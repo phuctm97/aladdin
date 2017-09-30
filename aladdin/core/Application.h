@@ -77,6 +77,7 @@ private:
   IDirect3D9* _directX;
   IDirect3DDevice9* _directXDevice;
   LPD3DXSPRITE _directXSprite;
+  DWORD _startTimestamp;
   DWORD _lastTimestamp;
 
 public:

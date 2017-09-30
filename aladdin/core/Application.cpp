@@ -30,6 +30,7 @@ Application::Application() :
   _directX( NULL ),
   _directXDevice( NULL ),
   _directXSprite( NULL ),
+  _startTimestamp( 0 ),
   _lastTimestamp( 0 ) {}
 
 Application::~Application() {
@@ -319,7 +320,8 @@ void Application::releaseDirectX() const {
 
 void Application::gameLoop() {
   // initial timestamp
-  _lastTimestamp = GetTickCount();
+  _startTimestamp = GetTickCount();
+  _lastTimestamp = _startTimestamp;
 
   while ( !_exiting ) {
     processMessage();
@@ -361,8 +363,8 @@ void Application::processGame() {
 
   // debug fps
   _frameCount++;
-  if ( _frameCount % 300 == 0 ) {
-    const int fps = static_cast<int>(roundf( 1000.0f / delta ));
+  if ( _frameCount % 1800 == 0 ) {
+    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
     getLogger()->debug( "FPS: %d", fps );
   }
 

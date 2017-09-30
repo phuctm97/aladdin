@@ -54,7 +54,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
 
   ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
-  sprite->setContentSize( Size2( info.Width, info.Height ) );
+  sprite->setContentSize( Size2( static_cast<float>(info.Width),static_cast<float>(info.Height) ) );
 }
 
 void Graphics::drawSprite( Sprite* sprite, const Vec2& position, const Rect& srcRect ) {
