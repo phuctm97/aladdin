@@ -5,7 +5,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Sprite)
+ALA_CLASS_HEADER_1(Sprite, ala::GameResource)
   // ======================================
   // Basic
   // ======================================
@@ -14,18 +14,20 @@ private:
   ala::Color _transColor;
 
 public:
-  Sprite( const std::string& sourceFile, const ala::Color& transColor = ala::Color( 255, 0, 255 ) );
-
-  ~Sprite();
+  Sprite( const std::string& name, const std::string& sourceFile, const ala::Color& transColor = ala::Color( 255, 0, 255 ), Scene* scope = NULL );
 
   const std::string& getSourceFile() const;
 
   const ala::Color& getTransColor() const;
 
+protected:
+  bool onLoad() override;
+
+  void onRelease() override;
+
   // ======================================
   // Platform specific
   // ======================================
-
 private:
   LPDIRECT3DTEXTURE9 _directXTexture;
 

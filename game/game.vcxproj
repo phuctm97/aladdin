@@ -116,6 +116,7 @@
   <ItemGroup>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
+    <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
+    <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="scenes\IntroScene.h" />
   </ItemGroup>
   <ItemGroup>

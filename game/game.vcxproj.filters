@@ -24,6 +24,9 @@
     <ClCompile Include="scenes\IntroScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
+    <ClCompile Include="app\MyResourceInitializer.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -31,6 +34,9 @@
     </ClInclude>
     <ClInclude Include="scenes\IntroScene.h">
       <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="app\MyResourceInitializer.h">
+      <Filter>app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

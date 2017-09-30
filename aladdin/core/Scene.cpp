@@ -1,5 +1,7 @@
 #include "Scene.h"
 #include "StdHelper.h"
+#include "GameResource.h"
+#include "GameManager.h"
 
 NAMESPACE_ALA
 {
@@ -61,6 +63,12 @@ void Scene::init() {
     return;
   }
 
+
+  // init Scene resources
+  for ( GameResource* resource : GameManager::get()->getResourcesWith( this ) ) {
+    if ( resource->isLoaded() ) continue;
+    resource->load();
+  }
 
   // TODO: scene init here
   for ( const auto it : _gameObjects ) {
@@ -144,6 +152,12 @@ void Scene::release() {
   _gameObjects.clear();
 
   ALA_ASSERT(_gameObjects.empty());
+
+  // release resource scope with this
+  for ( GameResource* resouce : GameManager::get()->getResourcesWith( this ) ) {
+    delete resouce;
+  }
+
   _releasing = 2;
 
   // make sure object released after release

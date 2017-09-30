@@ -89,6 +89,14 @@ void Application::initResources() {
     delete initializer;
   }
   _resourceInitializers.clear();
+
+  for ( const auto it : GameManager::get()->_attachedResources ) {
+    GameResource* resource = it.second;
+    if ( resource->isLoaded() ) continue;
+    if ( resource->getSceneScope() == NULL ) {
+      resource->load();
+    }
+  }
 }
 
 void Application::initComponents() {
@@ -118,7 +126,7 @@ void Application::initComponents() {
   initResources();
 
   // init runnings scene
-  gameManager->replaceScene(_sceneToStart);
+  gameManager->replaceScene( _sceneToStart );
 }
 
 void Application::releaseComponents() {
@@ -127,14 +135,12 @@ void Application::releaseComponents() {
   SAFE_DELETE(scene)
 
   // left objects
-  for ( const auto it : GameManager::get()->_attachedObjects ) {
-    GameObject* object = it.second;
+  for ( GameObject* object : GameManager::get()->getAllObjects() ) {
     SAFE_DELETE(object);
   }
 
   // left resources
-  for ( const auto it : GameManager::get()->_attachedResources ) {
-    GameResource* resource = it.second;
+  for ( GameResource* resource : GameManager::get()->getAllResources() ) {
     SAFE_DELETE(resource);
   }
 

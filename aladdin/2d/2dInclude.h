@@ -4,6 +4,8 @@
 #include "../core/Base.h"
 #include "../core/ClassMeta.h"
 #include "../core/Color.h"
+#include "../core/GameObjectComponent.h"
+#include "../core/GameResource.h"
 
 #include "2dMacros.h"
 

@@ -16,7 +16,7 @@ private:
 public:
   GameResource( const std::string& name, Scene* sceneScope = NULL );
 
-  ~GameResource();
+  virtual ~GameResource();
 
   const std::string& getName() const;
 

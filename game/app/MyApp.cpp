@@ -3,6 +3,7 @@
 */
 #include "MyApp.h"
 #include "../scenes/IntroScene.h"
+#include "MyResourceInitializer.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,6 +14,8 @@ void MyApp::init() {
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
   setLoopInterval( 1000.0f / 30 );
+
+  registerResourceInitializer(new MyResourceInitializer());
   startWithScene( new IntroScene() );
 }
 

@@ -61,6 +61,8 @@ public:
 
   void detach( GameObject* gameObject );
 
+  std::vector<GameObject*> getAllObjects();
+
   GameObject* getObjectById( long id );
 
   template <class T>
@@ -96,6 +98,10 @@ public:
   void detach( GameResource* resource );
 
   GameResource* getResource( const std::string& name );
+
+  std::vector<GameResource*> getResourcesWith( Scene* scope );
+
+  std::vector<GameResource*> getAllResources();
 };
 
 // TEMPLATE DEFINITIONS

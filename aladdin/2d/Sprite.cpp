@@ -3,20 +3,13 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::Sprite, "ala::Sprite" )
+ALA_CLASS_SOURCE_1(ala::Sprite, "ala::Sprite", ala::GameResource)
 
-Sprite::Sprite( const std::string& sourceFile, const ala::Color& transColor )
-  : _sourceFile( sourceFile ),
+Sprite::Sprite( const std::string& name, const std::string& sourceFile, const ala::Color& transColor, Scene* scope )
+  : GameResource( name, scope ),
+    _sourceFile( sourceFile ),
     _transColor( transColor ),
-    _directXTexture( 0 ) {
-  Graphics::get()->loadSprite( this );
-}
-
-Sprite::~Sprite() {
-  if ( _directXTexture ) {
-    _directXTexture->Release();
-  }
-}
+    _directXTexture( 0 ) {}
 
 const std::string& Sprite::getSourceFile() const {
   return _sourceFile;
@@ -24,6 +17,17 @@ const std::string& Sprite::getSourceFile() const {
 
 const ala::Color& Sprite::getTransColor() const {
   return _transColor;
+}
+
+bool Sprite::onLoad() {
+  Graphics::get()->loadSprite( this );
+  return _directXTexture != 0;
+}
+
+void Sprite::onRelease() {
+  if ( _directXTexture ) {
+    _directXTexture->Release();
+  }
 }
 
 void Sprite::setDirectXTexture( LPDIRECT3DTEXTURE9 directXTexture ) {

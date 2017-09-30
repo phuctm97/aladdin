@@ -83,6 +83,16 @@ void GameManager::detach( GameObject* gameObject ) {
   }
 }
 
+std::vector<GameObject*> GameManager::getAllObjects() {
+  std::vector<GameObject*> ret;
+
+  for ( const auto it : _attachedObjects ) {
+    ret.push_back( it.second );
+  }
+
+  return ret;
+}
+
 GameObject* GameManager::getObjectById( long id ) {
   const auto objectIt = _attachedObjects.find( id );
   if ( objectIt == _attachedObjects.end() ) return NULL;
@@ -128,21 +138,6 @@ void GameManager::replaceScene( Scene* scene ) {
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
 
-  // Kill resources scope with old scene
-  if ( _runningScene != NULL ) {
-    std::vector<GameResource*> resourcesToKill;
-
-    for ( const auto it : _attachedResources ) {
-      GameResource* resource = it.second;
-      if ( resource != NULL && resource->getSceneScope() == _runningScene ) {
-        resourcesToKill.push_back( resource );
-      }
-    }
-    for ( GameResource* resource : resourcesToKill ) {
-      delete resource;
-    }
-  }
-
   SAFE_DELETE(_runningScene);
   _runningScene = scene;
 
@@ -171,5 +166,29 @@ GameResource* GameManager::getResource( const std::string& name ) {
   const auto it = _attachedResources.find( name );
   if ( it == _attachedResources.end() ) return NULL;
   return it->second;
+}
+
+std::vector<GameResource*> GameManager::getResourcesWith( Scene* scope ) {
+  std::vector<GameResource*> ret;
+
+  for ( const auto it : _attachedResources ) {
+    GameResource* resource = it.second;
+    if ( resource->getSceneScope() == scope ) {
+      ret.push_back( resource );
+    }
+  }
+
+  return ret;
+}
+
+std::vector<GameResource*> GameManager::getAllResources() {
+  std::vector<GameResource*> ret;
+
+  for ( const auto it : _attachedResources ) {
+    GameResource* resource = it.second;
+    ret.push_back( resource );
+  }
+
+  return ret;
 }
 }
