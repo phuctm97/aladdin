@@ -1,3 +1,7 @@
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #ifndef __ALADDIN_2D_SPRITE_RENDERER_H__
 #define __ALADDIN_2D_SPRITE_RENDERER_H__
 

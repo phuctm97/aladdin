@@ -1,6 +1,10 @@
 #ifndef __BALL_CONTROLLER_H__
 #define __BALL_CONTROLLER_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include <aladdin.h>
 
 class BallController : public ala::GameObjectComponent {

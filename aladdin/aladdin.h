@@ -1,6 +1,10 @@
 #ifndef __ALADDIN_H__
 #define __ALADDIN_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "core/Application.h"
 #include "core/Base.h"
 #include "core/ClassMeta.h"

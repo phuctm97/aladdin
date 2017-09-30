@@ -1,6 +1,6 @@
-//
-// Created by phuctm97 on 9/25/2017.
-//
+/*
+ * Created by phuctm97 on 9/25/2017
+ */
 
 #include "Base.h"
 #include "Logger.h"

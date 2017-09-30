@@ -1,3 +1,7 @@
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "Sprite.h"
 #include "Graphics.h"
 

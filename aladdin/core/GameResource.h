@@ -1,6 +1,10 @@
 #ifndef __ALADDIN_CORE_GAME_RESOURCE_H__
 #define __ALADDIN_CORE_GAME_RESOURCE_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "Base.h"
 #include "Scene.h"
 

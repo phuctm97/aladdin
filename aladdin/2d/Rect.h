@@ -1,6 +1,10 @@
 #ifndef __ALADDIN_2D_RECT_H__
 #define __ALADDIN_2D_RECT_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "2dInclude.h"
 #include "Vec2.h"
 #include "Size2.h"

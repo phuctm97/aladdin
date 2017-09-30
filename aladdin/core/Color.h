@@ -1,6 +1,10 @@
 #ifndef __ALADDIN_CORE_COLOR_H__
 #define __ALADDIN_CORE_COLOR_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "Base.h"
 
 NAMESPACE_ALA

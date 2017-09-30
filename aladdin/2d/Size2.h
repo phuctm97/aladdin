@@ -1,6 +1,10 @@
 #ifndef __ALADDIN_2D_SIZE2_H__
 #define __ALADDIN_2D_SIZE2_H__
 
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "2dInclude.h"
 
 NAMESPACE_ALA

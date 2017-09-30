@@ -1,3 +1,7 @@
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "BallController.h"
 
 BallController::BallController( ala::GameObject* gameObject, const std::string& name )
