@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="core">
+      <UniqueIdentifier>{2a822e06-411a-419b-8091-70aa0908cffa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\CoreInclude.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\CoreMacros.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ClassMeta.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Base.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GameObject.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StdHelper.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GameObjectComponent.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GameManager.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Scene.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Application.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Logger.h">
+      <Filter>core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="core\ClassMeta.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Base.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GameObject.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GameObjectComponent.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GameManager.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Scene.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Application.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Logger.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

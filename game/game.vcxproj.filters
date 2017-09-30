@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="app">
+      <UniqueIdentifier>{b467e535-ea43-46fe-af98-727f5ae097df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scenes">
+      <UniqueIdentifier>{eb0a6ca3-8a1f-44cd-a4c9-5c84e6ea5d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logs">
+      <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{7789209a-1f0e-4ffe-bea8-368b8cad459b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="app\main.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="app\MyApp.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\IntroScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app\MyApp.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\IntroScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt">
+      <Filter>logs</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
