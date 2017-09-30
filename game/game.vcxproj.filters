@@ -10,9 +10,6 @@
     <Filter Include="logs">
       <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
-      <UniqueIdentifier>{7789209a-1f0e-4ffe-bea8-368b8cad459b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">

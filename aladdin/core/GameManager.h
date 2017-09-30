@@ -20,8 +20,8 @@ ALA_CLASS_HEADER_0(GameManager)
 
 private:
   static GameManager* __instance;
-
-  bool _destructing;
+  bool _destructed;
+  bool _released;
 
 public:
   GameManager();
@@ -29,6 +29,8 @@ public:
   ~GameManager();
 
   static GameManager* get();
+
+  void release();
 
   // ===============================================
   // Game Information

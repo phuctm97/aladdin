@@ -17,21 +17,19 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
   : _name( name ),
     _gameObject( gameObject ),
     _inited( false ),
+    _destructed( false ),
     _released( false ) {
   ALA_ASSERT(gameObject != NULL);
-
   gameObject->attach( this );
 }
 
 GameObjectComponent::~GameObjectComponent() {
-  if ( _inited && (!_released) ) {
-    release();
+  _destructed = true;
 
+  if ( _inited ) {
     // make sure object released after destruction
     ALA_ASSERT(_released);
   }
-
-  _gameObject->detach( this );
 }
 
 const std::string& GameObjectComponent::getName() const {
@@ -52,14 +50,10 @@ void GameObjectComponent::init() {
   ALA_ASSERT(!_inited);
 
   if ( !onInit() ) {
-    _inited = false;
     return;
   }
 
   _inited = true;
-
-  // make sure object initialized after initialization
-  ALA_ASSERT(_inited);
 }
 
 bool GameObjectComponent::onInit() {
@@ -88,15 +82,15 @@ void GameObjectComponent::render() {
 
 void GameObjectComponent::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!_released);
-
-  onRelease();
+  ALA_ASSERT(_inited && (!_released) && (!_destructed));
 
   _released = true;
 
-  // make sure object released after release
-  ALA_ASSERT(_released);
+  onRelease();
+
+  _gameObject->detach( this );
+
+  delete this;
 }
 
 void GameObjectComponent::onRelease() {}

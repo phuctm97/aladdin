@@ -23,16 +23,18 @@ GameManager* GameManager::get() {
 }
 
 GameManager::GameManager() :
-  _destructing( false ),
-  _idCounter( 0 ),
-  _runningScene( NULL ),
+  _destructed( false ),
+  _released( false ),
   _screenWidth( 0 ),
-  _screenHeight( 0 ) {
+  _screenHeight( 0 ),
+  _idCounter( 0 ),
+  _runningScene( NULL ) {
   getLogger()->debug( "Created" );
 }
 
 GameManager::~GameManager() {
-  _destructing = true;
+  _destructed = true;
+  ALA_ASSERT(_released);
   getLogger()->debug( "Released" );
   getLogger()->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
   getLogger()->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
@@ -42,6 +44,12 @@ GameManager::~GameManager() {
   getLogger()->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
   getLogger()->debug( "Total References Retained: %ld", Base::TOTAL_REFERENCE_RETAINED );
   getLogger()->debug( "Total References Released: %ld", Base::TOTAL_REFERENCE_RELEASED );
+}
+
+void GameManager::release() {
+  ALA_ASSERT((!_released) && (!_destructed));
+  _released = true;
+  delete this;
 }
 
 // ==============================================
@@ -67,7 +75,7 @@ long GameManager::newId() {
 // ==============================================
 
 void GameManager::attach( GameObject* gameObject ) {
-  if ( _destructing ) return;
+  if ( _destructed ) return;
 
   // insert to attach table by id
   if ( gameObject != NULL ) {
@@ -76,7 +84,7 @@ void GameManager::attach( GameObject* gameObject ) {
 }
 
 void GameManager::detach( GameObject* gameObject ) {
-  if ( _destructing ) return;
+  if ( _destructed ) return;
 
   if ( gameObject != NULL ) {
     _attachedObjects.erase( gameObject->getId() );
@@ -135,15 +143,17 @@ Scene* GameManager::getRunningScene() const {
 }
 
 void GameManager::replaceScene( Scene* scene ) {
+  if ( _destructed ) return;
+
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
 
-  SAFE_DELETE(_runningScene);
-  _runningScene = scene;
-
-  if ( !_runningScene->isInited() ) {
-    _runningScene->init();
+  if ( _runningScene != NULL ) {
+    _runningScene->release();
   }
+
+  _runningScene = scene;
+  _runningScene->init();
 }
 
 // ===============================================
@@ -151,13 +161,13 @@ void GameManager::replaceScene( Scene* scene ) {
 // ===============================================
 
 void GameManager::attach( GameResource* resource ) {
-  if ( _destructing ) return;
+  if ( _destructed ) return;
   if ( resource == NULL ) return;
   _attachedResources.emplace( resource->getName(), resource );
 }
 
 void GameManager::detach( GameResource* resource ) {
-  if ( _destructing ) return;
+  if ( _destructed ) return;
   if ( resource == NULL ) return;
   _attachedResources.erase( resource->getName() );
 }

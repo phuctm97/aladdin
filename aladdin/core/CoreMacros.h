@@ -138,4 +138,10 @@ ALA_DEFINE_CLASS_META_4(_class_, _classname_, _base1_, _base2_, _base3_, _base4_
 #define ALA_CLASS_SOURCE_5( _class_, _classname_, _base1_, _base2_, _base3_, _base4_, _base5_ ) \
 ALA_DEFINE_CLASS_META_5(_class_, _classname_, _base1_, _base2_, _base3_, _base4_, _base5_ )
 
+enum {
+  ALA_FALSE,
+  ALA_RELEASED,
+  ALA_RELEASING
+};
+
 #endif //!__ALADDIN_CORE_CORE_MARCOS_H__

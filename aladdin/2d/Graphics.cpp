@@ -52,7 +52,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
     NULL, //color palette
     &texture ); //destination texture
   
-  ALA_ASSERT(result != D3D_OK);
+  ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
 }
 }

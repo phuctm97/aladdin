@@ -33,6 +33,7 @@ public:
   // ==================================================
 private:
   bool _inited;
+  bool _destructed;
   bool _released;
 
 protected:

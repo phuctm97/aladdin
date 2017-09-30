@@ -14,19 +14,19 @@ ALA_CLASS_SOURCE_0(ala::Scene, "ala::Scene")
 Scene::Scene( const std::string& name ) :
   _name( name ),
   _inited( false ),
-  _releasing( 0 ) {
+  _destructed( false ),
+  _released( false ) {
   TOTAL_SCENE_CREATED++;
 }
 
 Scene::~Scene() {
-  _releasing = 1;
+  _destructed = true;
 
-  if ( _inited && (!isReleased()) ) {
-    release();
-
-    // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+  if ( _inited ) {
+    // make sure object released before destruction
+    ALA_ASSERT(_released);
   }
+
   TOTAL_SCENE_DELETED++;
 }
 
@@ -43,48 +43,33 @@ bool Scene::isInited() const {
   return _inited;
 }
 
-bool Scene::isReleasing() const {
-  return _releasing == 1;
-}
-
 bool Scene::isReleased() const {
-  return _releasing == 2;
+  return _released;
 }
 
 void Scene::init() {
   // make sure scene is not initialized;
   ALA_ASSERT(!_inited);
 
-  // TODO: subscriber pre init
-
   // child pre init
   if ( !onPreInit() ) {
-    _inited = false;
     return;
   }
 
+  _inited = true;
 
-  // init Scene resources
+  // load Scene resources
   for ( GameResource* resource : GameManager::get()->getResourcesWith( this ) ) {
-    if ( resource->isLoaded() ) continue;
     resource->load();
   }
 
-  // TODO: scene init here
+  // init child object
   for ( const auto it : _gameObjects ) {
     it.second->init();
   }
-  _inited = true;
-
-
-  // make sure scene initialized after initialization
-  ALA_ASSERT(_inited);
-
 
   // child post init
   onPostInit();
-
-  // TODO: client subscriber post init
 }
 
 bool Scene::onPreInit() {
@@ -95,7 +80,7 @@ void Scene::onPostInit() {}
 
 void Scene::update( float delta ) {
   // make sure scene is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
+  if ( (!_inited) || (_released) )
     return;
 
   onPreUpdate( delta );
@@ -114,12 +99,11 @@ void Scene::onPostUpdate( float delta ) {}
 
 void Scene::render() {
   // make sure scene is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
+  if ( (!_inited) || (_released) )
     return;
 
   onPreRender();
 
-  // TODO: scene update here
   for ( const auto it : _gameObjects ) {
     it.second->render();
   }
@@ -133,41 +117,37 @@ void Scene::onPostRender() {}
 
 void Scene::release() {
   // make sure scene is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!isReleased());
+  ALA_ASSERT(_inited && (!_released) && (!_destructed));
 
-  _releasing = 1;
+  // Child PreRelease
+  if ( !onPreRelease() ) {
+    return;
+  }
 
-  ALA_ASSERT(isReleasing());
-  // TODO: client subscriber pre release
+  _released = true;
 
-  // child pre release
-  if ( !onPreRelease() ) return;
+  // Scene Release
 
-  // TODO: game object release here
+  // release game object
+  std::vector<GameObject*> gameObjectsToRelease;
   for ( const auto it : _gameObjects ) {
-    GameObject* gameObject = it.second;
-    delete gameObject;
+    gameObjectsToRelease.push_back( it.second );
   }
   _gameObjects.clear();
-
-  ALA_ASSERT(_gameObjects.empty());
+  for ( GameObject* gameObject : gameObjectsToRelease ) {
+    gameObject->release();
+  }
 
   // release resource scope with this
   for ( GameResource* resouce : GameManager::get()->getResourcesWith( this ) ) {
-    delete resouce;
+    resouce->release();
   }
-
-  _releasing = 2;
-
-  // make sure object released after release
-  ALA_ASSERT(isReleased());
-
 
   // child post release
   onPostRelease();
 
-  // TODO: client subscriber post release
+  // delete self
+  delete this;
 }
 
 bool Scene::onPreRelease() {
@@ -187,7 +167,7 @@ GameObject* Scene::getGameObject( long id ) {
 }
 
 void Scene::addGameObject( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
+  if ( _destructed || _released ) return;
   if ( gameObject == NULL )return;
 
   _gameObjects.emplace( gameObject->getId(), gameObject );
@@ -195,7 +175,7 @@ void Scene::addGameObject( GameObject* gameObject ) {
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
+  if ( _destructed || _released ) return;
   if ( gameObject == NULL ) return;
 
   _gameObjects.erase( gameObject->getId() );

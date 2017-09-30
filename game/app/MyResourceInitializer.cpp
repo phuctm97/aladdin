@@ -1,5 +1,5 @@
 #include "MyResourceInitializer.h"
 
 void MyResourceInitializer::init() {
-  new ala::Sprite( "test.png", "test.png" );
+  new ala::Sprite( "sprites/test.jpg", "resources/sprites/test.jpg" );
 }

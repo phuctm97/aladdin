@@ -79,6 +79,9 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)resources\*" "$(TargetDir)resources\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

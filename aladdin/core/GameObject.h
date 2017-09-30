@@ -32,14 +32,13 @@ public:
   // =========================================================
 private:
   bool _inited;
-  int _releasing;
+  bool _destructed;
+  bool _released;
 
 public:
   bool isInited() const;
 
   bool isReleased() const;
-
-  bool isReleasing() const;
 
   void init();
 

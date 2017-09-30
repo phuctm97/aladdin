@@ -11,12 +11,13 @@ private:
   std::string _name;
   Scene* _sceneScope;
   bool _loaded;
+  bool _destructed;
   bool _released;
 
 public:
   GameResource( const std::string& name, Scene* sceneScope = NULL );
 
-  virtual ~GameResource();
+  ~GameResource();
 
   const std::string& getName() const;
 
@@ -35,9 +36,9 @@ public:
   Scene* getSceneScope() const;
 
 protected:
-  virtual bool onLoad();
+  virtual bool onLoad() = 0;
 
-  virtual void onRelease();
+  virtual void onRelease() = 0;
 
   // =============================================
   // Debug memory allocation

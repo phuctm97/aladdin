@@ -6,18 +6,20 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_0( ala::GameResource, "ala::GameResource" )
 
 GameResource::GameResource( const std::string& name, Scene* sceneScope )
-  : _name( name ), _sceneScope( sceneScope ), _loaded( false ), _released( false ) {
+  : _name( name ),
+    _sceneScope( sceneScope ),
+    _loaded( false ),
+    _destructed( false ),
+    _released( false ) {
   GameManager::get()->attach( this );
   TOTAL_RESOURCES_CREATED++;
 }
 
 GameResource::~GameResource() {
-  if ( _loaded && (!_released) ) {
-    release();
-
+  _destructed = true;
+  if ( _loaded ) {
     ALA_ASSERT(_released);
   }
-  GameManager::get()->detach( this );
   TOTAL_RESOURCES_DELETED++;
 }
 
@@ -32,10 +34,15 @@ void GameResource::load() {
 }
 
 void GameResource::release() {
-  ALA_ASSERT(_loaded && (!_released));
-  onRelease();
+  ALA_ASSERT(_loaded && (!_released) && (!_destructed));
+
   _released = true;
-  ALA_ASSERT(_released);
+
+  onRelease();
+
+  GameManager::get()->detach( this );
+
+  delete this;
 }
 
 bool GameResource::isLoaded() const {
@@ -57,12 +64,6 @@ void GameResource::setSceneScope( Scene* sceneScope ) {
 Scene* GameResource::getSceneScope() const {
   return _sceneScope;
 }
-
-bool GameResource::onLoad() {
-  return true;
-}
-
-void GameResource::onRelease() {}
 
 // =============================================
 // Debug memory allocation

@@ -132,21 +132,21 @@ void Application::initComponents() {
 void Application::releaseComponents() {
   // running scene
   Scene* scene = GameManager::get()->getRunningScene();
-  SAFE_DELETE(scene)
+  scene->release();
 
   // left objects
   for ( GameObject* object : GameManager::get()->getAllObjects() ) {
-    SAFE_DELETE(object);
+    object->release();
   }
 
   // left resources
   for ( GameResource* resource : GameManager::get()->getAllResources() ) {
-    SAFE_DELETE(resource);
+    resource->release();
   }
 
   // game singleton components
   GameManager* gameManager = GameManager::get();
-  SAFE_DELETE(gameManager);
+  gameManager->release();
 
   // windows components
   releaseDirectX();

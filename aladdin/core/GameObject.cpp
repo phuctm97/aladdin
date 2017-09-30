@@ -14,7 +14,8 @@ GameObject::GameObject( const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _inited( false ),
-    _releasing( 0 ),
+    _destructed( false ),
+    _released( false ),
     _parent( NULL ) {
   // attach to GameManager
   GameManager::get()->attach( this );
@@ -24,20 +25,12 @@ GameObject::GameObject( const std::string& name )
 }
 
 GameObject::~GameObject() {
-  _releasing = 1;
+  _destructed = true;
 
-  if ( (_inited) && (!isReleased()) ) {
-    release();
-
+  if ( _inited ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    ALA_ASSERT(_released);
   }
-
-  // remove from parent
-  removeFromParent();
-
-  // detach from GameManager
-  GameManager::get()->detach( this );
 
   // for debug memory allocation
   TOTAL_OBJECT_DELETED++;
@@ -60,27 +53,20 @@ bool GameObject::isInited() const {
 }
 
 bool GameObject::isReleased() const {
-  return _releasing == 2;
-}
-
-bool GameObject::isReleasing() const {
-  return _releasing == 1;
+  return _released;
 }
 
 void GameObject::init() {
   // make sure object is not initialized;
   ALA_ASSERT(!_inited);
 
-  // TODO: subscriber pre init
-
   // child pre init
   if ( !onPreInit() ) {
-    _inited = false;
     return;
   }
 
+  _inited = true;
 
-  // TODO: game object init here
   for ( GameObjectComponent* component : _components ) {
     component->init();
   }
@@ -88,17 +74,9 @@ void GameObject::init() {
   for ( const auto it : _children ) {
     it.second->init();
   }
-  _inited = true;
-
-
-  // make sure object initialized after initialization
-  ALA_ASSERT(_inited);
-
 
   // child post init
   onPostInit();
-
-  // TODO: client subscriber post init
 }
 
 bool GameObject::onPreInit() {
@@ -109,12 +87,11 @@ void GameObject::onPostInit() {}
 
 void GameObject::update( float delta ) {
   // make sure object is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
+  if ( (!_inited) || (_released) )
     return;
 
   onPreUpdate( delta );
 
-  // TODO: game object update here
   for ( GameObjectComponent* component : _components ) {
     component->update( delta );
   }
@@ -132,12 +109,11 @@ void GameObject::onPostUpdate( float delta ) {}
 
 void GameObject::render() {
   // make sure object is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
+  if ( (!_inited) || (_released) )
     return;
 
   onPreRender();
 
-  // TODO: game object update here
   for ( GameObjectComponent* component : _components ) {
     component->render();
   }
@@ -155,41 +131,41 @@ void GameObject::onPostRender() {}
 
 void GameObject::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!isReleased());
-
-  _releasing = 1;
-
-  ALA_ASSERT(isReleasing());
-  // TODO: client subscriber pre release
+  ALA_ASSERT(_inited && (!_released) && (!_destructed));
 
   // child pre release
   if ( !onPreRelease() ) return;
 
+  _released = true;
 
-  // TODO: game object release here
+  std::vector<GameObject*> gameObjectsToRelease;
   for ( const auto it : _children ) {
-    GameObject* gameObject = it.second;
-    delete gameObject;
+    gameObjectsToRelease.push_back( it.second );
   }
   _children.clear();
-  ALA_ASSERT(_children.empty());
+  for ( GameObject* object : gameObjectsToRelease ) {
+    object->release();
+  }
 
+  std::vector<GameObjectComponent*> componentsToRelease;
   for ( GameObjectComponent* component : _components ) {
-    delete component;
+    componentsToRelease.push_back( component );
   }
   _components.clear();
-  ALA_ASSERT(_components.empty());
-
-  _releasing = 2;
-
-  // make sure object released after release
-  ALA_ASSERT(isReleased());
+  for ( GameObjectComponent* component : componentsToRelease ) {
+    component->release();
+  }
 
   // child post release
   onPostRelease();
 
-  // TODO: client subscriber post release
+  // remove from parent
+  removeFromParent();
+
+  // detach from GameManager
+  GameManager::get()->detach( this );
+
+  delete this;
 }
 
 bool GameObject::onPreRelease() {
@@ -203,7 +179,7 @@ void GameObject::onPostRelease() {}
 // ============================================================
 
 void GameObject::attach( GameObjectComponent* component ) {
-  if ( _releasing > 0 ) return;
+  if ( _destructed || _released ) return;
 
   if ( component == NULL )
     return;
@@ -214,7 +190,7 @@ void GameObject::attach( GameObjectComponent* component ) {
 }
 
 void GameObject::detach( GameObjectComponent* component ) {
-  if ( _releasing > 0 ) return;
+  if ( _destructed || _released ) return;
 
   if ( component == NULL )
     return;
@@ -255,7 +231,7 @@ GameObject* GameObject::getParent() const {
 }
 
 void GameObject::setParent( GameObject* parent ) {
-  if ( _releasing > 0 ) return;
+  if ( _destructed || _released ) return;
   if ( _parent == parent ) return;
 
   ALA_ASSERT(parent != this);
@@ -293,8 +269,7 @@ GameObject* GameObject::getChild( long id ) {
 }
 
 void GameObject::addChild( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
-
+  if ( _destructed || _released ) return;
   if ( gameObject == NULL ) return;
 
   _children.emplace( gameObject->getId(), gameObject );
@@ -302,8 +277,7 @@ void GameObject::addChild( GameObject* gameObject ) {
 }
 
 void GameObject::removeChild( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
-
+  if ( _destructed || _released ) return;
   if ( gameObject == NULL ) return;
 
   _children.erase( gameObject->getId() );
