@@ -6,6 +6,7 @@
 */
 
 #include "Scene.h"
+#include "ResourceInitializer.h"
 
 NAMESPACE_ALA
 {
@@ -21,6 +22,7 @@ private:
   int _screenHeight;
   float _loopInterval;
   Scene* _sceneToStart;
+  std::vector<ResourceInitializer*> _resourceInitializers;
 
 public:
   Application();
@@ -43,7 +45,11 @@ public:
 
   void startWithScene( Scene* scene );
 
+  void registerResourceInitializer( ResourceInitializer* initializer );
+
 private:
+  void initResources();
+
   void initComponents();
 
   void releaseComponents();
@@ -61,6 +67,7 @@ protected:
   // Platform specific
   // ================================================
 
+private:
   int _logStream;
   bool _exiting;
   MSG _msg;

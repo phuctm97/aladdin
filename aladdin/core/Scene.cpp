@@ -9,7 +9,8 @@ ALA_CLASS_SOURCE_0(ala::Scene, "ala::Scene")
 // Basic
 // ================================================
 
-Scene::Scene() :
+Scene::Scene( const std::string& name ) :
+  _name( name ),
   _inited( false ),
   _releasing( 0 ) {
   TOTAL_SCENE_CREATED++;
@@ -25,6 +26,10 @@ Scene::~Scene() {
     ALA_ASSERT(isReleased());
   }
   TOTAL_SCENE_DELETED++;
+}
+
+const std::string& Scene::getName() const {
+  return _name;
 }
 
 

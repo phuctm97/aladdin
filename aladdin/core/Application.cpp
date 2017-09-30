@@ -4,6 +4,7 @@
 
 #include "Application.h"
 #include "GameManager.h"
+#include "../2d/Graphics.h"
 
 NAMESPACE_ALA
 {
@@ -76,6 +77,20 @@ void Application::startWithScene( Scene* scene ) {
   _sceneToStart = scene;
 }
 
+void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
+  _resourceInitializers.push_back( initializer );
+}
+
+void Application::initResources() {
+  for ( ResourceInitializer* initializer : _resourceInitializers ) {
+    if ( initializer ) {
+      initializer->init();
+    }
+    delete initializer;
+  }
+  _resourceInitializers.clear();
+}
+
 void Application::initComponents() {
   ALA_ASSERT(_screenWidth > 0);
   ALA_ASSERT(_screenHeight > 0);
@@ -88,16 +103,40 @@ void Application::initComponents() {
   initDirectX();
 
   // game singleton components
-  GameManager::get()->replaceScene( _sceneToStart );
+  GameManager* gameManager = GameManager::get();
+  gameManager->_screenWidth = static_cast<float>(_screenWidth);
+  gameManager->_screenHeight = static_cast<float>(_screenHeight);
+
+  Graphics* graphics = Graphics::get();
+  graphics->_directXDevice = _directXDevice;
+  graphics->_directXSprite = _directXSprite;
 
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
+
+  // init resources
+  initResources();
+
+  // init runnings scene
+  gameManager->replaceScene(_sceneToStart);
 }
 
 void Application::releaseComponents() {
   // running scene
   Scene* scene = GameManager::get()->getRunningScene();
   SAFE_DELETE(scene)
+
+  // left objects
+  for ( const auto it : GameManager::get()->_attachedObjects ) {
+    GameObject* object = it.second;
+    SAFE_DELETE(object);
+  }
+
+  // left resources
+  for ( const auto it : GameManager::get()->_attachedResources ) {
+    GameResource* resource = it.second;
+    SAFE_DELETE(resource);
+  }
 
   // game singleton components
   GameManager* gameManager = GameManager::get();
@@ -110,12 +149,7 @@ void Application::releaseComponents() {
 void Application::onUpdate( float delta ) {
   Scene* runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
-    if ( !runningScene->isInited() ) {
-      runningScene->init();
-    }
-    else {
-      runningScene->update( delta );
-    }
+    runningScene->update( delta );
   }
 }
 

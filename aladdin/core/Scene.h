@@ -15,10 +15,15 @@ ALA_CLASS_HEADER_0(Scene)
   // ================================================
   // Basic
   // ================================================
+private:
+  std::string _name;
+
 public:
-  Scene();
+  Scene( const std::string& name );
 
   virtual ~Scene();
+
+  const std::string& getName() const;
 
   // ==================================================
   // Events

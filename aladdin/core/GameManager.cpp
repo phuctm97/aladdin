@@ -25,29 +25,46 @@ GameManager* GameManager::get() {
 GameManager::GameManager() :
   _destructing( false ),
   _idCounter( 0 ),
-  _runningScene( NULL ) {
-  getLogger()->debug( "Created GameManager" );
+  _runningScene( NULL ),
+  _screenWidth( 0 ),
+  _screenHeight( 0 ) {
+  getLogger()->debug( "Created" );
 }
 
 GameManager::~GameManager() {
   _destructing = true;
-  getLogger()->debug( "Released GameManager" );
-  getLogger()->debug( "Total Object Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
-  getLogger()->debug( "Total Object Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
-  getLogger()->debug( "Total Scene Retained: %ld", Scene::TOTAL_SCENE_CREATED );
-  getLogger()->debug( "Total Scene Released: %ld", Scene::TOTAL_SCENE_DELETED );
-  getLogger()->debug( "Total Reference Retained: %ld", Base::TOTAL_REFERENCE_RETAINED );
-  getLogger()->debug( "Total Reference Released: %ld", Base::TOTAL_REFERENCE_RELEASED );
+  getLogger()->debug( "Released" );
+  getLogger()->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  getLogger()->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  getLogger()->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
+  getLogger()->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
+  getLogger()->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
+  getLogger()->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
+  getLogger()->debug( "Total References Retained: %ld", Base::TOTAL_REFERENCE_RETAINED );
+  getLogger()->debug( "Total References Released: %ld", Base::TOTAL_REFERENCE_RELEASED );
 }
 
+// ==============================================
+// Game Information
+// ==============================================
+float GameManager::getScreenWidth() const {
+  return _screenWidth;
+}
+
+float GameManager::getScreenHeight() const {
+  return _screenHeight;
+}
+
+// =============================================
+// Id Generator
+// =============================================
+long GameManager::newId() {
+  return ++_idCounter;
+}
 
 // ==============================================
 // Object Management
 // ==============================================
-
-long GameManager::newObjectId() {
-  return ++_idCounter;
-}
 
 void GameManager::attach( GameObject* gameObject ) {
   if ( _destructing ) return;
@@ -99,6 +116,10 @@ GameObject* GameManager::getObjectByName( const std::string& name ) {
   return NULL;
 }
 
+// ==================================================
+// Scene Management
+// ==================================================
+
 Scene* GameManager::getRunningScene() const {
   return _runningScene;
 }
@@ -107,7 +128,48 @@ void GameManager::replaceScene( Scene* scene ) {
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
 
+  // Kill resources scope with old scene
+  if ( _runningScene != NULL ) {
+    std::vector<GameResource*> resourcesToKill;
+
+    for ( const auto it : _attachedResources ) {
+      GameResource* resource = it.second;
+      if ( resource != NULL && resource->getSceneScope() == _runningScene ) {
+        resourcesToKill.push_back( resource );
+      }
+    }
+    for ( GameResource* resource : resourcesToKill ) {
+      delete resource;
+    }
+  }
+
   SAFE_DELETE(_runningScene);
   _runningScene = scene;
+
+  if ( !_runningScene->isInited() ) {
+    _runningScene->init();
+  }
+}
+
+// ===============================================
+// Resource Manager
+// ===============================================
+
+void GameManager::attach( GameResource* resource ) {
+  if ( _destructing ) return;
+  if ( resource == NULL ) return;
+  _attachedResources.emplace( resource->getName(), resource );
+}
+
+void GameManager::detach( GameResource* resource ) {
+  if ( _destructing ) return;
+  if ( resource == NULL ) return;
+  _attachedResources.erase( resource->getName() );
+}
+
+GameResource* GameManager::getResource( const std::string& name ) {
+  const auto it = _attachedResources.find( name );
+  if ( it == _attachedResources.end() ) return NULL;
+  return it->second;
 }
 }

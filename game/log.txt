@@ -1,8 +1,10 @@
-[D] [ala::GameManager] : Created GameManager
-[D] [ala::GameManager] : Released GameManager
-[D] [ala::GameManager] : Total Object Created: 0
-[D] [ala::GameManager] : Total Object Deleted: 0
-[D] [ala::GameManager] : Total Scene Retained: 1
-[D] [ala::GameManager] : Total Scene Released: 1
-[D] [ala::GameManager] : Total Reference Retained: 0
-[D] [ala::GameManager] : Total Reference Released: 0
+[D] [ala::GameManager] : Created
+[D] [ala::GameManager] : Released
+[D] [ala::GameManager] : Total Resources Created: 0
+[D] [ala::GameManager] : Total Resources Deleted: 0
+[D] [ala::GameManager] : Total Scenes Created: 1
+[D] [ala::GameManager] : Total Scenes Deleted: 1
+[D] [ala::GameManager] : Total Objects Created: 0
+[D] [ala::GameManager] : Total Objects Deleted: 0
+[D] [ala::GameManager] : Total References Retained: 0
+[D] [ala::GameManager] : Total References Released: 0

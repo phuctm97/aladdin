@@ -121,26 +121,45 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="2d\2dInclude.h" />
+    <ClInclude Include="2d\2dMacros.h" />
+    <ClInclude Include="2d\Graphics.h" />
+    <ClInclude Include="2d\Size2.h" />
+    <ClInclude Include="2d\Sprite.h" />
+    <ClInclude Include="2d\Transform2.h" />
+    <ClInclude Include="2d\Vec2.h" />
+    <ClInclude Include="aladdin.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Base.h" />
     <ClInclude Include="core\ClassMeta.h" />
+    <ClInclude Include="core\Color.h" />
     <ClInclude Include="core\CoreInclude.h" />
     <ClInclude Include="core\CoreMacros.h" />
     <ClInclude Include="core\GameManager.h" />
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
+    <ClInclude Include="core\GameResource.h" />
     <ClInclude Include="core\Logger.h" />
+    <ClInclude Include="core\ResourceInitializer.h" />
     <ClInclude Include="core\Scene.h" />
     <ClInclude Include="core\StdHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="2d\Graphics.cpp" />
+    <ClCompile Include="2d\Size2.cpp" />
+    <ClCompile Include="2d\Sprite.cpp" />
+    <ClCompile Include="2d\Transform2.cpp" />
+    <ClCompile Include="2d\Vec2.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\Base.cpp" />
     <ClCompile Include="core\ClassMeta.cpp" />
+    <ClCompile Include="core\Color.cpp" />
     <ClCompile Include="core\GameManager.cpp" />
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
+    <ClCompile Include="core\GameResource.cpp" />
     <ClCompile Include="core\Logger.cpp" />
+    <ClCompile Include="core\ResourceInitializer.cpp" />
     <ClCompile Include="core\Scene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

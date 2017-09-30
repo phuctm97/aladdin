@@ -4,6 +4,9 @@
     <Filter Include="core">
       <UniqueIdentifier>{2a822e06-411a-419b-8091-70aa0908cffa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2d">
+      <UniqueIdentifier>{5a7e7101-2315-47fa-8a62-730cdfab52c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\CoreInclude.h">
@@ -39,6 +42,37 @@
     <ClInclude Include="core\Logger.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="2d\2dInclude.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\2dMacros.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="aladdin.h" />
+    <ClInclude Include="2d\Graphics.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Vec2.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Size2.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Transform2.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Sprite.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Color.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GameResource.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ResourceInitializer.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -63,6 +97,30 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\Logger.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Graphics.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Vec2.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Size2.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Transform2.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Sprite.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Color.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\GameResource.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ResourceInitializer.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

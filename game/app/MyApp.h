@@ -5,7 +5,7 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include <core/Application.h>
+#include <aladdin.h>
 
 class MyApp : public ala::Application {
 public:

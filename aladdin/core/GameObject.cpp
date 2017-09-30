@@ -11,7 +11,7 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_0(ala::GameObject, "ala::GameObject")
 
 GameObject::GameObject( const std::string& name )
-  : _id( GameManager::get()->newObjectId() ),
+  : _id( GameManager::get()->newId() ),
     _name( name ),
     _inited( false ),
     _releasing( 0 ),

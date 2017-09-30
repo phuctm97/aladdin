@@ -8,6 +8,7 @@
 #include "Base.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "GameResource.h"
 
 NAMESPACE_ALA
 {
@@ -15,8 +16,12 @@ ALA_CLASS_HEADER_0(GameManager)
   // ==============================================
   // Basic
   // ==============================================
+  friend class Application;
+
 private:
   static GameManager* __instance;
+
+  bool _destructing;
 
 public:
   GameManager();
@@ -26,16 +31,32 @@ public:
   static GameManager* get();
 
   // ===============================================
+  // Game Information
+  // ===============================================
+private:
+  float _screenWidth;
+  float _screenHeight;
+
+public:
+  float getScreenWidth() const;
+  float getScreenHeight() const;
+
+  // ===============================================
+  // Id Generator
+  // ===============================================
+private:
+  long _idCounter;
+
+public:
+  long newId();
+
+  // ===============================================
   // Object Management
   // ===============================================
 private:
-  bool _destructing;
-  long _idCounter;
   std::unordered_map<long, GameObject*> _attachedObjects;
 
 public:
-  long newObjectId();
-
   void attach( GameObject* gameObject );
 
   void detach( GameObject* gameObject );
@@ -62,6 +83,19 @@ public:
   Scene* getRunningScene() const;
 
   void replaceScene( Scene* scene );
+
+  // ===============================================
+  // Resource Manager
+  // ===============================================
+private:
+  std::unordered_map<std::string, GameResource*> _attachedResources;
+
+public:
+  void attach( GameResource* resource );
+
+  void detach( GameResource* resource );
+
+  GameResource* getResource( const std::string& name );
 };
 
 // TEMPLATE DEFINITIONS
