@@ -13,12 +13,15 @@ NAMESPACE_ALA
 
 Base::Base() :
   _referenceCount( 0 ),
-  _logger( NULL ) {}
+  _logger( NULL ) {
+  TOTAL_BASE_CREATED++;
+}
 
 Base::~Base() {
   // make sure no reference left
   ALA_ASSERT(_referenceCount == 0);
   SAFE_DELETE(_logger);
+  TOTAL_BASE_DELETED++;
 }
 
 // ==============================================
@@ -36,12 +39,10 @@ int Base::getReferenceCount() const {
 
 void Base::increaseReferenceCount() {
   _referenceCount++;
-  TOTAL_REFERENCE_RETAINED++;
 }
 
 void Base::decreaseReferenceCount() {
   _referenceCount--;
-  TOTAL_REFERENCE_RELEASED++;
   if ( _referenceCount == 0 ) delete this;
 }
 
@@ -55,7 +56,6 @@ Logger* Base::getLogger() {
 // ======================================================
 // Debug memory allocation
 // ======================================================
-long Base::TOTAL_REFERENCE_RETAINED = 0;
-
-long Base::TOTAL_REFERENCE_RELEASED = 0;
+long Base::TOTAL_BASE_CREATED( 0 );
+long Base::TOTAL_BASE_DELETED( 0 );
 }

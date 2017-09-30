@@ -1,5 +1,10 @@
 #include "MyResourceInitializer.h"
+#include "../prefabs/BallPrefab.h"
 
 void MyResourceInitializer::init() {
-  new ala::Sprite( "sprites/test.jpg", "resources/sprites/test.jpg" );
+  // Textures
+  new ala::Sprite( "ball.png", "textures/ball.png" );
+
+  // Prefabs
+  new BallPrefab();
 }

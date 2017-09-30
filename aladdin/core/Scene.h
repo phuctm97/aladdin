@@ -41,32 +41,66 @@ public:
   void init();
 
 protected:
+
+  /**
+   * \brief Add Default Objects and Scene Resources here, they will be init right after this function return
+   * \return return true if everything were right otherwise return false and the application will crash
+   */
   virtual bool onPreInit();
 
+  /**
+  * \brief Add special Logic happen after initlization, every object and component in scene has been initialized
+  * Object and Component added to scene there will be not automatically init, so you have to init them manually
+  */
   virtual void onPostInit();
 
 public:
   void update( float delta );
 
 protected:
+
+  /**
+   * \brief Happen before scene, its objects and components were updated
+   * \param delta 
+   */
   virtual void onPreUpdate( float delta );
 
+
+  /**
+   * \brief Happen after scene, its objects and components were updated
+   */
   virtual void onPostUpdate( float delta );
 
 public:
   void render();
 
 protected:
+  /**
+   * \brief Happen before scene, its objects and components were rendered
+   */
   virtual void onPreRender();
 
+
+  /**
+   * \brief Happen after scene, its objects and components were rendered
+   */
   virtual void onPostRender();
 
 public:
   void release();
 
 protected:
+
+  /**
+   * \brief Happen before scene, its objects and components were released
+   * \return true if you want to continue releasing and false if not
+   */
   virtual bool onPreRelease();
 
+  
+  /**
+   * \brief Happen after scene, its objects and components were released and destroyed
+   */
   virtual void onPostRelease();
 
   // ==================================================

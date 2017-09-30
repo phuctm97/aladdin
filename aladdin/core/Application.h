@@ -20,9 +20,10 @@ private:
   std::string _title;
   int _screenWidth;
   int _screenHeight;
-  float _loopInterval;
+  float _animationInterval;
   Scene* _sceneToStart;
   std::vector<ResourceInitializer*> _resourceInitializers;
+  long _frameCount;
 
 public:
   Application();
@@ -39,7 +40,7 @@ public:
 
   const std::string& getTitle() const;
 
-  void setLoopInterval( float millis );
+  void setAnimationInterval( float millis );
 
   float getLoopInterval() const;
 

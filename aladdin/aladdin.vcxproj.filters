@@ -73,6 +73,15 @@
     <ClInclude Include="core\ResourceInitializer.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="2d\SpriteRenderer.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Rect.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Prefab.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -121,6 +130,15 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\ResourceInitializer.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\SpriteRenderer.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Rect.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Prefab.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

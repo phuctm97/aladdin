@@ -170,8 +170,12 @@ void Scene::addGameObject( GameObject* gameObject ) {
   if ( _destructed || _released ) return;
   if ( gameObject == NULL )return;
 
-  _gameObjects.emplace( gameObject->getId(), gameObject );
-  gameObject->setParent( NULL );
+  const auto rc = _gameObjects.emplace( gameObject->getId(), gameObject );
+
+  const bool sucess = rc.second;
+  if ( sucess ) {
+    gameObject->setParent( NULL );
+  }
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {

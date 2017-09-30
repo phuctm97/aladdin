@@ -51,8 +51,42 @@ void Graphics::loadSprite( Sprite* sprite ) {
     &info, //bitmap file info (from loaded file)
     NULL, //color palette
     &texture ); //destination texture
-  
+
   ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
+  sprite->setContentSize( Size2( info.Width, info.Height ) );
+}
+
+void Graphics::drawSprite( Sprite* sprite, const Vec2& position, const Rect& srcRect ) {
+  LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
+  ALA_ASSERT(texture);
+
+  RECT dSrcRect;
+  dSrcRect.left = static_cast<LONG>(srcRect.getTopLeft().getX());
+  dSrcRect.top = static_cast<LONG>(srcRect.getTopLeft().getY());
+  dSrcRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
+  dSrcRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
+
+  D3DXVECTOR3 dPostition;
+  dPostition.x = position.getX();
+  dPostition.y = position.getY();
+  dPostition.z = 0;
+
+  if ( srcRect.getSize().getWidth() == 0 || srcRect.getSize().getHeight() == 0 ) {
+    _directXSprite->Draw(
+      texture,
+      NULL,
+      NULL,
+      &dPostition,
+      D3DCOLOR_XRGB(255, 255, 255) );
+  }
+  else {
+    _directXSprite->Draw(
+      texture,
+      &dSrcRect,
+      NULL,
+      &dPostition,
+      D3DCOLOR_XRGB(255, 255, 255) );
+  }
 }
 }

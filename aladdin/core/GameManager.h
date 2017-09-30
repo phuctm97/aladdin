@@ -9,6 +9,7 @@
 #include "GameObject.h"
 #include "Scene.h"
 #include "GameResource.h"
+#include "Prefab.h"
 
 NAMESPACE_ALA
 {
@@ -89,7 +90,7 @@ public:
   void replaceScene( Scene* scene );
 
   // ===============================================
-  // Resource Manager
+  // Resource Management
   // ===============================================
 private:
   std::unordered_map<std::string, GameResource*> _attachedResources;
@@ -104,6 +105,21 @@ public:
   std::vector<GameResource*> getResourcesWith( Scene* scope );
 
   std::vector<GameResource*> getAllResources();
+
+  // ===============================================
+  // Prefab Management
+  // ===============================================
+private:
+  std::unordered_map<std::string, Prefab*> _registeredPrefabs;
+
+public:
+  void registerPrefab( Prefab* prefab );
+
+  void removePrefab( Prefab* prefab );
+
+  Prefab* getPrefab( const std::string& name );
+
+  std::vector<Prefab*> getAllPrefabs();
 };
 
 // TEMPLATE DEFINITIONS

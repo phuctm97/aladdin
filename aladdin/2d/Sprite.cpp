@@ -8,6 +8,7 @@ ALA_CLASS_SOURCE_1(ala::Sprite, "ala::Sprite", ala::GameResource)
 Sprite::Sprite( const std::string& name, const std::string& sourceFile, const ala::Color& transColor, Scene* scope )
   : GameResource( name, scope ),
     _sourceFile( sourceFile ),
+    _contentSize( 0, 0 ),
     _transColor( transColor ),
     _directXTexture( 0 ) {}
 
@@ -17,6 +18,14 @@ const std::string& Sprite::getSourceFile() const {
 
 const ala::Color& Sprite::getTransColor() const {
   return _transColor;
+}
+
+const ala::Size2& Sprite::getContentSize() const {
+  return _contentSize;
+}
+
+void Sprite::setContentSize( const ala::Size2& size ) {
+  _contentSize = size;
 }
 
 bool Sprite::onLoad() {

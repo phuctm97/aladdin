@@ -20,7 +20,7 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
     _destructed( false ),
     _released( false ) {
   ALA_ASSERT(gameObject != NULL);
-  gameObject->attach( this );
+  gameObject->addComponent( this );
 }
 
 GameObjectComponent::~GameObjectComponent() {
@@ -88,7 +88,7 @@ void GameObjectComponent::release() {
 
   onRelease();
 
-  _gameObject->detach( this );
+  _gameObject->removeComponent( this );
 
   delete this;
 }

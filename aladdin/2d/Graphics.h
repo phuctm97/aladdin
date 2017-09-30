@@ -2,6 +2,7 @@
 #define __ALADDIN_2D_GRAPHICS_2D_H__
 
 #include "2dInclude.h"
+#include "Rect.h"
 
 NAMESPACE_ALA
 {
@@ -31,6 +32,8 @@ private:
 
 public:
   void loadSprite( Sprite* sprite );
+
+  void drawSprite( Sprite* sprite, const Vec2& position, const Rect& srcRect = Rect() );
 };
 }
 

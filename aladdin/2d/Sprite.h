@@ -2,6 +2,7 @@
 #define __ALADDIN_2D_SPRITE_H__
 
 #include "2dInclude.h"
+#include "Size2.h"
 
 NAMESPACE_ALA
 {
@@ -11,6 +12,7 @@ ALA_CLASS_HEADER_1(Sprite, ala::GameResource)
   // ======================================
 private:
   std::string _sourceFile;
+  ala::Size2 _contentSize;
   ala::Color _transColor;
 
 public:
@@ -19,6 +21,10 @@ public:
   const std::string& getSourceFile() const;
 
   const ala::Color& getTransColor() const;
+
+  const ala::Size2& getContentSize() const;
+
+  void setContentSize( const ala::Size2& size );
 
 protected:
   bool onLoad() override;

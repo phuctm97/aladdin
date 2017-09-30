@@ -7,6 +7,8 @@ class IntroScene : public ala::Scene {
 public:
   IntroScene();
 
+protected:
+  virtual bool onPreInit() override;
 };
 
 #endif //!__INTRO_SCENE_H__

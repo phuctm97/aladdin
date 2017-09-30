@@ -37,12 +37,29 @@ private:
   bool _released;
 
 protected:
+  /**
+   * \brief Happen when component is initialized
+   * \return true to continue initlization or false to stop it and crash the application
+   */
   virtual bool onInit();
 
+  
+  /**
+   * \brief Happen when component is updated
+   * \param delta 
+   */
   virtual void onUpdate( float delta );
 
+  
+  /**
+   * \brief Happen when component is rendered
+   */
   virtual void onRender();
 
+
+  /**
+   * \brief Happen when component is released
+   */
   virtual void onRelease();
 
 public:

@@ -10,6 +10,15 @@
     <Filter Include="logs">
       <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="texures">
+      <UniqueIdentifier>{dc8c514d-9117-4d7e-9261-edc980421837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="prefabs">
+      <UniqueIdentifier>{06af661b-e60c-4b71-be13-42ab78410376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{8abd1086-4f7e-4275-9697-a2646390a106}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -24,6 +33,12 @@
     <ClCompile Include="app\MyResourceInitializer.cpp">
       <Filter>app</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\BallPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\BallController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -35,10 +50,21 @@
     <ClInclude Include="app\MyResourceInitializer.h">
       <Filter>app</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\BallPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\BallController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt">
       <Filter>logs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\ball.png">
+      <Filter>texures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ void MyApp::init() {
   // TODO: init application (size, title, fps, scene to start, log behaviors)
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
-  setLoopInterval( 1000.0f / 30 );
+  setAnimationInterval( 1000.0f / 60 );
 
   registerResourceInitializer(new MyResourceInitializer());
   startWithScene( new IntroScene() );

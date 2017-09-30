@@ -12,8 +12,24 @@ const Vec2& Transform2::getPosition() const {
   return _position;
 }
 
+float Transform2::getPositionX() const {
+  return _position.getX();
+}
+
+float Transform2::getPositionY() const {
+  return _position.getY();
+}
+
 void Transform2::setPosition( const Vec2& position ) {
   _position = position;
+}
+
+void Transform2::setPositionX( float x ) {
+  _position.setX( x );
+}
+
+void Transform2::setPositionY( float y ) {
+  _position.setY( y );
 }
 
 const Vec2& Transform2::getScale() const {

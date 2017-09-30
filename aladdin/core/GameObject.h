@@ -43,32 +43,60 @@ public:
   void init();
 
 protected:
+  /**
+  * \brief Add Child Objects and Components here, they will be init right after this function return.
+  * \return return true if everything were right otherwise return false and the application will crash
+  */
   virtual bool onPreInit();
 
+  /**
+  * \brief Add special Logic happen after initlization, every children and component in object has been initialized
+  * Component added to scene there will be not automatically init, so you have to init them manually
+  */
   virtual void onPostInit();
 
 public:
   void update( float delta );
 
 protected:
+  /**
+  * \brief Happen before object, its children and components were updated
+  * \param delta
+  */
   virtual void onPreUpdate( float delta );
 
+  /**
+  * \brief Happen after object, its children and components were updated
+  */
   virtual void onPostUpdate( float delta );
 
 public:
   void render();
 
 protected:
+  /**
+  * \brief Happen before object, its children and components were rendered
+  */
   virtual void onPreRender();
 
+  /**
+  * \brief Happen after object, its children and components were rendered
+  */
   virtual void onPostRender();
 
 public:
   void release();
 
 protected:
+  /**
+  * \brief Happen before object, its children and components were released
+  * \return true if you want to continue releasing and false if not
+  */
   virtual bool onPreRelease();
 
+  /**
+  * \brief Happen after object, its children and components were released and destroyed
+  */
   virtual void onPostRelease();
 
   // ========================================================
@@ -78,9 +106,9 @@ private:
   std::vector<GameObjectComponent*> _components;
 
 public:
-  void attach( GameObjectComponent* component );
+  void addComponent( GameObjectComponent* component );
 
-  void detach( GameObjectComponent* component );
+  void removeComponent( GameObjectComponent* component );
 
   GameObjectComponent* getComponent( const std::string& name ) const;
 

@@ -36,14 +36,6 @@ GameManager::~GameManager() {
   _destructed = true;
   ALA_ASSERT(_released);
   getLogger()->debug( "Released" );
-  getLogger()->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
-  getLogger()->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
-  getLogger()->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
-  getLogger()->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
-  getLogger()->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
-  getLogger()->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
-  getLogger()->debug( "Total References Retained: %ld", Base::TOTAL_REFERENCE_RETAINED );
-  getLogger()->debug( "Total References Released: %ld", Base::TOTAL_REFERENCE_RELEASED );
 }
 
 void GameManager::release() {
@@ -75,7 +67,7 @@ long GameManager::newId() {
 // ==============================================
 
 void GameManager::attach( GameObject* gameObject ) {
-  if ( _destructed ) return;
+  if ( _destructed || _released ) return;
 
   // insert to attach table by id
   if ( gameObject != NULL ) {
@@ -84,7 +76,7 @@ void GameManager::attach( GameObject* gameObject ) {
 }
 
 void GameManager::detach( GameObject* gameObject ) {
-  if ( _destructed ) return;
+  if ( _destructed || _released ) return;
 
   if ( gameObject != NULL ) {
     _attachedObjects.erase( gameObject->getId() );
@@ -143,7 +135,7 @@ Scene* GameManager::getRunningScene() const {
 }
 
 void GameManager::replaceScene( Scene* scene ) {
-  if ( _destructed ) return;
+  if ( _destructed || _released ) return;
 
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
@@ -157,17 +149,18 @@ void GameManager::replaceScene( Scene* scene ) {
 }
 
 // ===============================================
-// Resource Manager
+// Resource Management
 // ===============================================
 
 void GameManager::attach( GameResource* resource ) {
-  if ( _destructed ) return;
+  if ( _destructed || _released ) return;
   if ( resource == NULL ) return;
-  _attachedResources.emplace( resource->getName(), resource );
+  auto rc = _attachedResources.emplace( resource->getName(), resource );
+  ALA_ASSERT(rc.second == true);
 }
 
 void GameManager::detach( GameResource* resource ) {
-  if ( _destructed ) return;
+  if ( _destructed || _released ) return;
   if ( resource == NULL ) return;
   _attachedResources.erase( resource->getName() );
 }
@@ -197,6 +190,40 @@ std::vector<GameResource*> GameManager::getAllResources() {
   for ( const auto it : _attachedResources ) {
     GameResource* resource = it.second;
     ret.push_back( resource );
+  }
+
+  return ret;
+}
+
+// ===============================================
+// Prefab Management
+// ===============================================
+
+void GameManager::registerPrefab( Prefab* prefab ) {
+  if ( _destructed || _released ) return;
+  if ( prefab == NULL ) return;
+
+  auto rc = _registeredPrefabs.emplace( prefab->getName(), prefab );
+  ALA_ASSERT(rc.second == true);
+}
+
+void GameManager::removePrefab( Prefab* prefab ) {
+  if ( _destructed || _released ) return;
+  if ( prefab == NULL ) return;
+  _registeredPrefabs.erase( prefab->getName() );
+}
+
+Prefab* GameManager::getPrefab( const std::string& name ) {
+  const auto it = _registeredPrefabs.find( name );
+  if ( it == _registeredPrefabs.end() ) return NULL;
+  return it->second;
+}
+
+std::vector<Prefab*> GameManager::getAllPrefabs() {
+  std::vector<Prefab*> ret;
+
+  for ( const auto it : _registeredPrefabs ) {
+    ret.push_back( it.second );
   }
 
   return ret;

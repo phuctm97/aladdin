@@ -14,18 +14,26 @@ private:
   float _rotation;
 
 public:
-  Transform2( GameObject* gameObject, const std::string& name );
+  Transform2( GameObject* gameObject, const std::string& name = "" );
 
   const Vec2& getPosition() const;
 
+  float getPositionX() const;
+
+  float getPositionY() const;
+
   void setPosition( const Vec2& position );
-  
+
+  void setPositionX( float x );
+
+  void setPositionY( float y );
+
   const Vec2& getScale() const;
-  
+
   void setScale( const Vec2& scale );
-  
+
   float getRotation() const;
-  
+
   void setRotation( float rotation );
 };
 }

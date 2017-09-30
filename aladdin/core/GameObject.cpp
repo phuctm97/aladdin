@@ -178,7 +178,7 @@ void GameObject::onPostRelease() {}
 // Components
 // ============================================================
 
-void GameObject::attach( GameObjectComponent* component ) {
+void GameObject::addComponent( GameObjectComponent* component ) {
   if ( _destructed || _released ) return;
 
   if ( component == NULL )
@@ -189,7 +189,7 @@ void GameObject::attach( GameObjectComponent* component ) {
   }
 }
 
-void GameObject::detach( GameObjectComponent* component ) {
+void GameObject::removeComponent( GameObjectComponent* component ) {
   if ( _destructed || _released ) return;
 
   if ( component == NULL )
@@ -272,8 +272,12 @@ void GameObject::addChild( GameObject* gameObject ) {
   if ( _destructed || _released ) return;
   if ( gameObject == NULL ) return;
 
-  _children.emplace( gameObject->getId(), gameObject );
-  gameObject->setParent( this );
+  const auto rc = _children.emplace( gameObject->getId(), gameObject );
+
+  const bool success = rc.second;
+  if ( success ) {
+    gameObject->setParent( this );
+  }
 }
 
 void GameObject::removeChild( GameObject* gameObject ) {

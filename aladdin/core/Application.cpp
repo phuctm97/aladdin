@@ -3,6 +3,7 @@
 */
 
 #include "Application.h"
+#include "Logger.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
 
@@ -19,8 +20,9 @@ Application::Application() :
   _title( "Aladdin Game" ),
   _screenWidth( 0 ),
   _screenHeight( 0 ),
-  _loopInterval( 1000.0f / 30 ),
+  _animationInterval( 1000.0f / 30 ),
   _sceneToStart( NULL ),
+  _frameCount( 0 ),
   _logStream( 0 ),
   _exiting( false ),
   _hInstance( NULL ),
@@ -34,6 +36,14 @@ Application::~Application() {
   if ( _inited ) {
     ALA_ASSERT(_released);
   }
+  getLogger()->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  getLogger()->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  getLogger()->debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
+  getLogger()->debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
+  getLogger()->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
+  getLogger()->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
+  getLogger()->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
+  getLogger()->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -61,14 +71,14 @@ const std::string& Application::getTitle() const {
   return _title;
 }
 
-void Application::setLoopInterval( float millis ) {
+void Application::setAnimationInterval( float millis ) {
   // can only be set before init process
   ALA_ASSERT((!_inited) && (!_released));
-  _loopInterval = millis;
+  _animationInterval = millis;
 }
 
 float Application::getLoopInterval() const {
-  return _loopInterval;
+  return _animationInterval;
 }
 
 void Application::startWithScene( Scene* scene ) {
@@ -103,7 +113,7 @@ void Application::initComponents() {
   ALA_ASSERT(_screenWidth > 0);
   ALA_ASSERT(_screenHeight > 0);
   ALA_ASSERT(!_title.empty());
-  ALA_ASSERT(_loopInterval >= (1000.0f / 61));
+  ALA_ASSERT(_animationInterval >= (1000.0f / 61));
 
   // windows components
   initWindowHandle();
@@ -142,6 +152,11 @@ void Application::releaseComponents() {
   // left resources
   for ( GameResource* resource : GameManager::get()->getAllResources() ) {
     resource->release();
+  }
+
+  // left prefabs
+  for ( Prefab* prefab : GameManager::get()->getAllPrefabs() ) {
+    prefab->release();
   }
 
   // game singleton components
@@ -328,24 +343,38 @@ void Application::processMessage() {
 }
 
 void Application::processGame() {
-  const DWORD currentTimestamp = GetTickCount();
+  DWORD currentTimestamp = GetTickCount();
   // calculate delta
-  const float delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+  float delta = static_cast<float>(currentTimestamp - _lastTimestamp);
 
   // check interval
-  if ( delta >= _loopInterval ) {
-    // update timestamp
-    _lastTimestamp = currentTimestamp;
+  if ( delta < _animationInterval ) {
+    // too soon, sleep and recalculate
+    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
 
-    onUpdate( delta );
+    currentTimestamp = GetTickCount();
+    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
   }
+
+  // update timestamp
+  _lastTimestamp = currentTimestamp;
+
+  // debug fps
+  _frameCount++;
+  if ( _frameCount % 300 == 0 ) {
+    const int fps = static_cast<int>(roundf( 1000.0f / delta ));
+    getLogger()->debug( "FPS: %d", fps );
+  }
+
+  // update
+  onUpdate( delta );
 
   // clear screen
   _directXDevice->Clear( 0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 );
 
   // start rendering
   if ( _directXDevice->BeginScene() ) {
-    _directXSprite->Begin( D3DXSPRITE_ALPHABLEND );
+    _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE );
 
     onRender();
 

@@ -54,8 +54,8 @@ public:
   // Debug memory allocation
   // =============================================
 public:
-  static long TOTAL_REFERENCE_RETAINED;
-  static long TOTAL_REFERENCE_RELEASED;
+  static long TOTAL_BASE_CREATED;
+  static long TOTAL_BASE_DELETED;
 };
 
 // TEMPLATE DEFINITIONS
