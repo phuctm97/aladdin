@@ -24,11 +24,11 @@ const ala::Color& Sprite::getTransColor() const {
   return _transColor;
 }
 
-const ala::Size2& Sprite::getContentSize() const {
+const ala::Size& Sprite::getContentSize() const {
   return _contentSize;
 }
 
-void Sprite::setContentSize( const ala::Size2& size ) {
+void Sprite::setContentSize( const ala::Size& size ) {
   _contentSize = size;
 }
 

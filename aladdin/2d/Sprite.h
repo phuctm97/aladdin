@@ -6,7 +6,7 @@
  */
 
 #include "2dInclude.h"
-#include "Size2.h"
+#include "Size.h"
 
 NAMESPACE_ALA
 {
@@ -16,7 +16,7 @@ ALA_CLASS_HEADER_1(Sprite, ala::GameResource)
   // ======================================
 private:
   std::string _sourceFile;
-  ala::Size2 _contentSize;
+  ala::Size _contentSize;
   ala::Color _transColor;
 
 public:
@@ -26,9 +26,9 @@ public:
 
   const ala::Color& getTransColor() const;
 
-  const ala::Size2& getContentSize() const;
+  const ala::Size& getContentSize() const;
 
-  void setContentSize( const ala::Size2& size );
+  void setContentSize( const ala::Size& size );
 
 protected:
   bool onLoad() override;

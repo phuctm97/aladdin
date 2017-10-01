@@ -125,11 +125,9 @@
     <ClInclude Include="2d\2dMacros.h" />
     <ClInclude Include="2d\Graphics.h" />
     <ClInclude Include="2d\Rect.h" />
-    <ClInclude Include="2d\Size2.h" />
+    <ClInclude Include="2d\Size.h" />
     <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="2d\SpriteRenderer.h" />
-    <ClInclude Include="2d\Transform2.h" />
-    <ClInclude Include="2d\Vec2.h" />
     <ClInclude Include="aladdin.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\Base.h" />
@@ -146,15 +144,15 @@
     <ClInclude Include="core\ResourceInitializer.h" />
     <ClInclude Include="core\Scene.h" />
     <ClInclude Include="core\StdHelper.h" />
+    <ClInclude Include="core\Transform.h" />
+    <ClInclude Include="core\Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Graphics.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
-    <ClCompile Include="2d\Size2.cpp" />
+    <ClCompile Include="2d\Size.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="2d\SpriteRenderer.cpp" />
-    <ClCompile Include="2d\Transform2.cpp" />
-    <ClCompile Include="2d\Vec2.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\Base.cpp" />
     <ClCompile Include="core\ClassMeta.cpp" />
@@ -167,6 +165,8 @@
     <ClCompile Include="core\Prefab.cpp" />
     <ClCompile Include="core\ResourceInitializer.cpp" />
     <ClCompile Include="core\Scene.cpp" />
+    <ClCompile Include="core\Transform.cpp" />
+    <ClCompile Include="core\Vec2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

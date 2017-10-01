@@ -2,23 +2,22 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#ifndef __ALADDIN_2D_TRANSFORM2_H__
-#define __ALADDIN_2D_TRANSFORM2_H__
+#ifndef __ALADDIN_CORE_TRANSFORM2_H__
+#define __ALADDIN_CORE_TRANSFORM2_H__
 
-#include "2dInclude.h"
 #include "../core/GameObjectComponent.h"
 #include "Vec2.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_1(Transform2, ala::GameObjectComponent)
+ALA_CLASS_HEADER_1(Transform, ala::GameObjectComponent)
 private:
   Vec2 _position;
   Vec2 _scale;
   float _rotation;
 
 public:
-  Transform2( GameObject* gameObject, const std::string& name = "" );
+  Transform( GameObject* gameObject, const std::string& name = "" );
 
   const Vec2& getPosition() const;
 
@@ -42,4 +41,4 @@ public:
 };
 }
 
-#endif //!__ALADDIN_2D_TRANSFORM2_H__
+#endif //!__ALADDIN_CORE_TRANSFORM2_H__

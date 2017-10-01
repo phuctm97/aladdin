@@ -8,7 +8,7 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0( ala::Rect, "ala::Rect" )
 
-Rect::Rect( const Vec2& topLeft, const Size2& size ): _topLeft( topLeft ),
+Rect::Rect( const Vec2& topLeft, const Size& size ): _topLeft( topLeft ),
                                                       _size( size ) {}
 
 const Vec2& Rect::getTopLeft() const {
@@ -19,11 +19,11 @@ void Rect::setTopLeft( const Vec2& topLeft ) {
   _topLeft = topLeft;
 }
 
-const Size2& Rect::getSize() const {
+const Size& Rect::getSize() const {
   return _size;
 }
 
-void Rect::setSize( const Size2& size ) {
+void Rect::setSize( const Size& size ) {
   _size = size;
 }
 }

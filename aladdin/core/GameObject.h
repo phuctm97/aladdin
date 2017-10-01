@@ -44,13 +44,13 @@ public:
 
 protected:
   /**
-  * \brief Add Child Objects and Components here, they will be init right after this function return.
+  * \brief Add Components here, they will be init right after this function return.
   * \return return true if everything were right otherwise return false and the application will crash
   */
   virtual bool onPreInit();
 
   /**
-  * \brief Add special Logic happen after initlization, every children and component in object has been initialized
+  * \brief Add special Logic happen after initlization, every component belong to object has been initialized
   * Component added to scene there will be not automatically init, so you have to init them manually
   */
   virtual void onPostInit();
@@ -60,13 +60,13 @@ public:
 
 protected:
   /**
-  * \brief Happen before object, its children and components were updated
+  * \brief Happen before object and its components were updated
   * \param delta
   */
   virtual void onPreUpdate( float delta );
 
   /**
-  * \brief Happen after object, its children and components were updated
+  * \brief Happen after object and its components were updated
   */
   virtual void onPostUpdate( float delta );
 
@@ -75,12 +75,12 @@ public:
 
 protected:
   /**
-  * \brief Happen before object, its children and components were rendered
+  * \brief Happen before object and its components were rendered
   */
   virtual void onPreRender();
 
   /**
-  * \brief Happen after object, its children and components were rendered
+  * \brief Happen after object and its components were rendered
   */
   virtual void onPostRender();
 
@@ -89,13 +89,13 @@ public:
 
 protected:
   /**
-  * \brief Happen before object, its children and components were released
+  * \brief Happen before object and its components were released
   * \return true if you want to continue releasing and false if not
   */
   virtual bool onPreRelease();
 
   /**
-  * \brief Happen after object, its children and components were released and destroyed
+  * \brief Happen after object and its components were released and destroyed
   */
   virtual void onPostRelease();
 
@@ -129,7 +129,6 @@ private:
   GameObject* _parent;
 
   std::unordered_map<long, GameObject*> _children;
-
 public:
   GameObject* getParent() const;
 

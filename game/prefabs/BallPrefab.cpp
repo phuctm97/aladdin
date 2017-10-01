@@ -9,7 +9,7 @@ ala::GameObject* BallPrefab::doInstantiate() {
   ala::GameObject* object = new ala::GameObject();
 
   // add components
-  auto transform = new ala::Transform2( object );
+  auto transform = new ala::Transform( object );
   transform->setPosition( ala::Vec2() );
 
   new ala::SpriteRenderer( object, "ball.png" );

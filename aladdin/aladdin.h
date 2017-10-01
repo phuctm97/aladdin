@@ -18,9 +18,10 @@
 #include "core/Scene.h"
 #include "core/StdHelper.h"
 #include "core/Color.h"
-#include "2d/Vec2.h"
-#include "2d/Size2.h"
-#include "2d/Transform2.h"
+#include "core/Vec2.h"
+#include "core/Transform.h"
+#include "2d/Size.h"
+#include "2d/Rect.h"
 #include "2d/Sprite.h"
 #include "2d/SpriteRenderer.h"
 

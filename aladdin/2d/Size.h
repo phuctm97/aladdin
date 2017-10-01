@@ -9,13 +9,13 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Size2)
+ALA_CLASS_HEADER_0(Size)
 private:
   float _width;
   float _height;
 
 public:
-  Size2( float x, float y );
+  Size( float x, float y );
 
   float getWidth() const;
 

@@ -52,15 +52,6 @@
     <ClInclude Include="2d\Graphics.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="2d\Vec2.h">
-      <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Size2.h">
-      <Filter>2d</Filter>
-    </ClInclude>
-    <ClInclude Include="2d\Transform2.h">
-      <Filter>2d</Filter>
-    </ClInclude>
     <ClInclude Include="2d\Sprite.h">
       <Filter>2d</Filter>
     </ClInclude>
@@ -76,10 +67,19 @@
     <ClInclude Include="2d\SpriteRenderer.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="core\Prefab.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Vec2.h">
+      <Filter>core</Filter>
+    </ClInclude>
     <ClInclude Include="2d\Rect.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="core\Prefab.h">
+    <ClInclude Include="2d\Size.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Transform.h">
       <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
@@ -111,15 +111,6 @@
     <ClCompile Include="2d\Graphics.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="2d\Vec2.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\Size2.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
-    <ClCompile Include="2d\Transform2.cpp">
-      <Filter>2d</Filter>
-    </ClCompile>
     <ClCompile Include="2d\Sprite.cpp">
       <Filter>2d</Filter>
     </ClCompile>
@@ -135,10 +126,19 @@
     <ClCompile Include="2d\SpriteRenderer.cpp">
       <Filter>2d</Filter>
     </ClCompile>
+    <ClCompile Include="core\Prefab.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Vec2.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
     <ClCompile Include="2d\Rect.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="core\Prefab.cpp">
+    <ClCompile Include="2d\Size.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Transform.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

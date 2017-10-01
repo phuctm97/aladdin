@@ -3,9 +3,7 @@
  */
 
 #include "SpriteRenderer.h"
-#include "Transform2.h"
 #include "Graphics.h"
-#include "../core/GameManager.h"
 
 NAMESPACE_ALA
 {
@@ -28,7 +26,7 @@ void SpriteRenderer::setSprite( Sprite* sprite ) {
 }
 
 void SpriteRenderer::onRender() {
-  Transform2* transform = getGameObject()->getComponentT<Transform2>();
+  Transform* transform = getGameObject()->getComponentT<Transform>();
   if ( transform == NULL ) return;
 
   Graphics::get()->drawSprite( _sprite, transform->getPosition() );

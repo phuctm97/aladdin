@@ -2,10 +2,10 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#ifndef __ALADDIN_2D_VEC2_H__
-#define __ALADDIN_2D_VEC2_H__
+#ifndef __ALADDIN_CORE_VEC2_H__
+#define __ALADDIN_CORE_VEC2_H__
 
-#include "2dInclude.h"
+#include "Base.h"
 
 NAMESPACE_ALA
 {
@@ -27,4 +27,4 @@ public:
 };
 }
 
-#endif //!__ALADDIN_2D_VEC2_H__
+#endif //!__ALADDIN_CORE_VEC2_H__
