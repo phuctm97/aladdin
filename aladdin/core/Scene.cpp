@@ -15,12 +15,11 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 // Basic
 // ================================================
 
-Scene::Scene( const std::string& name ) :
-  _name( name ) {
+Scene::Scene() {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
-  TOTAL_SCENE_CREATED++;
+  TOTAL_SCENES_CREATED++;
 }
 
 Scene::~Scene() {
@@ -29,11 +28,7 @@ Scene::~Scene() {
     ALA_ASSERT(isReleased());
   }
 
-  TOTAL_SCENE_DELETED++;
-}
-
-const std::string& Scene::getName() const {
-  return _name;
+  TOTAL_SCENES_DELETED++;
 }
 
 // =================================================
@@ -72,7 +67,7 @@ void Scene::onPostInitialize() {}
 
 void Scene::update( const float delta ) {
   // make sure scene is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onPreUpdate( delta );
 
@@ -91,7 +86,7 @@ void Scene::onPostUpdate( const float delta ) {}
 
 void Scene::render() {
   // make sure scene is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onPreRender();
 
@@ -155,24 +150,18 @@ GameObject* Scene::getGameObject( const long id ) {
 void Scene::addGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL )return;
-
-  const auto rc = _gameObjects.emplace( gameObject->getId(), gameObject );
-  const auto sucess = rc.second;
-  if ( sucess ) {
-    // TODO: set object's parent
-  }
+  _gameObjects.emplace( gameObject->getId(), gameObject );
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
-
   _gameObjects.erase( gameObject->getId() );
 }
 
 // =============================================
 // Debug memory allocation
 // =============================================
-long Scene::TOTAL_SCENE_CREATED( 0 );
-long Scene::TOTAL_SCENE_DELETED( 0 );
+long Scene::TOTAL_SCENES_CREATED( 0 );
+long Scene::TOTAL_SCENES_DELETED( 0 );
 }

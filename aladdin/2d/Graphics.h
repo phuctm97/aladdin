@@ -20,6 +20,7 @@ ALA_CLASS_HEADER_0(Graphics)
 
 private:
   static Graphics* __instance;
+  Logger* _logger;
 
 public:
   Graphics();

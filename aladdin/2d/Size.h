@@ -15,17 +15,17 @@ private:
   float _height;
 
 public:
-  Size( float x, float y );
+  Size( const float x, const float y );
 
   virtual ~Size();
 
   float getWidth() const;
 
-  void setWidth( float x );
+  void setWidth( const float width );
 
   float getHeight() const;
 
-  void setHeight( float y );
+  void setHeight( const float height );
 };
 }
 

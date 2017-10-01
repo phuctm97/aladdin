@@ -33,6 +33,14 @@ public:
 
   void error(char const* const format, ...) const;
 
+
+  // =============================================
+  // Debug memory allocation
+  // =============================================
+public:
+  static long TOTAL_LOGGERS_CREATED;
+  static long TOTAL_LOGGERS_DELETED;
+
 };
 }
 

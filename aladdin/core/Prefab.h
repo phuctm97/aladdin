@@ -9,11 +9,9 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Prefab)
+ALA_CLASS_HEADER_1(Prefab, ala::Releasable)
 private:
   std::string _name;
-  bool _destructed;
-  bool _released;
 
 public:
   Prefab( const std::string& name );
@@ -22,13 +20,17 @@ public:
 
   const std::string& getName() const;
 
-  GameObject* instantiate();
+  GameObject* instantiate( const std::string& name = "" );
+
+  GameObject* instantiate( Scene* scene, const std::string& name = "" );
+
+  GameObject* instantiate( GameObject* parentObject, const std::string& name = "" );
 
 protected:
-  virtual GameObject* doInstantiate();
+  virtual void doInstantiate( GameObject* object ) = 0;
 
 public:
-  void release();
+  void release() override;
 
 protected:
   virtual void onRelease();

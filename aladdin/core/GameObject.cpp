@@ -10,19 +10,48 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_2(ala::GameObject, ala::Initializable, ala::Releasable)
 
-GameObject::GameObject( const std::string& name )
+GameObject::GameObject( Scene* parentScene, const std::string& name )
   : _id( GameManager::get()->newId() ),
-    _name( name ) {
+    _name( name ),
+    _parentScene( parentScene ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  // default components
+  _transform = new Transform( this );
 
   // attach to GameManager
   GameManager::get()->attach( this );
 
-  configureDefaultComponents();
+  // make sure parent scene is not null
+  ALA_ASSERT(_parentScene != NULL);
+
+  // attach to Scene
+  _parentScene->addGameObject( this );
 
   // for debug memory allocation
-  TOTAL_OBJECT_CREATED++;
+  TOTAL_OBJECTS_CREATED++;
+}
+
+GameObject::GameObject( GameObject* parentObject, const std::string& name )
+  : _id( GameManager::get()->newId() ),
+    _name( name ),
+    _parentScene( NULL ) {
+
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  // make sure parent object is not null
+  ALA_ASSERT(parentObject != NULL);
+
+  // default components
+  _transform = new Transform( this, parentObject->getTransform() );
+
+  // attach to GameManager
+  GameManager::get()->attach( this );
+
+  // for debug memory allocation
+  TOTAL_OBJECTS_CREATED++;
 }
 
 GameObject::~GameObject() {
@@ -32,7 +61,7 @@ GameObject::~GameObject() {
   }
 
   // for debug memory allocation
-  TOTAL_OBJECT_DELETED++;
+  TOTAL_OBJECTS_DELETED++;
 }
 
 long GameObject::getId() const {
@@ -41,6 +70,10 @@ long GameObject::getId() const {
 
 const std::string& GameObject::getName() const {
   return _name;
+}
+
+Scene* GameObject::getParentScene() const {
+  return _parentScene;
 }
 
 // ===========================================================
@@ -65,7 +98,7 @@ void GameObject::initialize() {
 
 void GameObject::update( const float delta ) {
   // make sure object is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   // update components
   for ( auto component : _components ) {
@@ -75,7 +108,7 @@ void GameObject::update( const float delta ) {
 
 void GameObject::render() {
   // make sure object is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   // render components
   for ( auto component : _components ) {
@@ -96,12 +129,15 @@ void GameObject::release() {
     component->release();
   }
 
-  setToReleased();
-
-  // TODO: remove from parent
+  // remove from parent scene
+  if ( _parentScene != NULL ) {
+    _parentScene->removeGameObject( this );
+  }
 
   // detach from GameManager
   GameManager::get()->detach( this );
+
+  setToReleased();
 
   // destroy
   delete this;
@@ -152,10 +188,6 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::strin
 // Default components
 // ========================================================
 
-void GameObject::configureDefaultComponents() {
-  _transform = new Transform( this );
-}
-
 bool GameObject::isDefaultComponents( GameObjectComponent* component ) {
   if ( component == _transform ) return true;
   return false;
@@ -173,7 +205,7 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
 // Debug memory allocation
 // ============================================
 
-long GameObject::TOTAL_OBJECT_CREATED( 0 );
+long GameObject::TOTAL_OBJECTS_CREATED( 0 );
 
-long GameObject::TOTAL_OBJECT_DELETED( 0 );
+long GameObject::TOTAL_OBJECTS_DELETED( 0 );
 }

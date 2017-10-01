@@ -10,7 +10,7 @@ USING_NAMESPACE_ALA;
 MyApp::MyApp() : Application() {}
 
 void MyApp::onInitialize() {
-  // TODO: init application (size, title, fps, scene to start, log behaviors)
+  // TODO: init application (size, title, fps, resources initializer, scene to start, log behaviors)
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
   setAnimationInterval( 1000.0f / 60 );

@@ -9,7 +9,7 @@ BallController::BallController( ala::GameObject* gameObject, const std::string& 
     _state( 'R' ),
     _speed( 2 ) {}
 
-void BallController::onUpdate( float delta ) {
+void BallController::onUpdate( const float delta ) {
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   const auto sprite = getGameObject()->getComponentT<ala::SpriteRenderer>()->getSprite();
 

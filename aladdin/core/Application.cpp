@@ -15,9 +15,9 @@ ALA_CLASS_SOURCE_2(Application, ala::Initializable, ala::Releasable)
 
 Application::Application() :
   _title( "Aladdin Game" ),
-  _screenWidth( 0 ),
-  _screenHeight( 0 ),
-  _animationInterval( 1000.0f / 30 ),
+  _screenWidth( 800 ),
+  _screenHeight( 600 ),
+  _animationInterval( 1000.0f / 60 ),
   _sceneToStart( NULL ),
   _frameCount( 0 ),
   _logger( new Logger( "ala::Application" ) ),
@@ -38,14 +38,22 @@ Application::~Application() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
+  _logger->debug( "Released" );
   _logger->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
   _logger->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  _logger->debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
+  _logger->debug( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
   _logger->debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
   _logger->debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
-  _logger->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
-  _logger->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
-  _logger->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
-  _logger->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
+  _logger->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
+  _logger->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
+  _logger->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
+  _logger->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
+  _logger->debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
+  _logger->debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
+  _logger->debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
+  _logger->debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
+  delete _logger;
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -142,26 +150,6 @@ void Application::release() {
   delete this;
 }
 
-void Application::initResources() {
-  // init resource initializers
-  for ( auto initializer : _resourceInitializers ) {
-    if ( initializer ) {
-      initializer->init();
-    }
-    delete initializer;
-  }
-  _resourceInitializers.clear();
-
-  // load game resources
-  for ( const auto it : GameManager::get()->_attachedResources ) {
-    auto resource = it.second;
-    if ( resource->isLoaded() ) continue;
-    if ( resource->isGameScope() ) {
-      resource->load();
-    }
-  }
-}
-
 void Application::initComponents() {
   // validate application properties
   ALA_ASSERT(_screenWidth > 0);
@@ -172,6 +160,8 @@ void Application::initComponents() {
   // windows components
   initWindowHandle();
   initDirectX();
+
+  _logger->debug( "Created" );
 
   // game singleton components
   GameManager* gameManager = GameManager::get();
@@ -190,6 +180,26 @@ void Application::initComponents() {
 
   // init runnings scene
   gameManager->replaceScene( _sceneToStart );
+}
+
+void Application::initResources() {
+  // init resource initializers
+  for ( auto initializer : _resourceInitializers ) {
+    if ( initializer ) {
+      initializer->init();
+    }
+    delete initializer;
+  }
+  _resourceInitializers.clear();
+
+  // load game resources
+  for ( const auto it : GameManager::get()->_attachedResources ) {
+    auto resource = it.second;
+    if ( resource->isLoaded() ) continue;
+    if ( resource->isGameScope() ) {
+      resource->load();
+    }
+  }
 }
 
 void Application::releaseComponents() {

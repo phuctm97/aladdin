@@ -13,7 +13,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(GameManager)
+ALA_CLASS_HEADER_1(GameManager, ala::Releasable)
   // ==============================================
   // Basic
   // ==============================================
@@ -21,8 +21,6 @@ ALA_CLASS_HEADER_0(GameManager)
 
 private:
   static GameManager* __instance;
-  bool _destructed;
-  bool _released;
   Logger* _logger;
 
 public:
@@ -32,7 +30,7 @@ public:
 
   static GameManager* get();
 
-  void release();
+  void release() override;
 
   // ===============================================
   // Game Information
@@ -135,7 +133,7 @@ T* GameManager::getObjectTById( long id ) {
   if ( objectIt == _attachedObjects.end() ) return NULL;
 
   const auto object = objectIt->second;
-  if ( object->isInstanceOf<T>() ) {
+  if ( ALA_IS_INSTANCE_OF( object, T) ) {
     return static_cast<T *>(object);
   }
   return NULL;
@@ -147,7 +145,7 @@ T* GameManager::getObjectTByName( const std::string& name ) {
     auto object = pair.second;
     if ( object == NULL ) continue;
     if ( object->getName() == name ) {
-      if ( object->isInstanceOf<T>() ) {
+      if ( ALA_IS_INSTANCE_OF(object, T) ) {
         return static_cast<T *>(object);
       }
     }

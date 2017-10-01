@@ -14,9 +14,17 @@ ALA_CLASS_SOURCE_0(ala::Graphics)
 
 Graphics* Graphics::__instance( NULL );
 
-Graphics::Graphics(): _directXDevice( 0 ), _directXSprite( 0 ) { }
+Graphics::Graphics():
+  _logger( new Logger( "ala::Graphics" ) ),
+  _directXDevice( 0 ),
+  _directXSprite( 0 ) {
+  _logger->debug( "Created" );
+}
 
-Graphics::~Graphics() {}
+Graphics::~Graphics() {
+  _logger->debug( "Released" );
+  delete _logger;
+}
 
 Graphics* Graphics::get() {
   if ( __instance == NULL ) {

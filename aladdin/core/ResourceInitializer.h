@@ -11,9 +11,18 @@ NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_0(ResourceInitializer)
 public:
+  ResourceInitializer();
+
   virtual ~ResourceInitializer();
 
   virtual void init() = 0;
+
+  // =============================================
+  // Debug memory allocation
+  // =============================================
+public:
+  static long TOTAL_RESOURCE_INITIALIZERS_CREATED;
+  static long TOTAL_RESOURCE_INITIALIZERS_DELETED;
 };
 }
 

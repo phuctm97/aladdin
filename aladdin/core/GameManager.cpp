@@ -10,7 +10,7 @@ NAMESPACE_ALA
 // Basic
 // ===========================================
 
-ALA_CLASS_SOURCE_0(ala::GameManager)
+ALA_CLASS_SOURCE_1(ala::GameManager, ala::Releasable)
 
 GameManager* GameManager::__instance( NULL );
 
@@ -22,27 +22,26 @@ GameManager* GameManager::get() {
 }
 
 GameManager::GameManager() :
-  _destructed( false ),
-  _released( false ),
   _logger( new Logger( "ala::GameManager" ) ),
   _screenWidth( 0 ),
   _screenHeight( 0 ),
   _idCounter( 0 ),
   _runningScene( NULL ) {
+  ALA_ASSERT((!isReleased()) && (!isReleasing()));
 
   _logger->debug( "Created" );
 }
 
 GameManager::~GameManager() {
-  _destructed = true;
-  ALA_ASSERT(_released);
-
+  ALA_ASSERT(isReleased());
   _logger->debug( "Released" );
+  delete _logger;
 }
 
 void GameManager::release() {
-  ALA_ASSERT((!_released) && (!_destructed));
-  _released = true;
+  ALA_ASSERT((!isReleased()) && (!isReleasing()));
+  setToReleasing();
+  setToReleased();
   delete this;
 }
 
@@ -69,7 +68,7 @@ long GameManager::newId() {
 // ==============================================
 
 void GameManager::attach( GameObject* gameObject ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
 
   // insert to attach table by id
   if ( gameObject != NULL ) {
@@ -78,7 +77,7 @@ void GameManager::attach( GameObject* gameObject ) {
 }
 
 void GameManager::detach( GameObject* gameObject ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
 
   if ( gameObject != NULL ) {
     _attachedObjects.erase( gameObject->getId() );
@@ -137,7 +136,7 @@ Scene* GameManager::getRunningScene() const {
 }
 
 void GameManager::replaceScene( Scene* scene ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
 
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
@@ -157,14 +156,14 @@ void GameManager::replaceScene( Scene* scene ) {
 // ===============================================
 
 void GameManager::attach( GameResource* resource ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( resource == NULL ) return;
   auto rc = _attachedResources.emplace( resource->getName(), resource );
   ALA_ASSERT(rc.second == true);
 }
 
 void GameManager::detach( GameResource* resource ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( resource == NULL ) return;
   _attachedResources.erase( resource->getName() );
 }
@@ -179,7 +178,7 @@ std::vector<GameResource*> GameManager::getResourcesWith( Scene* scope ) {
   std::vector<GameResource*> ret;
 
   for ( const auto it : _attachedResources ) {
-    GameResource* resource = it.second;
+    auto resource = it.second;
     if ( resource->getSceneScope() == scope ) {
       ret.push_back( resource );
     }
@@ -192,7 +191,7 @@ std::vector<GameResource*> GameManager::getAllResources() {
   std::vector<GameResource*> ret;
 
   for ( const auto it : _attachedResources ) {
-    GameResource* resource = it.second;
+    auto resource = it.second;
     ret.push_back( resource );
   }
 
@@ -204,7 +203,7 @@ std::vector<GameResource*> GameManager::getAllResources() {
 // ===============================================
 
 void GameManager::registerPrefab( Prefab* prefab ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( prefab == NULL ) return;
 
   auto rc = _registeredPrefabs.emplace( prefab->getName(), prefab );
@@ -212,7 +211,7 @@ void GameManager::registerPrefab( Prefab* prefab ) {
 }
 
 void GameManager::removePrefab( Prefab* prefab ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( prefab == NULL ) return;
   _registeredPrefabs.erase( prefab->getName() );
 }

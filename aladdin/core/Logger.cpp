@@ -15,9 +15,13 @@ void Logger::setLogLevel( int level ) {
   __logLevel = level;
 }
 
-Logger::Logger( const std::string& className ) : _className( className ) { }
+Logger::Logger( const std::string& className ) : _className( className ) {
+  TOTAL_LOGGERS_CREATED++;
+}
 
-Logger::~Logger() {}
+Logger::~Logger() {
+  TOTAL_LOGGERS_DELETED++;
+}
 
 void Logger::debug( char const* const format, ... ) const {
   if ( __logLevel > LOG_DEBUG ) return;
@@ -66,4 +70,10 @@ void Logger::error( char const* const format, ... ) const {
   printf( logString.c_str() );
   va_end(args);
 }
+
+// =============================================
+// Debug memory allocation
+// =============================================
+long Logger::TOTAL_LOGGERS_CREATED( 0 );
+long Logger::TOTAL_LOGGERS_DELETED( 0 );
 }

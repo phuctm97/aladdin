@@ -18,15 +18,13 @@ ALA_CLASS_HEADER_2(Scene, ala::Initializable, ala::Releasable)
   // ================================================
   // Basic
   // ================================================
-private:
-  std::string _name;
-
 public:
-  Scene( const std::string& name );
+  /**
+   * \brief Create a scene, this will not be managed unless you attach to GameManager by call replaceScene
+   */
+  Scene();
 
   virtual ~Scene();
-
-  const std::string& getName() const;
 
   // ==================================================
   // Events
@@ -80,6 +78,9 @@ protected:
   virtual void onPostRender();
 
 public:
+  /**
+   * \brief Release and destroy scene, this will not change running scene, you should not call this method directly
+   */
   void release() override;
 
 protected:
@@ -104,16 +105,24 @@ private:
 public:
   GameObject* getGameObject( const long id );
 
+  /**
+   * \brief Attach game object to scene, this will not change game object's parent, you should not call this method directly
+   * \param gameObject Game object to attach
+   */
   void addGameObject( GameObject* gameObject );
 
+  /**
+   * \brief Detach game object from scene, this will not change game object's parent or release it, you should not call this method directly
+   * \param gameObject Game object to detach
+   */
   void removeGameObject( GameObject* gameObject );
 
   // =============================================
   // Debug memory allocation
   // =============================================
 public:
-  static long TOTAL_SCENE_CREATED;
-  static long TOTAL_SCENE_DELETED;
+  static long TOTAL_SCENES_CREATED;
+  static long TOTAL_SCENES_DELETED;
 };
 }
 

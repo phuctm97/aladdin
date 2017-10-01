@@ -5,7 +5,7 @@
 #include "IntroScene.h"
 #include "core/GameManager.h"
 
-IntroScene::IntroScene(): Scene( "IntroScene" ) {}
+IntroScene::IntroScene() {}
 
 void IntroScene::onPreInitialize() {
   ala::GameManager::get()->getPrefab( "Ball" )->instantiate();

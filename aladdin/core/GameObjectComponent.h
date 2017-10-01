@@ -22,6 +22,11 @@ private:
   GameObject* _gameObject;
 
 public:
+  /**
+   * \brief Create a component and attach it to game object
+   * \param gameObject Target game object
+   * \param name Component name
+   */
   GameObjectComponent( GameObject* gameObject, const std::string& name = "" );
 
   virtual ~GameObjectComponent();
@@ -66,7 +71,17 @@ public:
 
   void render();
 
+  /**
+   * \brief Release and destroy component, automatically removed from game object
+   */
   void release() override;
+
+  // ===========================================================
+  // Debug memory allocation
+  // ===========================================================
+public:
+  static long TOTAL_COMPONENTS_CREATED;
+  static long TOTAL_COMPONENTS_DELETED;
 };
 }
 

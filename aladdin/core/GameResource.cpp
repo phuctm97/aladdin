@@ -56,10 +56,10 @@ void GameResource::release() {
 
   onRelease();
 
-  setToReleased();
-
   // detach from game manager
-  GameManager::get()->detach( this );
+  GameManager::get()->detach(this);
+
+  setToReleased();
 
   // destroy
   delete this;

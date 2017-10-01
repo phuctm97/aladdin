@@ -15,17 +15,17 @@ private:
   float _y;
 
 public:
-  Vec2( float x = 0, float y = 0 );
+  Vec2( const float x = 0, const float y = 0 );
 
   virtual ~Vec2();
 
   float getX() const;
 
-  void setX( float x );
+  void setX( const float x );
 
   float getY() const;
 
-  void setY( float y );
+  void setY( const float y );
 };
 }
 

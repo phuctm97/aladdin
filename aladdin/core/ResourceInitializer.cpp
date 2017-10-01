@@ -8,5 +8,17 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0( ala::ResourceInitializer )
 
-ResourceInitializer::~ResourceInitializer() {}
+ResourceInitializer::ResourceInitializer() {
+  TOTAL_RESOURCE_INITIALIZERS_CREATED++;
+}
+
+ResourceInitializer::~ResourceInitializer() {
+  TOTAL_RESOURCE_INITIALIZERS_DELETED++;
+}
+
+// =============================================
+// Debug memory allocation
+// =============================================
+long ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED( 0 );
+long ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED( 0 );
 }

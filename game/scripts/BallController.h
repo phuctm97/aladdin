@@ -16,7 +16,7 @@ public:
   BallController( ala::GameObject* gameObject, const std::string& name = "" );
 
 protected:
-  void onUpdate( float delta ) override;
+  void onUpdate( const float delta ) override;
 };
 
 

@@ -16,13 +16,15 @@ ALA_CLASS_SOURCE_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
     _gameObject( gameObject ) {
-  // check game object
-  ALA_ASSERT(gameObject != NULL);
-
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
-  gameObject->addComponent( this );
+  // check game object
+  ALA_ASSERT(gameObject != NULL);
+
+  _gameObject->addComponent( this );
+
+  TOTAL_COMPONENTS_CREATED++;
 }
 
 GameObjectComponent::~GameObjectComponent() {
@@ -30,6 +32,8 @@ GameObjectComponent::~GameObjectComponent() {
     // make sure object released after destruction
     ALA_ASSERT(isReleased());
   }
+
+  TOTAL_COMPONENTS_DELETED++;
 }
 
 const std::string& GameObjectComponent::getName() const {
@@ -62,7 +66,7 @@ void GameObjectComponent::onInitialize() {}
 
 void GameObjectComponent::update( const float delta ) {
   // make sure object is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onUpdate( delta );
 }
@@ -73,7 +77,7 @@ void GameObjectComponent::onRender() {}
 
 void GameObjectComponent::render() {
   // make sure object is initialized and not released
-  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onRender();
 }
@@ -88,6 +92,9 @@ void GameObjectComponent::release() {
 
   onRelease();
 
+  // remove from game object
+  _gameObject->removeComponent( this );
+
   setToReleased();
 
   // destroy
@@ -95,4 +102,10 @@ void GameObjectComponent::release() {
 }
 
 void GameObjectComponent::onRelease() {}
+
+// ===========================================================
+// Debug memory allocation
+// ===========================================================
+long GameObjectComponent::TOTAL_COMPONENTS_CREATED( 0 );
+long GameObjectComponent::TOTAL_COMPONENTS_DELETED( 0 );
 }
