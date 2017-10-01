@@ -130,6 +130,7 @@
     <ClInclude Include="2d\SpriteRenderer.h" />
     <ClInclude Include="aladdin.h" />
     <ClInclude Include="core\Application.h" />
+    <ClInclude Include="core\Callback.h" />
     <ClInclude Include="core\ClassMeta.h" />
     <ClInclude Include="core\Color.h" />
     <ClInclude Include="core\CoreInclude.h" />
@@ -138,14 +139,17 @@
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
     <ClInclude Include="core\GameResource.h" />
+    <ClInclude Include="core\IMessageArg.h" />
     <ClInclude Include="core\Initializable.h" />
     <ClInclude Include="core\Loadable.h" />
     <ClInclude Include="core\Logger.h" />
+    <ClInclude Include="core\Messenger.h" />
     <ClInclude Include="core\Prefab.h" />
     <ClInclude Include="core\Releasable.h" />
     <ClInclude Include="core\ResourceInitializer.h" />
     <ClInclude Include="core\Scene.h" />
     <ClInclude Include="core\StdHelper.h" />
+    <ClInclude Include="core\StringMessageArg.h" />
     <ClInclude Include="core\Transform.h" />
     <ClInclude Include="core\Vec2.h" />
   </ItemGroup>
@@ -156,19 +160,23 @@
     <ClCompile Include="2d\Sprite.cpp" />
     <ClCompile Include="2d\SpriteRenderer.cpp" />
     <ClCompile Include="core\Application.cpp" />
+    <ClCompile Include="core\Callback.cpp" />
     <ClCompile Include="core\ClassMeta.cpp" />
     <ClCompile Include="core\Color.cpp" />
     <ClCompile Include="core\GameManager.cpp" />
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
     <ClCompile Include="core\GameResource.cpp" />
+    <ClCompile Include="core\IMessageArg.cpp" />
     <ClCompile Include="core\Initializable.cpp" />
     <ClCompile Include="core\Loadable.cpp" />
     <ClCompile Include="core\Logger.cpp" />
+    <ClCompile Include="core\Messenger.cpp" />
     <ClCompile Include="core\Prefab.cpp" />
     <ClCompile Include="core\Releasable.cpp" />
     <ClCompile Include="core\ResourceInitializer.cpp" />
     <ClCompile Include="core\Scene.cpp" />
+    <ClCompile Include="core\StringMessageArg.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
   </ItemGroup>
