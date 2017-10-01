@@ -5,11 +5,11 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include "Base.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include "GameResource.h"
 #include "Prefab.h"
+#include "Logger.h"
 
 NAMESPACE_ALA
 {
@@ -23,11 +23,12 @@ private:
   static GameManager* __instance;
   bool _destructed;
   bool _released;
+  Logger* _logger;
 
 public:
   GameManager();
 
-  ~GameManager();
+  virtual ~GameManager();
 
   static GameManager* get();
 

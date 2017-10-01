@@ -18,9 +18,6 @@
     <ClInclude Include="core\ClassMeta.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="core\Base.h">
-      <Filter>core</Filter>
-    </ClInclude>
     <ClInclude Include="core\GameObject.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -85,9 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\Base.cpp">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\GameObject.cpp">

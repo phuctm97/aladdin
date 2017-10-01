@@ -2,10 +2,10 @@
 #define __ALADDIN_CORE_GAME_OBJECT_COMPONENT_H__
 
 /*
-* Created by phuctm97 on Sep 27th 2017
-*/
+ * Created by phuctm97 on Sep 27th 2017
+ */
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
@@ -22,7 +22,7 @@ private:
 public:
   GameObjectComponent( GameObject* gameObject, const std::string& name = "" );
 
-  ~GameObjectComponent();
+  virtual ~GameObjectComponent();
 
   const std::string& getName() const;
 
@@ -43,14 +43,14 @@ protected:
    */
   virtual bool onInit();
 
-  
+
   /**
    * \brief Happen when component is updated
    * \param delta 
    */
   virtual void onUpdate( float delta );
 
-  
+
   /**
    * \brief Happen when component is rendered
    */

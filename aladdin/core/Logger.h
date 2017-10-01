@@ -5,7 +5,7 @@
 #ifndef __ALADDIN_CORE_LOGGER_H__
 #define __ALADDIN_CORE_LOGGER_H__
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
@@ -24,6 +24,8 @@ public:
   static void setLogLevel( int level );
 
   Logger( const std::string& className );
+
+  virtual ~Logger();
 
   void debug( char const* const format, ... ) const;
 

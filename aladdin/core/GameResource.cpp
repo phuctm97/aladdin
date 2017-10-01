@@ -7,7 +7,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::GameResource, "ala::GameResource" )
+ALA_CLASS_SOURCE_0( ala::GameResource )
 
 GameResource::GameResource( const std::string& name, Scene* sceneScope )
   : _name( name ),

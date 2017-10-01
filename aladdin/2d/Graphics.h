@@ -24,6 +24,8 @@ private:
 public:
   Graphics();
 
+  virtual ~Graphics();
+
   static Graphics* get();
 
   // ==========================================

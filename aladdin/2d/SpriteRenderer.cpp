@@ -7,7 +7,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1(ala::SpriteRenderer, "ala::SpriteRenderer", ala::GameObjectComponent )
+ALA_CLASS_SOURCE_1(ala::SpriteRenderer, ala::GameObjectComponent )
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const std::string& name )
   : GameObjectComponent( gameObject, name ), _sprite( sprite ) {}
@@ -16,6 +16,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
   : GameObjectComponent( gameObject, name ), _sprite( NULL ) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 }
+
+SpriteRenderer::~SpriteRenderer() {}
 
 Sprite* SpriteRenderer::getSprite() const {
   return _sprite;

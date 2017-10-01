@@ -8,7 +8,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::GameObject, "ala::GameObject")
+ALA_CLASS_SOURCE_0(ala::GameObject)
 
 GameObject::GameObject( const std::string& name )
   : _id( GameManager::get()->newId() ),

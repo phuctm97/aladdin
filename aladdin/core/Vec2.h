@@ -5,7 +5,7 @@
 #ifndef __ALADDIN_CORE_VEC2_H__
 #define __ALADDIN_CORE_VEC2_H__
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
@@ -16,6 +16,8 @@ private:
 
 public:
   Vec2( float x = 0, float y = 0 );
+
+  virtual ~Vec2();
 
   float getX() const;
 

@@ -7,7 +7,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1(ala::Sprite, "ala::Sprite", ala::GameResource)
+ALA_CLASS_SOURCE_1(ala::Sprite, ala::GameResource)
 
 Sprite::Sprite( const std::string& name, const std::string& sourceFile, const ala::Color& transColor, Scene* scope )
   : GameResource( name, scope ),
@@ -15,6 +15,8 @@ Sprite::Sprite( const std::string& name, const std::string& sourceFile, const al
     _contentSize( 0, 0 ),
     _transColor( transColor ),
     _directXTexture( 0 ) {}
+
+Sprite::~Sprite() {}
 
 const std::string& Sprite::getSourceFile() const {
   return _sourceFile;

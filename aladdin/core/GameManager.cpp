@@ -3,7 +3,6 @@
 */
 
 #include "GameManager.h"
-#include "Logger.h"
 
 NAMESPACE_ALA
 {
@@ -11,7 +10,7 @@ NAMESPACE_ALA
 // Basic
 // ===========================================
 
-ALA_CLASS_SOURCE_0(ala::GameManager, "ala::GameManager")
+ALA_CLASS_SOURCE_0(ala::GameManager)
 
 GameManager* GameManager::__instance( NULL );
 
@@ -25,17 +24,20 @@ GameManager* GameManager::get() {
 GameManager::GameManager() :
   _destructed( false ),
   _released( false ),
+  _logger( new Logger( "ala::GameManager" ) ),
   _screenWidth( 0 ),
   _screenHeight( 0 ),
   _idCounter( 0 ),
   _runningScene( NULL ) {
-  getLogger()->debug( "Created" );
+
+  _logger->debug( "Created" );
 }
 
 GameManager::~GameManager() {
   _destructed = true;
   ALA_ASSERT(_released);
-  getLogger()->debug( "Released" );
+
+  _logger->debug( "Released" );
 }
 
 void GameManager::release() {

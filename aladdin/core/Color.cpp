@@ -4,14 +4,16 @@
 
 #include "Color.h"
 
-NAMESPACE_ALA {
-
-ALA_CLASS_SOURCE_0( ala::Color, "ala::Color" )
+NAMESPACE_ALA
+{
+ALA_CLASS_SOURCE_0( ala::Color )
 
 Color::Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a ): _r( r ),
                                                                                     _g( g ),
                                                                                     _b( b ),
                                                                                     _a( a ) {}
+
+Color::~Color() {}
 
 unsigned char Color::getR() const {
   return _r;

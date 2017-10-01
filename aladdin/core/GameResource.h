@@ -5,7 +5,6 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#include "Base.h"
 #include "Scene.h"
 
 NAMESPACE_ALA
@@ -21,7 +20,7 @@ private:
 public:
   GameResource( const std::string& name, Scene* sceneScope = NULL );
 
-  ~GameResource();
+  virtual ~GameResource();
 
   const std::string& getName() const;
 

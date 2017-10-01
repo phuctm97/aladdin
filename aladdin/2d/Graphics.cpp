@@ -10,11 +10,13 @@ NAMESPACE_ALA
 // ==========================================
 // Basic
 // ==========================================
-ALA_CLASS_SOURCE_0(ala::Graphics, "ala::Graphics")
+ALA_CLASS_SOURCE_0(ala::Graphics)
 
 Graphics* Graphics::__instance( NULL );
 
 Graphics::Graphics(): _directXDevice( 0 ), _directXSprite( 0 ) { }
+
+Graphics::~Graphics() {}
 
 Graphics* Graphics::get() {
   if ( __instance == NULL ) {
@@ -58,7 +60,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
 
   ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
-  sprite->setContentSize( Size( static_cast<float>(info.Width),static_cast<float>(info.Height) ) );
+  sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
 void Graphics::drawSprite( Sprite* sprite, const Vec2& position, const Rect& srcRect ) {

@@ -22,6 +22,8 @@ private:
 public:
   Sprite( const std::string& name, const std::string& sourceFile, const ala::Color& transColor = ala::Color( 255, 0, 255 ), Scene* scope = NULL );
 
+  virtual ~Sprite();
+
   const std::string& getSourceFile() const;
 
   const ala::Color& getTransColor() const;

@@ -5,7 +5,7 @@
 #ifndef __ALADDIN_CORE_TRANSFORM2_H__
 #define __ALADDIN_CORE_TRANSFORM2_H__
 
-#include "../core/GameObjectComponent.h"
+#include "GameObjectComponent.h"
 #include "Vec2.h"
 
 NAMESPACE_ALA
@@ -18,6 +18,8 @@ private:
 
 public:
   Transform( GameObject* gameObject, const std::string& name = "" );
+
+  virtual ~Transform();
 
   const Vec2& getPosition() const;
 

@@ -5,7 +5,6 @@
 * Created on Sep 27th 2017
 */
 
-#include "Base.h"
 #include "GameObjectComponent.h"
 
 NAMESPACE_ALA
@@ -21,7 +20,7 @@ private:
 public:
   GameObject( const std::string& name = "" );
 
-  ~GameObject();
+  virtual ~GameObject();
 
   long getId() const;
 
@@ -159,7 +158,7 @@ public:
 template <class T>
 T* GameObject::getComponentT() const {
   for ( GameObjectComponent* component : _components ) {
-    if ( component != NULL && component->isInstanceOf<T>() ) {
+    if ( component != NULL && ALA_IS_INSTANCE_OF(component, T) ) {
       return static_cast<T*>(component);
     }
   }
@@ -171,7 +170,7 @@ std::vector<T*> GameObject::getAllComponentTs() const {
   std::vector<T*> ret;
 
   for ( GameObjectComponent* component : _components ) {
-    if ( component != NULL && component->isInstanceOf<T>() ) {
+    if ( component != NULL && ALA_IS_INSTANCE_OF( component, T) ) {
       ret.emplace_back( component );
     }
   }

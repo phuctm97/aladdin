@@ -19,6 +19,7 @@ public:
 
   SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName = "", const std::string& name = "" );
 
+  virtual ~SpriteRenderer();
 
   Sprite* getSprite() const;
 

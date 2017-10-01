@@ -5,7 +5,7 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
@@ -17,6 +17,7 @@ private:
   unsigned char _a;
 public:
   Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255 );
+  virtual ~Color();
 
   unsigned char getR() const;
   void setR( unsigned char r );

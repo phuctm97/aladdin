@@ -5,7 +5,6 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#include "../core/Base.h"
 #include "../core/ClassMeta.h"
 #include "../core/Color.h"
 #include "../core/Vec2.h"

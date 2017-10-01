@@ -6,11 +6,13 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1( ala::Transform, "ala::Transform", ala::GameObjectComponent )
+ALA_CLASS_SOURCE_1( ala::Transform, ala::GameObjectComponent )
 
 Transform::Transform( GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _rotation( 0 ) {}
+
+Transform::~Transform() {}
 
 const Vec2& Transform::getPosition() const {
   return _position;

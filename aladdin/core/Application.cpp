@@ -3,13 +3,12 @@
 */
 
 #include "Application.h"
-#include "Logger.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::Application, "ala::Application")
+ALA_CLASS_SOURCE_0(ala::Application)
 // ==================================================
 // Basic
 // ==================================================
@@ -23,6 +22,7 @@ Application::Application() :
   _animationInterval( 1000.0f / 30 ),
   _sceneToStart( NULL ),
   _frameCount( 0 ),
+  _logger( new Logger( "ala::Application" ) ),
   _logStream( 0 ),
   _exiting( false ),
   _hInstance( NULL ),
@@ -37,14 +37,14 @@ Application::~Application() {
   if ( _inited ) {
     ALA_ASSERT(_released);
   }
-  getLogger()->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
-  getLogger()->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
-  getLogger()->debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
-  getLogger()->debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
-  getLogger()->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
-  getLogger()->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
-  getLogger()->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
-  getLogger()->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
+  _logger->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  _logger->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  _logger->debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
+  _logger->debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
+  _logger->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENE_DELETED );
+  _logger->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENE_DELETED );
+  _logger->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECT_CREATED );
+  _logger->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECT_DELETED );
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -365,7 +365,7 @@ void Application::processGame() {
   _frameCount++;
   if ( _frameCount % 1800 == 0 ) {
     const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
-    getLogger()->debug( "FPS: %d", fps );
+    _logger->debug( "FPS: %d", fps );
   }
 
   // update

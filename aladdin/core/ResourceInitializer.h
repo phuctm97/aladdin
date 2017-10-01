@@ -5,12 +5,14 @@
 #ifndef __ALADDIN_CORE_RESOURCE_INITIALIZER_H__
 #define __ALADDIN_CORE_RESOURCE_INITIALIZER_H__
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_0(ResourceInitializer)
 public:
+  virtual ~ResourceInitializer();
+
   virtual void init() = 0;
 };
 }

@@ -9,7 +9,6 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include "Base.h"
 #include "GameObject.h"
 
 NAMESPACE_ALA

@@ -6,10 +6,12 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::Rect, "ala::Rect" )
+ALA_CLASS_SOURCE_0( ala::Rect )
 
 Rect::Rect( const Vec2& topLeft, const Size& size ): _topLeft( topLeft ),
-                                                      _size( size ) {}
+                                                     _size( size ) {}
+
+Rect::~Rect() {}
 
 const Vec2& Rect::getTopLeft() const {
   return _topLeft;

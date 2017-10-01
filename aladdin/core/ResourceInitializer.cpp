@@ -6,5 +6,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::ResourceInitializer, "ala::ResourceInitializer" )
+ALA_CLASS_SOURCE_0( ala::ResourceInitializer )
+
+ResourceInitializer::~ResourceInitializer() {}
 }

@@ -11,7 +11,7 @@ NAMESPACE_ALA
 // Basic
 // ================================================
 
-ALA_CLASS_SOURCE_0(ala::GameObjectComponent, "ala::GameObjectComponent")
+ALA_CLASS_SOURCE_0(ala::GameObjectComponent)
 
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),

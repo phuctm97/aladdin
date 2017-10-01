@@ -7,6 +7,7 @@
 
 #include "Scene.h"
 #include "ResourceInitializer.h"
+#include "Logger.h"
 
 NAMESPACE_ALA
 {
@@ -24,11 +25,12 @@ private:
   Scene* _sceneToStart;
   std::vector<ResourceInitializer*> _resourceInitializers;
   long _frameCount;
+  Logger* _logger;
 
 public:
   Application();
 
-  ~Application();
+  virtual ~Application();
 
   void setScreenSize( int width, int height );
 

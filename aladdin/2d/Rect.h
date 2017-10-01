@@ -18,6 +18,8 @@ private:
 public:
   Rect( const Vec2& topLeft = Vec2(), const Size& size = Size( 0, 0 ) );
 
+  virtual ~Rect();
+
   const Vec2& getTopLeft() const;
 
   void setTopLeft( const Vec2& topLeft );

@@ -9,7 +9,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::Scene, "ala::Scene")
+ALA_CLASS_SOURCE_0(ala::Scene)
 
 // ================================================
 // Basic

@@ -17,6 +17,8 @@ private:
 public:
   Size( float x, float y );
 
+  virtual ~Size();
+
   float getWidth() const;
 
   void setWidth( float x );

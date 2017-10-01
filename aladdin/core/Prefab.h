@@ -5,7 +5,6 @@
 #ifndef __ALADDIN_CORE_PREFAB_H__
 #define __ALADDIN_CORE_PREFAB_H__
 
-#include "Base.h"
 #include "GameObject.h"
 
 NAMESPACE_ALA

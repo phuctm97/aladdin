@@ -7,7 +7,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::Prefab, "ala::Prefab" )
+ALA_CLASS_SOURCE_0( ala::Prefab )
 
 Prefab::Prefab( const std::string& name )
   : _name( name ),

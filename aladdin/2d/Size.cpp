@@ -6,10 +6,12 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::Size, "ala::Size" )
+ALA_CLASS_SOURCE_0( ala::Size )
 
 Size::Size( float x, float y ) : _width( x ),
                                  _height( y ) {}
+
+Size::~Size() {}
 
 float Size::getWidth() const {
   return _width;
