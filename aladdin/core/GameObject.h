@@ -6,6 +6,7 @@
 */
 
 #include "GameObjectComponent.h"
+#include "Transform.h"
 
 NAMESPACE_ALA
 {
@@ -60,6 +61,19 @@ public:
 
   template <class T>
   std::vector<T*> getAllComponentTs() const;
+
+  // ========================================================
+  // Default components
+  // ========================================================
+private:
+  Transform* _transform;
+
+  void configureDefaultComponents();
+
+  bool isDefaultComponents( GameObjectComponent* component);
+
+public:
+  Transform* getTransform() const;
 
   // ===========================================================
   // Debug memory allocation

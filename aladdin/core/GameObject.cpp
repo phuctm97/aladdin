@@ -19,6 +19,8 @@ GameObject::GameObject( const std::string& name )
   // attach to GameManager
   GameManager::get()->attach( this );
 
+  configureDefaultComponents();
+
   // for debug memory allocation
   TOTAL_OBJECT_CREATED++;
 }
@@ -113,7 +115,6 @@ void GameObject::addComponent( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
   if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
-
   _components.emplace_back( component );
 }
 
@@ -121,6 +122,8 @@ void GameObject::removeComponent( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
 
+  // prevent remove default components
+  ALA_ASSERT(isDefaultComponents( component ));
   StdHelper::vectorErase<GameObjectComponent*>( _components, component );
 }
 
@@ -143,6 +146,23 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::strin
   }
 
   return ret;
+}
+
+// ========================================================
+// Default components
+// ========================================================
+
+void GameObject::configureDefaultComponents() {
+  _transform = new Transform( this );
+}
+
+bool GameObject::isDefaultComponents( GameObjectComponent* component ) {
+  if ( component == _transform ) return true;
+  return false;
+}
+
+Transform* GameObject::getTransform() const {
+  return _transform;
 }
 
 std::vector<GameObjectComponent*> GameObject::getAllComponents() const {

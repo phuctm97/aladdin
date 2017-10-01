@@ -10,7 +10,9 @@ ALA_CLASS_SOURCE_1( ala::Transform, ala::GameObjectComponent )
 
 Transform::Transform( GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _rotation( 0 ) {}
+    _rotation( 0 ),
+    _position( 0, 0 ),
+    _scale( 1, 1 ) {}
 
 Transform::~Transform() {}
 
