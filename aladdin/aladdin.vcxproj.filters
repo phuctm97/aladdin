@@ -94,9 +94,6 @@
     <ClInclude Include="core\IMessageArg.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="core\Callback.h">
-      <Filter>core</Filter>
-    </ClInclude>
     <ClInclude Include="core\StringMessageArg.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -169,9 +166,6 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\IMessageArg.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\Callback.cpp">
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\StringMessageArg.cpp">

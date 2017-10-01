@@ -6,9 +6,9 @@ ALA_CLASS_SOURCE_0(ala::Messenger)
 
 void Messenger::broadcast (std::string messageId, IMessageArg* args )
 {
-	for(auto tmp: _callbacks[messageId])
+	for(auto callback: _callbacks[messageId])
 	{
-		tmp.second(args);
+		callback.second(args);
 	}
 }
 
