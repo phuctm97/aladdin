@@ -29,9 +29,11 @@
 #include <memory>
 
 // Platform specific
+#define DIRECTINPUT_VERSION 0x0800
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
+#include <dinput.h>
 #include <assert.h>
 
 // Aladdin includes

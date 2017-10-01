@@ -49,7 +49,7 @@ public:
   void registerResourceInitializer( ResourceInitializer* initializer );
 
 private:
-  void onUpdate(float delta);
+  void onUpdate( float delta );
 
   void onRender();
 
@@ -86,6 +86,8 @@ private:
   IDirect3D9* _directX;
   IDirect3DDevice9* _directXDevice;
   LPD3DXSPRITE _directXSprite;
+  LPDIRECTINPUT8 _directXInput;
+  LPDIRECTINPUTDEVICE8 _directXInputKeyboard;
   DWORD _startTimestamp;
   DWORD _lastTimestamp;
 

@@ -5,6 +5,7 @@
 #include "Application.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
+#include "../input/Input.h"
 
 NAMESPACE_ALA
 {
@@ -171,6 +172,9 @@ void Application::initComponents() {
   graphics->_directXDevice = _directXDevice;
   graphics->_directXSprite = _directXSprite;
 
+  Input* input = Input::get();
+  input->_directXInputKeyboard = _directXInputKeyboard;
+
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
 
@@ -224,6 +228,9 @@ void Application::releaseComponents() {
   // game singleton components
   Graphics* graphics = Graphics::get();
   delete graphics;
+
+  Input* input = Input::get();
+  input->release();
 
   GameManager* gameManager = GameManager::get();
   gameManager->release();
@@ -305,6 +312,8 @@ void Application::initWindowHandle() {
 }
 
 void Application::initDirectX() {
+  HRESULT result;
+
   // init DirectX
   _directX = Direct3DCreate9( D3D_SDK_VERSION );
   ALA_ASSERT(!FAILED(_directX));
@@ -319,30 +328,64 @@ void Application::initDirectX() {
   d3dpp.Windowed = true;
   d3dpp.hDeviceWindow = _hWnd;
   d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-  _directX->CreateDevice(
+  result = _directX->CreateDevice(
     D3DADAPTER_DEFAULT,
     D3DDEVTYPE_HAL,
     _hWnd,
     D3DCREATE_HARDWARE_VERTEXPROCESSING,
     &d3dpp,
     &_directXDevice );
+
+  ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXDevice));
 
   // init DirectX Sprite
-  HRESULT result;
   result = D3DXCreateSprite( _directXDevice, &_directXSprite );
   ALA_ASSERT(result == D3D_OK);
+  ALA_ASSERT(!FAILED(_directXSprite));
+
+  // init DirectX Input
+  result = DirectInput8Create(
+    _hInstance,
+    DIRECTINPUT_VERSION,
+    IID_IDirectInput8,
+    reinterpret_cast<void**>(&_directXInput),
+    NULL );
+  ALA_ASSERT(result == DI_OK);
+  ALA_ASSERT(!FAILED(_directXInput));
+
+  // init DirectX Input Keyboard
+  result = _directXInput->CreateDevice( GUID_SysKeyboard, &_directXInputKeyboard, NULL );
+  ALA_ASSERT(result == DI_OK);
+  ALA_ASSERT(!FAILED(_directXInputKeyboard));
+
+  result = _directXInputKeyboard->SetDataFormat( &c_dfDIKeyboard );
+  ALA_ASSERT(result == DI_OK);
+  result = _directXInputKeyboard->SetCooperativeLevel( _hWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
+  ALA_ASSERT(result == DI_OK);
+  result = _directXInputKeyboard->Acquire();
+  ALA_ASSERT(result == DI_OK);
+
+
+  // TODO: init DirectX Input Mouse
 }
 
 void Application::releaseDirectX() const {
   if ( _directXSprite ) {
     _directXSprite->Release();
   }
+  if ( _directXDevice ) {
+    _directXDevice->Release();
+  }
   if ( _directX ) {
     _directX->Release();
   }
-  if ( _directXDevice ) {
-    _directXDevice->Release();
+  if ( _directXInputKeyboard ) {
+    _directXInputKeyboard->Unacquire();
+    _directXInputKeyboard->Release();
+  }
+  if ( _directXInput ) {
+    _directXInput->Release();
   }
 }
 

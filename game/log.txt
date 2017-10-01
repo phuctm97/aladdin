@@ -1,7 +1,9 @@
 [D] [ala::Application] : Created
 [D] [ala::GameManager] : Created
 [D] [ala::Graphics] : Created
+[D] [ala::Logger] : Created
 [D] [ala::Graphics] : Released
+[D] [ala::Logger] : Released
 [D] [ala::GameManager] : Released
 [D] [ala::Application] : Released
 [D] [ala::Application] : Total Resources Created: 1
@@ -16,5 +18,5 @@
 [D] [ala::Application] : Total Objects Deleted: 1
 [D] [ala::Application] : Total Components Created: 3
 [D] [ala::Application] : Total Components Deleted: 3
-[D] [ala::Application] : Total Loggers Created: 3
-[D] [ala::Application] : Total Loggers Deleted: 2
+[D] [ala::Application] : Total Loggers Created: 4
+[D] [ala::Application] : Total Loggers Deleted: 3
