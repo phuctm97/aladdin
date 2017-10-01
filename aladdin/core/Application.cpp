@@ -20,7 +20,7 @@ Application::Application() :
   _animationInterval( 1000.0f / 60 ),
   _sceneToStart( NULL ),
   _frameCount( 0 ),
-  _logger( new Logger( "ala::Application" ) ),
+  _logger( "ala::Application" ),
   _logStream( 0 ),
   _exiting( false ),
   _hInstance( NULL ),
@@ -38,22 +38,21 @@ Application::~Application() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger->debug( "Released" );
-  _logger->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
-  _logger->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
-  _logger->debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
-  _logger->debug( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
-  _logger->debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
-  _logger->debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
-  _logger->debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
-  _logger->debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
-  _logger->debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
-  _logger->debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
-  _logger->debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
-  _logger->debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
-  _logger->debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
-  _logger->debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
-  delete _logger;
+  _logger.debug( "Released" );
+  _logger.debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  _logger.debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  _logger.debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
+  _logger.debug( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
+  _logger.debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
+  _logger.debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
+  _logger.debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
+  _logger.debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
+  _logger.debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
+  _logger.debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
+  _logger.debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
+  _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
+  _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
+  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -161,7 +160,7 @@ void Application::initComponents() {
   initWindowHandle();
   initDirectX();
 
-  _logger->debug( "Created" );
+  _logger.debug( "Created" );
 
   // game singleton components
   GameManager* gameManager = GameManager::get();
@@ -396,7 +395,7 @@ void Application::processGame() {
   _frameCount++;
   if ( _frameCount % 1800 == 0 ) {
     const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
-    _logger->debug( "FPS: %d", fps );
+    _logger.debug( "FPS: %d", fps );
   }
 
   // update

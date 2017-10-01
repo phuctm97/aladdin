@@ -23,7 +23,7 @@ private:
   std::vector<ResourceInitializer*> _resourceInitializers;
   Scene* _sceneToStart;
   long _frameCount;
-  Logger* _logger;
+  Logger _logger;
 
 public:
   Application();

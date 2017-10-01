@@ -21,7 +21,7 @@ ALA_CLASS_HEADER_1(GameManager, ala::Releasable)
 
 private:
   static GameManager* __instance;
-  Logger* _logger;
+  Logger _logger;
 
 public:
   GameManager();
