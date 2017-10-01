@@ -6,12 +6,14 @@
  */
 
 #include "ClassMeta.h"
+#include "Initializable.h"
+#include "Releasable.h"
 
 NAMESPACE_ALA
 {
 class GameObject;
 
-ALA_CLASS_HEADER_0(GameObjectComponent)
+ALA_CLASS_HEADER_2(GameObjectComponent, ala::Initializable, ala::Releasable)
   // =====================================================
   // Basic
   // =====================================================
@@ -31,24 +33,19 @@ public:
   // ==================================================
   // Events
   // ==================================================
-private:
-  bool _inited;
-  bool _destructed;
-  bool _released;
-
 protected:
   /**
    * \brief Happen when component is initialized
    * \return true to continue initlization or false to stop it and crash the application
    */
-  virtual bool onInit();
+  virtual void onInitialize();
 
 
   /**
    * \brief Happen when component is updated
    * \param delta 
    */
-  virtual void onUpdate( float delta );
+  virtual void onUpdate( const float delta );
 
 
   /**
@@ -63,17 +60,13 @@ protected:
   virtual void onRelease();
 
 public:
-  bool isInited() const;
+  void initialize() override;
 
-  bool isReleased() const;
-
-  void init();
-
-  void update( float delta );
+  void update( const float delta );
 
   void render();
 
-  void release();
+  void release() override;
 };
 }
 

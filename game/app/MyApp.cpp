@@ -9,7 +9,7 @@ USING_NAMESPACE_ALA;
 
 MyApp::MyApp() : Application() {}
 
-void MyApp::init() {
+void MyApp::onInitialize() {
   // TODO: init application (size, title, fps, scene to start, log behaviors)
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
@@ -19,6 +19,6 @@ void MyApp::init() {
   startWithScene( new IntroScene() );
 }
 
-void MyApp::release() {
+void MyApp::onRelease() {
   // TODO: release my application
 }

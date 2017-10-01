@@ -11,24 +11,24 @@ NAMESPACE_ALA
 // Basic
 // ================================================
 
-ALA_CLASS_SOURCE_0(ala::GameObjectComponent)
+ALA_CLASS_SOURCE_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
-    _gameObject( gameObject ),
-    _inited( false ),
-    _destructed( false ),
-    _released( false ) {
+    _gameObject( gameObject ) {
+  // check game object
   ALA_ASSERT(gameObject != NULL);
+
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
   gameObject->addComponent( this );
 }
 
 GameObjectComponent::~GameObjectComponent() {
-  _destructed = true;
-
-  if ( _inited ) {
+  if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(_released);
+    ALA_ASSERT(isReleased());
   }
 }
 
@@ -45,61 +45,54 @@ GameObject* GameObjectComponent::getGameObject() const {
 // Events
 // =================================================
 
-void GameObjectComponent::init() {
+void GameObjectComponent::initialize() {
   // make sure object is not initialized;
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
-  if ( !onInit() ) {
-    return;
-  }
+  setToInitializing();
 
-  _inited = true;
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  onInitialize();
+
+  setToInitialized();
 }
 
-bool GameObjectComponent::onInit() {
-  return true;
-}
+void GameObjectComponent::onInitialize() {}
 
-void GameObjectComponent::update( float delta ) {
+void GameObjectComponent::update( const float delta ) {
   // make sure object is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
 
   onUpdate( delta );
 }
 
-void GameObjectComponent::onUpdate( float delta ) {}
+void GameObjectComponent::onUpdate( const float delta ) {}
 
 void GameObjectComponent::onRender() {}
 
 void GameObjectComponent::render() {
   // make sure object is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
 
   onRender();
 }
 
 void GameObjectComponent::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT(_inited && (!_released) && (!_destructed));
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
-  _released = true;
+  setToReleasing();
+
+  // TODO: lock mutual exclusive when run in multithreading mode
 
   onRelease();
 
-  _gameObject->removeComponent( this );
+  setToReleased();
 
+  // destroy
   delete this;
 }
 
 void GameObjectComponent::onRelease() {}
-
-bool GameObjectComponent::isInited() const {
-  return _inited;
-}
-
-bool GameObjectComponent::isReleased() const {
-  return _released;
-}
 }

@@ -13,7 +13,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Scene)
+ALA_CLASS_HEADER_2(Scene, ala::Initializable, ala::Releasable)
 
   // ================================================
   // Basic
@@ -31,34 +31,24 @@ public:
   // ==================================================
   // Events
   // ==================================================
-private:
-  bool _inited;
-  bool _destructed;
-  bool _released;
-
 public:
-  bool isInited() const;
-
-  bool isReleased() const;
-
-  void init();
+  void initialize() override;
 
 protected:
 
   /**
    * \brief Add Default Objects and Scene Resources here, they will be init right after this function return
-   * \return return true if everything were right otherwise return false and the application will crash
    */
-  virtual bool onPreInit();
+  virtual void onPreInitialize();
 
   /**
   * \brief Add special Logic happen after initlization, every object and component in scene has been initialized
   * Object and Component added to scene there will be not automatically init, so you have to init them manually
   */
-  virtual void onPostInit();
+  virtual void onPostInitialize();
 
 public:
-  void update( float delta );
+  void update( const float delta );
 
 protected:
 
@@ -66,13 +56,13 @@ protected:
    * \brief Happen before scene, its objects and components were updated
    * \param delta 
    */
-  virtual void onPreUpdate( float delta );
+  virtual void onPreUpdate( const float delta );
 
 
   /**
    * \brief Happen after scene, its objects and components were updated
    */
-  virtual void onPostUpdate( float delta );
+  virtual void onPostUpdate( const float delta );
 
 public:
   void render();
@@ -90,17 +80,16 @@ protected:
   virtual void onPostRender();
 
 public:
-  void release();
+  void release() override;
 
 protected:
 
   /**
    * \brief Happen before scene, its objects and components were released
-   * \return true if you want to continue releasing and false if not
    */
-  virtual bool onPreRelease();
+  virtual void onPreRelease();
 
-  
+
   /**
    * \brief Happen after scene, its objects and components were released and destroyed
    */
@@ -113,7 +102,7 @@ private:
   std::unordered_map<long, GameObject*> _gameObjects;
 
 public:
-  GameObject* getGameObject( long id );
+  GameObject* getGameObject( const long id );
 
   void addGameObject( GameObject* gameObject );
 

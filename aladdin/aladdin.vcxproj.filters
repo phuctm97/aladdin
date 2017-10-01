@@ -79,6 +79,15 @@
     <ClInclude Include="core\Transform.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\Initializable.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Releasable.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Loadable.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -133,6 +142,15 @@
       <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="core\Transform.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Initializable.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Releasable.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Loadable.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

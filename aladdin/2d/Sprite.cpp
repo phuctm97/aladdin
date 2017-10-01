@@ -34,9 +34,9 @@ void Sprite::setContentSize( const ala::Size& size ) {
   _contentSize = size;
 }
 
-bool Sprite::onLoad() {
+void Sprite::onLoad() {
   Graphics::get()->loadSprite( this );
-  return _directXTexture != 0;
+  ALA_ASSERT( _directXTexture != 0);
 }
 
 void Sprite::onRelease() {

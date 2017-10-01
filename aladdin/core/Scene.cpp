@@ -9,26 +9,24 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::Scene)
+ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 
 // ================================================
 // Basic
 // ================================================
 
 Scene::Scene( const std::string& name ) :
-  _name( name ),
-  _inited( false ),
-  _destructed( false ),
-  _released( false ) {
+  _name( name ) {
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
   TOTAL_SCENE_CREATED++;
 }
 
 Scene::~Scene() {
-  _destructed = true;
-
-  if ( _inited ) {
-    // make sure object released before destruction
-    ALA_ASSERT(_released);
+  if ( isInitialized() ) {
+    // make sure object released after destruction
+    ALA_ASSERT(isReleased());
   }
 
   TOTAL_SCENE_DELETED++;
@@ -38,78 +36,69 @@ const std::string& Scene::getName() const {
   return _name;
 }
 
-
 // =================================================
 // Events
 // =================================================
 
-bool Scene::isInited() const {
-  return _inited;
-}
-
-bool Scene::isReleased() const {
-  return _released;
-}
-
-void Scene::init() {
+void Scene::initialize() {
   // make sure scene is not initialized;
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()));
 
-  // child pre init
-  if ( !onPreInit() ) {
-    return;
-  }
+  onPreInitialize();
 
-  _inited = true;
+  setToInitializing();
 
-  // load Scene resources
-  for ( GameResource* resource : GameManager::get()->getResourcesWith( this ) ) {
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  // load resources scope with this
+  for ( auto resource : GameManager::get()->getResourcesWith( this ) ) {
     resource->load();
   }
 
-  // init child object
+  // init game objects
   for ( const auto it : _gameObjects ) {
-    it.second->init();
+    auto object = it.second;
+    object->initialize();
   }
 
-  // child post init
-  onPostInit();
+  setToInitialized();
+
+  onPostInitialize();
 }
 
-bool Scene::onPreInit() {
-  return true;
-}
+void Scene::onPreInitialize() {}
 
-void Scene::onPostInit() {}
+void Scene::onPostInitialize() {}
 
-void Scene::update( float delta ) {
+void Scene::update( const float delta ) {
   // make sure scene is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
 
   onPreUpdate( delta );
 
-  // TODO: scene update here
+  // update game objects
   for ( const auto it : _gameObjects ) {
-    it.second->update( delta );
+    auto object = it.second;
+    object->update( delta );
   }
 
   onPostUpdate( delta );
 }
 
-void Scene::onPreUpdate( float delta ) {}
+void Scene::onPreUpdate( const float delta ) {}
 
-void Scene::onPostUpdate( float delta ) {}
+void Scene::onPostUpdate( const float delta ) {}
 
 void Scene::render() {
   // make sure scene is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+  if ( (!isInitialized()) || (!isInitializing()) || isReleasing() || isReleased() ) return;
 
   onPreRender();
 
+  // render game objects
   for ( const auto it : _gameObjects ) {
-    it.second->render();
+    auto object = it.second;
+    object->render();
   }
 
   onPostRender();
@@ -121,42 +110,35 @@ void Scene::onPostRender() {}
 
 void Scene::release() {
   // make sure scene is initialized and not released
-  ALA_ASSERT(_inited && (!_released) && (!_destructed));
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
-  // Child PreRelease
-  if ( !onPreRelease() ) {
-    return;
-  }
+  onPreRelease();
 
-  _released = true;
+  setToReleasing();
 
-  // Scene Release
+  // TODO: lock mutual exclusive when run in multithreading mode
 
-  // release game object
+  // release game objects
   std::vector<GameObject*> gameObjectsToRelease;
   for ( const auto it : _gameObjects ) {
-    gameObjectsToRelease.push_back( it.second );
-  }
-  _gameObjects.clear();
-  for ( GameObject* gameObject : gameObjectsToRelease ) {
-    gameObject->release();
+    auto object = it.second;
+    object->release();
   }
 
-  // release resource scope with this
-  for ( GameResource* resouce : GameManager::get()->getResourcesWith( this ) ) {
+  // release resources scope with this
+  for ( auto resouce : GameManager::get()->getResourcesWith( this ) ) {
     resouce->release();
   }
 
-  // child post release
+  setToReleased();
+
   onPostRelease();
 
-  // delete self
+  // destroy
   delete this;
 }
 
-bool Scene::onPreRelease() {
-  return true;
-}
+void Scene::onPreRelease() {}
 
 void Scene::onPostRelease() {}
 
@@ -164,26 +146,25 @@ void Scene::onPostRelease() {}
 // Objects Management
 // ==================================================
 
-GameObject* Scene::getGameObject( long id ) {
+GameObject* Scene::getGameObject( const long id ) {
   const auto it = _gameObjects.find( id );
   if ( it == _gameObjects.end() ) return NULL;
   return it->second;
 }
 
 void Scene::addGameObject( GameObject* gameObject ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL )return;
 
   const auto rc = _gameObjects.emplace( gameObject->getId(), gameObject );
-
-  const bool sucess = rc.second;
+  const auto sucess = rc.second;
   if ( sucess ) {
-    gameObject->setParent( NULL );
+    // TODO: set object's parent
   }
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
-  if ( _destructed || _released ) return;
+  if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
 
   _gameObjects.erase( gameObject->getId() );

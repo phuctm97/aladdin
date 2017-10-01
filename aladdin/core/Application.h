@@ -11,19 +11,17 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Application)
+ALA_CLASS_HEADER_2(Application, ala::Initializable, ala::Releasable)
   // ================================================
   // Basic
   // ================================================
 private:
-  bool _inited;
-  bool _released;
   std::string _title;
   int _screenWidth;
   int _screenHeight;
   float _animationInterval;
-  Scene* _sceneToStart;
   std::vector<ResourceInitializer*> _resourceInitializers;
+  Scene* _sceneToStart;
   long _frameCount;
   Logger* _logger;
 
@@ -51,20 +49,29 @@ public:
   void registerResourceInitializer( ResourceInitializer* initializer );
 
 private:
+  void onUpdate(float delta);
+
+  void onRender();
+
+  // ================================================
+  // Initializing & Releasing
+  // ================================================
+public:
+  void initialize() override;
+
+  void release() override;
+
+private:
   void initResources();
 
   void initComponents();
 
   void releaseComponents();
 
-  void onUpdate( float delta );
-
-  void onRender();
-
 protected:
-  virtual void init() = 0;
+  virtual void onInitialize() = 0;
 
-  virtual void release() = 0;
+  virtual void onRelease() = 0;
 
   // ================================================
   // Platform specific
@@ -83,11 +90,11 @@ private:
   DWORD _lastTimestamp;
 
 public:
-  void run( HINSTANCE hInstance,
-            HINSTANCE hPrevInstance,
-            LPSTR lpCmdLine,
-            int nCmdShow,
-            int logStream = 0 );
+  void run( const HINSTANCE hInstance,
+            const HINSTANCE hPrevInstance,
+            const LPSTR lpCmdLine,
+            const int nCmdShow,
+            const int logStream = 0 );
 
 private:
   void initWindowHandle();

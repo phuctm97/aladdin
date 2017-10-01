@@ -6,16 +6,14 @@
  */
 
 #include "Scene.h"
+#include "Loadable.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(GameResource)
+ALA_CLASS_HEADER_2(GameResource, ala::Loadable, ala::Releasable)
 private:
   std::string _name;
   Scene* _sceneScope;
-  bool _loaded;
-  bool _destructed;
-  bool _released;
 
 public:
   GameResource( const std::string& name, Scene* sceneScope = NULL );
@@ -24,13 +22,9 @@ public:
 
   const std::string& getName() const;
 
-  void load();
+  void load() override;
 
-  void release();
-
-  bool isLoaded() const;
-
-  bool isReleased() const;
+  void release() override;
 
   void setGameScope();
 
@@ -38,8 +32,10 @@ public:
 
   Scene* getSceneScope() const;
 
+  bool isGameScope() const;
+
 protected:
-  virtual bool onLoad() = 0;
+  virtual void onLoad() = 0;
 
   virtual void onRelease() = 0;
 

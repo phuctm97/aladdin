@@ -7,7 +7,6 @@
 
 IntroScene::IntroScene(): Scene( "IntroScene" ) {}
 
-bool IntroScene::onPreInit() {
+void IntroScene::onPreInitialize() {
   ala::GameManager::get()->getPrefab( "Ball" )->instantiate();
-  return true;
 }

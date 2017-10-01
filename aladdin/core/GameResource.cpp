@@ -7,22 +7,24 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0( ala::GameResource )
+ALA_CLASS_SOURCE_2(ala::GameResource, ala::Loadable, ala::Releasable)
 
 GameResource::GameResource( const std::string& name, Scene* sceneScope )
   : _name( name ),
-    _sceneScope( sceneScope ),
-    _loaded( false ),
-    _destructed( false ),
-    _released( false ) {
+    _sceneScope( sceneScope ) {
+  // check initial state
+  ALA_ASSERT((!isLoaded()) && (!isLoading()) && (!isReleased()) && (!isReleasing()));
+
+  // attach to game manager
   GameManager::get()->attach( this );
+
   TOTAL_RESOURCES_CREATED++;
 }
 
 GameResource::~GameResource() {
-  _destructed = true;
-  if ( _loaded ) {
-    ALA_ASSERT(_released);
+  if ( isLoaded() ) {
+    // make sure object released after destruction
+    ALA_ASSERT(isReleased());
   }
   TOTAL_RESOURCES_DELETED++;
 }
@@ -32,29 +34,35 @@ const std::string& GameResource::getName() const {
 }
 
 void GameResource::load() {
-  ALA_ASSERT(!_loaded);
-  _loaded = onLoad();
-  ALA_ASSERT(_loaded);
+  // make sure that object is not loaded
+  ALA_ASSERT((!isLoaded()) && (!isLoading()));
+
+  setToLoading();
+
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  onLoad();
+
+  setToLoaded();
 }
 
 void GameResource::release() {
-  ALA_ASSERT(_loaded && (!_released) && (!_destructed));
+  // make sure object is initialized and not released
+  ALA_ASSERT((isLoaded()) && (!isLoading()) && (!isReleased()));
 
-  _released = true;
+  setToReleasing();
+
+  // TODO: lock mutual exclusive when run in multithreading mode
 
   onRelease();
 
+  setToReleased();
+
+  // detach from game manager
   GameManager::get()->detach( this );
 
+  // destroy
   delete this;
-}
-
-bool GameResource::isLoaded() const {
-  return _loaded;
-}
-
-bool GameResource::isReleased() const {
-  return _released;
 }
 
 void GameResource::setGameScope() {
@@ -67,6 +75,10 @@ void GameResource::setSceneScope( Scene* sceneScope ) {
 
 Scene* GameResource::getSceneScope() const {
   return _sceneScope;
+}
+
+bool GameResource::isGameScope() const {
+  return _sceneScope == NULL;
 }
 
 // =============================================

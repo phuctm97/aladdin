@@ -147,7 +147,9 @@ void GameManager::replaceScene( Scene* scene ) {
   }
 
   _runningScene = scene;
-  _runningScene->init();
+  if ( !_runningScene->isInitialized() ) {
+    _runningScene->initialize();
+  }
 }
 
 // ===============================================

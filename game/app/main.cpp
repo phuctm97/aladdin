@@ -1,18 +1,19 @@
 #include "MyApp.h"
 
 #ifndef LOG_STREAM
-#define LOG_STREAM 1
+#define LOG_STREAM 2
 #endif
 
 int WINAPI WinMain( HINSTANCE hInstance,
                     HINSTANCE hPrevInstance,
                     LPSTR lpCmdLine,
                     int nCmdShow ) {
-  MyApp app;
-  app.run( hInstance,
-           hPrevInstance,
-           lpCmdLine,
-           nCmdShow,
-           LOG_STREAM );
+  MyApp* app = new MyApp();
+  app->run( hInstance,
+            hPrevInstance,
+            lpCmdLine,
+            nCmdShow,
+            LOG_STREAM );
+  app->release();
   return 0;
 }

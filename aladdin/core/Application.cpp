@@ -8,14 +8,12 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::Application)
 // ==================================================
 // Basic
 // ==================================================
+ALA_CLASS_SOURCE_2(Application, ala::Initializable, ala::Releasable)
 
 Application::Application() :
-  _inited( false ),
-  _released( false ),
   _title( "Aladdin Game" ),
   _screenWidth( 0 ),
   _screenHeight( 0 ),
@@ -31,11 +29,14 @@ Application::Application() :
   _directXDevice( NULL ),
   _directXSprite( NULL ),
   _startTimestamp( 0 ),
-  _lastTimestamp( 0 ) {}
+  _lastTimestamp( 0 ) {
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+}
 
 Application::~Application() {
-  if ( _inited ) {
-    ALA_ASSERT(_released);
+  if ( isInitialized() ) {
+    ALA_ASSERT(isReleased());
   }
   _logger->debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
   _logger->debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
@@ -49,7 +50,7 @@ Application::~Application() {
 
 void Application::setScreenSize( int width, int height ) {
   // can only be set before init process
-  ALA_ASSERT((!_inited) && (!_released));
+  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _screenWidth = width;
   _screenHeight = height;
 }
@@ -64,7 +65,7 @@ int Application::getScreenHeight() const {
 
 void Application::setTitle( const std::string& title ) {
   // can only be set before init process
-  ALA_ASSERT((!_inited) && (!_released));
+  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _title = title;
 }
 
@@ -74,7 +75,7 @@ const std::string& Application::getTitle() const {
 
 void Application::setAnimationInterval( float millis ) {
   // can only be set before init process
-  ALA_ASSERT((!_inited) && (!_released));
+  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _animationInterval = millis;
 }
 
@@ -84,7 +85,7 @@ float Application::getLoopInterval() const {
 
 void Application::startWithScene( Scene* scene ) {
   // can only be set before init process
-  ALA_ASSERT((!_inited) && (!_released));
+  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _sceneToStart = scene;
 }
 
@@ -92,8 +93,58 @@ void Application::registerResourceInitializer( ResourceInitializer* initializer 
   _resourceInitializers.push_back( initializer );
 }
 
+void Application::onUpdate( float delta ) {
+  Scene* runningScene = GameManager::get()->getRunningScene();
+  if ( runningScene ) {
+    runningScene->update( delta );
+  }
+}
+
+void Application::onRender() {
+  Scene* runningScene = GameManager::get()->getRunningScene();
+  if ( runningScene ) {
+    runningScene->render();
+  }
+}
+
+// ================================================
+// Initializing & Releasing
+// ================================================
+
+void Application::initialize() {
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
+
+  setToInitializing();
+
+  // client application init
+  onInitialize();
+
+  // init components
+  initComponents();
+
+  setToInitialized();
+}
+
+void Application::release() {
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+
+  setToReleasing();
+
+  // client application release
+  onRelease();
+
+  // release components
+  releaseComponents();
+
+  setToReleased();
+
+  // destroy
+  delete this;
+}
+
 void Application::initResources() {
-  for ( ResourceInitializer* initializer : _resourceInitializers ) {
+  // init resource initializers
+  for ( auto initializer : _resourceInitializers ) {
     if ( initializer ) {
       initializer->init();
     }
@@ -101,16 +152,18 @@ void Application::initResources() {
   }
   _resourceInitializers.clear();
 
+  // load game resources
   for ( const auto it : GameManager::get()->_attachedResources ) {
-    GameResource* resource = it.second;
+    auto resource = it.second;
     if ( resource->isLoaded() ) continue;
-    if ( resource->getSceneScope() == NULL ) {
+    if ( resource->isGameScope() ) {
       resource->load();
     }
   }
 }
 
 void Application::initComponents() {
+  // validate application properties
   ALA_ASSERT(_screenWidth > 0);
   ALA_ASSERT(_screenHeight > 0);
   ALA_ASSERT(!_title.empty());
@@ -118,7 +171,6 @@ void Application::initComponents() {
 
   // windows components
   initWindowHandle();
-
   initDirectX();
 
   // game singleton components
@@ -161,6 +213,9 @@ void Application::releaseComponents() {
   }
 
   // game singleton components
+  Graphics* graphics = Graphics::get();
+  delete graphics;
+
   GameManager* gameManager = GameManager::get();
   gameManager->release();
 
@@ -168,62 +223,26 @@ void Application::releaseComponents() {
   releaseDirectX();
 }
 
-void Application::onUpdate( float delta ) {
-  Scene* runningScene = GameManager::get()->getRunningScene();
-  if ( runningScene ) {
-    runningScene->update( delta );
-  }
-}
-
-void Application::onRender() {
-  Scene* runningScene = GameManager::get()->getRunningScene();
-  if ( runningScene ) {
-    runningScene->render();
-  }
-}
-
 // ===================================================
 // Platform specific
 // ===================================================
-void Application::run( HINSTANCE hInstance,
-                       HINSTANCE hPrevInstance,
-                       LPSTR lpCmdLine,
-                       int nCmdShow,
-                       int logStream ) {
+void Application::run( const HINSTANCE hInstance,
+                       const HINSTANCE hPrevInstance,
+                       const LPSTR lpCmdLine,
+                       const int nCmdShow,
+                       const int logStream ) {
   // make sure that application can only init once
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
   // get run arguments
   _hInstance = hInstance;
   _logStream = logStream;
 
-  // client application init
-  init();
+  // init app
+  initialize();
 
-  // init components
-  initComponents();
-
-  _inited = true;
-
-  // make sure that application is already inited before looping
-  ALA_ASSERT(_inited);
-
-  // platform specific game loop
+  // game loop
   gameLoop();
-
-  // make sure that application can only release once
-  ALA_ASSERT(!_released);
-
-  // client application release
-  release();
-
-  // release components
-  releaseComponents();
-
-  _released = true;
-
-  // make sure that application is already released before exit
-  ALA_ASSERT(_released);
 }
 
 void Application::initWindowHandle() {
@@ -345,7 +364,9 @@ void Application::processMessage() {
 }
 
 void Application::processGame() {
+  // get current timestamp
   DWORD currentTimestamp = GetTickCount();
+
   // calculate delta
   float delta = static_cast<float>(currentTimestamp - _lastTimestamp);
 

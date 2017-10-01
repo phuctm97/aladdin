@@ -33,7 +33,7 @@ public:
   void setContentSize( const ala::Size& size );
 
 protected:
-  bool onLoad() override;
+  void onLoad() override;
 
   void onRelease() override;
 

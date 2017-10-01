@@ -12,9 +12,9 @@ public:
   MyApp();
 
 protected:
-  void init() override;
+  void onInitialize() override;
 
-  void release() override;
+  void onRelease() override;
 };
 
 #endif //!__MY_APP_H__

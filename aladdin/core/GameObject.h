@@ -9,7 +9,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(GameObject)
+ALA_CLASS_HEADER_2(GameObject, ala::Initializable, ala::Releasable)
   // =========================================================================
   // Basic
   // =========================================================================
@@ -29,74 +29,14 @@ public:
   // =========================================================
   // Events
   // =========================================================
-private:
-  bool _inited;
-  bool _destructed;
-  bool _released;
-
 public:
-  bool isInited() const;
+  void initialize() override;
 
-  bool isReleased() const;
+  void update( const float delta );
 
-  void init();
-
-protected:
-  /**
-  * \brief Add Components here, they will be init right after this function return.
-  * \return return true if everything were right otherwise return false and the application will crash
-  */
-  virtual bool onPreInit();
-
-  /**
-  * \brief Add special Logic happen after initlization, every component belong to object has been initialized
-  * Component added to scene there will be not automatically init, so you have to init them manually
-  */
-  virtual void onPostInit();
-
-public:
-  void update( float delta );
-
-protected:
-  /**
-  * \brief Happen before object and its components were updated
-  * \param delta
-  */
-  virtual void onPreUpdate( float delta );
-
-  /**
-  * \brief Happen after object and its components were updated
-  */
-  virtual void onPostUpdate( float delta );
-
-public:
   void render();
 
-protected:
-  /**
-  * \brief Happen before object and its components were rendered
-  */
-  virtual void onPreRender();
-
-  /**
-  * \brief Happen after object and its components were rendered
-  */
-  virtual void onPostRender();
-
-public:
-  void release();
-
-protected:
-  /**
-  * \brief Happen before object and its components were released
-  * \return true if you want to continue releasing and false if not
-  */
-  virtual bool onPreRelease();
-
-  /**
-  * \brief Happen after object and its components were released and destroyed
-  */
-  virtual void onPostRelease();
+  void release() override;
 
   // ========================================================
   // Components
@@ -120,26 +60,6 @@ public:
 
   template <class T>
   std::vector<T*> getAllComponentTs() const;
-
-  // ==================================================
-  // Objects Management
-  // ==================================================
-private:
-  GameObject* _parent;
-
-  std::unordered_map<long, GameObject*> _children;
-public:
-  GameObject* getParent() const;
-
-  void setParent( GameObject* parent );
-
-  void removeFromParent();
-
-  GameObject* getChild( long id );
-
-  void addChild( GameObject* gameObject );
-
-  void removeChild( GameObject* gameObject );
 
   // ===========================================================
   // Debug memory allocation

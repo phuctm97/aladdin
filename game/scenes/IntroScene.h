@@ -12,7 +12,7 @@ public:
   IntroScene();
 
 protected:
-  virtual bool onPreInit() override;
+  void onPreInitialize() override;
 };
 
 #endif //!__INTRO_SCENE_H__
