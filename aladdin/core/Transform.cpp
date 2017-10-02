@@ -19,10 +19,10 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _position( 0, 0 ),
     _scale( 1, 1 ),
     _rotation( 0 ),
-    _origin ( 0.5f,0.5f ),
-    _isDirty ( false ),
-    _isInverseDirty ( false ),
-    _parent( parentTransform ) {
+    _origin( 0.5f, 0.5f ),
+    _parent( parentTransform ),
+    _dirty( false ),
+    _inverseDirty( false ) {
   if ( _parent != NULL ) {
     _localToWorldMatrix = Mat4::getIdentityMat();
     _worldToLocalMatrix = Mat4::getIdentityMat();
@@ -49,9 +49,8 @@ void Transform::setPosition( const Vec2& position ) {
   setDirty();
 }
 
-void Transform::setPosition ( const float x, const float y )
-{
-  _position = Vec2(x, y);
+void Transform::setPosition( const float x, const float y ) {
+  _position = Vec2( x, y );
   setDirty();
 }
 
@@ -74,22 +73,19 @@ void Transform::setScale( const Vec2& scale ) {
   setDirty();
 }
 
-void Transform::setScaleX ( float x )
-{
-  _scale.setX(x);
+void Transform::setScaleX( float x ) {
+  _scale.setX( x );
   setDirty();
 }
 
-void Transform::setScaleY ( float y )
-{
-  _scale.setY(y);
+void Transform::setScaleY( float y ) {
+  _scale.setY( y );
   setDirty();
 }
 
-void Transform::setScale ( float scale )
-{
-  _scale.setX(scale);
-  _scale.setY(scale);
+void Transform::setScale( float scale ) {
+  _scale.setX( scale );
+  _scale.setY( scale );
   setDirty();
 }
 
@@ -102,7 +98,7 @@ void Transform::setRotation( const float rotation ) {
   setDirty();
 }
 
-  // =======================================================
+// =======================================================
 // Children management
 // =======================================================
 
@@ -135,6 +131,9 @@ void Transform::removeChild( Transform* child ) {
 
 void Transform::onRelease() {
   // release child transform
+  for ( auto child : _children ) {
+    child->getGameObject()->release();
+  }
   if ( _parent != NULL ) {
     _parent->removeChild( this );
   }
@@ -163,18 +162,17 @@ Mat4 Transform::calculateLocalToParentMatrix ( ) const
 
 Mat4 Transform::getLocalToWorldMatrix ( )
 {
-  if(_isDirty)
+  if(_dirty)
   {
     if(_parent == NULL)
     {
       _localToWorldMatrix = calculateLocalToParentMatrix();
     }
-    else
-    {
+    else {
       _localToWorldMatrix = _parent->getLocalToWorldMatrix() * calculateLocalToParentMatrix();
     }
 
-    _isDirty = false;
+    _dirty = false;
   }
 
   return _localToWorldMatrix;
@@ -182,25 +180,22 @@ Mat4 Transform::getLocalToWorldMatrix ( )
 
 Mat4 Transform::getWorldToLocalMatrix()
 {
-  if(_isInverseDirty)
+  if(_inverseDirty)
   {
     auto localToWorldMatrix = getLocalToWorldMatrix();
     _worldToLocalMatrix = localToWorldMatrix.getInverse();
-    _isInverseDirty = false;
+    _inverseDirty = false;
   }
 
   return _worldToLocalMatrix;
 }
 
-void Transform::setDirty ( )
-{
-  if(!_isDirty)
-  {
-    _isDirty = true;
-    _isInverseDirty = true;
+void Transform::setDirty() {
+  if ( !_dirty ) {
+    _dirty = true;
+    _inverseDirty = true;
 
-    for (auto transform : _children)
-    {
+    for ( auto transform : _children ) {
       transform->setDirty();
     }
   }

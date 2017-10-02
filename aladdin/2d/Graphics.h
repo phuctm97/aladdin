@@ -12,7 +12,7 @@ NAMESPACE_ALA
 {
 class Sprite;
 
-ALA_CLASS_HEADER_0(Graphics)
+ALA_CLASS_HEADER_2(Graphics, ala::Initializable, ala::Releasable)
   // ==========================================
   // Basic
   // ==========================================
@@ -20,7 +20,7 @@ ALA_CLASS_HEADER_0(Graphics)
 
 private:
   static Graphics* __instance;
-  Logger* _logger;
+  Logger _logger;
 
 public:
   Graphics();
@@ -29,15 +29,31 @@ public:
 
   static Graphics* get();
 
+  void initialize() override;
+
+  void release() override;
+
   // ==========================================
   // Platform specific
   // ==========================================
 private:
+  HINSTANCE _hInstance;
+  HWND _hWnd;
+  UINT _screenWidth;
+  UINT _screenHeight;
+  IDirect3D9* _directX;
   IDirect3DDevice9* _directXDevice;
-
   LPD3DXSPRITE _directXSprite;
 
 public:
+  void initDirectX();
+
+  void releaseDirectX();
+
+  bool beginRendering();
+
+  void endRendering();
+
   void loadSprite( Sprite* sprite );
 
   void drawSprite(Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex = 0);

@@ -15,5 +15,9 @@ int WINAPI WinMain( HINSTANCE hInstance,
             nCmdShow,
             LOG_STREAM );
   app->release();
+
+  if ( LOG_STREAM == 1 ) {
+    system( "pause" );
+  }
   return 0;
 }

@@ -34,7 +34,7 @@ public:
 
   void setPosition( const Vec2& position );
 
-  void setPosition(const float x, const float y);
+  void setPosition( const float x, const float y );
 
   void setPositionX( const float x );
 
@@ -44,11 +44,11 @@ public:
 
   void setScale( const Vec2& scale );
 
-  void setScaleX(float x);
+  void setScaleX( float x );
 
-  void setScaleY(float y);
+  void setScaleY( float y );
 
-  void setScale(float scale);
+  void setScale( float scale );
 
   float getRotation() const;
 
@@ -82,7 +82,8 @@ public:
    */
   void removeChild( Transform* child );
 
-  void setParent(Transform* parent);
+  void setParent( Transform* parent );
+
 protected:
   void onRelease() override;
 
@@ -90,20 +91,25 @@ protected:
 
   void onRender() override;
 
+  // =====================================================
+  // Transformation
+  // =====================================================
 public:
   Mat4 calculateLocalToParentMatrix() const;
+
   Mat4 getLocalToWorldMatrix();
+
   Mat4 getWorldToLocalMatrix();
 private:
   // specifies if the localToWorldTransform
   // needs to be recalulated
-  bool _isDirty;
+  bool _dirty;
   // the transform that converts local coordinates
   // to world coordinates
   Mat4 _localToWorldMatrix;
   // specifies if the worldToLocalMatrix
   // needs to be recalculated
-  bool _isInverseDirty;
+  bool _inverseDirty;
   // the transform that converts world cooridnates
   // to local coordinates
   Mat4 _worldToLocalMatrix;

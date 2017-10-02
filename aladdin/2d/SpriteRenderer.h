@@ -28,7 +28,7 @@ public:
 
   const Color& getBackColor() const;
 
-  void setBackColor(const Color& color);
+  void setBackColor( const Color& color );
 
   Size getFrameSize() const;
 

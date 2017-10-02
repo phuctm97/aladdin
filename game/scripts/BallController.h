@@ -18,6 +18,7 @@ public:
 
 protected:
   void onInitialize() override;
+
   void onUpdate( const float delta ) override;
 
   void onRelease() override;

@@ -16,12 +16,14 @@ ALA_CLASS_HEADER_2(Application, ala::Initializable, ala::Releasable)
   // Basic
   // ================================================
 private:
+  // Configuration information
   std::string _title;
   int _screenWidth;
   int _screenHeight;
   float _animationInterval;
   std::vector<ResourceInitializer*> _resourceInitializers;
-  Scene* _sceneToStart;
+
+  // Debug information
   long _frameCount;
   Logger _logger;
 
@@ -42,16 +44,25 @@ public:
 
   void setAnimationInterval( float millis );
 
-  float getLoopInterval() const;
+  void setFps( int fps );
 
-  void startWithScene( Scene* scene );
+  float getAnimationInterval() const;
 
   void registerResourceInitializer( ResourceInitializer* initializer );
 
-private:
-  void onUpdate(float delta);
+  // ================================================
+  // Main Game Process
+  // ================================================
+  void startWithScene(Scene* scene);
 
-  void onRender();
+private:
+  float updateTimestampCalculateAndFixAnimationInterval();
+
+  void updateInput();
+
+  void updateGame( float delta );
+
+  void renderGraphics();
 
   // ================================================
   // Initializing & Releasing
@@ -69,9 +80,15 @@ private:
   void releaseComponents();
 
 protected:
-  virtual void onInitialize() = 0;
+  /**
+   * \brief Configuration goes here (screen size, title, fps, ...)
+   */
+  virtual void onPreInitialize() = 0;
 
-  virtual void onRelease() = 0;
+  /**
+   * \brief Set Scene to start here
+   */
+  virtual void onPostInitialize() = 0;
 
   // ================================================
   // Platform specific
@@ -83,9 +100,6 @@ private:
   MSG _msg;
   HINSTANCE _hInstance;
   HWND _hWnd;
-  IDirect3D9* _directX;
-  IDirect3DDevice9* _directXDevice;
-  LPD3DXSPRITE _directXSprite;
   DWORD _startTimestamp;
   DWORD _lastTimestamp;
 
@@ -98,10 +112,6 @@ public:
 
 private:
   void initWindowHandle();
-
-  void initDirectX();
-
-  void releaseDirectX() const;
 
   void gameLoop();
 

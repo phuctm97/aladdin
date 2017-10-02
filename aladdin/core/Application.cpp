@@ -5,6 +5,7 @@
 #include "Application.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
+#include "../input/Input.h"
 
 NAMESPACE_ALA
 {
@@ -18,16 +19,12 @@ Application::Application() :
   _screenWidth( 800 ),
   _screenHeight( 600 ),
   _animationInterval( 1000.0f / 60 ),
-  _sceneToStart( NULL ),
   _frameCount( 0 ),
   _logger( "ala::Application" ),
   _logStream( 0 ),
   _exiting( false ),
   _hInstance( NULL ),
   _hWnd( NULL ),
-  _directX( NULL ),
-  _directXDevice( NULL ),
-  _directXSprite( NULL ),
   _startTimestamp( 0 ),
   _lastTimestamp( 0 ) {
   // check initial state
@@ -38,7 +35,8 @@ Application::~Application() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger.debug( "Released" );
+
+  // memory debug
   _logger.debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
   _logger.debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
   _logger.debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
@@ -52,14 +50,18 @@ Application::~Application() {
   _logger.debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
   _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
   _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
-  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
+  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
   _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
   _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
+
+  // average fps
+  const auto fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (GetTickCount() - _startTimestamp) ));
+  _logger.debug( "Average FPS: %d", fps );
 }
 
 void Application::setScreenSize( int width, int height ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _screenWidth = width;
   _screenHeight = height;
 }
@@ -74,7 +76,7 @@ int Application::getScreenHeight() const {
 
 void Application::setTitle( const std::string& title ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _title = title;
 }
 
@@ -84,36 +86,90 @@ const std::string& Application::getTitle() const {
 
 void Application::setAnimationInterval( float millis ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT(millis >= 1000.0f / 61);
   _animationInterval = millis;
 }
 
-float Application::getLoopInterval() const {
+void Application::setFps( int fps ) {
+  // can only be set before init process
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT(fps > 0 && fps <= 60);
+  _animationInterval = 1000.0f / fps;
+}
+
+float Application::getAnimationInterval() const {
   return _animationInterval;
 }
 
-void Application::startWithScene( Scene* scene ) {
-  // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
-  _sceneToStart = scene;
-}
-
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
+  // can only be set before init process
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _resourceInitializers.push_back( initializer );
 }
 
-void Application::onUpdate( float delta ) {
+// ================================================
+// Main Game Process
+// ================================================
+
+void Application::startWithScene( Scene* scene ) {
+  // can only be set before init process
+  ALA_ASSERT(isInitialized() && (!isReleased()) && (!isReleasing()));
+  GameManager::get()->replaceScene( scene );
+}
+
+float Application::updateTimestampCalculateAndFixAnimationInterval() {
+  // get current timestamp
+  DWORD currentTimestamp = GetTickCount();
+
+  // calculate delta
+  auto delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+
+  // check interval
+  if ( delta < _animationInterval ) {
+    // too soon, sleep and recalculate
+    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
+
+    currentTimestamp = GetTickCount();
+    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+  }
+
+  // update timestamp
+  _lastTimestamp = currentTimestamp;
+
+  // debug fps
+  _frameCount++;
+  if ( _frameCount % 1800 == 0 ) {
+    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
+    _logger.debug( "FPS: %d", fps );
+  }
+
+  return delta;
+}
+
+void Application::updateInput() {
+  // update input
+  Input::get()->update();
+}
+
+void Application::updateGame( float delta ) {
+  // update running scene
   Scene* runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->update( delta );
   }
 }
 
-void Application::onRender() {
+void Application::renderGraphics() {
+  if ( !Graphics::get()->beginRendering() ) return;
+
+  // render running scene
   Scene* runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->render();
   }
+
+  Graphics::get()->endRendering();
 }
 
 // ================================================
@@ -123,15 +179,19 @@ void Application::onRender() {
 void Application::initialize() {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
+  // pre init for configuration
+  onPreInitialize();
+
   setToInitializing();
 
-  // client application init
-  onInitialize();
-
-  // init components
   initComponents();
 
+  initResources();
+
   setToInitialized();
+
+  // post init for starting
+  onPostInitialize();
 }
 
 void Application::release() {
@@ -139,10 +199,6 @@ void Application::release() {
 
   setToReleasing();
 
-  // client application release
-  onRelease();
-
-  // release components
   releaseComponents();
 
   setToReleased();
@@ -160,40 +216,39 @@ void Application::initComponents() {
 
   // windows components
   initWindowHandle();
-  initDirectX();
-
-  _logger.debug( "Created" );
 
   // game singleton components
+  Graphics* graphics = Graphics::get();
+  graphics->_hInstance = _hInstance;
+  graphics->_hWnd = _hWnd;
+  graphics->_screenWidth = static_cast<UINT>(_screenWidth);
+  graphics->_screenHeight = static_cast<UINT>(_screenHeight);
+  graphics->initialize();
+
+  Input* input = Input::get();
+  input->_hInstance = _hInstance;
+  input->_hWnd = _hWnd;
+  input->initialize();
+
   GameManager* gameManager = GameManager::get();
   gameManager->_screenWidth = static_cast<float>(_screenWidth);
   gameManager->_screenHeight = static_cast<float>(_screenHeight);
 
-  Graphics* graphics = Graphics::get();
-  graphics->_directXDevice = _directXDevice;
-  graphics->_directXSprite = _directXSprite;
-
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
-
-  // init resources
-  initResources();
-
-  // init runnings scene
-  gameManager->replaceScene( _sceneToStart );
 }
 
 void Application::initResources() {
-  // init resource initializers
+  // run & release resource initializers
   for ( auto initializer : _resourceInitializers ) {
     if ( initializer ) {
-      initializer->init();
+      initializer->run();
     }
     delete initializer;
   }
   _resourceInitializers.clear();
 
-  // load game resources
+  // load game scope resources
   for ( const auto it : GameManager::get()->_attachedResources ) {
     auto resource = it.second;
     if ( resource->isLoaded() ) continue;
@@ -205,33 +260,33 @@ void Application::initResources() {
 
 void Application::releaseComponents() {
   // running scene
-  Scene* scene = GameManager::get()->getRunningScene();
+  auto scene = GameManager::get()->getRunningScene();
   scene->release();
 
   // left objects
-  for ( GameObject* object : GameManager::get()->getAllObjects() ) {
+  for ( auto object : GameManager::get()->getAllObjects() ) {
     object->release();
   }
 
   // left resources
-  for ( GameResource* resource : GameManager::get()->getAllResources() ) {
+  for ( auto resource : GameManager::get()->getAllResources() ) {
     resource->release();
   }
 
   // left prefabs
-  for ( Prefab* prefab : GameManager::get()->getAllPrefabs() ) {
+  for ( auto prefab : GameManager::get()->getAllPrefabs() ) {
     prefab->release();
   }
 
   // game singleton components
-  Graphics* graphics = Graphics::get();
-  delete graphics;
-
-  GameManager* gameManager = GameManager::get();
+  auto gameManager = GameManager::get();
   gameManager->release();
 
-  // windows components
-  releaseDirectX();
+  auto graphics = Graphics::get();
+  graphics->release();
+
+  auto input = Input::get();
+  input->release();
 }
 
 // ===================================================
@@ -265,12 +320,16 @@ void Application::initWindowHandle() {
     // ReSharper disable CppDeprecatedEntity
     freopen( "CON", "w", stdout );
     // ReSharper restore CppDeprecatedEntity
+
+    _logger.debug( "Allocated Console Logger" );
   }
     break;
   case 2: {
     // ReSharper disable CppDeprecatedEntity
     freopen( "log.txt", "w", stdout );
     // ReSharper restore CppDeprecatedEntity
+
+    _logger.debug( "Allocated File Logger. All your logging data will be store in file `log.txt`" );
   }
     break;
   default:
@@ -300,52 +359,11 @@ void Application::initWindowHandle() {
     _hInstance, // handle instance
     0);
   ALA_ASSERT(_hWnd);
+  _logger.debug( "Created Windows" );
 
   // show windows
   ShowWindow( _hWnd, SW_SHOW );
   UpdateWindow( _hWnd );
-}
-
-void Application::initDirectX() {
-  // init DirectX
-  _directX = Direct3DCreate9( D3D_SDK_VERSION );
-  ALA_ASSERT(!FAILED(_directX));
-
-  // init DirectX device
-  D3DPRESENT_PARAMETERS d3dpp;
-  ZeroMemory(&d3dpp, sizeof(d3dpp));
-  d3dpp.BackBufferCount = 1;
-  d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-  d3dpp.BackBufferWidth = static_cast<UINT>(_screenWidth);
-  d3dpp.BackBufferHeight = static_cast<UINT>(_screenHeight);
-  d3dpp.Windowed = true;
-  d3dpp.hDeviceWindow = _hWnd;
-  d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-  _directX->CreateDevice(
-    D3DADAPTER_DEFAULT,
-    D3DDEVTYPE_HAL,
-    _hWnd,
-    D3DCREATE_HARDWARE_VERTEXPROCESSING,
-    &d3dpp,
-    &_directXDevice );
-  ALA_ASSERT(!FAILED(_directXDevice));
-
-  // init DirectX Sprite
-  HRESULT result;
-  result = D3DXCreateSprite( _directXDevice, &_directXSprite );
-  ALA_ASSERT(result == D3D_OK);
-}
-
-void Application::releaseDirectX() const {
-  if ( _directXSprite ) {
-    _directXSprite->Release();
-  }
-  if ( _directX ) {
-    _directX->Release();
-  }
-  if ( _directXDevice ) {
-    _directXDevice->Release();
-  }
 }
 
 void Application::gameLoop() {
@@ -353,6 +371,7 @@ void Application::gameLoop() {
   _startTimestamp = GetTickCount();
   _lastTimestamp = _startTimestamp;
 
+  // main loop
   while ( !_exiting ) {
     processMessage();
     processGame();
@@ -375,50 +394,16 @@ void Application::processMessage() {
 }
 
 void Application::processGame() {
-  // get current timestamp
-  DWORD currentTimestamp = GetTickCount();
+  // update input
+  updateInput();
 
-  // calculate delta
-  float delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+  const auto delta = updateTimestampCalculateAndFixAnimationInterval();
 
-  // check interval
-  if ( delta < _animationInterval ) {
-    // too soon, sleep and recalculate
-    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
+  // update game
+  updateGame( delta );
 
-    currentTimestamp = GetTickCount();
-    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
-  }
-
-  // update timestamp
-  _lastTimestamp = currentTimestamp;
-
-  // debug fps
-  _frameCount++;
-  if ( _frameCount % 1800 == 0 ) {
-    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
-    _logger.debug( "FPS: %d", fps );
-  }
-
-  // update
-  onUpdate( delta );
-
-  // clear screen
-  _directXDevice->Clear( 0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 );
-
-  // start rendering
-  if ( _directXDevice->BeginScene() ) {
-    _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE );
-
-    onRender();
-
-    // stop rendering
-    _directXSprite->End();
-    _directXDevice->EndScene();
-  }
-
-  // display back buffer to screen
-  _directXDevice->Present( 0, 0, 0, 0 );
+  // render graphics
+  renderGraphics();
 }
 
 LRESULT Application::wndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {
