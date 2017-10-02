@@ -50,7 +50,7 @@ public:
 
   void releaseDirectX();
 
-  void beginRendering();
+  bool beginRendering();
 
   void endRendering();
 

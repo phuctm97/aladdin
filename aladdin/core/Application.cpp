@@ -91,6 +91,13 @@ void Application::setAnimationInterval( float millis ) {
   _animationInterval = millis;
 }
 
+void Application::setFps( int fps ) {
+  // can only be set before init process
+  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT(fps > 0 && fps <= 60);
+  _animationInterval = 1000.0f / fps;
+}
+
 float Application::getLoopInterval() const {
   return _animationInterval;
 }
@@ -148,7 +155,7 @@ void Application::updateGame( float delta ) {
 }
 
 void Application::renderGraphics() {
-  Graphics::get()->beginRendering();
+  if ( !Graphics::get()->beginRendering() ) return;
 
   // render running scene
   Scene* runningScene = GameManager::get()->getRunningScene();

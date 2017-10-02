@@ -117,22 +117,35 @@ void Graphics::releaseDirectX() {
   }
 }
 
-void Graphics::beginRendering() {
+bool Graphics::beginRendering() {
   // clear screen
-  ALA_ASSERT(_directXDevice->Clear( 0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ) == D3D_OK);
+  if ( _directXDevice->Clear( 0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 ) != D3D_OK ) {
+    _directXDevice->Present( 0, 0, 0, 0 );
+    return false;
+  }
 
   // start rendering
-  ALA_ASSERT(_directXDevice->BeginScene() == D3D_OK);
-  ALA_ASSERT(_directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE ) == D3D_OK);
+  if ( _directXDevice->BeginScene() != D3D_OK ) {
+    _directXDevice->Present( 0, 0, 0, 0 );
+    return false;
+  }
+
+  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND ) != D3D_OK ) {
+    _directXDevice->EndScene();
+    _directXDevice->Present( 0, 0, 0, 0 );
+    return false;
+  }
+
+  return true;
 }
 
 void Graphics::endRendering() {
   // stop rendering
-  ALA_ASSERT(_directXSprite->End() == D3D_OK);
-  ALA_ASSERT(_directXDevice->EndScene() == D3D_OK);
+  _directXSprite->End();
+  _directXDevice->EndScene();
 
   // display back buffer to screen
-  ALA_ASSERT(_directXDevice->Present( 0, 0, 0, 0 ) == D3D_OK);
+  _directXDevice->Present( 0, 0, 0, 0 );
 }
 
 void Graphics::loadSprite( Sprite* sprite ) {

@@ -42,6 +42,8 @@ public:
 
   void setAnimationInterval( float millis );
 
+  void setFps(int fps);
+
   float getLoopInterval() const;
 
   void startWithScene( Scene* scene );
