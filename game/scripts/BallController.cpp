@@ -3,13 +3,13 @@
  */
 
 #include "BallController.h"
+#include "core/StringMessageArgs.h"
 
 BallController::BallController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _state( 'R' ),
-    _speed( 2 )
-{
-}
+    _speed( 2 ),
+    _logger( "BallController" ) {}
 
 void BallController::onInitialize ( )
 {
@@ -29,6 +29,7 @@ void BallController::onUpdate( const float delta ) {
       transform->setPositionX( ala::GameManager::get()->getScreenWidth() - sprite->getFrameSize().getWidth()/2);
       transform->setRotation(-90);
       _state = 'D';
+      ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going down" ) );
     }
     transform->setPositionX( transform->getPositionX() + _speed );
     //transform->setScale(ala::Vec2(2.f, 2.f));
@@ -38,6 +39,7 @@ void BallController::onUpdate( const float delta ) {
       transform->setPositionY(ala::GameManager::get()->getScreenHeight() - sprite->getFrameSize().getHeight()/2);
       transform->setRotation(-180);
       _state = 'L';
+      ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going left" ) );
     }
     transform->setPositionY( transform->getPositionY() + _speed );
     //transform->setScale(ala::Vec2(2.f, 2.f));
@@ -47,6 +49,7 @@ void BallController::onUpdate( const float delta ) {
       transform->setPositionX(sprite->getFrameSize().getWidth() / 2);
       transform->setRotation(-270);
       _state = 'U';
+      ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going up" ) );
     }
     transform->setPositionX( transform->getPositionX() - _speed );
     //transform->setScale(ala::Vec2(0.5f, 0.5f));
@@ -56,6 +59,7 @@ void BallController::onUpdate( const float delta ) {
       transform->setPositionY(sprite->getFrameSize().getHeight() / 2);
       transform->setRotation(0);
       _state = 'R';
+      ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going right" ) );
     }
     transform->setPositionY( transform->getPositionY() - _speed );
     //transform->setScale(ala::Vec2(0.5f, 0.5f));
@@ -63,3 +67,14 @@ void BallController::onUpdate( const float delta ) {
   default: break;
   }
 }
+
+void BallController::onInitialize() {
+  subscribeObjectMessage(
+    getGameObject(),
+    "X changed",
+    [=]( ala::MessageArgs* ) {
+    _logger.info( "X changed\n" );
+  } );
+}
+
+void BallController::onRelease() {}

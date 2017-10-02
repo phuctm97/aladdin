@@ -10,6 +10,7 @@
 #include "GameResource.h"
 #include "Prefab.h"
 #include "Logger.h"
+#include "Messenger.h"
 
 NAMESPACE_ALA
 {
@@ -119,6 +120,15 @@ public:
   Prefab* getPrefab( const std::string& name );
 
   std::vector<Prefab*> getAllPrefabs();
+
+  // ===============================================
+  // Global messenger
+  // ===============================================
+private:
+  Messenger* _globalMessenger;
+
+public:
+  Messenger* getGlobalMessenger() const;
 };
 
 // TEMPLATE DEFINITIONS

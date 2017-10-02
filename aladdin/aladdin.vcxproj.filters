@@ -91,6 +91,9 @@
     <ClInclude Include="core\Loadable.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\Messenger.h">
+      <Filter>core</Filter>
+    </ClInclude>
     <ClInclude Include="input\InputInclude.h">
       <Filter>input</Filter>
     </ClInclude>
@@ -99,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="input\Input.h">
       <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StringMessageArgs.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\MessageArgs.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\MessageListener.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +179,18 @@
     </ClCompile>
     <ClCompile Include="input\Input.cpp">
       <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Messenger.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StringMessageArgs.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\MessageArgs.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\MessageListener.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

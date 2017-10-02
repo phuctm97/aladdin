@@ -5,14 +5,21 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
-#include <core/Scene.h>
+#include <aladdin.h>
 
-class IntroScene : public ala::Scene {
+class IntroScene : public ala::Scene, public ala::MessageListener {
 public:
   IntroScene();
 
 protected:
   void onPreInitialize() override;
+
+  void onPreRelease() override;
+
+private:
+  long _ballDirectionChangedListener;
+
+  ala::Logger _logger;
 };
 
 #endif //!__INTRO_SCENE_H__
