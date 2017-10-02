@@ -86,6 +86,8 @@ void GameObject::initialize() {
 
   setToInitializing();
 
+  _messenger = new Messenger;
+
   // TODO: lock mutual exclusive when run in multithreading mode
 
   // init components
@@ -138,6 +140,8 @@ void GameObject::release() {
   GameManager::get()->detach( this );
 
   setToReleased();
+
+  delete(_messenger);
 
   // destroy
   delete this;
@@ -197,7 +201,16 @@ Transform* GameObject::getTransform() const {
   return _transform;
 }
 
-std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
+// ===========================================================
+// Messenger
+// ===========================================================
+
+Messenger* GameObject::getMessenger ( ) const
+{
+  return _messenger;
+}
+
+	std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
   return _components;
 }
 
