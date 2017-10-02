@@ -404,6 +404,9 @@ void Application::processMessage() {
 }
 
 void Application::processGame() {
+  // update input
+  Input::get()->update();
+
   // get current timestamp
   DWORD currentTimestamp = GetTickCount();
 

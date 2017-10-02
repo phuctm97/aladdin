@@ -32,4 +32,4 @@
 [D] [ala::Application] : Total Components Deleted: 3
 [D] [ala::Application] : Total Loggers Created: 4
 [D] [ala::Application] : Total Loggers Deleted: 4
-[D] [ala::Application] : Average FPS: 37
+[D] [ala::Application] : Average FPS: 57
