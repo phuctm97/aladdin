@@ -55,6 +55,9 @@ void SpriteRenderer::onRender() {
   srcRect.setSize( _sprite->getContentSize() );
 
   // TODO: currently use default origin?
+  // Unity's sprite renderer uses (0.5, 0.5) origin
+  // Only images with RectTransform which are used mainly for creating UI (score, HP bar, etc...) uses anchor point
+  // source rect might needs a little fix after implementing animation
   Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, srcRect );
 }
 }
