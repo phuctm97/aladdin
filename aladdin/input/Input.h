@@ -5,7 +5,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_1(Input, ala::Releasable)
+ALA_CLASS_HEADER_2(Input, ala::Initializable, ala::Releasable)
   friend class Application;
 
 private:
@@ -50,14 +50,28 @@ public:
   std::string getInputString() const;
 
 public:
+  void initialize() override;
+
   void release() override;
+
+  void update();
 
   // =================================================
   // Platform specific
   // =================================================
-  
+
 private:
+  HINSTANCE _hInstance;
+  HWND _hWnd;
+  LPDIRECTINPUT8 _directXInput;
   LPDIRECTINPUTDEVICE8 _directXInputKeyboard;
+  char _keys[256];
+
+  void initDirectXInput();
+
+  void releaseDirectXInput();
+
+  int directXKeyDown( const int key );
 
 };
 }

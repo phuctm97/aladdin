@@ -39,7 +39,8 @@ Application::~Application() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger.debug( "Released" );
+
+  // memory debug
   _logger.debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
   _logger.debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
   _logger.debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
@@ -53,7 +54,11 @@ Application::~Application() {
   _logger.debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
   _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
   _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
-  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
+  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
+
+  // average fps
+  const auto fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (GetTickCount() - _startTimestamp) ));
+  _logger.debug( "Average FPS: %d", fps );
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -161,19 +166,19 @@ void Application::initComponents() {
   initWindowHandle();
   initDirectX();
 
-  _logger.debug( "Created" );
-
   // game singleton components
-  GameManager* gameManager = GameManager::get();
-  gameManager->_screenWidth = static_cast<float>(_screenWidth);
-  gameManager->_screenHeight = static_cast<float>(_screenHeight);
-
   Graphics* graphics = Graphics::get();
   graphics->_directXDevice = _directXDevice;
   graphics->_directXSprite = _directXSprite;
 
   Input* input = Input::get();
-  input->_directXInputKeyboard = _directXInputKeyboard;
+  input->_hInstance = _hInstance;
+  input->_hWnd = _hWnd;
+  input->initialize();
+
+  GameManager* gameManager = GameManager::get();
+  gameManager->_screenWidth = static_cast<float>(_screenWidth);
+  gameManager->_screenHeight = static_cast<float>(_screenHeight);
 
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
@@ -226,14 +231,14 @@ void Application::releaseComponents() {
   }
 
   // game singleton components
+  GameManager* gameManager = GameManager::get();
+  gameManager->release();
+
   Graphics* graphics = Graphics::get();
   delete graphics;
 
   Input* input = Input::get();
   input->release();
-
-  GameManager* gameManager = GameManager::get();
-  gameManager->release();
 
   // windows components
   releaseDirectX();
@@ -270,12 +275,16 @@ void Application::initWindowHandle() {
     // ReSharper disable CppDeprecatedEntity
     freopen( "CON", "w", stdout );
     // ReSharper restore CppDeprecatedEntity
+
+    _logger.debug( "Allocated Console Logger" );
   }
     break;
   case 2: {
     // ReSharper disable CppDeprecatedEntity
     freopen( "log.txt", "w", stdout );
     // ReSharper restore CppDeprecatedEntity
+
+    _logger.debug( "Allocated File Logger. All your logging data will be store in file `log.txt`" );
   }
     break;
   default:
@@ -305,6 +314,7 @@ void Application::initWindowHandle() {
     _hInstance, // handle instance
     0);
   ALA_ASSERT(_hWnd);
+  _logger.debug( "Created Windows" );
 
   // show windows
   ShowWindow( _hWnd, SW_SHOW );
@@ -317,6 +327,8 @@ void Application::initDirectX() {
   // init DirectX
   _directX = Direct3DCreate9( D3D_SDK_VERSION );
   ALA_ASSERT(!FAILED(_directX));
+
+  _logger.debug( "Initialized DirectX" );
 
   // init DirectX device
   D3DPRESENT_PARAMETERS d3dpp;
@@ -339,53 +351,29 @@ void Application::initDirectX() {
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXDevice));
 
+  _logger.debug( "Created DirectX Device" );
+
+
   // init DirectX Sprite
   result = D3DXCreateSprite( _directXDevice, &_directXSprite );
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXSprite));
 
-  // init DirectX Input
-  result = DirectInput8Create(
-    _hInstance,
-    DIRECTINPUT_VERSION,
-    IID_IDirectInput8,
-    reinterpret_cast<void**>(&_directXInput),
-    NULL );
-  ALA_ASSERT(result == DI_OK);
-  ALA_ASSERT(!FAILED(_directXInput));
-
-  // init DirectX Input Keyboard
-  result = _directXInput->CreateDevice( GUID_SysKeyboard, &_directXInputKeyboard, NULL );
-  ALA_ASSERT(result == DI_OK);
-  ALA_ASSERT(!FAILED(_directXInputKeyboard));
-
-  result = _directXInputKeyboard->SetDataFormat( &c_dfDIKeyboard );
-  ALA_ASSERT(result == DI_OK);
-  result = _directXInputKeyboard->SetCooperativeLevel( _hWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
-  ALA_ASSERT(result == DI_OK);
-  result = _directXInputKeyboard->Acquire();
-  ALA_ASSERT(result == DI_OK);
-
-
-  // TODO: init DirectX Input Mouse
+  _logger.debug( "Created DirectX Sprite" );
 }
 
 void Application::releaseDirectX() const {
   if ( _directXSprite ) {
     _directXSprite->Release();
+    _logger.debug( "Released DirectX Sprite" );
   }
   if ( _directXDevice ) {
     _directXDevice->Release();
+    _logger.debug( "Released DirectX Device" );
   }
   if ( _directX ) {
     _directX->Release();
-  }
-  if ( _directXInputKeyboard ) {
-    _directXInputKeyboard->Unacquire();
-    _directXInputKeyboard->Release();
-  }
-  if ( _directXInput ) {
-    _directXInput->Release();
+    _logger.debug( "Released DirectX" );
   }
 }
 

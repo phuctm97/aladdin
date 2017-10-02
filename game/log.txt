@@ -1,11 +1,23 @@
-[D] [ala::Application] : Created
-[D] [ala::GameManager] : Created
+[D] [ala::Application] : Allocated File Logger. All your logging data will be store in file `log.txt`
+[D] [ala::Application] : Created Windows
+[D] [ala::Application] : Initialized DirectX
+[D] [ala::Application] : Created DirectX Device
+[D] [ala::Application] : Created DirectX Sprite
 [D] [ala::Graphics] : Created
-[D] [ala::Logger] : Created
-[D] [ala::Graphics] : Released
-[D] [ala::Logger] : Released
+[D] [ala::Input] : Created
+[D] [ala::Input] : Created DirectX Input
+[D] [ala::Input] : Created DirectX Input Keyboard Device
+[D] [ala::Input] : Acquired Keyboard Device
+[D] [ala::GameManager] : Created
 [D] [ala::GameManager] : Released
-[D] [ala::Application] : Released
+[D] [ala::Graphics] : Released
+[D] [ala::Input] : Unacquired Keyboard Device
+[D] [ala::Input] : Released DirectX Input Keyboard Device
+[D] [ala::Input] : Released DirectX Input
+[D] [ala::Input] : Released
+[D] [ala::Application] : Released DirectX Sprite
+[D] [ala::Application] : Released DirectX Device
+[D] [ala::Application] : Released DirectX
 [D] [ala::Application] : Total Resources Created: 1
 [D] [ala::Application] : Total Resources Deleted: 1
 [D] [ala::Application] : Total Resource Initializers Created: 1
@@ -19,4 +31,5 @@
 [D] [ala::Application] : Total Components Created: 3
 [D] [ala::Application] : Total Components Deleted: 3
 [D] [ala::Application] : Total Loggers Created: 4
-[D] [ala::Application] : Total Loggers Deleted: 3
+[D] [ala::Application] : Total Loggers Deleted: 4
+[D] [ala::Application] : Average FPS: 37

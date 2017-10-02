@@ -6,7 +6,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1( ala::Input, ala::Releasable)
+ALA_CLASS_SOURCE_2( ala::Input, ala::Initializable, ala::Releasable)
 
 Input* Input::__instance( NULL );
 
@@ -18,13 +18,15 @@ Input* Input::get() {
 }
 
 Input::Input()
-  : _logger( "ala::Logger" ) {
-  ALA_ASSERT((!isReleased()) && (!isReleasing()));
+  : _logger( "ala::Input" ) {
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
   _logger.debug( "Created" );
 }
 
 Input::~Input() {
-  ALA_ASSERT(isReleased());
+  if ( isInitialized() ) {
+    ALA_ASSERT(isReleased());
+  }
   _logger.debug( "Released" );
 }
 
@@ -88,10 +90,82 @@ std::string Input::getInputString() const {
   throw "Not implemented";
 }
 
+void Input::initialize() {
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
+
+  setToInitializing();
+
+  initDirectXInput();
+
+  setToInitialized();
+}
+
 void Input::release() {
-  ALA_ASSERT((!isReleased()) && (!isReleasing()));
+  ALA_ASSERT(isInitialized() && (!isReleased()) && (!isReleasing()));
+
   setToReleasing();
+
+  releaseDirectXInput();
+
   setToReleased();
+
+  // destroy
   delete this;
+}
+
+void Input::update() {
+  _directXInputKeyboard->GetDeviceState( sizeof(_keys), static_cast<LPVOID>(&_keys) );
+}
+
+void Input::initDirectXInput() {
+  HRESULT result;
+
+  // init DirectX Input
+  result = DirectInput8Create(
+    _hInstance,
+    DIRECTINPUT_VERSION,
+    IID_IDirectInput8,
+    reinterpret_cast<void**>(&_directXInput),
+    NULL );
+  ALA_ASSERT(result == DI_OK);
+  ALA_ASSERT(!FAILED(_directXInput));
+
+  _logger.debug( "Created DirectX Input" );
+
+  // init DirectX Input Keyboard
+  result = _directXInput->CreateDevice( GUID_SysKeyboard, &_directXInputKeyboard, NULL );
+  ALA_ASSERT(result == DI_OK);
+  ALA_ASSERT(!FAILED(_directXInputKeyboard));
+
+  _logger.debug( "Created DirectX Input Keyboard Device" );
+
+  // acquire Keyboard
+  result = _directXInputKeyboard->SetDataFormat( &c_dfDIKeyboard );
+  ALA_ASSERT(result == DI_OK);
+  result = _directXInputKeyboard->SetCooperativeLevel( _hWnd, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND );
+  ALA_ASSERT(result == DI_OK);
+  result = _directXInputKeyboard->Acquire();
+  ALA_ASSERT(result == DI_OK);
+
+  _logger.debug( "Acquired Keyboard Device" );
+
+}
+
+void Input::releaseDirectXInput() {
+  if ( _directXInputKeyboard ) {
+    _directXInputKeyboard->Unacquire();
+    _logger.debug( "Unacquired Keyboard Device" );
+
+    _directXInputKeyboard->Release();
+    _logger.debug( "Released DirectX Input Keyboard Device" );
+  }
+  if ( _directXInput ) {
+    _directXInput->Release();
+    _logger.debug( "Released DirectX Input" );
+  }
+}
+
+int Input::directXKeyDown( const int key ) {
+  return (_keys[key] & 0x80);
 }
 }
