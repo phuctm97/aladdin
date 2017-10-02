@@ -17,6 +17,13 @@ void BallController::onInitialize ( )
   transform->setScale( ala::Vec2(2.f, 2.f));
   auto frameSize = getGameObject()->getComponentT<ala::SpriteRenderer>()->getFrameSize();
   transform->setPosition(ala::Vec2(frameSize.getWidth (  )/2, frameSize.getHeight (  )/2));
+
+  subscribeObjectMessage(
+    getGameObject(),
+    "X changed",
+    [=](ala::MessageArgs*) {
+    _logger.info("X changed\n");
+  });
 }
 
 void BallController::onUpdate( const float delta ) {
@@ -66,15 +73,6 @@ void BallController::onUpdate( const float delta ) {
     break;
   default: break;
   }
-}
-
-void BallController::onInitialize() {
-  subscribeObjectMessage(
-    getGameObject(),
-    "X changed",
-    [=]( ala::MessageArgs* ) {
-    _logger.info( "X changed\n" );
-  } );
 }
 
 void BallController::onRelease() {}

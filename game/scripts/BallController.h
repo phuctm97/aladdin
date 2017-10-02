@@ -20,8 +20,6 @@ protected:
   void onInitialize() override;
   void onUpdate( const float delta ) override;
 
-  void onInitialize() override;
-
   void onRelease() override;
 };
 
