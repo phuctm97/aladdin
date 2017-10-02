@@ -27,6 +27,7 @@ GameManager::GameManager() :
   _screenHeight( 0 ),
   _idCounter( 0 ),
   _runningScene( NULL ),
+  _sceneToReplaceInNextFrame( NULL ),
   _globalMessenger( new Messenger() ) {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
   _logger.debug( "Created" );
@@ -37,14 +38,23 @@ GameManager::~GameManager() {
   _logger.debug( "Released" );
 }
 
+void GameManager::update( const float delta ) {
+  if ( isReleasing() || isReleased() ) return;
+
+  updateRunningScene();
+}
+
 void GameManager::release() {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
+
   setToReleasing();
 
   // release messenger
   _globalMessenger->release();
 
   setToReleased();
+
+  // destroy
   delete this;
 }
 
@@ -72,19 +82,14 @@ long GameManager::newId() {
 
 void GameManager::attach( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
-
-  // insert to attach table by id
-  if ( gameObject != NULL ) {
-    _attachedObjects.emplace( gameObject->getId(), gameObject );
-  }
+  if ( gameObject == NULL ) return;
+  _attachedObjects.emplace( gameObject->getId(), gameObject );
 }
 
 void GameManager::detach( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
-
-  if ( gameObject != NULL ) {
-    _attachedObjects.erase( gameObject->getId() );
-  }
+  if ( gameObject == NULL ) return;
+  _attachedObjects.erase( gameObject->getId() );
 }
 
 std::vector<GameObject*> GameManager::getAllObjects() {
@@ -97,7 +102,7 @@ std::vector<GameObject*> GameManager::getAllObjects() {
   return ret;
 }
 
-GameObject* GameManager::getObjectById( long id ) {
+GameObject* GameManager::getObjectById( const long id ) {
   const auto objectIt = _attachedObjects.find( id );
   if ( objectIt == _attachedObjects.end() ) return NULL;
 
@@ -140,7 +145,22 @@ Scene* GameManager::getRunningScene() const {
 
 void GameManager::replaceScene( Scene* scene ) {
   if ( isReleasing() || isReleased() ) return;
+  if ( scene == NULL ) return;
+  doReplaceScene( scene );
+}
 
+void GameManager::replaceSceneInNextFrame( Scene* scene ) {
+  if ( scene == NULL ) return;
+  _sceneToReplaceInNextFrame = scene;
+}
+
+void GameManager::updateRunningScene() {
+  if ( _sceneToReplaceInNextFrame == NULL ) return;
+  doReplaceScene( _sceneToReplaceInNextFrame );
+  _sceneToReplaceInNextFrame = NULL;
+}
+
+void GameManager::doReplaceScene( Scene* scene ) {
   ALA_ASSERT(scene != NULL);
   ALA_ASSERT(scene != _runningScene);
 
@@ -162,6 +182,8 @@ void GameManager::attach( GameResource* resource ) {
   if ( isReleasing() || isReleased() ) return;
   if ( resource == NULL ) return;
   auto rc = _attachedResources.emplace( resource->getName(), resource );
+
+  // make sure there is no duplicate resources
   ALA_ASSERT(rc.second == true);
 }
 
@@ -210,6 +232,8 @@ void GameManager::registerPrefab( Prefab* prefab ) {
   if ( prefab == NULL ) return;
 
   auto rc = _registeredPrefabs.emplace( prefab->getName(), prefab );
+
+  // make sure there is no duplicate prefab
   ALA_ASSERT(rc.second == true);
 }
 

@@ -47,13 +47,18 @@ void Scene::initialize() {
 
   // load resources scope with this
   for ( auto resource : GameManager::get()->getResourcesWith( this ) ) {
-    resource->load();
+    if ( !resource->isLoaded() ) {
+      resource->load();
+    }
   }
 
   // init game objects
   for ( const auto it : _gameObjects ) {
     auto object = it.second;
-    object->initialize();
+
+    if ( (!object->isSelfInitialize()) && (!object->isInitialized()) ) {
+      object->initialize();
+    }
   }
 
   setToInitialized();
@@ -66,8 +71,12 @@ void Scene::onPreInitialize() {}
 void Scene::onPostInitialize() {}
 
 void Scene::update( const float delta ) {
-  // make sure scene is initialized and not released
-  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
+  if ( isReleasing() || isReleased() ) return;
+
+  // update actions
+  updateAddAndRemoveGameObjects();
+
+  if ( !isInitialized() ) return;
 
   onPreUpdate( delta );
 
@@ -85,7 +94,7 @@ void Scene::onPreUpdate( const float delta ) {}
 void Scene::onPostUpdate( const float delta ) {}
 
 void Scene::render() {
-  // make sure scene is initialized and not released
+  // make sure scene is initialized and not being released
   if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onPreRender();
@@ -105,7 +114,7 @@ void Scene::onPostRender() {}
 
 void Scene::release() {
   // make sure scene is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   onPreRelease();
 
@@ -149,13 +158,45 @@ GameObject* Scene::getGameObject( const long id ) {
 
 void Scene::addGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
-  if ( gameObject == NULL )return;
-  _gameObjects.emplace( gameObject->getId(), gameObject );
+  if ( gameObject == NULL ) return;
+  doAddGameObject( gameObject );
+}
+
+void Scene::addGameObjectInNextFrame( GameObject* gameObject ) {
+  if ( gameObject == NULL ) return;
+  _gameObjectsToAddInNextFrame.push_back( gameObject );
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
+  doRemoveGameObject( gameObject );
+}
+
+void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
+  if ( gameObject == NULL ) return;
+  _gameObjectsToRemoveInNextFrame.push_back( gameObject );
+}
+
+void Scene::updateAddAndRemoveGameObjects() {
+  if ( isReleasing() || isReleased() ) return;
+
+  for ( auto object : _gameObjectsToAddInNextFrame ) {
+    doAddGameObject( object );
+  }
+  _gameObjectsToAddInNextFrame.clear();
+
+  for ( auto object : _gameObjectsToRemoveInNextFrame ) {
+    doRemoveGameObject( object );
+  }
+  _gameObjectsToRemoveInNextFrame.clear();
+}
+
+void Scene::doAddGameObject( GameObject* gameObject ) {
+  _gameObjects.emplace( gameObject->getId(), gameObject );
+}
+
+void Scene::doRemoveGameObject( GameObject* gameObject ) {
   _gameObjects.erase( gameObject->getId() );
 }
 

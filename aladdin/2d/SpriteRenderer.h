@@ -13,6 +13,7 @@ NAMESPACE_ALA
 ALA_CLASS_HEADER_1(SpriteRenderer, ala::GameObjectComponent)
 private:
   Sprite* _sprite;
+  Color _backColor;
 
 public:
   SpriteRenderer( GameObject* gameObject, Sprite* sprite = NULL, const std::string& name = "" );
@@ -24,6 +25,12 @@ public:
   Sprite* getSprite() const;
 
   void setSprite( Sprite* sprite );
+
+  const Color& getBackColor() const;
+
+  void setBackColor( const Color& color );
+
+  Size getFrameSize() const;
 
 protected:
   void onRender() override;

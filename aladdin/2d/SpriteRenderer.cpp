@@ -10,10 +10,12 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_1(ala::SpriteRenderer, ala::GameObjectComponent )
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _sprite( sprite ) {}
+  : GameObjectComponent( gameObject, name ), _sprite( sprite ),
+    _backColor( 255, 255, 255 ) {}
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _sprite( NULL ) {
+  : GameObjectComponent( gameObject, name ), _sprite( NULL ),
+    _backColor( 255, 255, 255 ) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 }
 
@@ -27,10 +29,32 @@ void SpriteRenderer::setSprite( Sprite* sprite ) {
   _sprite = sprite;
 }
 
-void SpriteRenderer::onRender() {
-  Transform* transform = getGameObject()->getComponentT<Transform>();
-  if ( transform == NULL ) return;
+const Color& SpriteRenderer::getBackColor() const {
+  return _backColor;
+}
 
-  Graphics::get()->drawSprite( _sprite, transform->getPosition() );
+void SpriteRenderer::setBackColor( const Color& color ) {
+  _backColor = color;
+}
+
+Size SpriteRenderer::getFrameSize() const {
+  auto frameSize = _sprite->getContentSize();
+  const auto transform = getGameObject()->getTransform();
+  frameSize.setWidth( frameSize.getWidth() * transform->getScale().getX() );
+  frameSize.setHeight( frameSize.getHeight() * transform->getScale().getY() );
+
+  return frameSize;
+}
+
+void SpriteRenderer::onRender() {
+  auto transform = getGameObject()->getTransform();
+  auto frameSize = getFrameSize();
+
+  Rect srcRect;
+  srcRect.setTopLeft( Vec2( 0.f, 0.f ) );
+  srcRect.setSize( _sprite->getContentSize() );
+
+  // TODO: currently use default origin?
+  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, srcRect );
 }
 }

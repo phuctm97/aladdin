@@ -16,12 +16,14 @@ ALA_CLASS_HEADER_2(Application, ala::Initializable, ala::Releasable)
   // Basic
   // ================================================
 private:
+  // Configuration information
   std::string _title;
   int _screenWidth;
   int _screenHeight;
   float _animationInterval;
   std::vector<ResourceInitializer*> _resourceInitializers;
-  Scene* _sceneToStart;
+
+  // Debug information
   long _frameCount;
   Logger _logger;
 
@@ -42,20 +44,23 @@ public:
 
   void setAnimationInterval( float millis );
 
-  void setFps(int fps);
+  void setFps( int fps );
 
-  float getLoopInterval() const;
-
-  void startWithScene( Scene* scene );
+  float getAnimationInterval() const;
 
   void registerResourceInitializer( ResourceInitializer* initializer );
+
+  // ================================================
+  // Main Game Process
+  // ================================================
+  void startWithScene(Scene* scene);
 
 private:
   float updateTimestampCalculateAndFixAnimationInterval();
 
   void updateInput();
-  
-  void updateGame( float delta );
+
+  void updateGame( const float delta );
 
   void renderGraphics();
 
@@ -75,9 +80,15 @@ private:
   void releaseComponents();
 
 protected:
-  virtual void onInitialize() = 0;
+  /**
+   * \brief Configuration goes here (screen size, title, fps, ...)
+   */
+  virtual void onPreInitialize() = 0;
 
-  virtual void onRelease() = 0;
+  /**
+   * \brief Set Scene to start here
+   */
+  virtual void onPostInitialize() = 0;
 
   // ================================================
   // Platform specific

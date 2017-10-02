@@ -14,6 +14,8 @@ GameObject::GameObject( Scene* parentScene, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _parentScene( parentScene ),
+    _active( false ),
+    _selfInitialize( true ),
     _messenger( new Messenger() ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
@@ -38,6 +40,8 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _parentScene( NULL ),
+    _active( false ),
+    _selfInitialize( true ),
     _messenger( new Messenger() ) {
 
   // check initial state
@@ -78,6 +82,22 @@ Scene* GameObject::getParentScene() const {
   return _parentScene;
 }
 
+bool GameObject::isActive() const {
+  return _active;
+}
+
+void GameObject::setActive( const bool val ) {
+  _active = val;
+}
+
+bool GameObject::isSelfInitialize() const {
+  return _selfInitialize;
+}
+
+void GameObject::setSelfInitialize( const bool val ) {
+  _selfInitialize = val;
+}
+
 // ===========================================================
 // Events
 // ===========================================================
@@ -92,15 +112,31 @@ void GameObject::initialize() {
 
   // init components
   for ( auto component : _components ) {
-    component->initialize();
+    if ( (!component->isSelfInitialize()) && (!component->isInitialized()) ) {
+      component->initialize();
+    }
   }
 
   setToInitialized();
+
+  // activate
+  setActive( true );
 }
 
 void GameObject::update( const float delta ) {
-  // make sure object is initialized and not released
-  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
+  if ( isReleasing() || isReleased() ) return;
+
+  // update actions
+  updateAddAndRemoveComponentInNextFrame();
+
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
+
+  if ( !isActive() ) return;
 
   // update components
   for ( auto component : _components ) {
@@ -109,7 +145,6 @@ void GameObject::update( const float delta ) {
 }
 
 void GameObject::render() {
-  // make sure object is initialized and not released
   if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   // render components
@@ -120,7 +155,7 @@ void GameObject::render() {
 
 void GameObject::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   setToReleasing();
 
@@ -133,7 +168,7 @@ void GameObject::release() {
 
   // remove from parent scene
   if ( _parentScene != NULL ) {
-    _parentScene->removeGameObject( this );
+    _parentScene->removeGameObjectInNextFrame( this );
   }
 
   // release messenger
@@ -154,18 +189,22 @@ void GameObject::release() {
 
 void GameObject::addComponent( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
+  doAddComponent( component );
+}
+
+void GameObject::addComponentInNextFrame( GameObjectComponent* component ) {
   if ( component == NULL ) return;
-  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
-  _components.emplace_back( component );
+  _componentsToAddInNextFrame.push_back( component );
 }
 
 void GameObject::removeComponent( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
-  if ( component == NULL ) return;
+  doRemoveComponent( component );
+}
 
-  // prevent remove default components
-  ALA_ASSERT(isDefaultComponents( component ));
-  StdHelper::vectorErase<GameObjectComponent*>( _components, component );
+void GameObject::removeComponentInNextFrame( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  _componentsToRemoveInNextFrame.push_back( component );
 }
 
 GameObjectComponent* GameObject::getComponent( const std::string& name ) const {
@@ -191,6 +230,32 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::strin
 
 std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
   return _components;
+}
+
+void GameObject::updateAddAndRemoveComponentInNextFrame() {
+  for ( auto component : _componentsToAddInNextFrame ) {
+    doAddComponent( component );
+  }
+  _componentsToAddInNextFrame.clear();
+
+  for ( auto component : _componentsToRemoveInNextFrame ) {
+    doRemoveComponent( component );
+  }
+  _componentsToRemoveInNextFrame.clear();
+}
+
+void GameObject::doAddComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
+  _components.emplace_back( component );
+}
+
+void GameObject::doRemoveComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+
+  // prevent remove default components
+  ALA_ASSERT(isDefaultComponents(component));
+  StdHelper::vectorErase<GameObjectComponent*>( _components, component );
 }
 
 // ========================================================

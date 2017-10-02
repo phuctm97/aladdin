@@ -101,6 +101,8 @@ protected:
   // ==================================================
 private:
   std::unordered_map<long, GameObject*> _gameObjects;
+  std::vector<GameObject*> _gameObjectsToAddInNextFrame;
+  std::vector<GameObject*> _gameObjectsToRemoveInNextFrame;
 
 public:
   GameObject* getGameObject( const long id );
@@ -111,11 +113,22 @@ public:
    */
   void addGameObject( GameObject* gameObject );
 
+  void addGameObjectInNextFrame( GameObject* gameObject );
+
   /**
    * \brief Detach game object from scene, this will not change game object's parent or release it, you should not call this method directly
    * \param gameObject Game object to detach
    */
   void removeGameObject( GameObject* gameObject );
+
+  void removeGameObjectInNextFrame( GameObject* gameObject );
+
+private:
+  void updateAddAndRemoveGameObjects();
+
+  void doAddGameObject( GameObject* gameObject );
+
+  void doRemoveGameObject( GameObject* gameObject );
 
   // =============================================
   // Debug memory allocation

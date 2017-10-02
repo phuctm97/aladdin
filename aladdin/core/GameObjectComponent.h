@@ -20,6 +20,8 @@ ALA_CLASS_HEADER_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 private:
   std::string _name;
   GameObject* _gameObject;
+  bool _active;
+  bool _selfInitialize;
 
 public:
   /**
@@ -34,6 +36,14 @@ public:
   const std::string& getName() const;
 
   GameObject* getGameObject() const;
+
+  bool isActive() const;
+
+  void setActive( const bool val );
+
+  bool isSelfInitialize() const;
+
+  void setSelfInitialize( const bool val );
 
   // ==================================================
   // Events
@@ -51,6 +61,8 @@ protected:
    * \param delta 
    */
   virtual void onUpdate( const float delta );
+
+  virtual void onInvokeUpdate( const float delta );
 
 
   /**
