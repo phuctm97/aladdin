@@ -9,16 +9,17 @@ USING_NAMESPACE_ALA;
 
 MyApp::MyApp() : Application() {}
 
-void MyApp::onInitialize() {
-  // TODO: init application (size, title, fps, resources initializer, scene to start, log behaviors)
+void MyApp::onPreInitialize() {
+  // configurations
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
   setFps( 60 );
 
+  // resource initializers
   registerResourceInitializer( new MyResourceInitializer() );
-  startWithScene( new IntroScene() );
 }
 
-void MyApp::onRelease() {
-  // TODO: release my application
+void MyApp::onPostInitialize() {
+  // starter scene
+  startWithScene( new IntroScene() );
 }

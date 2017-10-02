@@ -19,7 +19,6 @@ Application::Application() :
   _screenWidth( 800 ),
   _screenHeight( 600 ),
   _animationInterval( 1000.0f / 60 ),
-  _sceneToStart( NULL ),
   _frameCount( 0 ),
   _logger( "ala::Application" ),
   _logStream( 0 ),
@@ -62,7 +61,7 @@ Application::~Application() {
 
 void Application::setScreenSize( int width, int height ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _screenWidth = width;
   _screenHeight = height;
 }
@@ -77,7 +76,7 @@ int Application::getScreenHeight() const {
 
 void Application::setTitle( const std::string& title ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _title = title;
 }
 
@@ -87,29 +86,36 @@ const std::string& Application::getTitle() const {
 
 void Application::setAnimationInterval( float millis ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT(millis >= 1000.0f / 61);
   _animationInterval = millis;
 }
 
 void Application::setFps( int fps ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   ALA_ASSERT(fps > 0 && fps <= 60);
   _animationInterval = 1000.0f / fps;
 }
 
-float Application::getLoopInterval() const {
+float Application::getAnimationInterval() const {
   return _animationInterval;
 }
 
-void Application::startWithScene( Scene* scene ) {
+void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
   // can only be set before init process
-  ALA_ASSERT(isInitializing() && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
-  _sceneToStart = scene;
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  _resourceInitializers.push_back( initializer );
 }
 
-void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
-  _resourceInitializers.push_back( initializer );
+// ================================================
+// Main Game Process
+// ================================================
+
+void Application::startWithScene( Scene* scene ) {
+  // can only be set before init process
+  ALA_ASSERT(isInitialized() && (!isReleased()) && (!isReleasing()));
+  GameManager::get()->replaceScene( scene );
 }
 
 float Application::updateTimestampCalculateAndFixAnimationInterval() {
@@ -173,15 +179,19 @@ void Application::renderGraphics() {
 void Application::initialize() {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
+  // pre init for configuration
+  onPreInitialize();
+
   setToInitializing();
 
-  // client application init
-  onInitialize();
-
-  // init components
   initComponents();
 
+  initResources();
+
   setToInitialized();
+
+  // post init for starting
+  onPostInitialize();
 }
 
 void Application::release() {
@@ -189,10 +199,6 @@ void Application::release() {
 
   setToReleasing();
 
-  // client application release
-  onRelease();
-
-  // release components
   releaseComponents();
 
   setToReleased();
@@ -230,25 +236,19 @@ void Application::initComponents() {
 
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
-
-  // init resources
-  initResources();
-
-  // init runnings scene
-  gameManager->replaceScene( _sceneToStart );
 }
 
 void Application::initResources() {
-  // init resource initializers
+  // run & release resource initializers
   for ( auto initializer : _resourceInitializers ) {
     if ( initializer ) {
-      initializer->init();
+      initializer->run();
     }
     delete initializer;
   }
   _resourceInitializers.clear();
 
-  // load game resources
+  // load game scope resources
   for ( const auto it : GameManager::get()->_attachedResources ) {
     auto resource = it.second;
     if ( resource->isLoaded() ) continue;
@@ -260,32 +260,32 @@ void Application::initResources() {
 
 void Application::releaseComponents() {
   // running scene
-  Scene* scene = GameManager::get()->getRunningScene();
+  auto scene = GameManager::get()->getRunningScene();
   scene->release();
 
   // left objects
-  for ( GameObject* object : GameManager::get()->getAllObjects() ) {
+  for ( auto object : GameManager::get()->getAllObjects() ) {
     object->release();
   }
 
   // left resources
-  for ( GameResource* resource : GameManager::get()->getAllResources() ) {
+  for ( auto resource : GameManager::get()->getAllResources() ) {
     resource->release();
   }
 
   // left prefabs
-  for ( Prefab* prefab : GameManager::get()->getAllPrefabs() ) {
+  for ( auto prefab : GameManager::get()->getAllPrefabs() ) {
     prefab->release();
   }
 
   // game singleton components
-  GameManager* gameManager = GameManager::get();
+  auto gameManager = GameManager::get();
   gameManager->release();
 
-  Graphics* graphics = Graphics::get();
+  auto graphics = Graphics::get();
   graphics->release();
 
-  Input* input = Input::get();
+  auto input = Input::get();
   input->release();
 }
 
@@ -366,12 +366,12 @@ void Application::initWindowHandle() {
   UpdateWindow( _hWnd );
 }
 
-
 void Application::gameLoop() {
   // initial timestamp
   _startTimestamp = GetTickCount();
   _lastTimestamp = _startTimestamp;
 
+  // main loop
   while ( !_exiting ) {
     processMessage();
     processGame();
