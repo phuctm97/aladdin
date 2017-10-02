@@ -19,10 +19,10 @@ void BallController::onInitialize ( )
   transform->setPosition(ala::Vec2(frameSize.getWidth (  )/2, frameSize.getHeight (  )/2));
 
   ala::GameObject* ball2 = new ala::GameObject(getGameObject (  ), "Ball2");
-  new ala::SpriteRenderer(ball2, "ball.png");
-  ball2->getTransform()->setPosition(100, 100);
 
-  //transform->addChild(ball2->getTransform (  ));
+  new ala::SpriteRenderer(ball2, "ball.png");
+  ball2->initialize();
+  ball2->getTransform()->setPosition(100, 100);
 
   transform->setScale(1.5f);
   ball2->getTransform()->setScale(1.5f);

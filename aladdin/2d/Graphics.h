@@ -40,7 +40,7 @@ private:
 public:
   void loadSprite( Sprite* sprite );
 
-  void drawSprite(Sprite* sprite, const Vec2& origin, const D3DXMATRIX& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex = 0);
+  void drawSprite(Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex = 0);
 };
 }
 

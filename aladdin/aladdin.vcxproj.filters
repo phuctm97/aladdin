@@ -112,6 +112,9 @@
     <ClInclude Include="core\MessageListener.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\Mat4.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -190,6 +193,9 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="core\MessageListener.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Mat4.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,6 +7,7 @@
 
 #include "GameObjectComponent.h"
 #include "Vec2.h"
+#include "Mat4.h"
 
 NAMESPACE_ALA
 {
@@ -90,22 +91,22 @@ protected:
   void onRender() override;
 
 public:
-  D3DXMATRIX calculateLocalToParentMatrix();
-  D3DXMATRIX getLocalToWorldMatrix();
-  D3DXMATRIX getWorldToLocalMatrix();
+  Mat4 calculateLocalToParentMatrix() const;
+  Mat4 getLocalToWorldMatrix();
+  Mat4 getWorldToLocalMatrix();
 private:
   // specifies if the localToWorldTransform
   // needs to be recalulated
   bool _isDirty;
   // the transform that converts local coordinates
   // to world coordinates
-  D3DXMATRIX _localToWorldMatrix;
+  Mat4 _localToWorldMatrix;
   // specifies if the worldToLocalMatrix
   // needs to be recalculated
   bool _isInverseDirty;
   // the transform that converts world cooridnates
   // to local coordinates
-  D3DXMATRIX _worldToLocalMatrix;
+  Mat4 _worldToLocalMatrix;
 
   void setDirty();
 };

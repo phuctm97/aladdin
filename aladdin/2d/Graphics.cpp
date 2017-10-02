@@ -71,7 +71,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
-void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex ) {
+void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex ) {
   LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
   ALA_ASSERT(texture);
 
@@ -87,11 +87,14 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX&
   dPostition.z = zIndex;
 
   D3DXMATRIX oldMatrix;
+
+  auto transformationMatrix = transformMatrix.convertToDirectXMatrix();
+
   _directXSprite->GetTransform(&oldMatrix);
-  D3DXMATRIX finalMatrix = transformMatrix*oldMatrix;
+  D3DXMATRIX finalMatrix = transformationMatrix*oldMatrix;
 
 
-  _directXSprite->SetTransform(&transformMatrix);
+  _directXSprite->SetTransform(&finalMatrix);
 
   D3DXVECTOR3 center = D3DXVECTOR3(abs(dSrcRect.right - dSrcRect.left) * origin.getX (  ), abs(dSrcRect.top - dSrcRect.bottom) * (1-origin.getY (  )), 0);
 
