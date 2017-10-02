@@ -56,6 +56,6 @@ Size SpriteRenderer::getFrameSize ( ) const
   Rect srcRect;
   srcRect.setTopLeft(Vec2(0.f, 0.f));
   srcRect.setSize(_sprite->getContentSize (  ));
-  Graphics::get()->drawSprite( _sprite, Vec2(0.5f,0.5f), transform->getTransformationMatrix(), _backColor, srcRect );
+  Graphics::get()->drawSprite( _sprite, Vec2(0.5f,0.5f), transform->getLocalToWorldMatrix(), _backColor, srcRect );
 }
 }

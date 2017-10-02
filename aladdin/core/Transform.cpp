@@ -20,8 +20,12 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _scale( 1, 1 ),
     _rotation( 0 ),
     _origin ( 0.5f,0.5f ),
+    _isDirty ( false ),
+    _isInverseDirty ( false ),
     _parent( parentTransform ) {
   if ( _parent != NULL ) {
+    D3DXMatrixIdentity(&_localToWorldMatrix);
+    D3DXMatrixIdentity(&_worldToLocalMatrix);
     _parent->addChild( this );
   }
 }
@@ -42,19 +46,23 @@ float Transform::getPositionY() const {
 
 void Transform::setPosition( const Vec2& position ) {
   _position = position;
+  setDirty();
 }
 
 void Transform::setPosition ( const float x, const float y )
 {
   _position = Vec2(x, y);
+  setDirty();
 }
 
   void Transform::setPositionX( const float x ) {
   _position.setX( x );
+  setDirty();
 }
 
 void Transform::setPositionY( const float y ) {
   _position.setY( y );
+  setDirty();
 }
 
 const Vec2& Transform::getScale() const {
@@ -63,22 +71,26 @@ const Vec2& Transform::getScale() const {
 
 void Transform::setScale( const Vec2& scale ) {
   _scale = scale;
+  setDirty();
 }
 
 void Transform::setScaleX ( float x )
 {
   _scale.setX(x);
+  setDirty();
 }
 
 void Transform::setScaleY ( float y )
 {
   _scale.setY(y);
+  setDirty();
 }
 
 void Transform::setScale ( float scale )
 {
   _scale.setX(scale);
   _scale.setY(scale);
+  setDirty();
 }
 
   float Transform::getRotation() const {
@@ -87,6 +99,7 @@ void Transform::setScale ( float scale )
 
 void Transform::setRotation( const float rotation ) {
   _rotation = rotation;
+  setDirty();
 }
 
   // =======================================================
@@ -109,7 +122,11 @@ void Transform::addChild( Transform* child ) {
   if ( isReleasing() || isReleased() ) return;
   if ( child == NULL ) return;
   if ( StdHelper::vectorContain( _children, child ) ) return;
+
+  child->_parent = this;
   _children.push_back( child );
+
+  setDirty();
 }
 
 void Transform::removeChild( Transform* child ) {
@@ -137,31 +154,62 @@ void Transform::onRender() {
   }
 }
 
-D3DXMATRIX Transform::getTransformationMatrix ( )
+D3DXMATRIX Transform::calculateLocalToParentMatrix ( )
 {
-  //D3DXMATRIX transformationMatrix;
-
-  //auto position = D3DXVECTOR2(_position.getX(), _position.getY());
-  //auto scale = D3DXVECTOR2(_scale.getX(), _scale.getY());
-  //D3DXMatrixTransformation2D(
-  //  &transformationMatrix,
-  //  &position,
-  //  0.0f,
-  //  &scale,
-  //  &position,
-  //  D3DXToRadian(_rotation),
-  //  0
-  //);
-
   D3DXMATRIX matRotate;
   D3DXMATRIX matScale;
   D3DXMATRIX matTranslate;
 
   D3DXMatrixRotationZ(&matRotate, D3DXToRadian(_rotation));
-  D3DXMatrixScaling(&matScale, _scale.getX (  ), _scale.getY(), 1.f);
-  D3DXMatrixTranslation(&matTranslate, _position.getX (  ), _position.getY(), 0.0f);
+  D3DXMatrixScaling(&matScale, _scale.getX(), _scale.getY(), 1.f);
+  D3DXMatrixTranslation(&matTranslate, _position.getX(), _position.getY(), 0.0f);
 
 
   return matRotate*matScale*matTranslate;
+}
+
+D3DXMATRIX Transform::getLocalToWorldMatrix ( )
+{
+  if(_isDirty)
+  {
+    if(_parent == NULL)
+    {
+      _localToWorldMatrix = calculateLocalToParentMatrix();
+    }
+    else
+    {
+      _localToWorldMatrix = _parent->getLocalToWorldMatrix() * calculateLocalToParentMatrix();
+    }
+
+    _isDirty = false;
+  }
+
+  return _localToWorldMatrix;
+}
+
+D3DXMATRIX Transform::getWorldToLocalMatrix()
+{
+  if(_isInverseDirty)
+  {
+    auto localToWorldMatrix = getLocalToWorldMatrix();
+    D3DXMatrixInverse(&_worldToLocalMatrix, NULL, &localToWorldMatrix);
+    _isInverseDirty = false;
+  }
+
+  return _worldToLocalMatrix;
+}
+
+void Transform::setDirty ( )
+{
+  if(!_isDirty)
+  {
+    _isDirty = true;
+    _isInverseDirty = true;
+
+    for (auto transform : _children)
+    {
+      transform->setDirty();
+    }
+  }
 }
 }

@@ -81,7 +81,7 @@ public:
    */
   void removeChild( Transform* child );
 
-
+  void setParent(Transform* parent);
 protected:
   void onRelease() override;
 
@@ -90,7 +90,24 @@ protected:
   void onRender() override;
 
 public:
-  D3DXMATRIX getTransformationMatrix();
+  D3DXMATRIX calculateLocalToParentMatrix();
+  D3DXMATRIX getLocalToWorldMatrix();
+  D3DXMATRIX getWorldToLocalMatrix();
+private:
+  // specifies if the localToWorldTransform
+  // needs to be recalulated
+  bool _isDirty;
+  // the transform that converts local coordinates
+  // to world coordinates
+  D3DXMATRIX _localToWorldMatrix;
+  // specifies if the worldToLocalMatrix
+  // needs to be recalculated
+  bool _isInverseDirty;
+  // the transform that converts world cooridnates
+  // to local coordinates
+  D3DXMATRIX _worldToLocalMatrix;
+
+  void setDirty();
 };
 }
 
