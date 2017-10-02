@@ -91,6 +91,15 @@
     <ClInclude Include="core\Loadable.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\Messenger.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\IMessageArg.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StringMessageArg.h">
+      <Filter>core</Filter>
+    </ClInclude>
     <ClInclude Include="input\InputInclude.h">
       <Filter>input</Filter>
     </ClInclude>
@@ -167,6 +176,15 @@
     </ClCompile>
     <ClCompile Include="input\Input.cpp">
       <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Messenger.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\IMessageArg.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StringMessageArg.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

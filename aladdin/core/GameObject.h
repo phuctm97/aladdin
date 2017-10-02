@@ -7,6 +7,7 @@
 
 #include "GameObjectComponent.h"
 #include "Transform.h"
+#include "Messenger.h"
 
 NAMESPACE_ALA
 {
@@ -97,6 +98,15 @@ private:
 
 public:
   Transform* getTransform() const;
+
+  // ===========================================================
+  // Messenger
+  // ===========================================================
+
+private:
+	Messenger* _messenger;
+public:
+	Messenger* getMessenger() const;
 
   // ===========================================================
   // Debug memory allocation

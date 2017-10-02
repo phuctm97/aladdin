@@ -12,11 +12,14 @@ private:
   char _state;
   float _speed;
 
+  long _token;
 public:
   BallController( ala::GameObject* gameObject, const std::string& name = "" );
 
 protected:
   void onUpdate( const float delta ) override;
+  void onInitialize() override;
+  void onRelease() override;
 };
 
 

@@ -6,6 +6,7 @@
  */
 
 #include <core/Scene.h>
+#include "core/IMessageArg.h"
 
 class IntroScene : public ala::Scene {
 public:
@@ -13,6 +14,10 @@ public:
 
 protected:
   void onPreInitialize() override;
+  void onPreRelease() override;
+private:
+  void onBallDirectionChanged(ala::IMessageArg* arg);
+  long _ballDirectionChangedListener;
 };
 
 #endif //!__INTRO_SCENE_H__

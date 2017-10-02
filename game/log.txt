@@ -18,3 +18,5 @@
 [D] [ala::Application] : Total Components Deleted: 3
 [D] [ala::Application] : Total Loggers Created: 3
 [D] [ala::Application] : Total Loggers Deleted: 2
+[D] [ala::Application] : Total Messengers Created: 2
+[D] [ala::Application] : Total Messengers Deleted: 2
