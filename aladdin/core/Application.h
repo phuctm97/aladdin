@@ -60,7 +60,7 @@ private:
 
   void updateInput();
 
-  void updateGame( float delta );
+  void updateGame( const float delta );
 
   void renderGraphics();
 

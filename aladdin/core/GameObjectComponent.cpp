@@ -15,13 +15,15 @@ ALA_CLASS_SOURCE_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
-    _gameObject( gameObject ) {
+    _gameObject( gameObject ),
+    _active( false ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
   // check game object
   ALA_ASSERT(gameObject != NULL);
 
+  // attach to game object
   _gameObject->addComponent( this );
 
   TOTAL_COMPONENTS_CREATED++;
@@ -44,6 +46,21 @@ GameObject* GameObjectComponent::getGameObject() const {
   return _gameObject;
 }
 
+bool GameObjectComponent::isActive() const {
+  return _active;
+}
+
+void GameObjectComponent::setActive( const bool val ) {
+  _active = val;
+}
+
+bool GameObjectComponent::isSelfInitialize() const {
+  return _selfInitialize;
+}
+
+void GameObjectComponent::setSelfInitialize( const bool val ) {
+  _selfInitialize = val;
+}
 
 // =================================================
 // Events
@@ -60,23 +77,38 @@ void GameObjectComponent::initialize() {
   onInitialize();
 
   setToInitialized();
+
+  // activate
+  setActive( true );
 }
 
 void GameObjectComponent::onInitialize() {}
 
 void GameObjectComponent::update( const float delta ) {
-  // make sure object is initialized and not released
-  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
+  if ( isReleasing() || isReleased() ) return;
 
+  onInvokeUpdate( delta );
+
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
+
+  if ( !isActive() ) return;
+
+  // inheritance update
   onUpdate( delta );
 }
 
 void GameObjectComponent::onUpdate( const float delta ) {}
 
+void GameObjectComponent::onInvokeUpdate( const float delta ) {}
+
 void GameObjectComponent::onRender() {}
 
 void GameObjectComponent::render() {
-  // make sure object is initialized and not released
   if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onRender();
@@ -93,7 +125,7 @@ void GameObjectComponent::release() {
   onRelease();
 
   // remove from game object
-  _gameObject->removeComponent( this );
+  _gameObject->removeComponentInNextFrame( this );
 
   setToReleased();
 
