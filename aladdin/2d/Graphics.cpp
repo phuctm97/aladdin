@@ -182,7 +182,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
-void Graphics::drawSprite( Sprite* sprite, const Vec2& position, const Rect& srcRect ) {
+void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex ) {
   LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
   ALA_ASSERT(texture);
 
@@ -193,25 +193,36 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& position, const Rect& src
   dSrcRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
 
   D3DXVECTOR3 dPostition;
-  dPostition.x = position.getX();
-  dPostition.y = position.getY();
-  dPostition.z = 0;
+  dPostition.x = 0;
+  dPostition.y = 0;
+  dPostition.z = zIndex;
+
+  D3DXMATRIX oldMatrix;
+  _directXSprite->GetTransform(&oldMatrix);
+  D3DXMATRIX finalMatrix = transformMatrix*oldMatrix;
+
+
+  _directXSprite->SetTransform(&transformMatrix);
+
+  D3DXVECTOR3 center = D3DXVECTOR3(abs(dSrcRect.right - dSrcRect.left) * origin.getX (  ), abs(dSrcRect.top - dSrcRect.bottom) * (1-origin.getY (  )), 0);
 
   if ( srcRect.getSize().getWidth() == 0 || srcRect.getSize().getHeight() == 0 ) {
     _directXSprite->Draw(
       texture,
       NULL,
-      NULL,
+      &center,
       &dPostition,
-      D3DCOLOR_XRGB(255, 255, 255) );
+      D3DXCOLOR(backColor.getR (  )/256.f,backColor.getG (  )/256.f , backColor.getB()/256.f, backColor.getA (  )/256.f) );
   }
   else {
     _directXSprite->Draw(
       texture,
       &dSrcRect,
-      NULL,
+      &center,
       &dPostition,
-      D3DCOLOR_XRGB(255, 255, 255) );
+      D3DXCOLOR(backColor.getR() / 256.f, backColor.getG() / 256.f, backColor.getB() / 256.f, backColor.getA() / 256.f));
   }
+
+  _directXSprite->SetTransform(&oldMatrix);
 }
 }
