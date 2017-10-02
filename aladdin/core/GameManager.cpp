@@ -22,22 +22,18 @@ GameManager* GameManager::get() {
 }
 
 GameManager::GameManager() :
-  _logger( new Logger( "ala::GameManager" ) ),
+  _logger( "ala::GameManager" ),
   _screenWidth( 0 ),
   _screenHeight( 0 ),
   _idCounter( 0 ),
-  _globalMessenger ( new Messenger ),
   _runningScene( NULL ) {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
-
-  _logger->debug( "Created" );
+  _logger.debug( "Created" );
 }
 
 GameManager::~GameManager() {
   ALA_ASSERT(isReleased());
-  _logger->debug( "Released" );
-  delete _logger;
-  delete _globalMessenger;
+  _logger.debug( "Released" );
 }
 
 void GameManager::release() {
@@ -232,14 +228,5 @@ std::vector<Prefab*> GameManager::getAllPrefabs() {
   }
 
   return ret;
-}
-
-// ===============================================
-// Global messenger
-// ===============================================
-
-Messenger* GameManager::getGlobalMessenger ( ) const
-{
-  return _globalMessenger;
 }
 }

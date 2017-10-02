@@ -151,6 +151,9 @@
     <ClInclude Include="core\StringMessageArg.h" />
     <ClInclude Include="core\Transform.h" />
     <ClInclude Include="core\Vec2.h" />
+    <ClInclude Include="input\Input.h" />
+    <ClInclude Include="input\InputInclude.h" />
+    <ClInclude Include="input\InputMarcos.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Graphics.cpp" />
@@ -177,6 +180,7 @@
     <ClCompile Include="core\StringMessageArg.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
+    <ClCompile Include="input\Input.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
