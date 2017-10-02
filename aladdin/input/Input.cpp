@@ -6,6 +6,10 @@
 
 NAMESPACE_ALA
 {
+// =====================================================
+// Basics
+// =====================================================
+
 ALA_CLASS_SOURCE_2( ala::Input, ala::Initializable, ala::Releasable)
 
 Input* Input::__instance( NULL );
@@ -30,22 +34,6 @@ Input::~Input() {
     ALA_ASSERT(isReleased());
   }
   _logger.debug( "Released" );
-}
-
-float Input::getAxis( const std::string& axisName ) const {
-  throw "Not implemented";
-}
-
-bool Input::getButton( const std::string& buttonName ) const {
-  throw "Not implemented";
-}
-
-bool Input::getButtonDown( const std::string& buttonName ) const {
-  throw "Not implemented";
-}
-
-bool Input::getButtonUp( const std::string& buttonName ) const {
-  throw "Not implemented";
 }
 
 bool Input::getKey( const int code ) const {
@@ -144,6 +132,11 @@ void Input::update() {
   std::copy( _directXKeys, _directXKeys + 256, _oldDirectXKeys );
   _directXInputKeyboard->GetDeviceState( sizeof(_directXKeys), static_cast<LPVOID>(&_directXKeys) );
 }
+
+
+// =================================================
+// Platform specific
+// =================================================
 
 void Input::initDirectXInput() {
   HRESULT result;
@@ -308,15 +301,15 @@ void Input::initDirectXKeysMap() {
   _directXKeysMapString.emplace( "[+]", DIK_NUMPADPLUS );
   _directXKeysMapString.emplace( "[enter]", DIK_NUMPADENTER );
   _directXKeysMapString.emplace( "[=]", DIK_NUMPADEQUALS );
-  _directXKeysMapString.emplace( "upArrow", DIK_UPARROW );
-  _directXKeysMapString.emplace( "downArrow", DIK_DOWNARROW );
-  _directXKeysMapString.emplace( "leftArrow", DIK_LEFTARROW );
-  _directXKeysMapString.emplace( "rightArrow", DIK_RIGHTARROW );
+  _directXKeysMapString.emplace( "up", DIK_UPARROW );
+  _directXKeysMapString.emplace( "down", DIK_DOWNARROW );
+  _directXKeysMapString.emplace( "left", DIK_LEFTARROW );
+  _directXKeysMapString.emplace( "right", DIK_RIGHTARROW );
   _directXKeysMapString.emplace( "insert", DIK_INSERT );
   _directXKeysMapString.emplace( "home", DIK_HOME );
   _directXKeysMapString.emplace( "end", DIK_END );
-  _directXKeysMapString.emplace( "pageUp", DIK_PGUP );
-  _directXKeysMapString.emplace( "pageDown", DIK_PGDN );
+  _directXKeysMapString.emplace( "page up", DIK_PGUP );
+  _directXKeysMapString.emplace( "page down", DIK_PGDN );
   _directXKeysMapString.emplace( "f1", DIK_F1 );
   _directXKeysMapString.emplace( "f2", DIK_F2 );
   _directXKeysMapString.emplace( "f3", DIK_F3 );
@@ -378,16 +371,16 @@ void Input::initDirectXKeysMap() {
   _directXKeysMapString.emplace( "x", DIK_X );
   _directXKeysMapString.emplace( "y", DIK_Y );
   _directXKeysMapString.emplace( "z", DIK_Z );
-  _directXKeysMapString.emplace( "numLock", DIK_NUMLOCK );
-  _directXKeysMapString.emplace( "capsLock", DIK_CAPSLOCK );
-  _directXKeysMapString.emplace( "rshift", DIK_RSHIFT );
-  _directXKeysMapString.emplace( "lshift", DIK_LSHIFT );
-  _directXKeysMapString.emplace( "rctrl", DIK_RCONTROL );
-  _directXKeysMapString.emplace( "lctrl", DIK_LCONTROL );
-  _directXKeysMapString.emplace( "ralt", DIK_RALT );
-  _directXKeysMapString.emplace( "lalt", DIK_LALT );
-  _directXKeysMapString.emplace( "rwin", DIK_RWIN );
-  _directXKeysMapString.emplace( "lwin", DIK_LWIN );
+  _directXKeysMapString.emplace( "num lock", DIK_NUMLOCK );
+  _directXKeysMapString.emplace( "caps lock", DIK_CAPSLOCK );
+  _directXKeysMapString.emplace( "right shift", DIK_RSHIFT );
+  _directXKeysMapString.emplace( "left shift", DIK_LSHIFT );
+  _directXKeysMapString.emplace( "right ctrl", DIK_RCONTROL );
+  _directXKeysMapString.emplace( "left ctrl", DIK_LCONTROL );
+  _directXKeysMapString.emplace( "right alt", DIK_RALT );
+  _directXKeysMapString.emplace( "left alt", DIK_LALT );
+  _directXKeysMapString.emplace( "right win", DIK_RWIN );
+  _directXKeysMapString.emplace( "left win", DIK_LWIN );
 }
 
 void Input::releaseDirectXInput() {

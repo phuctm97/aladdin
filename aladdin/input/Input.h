@@ -114,6 +114,10 @@ enum {
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_2(Input, ala::Initializable, ala::Releasable)
+  // =====================================================
+  // Basics
+  // =====================================================
+
   friend class Application;
 
 private:
@@ -126,14 +130,6 @@ public:
   Input();
 
   virtual ~Input();
-
-  float getAxis( const std::string& axisName ) const;
-
-  bool getButton( const std::string& buttonName ) const;
-
-  bool getButtonDown( const std::string& buttonName ) const;
-
-  bool getButtonUp( const std::string& buttonName ) const;
 
   bool getKey( const int code ) const;
 
