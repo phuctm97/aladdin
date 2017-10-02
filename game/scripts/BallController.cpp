@@ -8,7 +8,7 @@
 BallController::BallController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _state( 'R' ),
-    _speed( 2 ),
+    _speed( 3 ),
     _logger( "BallController" ) {}
 
 void BallController::onUpdate( const float delta ) {

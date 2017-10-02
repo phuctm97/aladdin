@@ -5,6 +5,7 @@
  * Created by phuctm97 on Sep 30th 2017
  */
 
+#include "core/CoreInclude.h"
 #include "core/Application.h"
 #include "core/ClassMeta.h"
 #include "core/GameManager.h"
@@ -23,9 +24,12 @@
 #include "core/Color.h"
 #include "core/Vec2.h"
 #include "core/Transform.h"
+#include "2d/2dInclude.h"
 #include "2d/Size.h"
 #include "2d/Rect.h"
 #include "2d/Sprite.h"
 #include "2d/SpriteRenderer.h"
+#include "input/InputInclude.h"
+#include "input/Input.h"
 
 #endif //!__ALADDIN_H__
