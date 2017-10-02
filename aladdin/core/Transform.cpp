@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "StdHelper.h"
 #include "GameManager.h"
+#include "IMessageArg.h"
 
 NAMESPACE_ALA
 {
@@ -45,7 +46,6 @@ void Transform::setPosition( const Vec2& position ) {
 
 void Transform::setPositionX( const float x ) {
   _position.setX( x );
-  getGameObject (  )->getMessenger()->broadcast("X changed", new IMessageArg);
 }
 
 void Transform::setPositionY( const float y ) {

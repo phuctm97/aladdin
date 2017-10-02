@@ -1,7 +1,7 @@
 ﻿#ifndef __ALADDIN_CORE_MESSENGER__
 #define __ALADDIN_CORE_MESSENGER__
 
-#include "Callback.h"
+#include "IMessageArg.h"
 
 NAMESPACE_ALA
 {
