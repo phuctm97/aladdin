@@ -19,6 +19,7 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _position( 0, 0 ),
     _scale( 1, 1 ),
     _rotation( 0 ),
+    _origin ( 0.5f,0.5f ),
     _parent( parentTransform ) {
   if ( _parent != NULL ) {
     _parent->addChild( this );
@@ -43,7 +44,12 @@ void Transform::setPosition( const Vec2& position ) {
   _position = position;
 }
 
-void Transform::setPositionX( const float x ) {
+void Transform::setPosition ( const float x, const float y )
+{
+  _position = Vec2(x, y);
+}
+
+  void Transform::setPositionX( const float x ) {
   _position.setX( x );
 }
 
@@ -59,7 +65,23 @@ void Transform::setScale( const Vec2& scale ) {
   _scale = scale;
 }
 
-float Transform::getRotation() const {
+void Transform::setScaleX ( float x )
+{
+  _scale.setX(x);
+}
+
+void Transform::setScaleY ( float y )
+{
+  _scale.setY(y);
+}
+
+void Transform::setScale ( float scale )
+{
+  _scale.setX(scale);
+  _scale.setY(scale);
+}
+
+  float Transform::getRotation() const {
   return _rotation;
 }
 
@@ -67,7 +89,7 @@ void Transform::setRotation( const float rotation ) {
   _rotation = rotation;
 }
 
-// =======================================================
+  // =======================================================
 // Children management
 // =======================================================
 
@@ -113,5 +135,33 @@ void Transform::onRender() {
   for ( auto transform : _children ) {
     transform->getGameObject()->render();
   }
+}
+
+D3DXMATRIX Transform::getTransformationMatrix ( )
+{
+  //D3DXMATRIX transformationMatrix;
+
+  //auto position = D3DXVECTOR2(_position.getX(), _position.getY());
+  //auto scale = D3DXVECTOR2(_scale.getX(), _scale.getY());
+  //D3DXMatrixTransformation2D(
+  //  &transformationMatrix,
+  //  &position,
+  //  0.0f,
+  //  &scale,
+  //  &position,
+  //  D3DXToRadian(_rotation),
+  //  0
+  //);
+
+  D3DXMATRIX matRotate;
+  D3DXMATRIX matScale;
+  D3DXMATRIX matTranslate;
+
+  D3DXMatrixRotationZ(&matRotate, D3DXToRadian(_rotation));
+  D3DXMatrixScaling(&matScale, _scale.getX (  ), _scale.getY(), 1.f);
+  D3DXMatrixTranslation(&matTranslate, _position.getX (  ), _position.getY(), 0.0f);
+
+
+  return matRotate*matScale*matTranslate;
 }
 }

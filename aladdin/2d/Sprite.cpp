@@ -30,7 +30,7 @@ const ala::Size& Sprite::getContentSize() const {
   return _contentSize;
 }
 
-void Sprite::setContentSize( const ala::Size& size ) {
+void Sprite::setContentSize( const Size& size ) {
   _contentSize = size;
 }
 
