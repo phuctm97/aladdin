@@ -33,7 +33,7 @@ public:
 
   void setPosition( const Vec2& position );
 
-  void setPosition(const float x, const float y);
+  void setPosition( const float x, const float y );
 
   void setPositionX( const float x );
 
@@ -43,11 +43,11 @@ public:
 
   void setScale( const Vec2& scale );
 
-  void setScaleX(float x);
+  void setScaleX( float x );
 
-  void setScaleY(float y);
+  void setScaleY( float y );
 
-  void setScale(float scale);
+  void setScale( float scale );
 
   float getRotation() const;
 
@@ -81,7 +81,8 @@ public:
    */
   void removeChild( Transform* child );
 
-  void setParent(Transform* parent);
+  void setParent( Transform* parent );
+
 protected:
   void onRelease() override;
 
@@ -89,20 +90,25 @@ protected:
 
   void onRender() override;
 
+  // =====================================================
+  // Transformation
+  // =====================================================
 public:
   D3DXMATRIX calculateLocalToParentMatrix();
+  
   D3DXMATRIX getLocalToWorldMatrix();
+
   D3DXMATRIX getWorldToLocalMatrix();
 private:
   // specifies if the localToWorldTransform
   // needs to be recalulated
-  bool _isDirty;
+  bool _dirty;
   // the transform that converts local coordinates
   // to world coordinates
   D3DXMATRIX _localToWorldMatrix;
   // specifies if the worldToLocalMatrix
   // needs to be recalculated
-  bool _isInverseDirty;
+  bool _inverseDirty;
   // the transform that converts world cooridnates
   // to local coordinates
   D3DXMATRIX _worldToLocalMatrix;

@@ -198,13 +198,13 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX&
   dPostition.z = zIndex;
 
   D3DXMATRIX oldMatrix;
-  _directXSprite->GetTransform(&oldMatrix);
-  D3DXMATRIX finalMatrix = transformMatrix*oldMatrix;
+  _directXSprite->GetTransform( &oldMatrix );
+  D3DXMATRIX finalMatrix = transformMatrix * oldMatrix;
 
 
-  _directXSprite->SetTransform(&transformMatrix);
+  _directXSprite->SetTransform( &transformMatrix );
 
-  D3DXVECTOR3 center = D3DXVECTOR3(abs(dSrcRect.right - dSrcRect.left) * origin.getX (  ), abs(dSrcRect.top - dSrcRect.bottom) * (1-origin.getY (  )), 0);
+  D3DXVECTOR3 center = D3DXVECTOR3( abs( dSrcRect.right - dSrcRect.left ) * origin.getX(), abs( dSrcRect.top - dSrcRect.bottom ) * (1 - origin.getY()), 0 );
 
   if ( srcRect.getSize().getWidth() == 0 || srcRect.getSize().getHeight() == 0 ) {
     _directXSprite->Draw(
@@ -212,7 +212,7 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX&
       NULL,
       &center,
       &dPostition,
-      D3DXCOLOR(backColor.getR (  )/256.f,backColor.getG (  )/256.f , backColor.getB()/256.f, backColor.getA (  )/256.f) );
+      D3DXCOLOR( backColor.getR() / 256.f, backColor.getG() / 256.f, backColor.getB() / 256.f, backColor.getA() / 256.f ) );
   }
   else {
     _directXSprite->Draw(
@@ -220,9 +220,9 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const D3DXMATRIX&
       &dSrcRect,
       &center,
       &dPostition,
-      D3DXCOLOR(backColor.getR() / 256.f, backColor.getG() / 256.f, backColor.getB() / 256.f, backColor.getA() / 256.f));
+      D3DXCOLOR( backColor.getR() / 256.f, backColor.getG() / 256.f, backColor.getB() / 256.f, backColor.getA() / 256.f ) );
   }
 
-  _directXSprite->SetTransform(&oldMatrix);
+  _directXSprite->SetTransform( &oldMatrix );
 }
 }
