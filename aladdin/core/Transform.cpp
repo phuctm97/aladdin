@@ -55,7 +55,7 @@ void Transform::setPosition ( const float x, const float y )
   setDirty();
 }
 
-  void Transform::setPositionX( const float x ) {
+void Transform::setPositionX( const float x ) {
   _position.setX( x );
   setDirty();
 }
@@ -93,7 +93,7 @@ void Transform::setScale ( float scale )
   setDirty();
 }
 
-  float Transform::getRotation() const {
+float Transform::getRotation() const {
   return _rotation;
 }
 
@@ -122,8 +122,6 @@ void Transform::addChild( Transform* child ) {
   if ( isReleasing() || isReleased() ) return;
   if ( child == NULL ) return;
   if ( StdHelper::vectorContain( _children, child ) ) return;
-
-  child->_parent = this;
   _children.push_back( child );
 
   child->setDirty();
