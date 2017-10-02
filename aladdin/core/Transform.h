@@ -19,7 +19,7 @@ private:
   Vec2 _position;
   Vec2 _scale;
   float _rotation;
-
+  Vec2 _origin;
 public:
   Transform( GameObject* gameObject, Transform* parentTransform = NULL, const std::string& name = "" );
 
@@ -33,6 +33,8 @@ public:
 
   void setPosition( const Vec2& position );
 
+  void setPosition(const float x, const float y);
+
   void setPositionX( const float x );
 
   void setPositionY( const float y );
@@ -40,6 +42,12 @@ public:
   const Vec2& getScale() const;
 
   void setScale( const Vec2& scale );
+
+  void setScaleX(float x);
+
+  void setScaleY(float y);
+
+  void setScale(float scale);
 
   float getRotation() const;
 
@@ -73,13 +81,33 @@ public:
    */
   void removeChild( Transform* child );
 
-
+  void setParent(Transform* parent);
 protected:
   void onRelease() override;
 
   void onUpdate( const float delta ) override;
 
   void onRender() override;
+
+public:
+  D3DXMATRIX calculateLocalToParentMatrix();
+  D3DXMATRIX getLocalToWorldMatrix();
+  D3DXMATRIX getWorldToLocalMatrix();
+private:
+  // specifies if the localToWorldTransform
+  // needs to be recalulated
+  bool _isDirty;
+  // the transform that converts local coordinates
+  // to world coordinates
+  D3DXMATRIX _localToWorldMatrix;
+  // specifies if the worldToLocalMatrix
+  // needs to be recalculated
+  bool _isInverseDirty;
+  // the transform that converts world cooridnates
+  // to local coordinates
+  D3DXMATRIX _worldToLocalMatrix;
+
+  void setDirty();
 };
 }
 
