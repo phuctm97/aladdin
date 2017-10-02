@@ -31,6 +31,8 @@ public:
 
   static GameManager* get();
 
+  void update( const float delta );
+
   void release() override;
 
   // ===============================================
@@ -66,10 +68,10 @@ public:
 
   std::vector<GameObject*> getAllObjects();
 
-  GameObject* getObjectById( long id );
+  GameObject* getObjectById( const long id );
 
   template <class T>
-  T* getObjectTById( long id );
+  T* getObjectTById( const long id );
 
   std::vector<GameObject*> getAllObjectsByName( const std::string& name );
 
@@ -83,11 +85,18 @@ public:
   // ===============================================
 private:
   Scene* _runningScene;
+  Scene* _sceneToReplaceInNextFrame;
 
 public:
   Scene* getRunningScene() const;
 
   void replaceScene( Scene* scene );
+
+  void replaceSceneInNextFrame( Scene* scene );
+
+private:
+  void updateRunningScene();
+  void doReplaceScene( Scene* scene );
 
   // ===============================================
   // Resource Management
@@ -138,7 +147,7 @@ public:
 // ===============================================
 
 template <class T>
-T* GameManager::getObjectTById( long id ) {
+T* GameManager::getObjectTById( const long id ) {
   const auto objectIt = _attachedObjects.find( id );
   if ( objectIt == _attachedObjects.end() ) return NULL;
 

@@ -73,17 +73,17 @@ void Transform::setScale( const Vec2& scale ) {
   setDirty();
 }
 
-void Transform::setScaleX( float x ) {
+void Transform::setScaleX( const float x ) {
   _scale.setX( x );
   setDirty();
 }
 
-void Transform::setScaleY( float y ) {
+void Transform::setScaleY( const float y ) {
   _scale.setY( y );
   setDirty();
 }
 
-void Transform::setScale( float scale ) {
+void Transform::setScale( const float scale ) {
   _scale.setX( scale );
   _scale.setY( scale );
   setDirty();
@@ -116,15 +116,43 @@ Transform* Transform::getParent() const {
 
 void Transform::addChild( Transform* child ) {
   if ( isReleasing() || isReleased() ) return;
-  if ( child == NULL ) return;
-  if ( StdHelper::vectorContain( _children, child ) ) return;
-  _children.push_back( child );
+  doAddChild( child );
+}
 
-  child->setDirty();
+void Transform::addChildInNextFrame( Transform* child ) {
+  if ( child == NULL ) return;
+  _childrenToAddInNextFrame.push_back( child );
 }
 
 void Transform::removeChild( Transform* child ) {
   if ( isReleasing() || isReleased() ) return;
+  doRemoveChild( child );
+}
+
+void Transform::removeChildInNextFrame( Transform* child ) {
+  if ( child == NULL ) return;
+  _childrenToRemoveInNextFrame.push_back( child );
+}
+
+void Transform::updateAddAndRemoveChildInNextFrame() {
+  for ( auto child : _childrenToAddInNextFrame ) {
+    doAddChild( child );
+  }
+  _childrenToAddInNextFrame.clear();
+
+  for ( auto child : _childrenToRemoveInNextFrame ) {
+    doRemoveChild( child );
+  }
+  _childrenToRemoveInNextFrame.clear();
+}
+
+void Transform::doAddChild( Transform* child ) {
+  if ( child == NULL ) return;
+  if ( StdHelper::vectorContain( _children, child ) ) return;
+  _children.push_back( child );
+}
+
+void Transform::doRemoveChild( Transform* child ) {
   if ( child == NULL ) return;
   StdHelper::vectorErase( _children, child );
 }
@@ -135,8 +163,12 @@ void Transform::onRelease() {
     child->getGameObject()->release();
   }
   if ( _parent != NULL ) {
-    _parent->removeChild( this );
+    _parent->removeChildInNextFrame( this );
   }
+}
+
+void Transform::onInvokeUpdate( const float delta ) {
+  updateAddAndRemoveChildInNextFrame();
 }
 
 void Transform::onUpdate( const float delta ) {

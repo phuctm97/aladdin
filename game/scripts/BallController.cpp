@@ -25,7 +25,6 @@ void BallController::onInitialize() {
 
   transform->setScale( 1.5f );
   ball2->getTransform()->setScale( 1.5f );
-  ball2->initialize();
 
   subscribeObjectMessage(
     getGameObject(),

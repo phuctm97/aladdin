@@ -21,6 +21,8 @@ private:
   long _id;
   std::string _name;
   Scene* _parentScene;
+  bool _active;
+  bool _selfInitialize;
 
 public:
   /**
@@ -40,6 +42,14 @@ public:
   const std::string& getName() const;
 
   Scene* getParentScene() const;
+
+  bool isActive() const;
+
+  void setActive( const bool val );
+
+  bool isSelfInitialize() const;
+
+  void setSelfInitialize( const bool val );
 
   // =========================================================
   // Events
@@ -61,6 +71,8 @@ public:
   // ========================================================
 private:
   std::vector<GameObjectComponent*> _components;
+  std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
+  std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;
 
 public:
   /**
@@ -69,12 +81,15 @@ public:
    */
   void addComponent( GameObjectComponent* component );
 
+  void addComponentInNextFrame( GameObjectComponent* component );
 
   /**
    * \brief Detach a component from game object, this will not release component, you will have to delete in your own when it's necessary
    * \param component Component to detach
    */
   void removeComponent( GameObjectComponent* component );
+
+  void removeComponentInNextFrame( GameObjectComponent* component );
 
   GameObjectComponent* getComponent( const std::string& name ) const;
 
@@ -87,6 +102,13 @@ public:
 
   template <class T>
   std::vector<T*> getAllComponentTs() const;
+
+private:
+  void updateAddAndRemoveComponentInNextFrame();
+
+  void doAddComponent( GameObjectComponent* component );
+
+  void doRemoveComponent( GameObjectComponent* component );
 
   // ========================================================
   // Default components
@@ -106,7 +128,7 @@ public:
 private:
   Messenger* _messenger;
 
-  public:
+public:
   Messenger* getMessenger() const;
 
   // ===========================================================

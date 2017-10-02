@@ -152,9 +152,12 @@ void Application::updateInput() {
   Input::get()->update();
 }
 
-void Application::updateGame( float delta ) {
+void Application::updateGame( const float delta ) {
+  // update game manager
+  GameManager::get()->update( delta );
+
   // update running scene
-  Scene* runningScene = GameManager::get()->getRunningScene();
+  auto runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->update( delta );
   }

@@ -48,7 +48,7 @@ void GameResource::load() {
 
 void GameResource::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isLoaded()) && (!isLoading()) && (!isReleased()));
+  ALA_ASSERT((isLoaded()) && (!isReleasing()) && (!isReleased()));
 
   setToReleasing();
 
@@ -57,7 +57,7 @@ void GameResource::release() {
   onRelease();
 
   // detach from game manager
-  GameManager::get()->detach(this);
+  GameManager::get()->detach( this );
 
   setToReleased();
 

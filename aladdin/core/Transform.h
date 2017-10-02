@@ -44,11 +44,11 @@ public:
 
   void setScale( const Vec2& scale );
 
-  void setScaleX( float x );
+  void setScaleX( const float x );
 
-  void setScaleY( float y );
+  void setScaleY( const float y );
 
-  void setScale( float scale );
+  void setScale( const float scale );
 
   float getRotation() const;
 
@@ -60,8 +60,9 @@ public:
 
 private:
   std::vector<Transform*> _children;
-
   Transform* _parent;
+  std::vector<Transform*> _childrenToAddInNextFrame;
+  std::vector<Transform*> _childrenToRemoveInNextFrame;
 
 public:
   std::vector<Transform*> getChildren() const;
@@ -76,16 +77,27 @@ public:
    */
   void addChild( Transform* child );
 
+  void addChildInNextFrame( Transform* child );
+
   /**
    * \brief Detach a transform from this children, this will not reset child parent or object, you should not call this method directly
    * \param child Child transform to detach
    */
   void removeChild( Transform* child );
 
-  void setParent( Transform* parent );
+  void removeChildInNextFrame( Transform* child );
+
+private:
+  void updateAddAndRemoveChildInNextFrame();
+
+  void doAddChild( Transform* child );
+
+  void doRemoveChild( Transform* child );
 
 protected:
   void onRelease() override;
+
+  void onInvokeUpdate( const float delta ) override;
 
   void onUpdate( const float delta ) override;
 
