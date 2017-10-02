@@ -33,3 +33,6 @@
 [D] [ala::Application] : Total Loggers Created: 4
 [D] [ala::Application] : Total Loggers Deleted: 4
 [D] [ala::Application] : Average FPS: 56
+[D] [ala::Application] : Total Loggers Deleted: 3
+[D] [ala::Application] : Total Messengers Created: 2
+[D] [ala::Application] : Total Messengers Deleted: 2

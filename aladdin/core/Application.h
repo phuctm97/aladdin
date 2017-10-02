@@ -49,9 +49,13 @@ public:
   void registerResourceInitializer( ResourceInitializer* initializer );
 
 private:
-  void onUpdate( float delta );
+  float updateTimestampCalculateAndFixAnimationInterval();
 
-  void onRender();
+  void updateInput();
+  
+  void updateGame( float delta );
+
+  void renderGraphics();
 
   // ================================================
   // Initializing & Releasing
@@ -83,9 +87,6 @@ private:
   MSG _msg;
   HINSTANCE _hInstance;
   HWND _hWnd;
-  IDirect3D9* _directX;
-  IDirect3DDevice9* _directXDevice;
-  LPD3DXSPRITE _directXSprite;
   DWORD _startTimestamp;
   DWORD _lastTimestamp;
 
@@ -98,10 +99,6 @@ public:
 
 private:
   void initWindowHandle();
-
-  void initDirectX();
-
-  void releaseDirectX() const;
 
   void gameLoop();
 

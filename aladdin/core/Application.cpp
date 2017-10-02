@@ -26,9 +26,6 @@ Application::Application() :
   _exiting( false ),
   _hInstance( NULL ),
   _hWnd( NULL ),
-  _directX( NULL ),
-  _directXDevice( NULL ),
-  _directXSprite( NULL ),
   _startTimestamp( 0 ),
   _lastTimestamp( 0 ) {
   // check initial state
@@ -55,6 +52,8 @@ Application::~Application() {
   _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
   _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
   _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
+  _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
+  _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 
   // average fps
   const auto fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (GetTickCount() - _startTimestamp) ));
@@ -106,18 +105,58 @@ void Application::registerResourceInitializer( ResourceInitializer* initializer 
   _resourceInitializers.push_back( initializer );
 }
 
-void Application::onUpdate( float delta ) {
+float Application::updateTimestampCalculateAndFixAnimationInterval() {
+  // get current timestamp
+  DWORD currentTimestamp = GetTickCount();
+
+  // calculate delta
+  auto delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+
+  // check interval
+  if ( delta < _animationInterval ) {
+    // too soon, sleep and recalculate
+    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
+
+    currentTimestamp = GetTickCount();
+    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+  }
+
+  // update timestamp
+  _lastTimestamp = currentTimestamp;
+
+  // debug fps
+  _frameCount++;
+  if ( _frameCount % 1800 == 0 ) {
+    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
+    _logger.debug( "FPS: %d", fps );
+  }
+
+  return delta;
+}
+
+void Application::updateInput() {
+  // update input
+  Input::get()->update();
+}
+
+void Application::updateGame( float delta ) {
+  // update running scene
   Scene* runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->update( delta );
   }
 }
 
-void Application::onRender() {
+void Application::renderGraphics() {
+  Graphics::get()->beginRendering();
+
+  // render running scene
   Scene* runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->render();
   }
+
+  Graphics::get()->endRendering();
 }
 
 // ================================================
@@ -164,12 +203,14 @@ void Application::initComponents() {
 
   // windows components
   initWindowHandle();
-  initDirectX();
 
   // game singleton components
   Graphics* graphics = Graphics::get();
-  graphics->_directXDevice = _directXDevice;
-  graphics->_directXSprite = _directXSprite;
+  graphics->_hInstance = _hInstance;
+  graphics->_hWnd = _hWnd;
+  graphics->_screenWidth = static_cast<UINT>(_screenWidth);
+  graphics->_screenHeight = static_cast<UINT>(_screenHeight);
+  graphics->initialize();
 
   Input* input = Input::get();
   input->_hInstance = _hInstance;
@@ -235,13 +276,10 @@ void Application::releaseComponents() {
   gameManager->release();
 
   Graphics* graphics = Graphics::get();
-  delete graphics;
+  graphics->release();
 
   Input* input = Input::get();
   input->release();
-
-  // windows components
-  releaseDirectX();
 }
 
 // ===================================================
@@ -321,61 +359,6 @@ void Application::initWindowHandle() {
   UpdateWindow( _hWnd );
 }
 
-void Application::initDirectX() {
-  HRESULT result;
-
-  // init DirectX
-  _directX = Direct3DCreate9( D3D_SDK_VERSION );
-  ALA_ASSERT(!FAILED(_directX));
-
-  _logger.debug( "Initialized DirectX" );
-
-  // init DirectX device
-  D3DPRESENT_PARAMETERS d3dpp;
-  ZeroMemory(&d3dpp, sizeof(d3dpp));
-  d3dpp.BackBufferCount = 1;
-  d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-  d3dpp.BackBufferWidth = static_cast<UINT>(_screenWidth);
-  d3dpp.BackBufferHeight = static_cast<UINT>(_screenHeight);
-  d3dpp.Windowed = true;
-  d3dpp.hDeviceWindow = _hWnd;
-  d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-  result = _directX->CreateDevice(
-    D3DADAPTER_DEFAULT,
-    D3DDEVTYPE_HAL,
-    _hWnd,
-    D3DCREATE_HARDWARE_VERTEXPROCESSING,
-    &d3dpp,
-    &_directXDevice );
-
-  ALA_ASSERT(result == D3D_OK);
-  ALA_ASSERT(!FAILED(_directXDevice));
-
-  _logger.debug( "Created DirectX Device" );
-
-
-  // init DirectX Sprite
-  result = D3DXCreateSprite( _directXDevice, &_directXSprite );
-  ALA_ASSERT(result == D3D_OK);
-  ALA_ASSERT(!FAILED(_directXSprite));
-
-  _logger.debug( "Created DirectX Sprite" );
-}
-
-void Application::releaseDirectX() const {
-  if ( _directXSprite ) {
-    _directXSprite->Release();
-    _logger.debug( "Released DirectX Sprite" );
-  }
-  if ( _directXDevice ) {
-    _directXDevice->Release();
-    _logger.debug( "Released DirectX Device" );
-  }
-  if ( _directX ) {
-    _directX->Release();
-    _logger.debug( "Released DirectX" );
-  }
-}
 
 void Application::gameLoop() {
   // initial timestamp
@@ -405,52 +388,15 @@ void Application::processMessage() {
 
 void Application::processGame() {
   // update input
-  Input::get()->update();
+  updateInput();
 
-  // get current timestamp
-  DWORD currentTimestamp = GetTickCount();
+  const auto delta = updateTimestampCalculateAndFixAnimationInterval();
 
-  // calculate delta
-  float delta = static_cast<float>(currentTimestamp - _lastTimestamp);
+  // update game
+  updateGame( delta );
 
-  // check interval
-  if ( delta < _animationInterval ) {
-    // too soon, sleep and recalculate
-    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
-
-    currentTimestamp = GetTickCount();
-    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
-  }
-
-  // update timestamp
-  _lastTimestamp = currentTimestamp;
-
-  // debug fps
-  _frameCount++;
-  if ( _frameCount % 1800 == 0 ) {
-    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
-    _logger.debug( "FPS: %d", fps );
-  }
-
-  // update
-  onUpdate( delta );
-
-  // clear screen
-  _directXDevice->Clear( 0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0 );
-
-  // start rendering
-  if ( _directXDevice->BeginScene() ) {
-    _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE );
-
-    onRender();
-
-    // stop rendering
-    _directXSprite->End();
-    _directXDevice->EndScene();
-  }
-
-  // display back buffer to screen
-  _directXDevice->Present( 0, 0, 0, 0 );
+  // render graphics
+  renderGraphics();
 }
 
 LRESULT Application::wndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {

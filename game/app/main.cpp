@@ -1,7 +1,7 @@
 #include "MyApp.h"
 
 #ifndef LOG_STREAM
-#define LOG_STREAM 2
+#define LOG_STREAM 1
 #endif
 
 int WINAPI WinMain( HINSTANCE hInstance,
@@ -15,5 +15,9 @@ int WINAPI WinMain( HINSTANCE hInstance,
             nCmdShow,
             LOG_STREAM );
   app->release();
+
+  if ( LOG_STREAM == 1 ) {
+    system( "pause" );
+  }
   return 0;
 }

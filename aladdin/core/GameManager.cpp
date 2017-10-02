@@ -26,7 +26,8 @@ GameManager::GameManager() :
   _screenWidth( 0 ),
   _screenHeight( 0 ),
   _idCounter( 0 ),
-  _runningScene( NULL ) {
+  _runningScene( NULL ),
+  _globalMessenger( new Messenger() ) {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
   _logger.debug( "Created" );
 }
@@ -39,6 +40,10 @@ GameManager::~GameManager() {
 void GameManager::release() {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
   setToReleasing();
+
+  // release messenger
+  _globalMessenger->release();
+
   setToReleased();
   delete this;
 }
@@ -228,5 +233,13 @@ std::vector<Prefab*> GameManager::getAllPrefabs() {
   }
 
   return ret;
+}
+
+// ===============================================
+// Global messenger
+// ===============================================
+
+Messenger* GameManager::getGlobalMessenger() const {
+  return _globalMessenger;
 }
 }

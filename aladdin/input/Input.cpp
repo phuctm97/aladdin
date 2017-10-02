@@ -18,7 +18,9 @@ Input* Input::get() {
 }
 
 Input::Input()
-  : _logger( "ala::Input" ) {
+  : _logger( "ala::Input" ),
+    _directXInput( 0 ),
+    _directXInputKeyboard( 0 ) {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
   _logger.debug( "Created" );
 }
