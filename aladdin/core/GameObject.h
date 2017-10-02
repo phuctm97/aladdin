@@ -104,9 +104,10 @@ public:
   // ===========================================================
 
 private:
-	Messenger* _messenger;
-public:
-	Messenger* getMessenger() const;
+  Messenger* _messenger;
+
+  public:
+  Messenger* getMessenger() const;
 
   // ===========================================================
   // Debug memory allocation

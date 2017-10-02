@@ -1,7 +1,7 @@
 #include "MyApp.h"
 
 #ifndef LOG_STREAM
-#define LOG_STREAM 2
+#define LOG_STREAM 1
 #endif
 
 int WINAPI WinMain( HINSTANCE hInstance,

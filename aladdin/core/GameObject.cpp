@@ -13,7 +13,8 @@ ALA_CLASS_SOURCE_2(ala::GameObject, ala::Initializable, ala::Releasable)
 GameObject::GameObject( Scene* parentScene, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
-    _parentScene( parentScene ) {
+    _parentScene( parentScene ),
+    _messenger( new Messenger() ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -36,7 +37,8 @@ GameObject::GameObject( Scene* parentScene, const std::string& name )
 GameObject::GameObject( GameObject* parentObject, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
-    _parentScene( NULL ) {
+    _parentScene( NULL ),
+    _messenger( new Messenger() ) {
 
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
@@ -86,8 +88,6 @@ void GameObject::initialize() {
 
   setToInitializing();
 
-  _messenger = new Messenger;
-
   // TODO: lock mutual exclusive when run in multithreading mode
 
   // init components
@@ -136,12 +136,13 @@ void GameObject::release() {
     _parentScene->removeGameObject( this );
   }
 
+  // release messenger
+  _messenger->release();
+
   // detach from GameManager
   GameManager::get()->detach( this );
 
   setToReleased();
-
-  delete(_messenger);
 
   // destroy
   delete this;
@@ -188,6 +189,10 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::strin
   return ret;
 }
 
+std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
+  return _components;
+}
+
 // ========================================================
 // Default components
 // ========================================================
@@ -205,13 +210,8 @@ Transform* GameObject::getTransform() const {
 // Messenger
 // ===========================================================
 
-Messenger* GameObject::getMessenger ( ) const
-{
+Messenger* GameObject::getMessenger() const {
   return _messenger;
-}
-
-	std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
-  return _components;
 }
 
 // ============================================

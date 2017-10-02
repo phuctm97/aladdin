@@ -5,7 +5,6 @@
 #include "Transform.h"
 #include "StdHelper.h"
 #include "GameManager.h"
-#include "IMessageArg.h"
 
 NAMESPACE_ALA
 {

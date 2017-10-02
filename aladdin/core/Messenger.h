@@ -1,23 +1,35 @@
 ﻿#ifndef __ALADDIN_CORE_MESSENGER__
 #define __ALADDIN_CORE_MESSENGER__
 
-#include "IMessageArg.h"
+#include "MessageArgs.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(Messenger)
+ALA_CLASS_HEADER_1(Messenger, ala::Releasable)
 public:
   Messenger();
-  ~Messenger();
-  void broadcast(std::string messageId, IMessageArg* args);
-  long subscribe(std::string messageId, std::function<void(IMessageArg*)> f);
-  void unsubscribe(std::string messageId, long token);
+
+  virtual ~Messenger();
+
+  void broadcast( const std::string& messageId, MessageArgs* args );
+
+  long subscribe( const std::string& messageId, const std::function<void( MessageArgs* )>& callback );
+
+  void unsubscribe( const std::string& messageId, const long token );
+
+  void release() override;
+
 private:
-  std::map<std::string, std::map<long, std::function<void(IMessageArg*)>>> _callbacks;
-  long _token = 0;
+  std::unordered_map<std::string, std::unordered_map<long, std::function<void( MessageArgs* )>>> _callbacks;
+
+  long _tokenCounter;
+
+  // =============================================
+  // Debug memory usage
+  // =============================================
 public:
   static long TOTAL_MESSENGERS_CREATED;
   static long TOTAL_MESSENGERS_DELETED;
 };
 }
-#endif //__ALADDIN_CORE_MESSENGER__
+#endif //!__ALADDIN_CORE_MESSENGER__

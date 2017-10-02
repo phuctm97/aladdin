@@ -53,8 +53,8 @@ Application::~Application() {
   _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
   _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
   _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED );
-  _logger->debug("Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED);
-  _logger->debug("Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED);
+  _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
+  _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 }
 
 void Application::setScreenSize( int width, int height ) {

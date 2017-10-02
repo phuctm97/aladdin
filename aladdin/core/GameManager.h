@@ -121,11 +121,12 @@ public:
 
   std::vector<Prefab*> getAllPrefabs();
 
-// ===============================================
-// Global messenger
-// ===============================================
+  // ===============================================
+  // Global messenger
+  // ===============================================
 private:
   Messenger* _globalMessenger;
+
 public:
   Messenger* getGlobalMessenger() const;
 };

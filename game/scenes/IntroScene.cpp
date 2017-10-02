@@ -4,25 +4,20 @@
 
 #include "IntroScene.h"
 #include "core/GameManager.h"
-#include "core/StringMessageArg.h"
+#include "core/StringMessageArgs.h"
 
-IntroScene::IntroScene() {}
+IntroScene::IntroScene() : _ballDirectionChangedListener( 0 ), _logger( "IntroScene" ) {}
 
 void IntroScene::onPreInitialize() {
   ala::GameManager::get()->getPrefab( "Ball" )->instantiate();
-  _ballDirectionChangedListener = ala::GameManager::get()->getGlobalMessenger()->subscribe("Ball Direction Changed", [=](ala::IMessageArg* arg)
-  {
-	  onBallDirectionChanged(arg);
-  });
+
+  subscribeGlobalMessage(
+    "Ball Direction Changed",
+    [=]( ala::MessageArgs* arg ) {
+
+    _logger.info( static_cast<ala::StringMessageArgs*>(arg)->getPayload().c_str() );
+
+  } );
 }
 
-void IntroScene::onPreRelease ( )
-{
-	ala::GameManager::get()->getGlobalMessenger()->unsubscribe("Ball Direction Changed", _ballDirectionChangedListener);
-}
-
-void IntroScene::onBallDirectionChanged ( ala::IMessageArg* arg )
-{
-	// log to output in visual studio ._.
-	OutputDebugString(static_cast < ala::StringMessageArg* > ( arg )->getPayload (  ).c_str (  ));
-}
+void IntroScene::onPreRelease() {}
