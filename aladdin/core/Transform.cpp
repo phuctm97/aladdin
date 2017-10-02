@@ -126,7 +126,7 @@ void Transform::addChild( Transform* child ) {
   child->_parent = this;
   _children.push_back( child );
 
-  setDirty();
+  child->setDirty();
 }
 
 void Transform::removeChild( Transform* child ) {
