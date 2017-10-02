@@ -107,7 +107,8 @@ enum {
   ALA_KEY_RIGHT_ALT,
   ALA_KEY_LEFT_ALT,
   ALA_KEY_RIGHT_WINDOWS,
-  ALA_KEY_LEFT_WINDOWS
+  ALA_KEY_LEFT_WINDOWS,
+  __ALA_KEY_END,
 };
 
 NAMESPACE_ALA
@@ -139,6 +140,12 @@ public:
   bool getKeyDown( const int code ) const;
 
   bool getKeyUp( const int code ) const;
+
+  bool getKey( const std::string& keyName ) const;
+
+  bool getKeyDown( const std::string& keyName ) const;
+
+  bool getKeyUp( const std::string& keyName ) const;
 
   bool getMouseButton( int button ) const;
 
@@ -173,7 +180,9 @@ private:
   LPDIRECTINPUT8 _directXInput;
   LPDIRECTINPUTDEVICE8 _directXInputKeyboard;
   char _directXKeys[256];
-  std::map<int, int> _directXKeysMap;
+  char _oldDirectXKeys[256];
+  std::map<int, int> _directXKeysMapInt;
+  std::map<std::string, int> _directXKeysMapString;
 
   void initDirectXInput();
 
@@ -181,8 +190,13 @@ private:
 
   void releaseDirectXInput();
 
-  int directXKeyDown( const int key );
+  bool directXKeyDown( const int key ) const;
 
+  bool oldDirectXKeyDown( const int key ) const;
+
+  int toDirectXKey( const int code ) const;
+
+  int toDirectXKey( const std::string& keyName ) const;
 };
 }
 

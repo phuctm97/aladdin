@@ -15,6 +15,16 @@ void BallController::onUpdate( const float delta ) {
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   const auto sprite = getGameObject()->getComponentT<ala::SpriteRenderer>()->getSprite();
 
+  if ( ala::Input::get()->getKeyDown( "a" ) ) {
+    _logger.info( "Pressed key A" );
+  }
+  if ( ala::Input::get()->getKey( "a" ) ) {
+    _logger.info( "Pressing key A" );
+  }
+  if ( ala::Input::get()->getKeyUp( "a" ) ) {
+    _logger.info( "Released key A" );
+  }
+
   switch ( _state ) {
   case 'R':
     if ( transform->getPositionX() + sprite->getContentSize().getWidth() >= ala::GameManager::get()->getScreenWidth() ) {
