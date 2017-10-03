@@ -115,6 +115,9 @@
     <ClInclude Include="core\Mat4.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="2d\Camera.h">
+      <Filter>2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="core\Mat4.cpp">
       <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Camera.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

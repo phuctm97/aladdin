@@ -15,16 +15,7 @@ void BallController::onInitialize() {
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   transform->setScale( ala::Vec2( 2.f, 2.f ) );
   auto frameSize = getGameObject()->getComponentT<ala::SpriteRenderer>()->getFrameSize();
-  transform->setPosition( ala::Vec2( frameSize.getWidth() / 2, frameSize.getHeight() / 2 ) );
-
-  ala::GameObject* ball2 = new ala::GameObject( getGameObject() );
-  new ala::SpriteRenderer( ball2, "ball.png" );
-  ball2->getTransform()->setPosition( 100, 100 );
-
-  //transform->addChild(ball2->getTransform (  ));
-
-  transform->setScale( 1.5f );
-  ball2->getTransform()->setScale( 1.5f );
+  transform->setPosition( ala::Vec2( 0, 0 ) );
 
   subscribeObjectMessage(
     getGameObject(),
@@ -35,7 +26,12 @@ void BallController::onInitialize() {
 }
 
 void BallController::onUpdate( const float delta ) {
+
   auto transform = getGameObject()->getComponentT<ala::Transform>();
+
+  transform->setPositionY(transform->getPositionY() + _speed);
+
+  return;
   const auto sprite = getGameObject()->getComponentT<ala::SpriteRenderer>();
 
   if ( ala::Input::get()->getKeyDown( "a" ) ) {
