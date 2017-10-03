@@ -45,6 +45,9 @@ private:
   IDirect3DDevice9* _directXDevice;
   LPD3DXSPRITE _directXSprite;
 
+  D3DXMATRIX _projectionMatrix;
+  D3DXMATRIX _worldMatrix;
+  D3DXMATRIX _viewMatrix;
 public:
   void initDirectX();
 
@@ -61,6 +64,10 @@ public:
   D3DXMATRIX convertToDirectXMatrix( const Mat4& mat ) const;
 
   RECT convertToWindowsRect( const Rect& rect ) const;
+
+  void setProjectionMatrix(const Mat4 &mat);
+  void setWorldMatrix(const Mat4 &mat);
+  void setViewMatrix(const Mat4 &mat);
 };
 }
 

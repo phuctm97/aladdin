@@ -78,6 +78,9 @@ public:
 
   static Mat4 getScalingMatrix( const Vec2& scale );
   static Mat4 getScalingMatrix( const float x, const float y, const float z );
+
+  static Mat4 getOrthoLHMatrix(float width, float height, float zn, float zf);
+  static Mat4 getOrthoRHMatrix(float width, float height, float zn, float zf);
 };
 }
 
