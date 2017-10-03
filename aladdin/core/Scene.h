@@ -18,6 +18,9 @@ ALA_CLASS_HEADER_2(Scene, ala::Initializable, ala::Releasable)
   // ================================================
   // Basic
   // ================================================
+private:
+  bool _toReleaseInNextFrame;
+
 public:
   /**
    * \brief Create a scene, this will not be managed unless you attach to GameManager by call replaceScene
@@ -83,6 +86,8 @@ public:
    */
   void release() override;
 
+  void releaseInNextFrame();
+
 protected:
 
   /**
@@ -101,6 +106,7 @@ protected:
   // ==================================================
 private:
   std::unordered_map<long, GameObject*> _gameObjects;
+  bool _gameObjectInLocking;
   std::vector<GameObject*> _gameObjectsToAddInNextFrame;
   std::vector<GameObject*> _gameObjectsToRemoveInNextFrame;
 
@@ -124,6 +130,10 @@ public:
   void removeGameObjectInNextFrame( GameObject* gameObject );
 
 private:
+  void lockGameObjects();
+
+  void unlockGameObjects();
+
   void updateAddAndRemoveGameObjects();
 
   void doAddGameObject( GameObject* gameObject );

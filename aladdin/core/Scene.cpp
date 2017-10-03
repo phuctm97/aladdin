@@ -15,7 +15,7 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 // Basic
 // ================================================
 
-Scene::Scene() {
+Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLocking( false ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -73,10 +73,19 @@ void Scene::onPostInitialize() {}
 void Scene::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
 
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
   // update actions
   updateAddAndRemoveGameObjects();
 
   if ( !isInitialized() ) return;
+
+  lockGameObjects();
 
   onPreUpdate( delta );
 
@@ -87,6 +96,8 @@ void Scene::update( const float delta ) {
   }
 
   onPostUpdate( delta );
+
+  unlockGameObjects();
 }
 
 void Scene::onPreUpdate( const float delta ) {}
@@ -97,6 +108,8 @@ void Scene::render() {
   // make sure scene is initialized and not being released
   if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
+  lockGameObjects();
+
   onPreRender();
 
   // render game objects
@@ -106,6 +119,8 @@ void Scene::render() {
   }
 
   onPostRender();
+
+  unlockGameObjects();
 }
 
 void Scene::onPreRender() {}
@@ -116,11 +131,15 @@ void Scene::release() {
   // make sure scene is initialized and not released
   ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
+  // check lock
+  if ( _gameObjectInLocking ) {
+    releaseInNextFrame();
+    return;
+  }
+
   onPreRelease();
 
   setToReleasing();
-
-  // TODO: lock mutual exclusive when run in multithreading mode
 
   // release game objects
   std::vector<GameObject*> gameObjectsToRelease;
@@ -142,6 +161,10 @@ void Scene::release() {
   delete this;
 }
 
+void Scene::releaseInNextFrame() {
+  _toReleaseInNextFrame = true;
+}
+
 void Scene::onPreRelease() {}
 
 void Scene::onPostRelease() {}
@@ -159,6 +182,12 @@ GameObject* Scene::getGameObject( const long id ) {
 void Scene::addGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
+
+  // check lock
+  if ( _gameObjectInLocking ) {
+    addGameObjectInNextFrame( gameObject );
+    return;
+  }
   doAddGameObject( gameObject );
 }
 
@@ -170,12 +199,26 @@ void Scene::addGameObjectInNextFrame( GameObject* gameObject ) {
 void Scene::removeGameObject( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
+
+  // check lock
+  if ( _gameObjectInLocking ) {
+    removeGameObjectInNextFrame( gameObject );
+    return;
+  }
   doRemoveGameObject( gameObject );
 }
 
 void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
   if ( gameObject == NULL ) return;
   _gameObjectsToRemoveInNextFrame.push_back( gameObject );
+}
+
+void Scene::lockGameObjects() {
+  _gameObjectInLocking = true;
+}
+
+void Scene::unlockGameObjects() {
+  _gameObjectInLocking = false;
 }
 
 void Scene::updateAddAndRemoveGameObjects() {
