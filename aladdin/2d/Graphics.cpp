@@ -182,30 +182,26 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
-void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, float zIndex ) {
+void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex ) {
   LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
   ALA_ASSERT(texture);
 
-  RECT dSrcRect;
-  dSrcRect.left = static_cast<LONG>(srcRect.getTopLeft().getX());
-  dSrcRect.top = static_cast<LONG>(srcRect.getTopLeft().getY());
-  dSrcRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
-  dSrcRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
+  RECT dSrcRect = convertToWindowsRect( srcRect );
 
   D3DXVECTOR3 dPostition;
   dPostition.x = 0;
   dPostition.y = 0;
-  dPostition.z = zIndex;
+  dPostition.z = static_cast<float>(zIndex);
 
   D3DXMATRIX oldMatrix;
 
-  auto transformationMatrix = transformMatrix.convertToDirectXMatrix();
+  auto transformationMatrix = convertToDirectXMatrix( transformMatrix );
 
-  _directXSprite->GetTransform(&oldMatrix);
-  D3DXMATRIX finalMatrix = transformationMatrix*oldMatrix;
+  _directXSprite->GetTransform( &oldMatrix );
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
 
 
-  _directXSprite->SetTransform(&finalMatrix);
+  _directXSprite->SetTransform( &finalMatrix );
 
   D3DXVECTOR3 center = D3DXVECTOR3( abs( dSrcRect.right - dSrcRect.left ) * origin.getX(), abs( dSrcRect.top - dSrcRect.bottom ) * (1 - origin.getY()), 0 );
 
@@ -227,5 +223,40 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
   }
 
   _directXSprite->SetTransform( &oldMatrix );
+}
+
+D3DXMATRIX Graphics::convertToDirectXMatrix( const Mat4& mat ) const {
+
+  D3DXMATRIX result;
+  result._11 = mat.get11();
+  result._12 = mat.get12();
+  result._13 = mat.get13();
+  result._14 = mat.get14();
+
+  result._21 = mat.get21();
+  result._22 = mat.get22();
+  result._23 = mat.get23();
+  result._24 = mat.get24();
+
+  result._31 = mat.get31();
+  result._32 = mat.get32();
+  result._33 = mat.get33();
+  result._34 = mat.get34();
+
+  result._41 = mat.get41();
+  result._42 = mat.get42();
+  result._43 = mat.get43();
+  result._44 = mat.get44();
+
+  return result;
+}
+
+RECT Graphics::convertToWindowsRect( const Rect& srcRect ) const {
+  RECT desRect;
+  desRect.left = static_cast<LONG>(srcRect.getTopLeft().getX());
+  desRect.top = static_cast<LONG>(srcRect.getTopLeft().getY());
+  desRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
+  desRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
+  return desRect;
 }
 }

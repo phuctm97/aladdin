@@ -14,7 +14,7 @@ ALA_CLASS_HEADER_1(SpriteRenderer, ala::GameObjectComponent)
 private:
   Sprite* _sprite;
   Color _backColor;
-  float _zOrder;
+  int _zOrder;
 
 public:
   SpriteRenderer( GameObject* gameObject, Sprite* sprite = NULL, const std::string& name = "" );
@@ -33,9 +33,10 @@ public:
 
   Size getFrameSize() const;
 
-  void setZOrder(float zOrder);
+  void setZOrder( const int zOrder );
 
-  float getZOrder() const;
+  int getZOrder() const;
+
 protected:
   void onRender() override;
 };

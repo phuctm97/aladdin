@@ -5,8 +5,15 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_0(ala::Mat4)
 
 
-void Mat4::operator+= ( const Mat4& mat )
-{
+Mat4::Mat4()
+  : _11( 0 ), _12( 0 ), _13( 0 ), _14( 0 ),
+    _21( 0 ), _22( 0 ), _23( 0 ), _24( 0 ),
+    _31( 0 ), _32( 0 ), _33( 0 ), _34( 0 ),
+    _41( 0 ), _42( 0 ), _43( 0 ), _44( 0 ) { }
+
+Mat4::~Mat4() { }
+
+void Mat4::operator+=( const Mat4& mat ) {
   _11 += mat._11;
   _12 += mat._12;
   _13 += mat._13;
@@ -29,8 +36,7 @@ void Mat4::operator+= ( const Mat4& mat )
 
 }
 
-void Mat4::operator-= ( const Mat4& mat )
-{
+void Mat4::operator-=( const Mat4& mat ) {
   _11 -= mat._11;
   _12 -= mat._12;
   _13 -= mat._13;
@@ -53,8 +59,7 @@ void Mat4::operator-= ( const Mat4& mat )
 
 }
 
-void Mat4::operator*= ( float v )
-{
+void Mat4::operator*=( const float v ) {
   _11 *= v;
   _12 *= v;
   _13 *= v;
@@ -77,8 +82,7 @@ void Mat4::operator*= ( float v )
 
 }
 
-void Mat4::operator/= ( float v )
-{
+void Mat4::operator/=( const float v ) {
   _11 /= v;
   _12 /= v;
   _13 /= v;
@@ -101,8 +105,7 @@ void Mat4::operator/= ( float v )
 
 }
 
-Mat4 Mat4::operator- ( ) const
-{
+Mat4 Mat4::operator-() const {
   Mat4 result;
 
   result._11 = -_11;
@@ -129,8 +132,7 @@ Mat4 Mat4::operator- ( ) const
 
 }
 
-Mat4 Mat4::operator+ ( const Mat4& mat ) const
-{
+Mat4 Mat4::operator+( const Mat4& mat ) const {
   Mat4 result;
 
   result._11 = _11 + mat._11;
@@ -157,8 +159,7 @@ Mat4 Mat4::operator+ ( const Mat4& mat ) const
 
 }
 
-Mat4 Mat4::operator- ( const Mat4& mat ) const
-{
+Mat4 Mat4::operator-( const Mat4& mat ) const {
   Mat4 result;
 
   result._11 = _11 - mat._11;
@@ -185,8 +186,7 @@ Mat4 Mat4::operator- ( const Mat4& mat ) const
 
 }
 
-Mat4 Mat4::operator* ( const Mat4& mat ) const
-{
+Mat4 Mat4::operator*( const Mat4& mat ) const {
   Mat4 result;
   result._11 = this->_11 * mat._11 + this->_12 * mat._21 + this->_13 * mat._31 + this->_14 * mat._41;
   result._12 = this->_11 * mat._12 + this->_12 * mat._22 + this->_13 * mat._32 + this->_14 * mat._42;
@@ -208,8 +208,7 @@ Mat4 Mat4::operator* ( const Mat4& mat ) const
   return result;
 }
 
-Mat4 Mat4::operator* ( float v ) const
-{
+Mat4 Mat4::operator*( const float v ) const {
   Mat4 result;
 
   result._11 = _11 * v;
@@ -235,8 +234,7 @@ Mat4 Mat4::operator* ( float v ) const
   return result;
 }
 
-Mat4 Mat4::operator/ ( float v ) const
-{
+Mat4 Mat4::operator/( const float v ) const {
   Mat4 result;
 
   result._11 = _11 / v;
@@ -263,20 +261,30 @@ Mat4 Mat4::operator/ ( float v ) const
 
 }
 
-Mat4 Mat4::getEmptyMat ( )
-{
+Mat4 Mat4::getEmptyMat() {
   Mat4 result;
 
-  result._11 = 0.0f; result._12 = 0.0f; result._13 = 0.0f; result._14 = 0.0f;
-  result._21 = 0.0f; result._22 = 0.0f; result._23 = 0.0f; result._24 = 0.0f;
-  result._31 = 0.0f; result._32 = 0.0f; result._33 = 0.0f; result._34 = 0.0f;
-  result._41 = 0.0f; result._42 = 0.0f; result._43 = 0.0f; result._44 = 0.0f;
+  result._11 = 0.0f;
+  result._12 = 0.0f;
+  result._13 = 0.0f;
+  result._14 = 0.0f;
+  result._21 = 0.0f;
+  result._22 = 0.0f;
+  result._23 = 0.0f;
+  result._24 = 0.0f;
+  result._31 = 0.0f;
+  result._32 = 0.0f;
+  result._33 = 0.0f;
+  result._34 = 0.0f;
+  result._41 = 0.0f;
+  result._42 = 0.0f;
+  result._43 = 0.0f;
+  result._44 = 0.0f;
 
   return result;
 }
 
-Mat4 Mat4::getIdentityMat ( )
-{
+Mat4 Mat4::getIdentityMat() {
   Mat4 result;
 
   result._11 = 1.0f;
@@ -303,9 +311,8 @@ Mat4 Mat4::getIdentityMat ( )
 
 }
 
-float Mat4::getDet ( ) const
-{
-  return  _11 * _22 * _33 * _44 +
+float Mat4::getDet() const {
+  return _11 * _22 * _33 * _44 +
     _11 * _23 * _34 * _42 +
     _11 * _24 * _32 * _43 +
     _12 * _21 * _34 * _43 +
@@ -331,13 +338,11 @@ float Mat4::getDet ( ) const
       _14 * _23 * _31 * _42);
 }
 
-float Mat4::getTrace ( ) const
-{
+float Mat4::getTrace() const {
   return this->_11 + this->_22 + this->_33 + this->_44;
 }
 
-Mat4 Mat4::getTranspose ( ) const
-{
+Mat4 Mat4::getTranspose() const {
   Mat4 result;
   result._11 = this->_11;
   result._12 = this->_21;
@@ -362,8 +367,7 @@ Mat4 Mat4::getTranspose ( ) const
   return result;
 }
 
-Mat4 Mat4::getInverse ( ) const
-{
+Mat4 Mat4::getInverse() const {
   Mat4 I = getIdentityMat();
 
   Mat4 mat2 = (*this) * (*this);
@@ -376,17 +380,144 @@ Mat4 Mat4::getInverse ( ) const
   float tmp1 = (trace1 * trace1 * trace1 - 3.0f * trace1 * trace2 + 2.0f * trace3) / 6.0f;
   float tmp2 = -(trace1 * trace1 - trace2) / 2.0f;
 
-  Mat4 result = (I * tmp1 + (*this) * tmp2 + mat2 * trace1 - mat3) / getDet (  );
+  Mat4 result = (I * tmp1 + (*this) * tmp2 + mat2 * trace1 - mat3) / getDet();
 
   return result;
 
 }
 
-Mat4 Mat4::getRotationXMatrix ( float angle )
-{
-  Mat4 result = getIdentityMat (  );
-  float cosAng = cosf(angle);
-  float sinAng = sinf(angle);
+float Mat4::get11() const {
+  return _11;
+}
+
+float Mat4::get12() const {
+  return _12;
+}
+
+float Mat4::get13() const {
+  return _13;
+}
+
+float Mat4::get14() const {
+  return _14;
+}
+
+float Mat4::get21() const {
+  return _21;
+}
+
+float Mat4::get22() const {
+  return _22;
+}
+
+float Mat4::get23() const {
+  return _23;
+}
+
+float Mat4::get24() const {
+  return _24;
+}
+
+float Mat4::get31() const {
+  return _31;
+}
+
+float Mat4::get32() const {
+  return _32;
+}
+
+float Mat4::get33() const {
+  return _33;
+}
+
+float Mat4::get34() const {
+  return _34;
+}
+
+float Mat4::get41() const {
+  return _41;
+}
+
+float Mat4::get42() const {
+  return _42;
+}
+
+float Mat4::get43() const {
+  return _43;
+}
+
+float Mat4::get44() const {
+  return _44;
+}
+
+void Mat4::set11( const float x ) {
+  _11 = x;
+}
+
+void Mat4::set12( const float x ) {
+  _12 = x;
+}
+
+void Mat4::set13( const float x ) {
+  _13 = x;
+}
+
+void Mat4::set14( const float x ) {
+  _14 = x;
+}
+
+void Mat4::set21( const float x ) {
+  _21 = x;
+}
+
+void Mat4::set22( const float x ) {
+  _22 = x;
+}
+
+void Mat4::set23( const float x ) {
+  _23 = x;
+}
+
+void Mat4::set24( const float x ) {
+  _24 = x;
+}
+
+void Mat4::set31( const float x ) {
+  _31 = x;
+}
+
+void Mat4::set32( const float x ) {
+  _32 = x;
+}
+
+void Mat4::set33( const float x ) {
+  _33 = x;
+}
+
+void Mat4::set34( const float x ) {
+  _34 = x;
+}
+
+void Mat4::set41( const float x ) {
+  _41 = x;
+}
+
+void Mat4::set42( const float x ) {
+  _42 = x;
+}
+
+void Mat4::set43( const float x ) {
+  _43 = x;
+}
+
+void Mat4::set44( const float x ) {
+  _44 = x;
+}
+
+Mat4 Mat4::getRotationXMatrix( const float angle ) {
+  Mat4 result = getIdentityMat();
+  float cosAng = cosf( angle );
+  float sinAng = sinf( angle );
 
   result._22 = cosAng;
   result._33 = cosAng;
@@ -397,11 +528,10 @@ Mat4 Mat4::getRotationXMatrix ( float angle )
 
 }
 
-Mat4 Mat4::getRotationYMatrix ( float angle )
-{
-  Mat4 result = getIdentityMat (  );
-  float cosAng = cosf(angle);
-  float sinAng = sinf(angle);
+Mat4 Mat4::getRotationYMatrix( const float angle ) {
+  Mat4 result = getIdentityMat();
+  float cosAng = cosf( angle );
+  float sinAng = sinf( angle );
 
   result._11 = cosAng;
   result._33 = cosAng;
@@ -412,11 +542,10 @@ Mat4 Mat4::getRotationYMatrix ( float angle )
 
 }
 
-Mat4 Mat4::getRotationZMatrix ( float angle )
-{
+Mat4 Mat4::getRotationZMatrix( const float angle ) {
   Mat4 result = getIdentityMat();
-  float cosAng = cosf(angle);
-  float sinAng = sinf(angle);
+  float cosAng = cosf( angle );
+  float sinAng = sinf( angle );
 
   result._11 = cosAng;
   result._22 = cosAng;
@@ -427,18 +556,16 @@ Mat4 Mat4::getRotationZMatrix ( float angle )
 
 }
 
-Mat4 Mat4::getTranslationMatrix ( Vec2 translation )
-{
+Mat4 Mat4::getTranslationMatrix( const Vec2& translation ) {
   Mat4 result = getIdentityMat();
-  result._41 = translation.getX (  );
-  result._42 = translation.getY (  );
+  result._41 = translation.getX();
+  result._42 = translation.getY();
 
   return result;
 
 }
 
-Mat4 Mat4::getTranslationMatrix ( float x, float y, float z )
-{
+Mat4 Mat4::getTranslationMatrix( const float x, const float y, const float z ) {
   Mat4 result = getIdentityMat();
   result._41 = x;
   result._42 = y;
@@ -447,49 +574,21 @@ Mat4 Mat4::getTranslationMatrix ( float x, float y, float z )
   return result;
 }
 
-Mat4 Mat4::getScalingMatrix ( Vec2 scale )
-{
+Mat4 Mat4::getScalingMatrix( const Vec2& scale ) {
   Mat4 result = getIdentityMat();
 
-  result._11 = scale.getX (  );
-  result._22 = scale.getY (  );
+  result._11 = scale.getX();
+  result._22 = scale.getY();
 
   return result;
 }
 
-Mat4 Mat4::getScalingMatrix ( float x, float y, float z )
-{
+Mat4 Mat4::getScalingMatrix( const float x, const float y, const float z ) {
   Mat4 result = getIdentityMat();
 
   result._11 = x;
   result._22 = y;
   result._33 = z;
-
-  return result;
-}
-
-D3DXMATRIX Mat4::convertToDirectXMatrix ( ) const
-{
-  D3DXMATRIX result;
-  result._11 = _11;
-  result._12 = _12;
-  result._13 = _13;
-  result._14 = _14;
-
-  result._21 = _21;
-  result._22 = _22;
-  result._23 = _23;
-  result._24 = _24;
-
-  result._31 = _31;
-  result._32 = _32;
-  result._33 = _33;
-  result._34 = _34;
-
-  result._41 = _41;
-  result._42 = _42;
-  result._43 = _43;
-  result._44 = _44;
 
   return result;
 }

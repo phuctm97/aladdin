@@ -10,12 +10,16 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_1(ala::SpriteRenderer, ala::GameObjectComponent )
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _sprite( sprite ),
-    _backColor( 255, 255, 255 ) {}
+  : GameObjectComponent( gameObject, name ),
+    _sprite( sprite ),
+    _backColor( 255, 255, 255 ),
+    _zOrder( 0 ) {}
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _sprite( NULL ),
-    _backColor( 255, 255, 255 ) {
+  : GameObjectComponent( gameObject, name ),
+    _sprite( NULL ),
+    _backColor( 255, 255, 255 ),
+    _zOrder( 0 ) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 }
 
@@ -46,17 +50,15 @@ Size SpriteRenderer::getFrameSize() const {
   return frameSize;
 }
 
-void SpriteRenderer::setZOrder ( float zOrder )
-{
+void SpriteRenderer::setZOrder( const int zOrder ) {
   _zOrder = zOrder;
 }
 
-float SpriteRenderer::getZOrder ( ) const
-{
+int SpriteRenderer::getZOrder() const {
   return _zOrder;
 }
 
-  void SpriteRenderer::onRender() {
+void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
   auto frameSize = getFrameSize();
 
@@ -64,8 +66,7 @@ float SpriteRenderer::getZOrder ( ) const
   srcRect.setTopLeft( Vec2( 0.f, 0.f ) );
   srcRect.setSize( _sprite->getContentSize() );
 
-  // TODO: currently use default origin?
-  // Unity's sprite renderer uses (0.5, 0.5) origin
+  // Sprite renderer uses (0.5, 0.5) origin
   // Only images with RectTransform which are used mainly for creating UI (score, HP bar, etc...) uses anchor point
   // source rect might needs a little fix after implementing animation
   Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, srcRect, _zOrder );
