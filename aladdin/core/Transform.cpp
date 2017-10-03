@@ -24,8 +24,8 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _dirty( false ),
     _inverseDirty( false ) {
   if ( _parent != NULL ) {
-    D3DXMatrixIdentity( &_localToWorldMatrix );
-    D3DXMatrixIdentity( &_worldToLocalMatrix );
+    _localToWorldMatrix = Mat4::getIdentityMat();
+    _worldToLocalMatrix = Mat4::getIdentityMat();
     _parent->addChild( this );
   }
 }
@@ -183,26 +183,21 @@ void Transform::onRender() {
   }
 }
 
-// =====================================================
-// Transformation
-// =====================================================
-
-D3DXMATRIX Transform::calculateLocalToParentMatrix() {
-  D3DXMATRIX matRotate;
-  D3DXMATRIX matScale;
-  D3DXMATRIX matTranslate;
-
-  D3DXMatrixRotationZ( &matRotate, D3DXToRadian(_rotation) );
-  D3DXMatrixScaling( &matScale, _scale.getX(), _scale.getY(), 1.f );
-  D3DXMatrixTranslation( &matTranslate, _position.getX(), _position.getY(), 0.0f );
-
+Mat4 Transform::calculateLocalToParentMatrix ( ) const
+{
+  Mat4 matRotate = Mat4::getRotationZMatrix(D3DXToRadian(_rotation));
+  Mat4 matScale = Mat4::getScalingMatrix(_scale);
+  Mat4 matTranslate = Mat4::getTranslationMatrix(_position);
 
   return matRotate * matScale * matTranslate;
 }
 
-D3DXMATRIX Transform::getLocalToWorldMatrix() {
-  if ( _dirty ) {
-    if ( _parent == NULL ) {
+Mat4 Transform::getLocalToWorldMatrix ( )
+{
+  if(_dirty)
+  {
+    if(_parent == NULL)
+    {
       _localToWorldMatrix = calculateLocalToParentMatrix();
     }
     else {
@@ -215,10 +210,12 @@ D3DXMATRIX Transform::getLocalToWorldMatrix() {
   return _localToWorldMatrix;
 }
 
-D3DXMATRIX Transform::getWorldToLocalMatrix() {
-  if ( _inverseDirty ) {
+Mat4 Transform::getWorldToLocalMatrix()
+{
+  if(_inverseDirty)
+  {
     auto localToWorldMatrix = getLocalToWorldMatrix();
-    D3DXMatrixInverse( &_worldToLocalMatrix, NULL, &localToWorldMatrix );
+    _worldToLocalMatrix = localToWorldMatrix.getInverse();
     _inverseDirty = false;
   }
 
