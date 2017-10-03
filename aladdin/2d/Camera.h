@@ -15,14 +15,20 @@ private:
 
   Mat4 _orthographicMatrix;
   Mat4 _viewMatrix;
-protected:
-  void onUpdate(float dt) override;
 
 public:
-  Camera(GameObject* gameObject, const std::string& name);
-  Camera(GameObject* gameObject, const std::string& name, float width, float height, float angle, const Vec2 &scaleFactor);
+  Camera( GameObject* gameObject, const std::string& name );
+  Camera( GameObject* gameObject, const std::string& name,
+          const float width,
+          const float height,
+          const float angle,
+          const Vec2& scaleFactor );
 
   virtual ~Camera();
+
+
+protected:
+  void onUpdate( float dt ) override;
 };
 }
 

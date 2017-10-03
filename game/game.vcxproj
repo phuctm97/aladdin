@@ -121,6 +121,7 @@
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\BallPrefab.cpp" />
+    <ClCompile Include="prefabs\CameraPrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
     <ClCompile Include="scripts\BallController.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\BallPrefab.h" />
+    <ClInclude Include="prefabs\CameraPrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
     <ClInclude Include="scripts\BallController.h" />
   </ItemGroup>

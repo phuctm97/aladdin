@@ -4,6 +4,7 @@
 
 #include "MyResourceInitializer.h"
 #include "../prefabs/BallPrefab.h"
+#include "../prefabs/CameraPrefab.h"
 
 void MyResourceInitializer::run() {
   // Textures
@@ -11,4 +12,5 @@ void MyResourceInitializer::run() {
 
   // Prefabs
   new BallPrefab();
+  new CameraPrefab();
 }

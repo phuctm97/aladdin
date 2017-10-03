@@ -65,9 +65,11 @@ public:
 
   RECT convertToWindowsRect( const Rect& rect ) const;
 
-  void setProjectionMatrix(const Mat4 &mat);
-  void setWorldMatrix(const Mat4 &mat);
-  void setViewMatrix(const Mat4 &mat);
+  void setProjectionMatrix( const Mat4& mat );
+
+  void setWorldMatrix( const Mat4& mat );
+  
+  void setViewMatrix( const Mat4& mat );
 };
 }
 
