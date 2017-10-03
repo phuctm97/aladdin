@@ -6,4 +6,7 @@ void CameraPrefab::doInstantiate( ala::GameObject* object ) {
                    ala::GameManager::get()->getScreenHeight(),
                    0,
                    ala::Vec2( 1.0f, 1.0f ) );
+  object->getTransform()->setPosition(
+    +ala::GameManager::get()->getScreenWidth() * 0.5f,
+    +ala::GameManager::get()->getScreenHeight() * 0.5f );
 }

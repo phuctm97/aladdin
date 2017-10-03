@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "../2d/Graphics.h"
 #include "../input/Input.h"
+#include "../audio/Audio.h"
 
 NAMESPACE_ALA
 {
@@ -233,6 +234,9 @@ void Application::initComponents() {
   input->_hWnd = _hWnd;
   input->initialize();
 
+  Audio* audio = Audio::get();
+  audio->initialize();
+
   GameManager* gameManager = GameManager::get();
   gameManager->_screenWidth = static_cast<float>(_screenWidth);
   gameManager->_screenHeight = static_cast<float>(_screenHeight);
@@ -285,11 +289,14 @@ void Application::releaseComponents() {
   auto gameManager = GameManager::get();
   gameManager->release();
 
-  auto graphics = Graphics::get();
-  graphics->release();
+  auto audio = Audio::get();
+  audio->release();
 
   auto input = Input::get();
   input->release();
+
+  auto graphics = Graphics::get();
+  graphics->release();
 }
 
 // ===================================================

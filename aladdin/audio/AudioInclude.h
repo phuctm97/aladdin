@@ -1,9 +1,5 @@
-#ifndef __ALADDIN_2D_2D_INCLUDE_H__
-#define __ALADDIN_2D_2D_INCLUDE_H__
-
-/*
- * Created by phuctm97 on Sep 30th 2017
- */
+#ifndef __ALADDIN_AUDIO_AUDIO_INCLUDE_H__
+#define __ALADDIN_AUDIO_AUDIO_INCLUDE_H__
 
 #include "../core/ClassMeta.h"
 #include "../core/Color.h"
@@ -14,6 +10,6 @@
 #include "../core/Transform.h"
 #include "../core/GameManager.h"
 
-#include "2dMacros.h"
+#include "AudioMarcos.h"
 
-#endif //!__ALADDIN_2D_2D_INCLUDE_H__
+#endif //!__ALADDIN_AUDIO_AUDIO_INCLUDE_H__
