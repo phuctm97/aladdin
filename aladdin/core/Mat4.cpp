@@ -592,4 +592,33 @@ Mat4 Mat4::getScalingMatrix( const float x, const float y, const float z ) {
 
   return result;
 }
+
+Mat4 Mat4::getOrthoLHMatrix ( float width, float height, float zn, float zf )
+{
+  Mat4 result = getIdentityMat (  );
+
+  float d = zf - zn;
+
+  result._11 = 2.0f / float(width);
+  result._22 = 2.0f / float(height);
+  result._33 = 1.0f / d;
+  result._43 = -zn / d;
+
+  return result;
+}
+
+Mat4 Mat4::getOrthoRHMatrix ( float width, float height, float zn, float zf )
+{
+  Mat4 result = getIdentityMat();
+
+  float d = zn - zf;
+
+  result._11 = 2.0f / float(width);
+  result._22 = 2.0f / float(height);
+  result._33 = 1.0f / d;
+  result._43 = zn / d;
+
+  return result;
+
+}
 }

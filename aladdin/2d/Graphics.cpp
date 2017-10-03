@@ -126,11 +126,16 @@ bool Graphics::beginRendering() {
 
   // start rendering
   if ( _directXDevice->BeginScene() != D3D_OK ) {
+
     _directXDevice->Present( 0, 0, 0, 0 );
     return false;
   }
 
-  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND ) != D3D_OK ) {
+  _directXDevice->SetTransform(D3DTS_PROJECTION, &_projectionMatrix);
+  _directXDevice->SetTransform(D3DTS_WORLD, &_worldMatrix);
+  _directXDevice->SetTransform(D3DTS_VIEW, &_viewMatrix);
+
+  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE) != D3D_OK ) {
     _directXDevice->EndScene();
     _directXDevice->Present( 0, 0, 0, 0 );
     return false;
@@ -258,5 +263,20 @@ RECT Graphics::convertToWindowsRect( const Rect& srcRect ) const {
   desRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
   desRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
   return desRect;
+}
+
+void Graphics::setProjectionMatrix ( const Mat4& mat )
+{
+  _projectionMatrix = convertToDirectXMatrix(mat);
+}
+
+void Graphics::setWorldMatrix ( const Mat4& mat )
+{
+  _worldMatrix = convertToDirectXMatrix(mat);
+}
+
+void Graphics::setViewMatrix ( const Mat4& mat )
+{
+  _viewMatrix = convertToDirectXMatrix(mat);
 }
 }
