@@ -23,6 +23,7 @@ private:
   Scene* _parentScene;
   bool _active;
   bool _selfInitialize;
+  bool _toReleaseInNextFrame;
 
 public:
   /**
@@ -66,10 +67,13 @@ public:
    */
   void release() override;
 
+  void releaseInNextFrame();
+
   // ========================================================
   // Components
   // ========================================================
 private:
+  bool _componentsInLocking;
   std::vector<GameObjectComponent*> _components;
   std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
   std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;
@@ -104,6 +108,10 @@ public:
   std::vector<T*> getAllComponentTs() const;
 
 private:
+  void lockComponents();
+
+  void unlockComponents();
+
   void updateAddAndRemoveComponentInNextFrame();
 
   void doAddComponent( GameObjectComponent* component );

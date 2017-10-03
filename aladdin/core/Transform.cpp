@@ -20,6 +20,7 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _scale( 1, 1 ),
     _rotation( 0 ),
     _origin( 0.5f, 0.5f ),
+    _childrenInLocking( false ),
     _parent( parentTransform ),
     _dirty( false ),
     _inverseDirty( false ) {
@@ -115,23 +116,49 @@ Transform* Transform::getParent() const {
 }
 
 void Transform::addChild( Transform* child ) {
+  // check lock
+  if ( _childrenInLocking ) {
+    addChildInNextFrame( child );
+    return;
+  }
+
   if ( isReleasing() || isReleased() ) return;
+  if ( child == NULL ) return;
+  if ( StdHelper::vectorContain( _children, child ) ) return;
   doAddChild( child );
 }
 
 void Transform::addChildInNextFrame( Transform* child ) {
+  if ( isReleasing() || isReleased() ) return;
   if ( child == NULL ) return;
+  if ( StdHelper::vectorContain( _children, child ) ) return;
   _childrenToAddInNextFrame.push_back( child );
 }
 
 void Transform::removeChild( Transform* child ) {
+  // check lock
+  if ( _childrenInLocking ) {
+    removeChildInNextFrame( child );
+    return;
+  }
+
   if ( isReleasing() || isReleased() ) return;
+  if ( child == NULL ) return;
   doRemoveChild( child );
 }
 
 void Transform::removeChildInNextFrame( Transform* child ) {
+  if ( isReleasing() || isReleased() ) return;
   if ( child == NULL ) return;
   _childrenToRemoveInNextFrame.push_back( child );
+}
+
+void Transform::lockChildren() {
+  _childrenInLocking = true;
+}
+
+void Transform::unlockChildren() {
+  _childrenInLocking = false;
 }
 
 void Transform::updateAddAndRemoveChildInNextFrame() {
@@ -147,14 +174,19 @@ void Transform::updateAddAndRemoveChildInNextFrame() {
 }
 
 void Transform::doAddChild( Transform* child ) {
-  if ( child == NULL ) return;
-  if ( StdHelper::vectorContain( _children, child ) ) return;
   _children.push_back( child );
 }
 
 void Transform::doRemoveChild( Transform* child ) {
-  if ( child == NULL ) return;
   StdHelper::vectorErase( _children, child );
+}
+
+bool Transform::onPreRelease() {
+  if ( _childrenInLocking ) {
+    releaseInNextFrame();
+    return false;
+  }
+  return true;
 }
 
 void Transform::onRelease() {
@@ -163,41 +195,45 @@ void Transform::onRelease() {
     child->getGameObject()->release();
   }
   if ( _parent != NULL ) {
-    _parent->removeChildInNextFrame( this );
+    _parent->removeChild( this );
   }
 }
 
-void Transform::onInvokeUpdate( const float delta ) {
+void Transform::onPreUpdate( const float delta ) {
   updateAddAndRemoveChildInNextFrame();
 }
 
 void Transform::onUpdate( const float delta ) {
+  lockChildren();
+
   for ( auto transform : _children ) {
     transform->getGameObject()->update( delta );
   }
+
+  unlockChildren();
 }
 
 void Transform::onRender() {
+  lockChildren();
+
   for ( auto transform : _children ) {
     transform->getGameObject()->render();
   }
+
+  unlockChildren();
 }
 
-Mat4 Transform::calculateLocalToParentMatrix ( ) const
-{
-  Mat4 matRotate = Mat4::getRotationZMatrix(D3DXToRadian(_rotation));
-  Mat4 matScale = Mat4::getScalingMatrix(_scale);
-  Mat4 matTranslate = Mat4::getTranslationMatrix(_position);
+Mat4 Transform::calculateLocalToParentMatrix() const {
+  Mat4 matRotate = Mat4::getRotationZMatrix( D3DXToRadian(_rotation) );
+  Mat4 matScale = Mat4::getScalingMatrix( _scale );
+  Mat4 matTranslate = Mat4::getTranslationMatrix( _position );
 
   return matRotate * matScale * matTranslate;
 }
 
-Mat4 Transform::getLocalToWorldMatrix ( )
-{
-  if(_dirty)
-  {
-    if(_parent == NULL)
-    {
+Mat4 Transform::getLocalToWorldMatrix() {
+  if ( _dirty ) {
+    if ( _parent == NULL ) {
       _localToWorldMatrix = calculateLocalToParentMatrix();
     }
     else {
@@ -210,10 +246,8 @@ Mat4 Transform::getLocalToWorldMatrix ( )
   return _localToWorldMatrix;
 }
 
-Mat4 Transform::getWorldToLocalMatrix()
-{
-  if(_inverseDirty)
-  {
+Mat4 Transform::getWorldToLocalMatrix() {
+  if ( _inverseDirty ) {
     auto localToWorldMatrix = getLocalToWorldMatrix();
     _worldToLocalMatrix = localToWorldMatrix.getInverse();
     _inverseDirty = false;

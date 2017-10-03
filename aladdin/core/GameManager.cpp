@@ -146,11 +146,14 @@ Scene* GameManager::getRunningScene() const {
 void GameManager::replaceScene( Scene* scene ) {
   if ( isReleasing() || isReleased() ) return;
   if ( scene == NULL ) return;
+  if ( scene == _runningScene ) return;
   doReplaceScene( scene );
 }
 
 void GameManager::replaceSceneInNextFrame( Scene* scene ) {
+  if ( isReleasing() || isReleased() ) return;
   if ( scene == NULL ) return;
+  if ( scene == _runningScene ) return;
   _sceneToReplaceInNextFrame = scene;
 }
 
@@ -161,9 +164,6 @@ void GameManager::updateRunningScene() {
 }
 
 void GameManager::doReplaceScene( Scene* scene ) {
-  ALA_ASSERT(scene != NULL);
-  ALA_ASSERT(scene != _runningScene);
-
   if ( _runningScene != NULL ) {
     _runningScene->release();
   }

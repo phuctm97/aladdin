@@ -16,7 +16,8 @@ ALA_CLASS_SOURCE_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
     _gameObject( gameObject ),
-    _active( false ) {
+    _active( false ),
+    _toReleaseInNextFrame( false ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -70,6 +71,8 @@ void GameObjectComponent::initialize() {
   // make sure object is not initialized;
   ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
+  if ( !onPreInitialize() ) return;
+
   setToInitializing();
 
   // TODO: lock mutual exclusive when run in multithreading mode
@@ -84,10 +87,21 @@ void GameObjectComponent::initialize() {
 
 void GameObjectComponent::onInitialize() {}
 
+bool GameObjectComponent::onPreInitialize() {
+  return true;
+}
+
 void GameObjectComponent::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
 
-  onInvokeUpdate( delta );
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  onPreUpdate( delta );
 
   if ( !isInitialized() ) {
     if ( isSelfInitialize() ) {
@@ -104,7 +118,7 @@ void GameObjectComponent::update( const float delta ) {
 
 void GameObjectComponent::onUpdate( const float delta ) {}
 
-void GameObjectComponent::onInvokeUpdate( const float delta ) {}
+void GameObjectComponent::onPreUpdate( const float delta ) {}
 
 void GameObjectComponent::onRender() {}
 
@@ -118,6 +132,8 @@ void GameObjectComponent::release() {
   // make sure object is initialized and not released
   ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
+  if ( !onPreRelease() ) return;
+
   setToReleasing();
 
   // TODO: lock mutual exclusive when run in multithreading mode
@@ -125,7 +141,7 @@ void GameObjectComponent::release() {
   onRelease();
 
   // remove from game object
-  _gameObject->removeComponentInNextFrame( this );
+  _gameObject->removeComponent( this );
 
   setToReleased();
 
@@ -133,7 +149,17 @@ void GameObjectComponent::release() {
   delete this;
 }
 
+void GameObjectComponent::releaseInNextFrame() {
+  // make sure object is initialized and not released
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  _toReleaseInNextFrame = true;
+}
+
 void GameObjectComponent::onRelease() {}
+
+bool GameObjectComponent::onPreRelease() {
+  return true;
+}
 
 // ===========================================================
 // Debug memory allocation

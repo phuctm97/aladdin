@@ -56,7 +56,7 @@ void Scene::initialize() {
   for ( const auto it : _gameObjects ) {
     auto object = it.second;
 
-    if ( (!object->isSelfInitialize()) && (!object->isInitialized()) ) {
+    if ( !object->isInitialized() ) {
       object->initialize();
     }
   }
@@ -128,14 +128,14 @@ void Scene::onPreRender() {}
 void Scene::onPostRender() {}
 
 void Scene::release() {
-  // make sure scene is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
-
   // check lock
   if ( _gameObjectInLocking ) {
     releaseInNextFrame();
     return;
   }
+
+  // make sure scene is initialized and not released
+  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   onPreRelease();
 
@@ -162,6 +162,8 @@ void Scene::release() {
 }
 
 void Scene::releaseInNextFrame() {
+  // make sure scene is initialized and not released
+  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 
@@ -180,35 +182,37 @@ GameObject* Scene::getGameObject( const long id ) {
 }
 
 void Scene::addGameObject( GameObject* gameObject ) {
-  if ( isReleasing() || isReleased() ) return;
-  if ( gameObject == NULL ) return;
-
   // check lock
   if ( _gameObjectInLocking ) {
     addGameObjectInNextFrame( gameObject );
     return;
   }
+
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
   doAddGameObject( gameObject );
 }
 
 void Scene::addGameObjectInNextFrame( GameObject* gameObject ) {
+  if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
   _gameObjectsToAddInNextFrame.push_back( gameObject );
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
-  if ( isReleasing() || isReleased() ) return;
-  if ( gameObject == NULL ) return;
-
   // check lock
   if ( _gameObjectInLocking ) {
     removeGameObjectInNextFrame( gameObject );
     return;
   }
+
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
   doRemoveGameObject( gameObject );
 }
 
 void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
+  if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
   _gameObjectsToRemoveInNextFrame.push_back( gameObject );
 }
@@ -222,8 +226,6 @@ void Scene::unlockGameObjects() {
 }
 
 void Scene::updateAddAndRemoveGameObjects() {
-  if ( isReleasing() || isReleased() ) return;
-
   for ( auto object : _gameObjectsToAddInNextFrame ) {
     doAddGameObject( object );
   }

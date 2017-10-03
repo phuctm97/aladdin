@@ -59,6 +59,7 @@ public:
   // =======================================================
 
 private:
+  bool _childrenInLocking;
   std::vector<Transform*> _children;
   Transform* _parent;
   std::vector<Transform*> _childrenToAddInNextFrame;
@@ -88,6 +89,10 @@ public:
   void removeChildInNextFrame( Transform* child );
 
 private:
+  void lockChildren();
+
+  void unlockChildren();
+
   void updateAddAndRemoveChildInNextFrame();
 
   void doAddChild( Transform* child );
@@ -95,9 +100,11 @@ private:
   void doRemoveChild( Transform* child );
 
 protected:
+  bool onPreRelease() override;
+  
   void onRelease() override;
 
-  void onInvokeUpdate( const float delta ) override;
+  void onPreUpdate( const float delta ) override;
 
   void onUpdate( const float delta ) override;
 

@@ -22,6 +22,7 @@ private:
   GameObject* _gameObject;
   bool _active;
   bool _selfInitialize;
+  bool _toReleaseInNextFrame;
 
 public:
   /**
@@ -55,6 +56,7 @@ protected:
    */
   virtual void onInitialize();
 
+  virtual bool onPreInitialize();
 
   /**
    * \brief Happen when component is updated
@@ -62,7 +64,7 @@ protected:
    */
   virtual void onUpdate( const float delta );
 
-  virtual void onInvokeUpdate( const float delta );
+  virtual void onPreUpdate( const float delta );
 
 
   /**
@@ -76,6 +78,8 @@ protected:
    */
   virtual void onRelease();
 
+  virtual bool onPreRelease();
+
 public:
   void initialize() override;
 
@@ -87,6 +91,8 @@ public:
    * \brief Release and destroy component, automatically removed from game object
    */
   void release() override;
+
+  void releaseInNextFrame();
 
   // ===========================================================
   // Debug memory allocation
