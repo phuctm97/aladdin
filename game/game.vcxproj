@@ -124,6 +124,10 @@
     <ClCompile Include="prefabs\CameraPrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
     <ClCompile Include="scripts\BallController.cpp" />
+    <ClCompile Include="states\GoDownState.cpp" />
+    <ClCompile Include="states\GoLeftState.cpp" />
+    <ClCompile Include="states\GoRightState.cpp" />
+    <ClCompile Include="states\GoUpState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -137,6 +141,10 @@
     <ClInclude Include="prefabs\CameraPrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
     <ClInclude Include="scripts\BallController.h" />
+    <ClInclude Include="states\GoDownState.h" />
+    <ClInclude Include="states\GoLeftState.h" />
+    <ClInclude Include="states\GoRightState.h" />
+    <ClInclude Include="states\GoUpState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />

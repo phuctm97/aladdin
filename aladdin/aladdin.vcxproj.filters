@@ -118,6 +118,12 @@
     <ClInclude Include="2d\Camera.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="core\IState.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StateManager.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -203,6 +209,12 @@
     </ClCompile>
     <ClCompile Include="2d\Camera.cpp">
       <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\IState.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StateManager.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
