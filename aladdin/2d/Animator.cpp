@@ -14,16 +14,12 @@ void Animator::onUpdate ( const float delta )
   _elapsedTime += delta;
   if(_elapsedTime >= _interval)
   {
-    auto size = _currentFrame.size();
-    if(_currentIndex >= size- 1)
+    ++_frameIterator;
+    if(_frameIterator == _frames.end (  ))
     {
-      _currentIndex = 0;
+      _frameIterator = _frames.begin();
     }
-    else
-    {
-      _currentIndex++;
-    }
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
     _elapsedTime = 0;
   }
 }
@@ -33,11 +29,11 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
   _interval ( interval>0? interval: 1000)
 {
   _animation = animation;
-  _currentFrame = _animation->getFrameForAction(entryAction);
+  _frames = _animation->getFrameForAction(entryAction);
 
-  _currentIndex = 0;
+  _frameIterator = _frames.begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
 
 }
 
@@ -46,17 +42,17 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
   _interval(interval>0 ? interval : 1000)
 {
   _animation = static_cast<Animation*>(GameManager::get()->getResource(animationResourceName));
-  _currentFrame = _animation->getFrameForAction(entryAction);
+  _frames = _animation->getFrameForAction(entryAction);
 
-  _currentIndex = 0;
+  _frameIterator = _frames.begin (  );
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
 }
 
 void Animator::setAction ( std::string actionName )
 {
-  _currentFrame = _animation->getFrameForAction(actionName);
-  _currentIndex = 0;
+  _frames = _animation->getFrameForAction(actionName);
+  _frameIterator = _frames.begin (  );
 }
 
 void Animator::setFrameInterval ( float interval )
@@ -66,6 +62,6 @@ void Animator::setFrameInterval ( float interval )
 
 Rect Animator::getCurrentFrame ( ) const
 {
-  return _currentFrame[_currentIndex];
+  return *_frameIterator;
 }
 }

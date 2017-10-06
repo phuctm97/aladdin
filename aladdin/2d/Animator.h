@@ -11,8 +11,8 @@ ALA_CLASS_HEADER_1(Animator, ala::GameObjectComponent)
 private:
   Animation* _animation;
 
-  std::vector<Rect> _currentFrame;
-  int _currentIndex;
+  std::vector<Rect> _frames;
+  std::vector<Rect>::iterator _frameIterator;
 
   float _elapsedTime;
   float _interval;
