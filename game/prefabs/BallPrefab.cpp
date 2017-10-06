@@ -10,7 +10,7 @@
 
 void BallPrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "sprites.png" );
-  new ala::Animator(object, "Right", "sprites.animation", 100);
+  new ala::Animator(object, "Right", "sprites.animation", 1.f/12);
   new BallController( object );
   new ala::StateManager(object, new GoRightState(object));
 }

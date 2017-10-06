@@ -30,6 +30,6 @@ ala::IState* GoUpState::checkTransition()
 void GoUpState::onUpdate(const float dt)
 {
   auto position = getGameObject()->getTransform()->getPosition();
-  position.setY(position.getY() + 10);
+  position.setY(position.getY() + 100*dt);
   getGameObject()->getTransform()->setPosition(position);
 }

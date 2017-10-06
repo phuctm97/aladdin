@@ -18,16 +18,14 @@ Application::Application() :
   _title( "Aladdin Game" ),
   _screenWidth( 800 ),
   _screenHeight( 600 ),
-  _animationInterval( 1000.0f / 60 ),
   _frameCount( 0 ),
   _logger( "ala::Application" ),
   _logStream( 0 ),
   _exiting( false ),
   _hInstance( NULL ),
-  _hWnd( NULL ),
-  _startTimestamp( 0 ),
-  _lastTimestamp( 0 ) {
+  _hWnd( NULL ) {
   // check initial state
+  setFps(60);
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 }
 
@@ -54,8 +52,12 @@ Application::~Application() {
   _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
   _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 
-  // average fps
-  const auto fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (GetTickCount() - _startTimestamp) ));
+  //average fps
+
+
+  QueryPerformanceCounter(&_currentTimestamp);
+  auto interval = (float(_currentTimestamp.QuadPart - _startTimestamp.QuadPart))/_freq.QuadPart;
+  const auto fps = static_cast<int>(roundf( (_frameCount) / interval ));
   _logger.debug( "Average FPS: %d", fps );
 }
 
@@ -84,23 +86,21 @@ const std::string& Application::getTitle() const {
   return _title;
 }
 
-void Application::setAnimationInterval( float millis ) {
+void Application::setAnimationInterval( float interval ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
-  ALA_ASSERT(millis >= 1000.0f / 61);
-  _animationInterval = millis;
+  ALA_ASSERT(interval >= 1.f / 61);
+  QueryPerformanceFrequency(&_freq);
+  _animationInterval.QuadPart = LONGLONG(interval * _freq.QuadPart);
 }
 
 void Application::setFps( int fps ) {
-  // can only be set before init process
-  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
-  ALA_ASSERT(fps > 0 && fps <= 60);
-  _animationInterval = 1000.0f / fps;
+  setAnimationInterval(1.0 / fps);
 }
-
-float Application::getAnimationInterval() const {
-  return _animationInterval;
-}
+//
+//float Application::getAnimationInterval() const {
+//  return _animationInterval.QuadPart;
+//}
 
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
   // can only be set before init process
@@ -116,35 +116,6 @@ void Application::startWithScene( Scene* scene ) {
   // can only be set before init process
   ALA_ASSERT(isInitialized() && (!isReleased()) && (!isReleasing()));
   GameManager::get()->replaceScene( scene );
-}
-
-float Application::updateTimestampCalculateAndFixAnimationInterval() {
-  // get current timestamp
-  DWORD currentTimestamp = GetTickCount();
-
-  // calculate delta
-  auto delta = static_cast<float>(currentTimestamp - _lastTimestamp);
-
-  // check interval
-  if ( delta < _animationInterval ) {
-    // too soon, sleep and recalculate
-    Sleep( static_cast<DWORD>(roundf( _animationInterval - delta )) );
-
-    currentTimestamp = GetTickCount();
-    delta = static_cast<float>(currentTimestamp - _lastTimestamp);
-  }
-
-  // update timestamp
-  _lastTimestamp = currentTimestamp;
-
-  // debug fps
-  _frameCount++;
-  if ( _frameCount % 1800 == 0 ) {
-    const int fps = static_cast<int>(roundf( (1000.0f * _frameCount) / (currentTimestamp - _startTimestamp) ));
-    _logger.debug( "FPS: %d", fps );
-  }
-
-  return delta;
 }
 
 void Application::updateInput() {
@@ -215,7 +186,7 @@ void Application::initComponents() {
   ALA_ASSERT(_screenWidth > 0);
   ALA_ASSERT(_screenHeight > 0);
   ALA_ASSERT(!_title.empty());
-  ALA_ASSERT(_animationInterval >= (1000.0f / 61));
+  //ALA_ASSERT(_animationInterval >= (1000.0f / 61));
 
   // windows components
   initWindowHandle();
@@ -369,15 +340,51 @@ void Application::initWindowHandle() {
   UpdateWindow( _hWnd );
 }
 
-void Application::gameLoop() {
+void Application::gameLoop() 
+  {
+
   // initial timestamp
-  _startTimestamp = GetTickCount();
+  QueryPerformanceCounter(&_startTimestamp);
   _lastTimestamp = _startTimestamp;
+  _currentTimestamp = _lastTimestamp;
+
+  LONGLONG interval = 0LL;
+  LONG waitMS = 0L;
 
   // main loop
-  while ( !_exiting ) {
-    processMessage();
-    processGame();
+  while ( !_exiting ) 
+  {
+    QueryPerformanceCounter(&_currentTimestamp);
+    interval = (_currentTimestamp.QuadPart - _lastTimestamp.QuadPart);
+
+    if (interval >= _animationInterval.QuadPart)
+    {
+      _lastTimestamp.QuadPart = _currentTimestamp.QuadPart;
+      _delta = (float(interval)) / _freq.QuadPart;
+
+      _logger.debug("dt: %f", _delta);
+
+      _frameCount++;
+      //if (_frameCount % 10 == 0) {
+      //  auto x = float(_currentTimestamp.QuadPart - _startTimestamp.QuadPart);
+      //  auto y = x / _freq.QuadPart;
+      //  const int fps = static_cast<int>(roundf((1.0f * _frameCount) / y));
+      //  _logger.debug("FPS: %d", fps);
+      //}
+      processMessage();
+      processGame();
+    }
+    else
+    {
+      // The precision of timer on Windows is set to highest (1ms) by 'timeBeginPeriod' from above code,
+      // but it's still not precise enough. For example, if the precision of timer is 1ms,
+      // Sleep(3) may make a sleep of 2ms or 4ms. Therefore, we subtract 1ms here to make Sleep time shorter.
+      // If 'waitMS' is equal or less than 1ms, don't sleep and run into next loop to
+      // boost CPU to next frame accurately.
+      waitMS = (_animationInterval.QuadPart - interval) * 1000LL / _freq.QuadPart - 1L;
+      if (waitMS > 1L)
+        Sleep(waitMS);
+    }
   }
 }
 
@@ -400,10 +407,8 @@ void Application::processGame() {
   // update input
   updateInput();
 
-  const auto delta = updateTimestampCalculateAndFixAnimationInterval();
-
   // update game
-  updateGame( delta );
+  updateGame( _delta );
 
   // render graphics
   renderGraphics();
