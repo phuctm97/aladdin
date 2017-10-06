@@ -1,4 +1,5 @@
 ﻿#include "Animator.h"
+#include "MessageArgRect.h"
 
 NAMESPACE_ALA
 {
@@ -22,6 +23,7 @@ void Animator::onUpdate ( const float delta )
     {
       _currentIndex++;
     }
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
     _elapsedTime = 0;
   }
 }
@@ -32,6 +34,11 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
 {
   _animation = animation;
   _currentFrame = _animation->getFrameForAction(entryAction);
+
+  _currentIndex = 0;
+
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
+
 }
 
 Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName, float interval, std::string name )
@@ -40,6 +47,10 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
 {
   _animation = static_cast<Animation*>(GameManager::get()->getResource(animationResourceName));
   _currentFrame = _animation->getFrameForAction(entryAction);
+
+  _currentIndex = 0;
+
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(_currentFrame[_currentIndex]));
 }
 
 void Animator::setAction ( std::string actionName )

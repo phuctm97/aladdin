@@ -139,6 +139,9 @@
     <ClInclude Include="2d\Animation.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="2d\MessageArgRect.h">
+      <Filter>2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -238,6 +241,9 @@
       <Filter>pugixml</Filter>
     </ClCompile>
     <ClCompile Include="2d\Animation.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\MessageArgRect.cpp">
       <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
