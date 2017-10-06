@@ -4,6 +4,7 @@
 
 #include "SpriteRenderer.h"
 #include "Graphics.h"
+#include "Animator.h"
 
 NAMESPACE_ALA
 {
@@ -62,9 +63,19 @@ void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
   auto frameSize = getFrameSize();
 
+  auto animator = getGameObject()->getComponentT<Animator>();
+
   Rect srcRect;
-  srcRect.setTopLeft( Vec2( 0.f, 0.f ) );
-  srcRect.setSize( _sprite->getContentSize() );
+
+  if(animator == NULL)
+  {
+    srcRect.setTopLeft(Vec2(0.f, 0.f));
+    srcRect.setSize(_sprite->getContentSize());
+  }
+  else
+  {
+    srcRect = animator->getCurrentFrame();
+  }
 
   // Sprite renderer uses (0.5, 0.5) origin
   // Only images with RectTransform which are used mainly for creating UI (score, HP bar, etc...) uses anchor point

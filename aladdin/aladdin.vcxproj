@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,6 +123,8 @@
   <ItemGroup>
     <ClInclude Include="2d\2dInclude.h" />
     <ClInclude Include="2d\2dMacros.h" />
+    <ClInclude Include="2d\Animation.h" />
+    <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Graphics.h" />
     <ClInclude Include="2d\Rect.h" />
@@ -159,8 +161,12 @@
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
     <ClInclude Include="input\InputMarcos.h" />
+    <ClInclude Include="pugixml\pugiconfig.hpp" />
+    <ClInclude Include="pugixml\pugixml.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="2d\Animation.cpp" />
+    <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
@@ -191,6 +197,7 @@
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="input\Input.cpp" />
+    <ClCompile Include="pugixml\pugixml.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

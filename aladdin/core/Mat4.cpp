@@ -578,7 +578,7 @@ Mat4 Mat4::getScalingMatrix( const Vec2& scale ) {
   Mat4 result = getIdentityMat();
 
   result._11 = scale.getX();
-  result._22 = scale.getY();
+  result._22 = -scale.getY();
 
   return result;
 }
@@ -587,7 +587,7 @@ Mat4 Mat4::getScalingMatrix( const float x, const float y, const float z ) {
   Mat4 result = getIdentityMat();
 
   result._11 = x;
-  result._22 = y;
+  result._22 = -y;
   result._33 = z;
 
   return result;

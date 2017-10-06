@@ -1,6 +1,7 @@
 #include "GoLeftState.h"
 #include "core/GameManager.h"
 #include "GoUpState.h"
+#include "2d/Animator.h"
 
 GoLeftState::GoLeftState ( ala::GameObject* gameObject)
   :IState ( gameObject )
@@ -13,6 +14,8 @@ ala::IState* GoLeftState::checkTransition ( )
 
   if(transform->getPositionX (  ) <= -ala::GameManager::get (  )->getScreenWidth (  )/2)
   {
+    auto animator = getGameObject()->getComponentT< ala::Animator>();
+    animator->setAction("Back");
     return new GoUpState(getGameObject (  ));
   }
   else
