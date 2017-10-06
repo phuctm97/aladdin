@@ -53,8 +53,6 @@ Application::~Application() {
   _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 
   //average fps
-
-
   QueryPerformanceCounter(&_currentTimestamp);
   auto interval = (float(_currentTimestamp.QuadPart - _startTimestamp.QuadPart))/_freq.QuadPart;
   const auto fps = static_cast<int>(roundf( (_frameCount) / interval ));
@@ -97,10 +95,10 @@ void Application::setAnimationInterval( float interval ) {
 void Application::setFps( int fps ) {
   setAnimationInterval(1.0 / fps);
 }
-//
-//float Application::getAnimationInterval() const {
-//  return _animationInterval.QuadPart;
-//}
+
+float Application::getAnimationInterval() const {
+  return (float(_animationInterval.QuadPart))/(_freq.QuadPart);
+}
 
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
   // can only be set before init process
@@ -361,6 +359,9 @@ void Application::gameLoop()
     {
       _lastTimestamp.QuadPart = _currentTimestamp.QuadPart;
       _delta = (float(interval)) / _freq.QuadPart;
+
+      //convert to ms
+      //_delta *= 1000.f;
 
       _logger.debug("dt: %f", _delta);
 

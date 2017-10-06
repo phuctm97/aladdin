@@ -46,7 +46,7 @@ public:
 
   void setFps( int fps );
 
-  //float getAnimationInterval() const;
+  float getAnimationInterval() const;
 
   void registerResourceInitializer( ResourceInitializer* initializer );
 

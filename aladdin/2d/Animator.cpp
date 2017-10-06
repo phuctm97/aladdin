@@ -1,5 +1,5 @@
 ﻿#include "Animator.h"
-#include "MessageArgRect.h"
+#include "RectMessageArg.h"
 
 NAMESPACE_ALA
 {
@@ -19,7 +19,7 @@ void Animator::onUpdate ( const float delta )
     {
       _frameIterator = _frames.begin();
     }
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
     _elapsedTime = 0;
   }
 }
@@ -33,7 +33,7 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
 
   _frameIterator = _frames.begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
 
 }
 
@@ -46,7 +46,7 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
 
   _frameIterator = _frames.begin (  );
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new MessageArgRect(*_frameIterator));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
 }
 
 void Animator::setAction ( std::string actionName )

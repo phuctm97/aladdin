@@ -127,7 +127,7 @@
     <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Graphics.h" />
-    <ClInclude Include="2d\MessageArgRect.h" />
+    <ClInclude Include="2d\RectMessageArg.h" />
     <ClInclude Include="2d\Rect.h" />
     <ClInclude Include="2d\Size.h" />
     <ClInclude Include="2d\Sprite.h" />
@@ -170,7 +170,7 @@
     <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
-    <ClCompile Include="2d\MessageArgRect.cpp" />
+    <ClCompile Include="2d\RectMessageArg.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
     <ClCompile Include="2d\Size.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />

@@ -6,11 +6,11 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_1 ( MessageArgRect, MessageArgs )
+ALA_CLASS_HEADER_1 ( RectMessageArg, MessageArgs )
 private:
   Rect _rect;
 public:
-  MessageArgRect(const Rect &rect);
+  RectMessageArg(const Rect &rect);
 
   const Rect& getRect() const;
 };

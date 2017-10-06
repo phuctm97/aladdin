@@ -5,7 +5,7 @@
 #include "SpriteRenderer.h"
 #include "Graphics.h"
 #include "Animator.h"
-#include "MessageArgRect.h"
+#include "RectMessageArg.h"
 
 NAMESPACE_ALA
 {
@@ -31,7 +31,7 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
 
   subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
   {
-    _srcRect = static_cast < MessageArgRect* > (message)->getRect();
+    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
   });
 }
 
@@ -55,7 +55,7 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
 
   subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
   {
-    _srcRect = static_cast < MessageArgRect* > (message)->getRect();
+    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
   });
 }
 
