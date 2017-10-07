@@ -81,7 +81,8 @@
     </ClCompile>
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
-xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,10 +122,15 @@ xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"</Command>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp" />
     <ClCompile Include="prefabs\BallPrefab.cpp" />
     <ClCompile Include="prefabs\CameraPrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
     <ClCompile Include="scripts\BallController.cpp" />
+    <ClCompile Include="states\GoDownState.cpp" />
+    <ClCompile Include="states\GoLeftState.cpp" />
+    <ClCompile Include="states\GoRightState.cpp" />
+    <ClCompile Include="states\GoUpState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -134,10 +140,15 @@ xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"</Command>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
+    <ClInclude Include="prefabs\AnimationExamplePrefab.h" />
     <ClInclude Include="prefabs\BallPrefab.h" />
     <ClInclude Include="prefabs\CameraPrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
     <ClInclude Include="scripts\BallController.h" />
+    <ClInclude Include="states\GoDownState.h" />
+    <ClInclude Include="states\GoLeftState.h" />
+    <ClInclude Include="states\GoRightState.h" />
+    <ClInclude Include="states\GoUpState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -147,6 +158,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"</Command>
   </ItemGroup>
   <ItemGroup>
     <Media Include="audio\sfx\wow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\sprites.animation" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

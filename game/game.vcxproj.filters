@@ -25,6 +25,12 @@
     <Filter Include="audio\sfx">
       <UniqueIdentifier>{0fa2c2a0-8353-43a0-a406-bfa0aca9b011}</UniqueIdentifier>
     </Filter>
+    <Filter Include="states">
+      <UniqueIdentifier>{ca9aa45b-51c5-4443-89ce-506cb03aa5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations">
+      <UniqueIdentifier>{6f2110f8-5cca-4925-a665-f5a8eb1bcb0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -48,6 +54,21 @@
     <ClCompile Include="prefabs\CameraPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="states\GoLeftState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\GoRightState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\GoUpState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\GoDownState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -68,6 +89,21 @@
     <ClInclude Include="prefabs\CameraPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="states\GoLeftState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\GoRightState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\GoUpState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\GoDownState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AnimationExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt">
@@ -83,5 +119,10 @@
     <Media Include="audio\sfx\wow.wav">
       <Filter>audio\sfx</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\sprites.animation">
+      <Filter>animations</Filter>
+    </None>
   </ItemGroup>
 </Project>

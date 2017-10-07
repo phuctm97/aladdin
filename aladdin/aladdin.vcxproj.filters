@@ -13,6 +13,9 @@
     <Filter Include="audio">
       <UniqueIdentifier>{12be5016-48b8-4c34-9d8c-4f915f5e1efa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pugixml">
+      <UniqueIdentifier>{862b369d-8247-49a1-aeaf-a36d4d1d8d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\CoreInclude.h">
@@ -138,6 +141,27 @@
     </ClInclude>
     <ClInclude Include="audio\Audio.h">
       <Filter>audio</Filter>
+     </ClInclude>
+    <ClInclude Include="core\IState.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StateManager.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animator.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugiconfig.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugixml.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\RectMessageArg.h">
+      <Filter>2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +260,24 @@
     </ClCompile>
     <ClCompile Include="audio\Audio.cpp">
       <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="core\IState.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StateManager.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animator.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="pugixml\pugixml.cpp">
+      <Filter>pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\RectMessageArg.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

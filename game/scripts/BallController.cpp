@@ -13,11 +13,10 @@ BallController::BallController( ala::GameObject* gameObject, const std::string& 
 
 void BallController::onInitialize() {
   auto transform = getGameObject()->getComponentT<ala::Transform>();
-  transform->setScale( ala::Vec2( 2.f, 2.f ) );
   auto frameSize = getGameObject()->getComponentT<ala::SpriteRenderer>()->getFrameSize();
-  transform->setPosition( ala::Vec2(
-    frameSize.getWidth() / 2,
-    ala::GameManager::get()->getScreenHeight() - frameSize.getHeight() / 2 ) );
+  transform->setPosition(
+    ala::Vec2( -ala::GameManager::get()->getScreenWidth() / 2 + frameSize.getWidth() / 2,
+               ala::GameManager::get()->getScreenHeight() / 2 - frameSize.getHeight() / 2 ) );
 
   subscribeObjectMessage(
     getGameObject(),

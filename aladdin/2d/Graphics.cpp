@@ -200,11 +200,13 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
 
   D3DXMATRIX oldMatrix;
 
-  auto transformationMatrix = convertToDirectXMatrix( transformMatrix );
+  auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
+
+  auto transformationMatrix = convertToDirectXMatrix(flipMatrix* transformMatrix);
 
   _directXSprite->GetTransform( &oldMatrix );
-  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
 
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
 
   _directXSprite->SetTransform( &finalMatrix );
 
