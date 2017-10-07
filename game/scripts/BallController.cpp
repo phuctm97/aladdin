@@ -15,7 +15,9 @@ void BallController::onInitialize() {
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   transform->setScale( ala::Vec2( 2.f, 2.f ) );
   auto frameSize = getGameObject()->getComponentT<ala::SpriteRenderer>()->getFrameSize();
-  transform->setPosition( ala::Vec2( 0, 0 ) );
+  transform->setPosition( ala::Vec2(
+    frameSize.getWidth() / 2,
+    ala::GameManager::get()->getScreenHeight() - frameSize.getHeight() / 2 ) );
 
   subscribeObjectMessage(
     getGameObject(),
@@ -28,11 +30,8 @@ void BallController::onInitialize() {
 void BallController::onUpdate( const float delta ) {
 
   auto transform = getGameObject()->getComponentT<ala::Transform>();
-
-  transform->setPositionY(transform->getPositionY() + _speed);
-
-  return;
   const auto sprite = getGameObject()->getComponentT<ala::SpriteRenderer>();
+  auto audioSource = getGameObject()->getComponentT<ala::AudioSource>();
 
   if ( ala::Input::get()->getKeyDown( "a" ) ) {
     _logger.info( "Pressed key A" );
@@ -51,17 +50,19 @@ void BallController::onUpdate( const float delta ) {
       transform->setRotation( -90 );
       _state = 'D';
       ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going down" ) );
+      audioSource->playOneShot();
     }
     transform->setPositionX( transform->getPositionX() + _speed );
     break;
   case 'D':
-    if ( transform->getPositionY() + sprite->getFrameSize().getHeight() / 2 >= ala::GameManager::get()->getScreenHeight() ) {
-      transform->setPositionY( ala::GameManager::get()->getScreenHeight() - sprite->getFrameSize().getHeight() / 2 );
+    if ( transform->getPositionY() - sprite->getFrameSize().getHeight() / 2 <= 0 ) {
+      transform->setPositionY( sprite->getFrameSize().getHeight() / 2 );
       transform->setRotation( -180 );
       _state = 'L';
       ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going left" ) );
+      audioSource->playOneShot();
     }
-    transform->setPositionY( transform->getPositionY() + _speed );
+    transform->setPositionY( transform->getPositionY() - _speed );
     break;
   case 'L':
     if ( transform->getPositionX() - sprite->getFrameSize().getWidth() / 2 <= 0 ) {
@@ -69,17 +70,19 @@ void BallController::onUpdate( const float delta ) {
       transform->setRotation( -270 );
       _state = 'U';
       ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going up" ) );
+      audioSource->playOneShot();
     }
     transform->setPositionX( transform->getPositionX() - _speed );
     break;
   case 'U':
-    if ( transform->getPositionY() - sprite->getFrameSize().getHeight() / 2 <= 0 ) {
-      transform->setPositionY( sprite->getFrameSize().getHeight() / 2 );
+    if ( transform->getPositionY() + sprite->getFrameSize().getHeight() / 2 >= ala::GameManager::get()->getScreenHeight() ) {
+      transform->setPositionY( ala::GameManager::get()->getScreenHeight() - sprite->getFrameSize().getHeight() / 2 );
       transform->setRotation( 0 );
       _state = 'R';
       ala::GameManager::get()->getGlobalMessenger()->broadcast( "Ball Direction Changed", new ala::StringMessageArgs( "Ball going right" ) );
+      audioSource->playOneShot();
     }
-    transform->setPositionY( transform->getPositionY() - _speed );
+    transform->setPositionY( transform->getPositionY() + _speed );
     break;
   default: break;
   }

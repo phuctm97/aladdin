@@ -33,5 +33,9 @@
 #include "2d/Camera.h"
 #include "input/InputInclude.h"
 #include "input/Input.h"
+#include "audio/AudioInclude.h"
+#include "audio/Audio.h"
+#include "audio/AudioClip.h"
+#include "audio/AudioSource.h"
 
 #endif //!__ALADDIN_H__

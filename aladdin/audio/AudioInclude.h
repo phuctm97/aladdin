@@ -10,6 +10,8 @@
 #include "../core/Transform.h"
 #include "../core/GameManager.h"
 
+#include "dxaudio.h"
+
 #include "AudioMarcos.h"
 
 #endif //!__ALADDIN_AUDIO_AUDIO_INCLUDE_H__

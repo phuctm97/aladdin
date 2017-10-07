@@ -1,7 +1,6 @@
 /*
 * Created by phuctm97 on Sep 27th 2017
 */
-
 #include "Application.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
@@ -235,6 +234,7 @@ void Application::initComponents() {
   input->initialize();
 
   Audio* audio = Audio::get();
+  audio->_hWnd = _hWnd;
   audio->initialize();
 
   GameManager* gameManager = GameManager::get();
@@ -302,6 +302,8 @@ void Application::releaseComponents() {
 // ===================================================
 // Platform specific
 // ===================================================
+int (WINAPIV * __vsnprintf)( char*, size_t, const char*, va_list ) = _vsnprintf;
+
 void Application::run( const HINSTANCE hInstance,
                        const HINSTANCE hPrevInstance,
                        const LPSTR lpCmdLine,

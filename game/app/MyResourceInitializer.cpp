@@ -10,6 +10,9 @@ void MyResourceInitializer::run() {
   // Textures
   new ala::Sprite( "ball.png", "textures/ball.png" );
 
+  // Audio
+  new ala::AudioClip( "wow.wav", "audio/sfx/wow.wav" );
+
   // Prefabs
   new BallPrefab();
   new CameraPrefab();

@@ -6,16 +6,34 @@
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1(AudioClip, ala::GameResource)
+  // ====================================================
+  // Basics
+  // ====================================================
+private:
+  std::string _sourceFile;
+
 public:
-  AudioClip( const std::string& name, Scene* sceneScope )
-    : GameResource( name, sceneScope ) {}
+  AudioClip( const std::string& name, const std::string& sourceFile, Scene* sceneScope = NULL );
 
   virtual ~AudioClip();
+
+  const std::string& getSourceFile() const;
 
 protected:
   void onLoad() override;
 
   void onRelease() override;
+
+  // ===================================================
+  // Platform specific
+  // ===================================================
+private:
+  CSound* _cSound;
+
+public:
+  CSound* getCSound() const;
+
+  void setCSound( CSound* cSound );
 };
 }
 

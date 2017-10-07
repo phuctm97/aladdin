@@ -133,9 +133,6 @@
     <ClInclude Include="audio\AudioSource.h">
       <Filter>audio</Filter>
     </ClInclude>
-    <ClInclude Include="audio\AudioListener.h">
-      <Filter>audio</Filter>
-    </ClInclude>
     <ClInclude Include="audio\dxaudio.h">
       <Filter>audio</Filter>
     </ClInclude>
@@ -232,9 +229,6 @@
       <Filter>audio</Filter>
     </ClCompile>
     <ClCompile Include="audio\AudioSource.cpp">
-      <Filter>audio</Filter>
-    </ClCompile>
-    <ClCompile Include="audio\AudioListener.cpp">
       <Filter>audio</Filter>
     </ClCompile>
     <ClCompile Include="audio\dxaudio.cpp">
