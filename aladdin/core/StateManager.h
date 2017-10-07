@@ -1,5 +1,5 @@
-﻿#ifndef __STATE_MANAGER_H__
-#define __STATE_MANAGER_H__
+﻿#ifndef __ALADDIN_CORE_STATE_MANAGER_H__
+#define __ALADDIN_CORE_STATE_MANAGER_H__
 
 #include "IState.h"
 #include "GameObjectComponent.h"
@@ -21,4 +21,4 @@ public:
 };
 }
 
-#endif //__STATE_MANAGER_H__
+#endif //__ALADDIN_CORE_STATE_MANAGER_H__

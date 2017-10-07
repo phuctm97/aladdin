@@ -80,7 +80,9 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <PreBuildEvent>
-      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"</Command>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,6 +155,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\sfx\wow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\sprites.animation" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

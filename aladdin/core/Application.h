@@ -44,7 +44,7 @@ public:
 
   void setAnimationInterval( float interval );
 
-  void setFps( int fps );
+  void setFps( const int fps );
 
   float getAnimationInterval() const;
 
@@ -56,8 +56,6 @@ public:
   void startWithScene(Scene* scene);
 
 private:
-  float updateTimestampCalculateAndFixAnimationInterval();
-
   void updateInput();
 
   void updateGame( const float delta );

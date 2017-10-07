@@ -126,32 +126,34 @@ public:
 
   static Vec2 forAngle(const float a);
 
+  // TODO: Why don't you use static constants instead?
+
   /** equals to Vec2(0,0) */
-  static const Vec2 getZeroVector();
+  static Vec2 getZeroVector();
   /** equals to Vec2(1,1) */
-  static const Vec2 getIdentityVector();
+  static Vec2 getIdentityVector();
   /** equals to Vec2(1,0) */
-  static const Vec2 getUnitXVector();
+  static Vec2 getUnitXVector();
   /** equals to Vec2(0,1) */
-  static const Vec2 getUnitYVector();
+  static Vec2 getUnitYVector();
   /** equals to Vec2(0.5, 0.5) */
-  static const Vec2 getAnchorMiddle();
+  static Vec2 getAnchorMiddle();
   /** equals to Vec2(0, 0) */
-  static const Vec2 getAnchorBottomLeft();
+  static Vec2 getAnchorBottomLeft();
   /** equals to Vec2(0, 1) */
-  static const Vec2 getAnchorTopLeft();
+  static Vec2 getAnchorTopLeft();
   /** equals to Vec2(1, 0) */
-  static const Vec2 getAnchorBottomRight();
+  static Vec2 getAnchorBottomRight();
   /** equals to Vec2(1, 1) */
-  static const Vec2 getAnchorTopRight();
+  static Vec2 getAnchorTopRight();
   /** equals to Vec2(1, 0.5) */
-  static const Vec2 getAnchorMiddleRight();
+  static Vec2 getAnchorMiddleRight();
   /** equals to Vec2(0, 0.5) */
-  static const Vec2 getAnchorMiddleLeft();
+  static Vec2 getAnchorMiddleLeft();
   /** equals to Vec2(0.5, 1) */
-  static const Vec2 getAnchorMiddleTop();
+  static Vec2 getAnchorMiddleTop();
   /** equals to Vec2(0.5, 0) */
-  static const Vec2 getAnchorMiddleBottom();
+  static Vec2 getAnchorMiddleBottom();
 };
 
 typedef Vec2 Point;

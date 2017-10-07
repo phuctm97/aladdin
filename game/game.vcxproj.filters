@@ -19,8 +19,17 @@
     <Filter Include="scripts">
       <UniqueIdentifier>{8abd1086-4f7e-4275-9697-a2646390a106}</UniqueIdentifier>
     </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{d11a369c-7d56-49de-bff0-ee23c4387ba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio\sfx">
+      <UniqueIdentifier>{0fa2c2a0-8353-43a0-a406-bfa0aca9b011}</UniqueIdentifier>
+    </Filter>
     <Filter Include="states">
       <UniqueIdentifier>{ca9aa45b-51c5-4443-89ce-506cb03aa5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations">
+      <UniqueIdentifier>{6f2110f8-5cca-4925-a665-f5a8eb1bcb0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,5 +114,15 @@
     <Image Include="textures\ball.png">
       <Filter>texures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\sfx\wow.wav">
+      <Filter>audio\sfx</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\sprites.animation">
+      <Filter>animations</Filter>
+    </None>
   </ItemGroup>
 </Project>

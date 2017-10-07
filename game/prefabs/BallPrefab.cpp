@@ -7,5 +7,6 @@
 
 void BallPrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "ball.png" );
+  new ala::AudioSource( object, "wow.wav" );
   new BallController( object );
 }

@@ -20,14 +20,14 @@ private:
 protected:
   virtual ~Animator();
 
-  virtual void onUpdate(const float delta);
+  void onUpdate(const float delta) override;
 public:
-  Animator(GameObject* gameObject, const std::string &entryAction, Animation* animationName = NULL, float interval = 1000, std::string name = "");
-  Animator(GameObject* gameObject, const std::string &entryAction, const std::string &animationResourceName = "", float interval = 1000, std::string name = "");
+  Animator(GameObject* gameObject, const std::string &entryAction, Animation* animationName = NULL, const float interval = 1000, const std::string& name = "");
+  Animator(GameObject* gameObject, const std::string &entryAction, const std::string &animationResourceName = "", const float interval = 1000, const std::string& name = "");
 
-  void setAction(std::string actionName);
+  void setAction(const std::string& actionName);
 
-  void setFrameInterval(float interval);
+  void setFrameInterval(const float interval);
   Rect getCurrentFrame() const;
 };
 }

@@ -10,6 +10,9 @@
     <Filter Include="input">
       <UniqueIdentifier>{85ab0f5d-a8b4-4a05-83d1-348602b18cff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{12be5016-48b8-4c34-9d8c-4f915f5e1efa}</UniqueIdentifier>
+    </Filter>
     <Filter Include="pugixml">
       <UniqueIdentifier>{862b369d-8247-49a1-aeaf-a36d4d1d8d1c}</UniqueIdentifier>
     </Filter>
@@ -121,6 +124,24 @@
     <ClInclude Include="2d\Camera.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="audio\AudioMarcos.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioInclude.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioClip.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\AudioSource.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\dxaudio.h">
+      <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="audio\Audio.h">
+      <Filter>audio</Filter>
+    </ClInclude>
     <ClInclude Include="core\IState.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -139,7 +160,7 @@
     <ClInclude Include="2d\Animation.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="2d\RectMessageArg.h">
+    <ClInclude Include="2d\RectMessageArgs.h">
       <Filter>2d</Filter>
     </ClInclude>
   </ItemGroup>
@@ -228,6 +249,18 @@
     <ClCompile Include="2d\Camera.cpp">
       <Filter>2d</Filter>
     </ClCompile>
+    <ClCompile Include="audio\AudioClip.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\AudioSource.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\dxaudio.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\Audio.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
     <ClCompile Include="core\IState.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -243,7 +276,7 @@
     <ClCompile Include="2d\Animation.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="2d\RectMessageArg.cpp">
+    <ClCompile Include="2d\RectMessageArgs.cpp">
       <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
