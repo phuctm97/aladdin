@@ -7,14 +7,18 @@
 
 #include "2dInclude.h"
 #include "Sprite.h"
+#include "Rect.h"
+#include "../core/MessageListener.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_1(SpriteRenderer, ala::GameObjectComponent)
+ALA_CLASS_HEADER_2(SpriteRenderer, ala::GameObjectComponent, ala::MessageListener)
 private:
   Sprite* _sprite;
   Color _backColor;
   int _zOrder;
+
+  Rect _srcRect;
 
 public:
   SpriteRenderer( GameObject* gameObject, Sprite* sprite = NULL, const std::string& name = "" );
@@ -38,7 +42,9 @@ public:
   int getZOrder() const;
 
 protected:
+  void onInitialize() override;
   void onRender() override;
+  void onRelease() override;
 };
 }
 

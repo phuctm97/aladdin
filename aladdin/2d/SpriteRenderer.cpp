@@ -4,6 +4,8 @@
 
 #include "SpriteRenderer.h"
 #include "Graphics.h"
+#include "Animator.h"
+#include "RectMessageArg.h"
 
 NAMESPACE_ALA
 {
@@ -13,7 +15,25 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
   : GameObjectComponent( gameObject, name ),
     _sprite( sprite ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 ) {}
+    _zOrder( 0 )
+{
+  auto animator = getGameObject()->getComponentT<Animator>();
+
+  if (animator == NULL || !animator->isInitialized())
+  {
+    _srcRect.setTopLeft(Vec2(0.f, 0.f));
+    _srcRect.setSize(_sprite->getContentSize());
+  }
+  else
+  {
+    _srcRect = animator->getCurrentFrame();
+  }
+
+  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
+  {
+    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
+  });
+}
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName, const std::string& name )
   : GameObjectComponent( gameObject, name ),
@@ -21,6 +41,22 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
     _backColor( 255, 255, 255 ),
     _zOrder( 0 ) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
+  auto animator = getGameObject()->getComponentT<Animator>();
+
+  if (animator == NULL || !animator->isInitialized())
+  {
+    _srcRect.setTopLeft(Vec2(0.f, 0.f));
+    _srcRect.setSize(_sprite->getContentSize());
+  }
+  else
+  {
+    _srcRect = animator->getCurrentFrame();
+  }
+
+  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
+  {
+    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
+  });
 }
 
 SpriteRenderer::~SpriteRenderer() {}
@@ -42,12 +78,10 @@ void SpriteRenderer::setBackColor( const Color& color ) {
 }
 
 Size SpriteRenderer::getFrameSize() const {
-  auto frameSize = _sprite->getContentSize();
   const auto transform = getGameObject()->getTransform();
-  frameSize.setWidth( frameSize.getWidth() * transform->getScale().getX() );
-  frameSize.setHeight( frameSize.getHeight() * transform->getScale().getY() );
 
-  return frameSize;
+  return Size(_srcRect.getSize().getWidth() * transform->getScale().getX(), 
+    _srcRect.getSize().getHeight() * transform->getScale().getY());
 }
 
 void SpriteRenderer::setZOrder( const int zOrder ) {
@@ -58,17 +92,18 @@ int SpriteRenderer::getZOrder() const {
   return _zOrder;
 }
 
+void SpriteRenderer::onInitialize ( )
+{
+}
+
 void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
-  auto frameSize = getFrameSize();
 
-  Rect srcRect;
-  srcRect.setTopLeft( Vec2( 0.f, 0.f ) );
-  srcRect.setSize( _sprite->getContentSize() );
+  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, _srcRect, _zOrder );
+}
 
-  // Sprite renderer uses (0.5, 0.5) origin
-  // Only images with RectTransform which are used mainly for creating UI (score, HP bar, etc...) uses anchor point
-  // source rect might needs a little fix after implementing animation
-  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, srcRect, _zOrder );
+void SpriteRenderer::onRelease ( )
+{
+  unsubcribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE);
 }
 }

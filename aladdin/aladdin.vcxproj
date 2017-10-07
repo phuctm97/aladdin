@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,8 +123,11 @@
   <ItemGroup>
     <ClInclude Include="2d\2dInclude.h" />
     <ClInclude Include="2d\2dMacros.h" />
+    <ClInclude Include="2d\Animation.h" />
+    <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Graphics.h" />
+    <ClInclude Include="2d\RectMessageArg.h" />
     <ClInclude Include="2d\Rect.h" />
     <ClInclude Include="2d\Size.h" />
     <ClInclude Include="2d\Sprite.h" />
@@ -139,6 +142,7 @@
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
     <ClInclude Include="core\GameResource.h" />
+    <ClInclude Include="core\IState.h" />
     <ClInclude Include="core\Mat4.h" />
     <ClInclude Include="core\MessageArgs.h" />
     <ClInclude Include="core\Initializable.h" />
@@ -150,6 +154,7 @@
     <ClInclude Include="core\Releasable.h" />
     <ClInclude Include="core\ResourceInitializer.h" />
     <ClInclude Include="core\Scene.h" />
+    <ClInclude Include="core\StateManager.h" />
     <ClInclude Include="core\StdHelper.h" />
     <ClInclude Include="core\StringMessageArgs.h" />
     <ClInclude Include="core\Transform.h" />
@@ -157,10 +162,15 @@
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
     <ClInclude Include="input\InputMarcos.h" />
+    <ClInclude Include="pugixml\pugiconfig.hpp" />
+    <ClInclude Include="pugixml\pugixml.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="2d\Animation.cpp" />
+    <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
+    <ClCompile Include="2d\RectMessageArg.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
     <ClCompile Include="2d\Size.cpp" />
     <ClCompile Include="2d\Sprite.cpp" />
@@ -172,6 +182,7 @@
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
     <ClCompile Include="core\GameResource.cpp" />
+    <ClCompile Include="core\IState.cpp" />
     <ClCompile Include="core\Mat4.cpp" />
     <ClCompile Include="core\MessageArgs.cpp" />
     <ClCompile Include="core\Initializable.cpp" />
@@ -183,10 +194,12 @@
     <ClCompile Include="core\Releasable.cpp" />
     <ClCompile Include="core\ResourceInitializer.cpp" />
     <ClCompile Include="core\Scene.cpp" />
+    <ClCompile Include="core\StateManager.cpp" />
     <ClCompile Include="core\StringMessageArgs.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="input\Input.cpp" />
+    <ClCompile Include="pugixml\pugixml.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

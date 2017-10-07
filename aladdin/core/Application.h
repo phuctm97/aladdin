@@ -20,7 +20,7 @@ private:
   std::string _title;
   int _screenWidth;
   int _screenHeight;
-  float _animationInterval;
+  LARGE_INTEGER _animationInterval;
   std::vector<ResourceInitializer*> _resourceInitializers;
 
   // Debug information
@@ -42,7 +42,7 @@ public:
 
   const std::string& getTitle() const;
 
-  void setAnimationInterval( float millis );
+  void setAnimationInterval( float interval );
 
   void setFps( int fps );
 
@@ -100,9 +100,14 @@ private:
   MSG _msg;
   HINSTANCE _hInstance;
   HWND _hWnd;
-  DWORD _startTimestamp;
-  DWORD _lastTimestamp;
 
+  LARGE_INTEGER _freq;
+
+  _LARGE_INTEGER _startTimestamp;
+  _LARGE_INTEGER _lastTimestamp;
+  _LARGE_INTEGER _currentTimestamp;
+
+  float _delta;
 public:
   void run( const HINSTANCE hInstance,
             const HINSTANCE hPrevInstance,

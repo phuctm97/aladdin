@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas version="1.0">
+	<Action actionName = "Back">
+		<Rect x="0" y="166" width="65" height="82"/>
+		<Rect x="67" y="166" width="64" height="81"/>
+		<Rect x="0" y="0" width="65" height="81"/>
+	</Action>
+	<Action actionName = "Front">
+		<Rect x="0" y="83" width="65" height="81"/>
+		<Rect x="67" y="0" width="65" height="81"/>
+		<Rect x="67" y="83" width="65" height="81"/>
+	</Action>
+	<Action actionName = "Left">
+		<Rect x="134" y="83" width="59" height="81"/>
+		<Rect x="194" y="166" width="59" height="81"/>
+		<Rect x="195" y="0" width="59" height="81"/>
+	</Action>
+	<Action actionName = "Right">
+		<Rect x="195" y="83" width="59" height="81"/>
+		<Rect x="134" y="0" width="59" height="81"/>
+		<Rect x="133" y="166" width="59" height="81"/>
+	</Action>
+</TextureAtlas>
