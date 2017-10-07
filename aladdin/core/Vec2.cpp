@@ -315,55 +315,55 @@ Vec2 Vec2::forAngle( const float a ) {
   return Vec2( cosf( a ), sinf( a ) );
 }
 
-const Vec2 Vec2::getZeroVector() {
+Vec2 Vec2::getZeroVector() {
   return Vec2( 0, 0 );
 }
 
-const Vec2 Vec2::getIdentityVector() {
+Vec2 Vec2::getIdentityVector() {
   return Vec2( 1, 1 );
 }
 
-const Vec2 Vec2::getUnitXVector() {
+Vec2 Vec2::getUnitXVector() {
   return Vec2( 1, 0 );
 }
 
-const Vec2 Vec2::getUnitYVector() {
+Vec2 Vec2::getUnitYVector() {
   return Vec2( 0, 1 );
 }
 
-const Vec2 Vec2::getAnchorMiddle() {
+Vec2 Vec2::getAnchorMiddle() {
   return Vec2( 0.5f, 0.5f );
 }
 
-const Vec2 Vec2::getAnchorBottomLeft() {
+Vec2 Vec2::getAnchorBottomLeft() {
   return Vec2( 0, 0 );
 }
 
-const Vec2 Vec2::getAnchorTopLeft() {
+Vec2 Vec2::getAnchorTopLeft() {
   return Vec2( 0, 1 );
 }
 
-const Vec2 Vec2::getAnchorBottomRight() {
+Vec2 Vec2::getAnchorBottomRight() {
   return Vec2( 1, 0 );
 }
 
-const Vec2 Vec2::getAnchorTopRight() {
+Vec2 Vec2::getAnchorTopRight() {
   return Vec2( 1, 1 );
 }
 
-const Vec2 Vec2::getAnchorMiddleRight() {
+Vec2 Vec2::getAnchorMiddleRight() {
   return Vec2( 1, 0.5f );
 }
 
-const Vec2 Vec2::getAnchorMiddleLeft() {
+Vec2 Vec2::getAnchorMiddleLeft() {
   return Vec2( 0, 0.5f );
 }
 
-const Vec2 Vec2::getAnchorMiddleTop() {
+Vec2 Vec2::getAnchorMiddleTop() {
   return Vec2( 0.5f, 1 );
 }
 
-const Vec2 Vec2::getAnchorMiddleBottom() {
+Vec2 Vec2::getAnchorMiddleBottom() {
   return Vec2( 0.5f, 0 );
 }
 }

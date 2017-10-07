@@ -141,7 +141,7 @@
     </ClInclude>
     <ClInclude Include="audio\Audio.h">
       <Filter>audio</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="core\IState.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -160,7 +160,7 @@
     <ClInclude Include="2d\Animation.h">
       <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="2d\RectMessageArg.h">
+    <ClInclude Include="2d\RectMessageArgs.h">
       <Filter>2d</Filter>
     </ClInclude>
   </ItemGroup>
@@ -276,7 +276,7 @@
     <ClCompile Include="2d\Animation.cpp">
       <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="2d\RectMessageArg.cpp">
+    <ClCompile Include="2d\RectMessageArgs.cpp">
       <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>

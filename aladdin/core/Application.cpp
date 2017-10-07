@@ -92,8 +92,8 @@ void Application::setAnimationInterval( float interval ) {
   _animationInterval.QuadPart = LONGLONG(interval * _freq.QuadPart);
 }
 
-void Application::setFps( int fps ) {
-  setAnimationInterval(1.0 / fps);
+void Application::setFps( const int fps ) {
+  setAnimationInterval(1.0f / fps);
 }
 
 float Application::getAnimationInterval() const {
@@ -349,14 +349,13 @@ void Application::initWindowHandle() {
 
 void Application::gameLoop() 
   {
-
   // initial timestamp
   QueryPerformanceCounter(&_startTimestamp);
   _lastTimestamp = _startTimestamp;
   _currentTimestamp = _lastTimestamp;
 
   LONGLONG interval = 0LL;
-  LONG waitMS = 0L;
+  LONGLONG waitMS = 0L;
 
   // main loop
   while ( !_exiting ) 
@@ -382,6 +381,10 @@ void Application::gameLoop()
       //  _logger.debug("FPS: %d", fps);
       //}
       processMessage();
+
+      // TODO: what if processMessage() delay a bit, _delta value will deviate from actual one, which decreases game responsiveness
+      // TODO: consider move inverval process right before main game update
+
       processGame();
     }
     else
@@ -391,9 +394,9 @@ void Application::gameLoop()
       // Sleep(3) may make a sleep of 2ms or 4ms. Therefore, we subtract 1ms here to make Sleep time shorter.
       // If 'waitMS' is equal or less than 1ms, don't sleep and run into next loop to
       // boost CPU to next frame accurately.
-      waitMS = (_animationInterval.QuadPart - interval) * 1000LL / _freq.QuadPart - 1L;
+      waitMS = (_animationInterval.QuadPart - interval) * 1000L / _freq.QuadPart - 1L;
       if (waitMS > 1L)
-        Sleep(waitMS);
+        Sleep(static_cast<DWORD>(waitMS));
     }
   }
 }

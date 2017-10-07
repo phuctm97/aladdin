@@ -18,7 +18,7 @@ protected:
 public:
   Animation(const std::string& name, const std::string& sourceFile, Scene* scope = NULL);
 
-  std::vector<Rect> getFrameForAction(std::string actionName);
+  const std::vector<Rect>& getFrameForAction(const std::string& actionName);
 
   virtual ~Animation();
 };

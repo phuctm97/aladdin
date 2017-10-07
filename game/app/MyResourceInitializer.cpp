@@ -5,7 +5,6 @@
 #include "MyResourceInitializer.h"
 #include "../prefabs/BallPrefab.h"
 #include "../prefabs/CameraPrefab.h"
-#include "2d/Animation.h"
 #include "../prefabs/AnimationExamplePrefab.h"
 
 void MyResourceInitializer::run() {

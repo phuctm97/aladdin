@@ -5,7 +5,7 @@
 #include "SpriteRenderer.h"
 #include "Graphics.h"
 #include "Animator.h"
-#include "RectMessageArg.h"
+#include "RectMessageArgs.h"
 
 NAMESPACE_ALA
 {
@@ -31,7 +31,7 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
 
   subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
   {
-    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
+    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
   });
 }
 
@@ -55,7 +55,7 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
 
   subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
   {
-    _srcRect = static_cast < RectMessageArg* > (message)->getRect();
+    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
   });
 }
 
@@ -104,6 +104,7 @@ void SpriteRenderer::onRender() {
 
 void SpriteRenderer::onRelease ( )
 {
+  // TODO: MessageListener auto release callbacks on destruction, this line may be redundant
   unsubcribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE);
 }
 }

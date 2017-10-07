@@ -1,5 +1,5 @@
 ﻿#include "Animator.h"
-#include "RectMessageArg.h"
+#include "RectMessageArgs.h"
 
 NAMESPACE_ALA
 {
@@ -19,12 +19,12 @@ void Animator::onUpdate ( const float delta )
     {
       _frameIterator = _frames.begin();
     }
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
     _elapsedTime = 0;
   }
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation, float interval, std::string name )
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation,const float interval,const std::string& name )
   :GameObjectComponent ( gameObject, name ),
   _interval ( interval>0? interval: 1000)
 {
@@ -33,11 +33,11 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
 
   _frameIterator = _frames.begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
 
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName, float interval, std::string name )
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName,const float interval,const std::string& name )
   :GameObjectComponent(gameObject, name),
   _interval(interval>0 ? interval : 1000)
 {
@@ -46,16 +46,16 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
 
   _frameIterator = _frames.begin (  );
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
 }
 
-void Animator::setAction ( std::string actionName )
+void Animator::setAction (const std::string& actionName )
 {
   _frames = _animation->getFrameForAction(actionName);
   _frameIterator = _frames.begin (  );
 }
 
-void Animator::setFrameInterval ( float interval )
+void Animator::setFrameInterval (const float interval )
 {
   _interval = interval < 0 ? _interval : interval;
 }
