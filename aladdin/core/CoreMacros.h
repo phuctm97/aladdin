@@ -148,4 +148,8 @@ enum {
   ALA_RELEASED
 };
 
+//MESSAGE DEFINITIONS
+
+#define SOURCE_RECT_CHANGE_MESSAGE "Source rect changed"
+
 #endif //!__ALADDIN_CORE_CORE_MARCOS_H__

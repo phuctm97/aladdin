@@ -10,6 +10,9 @@
     <Filter Include="input">
       <UniqueIdentifier>{85ab0f5d-a8b4-4a05-83d1-348602b18cff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pugixml">
+      <UniqueIdentifier>{862b369d-8247-49a1-aeaf-a36d4d1d8d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\CoreInclude.h">
@@ -118,6 +121,27 @@
     <ClInclude Include="2d\Camera.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="core\IState.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StateManager.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animator.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugiconfig.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml\pugixml.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\Animation.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="2d\RectMessageArg.h">
+      <Filter>2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -202,6 +226,24 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="2d\Camera.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\IState.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StateManager.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animator.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="pugixml\pugixml.cpp">
+      <Filter>pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\Animation.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\RectMessageArg.cpp">
       <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
