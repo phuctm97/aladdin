@@ -8,10 +8,11 @@
 #include "../core/ClassMeta.h"
 #include "../core/Color.h"
 #include "../core/Vec2.h"
-#include "../core/GameObjectComponent.h"
+#include "../core/Mat4.h"
 #include "../core/GameResource.h"
-#include "../core/GameManager.h"
+#include "../core/GameObjectComponent.h"
 #include "../core/Transform.h"
+#include "../core/GameManager.h"
 
 #include "2dMacros.h"
 

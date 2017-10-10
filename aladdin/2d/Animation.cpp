@@ -6,6 +6,7 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(ala::Animation, ala::GameResource)
 
+
 void Animation::onLoad ( )
 {
   pugi::xml_document _animationFile;
@@ -28,8 +29,8 @@ void Animation::onLoad ( )
     for(auto frame: frameNodes)
     {
       Rect rect;
-      rect.setTopLeft(Vec2(frame.attribute("x").as_int(), frame.attribute("y").as_int()));
-      rect.setSize(Size(frame.attribute("width").as_int(), frame.attribute("height").as_int()));
+      rect.setTopLeft(Vec2(static_cast<float>(frame.attribute( "x" ).as_int()), static_cast<float>(frame.attribute( "y" ).as_int())));
+      rect.setSize(Size(static_cast<float>(frame.attribute( "width" ).as_int()), static_cast<float>(frame.attribute( "height" ).as_int())));
       rect.setTopLeft(Vec2(rect.getTopLeft().getX(), rect.getTopLeft().getY()));
       frames.push_back(rect);
     }

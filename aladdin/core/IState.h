@@ -1,5 +1,5 @@
-﻿#ifndef __ISTATE_H__
-#define __ISTATE_H__
+﻿#ifndef __ALADDIN_CORE_I_STATE_H__
+#define __ALADDIN_CORE_I_STATE_H__
 
 #include "ClassMeta.h"
 #include "GameObject.h"
@@ -21,4 +21,4 @@ public:
   virtual ~IState();
 };
 }
-#endif //__ISTATE_H__
+#endif //__ALADDIN_CORE_I_STATE_H__
