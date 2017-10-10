@@ -4,6 +4,10 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0(ala::AnimationAction)
 
+AnimationAction::AnimationAction ( )
+{
+}
+
 AnimationAction::AnimationAction(const std::vector<ala::Rect>& frames, const std::string& actionName, const float interval, const bool loop)
 {
   _frames = frames;

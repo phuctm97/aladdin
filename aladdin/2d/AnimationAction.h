@@ -14,6 +14,7 @@ private:
 
   std::vector< Rect> _frames;
 public:
+  AnimationAction();
   AnimationAction(const std::vector<Rect>& frames, const std::string& actionName, const float interval = 0, const bool loop = true);
 
   const std::vector<Rect>& getFrames() const;

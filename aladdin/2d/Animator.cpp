@@ -18,43 +18,71 @@ void Animator::onUpdate ( const float delta )
 
   _elapsedTime += delta;
 
-  if (_elapsedTime >= _interval)
+  if (_elapsedTime >= _currentAction->getInterval (  ))
   {
-    playNext();
+    ++_frameIterator;
+    if (_frameIterator == _currentAction->getFrames().end() )
+    {
+      if(!_currentAction->isLoop (  ))
+      {
+        _isPlaying = false;
+        return;
+      }
+      else
+      {
+        playFromStart();
+        _elapsedTime = 0;
+      }
+    }
+    else
+    {
+      getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+      _elapsedTime = 0;
+    }
 
-    _elapsedTime = 0;
+
   }
 
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation,const float interval,const std::string& name )
-  :GameObjectComponent ( gameObject, name ),
-  _interval ( interval>0? interval: 1000)
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation,const std::string& name )
+  :GameObjectComponent ( gameObject, name )
 {
+  _isPlaying = true;
 
+  _animation = animation;
+  _currentAction = _animation->getAction(entryAction);
 
+  _frameIterator = _currentAction->getFrames (  ).begin();
 
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName,const float interval,const std::string& name )
-  :GameObjectComponent(gameObject, name),
-  _interval(interval>0 ? interval : 1000)
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName, const std::string& name )
+  :GameObjectComponent(gameObject, name)
 {
+  _isPlaying = true;
+
+  _animation = static_cast<Animation*>(GameManager::get()->getResource(animationResourceName));
+  _currentAction = _animation->getAction(entryAction);
+
+  _frameIterator = _currentAction->getFrames().begin();
+
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+
 }
 
 void Animator::setAction ( const std::string& actionName )
 {
   _currentAction = _animation->getAction(actionName);
+  _frameIterator = _currentAction->getFrames().begin();
+  _isPlaying = true;
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
 }
 
 const std::string& Animator::getAction ( ) const
 {
   return _currentAction->getActionName();
-}
-
-void Animator::setInterval ( const float interval )
-{
-  _interval = interval;
 }
 
 Rect Animator::getCurrentFrame ( ) const
@@ -75,6 +103,10 @@ void Animator::playNext ( )
   {
     playFromStart();
   }
+  else
+  {
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  }
 }
 
 void Animator::play ( )
@@ -84,6 +116,15 @@ void Animator::play ( )
 
 void Animator::playFromStart ( )
 {
+  _isPlaying = true;
+
   _frameIterator = _currentAction->getFrames().begin();
+
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+}
+
+bool Animator::isPlaying ( ) const
+{
+  return _isPlaying;
 }
 }
