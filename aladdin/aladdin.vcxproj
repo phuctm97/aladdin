@@ -124,6 +124,7 @@
     <ClInclude Include="2d\2dInclude.h" />
     <ClInclude Include="2d\2dMacros.h" />
     <ClInclude Include="2d\Animation.h" />
+    <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Graphics.h" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Animation.cpp" />
+    <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />

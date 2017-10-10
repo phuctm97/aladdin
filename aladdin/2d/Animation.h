@@ -3,13 +3,14 @@
 
 #include "2dInclude.h"
 #include "Rect.h"
+#include "AnimationAction.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1 ( Animation, ala::GameResource )
 private:
   std::string _sourceFile;
-  std::map<std::string, std::vector<Rect>> _frames;
+  std::map<std::string, AnimationAction> _frames;
 protected:
   void onLoad() override;
 
@@ -18,7 +19,7 @@ protected:
 public:
   Animation(const std::string& name, const std::string& sourceFile, Scene* scope = NULL);
 
-  std::vector<Rect> getFrameForAction(std::string actionName);
+  AnimationAction* getAction(const std::string& actionName);
 
   virtual ~Animation();
 };

@@ -11,29 +11,28 @@ Animator::~Animator ( )
 
 void Animator::onUpdate ( const float delta )
 {
-  _elapsedTime += delta;
-  if(_elapsedTime >= _interval)
+  if(!_isPlaying)
   {
-    ++_frameIterator;
-    if(_frameIterator == _frames.end (  ))
-    {
-      _frameIterator = _frames.begin();
-    }
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
+    return;
+  }
+
+  _elapsedTime += delta;
+
+  if (_elapsedTime >= _interval)
+  {
+    playNext();
+
     _elapsedTime = 0;
   }
+
 }
 
 Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation, float interval, std::string name )
   :GameObjectComponent ( gameObject, name ),
   _interval ( interval>0? interval: 1000)
 {
-  _animation = animation;
-  _frames = _animation->getFrameForAction(entryAction);
 
-  _frameIterator = _frames.begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
 
 }
 
@@ -41,27 +40,50 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
   :GameObjectComponent(gameObject, name),
   _interval(interval>0 ? interval : 1000)
 {
-  _animation = static_cast<Animation*>(GameManager::get()->getResource(animationResourceName));
-  _frames = _animation->getFrameForAction(entryAction);
-
-  _frameIterator = _frames.begin (  );
-
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArg(*_frameIterator));
 }
 
-void Animator::setAction ( std::string actionName )
+void Animator::setAction ( const std::string& actionName )
 {
-  _frames = _animation->getFrameForAction(actionName);
-  _frameIterator = _frames.begin (  );
+  _currentAction = _animation->getAction(actionName);
 }
 
-void Animator::setFrameInterval ( float interval )
+const std::string& Animator::getAction ( ) const
 {
-  _interval = interval < 0 ? _interval : interval;
+  return _currentAction->getActionName();
+}
+
+void Animator::setInterval ( const float interval )
+{
+  _interval = interval;
 }
 
 Rect Animator::getCurrentFrame ( ) const
 {
   return *_frameIterator;
+}
+
+void Animator::pause ( )
+{
+  _isPlaying = false;
+}
+
+void Animator::playNext ( )
+{
+  ++_frameIterator;
+
+  if(_frameIterator == _currentAction->getFrames (  ).end (  ))
+  {
+    playFromStart();
+  }
+}
+
+void Animator::play ( )
+{
+  _isPlaying = true;
+}
+
+void Animator::playFromStart ( )
+{
+  _frameIterator = _currentAction->getFrames().begin();
 }
 }
