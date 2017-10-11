@@ -13,6 +13,9 @@ void MyResourceInitializer::run() {
   new ala::Sprite( "sprites.png", "textures/sprites.png" );
   new ala::Animation( "sprites.animation", "animations/sprites.animation" );
 
+  new ala::Sprite("aladdin.png", "textures/aladdin.png");
+  new ala::Animation("aladdin.animation", "animations/aladdin.animation");
+
   // Audio
   new ala::AudioClip( "wow.wav", "audio/sfx/wow.wav" );
 

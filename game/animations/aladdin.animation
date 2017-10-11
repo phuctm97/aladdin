@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas version="1.0">
+	<Action actionName = "climb" interval = "0.1" isLoop = "false">
+		<Rect height="86" width="29" y="327" x="763" />
+		<Rect height="89" width="28" y="0" x="763" />
+		<Rect height="74" width="28" y="948" x="760" />
+		<Rect height="62" width="42" y="0" x="517" />
+		<Rect height="76" width="31" y="778" x="762" />
+		<Rect height="86" width="29" y="415" x="763" />
+		<Rect height="79" width="28" y="586" x="763" />
+		<Rect height="63" width="32" y="948" x="726" />
+		<Rect height="62" width="42" y="759" x="517" />
+		<Rect height="81" width="28" y="503" x="763" />
+	</Action>
+	<Action actionName = "cut" interval = "0.1" isLoop = "false">
+		<Rect height="51" width="45" y="686" x="421"/>
+		<Rect height="62" width="51" y="296" x="316" />
+		<Rect height="74" width="45" y="239" x="469" />
+		<Rect height="50" width="68" y="937" x="0" />
+		<Rect height="53" width="51" y="149" x="315" />
+	</Action>
+	<Action actionName = "cutground" interval = "0.1" isLoop = "false">
+		<Rect height="33" width="47" y="696" x="203" />
+		<Rect height="31" width="45" y="91" x="147" />
+		<Rect height="33" width="71" y="770" x="0" />
+		<Rect height="34" width="92" y="0" x="0" />
+		<Rect height="33" width="84" y="36" x="0" />
+		<Rect height="33" width="71" y="770" x="0" />
+		<Rect height="31" width="45" y="91" x="147" />
+	</Action>
+	<Action actionName = "cutup" interval = "0.1" isLoop = "false">
+		<Rect height="86" width="54" y="338" x="260" />
+		<Rect height="71" width="49" y="409" x="370" />
+		<Rect height="66" width="51" y="689" x="316" />
+		<Rect height="57" width="53" y="570" x="261" />
+		<Rect height="54" width="46" y="0" x="421" />
+		<Rect height="53" width="42" y="0" x="561" />
+		<Rect height="60" width="38" y="483" x="647" />
+		<Rect height="61" width="65" y="564" x="76" />
+		<Rect height="58" width="47" y="482" x="419" />
+		<Rect height="54" width="47" y="482" x="370" />
+		<Rect height="66" width="51" y="689" x="316" />
+		<Rect height="57" width="53" y="570" x="261" />
+		<Rect height="54" width="46" y="0" x="421" />
+		<Rect height="53" width="42" y="0" x="561" />
+		<Rect height="60" width="38" y="483" x="647" />
+		<Rect height="61" width="65" y="564" x="76" />
+		<Rect height="58" width="47" y="482" x="419" />
+		<Rect height="54" width="47" y="482" x="370" />
+		<Rect height="66" width="51" y="689" x="316" />
+		<Rect height="57" width="53" y="570" x="261" />
+		<Rect height="54" width="46" y="0" x="421" />
+		<Rect height="53" width="42" y="0" x="561" />
+		<Rect height="60" width="38" y="483" x="647" />
+		<Rect height="61" width="65" y="564" x="76" />
+		<Rect height="58" width="47" y="482" x="419" />
+		<Rect height="54" width="47" y="482" x="370" />
+		<Rect height="66" width="51" y="689" x="316" />
+		<Rect height="57" width="53" y="570" x="261" />
+		<Rect height="54" width="46" y="0" x="421" />
+		<Rect height="53" width="42" y="0" x="561" />
+		<Rect height="60" width="38" y="483" x="647" />
+		<Rect height="61" width="65" y="564" x="76" />
+		<Rect height="58" width="47" y="482" x="419" />
+		<Rect height="54" width="47" y="482" x="370" />
+		<Rect height="66" width="51" y="689" x="316" />
+		<Rect height="57" width="53" y="570" x="261" />
+		<Rect height="54" width="46" y="0" x="421" />
+		<Rect height="53" width="42" y="0" x="561" />
+		<Rect height="60" width="38" y="483" x="647" />
+		<Rect height="61" width="65" y="564" x="76" />
+		<Rect height="58" width="47" y="482" x="419" />
+		<Rect height="54" width="47" y="482" x="370" />
+		<Rect height="48" width="54" y="0" x="216" />
+		<Rect height="71" width="74" y="564" x="0" />
+	</Action>
+	<Action actionName = "die" interval = "0.1" isLoop = "false">
+		<Rect height="48" width="80" y="156" x="0" />
+		<Rect height="51" width="61" y="910" x="138" />
+		<Rect height="58" width="45" y="788" x="470" />
+		<Rect height="58" width="45" y="315" x="470" />
+		<Rect height="50" width="39" y="325" x="647" />
+		<Rect height="51" width="40" y="638" x="605" />
+		<Rect height="51" width="35" y="615" x="726" />
+		<Rect height="51" width="36" y="375" x="688" />
+		<Rect height="49" width="39" y="274" x="647" />
+		<Rect height="56" width="44" y="848" x="516" />
+		<Rect height="53" width="41" y="55" x="561" />
+	</Action>
+	<Action actionName = "falltoground" interval = "0.1" isLoop = "false">
+		<Rect height="83" width="54" y="696" x="260" />
+		<Rect height="65" width="54" y="208" x="260" />
+		<Rect height="34" width="66" y="910" x="70" />
+		<Rect height="29" width="64" y="989" x="0" />
+		<Rect height="30" width="63" y="387" x="78" />
+		<Rect height="34" width="60" y="963" x="138" />
+		<Rect height="47" width="56" y="963" x="200" />
+		<Rect height="55" width="56" y="734" x="202" />
+		<Rect height="53" width="56" y="641" x="203" />
+		<Rect height="52" width="37" y="727" x="687" />
+		<Rect height="56" width="67" y="852" x="70" />
+	</Action>
+	<Action actionName = "hide" interval = "0.1" isLoop = "true">
+		<Rect height="38" width="52" y="862" x="259" />
+		<Rect height="39" width="52" y="471" x="204" />
+		<Rect height="39" width="52" y="161" x="261" />
+		<Rect height="38" width="52" y="975" x="258" />
+		<Rect height="22" width="63" y="518" x="77" />
+		<Rect height="42" width="55" y="911" x="201" />
+	</Action>
+	<Action actionName = "idle1" interval = "0.1" isLoop = "true">
+		<Rect height="50" width="37" y="592" x="687" />
+		<Rect height="47" width="41" y="0" x="272" />
+		<Rect height="52" width="40" y="745" x="605" />
+		<Rect height="55" width="44" y="848" x="470" />
+		<Rect height="51" width="41" y="110" x="562" />
+		<Rect height="51" width="42" y="791" x="561" />
+		<Rect height="53" width="44" y="964" x="470" />
+	</Action>
+	<Action actionName = "idle2" interval = "0.1" isLoop = "true">
+		<Rect height="52" width="40" y="745" x="605" />
+		<Rect height="53" width="61" y="310" x="79" />
+		<Rect height="54" width="62" y="254" x="79" />
+		<Rect height="53" width="41" y="317" x="562" />
+		<Rect height="53" width="39" y="426" x="606" />
+		<Rect height="53" width="36" y="428" x="688" />
+		<Rect height="53" width="40" y="855" x="605" />
+		<Rect height="53" width="35" y="668" x="726" />
+		<Rect height="56" width="37" y="534" x="687" />
+		<Rect height="56" width="38" y="876" x="647" />
+		<Rect height="56" width="38" y="545" x="647" />
+		<Rect height="55" width="40" y="275" x="605" />
+		<Rect height="54" width="41" y="395" x="561" />
+		<Rect height="54" width="40" y="799" x="605" />
+		<Rect height="53" width="39" y="165" x="647" />
+		<Rect height="58" width="41" y="964" x="561" />
+		<Rect height="58" width="42" y="196" x="561" />
+		<Rect height="49" width="38" y="483" x="687" />
+		<Rect height="49" width="39" y="0" x="647" />
+		<Rect height="49" width="39" y="432" x="647" />
+		<Rect height="52" width="38" y="822" x="647" />
+		<Rect height="52" width="38" y="822" x="647" />
+		<Rect height="51" width="36" y="189" x="726" />
+		<Rect height="57" width="39" y="106" x="647" />
+		<Rect height="55" width="40" y="275" x="605" />
+		<Rect height="54" width="41" y="395" x="561" />
+		<Rect height="54" width="40" y="799" x="605" />
+		<Rect height="53" width="39" y="165" x="647" />
+		<Rect height="53" width="36" y="189" x="688" />
+		<Rect height="53" width="40" y="0" x="605" />
+		<Rect height="53" width="35" y="723" x="726" />
+		<Rect height="56" width="36" y="244" x="688" />
+	</Action>
+	<Action actionName = "injured" interval = "0.1" isLoop = "true">
+		<Rect height="46" width="42" y="645" x="517" />
+		<Rect height="52" width="55" y="372" x="203" />
+		<Rect height="50" width="59" y="248" x="143" />
+		<Rect height="48" width="80" y="156" x="0" />
+		<Rect height="51" width="61" y="910" x="138" />
+		<Rect height="49" width="59" y="683" x="142" />
+	</Action>
+	<Action actionName = "jumpncut" interval = "0.1" isLoop = "true">
+		<Rect height="54" width="52" y="921" x="314" />
+		<Rect height="52" width="50" y="149" x="368" />
+		<Rect height="66" width="47" y="542" x="421" />
+		<Rect height="56" width="52" y="91" x="315" />
+		<Rect height="46" width="80" y="206" x="0" />
+		<Rect height="54" width="47" y="418" x="421" />
+	</Action>
+	<Action actionName = "jumpnfall" interval = "0.1" isLoop = "true">
+		<Rect height="43" width="59" y="759" x="141" />
+		<Rect height="62" width="52" y="481" x="316" />
+		<Rect height="61" width="54" y="275" x="260" />
+		<Rect height="69" width="54" y="791" x="259" />
+		<Rect height="74" width="51" y="545" x="316" />
+		<Rect height="66" width="38" y="934" x="647" />
+		<Rect height="79" width="35" y="534" x="726" />
+		<Rect height="93" width="34" y="0" x="727" />
+		<Rect height="93" width="34" y="419" x="727" />
+		<Rect height="93" width="34" y="853" x="726" />
+	</Action>
+	<Action actionName = "jumpnthrow" interval = "0.1" isLoop = "false">
+		<Rect height="55" width="49" y="352" x="370" />
+		<Rect height="52" width="43" y="239" x="516" />
+		<Rect height="53" width="39" y="51" x="647" />
+		<Rect height="53" width="52" y="106" x="261" />
+		<Rect height="52" width="40" y="691" x="605" />
+	</Action>
+	<Action actionName = "jumpout" interval = "0.1" isLoop = "false">
+		<Rect height="77" width="25" y="151" x="764" />
+		<Rect height="71" width="36" y="302" x="688" />
+		<Rect height="64" width="48" y="111" x="420" />
+		<Rect height="54" width="59" y="627" x="142" />
+		<Rect height="41" width="59" y="419" x="141" />
+		<Rect height="54" width="52" y="50" x="261" />
+		<Rect height="67" width="47" y="349" x="421" />
+		<Rect height="75" width="45" y="375" x="470" />
+	</Action>
+	<Action actionName = "lookaround" interval = "0.1" isLoop = "true">
+		<Rect height="88" width="49" y="203" x="369" />
+		<Rect height="87" width="47" y="260" x="420" />
+		<Rect height="88" width="41" y="933" x="604" />
+		<Rect height="88" width="40" y="105" x="605" />
+		<Rect height="88" width="38" y="732" x="647" />
+	</Action>
+	<Action actionName = "lookup" interval = "0.1" isLoop = "true">
+		<Rect  height="53" width="39" y="377" x="647" />
+		<Rect  height="59" width="45" y="727" x="470" />
+		<Rect  height="58" width="49" y="797" x="369" />
+	</Action>
+	<Action actionName = "push" interval = "0.1" isLoop = "false">
+		<Rect  height="46" width="56" y="863" x="201" />
+		<Rect  height="44" width="65" y="472" x="77" />
+		<Rect  height="45" width="70" y="805" x="0" />
+		<Rect  height="44" width="77" y="341" x="0" />
+		<Rect  height="44" width="72" y="724" x="0" />
+		<Rect  height="44" width="66" y="713" x="74" />
+		<Rect  height="44" width="75" y="518" x="0" />
+		<Rect  height="44" width="81" y="110" x="0" />
+		<Rect  height="44" width="75" y="472" x="0" />
+	</Action>
+	<Action actionName = "roll" interval = "0.1" isLoop = "false">
+		<Rect  height="54" width="49" y="741" x="369" />
+		<Rect  height="32" width="37" y="111" x="369" />
+		<Rect  height="34" width="35" y="383" x="726" />
+		<Rect  height="40" width="38" y="196" x="517" />
+		<Rect  height="31" width="38" y="163" x="562" />
+		<Rect  height="38" width="37" y="332" x="605" />
+		<Rect  height="35" width="39" y="50" x="216" />
+		<Rect  height="42" width="43" y="67" x="516" />
+	</Action>
+	<Action actionName = "run" interval = "0.1" isLoop = "true">
+		<Rect  height="48" width="40" y="55" x="604" />
+		<Rect  height="51" width="43" y="964" x="516" />
+		<Rect  height="53" width="41" y="589" x="562" />
+		<Rect  height="57" width="41" y="530" x="562" />
+		<Rect  height="57" width="52" y="862" x="314" />
+		<Rect  height="54" width="46" y="474" x="468" />
+		<Rect  height="58" width="42" y="645" x="561" />
+		<Rect  height="52" width="41" y="372" x="604" />
+		<Rect  height="54" width="35" y="327" x="726" />
+		<Rect  height="57" width="49" y="293" x="369" />
+		<Rect  height="58" width="55" y="91" x="204" />
+		<Rect  height="55" width="55" y="151" x="204" />
+		<Rect  height="57" width="44" y="905" x="470" />
+	</Action>
+	<Action actionName = "runnjumpncut" interval = "0.1" isLoop = "false">
+		<Rect height="42" width="41" y="451" x="563" />
+		<Rect height="76" width="45" y="452" x="516" />
+		<Rect height="57" width="57" y="804" x="200" />
+		<Rect height="42" width="58" y="371" x="143" />
+		<Rect height="48" width="61" y="419" x="78" />
+		<Rect height="53" width="58" y="462" x="144" />
+		<Rect height="58" width="53" y="629" x="261" />
+		<Rect height="85" width="50" y="925" x="368" />
+		<Rect height="44" width="59" y="846" x="139" />
+	</Action>
+	<Action actionName = "sit" interval = "0.1" isLoop = "false">
+		<Rect  height="49" width="42" y="395" x="517" />
+		<Rect  height="40" width="48" y="977" x="312" />
+		<Rect  height="30" width="54" y="124" x="83" />
+		<Rect  height="35" width="53" y="589" x="143" />
+	</Action>
+	<Action actionName = "stop" interval = "0.1" isLoop = "false">
+		<Rect  height="53" width="54" y="426" x="261" />
+		<Rect  height="56" width="44" y="906" x="516" />
+		<Rect  height="66" width="51" y="621" x="316" />
+		<Rect  height="65" width="46" y="0" x="469" />
+		<Rect  height="64" width="42" y="693" x="517" />
+		<Rect  height="43" width="55" y="426" x="204" />
+		<Rect  height="40" width="52" y="206" x="145" />
+		<Rect  height="52" width="37" y="89" x="688" />
+		<Rect  height="48" width="46" y="56" x="421" />
+	</Action>
+	<Action actionName = "swing" interval = "0.1" isLoop = "false">
+		<Rect  height="78" width="40" y="195" x="605" />
+		<Rect  height="72" width="54" y="208" x="204" />
+		<Rect  height="77" width="52" y="781" x="315" />
+		<Rect  height="80" width="44" y="67" x="470" />
+		<Rect  height="83" width="36" y="242" x="726" />
+		<Rect  height="83" width="43" y="111" x="517" />
+		<Rect  height="77" width="50" y="662" x="369" />
+		<Rect  height="80" width="57" y="124" x="145" />
+		<Rect  height="81" width="47" y="177" x="420" />
+		<Rect  height="78" width="34" y="95" x="727" />
+	</Action>
+	<Action actionName = "swingcut" interval = "0.1" isLoop = "false">
+		<Rect  height="87" width="48" y="832" x="420" />
+		<Rect  height="89" width="52" y="0" x="315" />
+		<Rect  height="90" width="61" y="156" x="82" />
+		<Rect  height="90" width="51" y="204" x="316" />
+		<Rect  height="89" width="48" y="741" x="420" />
+		<Rect  height="89" width="48" y="921" x="420" />
+		<Rect  height="87" width="48" y="832" x="420" />
+	</Action>
+	<Action actionName = "swingthrow" interval = "0.1" isLoop = "false">
+		<Rect  height="87" width="37" y="0" x="688" />
+		<Rect  height="87" width="41" y="844" x="562" />
+		<Rect  height="88" width="51" y="360" x="317" />
+		<Rect  height="89" width="31" y="856" x="762" />
+		<Rect  height="89" width="57" y="0" x="157" />
+	</Action>
+	<Action actionName = "throw" interval = "0.1" isLoop = "false">
+		<Rect  height="56" width="43" y="530" x="517" />
+		<Rect  height="59" width="41" y="256" x="562" />
+		<Rect  height="58" width="38" y="603" x="647" />
+		<Rect  height="60" width="46" y="177" x="469" />
+		<Rect  height="58" width="37" y="943" x="687" />
+		<Rect  height="52" width="39" y="220" x="647" />
+	</Action>
+	<Action actionName = "throwground" interval = "0.1" isLoop = "false">
+		<Rect  height="44" width="37" y="143" x="688" />
+		<Rect  height="48" width="37" y="893" x="687" />
+		<Rect  height="48" width="50" y="61" x="369" />
+		<Rect  height="37" width="82" y="71" x="0" />
+		<Rect  height="37" width="57" y="804" x="141" />
+	</Action>
+	<Action actionName = "walkonbarrier" interval = "0.1" isLoop = "false">
+		<Rect  height="62" width="54" y="911" x="258" />
+		<Rect  height="63" width="50" y="860" x="368" />
+		<Rect  height="60" width="45" y="665" x="470" />
+		<Rect  height="59" width="50" y="0" x="369" />
+		<Rect  height="54" width="56" y="585" x="203" />
+		<Rect  height="59" width="59" y="310" x="142" />
+		<Rect  height="69" width="58" y="518" x="143" />
+		<Rect  height="70" width="55" y="300" x="203" />
+	</Action>
+</TextureAtlas>

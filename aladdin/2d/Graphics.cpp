@@ -20,14 +20,14 @@ Graphics::Graphics():
   _directXDevice( 0 ),
   _directXSprite( 0 ) {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
-  _logger.debug( "Created" );
+  _logger.info( "Created" );
 }
 
 Graphics::~Graphics() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger.debug( "Released" );
+  _logger.info( "Released" );
 }
 
 Graphics* Graphics::get() {
@@ -70,7 +70,7 @@ void Graphics::initDirectX() {
   // init DirectX
   _directX = Direct3DCreate9( D3D_SDK_VERSION );
   ALA_ASSERT(!FAILED(_directX));
-  _logger.debug( "Initialized DirectX" );
+  _logger.info( "Initialized DirectX" );
 
   // init DirectX device
   D3DPRESENT_PARAMETERS d3dpp;
@@ -92,28 +92,28 @@ void Graphics::initDirectX() {
 
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXDevice));
-  _logger.debug( "Created DirectX Device" );
+  _logger.info( "Created DirectX Device" );
 
 
   // init DirectX Sprite
   result = D3DXCreateSprite( _directXDevice, &_directXSprite );
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXSprite));
-  _logger.debug( "Created DirectX Sprite" );
+  _logger.info( "Created DirectX Sprite" );
 }
 
 void Graphics::releaseDirectX() {
   if ( _directXSprite ) {
     _directXSprite->Release();
-    _logger.debug( "Released DirectX Sprite" );
+    _logger.info( "Released DirectX Sprite" );
   }
   if ( _directXDevice ) {
     _directXDevice->Release();
-    _logger.debug( "Released DirectX Device" );
+    _logger.info( "Released DirectX Device" );
   }
   if ( _directX ) {
     _directX->Release();
-    _logger.debug( "Released DirectX" );
+    _logger.info( "Released DirectX" );
   }
 }
 

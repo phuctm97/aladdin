@@ -11,57 +11,120 @@ Animator::~Animator ( )
 
 void Animator::onUpdate ( const float delta )
 {
+  if(!_isPlaying)
+  {
+    return;
+  }
+
   _elapsedTime += delta;
-  if(_elapsedTime >= _interval)
+
+  if (_elapsedTime >= _currentAction->getInterval (  ))
   {
     ++_frameIterator;
-    if(_frameIterator == _frames.end (  ))
+    if (_frameIterator == _currentAction->getFrames().end() )
     {
-      _frameIterator = _frames.begin();
+      if(!_currentAction->isLoop (  ))
+      {
+        _isPlaying = false;
+        return;
+      }
+      else
+      {
+        playFromStart();
+        _elapsedTime = 0;
+      }
     }
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
-    _elapsedTime = 0;
+    else
+    {
+      getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+      _elapsedTime = 0;
+    }
+
+
   }
+
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation,const float interval,const std::string& name )
-  :GameObjectComponent ( gameObject, name ),
-  _interval ( interval>0? interval: 1000)
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Animation* animation,const std::string& name )
+  :GameObjectComponent ( gameObject, name )
 {
+  _isPlaying = true;
+
   _animation = animation;
-  _frames = _animation->getFrameForAction(entryAction);
+  _currentAction = _animation->getAction(entryAction);
 
-  _frameIterator = _frames.begin();
+  _frameIterator = _currentAction->getFrames (  ).begin();
 
   getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
-
 }
 
-Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName,const float interval,const std::string& name )
-  :GameObjectComponent(gameObject, name),
-  _interval(interval>0 ? interval : 1000)
+Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName, const std::string& name )
+  :GameObjectComponent(gameObject, name)
 {
+  _isPlaying = true;
+
   _animation = static_cast<Animation*>(GameManager::get()->getResource(animationResourceName));
-  _frames = _animation->getFrameForAction(entryAction);
+  _currentAction = _animation->getAction(entryAction);
 
-  _frameIterator = _frames.begin (  );
+  _frameIterator = _currentAction->getFrames().begin();
 
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+
+}
+
+void Animator::setAction ( const std::string& actionName )
+{
+  _currentAction = _animation->getAction(actionName);
+  _frameIterator = _currentAction->getFrames().begin();
+  _isPlaying = true;
   getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
 }
 
-void Animator::setAction (const std::string& actionName )
+const std::string& Animator::getAction ( ) const
 {
-  _frames = _animation->getFrameForAction(actionName);
-  _frameIterator = _frames.begin (  );
-}
-
-void Animator::setFrameInterval (const float interval )
-{
-  _interval = interval < 0 ? _interval : interval;
+  return _currentAction->getActionName();
 }
 
 Rect Animator::getCurrentFrame ( ) const
 {
   return *_frameIterator;
+}
+
+void Animator::pause ( )
+{
+  _isPlaying = false;
+}
+
+void Animator::playNext ( )
+{
+  ++_frameIterator;
+
+  if(_frameIterator == _currentAction->getFrames (  ).end (  ))
+  {
+    playFromStart();
+  }
+  else
+  {
+    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  }
+}
+
+void Animator::play ( )
+{
+  _isPlaying = true;
+}
+
+void Animator::playFromStart ( )
+{
+  _isPlaying = true;
+
+  _frameIterator = _currentAction->getFrames().begin();
+
+  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+}
+
+bool Animator::isPlaying ( ) const
+{
+  return _isPlaying;
 }
 }

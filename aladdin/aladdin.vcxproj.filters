@@ -163,6 +163,9 @@
     <ClInclude Include="2d\RectMessageArgs.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="2d\AnimationAction.h">
+      <Filter>2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -277,6 +280,9 @@
       <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="2d\RectMessageArgs.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\AnimationAction.cpp">
       <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>

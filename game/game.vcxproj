@@ -127,10 +127,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\CameraPrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
     <ClCompile Include="scripts\BallController.cpp" />
-    <ClCompile Include="states\GoDownState.cpp" />
+    <ClCompile Include="states\DownRightState.cpp" />
     <ClCompile Include="states\GoLeftState.cpp" />
     <ClCompile Include="states\GoRightState.cpp" />
-    <ClCompile Include="states\GoUpState.cpp" />
+    <ClCompile Include="states\StandLeftState.cpp" />
+    <ClCompile Include="states\StandRightState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -145,21 +146,25 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\CameraPrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
     <ClInclude Include="scripts\BallController.h" />
-    <ClInclude Include="states\GoDownState.h" />
+    <ClInclude Include="states\DownRightState.h" />
     <ClInclude Include="states\GoLeftState.h" />
     <ClInclude Include="states\GoRightState.h" />
-    <ClInclude Include="states\GoUpState.h" />
+    <ClInclude Include="states\StandLeftState.h" />
+    <ClInclude Include="states\StandRightState.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\aladdin.png" />
     <Image Include="textures\ball.png" />
+    <Image Include="textures\sprites.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="audio\sfx\wow.wav" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="animations\aladdin.animation" />
     <None Include="animations\sprites.animation" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

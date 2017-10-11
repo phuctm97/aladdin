@@ -11,14 +11,14 @@ Audio::Audio() :
   _hWnd( 0 ),
   _directXSound( 0 ) {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
-  _logger.debug( "Created" );
+  _logger.info( "Created" );
 }
 
 Audio::~Audio() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger.debug( "Released" );
+  _logger.info( "Released" );
 }
 
 Audio* Audio::get() {
@@ -81,6 +81,7 @@ void Audio::release() {
 
   setToReleasing();
 
+  releaseDirectXSound();
 
   setToReleased();
 
@@ -98,13 +99,15 @@ void Audio::initDirectXSound() {
   result = _directXSound->SetPrimaryBufferFormat( 2, 22050, 16 );
   ALA_ASSERT(result == DS_OK);
 
-  _logger.debug( "Created DirectX Sound" );
+  _logger.info( "Created DirectX Sound" );
 }
 
 void Audio::releaseDirectXSound() {
   if ( _directXSound ) {
     delete _directXSound;
     _directXSound = 0;
+
+    _logger.info( "Released DirectX Sound" );
   }
 }
 }

@@ -26,14 +26,14 @@ Input::Input()
     _directXInput( 0 ),
     _directXInputKeyboard( 0 ) {
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
-  _logger.debug( "Created" );
+  _logger.info( "Created" );
 }
 
 Input::~Input() {
   if ( isInitialized() ) {
     ALA_ASSERT(isReleased());
   }
-  _logger.debug( "Released" );
+  _logger.info( "Released" );
 }
 
 bool Input::getKey( const int code ) const {
@@ -151,14 +151,14 @@ void Input::initDirectXInput() {
   ALA_ASSERT(result == DI_OK);
   ALA_ASSERT(!FAILED(_directXInput));
 
-  _logger.debug( "Created DirectX Input" );
+  _logger.info( "Created DirectX Input" );
 
   // init DirectX Input Keyboard
   result = _directXInput->CreateDevice( GUID_SysKeyboard, &_directXInputKeyboard, NULL );
   ALA_ASSERT(result == DI_OK);
   ALA_ASSERT(!FAILED(_directXInputKeyboard));
 
-  _logger.debug( "Created DirectX Input Keyboard Device" );
+  _logger.info( "Created DirectX Input Keyboard Device" );
 
   // acquire Keyboard
   result = _directXInputKeyboard->SetDataFormat( &c_dfDIKeyboard );
@@ -168,7 +168,7 @@ void Input::initDirectXInput() {
   result = _directXInputKeyboard->Acquire();
   ALA_ASSERT(result == DI_OK);
 
-  _logger.debug( "Acquired Keyboard Device" );
+  _logger.info( "Acquired Keyboard Device" );
 }
 
 void Input::initDirectXKeysMap() {
@@ -386,14 +386,14 @@ void Input::initDirectXKeysMap() {
 void Input::releaseDirectXInput() {
   if ( _directXInputKeyboard ) {
     _directXInputKeyboard->Unacquire();
-    _logger.debug( "Unacquired Keyboard Device" );
+    _logger.info( "Unacquired Keyboard Device" );
 
     _directXInputKeyboard->Release();
-    _logger.debug( "Released DirectX Input Keyboard Device" );
+    _logger.info( "Released DirectX Input Keyboard Device" );
   }
   if ( _directXInput ) {
     _directXInput->Release();
-    _logger.debug( "Released DirectX Input" );
+    _logger.info( "Released DirectX Input" );
   }
 }
 
