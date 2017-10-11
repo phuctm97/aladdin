@@ -23,17 +23,6 @@ protected:
   void onLoad() override;
 
   void onRelease() override;
-
-  // ===================================================
-  // Platform specific
-  // ===================================================
-private:
-  CSound* _cSound;
-
-public:
-  CSound* getCSound() const;
-
-  void setCSound( CSound* cSound );
 };
 }
 

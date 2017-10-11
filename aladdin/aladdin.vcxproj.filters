@@ -166,6 +166,9 @@
     <ClInclude Include="2d\AnimationAction.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="audio\Sound.h">
+      <Filter>audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -284,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="2d\AnimationAction.cpp">
       <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="audio\Sound.cpp">
+      <Filter>audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

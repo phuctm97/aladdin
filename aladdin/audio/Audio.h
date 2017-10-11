@@ -2,7 +2,7 @@
 #define __ALADDIN_AUDIO_AUDIO_H__
 
 #include "AudioInclude.h"
-#include "AudioClip.h"
+#include "Sound.h"
 
 NAMESPACE_ALA
 {
@@ -24,11 +24,11 @@ public:
 
   static Audio* get();
 
-  void load( AudioClip* clip );
+  void load( Sound* sound );
 
-  void play( AudioClip* clip, bool loop );
+  void play( Sound* sound, bool loop );
 
-  void stop( AudioClip* clip );
+  void stop( Sound* sound );
 
 public:
   void initialize() override;

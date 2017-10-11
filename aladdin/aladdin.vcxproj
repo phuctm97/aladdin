@@ -143,6 +143,7 @@
     <ClInclude Include="audio\AudioMarcos.h" />
     <ClInclude Include="audio\AudioSource.h" />
     <ClInclude Include="audio\dxaudio.h" />
+    <ClInclude Include="audio\Sound.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\ClassMeta.h" />
     <ClInclude Include="core\Color.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="audio\AudioClip.cpp" />
     <ClCompile Include="audio\AudioSource.cpp" />
     <ClCompile Include="audio\dxaudio.cpp" />
+    <ClCompile Include="audio\Sound.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\ClassMeta.cpp" />
     <ClCompile Include="core\Color.cpp" />

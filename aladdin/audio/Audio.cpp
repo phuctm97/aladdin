@@ -28,41 +28,41 @@ Audio* Audio::get() {
   return __instance;
 }
 
-void Audio::load( AudioClip* clip ) {
-  ALA_ASSERT(clip != NULL);
+void Audio::load( Sound* sound ) {
+  ALA_ASSERT(sound != NULL);
 
   HRESULT result;
 
   CSound* cSound = 0;
 
   char srcFile[256];
-  std::copy( clip->getSourceFile().cbegin(), clip->getSourceFile().cend(), srcFile );
-  srcFile[clip->getSourceFile().length()] = '\0';
+  std::copy( sound->getSourceFile().cbegin(), sound->getSourceFile().cend(), srcFile );
+  srcFile[sound->getSourceFile().length()] = '\0';
 
   result = _directXSound->Create( &cSound, srcFile );
   ALA_ASSERT(result == DS_OK);
 
-  clip->setCSound( cSound );
+  sound->setCSound( cSound );
 }
 
-void Audio::play( AudioClip* clip, bool loop ) {
-  if ( clip == NULL ) return;
-  if ( !clip->getCSound() ) return;
+void Audio::play( Sound* sound, bool loop ) {
+  if ( sound == NULL ) return;
+  if ( !sound->getCSound() ) return;
 
   if ( loop ) {
-    clip->getCSound()->Play( 0, DSBPLAY_LOOPING );
+    sound->getCSound()->Play( 0, DSBPLAY_LOOPING );
   }
   else {
-    clip->getCSound()->Play();
+    sound->getCSound()->Play();
   }
 }
 
-void Audio::stop( AudioClip* clip ) {
-  if ( clip == NULL ) return;
-  if ( !clip->getCSound() ) return;
+void Audio::stop( Sound* sound ) {
+  if ( sound == NULL ) return;
+  if ( !sound->getCSound() ) return;
 
-  if ( clip->getCSound()->IsSoundPlaying() ) {
-    clip->getCSound()->Stop();
+  if ( sound->getCSound()->IsSoundPlaying() ) {
+    sound->getCSound()->Stop();
   }
 }
 
