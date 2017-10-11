@@ -1,10 +1,6 @@
 #include "GoLeftState.h"
-#include "core/GameManager.h"
-#include "2d/SpriteRenderer.h"
-#include "input/Input.h"
 #include "GoRightState.h"
 #include "StandLeftState.h"
-#include "2d/Animator.h"
 
 GoLeftState::GoLeftState ( ala::GameObject* gameObject)
   :IState ( gameObject )

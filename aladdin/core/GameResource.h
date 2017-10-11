@@ -34,6 +34,10 @@ public:
 
   bool isGameScope() const;
 
+  virtual bool isShared() const;
+
+  virtual GameResource* clone();
+
 protected:
   virtual void onLoad() = 0;
 

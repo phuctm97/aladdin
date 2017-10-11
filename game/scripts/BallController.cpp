@@ -3,7 +3,6 @@
  */
 
 #include "BallController.h"
-#include "core/StringMessageArgs.h"
 
 BallController::BallController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
