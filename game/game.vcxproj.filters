@@ -60,14 +60,17 @@
     <ClCompile Include="states\GoRightState.cpp">
       <Filter>states</Filter>
     </ClCompile>
-    <ClCompile Include="states\GoUpState.cpp">
-      <Filter>states</Filter>
-    </ClCompile>
-    <ClCompile Include="states\GoDownState.cpp">
-      <Filter>states</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\AnimationExamplePrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="states\StandLeftState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\StandRightState.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="states\DownRightState.cpp">
+      <Filter>states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,14 +98,17 @@
     <ClInclude Include="states\GoRightState.h">
       <Filter>states</Filter>
     </ClInclude>
-    <ClInclude Include="states\GoUpState.h">
-      <Filter>states</Filter>
-    </ClInclude>
-    <ClInclude Include="states\GoDownState.h">
-      <Filter>states</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\AnimationExamplePrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="states\StandLeftState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\StandRightState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="states\DownRightState.h">
+      <Filter>states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

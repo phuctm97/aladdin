@@ -1,12 +1,12 @@
-#ifndef __GO_LEFT_STATE_H__
-#define __GO_LEFT_STATE_H__
+﻿#ifndef __DOWN_RIGHT_STATE_H__
+#define __DOWN_RIGHT_STATE_H__
 
 #include "core/IState.h"
 
-class GoLeftState: public ala::IState
+class DownRightState : public ala::IState
 {
 public:
-  GoLeftState(ala::GameObject* gameObject);
+  DownRightState(ala::GameObject* gameObject);
 
   IState* checkTransition() override;
   void onUpdate(const float dt) override;

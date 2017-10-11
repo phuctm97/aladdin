@@ -22,8 +22,8 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _origin( 0.5f, 0.5f ),
     _childrenInLocking( false ),
     _parent( parentTransform ),
-    _dirty( false ),
-    _inverseDirty( false ) {
+    _dirty( true ),
+    _inverseDirty( true ) {
   if ( _parent != NULL ) {
     _localToWorldMatrix = Mat4::getIdentityMat();
     _worldToLocalMatrix = Mat4::getIdentityMat();

@@ -127,6 +127,7 @@
     <ClInclude Include="2d\2dInclude.h" />
     <ClInclude Include="2d\2dMacros.h" />
     <ClInclude Include="2d\Animation.h" />
+    <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\Graphics.h" />
@@ -173,9 +174,13 @@
     <ClInclude Include="input\InputMarcos.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
+    <ClInclude Include="ui\Text.h" />
+    <ClInclude Include="ui\UIInclude.h" />
+    <ClInclude Include="ui\UIMacros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Animation.cpp" />
+    <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
@@ -213,6 +218,7 @@
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
+    <ClCompile Include="ui\Text.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
