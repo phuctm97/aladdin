@@ -1,8 +1,10 @@
 #include "GoLeftState.h"
 #include "core/GameManager.h"
-#include "GoUpState.h"
-#include "2d/Animator.h"
 #include "2d/SpriteRenderer.h"
+#include "input/Input.h"
+#include "GoRightState.h"
+#include "StandLeftState.h"
+#include "2d/Animator.h"
 
 GoLeftState::GoLeftState ( ala::GameObject* gameObject)
   :IState ( gameObject )
@@ -11,21 +13,25 @@ GoLeftState::GoLeftState ( ala::GameObject* gameObject)
 
 ala::IState* GoLeftState::checkTransition ( )
 {
-  auto transform = getGameObject()->getTransform (  );
 
-  auto spriteRenderer = getGameObject()->getComponentT<ala::SpriteRenderer>();
-
-  if(transform->getPositionX (  ) - spriteRenderer->getFrameSize (  ).getWidth (  )/2 <= -ala::GameManager::get (  )->getScreenWidth (  )/2)
+  if(ala::Input::get()->getKeyDown(ALA_KEY_RIGHT_ARROW))
   {
-    auto animator = getGameObject()->getComponentT< ala::Animator>();
-    animator->setAction("Back");
-    return new GoUpState(getGameObject (  ));
+    return new GoRightState(getGameObject());
   }
-  else
+  if (ala::Input::get()->getKeyUp(ALA_KEY_LEFT_ARROW))
   {
-    return NULL;
+    return new StandLeftState(getGameObject());
   }
+  return NULL;
 }
+
+void GoLeftState::onStateEnter()
+{
+  auto animator = getGameObject()->getComponentT< ala::Animator>();
+  animator->setAction("run");
+  getGameObject()->getTransform()->setScaleX(-1);
+}
+
 
 void GoLeftState::onUpdate ( const float dt )
 {
