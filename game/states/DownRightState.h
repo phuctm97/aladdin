@@ -1,7 +1,7 @@
 ﻿#ifndef __DOWN_RIGHT_STATE_H__
 #define __DOWN_RIGHT_STATE_H__
 
-#include "core/IState.h"
+#include <aladdin.h>
 
 class DownRightState : public ala::IState
 {

@@ -1,7 +1,4 @@
-#include "2d/Animator.h"
-#include "2d/SpriteRenderer.h"
 #include "GoRightState.h"
-#include "input/Input.h"
 #include "GoLeftState.h"
 #include "StandRightState.h"
 

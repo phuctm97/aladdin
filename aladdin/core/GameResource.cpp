@@ -81,6 +81,14 @@ bool GameResource::isGameScope() const {
   return _sceneScope == NULL;
 }
 
+bool GameResource::isShared() const {
+  return true;
+}
+
+GameResource* GameResource::clone() {
+  return this;
+}
+
 // =============================================
 // Debug memory allocation
 // =============================================

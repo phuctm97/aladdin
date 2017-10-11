@@ -1,7 +1,7 @@
 #ifndef __GO_RIGHT_STATE_H__
 #define __GO_RIGHT_STATE_H__
 
-#include "core/IState.h"
+#include <aladdin.h>
 
 class GoRightState : public ala::IState
 {

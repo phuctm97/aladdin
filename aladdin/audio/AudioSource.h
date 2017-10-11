@@ -3,12 +3,14 @@
 
 #include "AudioInclude.h"
 #include "AudioClip.h"
+#include "Sound.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1(AudioSource, ala::GameObjectComponent)
 private:
   AudioClip* _audioClip;
+  Sound* _sound;
   bool _loop;
 
 public:
@@ -32,10 +34,16 @@ public:
 
   AudioClip* getAudioClip() const;
 
+  Sound* getSound() const;
+
   void setLoop( const bool val );
 
   bool isLoop() const;
 
+protected:
+  void onInitialize() override;
+
+  void onRelease() override;
 };
 }
 

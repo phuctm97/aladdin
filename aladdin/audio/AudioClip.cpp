@@ -7,8 +7,7 @@ ALA_CLASS_SOURCE_1( ala::AudioClip, ala::GameResource )
 
 AudioClip::AudioClip( const std::string& name, const std::string& sourceFile, Scene* sceneScope )
   : GameResource( name, sceneScope ),
-    _sourceFile( sourceFile ),
-    _cSound( NULL ) {}
+    _sourceFile( sourceFile ) {}
 
 AudioClip::~AudioClip() {}
 
@@ -17,21 +16,7 @@ const std::string& AudioClip::getSourceFile() const {
 }
 
 void AudioClip::onLoad() {
-  Audio::get()->load( this );
 }
 
-void AudioClip::onRelease() {
-  if ( _cSound != NULL ) {
-    delete _cSound;
-    _cSound = NULL;
-  }
-}
-
-CSound* AudioClip::getCSound() const {
-  return _cSound;
-}
-
-void AudioClip::setCSound( CSound* cSound ) {
-  _cSound = cSound;
-}
+void AudioClip::onRelease() {}
 }

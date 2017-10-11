@@ -1,8 +1,6 @@
 ﻿#include "StandLeftState.h"
-#include "input/Input.h"
 #include "GoRightState.h"
 #include "GoLeftState.h"
-#include "2d/Animator.h"
 #include "StandRightState.h"
 #include "DownRightState.h"
 
