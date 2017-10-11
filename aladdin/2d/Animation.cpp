@@ -20,7 +20,7 @@ void Animation::onLoad ( )
 
   for(auto action: actionNodes)
   {
-    std::string actionName = action.attribute("actionName").as_string();
+    const std::string actionName = action.attribute("actionName").as_string();
 
     auto frameNodes = action.children("Rect");
 
@@ -35,7 +35,9 @@ void Animation::onLoad ( )
       frames.push_back(rect);
     }
 
-    _frames[actionName] = frames;
+    const auto animationAction = AnimationAction(frames, actionName, action.attribute("interval").as_float(), action.attribute("isLoop").as_bool());
+
+    _frames[actionName] = animationAction;
   }
 }
 
@@ -49,9 +51,9 @@ Animation::Animation ( const std::string& name, const std::string& sourceFile, S
   _sourceFile = sourceFile;
 }
 
-const std::vector<Rect>& Animation::getFrameForAction (const std::string& actionName )
+AnimationAction* Animation::getAction ( const std::string& actionName )
 {
-  return _frames[actionName];
+  return &_frames[actionName];
 }
 
 Animation::~Animation ( )

@@ -16,6 +16,9 @@
     <Filter Include="pugixml">
       <UniqueIdentifier>{862b369d-8247-49a1-aeaf-a36d4d1d8d1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ui">
+      <UniqueIdentifier>{98f96149-0620-4a11-ad01-ef2fc9288db0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\CoreInclude.h">
@@ -163,6 +166,18 @@
     <ClInclude Include="2d\RectMessageArgs.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="2d\AnimationAction.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Text.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UIInclude.h">
+      <Filter>ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UIMacros.h">
+      <Filter>ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -278,6 +293,12 @@
     </ClCompile>
     <ClCompile Include="2d\RectMessageArgs.cpp">
       <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\AnimationAction.cpp">
+      <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\Text.cpp">
+      <Filter>ui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
