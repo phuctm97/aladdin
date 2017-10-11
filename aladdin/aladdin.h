@@ -25,7 +25,7 @@
 #include "core/Vec2.h"
 #include "core/Mat4.h"
 #include "core/Transform.h"
-#include "core/IState.h"
+#include "core/State.h"
 #include "core/StateManager.h"
 #include "2d/2dInclude.h"
 #include "2d/Size.h"

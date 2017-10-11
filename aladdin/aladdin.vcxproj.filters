@@ -142,9 +142,6 @@
     <ClInclude Include="audio\Audio.h">
       <Filter>audio</Filter>
     </ClInclude>
-    <ClInclude Include="core\IState.h">
-      <Filter>core</Filter>
-    </ClInclude>
     <ClInclude Include="core\StateManager.h">
       <Filter>core</Filter>
     </ClInclude>
@@ -168,6 +165,12 @@
     </ClInclude>
     <ClInclude Include="audio\Sound.h">
       <Filter>audio</Filter>
+    </ClInclude>
+    <ClInclude Include="core\StateTransition.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\State.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,9 +270,6 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>audio</Filter>
     </ClCompile>
-    <ClCompile Include="core\IState.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="core\StateManager.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -290,6 +290,12 @@
     </ClCompile>
     <ClCompile Include="audio\Sound.cpp">
       <Filter>audio</Filter>
+    </ClCompile>
+    <ClCompile Include="core\StateTransition.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\State.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

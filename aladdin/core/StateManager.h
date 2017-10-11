@@ -1,23 +1,37 @@
 ﻿#ifndef __ALADDIN_CORE_STATE_MANAGER_H__
 #define __ALADDIN_CORE_STATE_MANAGER_H__
 
-#include "IState.h"
+#include "State.h"
 #include "GameObjectComponent.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1 ( StateManager, GameObjectComponent )
 private:
-  IState* _currentState;
+  std::string _startState;
+  
+  State* _currentState;
+
+  std::map<std::string, State*> _states;
 
 protected:
-  void onUpdate(const float delta) override;
+  void onInitialize() override;
+
+  void onUpdate( const float delta ) override;
+
   void onRelease() override;
 public:
-  StateManager(GameObject* gameObject, IState* startState, const std::string& name = "");
+  StateManager( GameObject* gameObject, const std::string& startState, const std::string& name = "" );
+
   virtual ~StateManager();
 
-  void changeState(IState* state);
+  void changeState( State* state );
+
+  void attachState( State* state );
+
+  void detachState( State* state );
+
+  State* getState( const std::string& name );
 };
 }
 

@@ -153,7 +153,7 @@
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
     <ClInclude Include="core\GameResource.h" />
-    <ClInclude Include="core\IState.h" />
+    <ClInclude Include="core\State.h" />
     <ClInclude Include="core\Mat4.h" />
     <ClInclude Include="core\MessageArgs.h" />
     <ClInclude Include="core\Initializable.h" />
@@ -166,6 +166,7 @@
     <ClInclude Include="core\ResourceInitializer.h" />
     <ClInclude Include="core\Scene.h" />
     <ClInclude Include="core\StateManager.h" />
+    <ClInclude Include="core\StateTransition.h" />
     <ClInclude Include="core\StdHelper.h" />
     <ClInclude Include="core\StringMessageArgs.h" />
     <ClInclude Include="core\Transform.h" />
@@ -199,7 +200,7 @@
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
     <ClCompile Include="core\GameResource.cpp" />
-    <ClCompile Include="core\IState.cpp" />
+    <ClCompile Include="core\State.cpp" />
     <ClCompile Include="core\Mat4.cpp" />
     <ClCompile Include="core\MessageArgs.cpp" />
     <ClCompile Include="core\Initializable.cpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="core\ResourceInitializer.cpp" />
     <ClCompile Include="core\Scene.cpp" />
     <ClCompile Include="core\StateManager.cpp" />
+    <ClCompile Include="core\StateTransition.cpp" />
     <ClCompile Include="core\StringMessageArgs.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
