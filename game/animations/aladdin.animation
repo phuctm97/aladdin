@@ -229,7 +229,7 @@
 		<Rect  height="35" width="39" y="50" x="216" />
 		<Rect  height="42" width="43" y="67" x="516" />
 	</Action>
-	<Action actionName = "run" interval = "0.1" isLoop = "false">
+	<Action actionName = "run" interval = "0.1" isLoop = "true">
 		<Rect  height="48" width="40" y="55" x="604" />
 		<Rect  height="51" width="43" y="964" x="516" />
 		<Rect  height="53" width="41" y="589" x="562" />

@@ -120,6 +120,12 @@
     <Image Include="textures\ball.png">
       <Filter>texures</Filter>
     </Image>
+    <Image Include="textures\aladdin.png">
+      <Filter>texures</Filter>
+    </Image>
+    <Image Include="textures\sprites.png">
+      <Filter>texures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="audio\sfx\wow.wav">
@@ -128,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\sprites.animation">
+      <Filter>animations</Filter>
+    </None>
+    <None Include="animations\aladdin.animation">
       <Filter>animations</Filter>
     </None>
   </ItemGroup>

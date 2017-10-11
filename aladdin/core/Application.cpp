@@ -25,7 +25,7 @@ Application::Application() :
   _hInstance( NULL ),
   _hWnd( NULL ) {
   // check initial state
-  setFps(60);
+  setFps( 60 );
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 }
 
@@ -35,28 +35,28 @@ Application::~Application() {
   }
 
   // memory debug
-  _logger.debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
-  _logger.debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
-  _logger.debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
-  _logger.debug( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
-  _logger.debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
-  _logger.debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
-  _logger.debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
-  _logger.debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
-  _logger.debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
-  _logger.debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
-  _logger.debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
-  _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
-  _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
-  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
-  _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
-  _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
+  _logger.info( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  _logger.info( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  _logger.info( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
+  _logger.info( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
+  _logger.info( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
+  _logger.info( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
+  _logger.info( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
+  _logger.info( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
+  _logger.info( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
+  _logger.info( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
+  _logger.info( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
+  _logger.info( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
+  _logger.info( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
+  _logger.info( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
+  _logger.info( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
+  _logger.info( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 
   //average fps
-  QueryPerformanceCounter(&_currentTimestamp);
-  auto interval = (float(_currentTimestamp.QuadPart - _startTimestamp.QuadPart))/_freq.QuadPart;
+  QueryPerformanceCounter( &_currentTimestamp );
+  auto interval = (float( _currentTimestamp.QuadPart - _startTimestamp.QuadPart )) / _freq.QuadPart;
   const auto fps = static_cast<int>(roundf( (_frameCount) / interval ));
-  _logger.debug( "Average FPS: %d", fps );
+  _logger.info( "Average FPS: %d", fps );
 }
 
 void Application::setScreenSize( int width, int height ) {
@@ -88,16 +88,16 @@ void Application::setAnimationInterval( float interval ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   ALA_ASSERT(interval >= 1.f / 61);
-  QueryPerformanceFrequency(&_freq);
-  _animationInterval.QuadPart = LONGLONG(interval * _freq.QuadPart);
+  QueryPerformanceFrequency( &_freq );
+  _animationInterval.QuadPart = LONGLONG( interval * _freq.QuadPart );
 }
 
 void Application::setFps( const int fps ) {
-  setAnimationInterval(1.0f / fps);
+  setAnimationInterval( 1.0f / fps );
 }
 
 float Application::getAnimationInterval() const {
-  return (float(_animationInterval.QuadPart))/(_freq.QuadPart);
+  return (float( _animationInterval.QuadPart )) / (_freq.QuadPart);
 }
 
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
@@ -347,10 +347,9 @@ void Application::initWindowHandle() {
   UpdateWindow( _hWnd );
 }
 
-void Application::gameLoop() 
-  {
+void Application::gameLoop() {
   // initial timestamp
-  QueryPerformanceCounter(&_startTimestamp);
+  QueryPerformanceCounter( &_startTimestamp );
   _lastTimestamp = _startTimestamp;
   _currentTimestamp = _lastTimestamp;
 
@@ -358,20 +357,18 @@ void Application::gameLoop()
   LONGLONG waitMS = 0L;
 
   // main loop
-  while ( !_exiting ) 
-  {
-    QueryPerformanceCounter(&_currentTimestamp);
+  while ( !_exiting ) {
+    QueryPerformanceCounter( &_currentTimestamp );
     interval = (_currentTimestamp.QuadPart - _lastTimestamp.QuadPart);
 
-    if (interval >= _animationInterval.QuadPart)
-    {
+    if ( interval >= _animationInterval.QuadPart ) {
       _lastTimestamp.QuadPart = _currentTimestamp.QuadPart;
-      _delta = (float(interval)) / _freq.QuadPart;
+      _delta = (float( interval )) / _freq.QuadPart;
 
       //convert to ms
       //_delta *= 1000.f;
 
-      _logger.debug("dt: %f", _delta);
+      _logger.debug( "dt: %f", _delta );
 
       _frameCount++;
       //if (_frameCount % 10 == 0) {
@@ -387,16 +384,15 @@ void Application::gameLoop()
 
       processGame();
     }
-    else
-    {
+    else {
       // The precision of timer on Windows is set to highest (1ms) by 'timeBeginPeriod' from above code,
       // but it's still not precise enough. For example, if the precision of timer is 1ms,
       // Sleep(3) may make a sleep of 2ms or 4ms. Therefore, we subtract 1ms here to make Sleep time shorter.
       // If 'waitMS' is equal or less than 1ms, don't sleep and run into next loop to
       // boost CPU to next frame accurately.
       waitMS = (_animationInterval.QuadPart - interval) * 1000L / _freq.QuadPart - 1L;
-      if (waitMS > 1L)
-        Sleep(static_cast<DWORD>(waitMS));
+      if ( waitMS > 1L )
+        Sleep( static_cast<DWORD>(waitMS) );
     }
   }
 }

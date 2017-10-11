@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿#ifndef __ALADDIN_CORE_ANIMATION_ACTION_H__
+#define __ALADDIN_CORE_ANIMATION_ACTION_H__
 
 #include "2dInclude.h"
 #include "Rect.h"
@@ -12,10 +13,13 @@ private:
 
   std::string _actionName;
 
-  std::vector< Rect> _frames;
+  std::vector<Rect> _frames;
 public:
   AnimationAction();
-  AnimationAction(const std::vector<Rect>& frames, const std::string& actionName, const float interval = 0, const bool loop = true);
+
+  AnimationAction( const std::vector<Rect>& frames, const std::string& actionName, const float interval = 0, const bool loop = true );
+
+  virtual ~AnimationAction();
 
   const std::vector<Rect>& getFrames() const;
 
@@ -26,3 +30,5 @@ public:
   const std::string& getActionName() const;
 };
 }
+
+#endif //!__ALADDIN_CORE_ANIMATION_ACTION_H__
