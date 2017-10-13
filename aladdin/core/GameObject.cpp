@@ -102,6 +102,14 @@ void GameObject::setSelfInitialize( const bool val ) {
   _selfInitialize = val;
 }
 
+const std::string& GameObject::getLayer() const {
+  return _layer;
+}
+
+void GameObject::setLayer( const std::string& layer ) {
+  _layer = layer;
+}
+
 // ===========================================================
 // Events
 // ===========================================================

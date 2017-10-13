@@ -89,6 +89,8 @@ void Audio::release() {
   delete this;
 }
 
+void Audio::onBackgroundToForeground() {}
+
 void Audio::initDirectXSound() {
   HRESULT result;
 

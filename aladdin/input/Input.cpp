@@ -133,6 +133,15 @@ void Input::update() {
   _directXInputKeyboard->GetDeviceState( sizeof(_directXKeys), static_cast<LPVOID>(&_directXKeys) );
 }
 
+void Input::onBackgroundToForeground() {
+  if ( !isInitialized() ) return;
+  if ( _directXInputKeyboard->Poll() != DI_OK ) {
+    if ( _directXInputKeyboard->Acquire() == DI_OK ) {
+      _logger.info( "Acquired Keyboard Device" );
+    }
+  }
+}
+
 
 // =================================================
 // Platform specific

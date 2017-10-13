@@ -35,6 +35,8 @@ public:
 
   void release() override;
 
+  void onBackgroundToForeground();
+
   // ===============================================
   // Game Information
   // ===============================================
@@ -131,13 +133,24 @@ public:
   std::vector<Prefab*> getAllPrefabs();
 
   // ===============================================
-  // Global messenger
+  // Global Messenger
   // ===============================================
 private:
   Messenger* _globalMessenger;
 
 public:
   Messenger* getGlobalMessenger() const;
+
+  // ===============================================
+  // Layer Management
+  // ===============================================
+private:
+  std::unordered_map<std::string, int> _layers;
+
+public:
+  void addLayer( const std::string& layer );
+
+  int getLayerIndex( const std::string& layer );
 };
 
 // TEMPLATE DEFINITIONS

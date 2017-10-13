@@ -45,6 +45,9 @@ protected:
   void onInitialize() override;
   void onRender() override;
   void onRelease() override;
+
+private:
+  int calculateWorldZOrder() const;
 };
 }
 

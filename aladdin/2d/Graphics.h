@@ -33,6 +33,8 @@ public:
 
   void release() override;
 
+  void onBackgroundToForeground();
+
   // ==========================================
   // Platform specific
   // ==========================================
