@@ -266,4 +266,21 @@ std::vector<Prefab*> GameManager::getAllPrefabs() {
 Messenger* GameManager::getGlobalMessenger() const {
   return _globalMessenger;
 }
+
+void GameManager::addLayer( const std::string& layer ) {
+  if ( isReleasing() || isReleased() ) return;
+  const auto it = _layers.find( layer );
+  if ( it != _layers.end() ) return;
+  _layers.emplace( layer, _layers.size() + 1 );
+}
+
+int GameManager::getLayerIndex( const std::string& layer ) {
+  if ( isReleasing() || isReleased() ) return -1;
+  const auto it = _layers.find( layer );
+  if ( it == _layers.end() ) {
+    addLayer( layer );
+    return _layers[layer];
+  }
+  return it->second;
+}
 }

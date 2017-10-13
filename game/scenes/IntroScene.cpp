@@ -9,14 +9,6 @@ IntroScene::IntroScene() : _ballDirectionChangedListener( 0 ), _logger( "IntroSc
 void IntroScene::onPreInitialize() {
   ala::GameManager::get()->getPrefab( "Camera" )->instantiate();
   ala::GameManager::get()->getPrefab( "AnimationExample" )->instantiate();
-
-  subscribeGlobalMessage(
-    "Ball Direction Changed",
-    [=]( ala::MessageArgs* arg ) {
-
-    _logger.info( static_cast<ala::StringMessageArgs*>(arg)->getPayload().c_str() );
-
-  } );
 }
 
 void IntroScene::onPreRelease() {}

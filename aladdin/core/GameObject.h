@@ -21,6 +21,7 @@ private:
   long _id;
   std::string _name;
   Scene* _parentScene;
+  std::string _layer;
   bool _active;
   bool _selfInitialize;
   bool _toReleaseInNextFrame;
@@ -51,6 +52,10 @@ public:
   bool isSelfInitialize() const;
 
   void setSelfInitialize( const bool val );
+
+  const std::string& getLayer() const;
+
+  void setLayer( const std::string& layer );
 
   // =========================================================
   // Events
