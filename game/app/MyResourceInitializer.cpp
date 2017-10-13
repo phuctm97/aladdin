@@ -5,7 +5,7 @@
 #include "MyResourceInitializer.h"
 #include "../prefabs/BallPrefab.h"
 #include "../prefabs/CameraPrefab.h"
-#include "../prefabs/AnimationExamplePrefab.h"
+#include "../prefabs/AladdinPrefab.h"
 
 void MyResourceInitializer::run() {
   // Textures
@@ -20,7 +20,7 @@ void MyResourceInitializer::run() {
   new ala::AudioClip( "wow.wav", "audio/sfx/wow.wav" );
 
   // Prefabs
-  new AnimationExamplePrefab();
+  new AladdinPrefab();
   new BallPrefab();
   new CameraPrefab();
 }
