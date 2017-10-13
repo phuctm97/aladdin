@@ -166,6 +166,8 @@ public:
 
   void update();
 
+  void onBackgroundToForeground();
+
   // =================================================
   // Platform specific
   // =================================================

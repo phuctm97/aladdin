@@ -53,7 +53,7 @@ public:
   // ================================================
   // Main Game Process
   // ================================================
-  void startWithScene(Scene* scene);
+  void startWithScene( Scene* scene );
 
 private:
   void updateInput();
@@ -61,6 +61,8 @@ private:
   void updateGame( const float delta );
 
   void renderGraphics();
+
+  void backgroundToForeground();
 
   // ================================================
   // Initializing & Releasing
@@ -87,6 +89,8 @@ protected:
    * \brief Set Scene to start here
    */
   virtual void onPostInitialize() = 0;
+
+  virtual void onBackgroundToForeground();
 
   // ================================================
   // Platform specific

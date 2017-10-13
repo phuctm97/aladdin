@@ -85,7 +85,9 @@ Size SpriteRenderer::getFrameSize() const {
 }
 
 void SpriteRenderer::setZOrder( const int zOrder ) {
-  _zOrder = zOrder;
+  if (zOrder < 0) _zOrder = 0;
+  else if (zOrder >= 1000) _zOrder = 999;
+  else _zOrder = zOrder;
 }
 
 int SpriteRenderer::getZOrder() const {
@@ -98,13 +100,21 @@ void SpriteRenderer::onInitialize ( )
 
 void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
-
-  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, _srcRect, _zOrder );
+  auto worldZOrder = calculateWorldZOrder();
+  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
 }
 
 void SpriteRenderer::onRelease ( )
 {
   // TODO: MessageListener auto release callbacks on destruction, this line may be redundant
   unsubcribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE);
+}
+
+int SpriteRenderer::calculateWorldZOrder() const {
+  return _zOrder;
+
+  int layerIndex = GameManager::get()->getLayerIndex(getGameObject()->getLayer());
+  int worldZOrder = layerIndex * 1000 + _zOrder;
+  return worldZOrder;
 }
 }
