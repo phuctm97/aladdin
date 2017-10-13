@@ -1,6 +1,9 @@
 ﻿#include "Camera.h"
 #include "Graphics.h"
 
+#define ALA_CAMERA_MIN_Z 0.0f
+#define ALA_CAMERA_MAX_Z 100000.0f
+
 NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1 ( ala::Camera, ala::GameObjectComponent )
@@ -11,7 +14,7 @@ Camera::Camera( GameObject* gameObject, const std::string& name ) :
   _height( 0 ),
   _angle( 0 ),
   _scaleFactor( Vec2( 1.0f, 1.0f ) ) {
-  _orthographicMatrix = Mat4::getOrthoLHMatrix( _width, _height, 0.f, 1.f );
+  _orthographicMatrix = Mat4::getOrthoLHMatrix( _width, _height, ALA_CAMERA_MIN_Z, ALA_CAMERA_MAX_Z);
 }
 
 Camera::Camera( GameObject* gameObject, const std::string& name,
@@ -24,7 +27,7 @@ Camera::Camera( GameObject* gameObject, const std::string& name,
   _height( height ),
   _angle( angle ),
   _scaleFactor( scaleFactor ) {
-  _orthographicMatrix = Mat4::getOrthoLHMatrix( _width, _height, 0.f, 1.f );
+  _orthographicMatrix = Mat4::getOrthoLHMatrix( _width, _height, ALA_CAMERA_MIN_Z, ALA_CAMERA_MAX_Z);
 }
 
 Camera::~Camera() {}

@@ -111,8 +111,6 @@ void SpriteRenderer::onRelease ( )
 }
 
 int SpriteRenderer::calculateWorldZOrder() const {
-  return _zOrder;
-
   int layerIndex = GameManager::get()->getLayerIndex(getGameObject()->getLayer());
   int worldZOrder = layerIndex * 1000 + _zOrder;
   return worldZOrder;
