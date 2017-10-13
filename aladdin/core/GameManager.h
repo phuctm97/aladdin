@@ -35,6 +35,8 @@ public:
 
   void release() override;
 
+  void onBackgroundToForeground();
+
   // ===============================================
   // Game Information
   // ===============================================

@@ -144,6 +144,16 @@ void Application::renderGraphics() {
   Graphics::get()->endRendering();
 }
 
+void Application::backgroundToForeground() {
+  _logger.info("On Background to Foreground");
+
+  Input::get()->onBackgroundToForeground();
+  Audio::get()->onBackgroundToForeground();
+  Graphics::get()->onBackgroundToForeground();
+  GameManager::get()->onBackgroundToForeground();
+  onBackgroundToForeground();
+}
+
 // ================================================
 // Initializing & Releasing
 // ================================================
@@ -266,6 +276,10 @@ void Application::releaseComponents() {
 
   auto graphics = Graphics::get();
   graphics->release();
+}
+
+void Application::onBackgroundToForeground() {
+  
 }
 
 // ===================================================
@@ -405,6 +419,10 @@ void Application::processMessage() {
       _exiting = true;
       return;
     }
+    if ( _msg.message == WM_ACTIVATE ) {
+      backgroundToForeground();
+      _msg.message = 0;
+    }
 
     // process message
     TranslateMessage( &_msg );
@@ -427,6 +445,11 @@ LRESULT Application::wndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
   // Process message sent to windows
 
   switch ( message ) {
+  case WM_ACTIVATE:
+    if ( wParam == WA_ACTIVE || wParam == WA_CLICKACTIVE ) {
+      PostMessage( hWnd, WM_ACTIVATE, wParam, lParam );
+    }
+    break;
   case WM_CLOSE: // Windows is about to be closed because user click Close button or press Alt + F4
     break;
   case WM_DESTROY: // Windows is already closed and is about to be destroyed

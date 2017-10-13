@@ -30,12 +30,12 @@ GameManager::GameManager() :
   _sceneToReplaceInNextFrame( NULL ),
   _globalMessenger( new Messenger() ) {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
-  _logger.debug( "Created" );
+  _logger.info( "Created" );
 }
 
 GameManager::~GameManager() {
   ALA_ASSERT(isReleased());
-  _logger.debug( "Released" );
+  _logger.info( "Released" );
 }
 
 void GameManager::update( const float delta ) {
@@ -57,6 +57,8 @@ void GameManager::release() {
   // destroy
   delete this;
 }
+
+void GameManager::onBackgroundToForeground() {}
 
 // ==============================================
 // Game Information

@@ -60,6 +60,8 @@ void Graphics::release() {
   delete this;
 }
 
+void Graphics::onBackgroundToForeground() {}
+
 // ==========================================
 // Platform specific
 // ==========================================
