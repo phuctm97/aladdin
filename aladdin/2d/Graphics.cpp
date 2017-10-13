@@ -137,7 +137,7 @@ bool Graphics::beginRendering() {
   _directXDevice->SetTransform(D3DTS_WORLD, &_worldMatrix);
   _directXDevice->SetTransform(D3DTS_VIEW, &_viewMatrix);
 
-  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE) != D3D_OK ) {
+  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_SORT_DEPTH_BACKTOFRONT ) != D3D_OK ) {
     _directXDevice->EndScene();
     _directXDevice->Present( 0, 0, 0, 0 );
     return false;
