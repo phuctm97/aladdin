@@ -17,8 +17,6 @@ protected:
   void onPreRelease() override;
 
 private:
-  long _ballDirectionChangedListener;
-
   ala::Logger _logger;
 };
 
