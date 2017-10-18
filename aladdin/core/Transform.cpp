@@ -228,7 +228,7 @@ Mat4 Transform::calculateLocalToParentMatrix() const {
   Mat4 matScale = Mat4::getScalingMatrix( _scale );
   Mat4 matTranslate = Mat4::getTranslationMatrix( _position );
 
-  return matRotate * matScale * matTranslate;
+  return matScale * matRotate * matTranslate;
 }
 
 Mat4 Transform::getLocalToWorldMatrix() {

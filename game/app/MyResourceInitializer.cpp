@@ -6,6 +6,8 @@
 #include "../prefabs/BallPrefab.h"
 #include "../prefabs/CameraPrefab.h"
 #include "../prefabs/AnimationExamplePrefab.h"
+#include "ui/Font.h"
+#include "../prefabs/TextExamplePrefab.h"
 
 void MyResourceInitializer::run() {
   // Textures
@@ -16,6 +18,8 @@ void MyResourceInitializer::run() {
   new ala::Sprite("aladdin.png", "textures/aladdin.png");
   new ala::Animation("aladdin.animation", "animations/aladdin.animation");
 
+  new ala::Font("Sail-Regular", "Sail-Regular", "fonts");
+
   // Audio
   new ala::AudioClip( "wow.wav", "audio/sfx/wow.wav" );
 
@@ -23,4 +27,5 @@ void MyResourceInitializer::run() {
   new AnimationExamplePrefab();
   new BallPrefab();
   new CameraPrefab();
+  new TextExamplePrefab();
 }

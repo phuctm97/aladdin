@@ -125,6 +125,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\AnimationExamplePrefab.cpp" />
     <ClCompile Include="prefabs\BallPrefab.cpp" />
     <ClCompile Include="prefabs\CameraPrefab.cpp" />
+    <ClCompile Include="prefabs\TextExamplePrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
     <ClCompile Include="scripts\BallController.cpp" />
   </ItemGroup>
@@ -139,6 +140,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\AnimationExamplePrefab.h" />
     <ClInclude Include="prefabs\BallPrefab.h" />
     <ClInclude Include="prefabs\CameraPrefab.h" />
+    <ClInclude Include="prefabs\TextExamplePrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
     <ClInclude Include="scripts\BallController.h" />
   </ItemGroup>

@@ -41,6 +41,10 @@ public:
 
   int getZOrder() const;
 
+  const Rect& getSourceRect() const;
+
+  void setSourceRect(const Rect& rect);
+
 protected:
   void onInitialize() override;
   void onRender() override;

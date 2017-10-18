@@ -4,6 +4,9 @@
 
 #include "Graphics.h"
 #include "Sprite.h"
+#include "../ui/FontInfo.h"
+#include "../ui/Font.h"
+#include "../ui/Text.h"
 
 NAMESPACE_ALA
 {
@@ -189,6 +192,28 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
+ID3DXFont* Graphics::loadFont ( std::string fontName, const FontInfo& fontInfo ) const
+{
+  ID3DXFont* font;
+
+  D3DXCreateFont(
+    _directXDevice,		// device
+    fontInfo.getFontHeight(),									// font height
+    0,												// font width
+    convertToDirectXFontWeight ( fontInfo.getFontWeight (  ) ),									// font weight
+    1,												//
+    fontInfo.getItalic (  ),										// italic
+    DEFAULT_CHARSET,
+    OUT_DEFAULT_PRECIS,
+    ANTIALIASED_QUALITY,
+    FF_DONTCARE,
+    fontName.c_str (  ),										// font face
+    &font										// pointer font
+  );
+
+  return font;
+}
+
 void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex ) {
   LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
   ALA_ASSERT(texture);
@@ -234,6 +259,37 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
   _directXSprite->SetTransform( &oldMatrix );
 }
 
+void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::string& text, const Rect& boundingRect,
+  const int horizontalAlignment, const int verticalAlignment, const Color& textColor, const Mat4& transformMatrix, const int zIndex )
+{
+  D3DXMATRIX oldMatrix;
+
+  const auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
+
+  const auto transformationMatrix = convertToDirectXMatrix(flipMatrix* transformMatrix);
+
+  _directXSprite->GetTransform(&oldMatrix);
+
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
+
+  _directXSprite->SetTransform(&finalMatrix);
+
+  auto directXFont = font->getFont(fontInfo);
+  //auto directXRect = convertToWindowsRect(boundingRect);
+  //auto directXRect = convertToWindowsRect(Rect(Vec2(0, 0), 500, 500));
+  RECT directXRect;
+  directXRect.top = -GameManager::get()->getScreenHeight() / 2;
+  directXRect.left = -GameManager::get()->getScreenWidth() / 2;
+  directXRect.right = GameManager::get()->getScreenWidth() / 2;
+  directXRect.bottom = GameManager::get()->getScreenHeight() / 2;
+  const auto directXTextFormat = convertToDirectXTextFormat(horizontalAlignment, verticalAlignment);
+  const auto directXTextColor = D3DXCOLOR(textColor.getR() / 256.f, textColor.getG() / 256.f, textColor.getB() / 256.f, textColor.getA() / 256.f);
+
+  directXFont->DrawTextA(_directXSprite, text.c_str(), -1, &directXRect, directXTextFormat, directXTextColor);
+
+  _directXSprite->SetTransform(&oldMatrix);
+}
+
 D3DXMATRIX Graphics::convertToDirectXMatrix( const Mat4& mat ) const {
 
   D3DXMATRIX result;
@@ -267,6 +323,71 @@ RECT Graphics::convertToWindowsRect( const Rect& srcRect ) const {
   desRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
   desRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
   return desRect;
+}
+
+DWORD Graphics::convertToDirectXFontWeight ( const int fontWeight ) const
+{
+  switch ( fontWeight )
+  {
+  case ALA_FONT_WEIGHT_LIGHT:
+    return FW_LIGHT;
+  case ALA_FONT_WEIGHT_BOLD:
+    return FW_BOLD;
+  case ALA_FONT_WEIGHT_EXTRABOLD:
+    return FW_EXTRABOLD;
+  case ALA_FONT_WEIGHT_EXTRALIGHT:
+    return FW_EXTRALIGHT;
+  case ALA_FONT_WEIGHT_HEAVY:
+    return FW_HEAVY;
+  case ALA_FONT_WEIGHT_MEDIUM:
+    return FW_MEDIUM;
+  case ALA_FONT_WEIGHT_NORMAL:
+    return FW_NORMAL;
+  case ALA_FONT_WEIGHT_SEMIBOLD:
+    return FW_SEMIBOLD;
+  case ALA_FONT_WEIGHT_THIN:
+    return FW_THIN;
+  default:
+    return FW_NORMAL;
+  }
+}
+
+DWORD Graphics::convertToDirectXTextFormat ( const int horizontalAlignment, const int verticalAlignment )
+{
+  DWORD textFormat;
+  switch ( horizontalAlignment )
+  {
+  case ALA_HORIZONTAL_ALIGNMENT_CENTER:
+    textFormat = DT_CENTER;
+    break;
+  case ALA_HORIZONTAL_ALIGNMENT_LEFT:
+    textFormat = DT_LEFT;
+    break;
+  case ALA_HORIZONTAL_ALIGNMENT_RIGHT:
+    textFormat = DT_RIGHT;
+    break;
+  default:
+    textFormat = DT_CENTER;
+    break;
+  }
+
+  switch (verticalAlignment)
+  {
+  case ALA_VERTICAL_ALIGNMENT_MIDDLE:
+    textFormat |= DT_VCENTER;
+    break;
+  case ALA_VERTICAL_ALIGNMENT_TOP:
+    textFormat != DT_TOP;
+    break;
+  case ALA_VERTICAL_ALIGNMENT_BOTTOM:
+    textFormat != DT_BOTTOM;
+    break;
+  default:
+    textFormat |= DT_VCENTER;
+    break;
+  }
+
+  return textFormat;
 }
 
 void Graphics::setProjectionMatrix ( const Mat4& mat )

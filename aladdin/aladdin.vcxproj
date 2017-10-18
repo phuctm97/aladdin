@@ -176,6 +176,10 @@
     <ClInclude Include="input\InputMarcos.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
+    <ClInclude Include="ui\Font.h" />
+    <ClInclude Include="ui\FontInfo.h" />
+    <ClInclude Include="ui\RectTransform.h" />
+    <ClInclude Include="ui\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Animation.cpp" />
@@ -219,6 +223,10 @@
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
+    <ClCompile Include="ui\Font.cpp" />
+    <ClCompile Include="ui\FontInfo.cpp" />
+    <ClCompile Include="ui\RectTransform.cpp" />
+    <ClCompile Include="ui\Text.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
