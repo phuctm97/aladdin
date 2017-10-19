@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\phuctm97\Desktop\gameuit\aladdin\aladdin;D:\dev\directx-sdk\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)directx\Include;$(SolutionDir)aladdin;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -79,6 +79,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -116,7 +121,12 @@
   <ItemGroup>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
+    <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp" />
+    <ClCompile Include="prefabs\BallPrefab.cpp" />
+    <ClCompile Include="prefabs\TextExamplePrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
+    <ClCompile Include="scripts\BallController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -125,10 +135,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
+    <ClInclude Include="app\MyResourceInitializer.h" />
+    <ClInclude Include="prefabs\AnimationExamplePrefab.h" />
+    <ClInclude Include="prefabs\BallPrefab.h" />
+    <ClInclude Include="prefabs\TextExamplePrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
+    <ClInclude Include="scripts\BallController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\aladdin.png" />
+    <Image Include="textures\ball.png" />
+    <Image Include="textures\sprites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\sfx\wow.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\aladdin.animation" />
+    <None Include="animations\sprites.animation" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

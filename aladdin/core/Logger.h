@@ -1,7 +1,11 @@
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #ifndef __ALADDIN_CORE_LOGGER_H__
 #define __ALADDIN_CORE_LOGGER_H__
 
-#include "Base.h"
+#include "ClassMeta.h"
 
 NAMESPACE_ALA
 {
@@ -21,11 +25,21 @@ public:
 
   Logger( const std::string& className );
 
+  virtual ~Logger();
+
   void debug( char const* const format, ... ) const;
 
   void info(char const* const format, ...) const;
 
   void error(char const* const format, ...) const;
+
+
+  // =============================================
+  // Debug memory allocation
+  // =============================================
+public:
+  static long TOTAL_LOGGERS_CREATED;
+  static long TOTAL_LOGGERS_DELETED;
 
 };
 }

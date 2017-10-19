@@ -16,7 +16,7 @@ public:
   static bool vectorContain( const std::vector<T>& vec, const T& value );
 
   template <class T>
-  static void vectorErase( std::vector<T>& vec, const T& value );
+  static bool vectorErase( std::vector<T>& vec, const T& value );
 };
 
 template <class T>
@@ -26,11 +26,12 @@ bool StdHelper::vectorContain( const std::vector<T>& vec, const T& value ) {
 }
 
 template <class T>
-void StdHelper::vectorErase( std::vector<T>& vec, const T& value ) {
+bool StdHelper::vectorErase( std::vector<T>& vec, const T& value ) {
   const auto it = std::find( vec.begin(), vec.end(), value );
-  if ( it != vec.end() ) {
-    vec.erase( it );
-  }
+  if ( it == vec.end() ) return false;
+  
+  vec.erase( it );
+  return true;
 }
 }
 

@@ -1,8 +1,25 @@
 #ifndef __INTRO_SCENE_H__
 #define __INTRO_SCENE_H__
 
-#include <core/Scene.h>
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
 
-class IntroScene : public ala::Scene { };
+#include <aladdin.h>
+
+class IntroScene : public ala::Scene, public ala::MessageListener {
+public:
+  IntroScene();
+
+protected:
+  void onPreInitialize() override;
+
+  void onPreRelease() override;
+
+private:
+  long _ballDirectionChangedListener;
+
+  ala::Logger _logger;
+};
 
 #endif //!__INTRO_SCENE_H__
