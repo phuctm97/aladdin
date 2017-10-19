@@ -3,12 +3,17 @@
  */
 
 #include "ResourceInitializer.h"
+#include "GameManager.h"
+#include "../2d/CameraPrefab.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0( ala::ResourceInitializer )
 
 ResourceInitializer::ResourceInitializer() {
+  //init framework prefabs
+  new CameraPrefab();
+
   TOTAL_RESOURCE_INITIALIZERS_CREATED++;
 }
 

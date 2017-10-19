@@ -48,10 +48,10 @@
     <ClCompile Include="scripts\BallController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\CameraPrefab.cpp">
+    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp">
+    <ClCompile Include="prefabs\TextExamplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClInclude Include="scripts\BallController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\CameraPrefab.h">
+    <ClInclude Include="prefabs\AnimationExamplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\AnimationExamplePrefab.h">
+    <ClInclude Include="prefabs\TextExamplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
