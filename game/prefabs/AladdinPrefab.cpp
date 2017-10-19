@@ -1,67 +1,82 @@
 #include "AladdinPrefab.h"
+#include "../scripts/VectorBasedMovement.h"
 
 void AladdinPrefab::doInstantiate( ala::GameObject* object ) {
-  object->getTransform()->setPosition( ala::GameManager::get()->getScreenWidth() / 2, ala::GameManager::get()->getScreenHeight() / 2 );
-
   new ala::SpriteRenderer( object, "aladdin.png" );
   auto animator = new ala::Animator( object, "idle_1", "aladdin.animation" );
   auto stateManager = new ala::StateManager( object, "stand_right" );
+  auto movement = new VectorBasedMovement( object );
+  auto transform = object->getTransform();
+
+  // Start position
+  transform->setPosition( ala::GameManager::get()->getScreenWidth() / 2, ala::GameManager::get()->getScreenHeight() / 2 );
 
   // State Stand
   new ala::State( stateManager, "stand_right",
                   [=] {
                   animator->setAction( "idle_1" );
+                  transform->setScaleX( 1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
   new ala::State( stateManager, "stand_left",
                   [=] {
                   animator->setAction( "idle_1" );
+                  transform->setScaleX( -1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
 
+
   // State Go
+  float goSpeed = 90;
+
   new ala::State( stateManager, "go_right",
                   [=] {
                   animator->setAction( "run_1" );
-                  object->getTransform()->setScaleX( 1 );
+                  transform->setScaleX( 1 );
+                  movement->setVectorX( goSpeed );
                 },
                   [=]( float dt ) {
                   if ( animator->getAction() == "run_1" && !animator->isPlaying() )
                     animator->setAction( "run_2" );
-                  auto position = object->getTransform()->getPosition();
-                  position.setX( position.getX() + 100 * dt );
-                  object->getTransform()->setPosition( position );
                 }, NULL );
+
   new ala::State( stateManager, "go_left",
                   [=] {
                   animator->setAction( "run_1" );
-                  object->getTransform()->setScaleX( -1 );
+                  transform->setScaleX( -1 );
+                  movement->setVectorX( -goSpeed );
                 },
                   [=]( float dt ) {
                   if ( animator->getAction() == "run_1" && !animator->isPlaying() )
                     animator->setAction( "run_2" );
-                  auto position = object->getTransform()->getPosition();
-                  position.setX( position.getX() - 100 * dt );
-                  object->getTransform()->setPosition( position );
                 }, NULL );
 
   // State Sit
   new ala::State( stateManager, "sit_left",
                   [=] {
                   animator->setAction( "sit" );
+                  transform->setScaleX( -1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
   new ala::State( stateManager, "sit_right",
                   [=] {
                   animator->setAction( "sit" );
+                  transform->setScaleX( 1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
 
   // State Throw
   new ala::State( stateManager, "throw_right",
                   [=] {
                   animator->setAction( "throw" );
+                  transform->setScaleX( 1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
   new ala::State( stateManager, "throw_left",
                   [=] {
                   animator->setAction( "throw" );
-                  object->getTransform()->setScaleX( -1 );
+                  transform->setScaleX( -1 );
+                  movement->setVectorX( 0 );
                 }, NULL, NULL );
 
   new ala::StateTransition( stateManager, "stand_right", "go_right",
