@@ -2,20 +2,22 @@
 #include "../scripts/BallController.h"
 
 void AnimationExamplePrefab::doInstantiate( ala::GameObject* object ) {
-  new ala::SpriteRenderer( object, "aladdin.png" );
-  new ala::Animator( object, "idle1", "aladdin.animation" );
+  auto sr = new ala::SpriteRenderer( object, "aladdin.png" );
+  new ala::Animator( object, "stand", "aladdin.animation" );
   new ala::AudioSource( object, "wow.wav" );
   auto stateManager = new ala::StateManager( object, "stand-right" );
+
+  sr->setZOrder(100);
 
   new ala::State( stateManager, "stand-right",
                   [=] {
                   auto animator = object->getComponentT<ala::Animator>();
-                  animator->setAction( "idle1" );
+                  animator->setAction( "stand" );
                 }, NULL, NULL );
   new ala::State( stateManager, "stand-left",
                   [=] {
                   auto animator = object->getComponentT<ala::Animator>();
-                  animator->setAction( "idle1" );
+                  animator->setAction( "stand" );
                 }, NULL, NULL );
   new ala::State( stateManager, "go-right",
                   [=] {

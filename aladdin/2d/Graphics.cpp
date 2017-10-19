@@ -140,7 +140,7 @@ bool Graphics::beginRendering() {
   _directXDevice->SetTransform(D3DTS_WORLD, &_worldMatrix);
   _directXDevice->SetTransform(D3DTS_VIEW, &_viewMatrix);
 
-  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_SORT_DEPTH_BACKTOFRONT ) != D3D_OK ) {
+  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK ) != D3D_OK ) {
     _directXDevice->EndScene();
     _directXDevice->Present( 0, 0, 0, 0 );
     return false;
@@ -223,13 +223,14 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
   D3DXVECTOR3 dPostition;
   dPostition.x = 0;
   dPostition.y = 0;
-  dPostition.z = static_cast<float>(zIndex);
+  dPostition.z = 0;
 
   D3DXMATRIX oldMatrix;
 
+  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, zIndex);
   auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
 
-  auto transformationMatrix = convertToDirectXMatrix(flipMatrix* transformMatrix);
+  auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);
 
   _directXSprite->GetTransform( &oldMatrix );
 
@@ -266,7 +267,7 @@ void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::strin
 
   const auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
 
-  const auto transformationMatrix = convertToDirectXMatrix(flipMatrix* transformMatrix);
+  const auto transformationMatrix = convertToDirectXMatrix(flipMatrix*transformMatrix);
 
   _directXSprite->GetTransform(&oldMatrix);
 
@@ -275,13 +276,13 @@ void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::strin
   _directXSprite->SetTransform(&finalMatrix);
 
   auto directXFont = font->getFont(fontInfo);
-  //auto directXRect = convertToWindowsRect(boundingRect);
-  //auto directXRect = convertToWindowsRect(Rect(Vec2(0, 0), 500, 500));
+
   RECT directXRect;
-  directXRect.top = -GameManager::get()->getScreenHeight() / 2;
-  directXRect.left = -GameManager::get()->getScreenWidth() / 2;
-  directXRect.right = GameManager::get()->getScreenWidth() / 2;
-  directXRect.bottom = GameManager::get()->getScreenHeight() / 2;
+  directXRect.left = static_cast<LONG>(boundingRect.getTopLeft().getX());
+  directXRect.top = -static_cast<LONG>(boundingRect.getTopLeft().getY());
+  directXRect.right = static_cast<LONG>(boundingRect.getTopLeft().getX() + boundingRect.getSize().getWidth());
+  directXRect.bottom = static_cast<LONG>(-boundingRect.getTopLeft().getY() + boundingRect.getSize().getHeight());
+
   const auto directXTextFormat = convertToDirectXTextFormat(horizontalAlignment, verticalAlignment);
   const auto directXTextColor = D3DXCOLOR(textColor.getR() / 256.f, textColor.getG() / 256.f, textColor.getB() / 256.f, textColor.getA() / 256.f);
 
@@ -377,10 +378,10 @@ DWORD Graphics::convertToDirectXTextFormat ( const int horizontalAlignment, cons
     textFormat |= DT_VCENTER;
     break;
   case ALA_VERTICAL_ALIGNMENT_TOP:
-    textFormat != DT_TOP;
+    textFormat |= DT_TOP;
     break;
   case ALA_VERTICAL_ALIGNMENT_BOTTOM:
-    textFormat != DT_BOTTOM;
+    textFormat |= DT_BOTTOM;
     break;
   default:
     textFormat |= DT_VCENTER;

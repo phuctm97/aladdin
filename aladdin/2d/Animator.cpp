@@ -63,6 +63,7 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
   auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
   if (spriteRenderer != NULL)
   {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
     spriteRenderer->setSourceRect(*_frameIterator);
   }
 }
@@ -80,6 +81,7 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
   auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
   if (spriteRenderer != NULL)
   {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
     spriteRenderer->setSourceRect(*_frameIterator);
   }
 
@@ -93,6 +95,7 @@ void Animator::setAction ( const std::string& actionName )
   auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
   if (spriteRenderer != NULL)
   {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
     spriteRenderer->setSourceRect(*_frameIterator);
   }
 }

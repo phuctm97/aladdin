@@ -1,15 +1,18 @@
 #ifndef __CAMERA_PREFAB_H__
 #define __CAMERA_PREFAB_H__
 
-#include <aladdin.h>
+#include "2dInclude.h"
 
-class CameraPrefab : public ala::Prefab {
+NAMESPACE_ALA
+{
+ALA_CLASS_HEADER_1 ( CameraPrefab, Prefab )
 public:
   CameraPrefab()
-    : Prefab( "Camera" ) {}
+    : Prefab( "MainCamera" ) {}
 
 protected:
   void doInstantiate( ala::GameObject* object ) override;
 };
+}
 
 #endif //!__CAMERA_PREFAB_H__

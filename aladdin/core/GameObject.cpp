@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "GameManager.h"
 #include "StdHelper.h"
+#include "../ui/RectTransform.h"
 
 NAMESPACE_ALA
 {
@@ -242,6 +243,12 @@ void GameObject::addComponent( GameObjectComponent* component ) {
 void GameObject::addComponentInNextFrame( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
+  if(ALA_IS_INSTANCE_OF ( component, RectTransform ))
+  {
+    _componentsToRemoveInNextFrame.push_back(_transform);
+    _transform = static_cast < RectTransform* > ( component );
+    _componentsToAddInNextFrame.push_back(component);
+  }
   if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
   _componentsToAddInNextFrame.push_back( component );
 }

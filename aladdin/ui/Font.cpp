@@ -16,8 +16,10 @@ Font::Font (const std::string& name, const std::string& fontName, const std::str
   else
   {
     _isSystemFont = false;
-    _fileName = fontPath + "/" + fontName;
-    _fontName = fontName;
+    TCHAR fullPath[MAX_PATH];
+    GetFullPathNameA((fontPath + "/" + fontName).c_str(), MAX_PATH, fullPath, NULL);
+    _fileName = fullPath;
+    _fontName = fontName.substr ( 0, fontName.find_last_of ( "." ) );
   }
 }
 
@@ -43,9 +45,7 @@ Font::~Font ( )
 
 void Font::onLoad ( )
 {
-  _fileName = "C:\\Users\\15520\\Source\\Repos\\aladdin\\game\\fonts\\Sail-Regular.otf";
-  int rs = 0;
-  auto name = TEXT(_fileName.c_str());
+  int rs;
   if(!_isSystemFont)
   {
     rs = AddFontResourceEx(TEXT(_fileName.c_str()), FR_PRIVATE, NULL);

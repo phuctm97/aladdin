@@ -187,6 +187,9 @@
     <ClInclude Include="ui\RectTransform.h">
       <Filter>ui</Filter>
     </ClInclude>
+    <ClInclude Include="2d\CameraPrefab.h">
+      <Filter>2d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -323,6 +326,9 @@
     </ClCompile>
     <ClCompile Include="ui\RectTransform.cpp">
       <Filter>ui</Filter>
+    </ClCompile>
+    <ClCompile Include="2d\CameraPrefab.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

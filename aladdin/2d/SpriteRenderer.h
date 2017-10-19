@@ -8,11 +8,10 @@
 #include "2dInclude.h"
 #include "Sprite.h"
 #include "Rect.h"
-#include "../core/MessageListener.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_2(SpriteRenderer, ala::GameObjectComponent, ala::MessageListener)
+ALA_CLASS_HEADER_1(SpriteRenderer, ala::GameObjectComponent)
 private:
   Sprite* _sprite;
   Color _backColor;

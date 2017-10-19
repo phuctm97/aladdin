@@ -95,17 +95,20 @@ void Text::onInitialize ( )
 
 void Text::onRender ( )
 {
-  //auto rectTransform = getGameObject()->getComponentT<RectTransform>();
+  auto rectTransform = getGameObject()->getComponentT<RectTransform>();
 
-  //if(rectTransform == NULL)
-  //{
-  //  return;
+  if(rectTransform == NULL)
+  {
+    return;
   
-  //}
+  }
 
-  auto rectTransform = getGameObject()->getTransform();
+  //auto rectTransform = getGameObject()->getTransform();
 
-  Graphics::get (  )->drawText(_font, _fontInfo, _text, Rect(), _horizontalAlignment, _verticalAlignment, _textColor, rectTransform->getLocalToWorldMatrix());
+  auto camera = GameManager::get()->getObjectByName("MainCamera");
+  auto cameraMatrix = camera->getTransform()->getLocalToWorldMatrix();
+
+  Graphics::get (  )->drawText(_font, _fontInfo, _text, rectTransform->getBoundingRect (), _horizontalAlignment, _verticalAlignment, _textColor, rectTransform->getLocalToWorldMatrix()*Mat4::getRotationZMatrix(360 - camera->getTransform()->getRotation())*cameraMatrix );
 }
 
 void Text::onRelease ( )

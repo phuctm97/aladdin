@@ -10,7 +10,6 @@ ALA_CLASS_HEADER_1 ( Camera, ala::GameObjectComponent )
 private:
   float _width;
   float _height;
-  float _angle;
   Vec2 _scaleFactor;
 
   Mat4 _orthographicMatrix;
@@ -21,7 +20,6 @@ public:
   Camera( GameObject* gameObject, const std::string& name,
           const float width,
           const float height,
-          const float angle,
           const Vec2& scaleFactor );
 
   virtual ~Camera();

@@ -6,7 +6,8 @@
 #include "../scripts/BallController.h"
 
 void BallPrefab::doInstantiate( ala::GameObject* object ) {
-  new ala::SpriteRenderer( object, "ball.png" );
+  auto sr = new ala::SpriteRenderer( object, "ball.png" );
   new ala::AudioSource( object, "wow.wav" );
-  new BallController( object );
+
+  sr->setZOrder(0);
 }

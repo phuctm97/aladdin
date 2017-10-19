@@ -130,6 +130,7 @@
     <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
+    <ClInclude Include="2d\CameraPrefab.h" />
     <ClInclude Include="2d\Graphics.h" />
     <ClInclude Include="2d\RectMessageArgs.h" />
     <ClInclude Include="2d\Rect.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
+    <ClCompile Include="2d\CameraPrefab.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
     <ClCompile Include="2d\RectMessageArgs.cpp" />
     <ClCompile Include="2d\Rect.cpp" />

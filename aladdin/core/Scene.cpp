@@ -66,7 +66,10 @@ void Scene::initialize() {
   onPostInitialize();
 }
 
-void Scene::onPreInitialize() {}
+void Scene::onPreInitialize()
+{
+  
+}
 
 void Scene::onPostInitialize() {}
 
