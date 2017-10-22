@@ -96,9 +96,9 @@ float Transform::getRotation() const {
 
 void Transform::setRotation( const float rotation ) {
   _rotation = rotation;
-  while(_rotation > 360)
+  if(_rotation > 360)
   {
-    _rotation -= 360;
+    _rotation = fmod(rotation, 360.f);
   }
   setDirty();
 }

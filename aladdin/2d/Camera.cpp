@@ -30,8 +30,7 @@ Camera::Camera( GameObject* gameObject, const std::string& name,
 Camera::~Camera() {}
 
 void Camera::onUpdate( float dt ) {
-  const auto angle = getGameObject()->getTransform()->getRotation();
-  auto radianAngle = angle* M_PI / 180.f;
+  const auto radianAngle = DEGREETORADIAN(getGameObject()->getTransform()->getRotation());
   _viewMatrix = Mat4::getIdentityMat();
   _viewMatrix.set11( _scaleFactor.getX() * cos(radianAngle) );
   _viewMatrix.set12( _scaleFactor.getX() * sin(radianAngle) );

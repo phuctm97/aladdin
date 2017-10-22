@@ -23,13 +23,13 @@ Font::Font (const std::string& name, const std::string& fontName, const std::str
   }
 }
 
-ID3DXFont* Font::getFont ( const FontInfo& fontInfo )
+ID3DXFont* Font::getDirectXFont ( const FontInfo& fontInfo )
 {
   const auto font = _fonts.find(fontInfo);
 
   if(font == _fonts.end (  ))
   {
-    const auto fontResource = Graphics::get (  )->loadFont(_fontName, fontInfo);
+    const auto fontResource = Graphics::get (  )->loadDirectXFont(_fontName, fontInfo);
     _fonts[fontInfo] = fontResource;
     return fontResource;
   }
@@ -45,10 +45,9 @@ Font::~Font ( )
 
 void Font::onLoad ( )
 {
-  int rs;
   if(!_isSystemFont)
   {
-    rs = AddFontResourceEx(TEXT(_fileName.c_str()), FR_PRIVATE, NULL);
+    AddFontResourceEx(TEXT(_fileName.c_str()), FR_PRIVATE, NULL);
   }
 }
 

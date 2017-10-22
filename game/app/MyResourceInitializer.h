@@ -9,7 +9,7 @@
 
 class MyResourceInitializer: public ala::ResourceInitializer {
 public:
-  void run() override;
+  void doRun() override;
 };
 
 

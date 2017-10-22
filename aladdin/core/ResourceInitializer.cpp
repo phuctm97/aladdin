@@ -11,9 +11,6 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_0( ala::ResourceInitializer )
 
 ResourceInitializer::ResourceInitializer() {
-  //init framework prefabs
-  new CameraPrefab();
-
   TOTAL_RESOURCE_INITIALIZERS_CREATED++;
 }
 
@@ -21,7 +18,15 @@ ResourceInitializer::~ResourceInitializer() {
   TOTAL_RESOURCE_INITIALIZERS_DELETED++;
 }
 
-// =============================================
+void ResourceInitializer::run ( )
+{
+  //init framework prefabs
+  new CameraPrefab();
+
+  doRun();
+}
+
+  // =============================================
 // Debug memory allocation
 // =============================================
 long ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED( 0 );

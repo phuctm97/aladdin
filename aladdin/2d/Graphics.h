@@ -63,7 +63,7 @@ public:
 
   void loadSprite( Sprite* sprite );
 
-  ID3DXFont* loadFont(std::string fontName, const FontInfo &fontInfo) const;
+  ID3DXFont* loadDirectXFont(std::string fontName, const FontInfo &fontInfo) const;
 
   void drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex = 0 );
 

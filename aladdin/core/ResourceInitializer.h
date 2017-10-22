@@ -15,7 +15,8 @@ public:
 
   virtual ~ResourceInitializer();
 
-  virtual void run() = 0;
+  virtual void run();
+  virtual void doRun() = 0;
 
   // =============================================
   // Debug memory allocation

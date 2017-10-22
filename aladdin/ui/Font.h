@@ -1,5 +1,5 @@
-﻿#ifndef __FONT_H__
-#define __FONT_H__
+﻿#ifndef __ALADDIN_CORE_FONT_H__
+#define __ALADDIN_CORE_FONT_H__
 
 #include "../core/GameResource.h"
 #include "FontInfo.h"
@@ -15,7 +15,7 @@ private:
 public:
   Font(const std::string& name, const std::string& fontName, const std::string& fontPath = "", Scene* scope = NULL);
 
-  ID3DXFont* getFont(const FontInfo& fontInfo);
+  ID3DXFont* getDirectXFont(const FontInfo& fontInfo);
 
   virtual ~Font();
 
@@ -25,4 +25,4 @@ protected:
   void onRelease() override;
 };
 }
-#endif //__FONT_H__
+#endif //!__ALADDIN_CORE_FONT_H__

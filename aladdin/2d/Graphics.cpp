@@ -192,7 +192,7 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
-ID3DXFont* Graphics::loadFont ( std::string fontName, const FontInfo& fontInfo ) const
+ID3DXFont* Graphics::loadDirectXFont ( std::string fontName, const FontInfo& fontInfo ) const
 {
   ID3DXFont* font;
 
@@ -275,7 +275,7 @@ void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::strin
 
   _directXSprite->SetTransform(&finalMatrix);
 
-  auto directXFont = font->getFont(fontInfo);
+  auto directXFont = font->getDirectXFont(fontInfo);
 
   RECT directXRect;
   directXRect.left = static_cast<LONG>(boundingRect.getTopLeft().getX());

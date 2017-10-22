@@ -8,7 +8,7 @@
 #include "ui/Font.h"
 #include "../prefabs/TextExamplePrefab.h"
 
-void MyResourceInitializer::run() {
+void MyResourceInitializer::doRun() {
   // Textures
   new ala::Sprite( "ball.png", "textures/ball.png" );
   new ala::Sprite( "sprites.png", "textures/sprites.png" );

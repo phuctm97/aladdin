@@ -1,5 +1,5 @@
-﻿#ifndef __RECT_TRANSFORM_H__
-#define __RECT_TRANSFORM_H__
+﻿#ifndef __ALADDIN_UI_RECT_TRANSFORM__
+#define __ALADDIN_UI_RECT_TRANSFORM__
 
 #include "../core/Transform.h"
 #include "../2d/Rect.h"
@@ -18,4 +18,4 @@ public:
 
 };
 }
-#endif //!__RECT_TRANSFORM_H__
+#endif //!__ALADDIN_UI_RECT_TRANSFORM__

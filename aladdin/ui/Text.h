@@ -1,5 +1,5 @@
-﻿#ifndef __TEXT_H__
-#define __TEXT_H__
+﻿#ifndef __ALADDIN_UI_TEXT_H__
+#define __ALADDIN_UI_TEXT_H__
 
 #include "../core/GameObjectComponent.h"
 #include "Font.h"
@@ -57,4 +57,4 @@ protected:
   void onRelease() override;
 };
 }
-#endif //!__TEXT_H__
+#endif //!__ALADDIN_UI_TEXT_H__
