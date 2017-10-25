@@ -174,6 +174,8 @@
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
     <ClInclude Include="input\InputMarcos.h" />
+    <ClInclude Include="physics\Collider.h" />
+    <ClInclude Include="physics\Rigidbody.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
   </ItemGroup>
@@ -218,6 +220,8 @@
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="input\Input.cpp" />
+    <ClCompile Include="physics\Collider.cpp" />
+    <ClCompile Include="physics\Rigidbody.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
