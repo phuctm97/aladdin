@@ -7,8 +7,12 @@
 IntroScene::IntroScene() : _logger( "IntroScene" ) {}
 
 void IntroScene::onPreInitialize() {
-  ala::GameManager::get()->getPrefab( "Camera" )->instantiate();
-  ala::GameManager::get()->getPrefab( "Aladdin" )->instantiate();
+  auto gameManager = ala::GameManager::get();
+
+  gameManager->getPrefab( "Camera" )->instantiate();
+  gameManager->getPrefab( "Background" )->instantiate( "Background" );
+  gameManager->getPrefab( "Foreground" )->instantiate( "Foreground" );
+  gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
 }
 
 void IntroScene::onPreRelease() {}

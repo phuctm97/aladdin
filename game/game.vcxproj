@@ -123,10 +123,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
+    <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
     <ClCompile Include="prefabs\CameraPrefab.cpp" />
+    <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="scenes\IntroScene.cpp" />
-    <ClCompile Include="scripts\VectorBasedMovement.cpp" />
+    <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\LimitedGravityAffectedVelocityBasedMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -137,15 +140,20 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
+    <ClInclude Include="prefabs\BackgroundPrefab.h" />
     <ClInclude Include="prefabs\CameraPrefab.h" />
+    <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="scenes\IntroScene.h" />
-    <ClInclude Include="scripts\VectorBasedMovement.h" />
+    <ClInclude Include="scripts\CameraController.h" />
+    <ClInclude Include="scripts\LimitedGravityAffectedVelocityBasedMovement.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\backgrounds\scene_1_0.png" />
+    <Image Include="textures\backgrounds\scene_1_1.png" />
     <Image Include="textures\miscellaneous\throwable_apple.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>

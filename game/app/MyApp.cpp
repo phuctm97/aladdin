@@ -2,8 +2,8 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 #include "MyApp.h"
-#include "../scenes/IntroScene.h"
 #include "MyResourceInitializer.h"
+#include "../scenes/IntroScene.h"
 
 USING_NAMESPACE_ALA;
 
@@ -11,7 +11,7 @@ MyApp::MyApp() : Application() {}
 
 void MyApp::onPreInitialize() {
   // configurations
-  setScreenSize( 480, 360 );
+  setScreenSize( 320, 256 );
   setTitle( "Aladdin" );
   setFps( 60 );
   Logger::setLogLevel( Logger::LOG_INFO );
