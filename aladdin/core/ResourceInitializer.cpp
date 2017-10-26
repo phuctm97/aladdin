@@ -3,6 +3,8 @@
  */
 
 #include "ResourceInitializer.h"
+#include "GameManager.h"
+#include "../2d/CameraPrefab.h"
 
 NAMESPACE_ALA
 {
@@ -16,7 +18,15 @@ ResourceInitializer::~ResourceInitializer() {
   TOTAL_RESOURCE_INITIALIZERS_DELETED++;
 }
 
-// =============================================
+void ResourceInitializer::run ( )
+{
+  //init framework prefabs
+  new CameraPrefab();
+
+  doRun();
+}
+
+  // =============================================
 // Debug memory allocation
 // =============================================
 long ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED( 0 );

@@ -18,6 +18,14 @@
 #define MAX( x, y ) (((x) < (y)) ? (y) : (x))
 #endif
 
+#ifndef DEGREETORADIAN
+#define DEGREETORADIAN(degree) ((degree) * (M_PI/180.f))
+#endif
+
+#ifndef RADIANTODEGREE
+#define RADIANTODEGREE(radian) ((radian) * (180.f/M_PI))
+#endif
+
 #undef min
 #undef max
 

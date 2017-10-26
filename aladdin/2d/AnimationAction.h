@@ -13,11 +13,13 @@ private:
 
   std::string _actionName;
 
+  std::string _textureName;
+
   std::vector<Rect> _frames;
 public:
   AnimationAction();
 
-  AnimationAction( const std::vector<Rect>& frames, const std::string& actionName, const float interval = 0, const bool loop = true );
+  AnimationAction( const std::vector<Rect>& frames, const std::string& actionName, const std::string& textureName, const float interval = 0, const bool loop = true );
 
   virtual ~AnimationAction();
 
@@ -28,6 +30,8 @@ public:
   bool isLoop() const;
 
   const std::string& getActionName() const;
+
+  const std::string& getTextureName() const;
 };
 }
 

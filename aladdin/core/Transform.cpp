@@ -96,6 +96,10 @@ float Transform::getRotation() const {
 
 void Transform::setRotation( const float rotation ) {
   _rotation = rotation;
+  if(_rotation > 360)
+  {
+    _rotation = fmod(rotation, 360.f);
+  }
   setDirty();
 }
 
@@ -224,11 +228,11 @@ void Transform::onRender() {
 }
 
 Mat4 Transform::calculateLocalToParentMatrix() const {
-  Mat4 matRotate = Mat4::getRotationZMatrix( D3DXToRadian(_rotation) );
+  Mat4 matRotate = Mat4::getRotationZMatrix( (_rotation) );
   Mat4 matScale = Mat4::getScalingMatrix( _scale );
   Mat4 matTranslate = Mat4::getTranslationMatrix( _position );
 
-  return matRotate * matScale * matTranslate;
+  return matScale * matRotate * matTranslate;
 }
 
 Mat4 Transform::getLocalToWorldMatrix() {

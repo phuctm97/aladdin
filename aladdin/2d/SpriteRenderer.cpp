@@ -4,8 +4,6 @@
 
 #include "SpriteRenderer.h"
 #include "Graphics.h"
-#include "Animator.h"
-#include "RectMessageArgs.h"
 
 NAMESPACE_ALA
 {
@@ -17,22 +15,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
     _backColor( 255, 255, 255 ),
     _zOrder( 0 )
 {
-  auto animator = getGameObject()->getComponentT<Animator>();
-
-  if (animator == NULL || !animator->isInitialized())
-  {
-    _srcRect.setTopLeft(Vec2(0.f, 0.f));
-    _srcRect.setSize(_sprite->getContentSize());
-  }
-  else
-  {
-    _srcRect = animator->getCurrentFrame();
-  }
-
-  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
-  {
-    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
-  });
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName, const std::string& name )
@@ -41,22 +25,9 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
     _backColor( 255, 255, 255 ),
     _zOrder( 0 ) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
-  auto animator = getGameObject()->getComponentT<Animator>();
 
-  if (animator == NULL || !animator->isInitialized())
-  {
-    _srcRect.setTopLeft(Vec2(0.f, 0.f));
-    _srcRect.setSize(_sprite->getContentSize());
-  }
-  else
-  {
-    _srcRect = animator->getCurrentFrame();
-  }
-
-  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
-  {
-    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
-  });
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 SpriteRenderer::~SpriteRenderer() {}
@@ -67,6 +38,9 @@ Sprite* SpriteRenderer::getSprite() const {
 
 void SpriteRenderer::setSprite( Sprite* sprite ) {
   _sprite = sprite;
+
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 const Color& SpriteRenderer::getBackColor() const {
@@ -94,6 +68,16 @@ int SpriteRenderer::getZOrder() const {
   return _zOrder;
 }
 
+const Rect& SpriteRenderer::getSourceRect ( ) const
+{
+  return _srcRect;
+}
+
+void SpriteRenderer::setSourceRect ( const Rect& rect )
+{
+  _srcRect = rect;
+}
+
 void SpriteRenderer::onInitialize ( )
 {
 }
@@ -106,8 +90,6 @@ void SpriteRenderer::onRender() {
 
 void SpriteRenderer::onRelease ( )
 {
-  // TODO: MessageListener auto release callbacks on destruction, this line may be redundant
-  unsubcribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE);
 }
 
 int SpriteRenderer::calculateWorldZOrder() const {
