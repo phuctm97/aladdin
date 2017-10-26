@@ -85,10 +85,42 @@ void GameObjectComponent::initialize() {
   setActive( true );
 }
 
+void GameObjectComponent::updatePhysics ( const float delta )
+{
+  if (isReleasing() || isReleased()) return;
+
+  // update to release in next frame
+  if (_toReleaseInNextFrame) {
+    return;
+  }
+
+  onPrePhysicsUpdate(delta);
+
+  if (!isInitialized()) {
+    if (isSelfInitialize()) {
+      initialize();
+    }
+    else return;
+  }
+
+  if (!isActive()) return;
+
+  // inheritance update
+  onPhysicsUpdate(delta);
+}
+
 void GameObjectComponent::onInitialize() {}
 
 bool GameObjectComponent::onPreInitialize() {
   return true;
+}
+
+void GameObjectComponent::onPhysicsUpdate ( const float delta )
+{
+}
+
+void GameObjectComponent::onPrePhysicsUpdate ( const float delta )
+{
 }
 
 void GameObjectComponent::update( const float delta ) {

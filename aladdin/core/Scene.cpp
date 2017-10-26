@@ -70,6 +70,40 @@ void Scene::onPreInitialize() {}
 
 void Scene::onPostInitialize() {}
 
+void Scene::updatePhysics ( const float delta )
+{
+  if (isReleasing() || isReleased()) return;
+
+  // update to release in next frame
+  if (_toReleaseInNextFrame) {
+    return;
+  }
+
+  if (!isInitialized()) return;
+
+  lockGameObjects();
+
+  onPrePhysicsUpdate(delta);
+
+  // update game objects
+  for (const auto it : _gameObjects) {
+    auto object = it.second;
+    object->updatePhysics(delta);
+  }
+
+  onPostPhysicsUpdate(delta);
+
+  unlockGameObjects();
+}
+
+void Scene::onPrePhysicsUpdate ( const float delta )
+{
+}
+
+void Scene::onPostPhysicsUpdate ( const float delta )
+{
+}
+
 void Scene::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
 

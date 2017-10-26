@@ -6,6 +6,7 @@
 #include "../2d/Graphics.h"
 #include "../input/Input.h"
 #include "../audio/Audio.h"
+#include "../physics/PhysicsManager.h"
 
 NAMESPACE_ALA
 {
@@ -121,7 +122,18 @@ void Application::updateInput() {
   Input::get()->update();
 }
 
-void Application::updateGame( const float delta ) {
+void Application::updatePhysics ( const float delta )
+{
+  // update running scene
+  auto runningScene = GameManager::get()->getRunningScene();
+  if (runningScene) {
+    runningScene->updatePhysics(delta);
+  }
+
+  PhysicsManager::get()->update(delta);
+}
+
+  void Application::updateGame( const float delta ) {
   // update game manager
   GameManager::get()->update( delta );
 
@@ -220,6 +232,8 @@ void Application::initComponents() {
   gameManager->_screenWidth = static_cast<float>(_screenWidth);
   gameManager->_screenHeight = static_cast<float>(_screenHeight);
 
+  PhysicsManager* physicsManager = PhysicsManager::get();
+
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
 }
@@ -276,6 +290,9 @@ void Application::releaseComponents() {
 
   auto graphics = Graphics::get();
   graphics->release();
+
+  auto physicsManager = PhysicsManager::get();
+  physicsManager->release();
 }
 
 void Application::onBackgroundToForeground() {
@@ -433,6 +450,9 @@ void Application::processMessage() {
 void Application::processGame() {
   // update input
   updateInput();
+
+  // update physics
+  updatePhysics(_delta);
 
   // update game
   updateGame( _delta );

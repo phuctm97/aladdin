@@ -1,10 +1,13 @@
 ﻿#include "AnimationExamplePrefab.h"
 #include "../scripts/BallController.h"
+#include "physics/Rigidbody.h"
 
 void AnimationExamplePrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "aladdin.png" );
   new ala::Animator( object, "idle1", "aladdin.animation" );
   new ala::AudioSource( object, "wow.wav" );
+  auto rb = new ala::Rigidbody(object);
+  rb->addForce(10);
   auto stateManager = new ala::StateManager( object, "stand-right" );
 
   new ala::State( stateManager, "stand-right",

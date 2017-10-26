@@ -59,6 +59,14 @@ protected:
   virtual bool onPreInitialize();
 
   /**
+  * \brief Happen when component is updated
+  * \param delta
+  */
+  virtual void onPhysicsUpdate(const float delta);
+
+  virtual void onPrePhysicsUpdate(const float delta);
+
+  /**
    * \brief Happen when component is updated
    * \param delta 
    */
@@ -82,6 +90,8 @@ protected:
 
 public:
   void initialize() override;
+
+  void updatePhysics(const float delta);
 
   void update( const float delta );
 

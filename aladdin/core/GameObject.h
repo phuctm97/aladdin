@@ -63,6 +63,8 @@ public:
 public:
   void initialize() override;
 
+  void updatePhysics(const float delta);
+
   void update( const float delta );
 
   void render();

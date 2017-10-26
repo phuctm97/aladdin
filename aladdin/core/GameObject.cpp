@@ -135,6 +135,34 @@ void GameObject::initialize() {
   setActive( true );
 }
 
+void GameObject::updatePhysics ( const float delta )
+{
+  if (isReleasing() || isReleased()) return;
+
+  // update to release in next frame
+  if (_toReleaseInNextFrame) {
+    return;
+  }
+
+  if (!isInitialized()) {
+    if (isSelfInitialize()) {
+      initialize();
+    }
+    else return;
+  }
+
+  if (!isActive()) return;
+
+  lockComponents();
+
+  // update components
+  for (auto component : _components) {
+    component->updatePhysics(delta);
+  }
+
+  unlockComponents();
+}
+
 void GameObject::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
 

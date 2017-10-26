@@ -49,6 +49,22 @@ protected:
   virtual void onPostInitialize();
 
 public:
+  void updatePhysics(const float delta);
+
+protected:
+  /**
+  * \brief Happen before scene, its objects and components were physically updated
+  * \param delta
+  */
+  virtual void onPrePhysicsUpdate(const float delta);
+
+
+  /**
+  * \brief Happen after scene, its objects and components were physically updated
+  */
+  virtual void onPostPhysicsUpdate(const float delta);
+
+public:
   void update( const float delta );
 
 protected:

@@ -58,6 +58,8 @@ public:
 private:
   void updateInput();
 
+  void updatePhysics(const float delta);
+
   void updateGame( const float delta );
 
   void renderGraphics();
