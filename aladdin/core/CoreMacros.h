@@ -7,7 +7,7 @@
 
 // Common Methods
 #ifndef M_PI
-#define M_PI      3.14159265358
+#define M_PI      3.1415927f
 #endif
 
 #ifndef MIN
@@ -22,12 +22,12 @@
 #define ABS( x ) (x >= 0 ? x : -(x))
 #endif
 
-#ifndef DEGREETORADIAN
-#define DEGREETORADIAN(degree) ((degree) * (M_PI/180.f))
+#ifndef DEGREE_TO_RADIAN
+#define DEGREE_TO_RADIAN(degree) ((degree) * (M_PI/180.f))
 #endif
 
-#ifndef RADIANTODEGREE
-#define RADIANTODEGREE(radian) ((radian) * (180.f/M_PI))
+#ifndef RADIAN_TO_DEGREE
+#define RADIAN_TO_DEGREE(radian) ((radian) * (180.f/M_PI))
 #endif
 
 #undef min

@@ -20,7 +20,7 @@ ResourceInitializer::~ResourceInitializer() {
 
 void ResourceInitializer::run ( )
 {
-  //init framework prefabs
+  // required framework prefabs
   new CameraPrefab();
 
   doRun();

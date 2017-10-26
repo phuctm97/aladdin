@@ -27,19 +27,19 @@ Camera::Camera( GameObject* gameObject, const std::string& name,
 Camera::~Camera() {}
 
 void Camera::onUpdate( float dt ) {
-  const auto radianAngle = DEGREETORADIAN(getGameObject()->getTransform()->getRotation());
+  const auto radianAngle = DEGREE_TO_RADIAN(getGameObject()->getTransform()->getRotation());
   _viewMatrix = Mat4::getIdentityMat();
-  _viewMatrix.set11( _scaleFactor.getX() * cos(radianAngle) );
-  _viewMatrix.set12( _scaleFactor.getX() * sin(radianAngle) );
+  _viewMatrix.set11( _scaleFactor.getX() * cosf(radianAngle) );
+  _viewMatrix.set12( _scaleFactor.getX() * sinf(radianAngle) );
 
-  _viewMatrix.set21( -_scaleFactor.getY() * sin(radianAngle) );
-  _viewMatrix.set22( _scaleFactor.getY() * cos(radianAngle) );
+  _viewMatrix.set21( -_scaleFactor.getY() * sinf(radianAngle) );
+  _viewMatrix.set22( _scaleFactor.getY() * cosf(radianAngle) );
 
   auto cameraPosition = getGameObject()->getTransform()->getPosition();
 
-  _viewMatrix.set41( -cameraPosition.getX() * _scaleFactor.getX() * cos(radianAngle) + cameraPosition.getY() * _scaleFactor.getY() * sin(radianAngle) );
+  _viewMatrix.set41( -cameraPosition.getX() * _scaleFactor.getX() * cosf(radianAngle) + cameraPosition.getY() * _scaleFactor.getY() * sinf(radianAngle) );
 
-  _viewMatrix.set42( -cameraPosition.getX() * _scaleFactor.getX() * sin(radianAngle) - cameraPosition.getY() * _scaleFactor.getY() * cos(radianAngle) );
+  _viewMatrix.set42( -cameraPosition.getX() * _scaleFactor.getX() * sinf(radianAngle) - cameraPosition.getY() * _scaleFactor.getY() * cosf(radianAngle) );
 
   auto graphics = Graphics::get();
 

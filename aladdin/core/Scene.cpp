@@ -6,6 +6,7 @@
 #include "StdHelper.h"
 #include "GameResource.h"
 #include "GameManager.h"
+#include "../2d/2dMacros.h"
 
 NAMESPACE_ALA
 {
@@ -38,6 +39,9 @@ Scene::~Scene() {
 void Scene::initialize() {
   // make sure scene is not initialized;
   ALA_ASSERT((!isInitializing()) && (!isInitialized()));
+
+  // required framework objects
+  ala::GameManager::get()->getPrefab(ALA_MAIN_CAMERA)->instantiate(ALA_MAIN_CAMERA);
 
   onPreInitialize();
 

@@ -8,10 +8,10 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0( ala::Logger )
 
-int Logger::__logLevel( LOG_DEBUG );
+int Logger::__logLevel( ALA_LOG_DEBUG );
 
 void Logger::setLogLevel( int level ) {
-  ALA_ASSERT(level >= LOG_DEBUG && level <= LOG_ERROR);
+  ALA_ASSERT(level >= ALA_LOG_DEBUG && level <= ALA_LOG_ERROR);
   __logLevel = level;
 }
 
@@ -24,7 +24,7 @@ Logger::~Logger() {
 }
 
 void Logger::debug( char const* const format, ... ) const {
-  if ( __logLevel > LOG_DEBUG ) return;
+  if ( __logLevel > ALA_LOG_DEBUG ) return;
 
   char buffer[256];
 
@@ -40,7 +40,7 @@ void Logger::debug( char const* const format, ... ) const {
 }
 
 void Logger::info( char const* const format, ... ) const {
-  if ( __logLevel > LOG_INFO ) return;
+  if ( __logLevel > ALA_LOG_INFO ) return;
 
   va_list args;
   va_start(args, format);
@@ -56,7 +56,7 @@ void Logger::info( char const* const format, ... ) const {
 }
 
 void Logger::error( char const* const format, ... ) const {
-  if ( __logLevel > LOG_ERROR ) return;
+  if ( __logLevel > ALA_LOG_ERROR ) return;
 
   va_list args;
   va_start(args, format);

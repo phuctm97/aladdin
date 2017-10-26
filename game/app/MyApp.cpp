@@ -14,7 +14,7 @@ void MyApp::onPreInitialize() {
   setScreenSize( 800, 600 );
   setTitle( "Aladdin" );
   setFps( 60 );
-  Logger::setLogLevel( Logger::LOG_INFO );
+  Logger::setLogLevel( ALA_LOG_INFO );
 
   // resource initializers
   registerResourceInitializer( new MyResourceInitializer() );

@@ -8,7 +8,7 @@ NAMESPACE_ALA
 ALA_CLASS_HEADER_1 ( CameraPrefab, Prefab )
 public:
   CameraPrefab()
-    : Prefab( MAIN_CAMERA ) {}
+    : Prefab( ALA_MAIN_CAMERA ) {}
 
 protected:
   void doInstantiate( ala::GameObject* object ) override;

@@ -15,7 +15,9 @@ public:
 
   virtual ~ResourceInitializer();
 
-  virtual void run();
+  void run();
+
+protected:
   virtual void doRun() = 0;
 
   // =============================================

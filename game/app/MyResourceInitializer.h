@@ -8,7 +8,7 @@
 #include <aladdin.h>
 
 class MyResourceInitializer: public ala::ResourceInitializer {
-public:
+protected:
   void doRun() override;
 };
 

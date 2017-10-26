@@ -105,7 +105,7 @@ void Text::onRender ( )
 
   //auto rectTransform = getGameObject()->getTransform();
 
-  auto camera = GameManager::get()->getObjectByName("MainCamera");
+  auto camera = GameManager::get()->getObjectByName(ALA_MAIN_CAMERA);
   auto cameraMatrix = camera->getTransform()->getLocalToWorldMatrix();
 
   Graphics::get (  )->drawText(_font, _fontInfo, _text, rectTransform->getBoundingRect (), _horizontalAlignment, _verticalAlignment, _textColor, rectTransform->getLocalToWorldMatrix()*Mat4::getRotationZMatrix(360 - camera->getTransform()->getRotation())*cameraMatrix );
