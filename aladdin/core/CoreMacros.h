@@ -18,6 +18,10 @@
 #define MAX( x, y ) (((x) < (y)) ? (y) : (x))
 #endif
 
+#ifndef ABS
+#define ABS( x ) (x >= 0 ? x : -(x))
+#endif
+
 #ifndef DEGREETORADIAN
 #define DEGREETORADIAN(degree) ((degree) * (M_PI/180.f))
 #endif
@@ -148,7 +152,8 @@ ALA_DEFINE_CLASS_META_4(_class_, _base1_, _base2_, _base3_, _base4_ )
 #define ALA_CLASS_SOURCE_5( _class_, _base1_, _base2_, _base3_, _base4_, _base5_ ) \
 ALA_DEFINE_CLASS_META_5(_class_, _base1_, _base2_, _base3_, _base4_, _base5_ )
 
-enum {
+enum
+{
   ALA_FALSE,
   ALA_INITIALIZING,
   ALA_INITIALIZED,

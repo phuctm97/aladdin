@@ -5,7 +5,7 @@
 
 class TextExamplePrefab : public ala::Prefab {
 public:
-  TextExamplePrefab() : Prefab("TextExample") {}
+  TextExamplePrefab() : Prefab("Text Example") {}
 
   void doInstantiate(ala::GameObject* object) override;
 };

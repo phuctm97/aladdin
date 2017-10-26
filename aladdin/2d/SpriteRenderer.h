@@ -5,6 +5,8 @@
 #ifndef __ALADDIN_2D_SPRITE_RENDERER_H__
 #define __ALADDIN_2D_SPRITE_RENDERER_H__
 
+#define ALA_MAX_Z_ORDER 999
+
 #include "2dInclude.h"
 #include "Sprite.h"
 #include "Rect.h"

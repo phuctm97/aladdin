@@ -36,46 +36,46 @@
     <ClCompile Include="app\MyApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\IntroScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="app\MyResourceInitializer.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\BallPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\BallController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\TextExamplePrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\BasicExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AnimationAndStateExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\BasicController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\DemoScene.cpp">
+      <Filter>scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\IntroScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="app\MyResourceInitializer.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\BallPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\BallController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\AnimationExamplePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\TextExamplePrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\BasicExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AnimationAndStateExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\BasicController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\DemoScene.h">
+      <Filter>scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +90,6 @@
     <Image Include="textures\aladdin.png">
       <Filter>texures</Filter>
     </Image>
-    <Image Include="textures\sprites.png">
-      <Filter>texures</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="audio\sfx\wow.wav">
@@ -100,9 +97,6 @@
     </Media>
   </ItemGroup>
   <ItemGroup>
-    <None Include="animations\sprites.animation">
-      <Filter>animations</Filter>
-    </None>
     <None Include="animations\aladdin.animation">
       <Filter>animations</Filter>
     </None>

@@ -7,9 +7,10 @@
 
 #include <aladdin.h>
 
-class BallPrefab : public ala::Prefab {
+class BasicExamplePrefab : public ala::Prefab
+{
 public:
-  BallPrefab(): Prefab( "Ball" ) {}
+  BasicExamplePrefab(): Prefab( "Basic Example" ) {}
 
   void doInstantiate( ala::GameObject* object ) override;
 };

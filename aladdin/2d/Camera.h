@@ -3,6 +3,9 @@
 
 #include "2dInclude.h"
 
+#define ALA_CAMERA_MIN_Z 0.0f
+#define ALA_CAMERA_MAX_Z 100000.0f
+
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1 ( Camera, ala::GameObjectComponent )

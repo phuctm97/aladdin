@@ -42,5 +42,9 @@
 #include "audio/Audio.h"
 #include "audio/AudioClip.h"
 #include "audio/AudioSource.h"
+#include "ui/Font.h"
+#include "ui/FontInfo.h"
+#include "ui/RectTransform.h"
+#include "ui/Text.h"
 
 #endif //!__ALADDIN_H__

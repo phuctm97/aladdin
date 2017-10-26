@@ -122,11 +122,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
-    <ClCompile Include="prefabs\AnimationExamplePrefab.cpp" />
-    <ClCompile Include="prefabs\BallPrefab.cpp" />
+    <ClCompile Include="prefabs\AnimationAndStateExamplePrefab.cpp" />
+    <ClCompile Include="prefabs\BasicExamplePrefab.cpp" />
     <ClCompile Include="prefabs\TextExamplePrefab.cpp" />
-    <ClCompile Include="scenes\IntroScene.cpp" />
-    <ClCompile Include="scripts\BallController.cpp" />
+    <ClCompile Include="scenes\DemoScene.cpp" />
+    <ClCompile Include="scripts\BasicController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -136,11 +136,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
-    <ClInclude Include="prefabs\AnimationExamplePrefab.h" />
-    <ClInclude Include="prefabs\BallPrefab.h" />
+    <ClInclude Include="prefabs\AnimationAndStateExamplePrefab.h" />
+    <ClInclude Include="prefabs\BasicExamplePrefab.h" />
     <ClInclude Include="prefabs\TextExamplePrefab.h" />
-    <ClInclude Include="scenes\IntroScene.h" />
-    <ClInclude Include="scripts\BallController.h" />
+    <ClInclude Include="scenes\DemoScene.h" />
+    <ClInclude Include="scripts\BasicController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -148,14 +148,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   <ItemGroup>
     <Image Include="textures\aladdin.png" />
     <Image Include="textures\ball.png" />
-    <Image Include="textures\sprites.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="audio\sfx\wow.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\aladdin.animation" />
-    <None Include="animations\sprites.animation" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

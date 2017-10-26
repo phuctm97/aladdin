@@ -1,9 +1,6 @@
 ﻿#include "Camera.h"
 #include "Graphics.h"
 
-#define ALA_CAMERA_MIN_Z 0.0f
-#define ALA_CAMERA_MAX_Z 100000.0f
-
 NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1 ( ala::Camera, ala::GameObjectComponent )

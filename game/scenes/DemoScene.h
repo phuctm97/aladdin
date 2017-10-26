@@ -7,9 +7,9 @@
 
 #include <aladdin.h>
 
-class IntroScene : public ala::Scene, public ala::MessageListener {
+class DemoScene : public ala::Scene, public ala::MessageListener {
 public:
-  IntroScene();
+  DemoScene();
 
 protected:
   void onPreInitialize() override;

@@ -7,6 +7,7 @@
 #include "../ui/FontInfo.h"
 #include "../ui/Font.h"
 #include "../ui/Text.h"
+#include "../2d/Camera.h"
 
 NAMESPACE_ALA
 {
@@ -227,7 +228,9 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
 
   D3DXMATRIX oldMatrix;
 
-  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, zIndex);
+  // reverse z index for back-to-front rendering
+  float reverseZIndex = MAX( ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z );
+  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, reverseZIndex);
   auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
 
   auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);

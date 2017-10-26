@@ -60,7 +60,7 @@ Size SpriteRenderer::getFrameSize() const {
 
 void SpriteRenderer::setZOrder( const int zOrder ) {
   if (zOrder < 0) _zOrder = 0;
-  else if (zOrder >= 1000) _zOrder = 999;
+  else if (zOrder > ALA_MAX_Z_ORDER) _zOrder = ALA_MAX_Z_ORDER;
   else _zOrder = zOrder;
 }
 

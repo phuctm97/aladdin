@@ -7,14 +7,14 @@
 
 #include <aladdin.h>
 
-class BallController : public ala::GameObjectComponent, public ala::MessageListener {
+class BasicController : public ala::GameObjectComponent, public ala::MessageListener {
 private:
   char _state;
   float _speed;
   ala::Logger _logger;
 
 public:
-  BallController( ala::GameObject* gameObject, const std::string& name = "" );
+  BasicController( ala::GameObject* gameObject, const std::string& name = "" );
 
 protected:
   void onInitialize() override;
