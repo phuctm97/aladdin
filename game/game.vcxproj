@@ -143,9 +143,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="scripts\BasicController.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="log.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="textures\aladdin.png" />
     <Image Include="textures\ball.png" />
   </ItemGroup>
@@ -154,6 +151,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\aladdin.animation" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,9 +7,6 @@
     <Filter Include="scenes">
       <UniqueIdentifier>{eb0a6ca3-8a1f-44cd-a4c9-5c84e6ea5d75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logs">
-      <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="texures">
       <UniqueIdentifier>{dc8c514d-9117-4d7e-9261-edc980421837}</UniqueIdentifier>
     </Filter>
@@ -79,11 +76,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="log.txt">
-      <Filter>logs</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="textures\ball.png">
       <Filter>texures</Filter>
     </Image>
@@ -100,5 +92,8 @@
     <None Include="animations\aladdin.animation">
       <Filter>animations</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
 </Project>
