@@ -3,10 +3,33 @@
 
 #include "PhysicsInclude.h"
 
-class Collider
+NAMESPACE_ALA
 {
+ALA_CLASS_HEADER_1(Collider, GameObjectComponent)
+private:
+	Vec2 _offset;
+	Size _size;
+
+	bool _isTrigger;
 public:
-  
+	Collider(GameObject* gameObject, const bool isTrigger = false, const Vec2 &offset = Vec2(0,0), const Size &size = Size(0,0), const std::string &name = "");
+
+	Rect getBoundingRect() const;
+
+	void onInitialize() override;;
+
+	void onRelease() override;
+
+	virtual ~Collider();
+
+	void setOffset(const Vec2& offset);
+	void setSize(const Size& size);
+	void setTrigger(const bool trigger);
+
+	const Vec2& getOffset() const;
+	const Size& getSize() const;
+	bool getTrigger() const;
 };
+}
 
 #endif //!__ALADDIN_PHYSICS_COLLIDER_H__

@@ -28,4 +28,9 @@ float Size::getHeight() const {
 void Size::setHeight( const float height ) {
   _height = height;
 }
+
+float Size::getArea() const
+{
+	return _height*_width;
+}
 }

@@ -99,6 +99,12 @@ void Transform::setRotation( const float rotation ) {
   setDirty();
 }
 
+Vec2 Transform::getWorldPosition()
+{
+	auto worldToLocal = getLocalToWorldMatrix();
+	return Vec2(worldToLocal.get41(), worldToLocal.get42());
+}
+
 // =======================================================
 // Children management
 // =======================================================

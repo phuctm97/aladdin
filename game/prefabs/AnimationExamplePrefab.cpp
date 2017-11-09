@@ -1,13 +1,18 @@
 ﻿#include "AnimationExamplePrefab.h"
 #include "../scripts/BallController.h"
 #include "physics/Rigidbody.h"
+#include "physics/Collider.h"
 
 void AnimationExamplePrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "aladdin.png" );
   new ala::Animator( object, "idle1", "aladdin.animation" );
   new ala::AudioSource( object, "wow.wav" );
-  auto rb = new ala::Rigidbody(object);
-  rb->addForce(10);
+	object->getTransform()->setPosition(-1000, 0);
+	auto rb = new ala::Rigidbody(object, ala::PhysicsMaterial(1,1));
+	rb->setGravityScale(0);
+	rb->addImpulse(ala::Vec2(10,0));
+	new ala::Collider(object, false, ala::Vec2(0, 0), ala::Size(300, 300));
+  //rb->addImpulse(ala::Vec2(0,5000));
   auto stateManager = new ala::StateManager( object, "stand-right" );
 
   new ala::State( stateManager, "stand-right",

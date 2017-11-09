@@ -7,6 +7,8 @@
 
 #include "../core/ClassMeta.h"
 #include "../core/Vec2.h"
+#include "../2d/Size.h"
+#include "../2d/Rect.h"
 #include "../core/GameObjectComponent.h"
 #include "../core/GameManager.h"
 #include "../core/Transform.h"

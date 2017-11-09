@@ -4,6 +4,7 @@
 #include "PhysicsInclude.h"
 #include "Rigidbody.h"
 #include "Collider.h"
+#include "CollisionInfo.h"
 
 NAMESPACE_ALA
 {
@@ -14,6 +15,8 @@ private:
 
   std::vector<Rigidbody*> _rigidbodies;
   std::vector<Collider*> _colliders;
+
+	bool getCollisionInfo(GameObject* a, GameObject* b, CollisionInfo& collisionInfo) const;
 public:
   PhysicsManager();
 

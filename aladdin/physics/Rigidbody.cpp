@@ -7,14 +7,36 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(Rigidbody, GameObjectComponent)
 
-Rigidbody::Rigidbody ( GameObject* gameObject, const std::string& name )
+Rigidbody::Rigidbody (GameObject* gameObject, const PhysicsMaterial material, const int bodyType, const float gravityScale, const std::string& name)
   : GameObjectComponent ( gameObject, name ),
-    _mass ( 1 ),
     _position ( gameObject->getTransform (  )->getPosition (  ) ),
     _velocity ( 0 ),
-    _gravityScale ( 1 ),
-    _bodyType ( ALA_BODY_TYPE_DYNAMIC )
+		_bodyType(bodyType),
+		_material(material),
+    _gravityScale ( gravityScale ),
+		_forces(0),
+		_impulses(0)
 {
+}
+
+void Rigidbody::addAcceleration(const Vec2& acceleration)
+{
+	if (_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+	{
+		return;
+	}
+
+	_forces += acceleration * getMass();
+}
+
+void Rigidbody::addVelocity(const Vec2& velocity)
+{
+	if (_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+	{
+		return;
+	}
+
+	_impulses += velocity * getMass();
 }
 
 void Rigidbody::onPhysicsUpdate ( const float delta )
@@ -32,11 +54,11 @@ void Rigidbody::onPhysicsUpdate ( const float delta )
 
   _impulses = Vec2(0,0);
 
-  const Vec2 acceleration = totalForce / _mass + gravityAcceleration;
+  const Vec2 acceleration = totalForce * getInverseMass() + gravityAcceleration;
+
   _velocity += acceleration*delta;
 
-  // x = x0 + v0*t + (1/2)at^2
-  _position += _velocity*delta + acceleration*(1 / 2.f)*delta*delta;
+  _position += _velocity*delta;
 }
 
 void Rigidbody::addForce ( const Vec2 &force)
@@ -73,14 +95,19 @@ void Rigidbody::setBodyType ( const int bodyType )
   _bodyType = bodyType;
 }
 
-void Rigidbody::setMass ( const float mass )
-{
-  _mass = mass;
-}
-
 void Rigidbody::setGravityScale ( const float gravityScale )
 {
   _gravityScale = gravityScale;
+}
+
+void Rigidbody::setPhysicsMaterial(const PhysicsMaterial& material)
+{
+	_material = material;
+}
+
+const PhysicsMaterial& Rigidbody::getPhysicsMaterial() const
+{
+	return _material;
 }
 
 const Vec2& Rigidbody::getPosition ( ) const
@@ -93,17 +120,35 @@ const Vec2& Rigidbody::getVelocity ( ) const
   return _velocity;
 }
 
-const int Rigidbody::getBodyType ( ) const
+int Rigidbody::getBodyType ( ) const
 {
   return _bodyType;
 }
 
-const float Rigidbody::getMass ( ) const
+float Rigidbody::getMass ( ) const
 {
-  return _mass;
+	const auto collider = getGameObject()->getComponentT<Collider>();
+	if(collider == nullptr)
+	{
+		return 0;
+	}
+
+	return collider->getSize().getArea() * _material.getDensity();
 }
 
-const float Rigidbody::getGravityScale ( ) const
+float Rigidbody::getInverseMass() const
+{
+	const auto mass = getMass();
+
+	if(mass == 0)
+	{
+		return 0;
+	}
+
+	return 1 / mass;
+}
+
+float Rigidbody::getGravityScale ( ) const
 {
   return _gravityScale;
 }

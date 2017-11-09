@@ -26,6 +26,8 @@ public:
   float getHeight() const;
 
   void setHeight( const float height );
+
+	float getArea() const;
 };
 }
 

@@ -9,6 +9,7 @@ IntroScene::IntroScene() : _ballDirectionChangedListener( 0 ), _logger( "IntroSc
 void IntroScene::onPreInitialize() {
   ala::GameManager::get()->getPrefab( "Camera" )->instantiate();
   ala::GameManager::get()->getPrefab( "AnimationExample" )->instantiate();
+	ala::GameManager::get()->getPrefab("Ball")->instantiate();
 }
 
 void IntroScene::onPreRelease() {}

@@ -9,7 +9,7 @@ enum
 };
 
 #ifndef GRAVITY_ACCELERATION 
-#define GRAVITY_ACCELERATION Vec2 (0, -10.f)
+#define GRAVITY_ACCELERATION Vec2 (0, -100.f)
 #endif
 
 #endif //!__ALADDIN_PHYSICS_PHYSICS_MARCOS_H__

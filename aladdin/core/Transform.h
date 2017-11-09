@@ -54,6 +54,8 @@ public:
 
   void setRotation( const float rotation );
 
+	Vec2 getWorldPosition();
+
   // =======================================================
   // Children management
   // =======================================================

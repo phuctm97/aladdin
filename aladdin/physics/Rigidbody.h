@@ -2,6 +2,7 @@
 #define __ALADDIN_PHYSICS_RIGIDBODY_H__
 
 #include "PhysicsInclude.h"
+#include "PhysicsMaterial.h"
 
 NAMESPACE_ALA
 {
@@ -12,31 +13,35 @@ private:
 
   int _bodyType;
   
-  float _mass;
+	PhysicsMaterial _material;
 
   float _gravityScale;
 
   Vec2 _forces;
   Vec2 _impulses;
 public:
-  Rigidbody(GameObject* gameObject, const std::string& name = "");
+  Rigidbody(GameObject* gameObject, const PhysicsMaterial material, const int bodyType = ALA_BODY_TYPE_DYNAMIC, const float gravityScale = 0, const std::string& name = "");
 
   void onPhysicsUpdate(const float delta) override;
 
   void addForce(const Vec2 &force);
   void addImpulse(const Vec2 &impulse);
+	void addAcceleration(const Vec2& acceleration);
+	void addVelocity(const Vec2& velocity);
 
   void setPosition(const Vec2& position);
   void setVelocity(const Vec2& velocity);
   void setBodyType(const int bodyType);
-  void setMass(const float mass);
   void setGravityScale(const float gravityScale);
+	void setPhysicsMaterial(const PhysicsMaterial& material);
 
   const Vec2& getPosition() const;
   const Vec2& getVelocity() const;
-  const int getBodyType() const;
-  const float getMass() const;
-  const float getGravityScale() const;
+  int getBodyType() const;
+	float getMass() const;
+	float getInverseMass() const;
+  float getGravityScale() const;
+	const PhysicsMaterial& getPhysicsMaterial() const;
 
   void onInitialize() override;;
 
