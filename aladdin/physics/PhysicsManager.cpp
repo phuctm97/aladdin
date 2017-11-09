@@ -24,21 +24,21 @@ bool PhysicsManager::getCollisionInfo(GameObject* a, GameObject* b, CollisionInf
 	auto rectA = colliderA->getBoundingRect();
 	auto rectB = colliderB->getBoundingRect();
 
-	const float aExtentX = rectA.getMidX();
-	const float bExtentX = rectB.getMidX();
+	const float aExtentX = rectA.getSize().getWidth()/2;
+	const float bExtentX = rectB.getSize().getWidth() / 2;
 
 	const float xOverlap = aExtentX + bExtentX - abs(n.getX());
 
 	if(xOverlap > 0)
 	{
-		const float aExtentY = rectA.getMidY();
-		const float bExtentY = rectB.getMidY();
+		const float aExtentY = rectA.getSize().getHeight()/2;
+		const float bExtentY = rectB.getSize().getHeight() / 2;
 
 		const float yOverlap = aExtentY + bExtentY - abs(n.getY());
 
 		if(yOverlap > 0)
 		{
-			if(xOverlap > yOverlap)
+			if(xOverlap < yOverlap)
 			{
 				if(n.getX() < 0)
 				{
@@ -125,23 +125,31 @@ void PhysicsManager::update ( const float delta )
 			}
 
 			const Vec2 relativeVelocity = rb2->getVelocity() - rb1->getVelocity();
-			const float vectorAlongNormal = relativeVelocity.dot(collisionInfo.getNormal());
+			const float velocityAlongNormal = relativeVelocity.dot(collisionInfo.getNormal());
 
 			//do not resolve if objects are seperating
-			if(vectorAlongNormal > 0)
+			if(velocityAlongNormal > 0)
 			{
 				return;
 			}
 
 			const float restitution = MIN(rb1->getPhysicsMaterial().getRestitution(), rb2->getPhysicsMaterial().getRestitution());
 
-			float impulseScalar = -(1 + restitution) * vectorAlongNormal;
+			float impulseScalar = -(1 + restitution) * velocityAlongNormal;
 			impulseScalar /= rb1->getInverseMass() + rb2->getInverseMass();
 
 			//apply impulse
-			Vec2 impulse = collisionInfo.getNormal()* impulseScalar;
+			const Vec2 impulse = collisionInfo.getNormal()* impulseScalar;
+
 			rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
-			rb2->setVelocity(rb1->getVelocity() + impulse * rb1->getInverseMass());
+			rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
+
+			//positional correction
+			const float percent = 0.2; // usually 20% to 80%
+			const float slop = 0.01; // usually 0.01 to 0.1
+			const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
+			rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
+			rb2->setPosition(rb2->getPosition() - correction*rb2->getInverseMass());
 
 			//collision happens
 			_logger.info("collision");

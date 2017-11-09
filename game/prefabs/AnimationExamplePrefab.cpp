@@ -7,11 +7,11 @@ void AnimationExamplePrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "aladdin.png" );
   new ala::Animator( object, "idle1", "aladdin.animation" );
   new ala::AudioSource( object, "wow.wav" );
-	object->getTransform()->setPosition(-1000, 0);
-	auto rb = new ala::Rigidbody(object, ala::PhysicsMaterial(1,1));
+	object->getTransform()->setPosition(-1000, -1000);
+	auto rb = new ala::Rigidbody(object, ala::PhysicsMaterial(1,10));
 	rb->setGravityScale(0);
-	rb->addImpulse(ala::Vec2(10,0));
-	new ala::Collider(object, false, ala::Vec2(0, 0), ala::Size(300, 300));
+	rb->setVelocity(ala::Vec2(100,100));
+	new ala::Collider(object, false, ala::Vec2(0, 0), ala::Size(30, 30));
   //rb->addImpulse(ala::Vec2(0,5000));
   auto stateManager = new ala::StateManager( object, "stand-right" );
 

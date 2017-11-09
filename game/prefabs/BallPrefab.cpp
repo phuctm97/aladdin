@@ -12,9 +12,9 @@ void BallPrefab::doInstantiate( ala::GameObject* object ) {
   new ala::SpriteRenderer( object, "ball.png" );
   new ala::AudioSource( object, "wow.wav" );
   //new BallController( object );
-	object->getTransform()->setPosition(1000, 0);
-	auto rb= new ala::Rigidbody(object, ala::PhysicsMaterial(1, 1));
+	object->getTransform()->setPosition(1000, 1000);
+	auto rb= new ala::Rigidbody(object, ala::PhysicsMaterial(1, 10));
 	rb->setGravityScale(0);
-	rb->setVelocity(ala::Vec2(-10, 0));
-	new ala::Collider(object, false, ala::Vec2(0, 0), ala::Size(300, 300));
+	rb->setVelocity(ala::Vec2(-100, -100));
+	new ala::Collider(object, false, ala::Vec2(0, 0), ala::Size(30, 30));
 }
