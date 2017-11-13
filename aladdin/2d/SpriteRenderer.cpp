@@ -13,7 +13,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
   : GameObjectComponent( gameObject, name ),
     _sprite( sprite ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 )
+    _zOrder( 0 ),
+    _anchorPoint( 0.5f, 0.5f )
 {
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
   _srcRect.setSize(_sprite->getContentSize());
@@ -23,7 +24,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
   : GameObjectComponent( gameObject, name ),
     _sprite( NULL ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 ) {
+    _zOrder( 0 ),
+    _anchorPoint(0.5f, 0.5f) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
@@ -78,6 +80,14 @@ void SpriteRenderer::setSourceRect ( const Rect& rect )
   _srcRect = rect;
 }
 
+const Vec2& SpriteRenderer::getAnchorPoint() const {
+  return _anchorPoint;
+}
+
+void SpriteRenderer::setAnchorPoint( const Vec2& p ) {
+  _anchorPoint = p;
+}
+
 void SpriteRenderer::onInitialize ( )
 {
 }
@@ -85,7 +95,7 @@ void SpriteRenderer::onInitialize ( )
 void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
   auto worldZOrder = calculateWorldZOrder();
-  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
+  Graphics::get()->drawSprite( _sprite, _anchorPoint, transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
 }
 
 void SpriteRenderer::onRelease ( )

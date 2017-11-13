@@ -26,6 +26,10 @@ public:
   float getHeight() const;
 
   void setHeight( const float height );
+
+  bool operator==(const Size& s) const;
+
+  bool operator!=(const Size& s) const;
 };
 }
 

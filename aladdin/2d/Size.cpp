@@ -28,4 +28,12 @@ float Size::getHeight() const {
 void Size::setHeight( const float height ) {
   _height = height;
 }
+
+bool Size::operator==( const Size& s ) const {
+  return _width == s._width && s._height == _height;
+}
+
+bool Size::operator!=( const Size& s ) const {
+  return !operator==( s );
+}
 }

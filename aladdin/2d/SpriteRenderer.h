@@ -16,6 +16,7 @@ private:
   Sprite* _sprite;
   Color _backColor;
   int _zOrder;
+  Vec2 _anchorPoint;
 
   Rect _srcRect;
 
@@ -43,6 +44,10 @@ public:
   const Rect& getSourceRect() const;
 
   void setSourceRect(const Rect& rect);
+
+  const Vec2& getAnchorPoint() const;
+
+  void setAnchorPoint(const Vec2& p);
 
 protected:
   void onInitialize() override;
