@@ -83,8 +83,8 @@ void Graphics::initDirectX() {
   ZeroMemory(&d3dpp, sizeof(d3dpp));
   d3dpp.BackBufferCount = 1;
   d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-  d3dpp.BackBufferWidth = _screenWidth;
-  d3dpp.BackBufferHeight = _screenHeight;
+  d3dpp.BackBufferWidth = _directXBackBufferWidth;
+  d3dpp.BackBufferHeight = _directXBackBufferHeight;
   d3dpp.Windowed = TRUE;
   d3dpp.hDeviceWindow = _hWnd;
   d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
