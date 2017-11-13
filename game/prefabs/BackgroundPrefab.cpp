@@ -1,14 +1,18 @@
 #include "BackgroundPrefab.h"
 
+USING_NAMESPACE_ALA;
+
 void BackgroundPrefab::doInstantiate( ala::GameObject* object ) {
+  const auto gameManager = GameManager::get();
+
   // ReSharper disable CppNonReclaimedResourceAcquisition
-  const auto spriteRenderer = new ala::SpriteRenderer( object, "background.png" );
+  const auto spriteRenderer = new SpriteRenderer( object, "background.png" );
 
   object->setLayer( "Background" );
   auto transform = object->getTransform();
 
-  transform->setPosition( ala::Vec2( spriteRenderer->getFrameSize().getWidth() / 2,
-                                     spriteRenderer->getFrameSize().getHeight() / 2 )
-    - ala::Vec2( ala::GameManager::get()->getVisibleWidth() / 2,
-                 ala::GameManager::get()->getVisibleHeight() / 2 ) );
+  transform->setPosition( Vec2( spriteRenderer->getFrameSize().getWidth() / 2,
+                                spriteRenderer->getFrameSize().getHeight() / 2 )
+    - Vec2( gameManager->getVisibleWidth() / 2,
+            gameManager->getVisibleHeight() / 2 ) );
 }

@@ -75,6 +75,12 @@
     <ClCompile Include="scenes\ExperimentalScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\AladdinController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Timer.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -101,6 +107,12 @@
     <ClInclude Include="scenes\ExperimentalScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\AladdinController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Timer.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\miscellaneous\throwable_apple.png">
@@ -119,5 +131,10 @@
   <ItemGroup>
     <Text Include="log.txt" />
     <Text Include="log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="animations\playable_characters\aladdin.anm">
+      <Filter>animations\playable_characters</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

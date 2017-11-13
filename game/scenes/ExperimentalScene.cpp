@@ -12,6 +12,7 @@ void ExperimentalScene::onPreInitialize() {
 
   ala::GameManager::get()->getPrefab( "Background" )->instantiate( "Background" );
   ala::GameManager::get()->getPrefab( "Foreground" )->instantiate();
+  ala::GameManager::get()->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
 }
 
 void ExperimentalScene::onPreRelease() {}

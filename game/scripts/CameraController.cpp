@@ -3,9 +3,7 @@
 USING_NAMESPACE_ALA;
 
 CameraController::CameraController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ) {
-  _speed = 10;
-}
+  : GameObjectComponent( gameObject, name ) {}
 
 void CameraController::onUpdate( const float delta ) {
   auto transform = getGameObject()->getTransform();
@@ -14,27 +12,23 @@ void CameraController::onUpdate( const float delta ) {
   const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
 
   const auto background = GameManager::get()->getObjectByName( "Background" );
-  const auto backgroundPosition = background->getTransform()->getPosition();
-  const auto backgroundFrameSize = background->getComponentT<SpriteRenderer>()
-                                             ->getFrameSize();
+  if ( background == NULL ) return;
+
+  const auto& backgroundPosition = background->getTransform()->getPosition();
+  const auto& backgroundFrameSize = background->getComponentT<SpriteRenderer>()
+                                              ->getFrameSize();
 
   const auto backgroundLeft = backgroundPosition.getX() - backgroundFrameSize.getWidth() / 2;
   const auto backgroundRight = backgroundPosition.getX() + backgroundFrameSize.getWidth() / 2;
   const auto backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
   const auto backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
 
-  if ( ala::Input::get()->getKey( ALA_KEY_LEFT_ARROW ) ) {
-    transform->setPositionX( transform->getPositionX() - _speed );
-  }
-  else if ( ala::Input::get()->getKey( ALA_KEY_RIGHT_ARROW ) ) {
-    transform->setPositionX( transform->getPositionX() + _speed );
-  }
-  else if ( ala::Input::get()->getKey( ALA_KEY_UP_ARROW ) ) {
-    transform->setPositionY( transform->getPositionY() + _speed );
-  }
-  else if ( ala::Input::get()->getKey( ALA_KEY_DOWN_ARROW ) ) {
-    transform->setPositionY( transform->getPositionY() - _speed );
-  }
+  const auto aladdin = GameManager::get()->getObjectByName( "Aladdin" );
+  if ( aladdin == NULL ) return;
+
+  const auto& aladdinPosition = aladdin->getTransform()->getPosition();
+
+  transform->setPosition( aladdinPosition );
 
   if ( transform->getPositionX() - backgroundLeft < halfVisibleWidth ) {
     transform->setPositionX( halfVisibleWidth + backgroundLeft );

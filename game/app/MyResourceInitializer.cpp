@@ -7,21 +7,26 @@
 #include "../prefabs/BackgroundPrefab.h"
 #include "../prefabs/ForegroundPrefab.h"
 
+USING_NAMESPACE_ALA;
+
 void MyResourceInitializer::doRun() {
-  auto gameManager = ala::GameManager::get();
+  auto gameManager = GameManager::get();
 
   // Layers
-  gameManager->addLayer("Background");
-  gameManager->addLayer("Character");
-  gameManager->addLayer("Foreground");
+  gameManager->addLayer( "Background" );
+  gameManager->addLayer( "Character" );
+  gameManager->addLayer( "Foreground" );
 
   // Textures
-  new ala::Sprite("background.png", "textures/backgrounds/scene_1_0.png");
-  new ala::Sprite("foreground.png", "textures/backgrounds/scene_1_1.png");
+  new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
+  new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
+  new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
 
   // Animations
+  new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
 
   // Prefabs
   new BackgroundPrefab();
   new ForegroundPrefab();
+  new AladdinPrefab();
 }
