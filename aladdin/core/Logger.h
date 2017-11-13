@@ -7,6 +7,12 @@
 
 #include "ClassMeta.h"
 
+enum {
+  ALA_LOG_DEBUG = 0,
+  ALA_LOG_INFO = 1,
+  ALA_LOG_ERROR = 2
+};
+
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_0(Logger)
@@ -15,12 +21,6 @@ private:
   std::string _className;
 
 public:
-  enum {
-    LOG_DEBUG = 0,
-    LOG_INFO = 1,
-    LOG_ERROR = 2
-  };
-
   static void setLogLevel( int level );
 
   Logger( const std::string& className );

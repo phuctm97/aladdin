@@ -44,8 +44,8 @@ float LimitedGravityAffectedVelocityBasedMovement::getLimit() const {
 
 void LimitedGravityAffectedVelocityBasedMovement::onUpdate( const float delta ) {
   auto transform = getGameObject()->getTransform();
-  auto spriteRenderer = getGameObject()->getComponentT<ala::SpriteRenderer>();
-  auto haftHeight = spriteRenderer == NULL ? 0 : spriteRenderer->getFrameSize().getHeight() / 2;
+  const auto spriteRenderer = getGameObject()->getComponentT<ala::SpriteRenderer>();
+  const auto haftHeight = spriteRenderer == NULL ? 0 : spriteRenderer->getFrameSize().getHeight() / 2;
 
   // update vector(acceleration)
   const auto newVelocityY = _velocity.getY() - _gravity * delta;

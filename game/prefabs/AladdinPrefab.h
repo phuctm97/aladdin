@@ -3,7 +3,8 @@
 
 #include <aladdin.h>
 
-class AladdinPrefab : ala::Prefab {
+class AladdinPrefab : ala::Prefab
+{
 public:
   AladdinPrefab() : Prefab( "Aladdin" ) {}
 

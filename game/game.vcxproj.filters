@@ -7,9 +7,6 @@
     <Filter Include="scenes">
       <UniqueIdentifier>{eb0a6ca3-8a1f-44cd-a4c9-5c84e6ea5d75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logs">
-      <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="texures">
       <UniqueIdentifier>{dc8c514d-9117-4d7e-9261-edc980421837}</UniqueIdentifier>
     </Filter>
@@ -57,19 +54,10 @@
     <ClCompile Include="app\MyApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\IntroScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="app\MyResourceInitializer.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\CameraPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\AladdinPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\BackgroundPrefab.cpp">
@@ -84,24 +72,18 @@
     <ClCompile Include="scripts\LimitedGravityAffectedVelocityBasedMovement.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\ExperimentalScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\IntroScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="app\MyResourceInitializer.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\CameraPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\AladdinPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ThrowableApplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\BackgroundPrefab.h">
@@ -116,11 +98,9 @@
     <ClInclude Include="scripts\LimitedGravityAffectedVelocityBasedMovement.h">
       <Filter>scripts</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="log.txt">
-      <Filter>logs</Filter>
-    </Text>
+    <ClInclude Include="scenes\ExperimentalScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\miscellaneous\throwable_apple.png">
@@ -137,13 +117,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="audio\sfx\wow.wav">
-      <Filter>audio\sfx</Filter>
-    </Media>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="animations\playable_characters\aladdin.animation">
-      <Filter>animations\playable_characters</Filter>
-    </None>
+    <Text Include="log.txt" />
+    <Text Include="log.txt" />
   </ItemGroup>
 </Project>

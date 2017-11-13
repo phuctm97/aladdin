@@ -1,11 +1,15 @@
 #include "ForegroundPrefab.h"
 
 void ForegroundPrefab::doInstantiate( ala::GameObject* object ) {
-  auto spriteRenderer = new ala::SpriteRenderer( object, "foreground.png" );
+  // ReSharper disable CppNonReclaimedResourceAcquisition
+  const auto spriteRenderer = new ala::SpriteRenderer( object, "foreground.png" );
 
   object->setLayer( "Foreground" );
   auto transform = object->getTransform();
   auto frameSize = spriteRenderer->getFrameSize();
 
-  transform->setPosition( ala::Vec2( frameSize.getWidth() / 2, frameSize.getHeight() / 2 ) );
+  transform->setPosition( ala::Vec2( spriteRenderer->getFrameSize().getWidth() / 2,
+                                     spriteRenderer->getFrameSize().getHeight() / 2 )
+    - ala::Vec2( ala::GameManager::get()->getScreenWidth() / 2,
+                 ala::GameManager::get()->getScreenHeight() / 2 ) );
 }

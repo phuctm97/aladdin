@@ -34,8 +34,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) {
                     }
                   }, NULL );
 
-  new ala::State( stateManager, "fall_right", [=] {
-  }, NULL, NULL );
+  new ala::State( stateManager, "fall_right", [=] { }, NULL, NULL );
 
   new ala::StateTransition( stateManager, "stand_right", "jump_right", [] {
     return ala::Input::get()->getKeyDown( ALA_KEY_SPACE );

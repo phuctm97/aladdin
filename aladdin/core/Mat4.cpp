@@ -543,9 +543,10 @@ Mat4 Mat4::getRotationYMatrix( const float angle ) {
 }
 
 Mat4 Mat4::getRotationZMatrix( const float angle ) {
+  auto radianAngle = D3DXToRadian(angle);
   Mat4 result = getIdentityMat();
-  float cosAng = cosf( angle );
-  float sinAng = sinf( angle );
+  float cosAng = cosf(radianAngle);
+  float sinAng = sinf(radianAngle);
 
   result._11 = cosAng;
   result._22 = cosAng;

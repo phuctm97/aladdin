@@ -8,7 +8,7 @@ CameraController::CameraController( ala::GameObject* gameObject, const std::stri
 void CameraController::onUpdate( const float delta ) {
   auto transform = getGameObject()->getTransform();
 
-  auto spriteRenderer =
+  const auto spriteRenderer =
     ala::GameManager::get()->getObjectByName( "Background" )->getComponentT<ala::SpriteRenderer>();
 
   auto backgroundFrameSize = spriteRenderer->getFrameSize();

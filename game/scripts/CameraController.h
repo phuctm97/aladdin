@@ -10,6 +10,7 @@ private:
   int _speed;
 
 public:
+  // ReSharper disable CppNonExplicitConvertingConstructor
   CameraController( ala::GameObject* gameObject, const std::string& name = "" );
 
 protected:

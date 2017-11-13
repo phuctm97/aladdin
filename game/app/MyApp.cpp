@@ -3,7 +3,7 @@
 */
 #include "MyApp.h"
 #include "MyResourceInitializer.h"
-#include "../scenes/IntroScene.h"
+#include "../scenes/ExperimentalScene.h"
 
 USING_NAMESPACE_ALA;
 
@@ -14,7 +14,7 @@ void MyApp::onPreInitialize() {
   setScreenSize( 320, 256 );
   setTitle( "Aladdin" );
   setFps( 60 );
-  Logger::setLogLevel( Logger::LOG_INFO );
+  Logger::setLogLevel( ALA_LOG_INFO );
 
   // resource initializers
   registerResourceInitializer( new MyResourceInitializer() );
@@ -22,5 +22,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new IntroScene() );
+  startWithScene( new ExperimentalScene() );
 }

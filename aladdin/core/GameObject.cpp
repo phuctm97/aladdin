@@ -17,7 +17,7 @@ GameObject::GameObject( Scene* parentScene, const std::string& name )
     _active( false ),
     _selfInitialize( true ),
     _toReleaseInNextFrame( false ),
-    _componentsInLocking( false ),
+    _componentsInLock( false ),
     _messenger( new Messenger() ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
@@ -45,7 +45,7 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
     _active( false ),
     _selfInitialize( true ),
     _toReleaseInNextFrame( false ),
-    _componentsInLocking( false ),
+    _componentsInLock( false ),
     _messenger( new Messenger() ) {
 
   // check initial state
@@ -182,7 +182,7 @@ void GameObject::render() {
 
 void GameObject::release() {
   // check lock
-  if ( _componentsInLocking ) {
+  if ( _componentsInLock ) {
     releaseInNextFrame();
     return;
   }
@@ -228,7 +228,7 @@ void GameObject::releaseInNextFrame() {
 
 void GameObject::addComponent( GameObjectComponent* component ) {
   // check lock
-  if ( _componentsInLocking ) {
+  if ( _componentsInLock ) {
     addComponentInNextFrame( component );
     return;
   }
@@ -236,6 +236,7 @@ void GameObject::addComponent( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
   if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
+
   doAddComponent( component );
 }
 
@@ -243,12 +244,13 @@ void GameObject::addComponentInNextFrame( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
   if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
+
   _componentsToAddInNextFrame.push_back( component );
 }
 
 void GameObject::removeComponent( GameObjectComponent* component ) {
   // check lock 
-  if ( _componentsInLocking ) {
+  if ( _componentsInLock ) {
     removeComponentInNextFrame( component );
     return;
   }
@@ -292,11 +294,11 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
 }
 
 void GameObject::lockComponents() {
-  _componentsInLocking = true;
+  _componentsInLock = true;
 }
 
 void GameObject::unlockComponents() {
-  _componentsInLocking = false;
+  _componentsInLock = false;
 }
 
 void GameObject::updateAddAndRemoveComponentInNextFrame() {
@@ -312,7 +314,18 @@ void GameObject::updateAddAndRemoveComponentInNextFrame() {
 }
 
 void GameObject::doAddComponent( GameObjectComponent* component ) {
-  _components.emplace_back( component );
+  if(component != _transform && ALA_IS_INSTANCE_OF(component, Transform)) {
+    ALA_ASSERT(!isInitializing() && !isInitialized() && !isReleasing() && !isReleased());
+    
+    // TODO: move children from old transform to new transform
+
+    doRemoveComponent(_transform);
+    _transform = static_cast<Transform*>(component);
+    _components.insert(_components.begin(), _transform);
+  }
+  else {
+    _components.emplace_back(component);
+  }
 }
 
 void GameObject::doRemoveComponent( GameObjectComponent* component ) {

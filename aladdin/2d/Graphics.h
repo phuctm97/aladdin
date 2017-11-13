@@ -10,7 +10,9 @@
 
 NAMESPACE_ALA
 {
-class Sprite;
+  class Font;
+  class FontInfo;
+  class Sprite;
 
 ALA_CLASS_HEADER_2(Graphics, ala::Initializable, ala::Releasable)
   // ==========================================
@@ -61,11 +63,19 @@ public:
 
   void loadSprite( Sprite* sprite );
 
+  ID3DXFont* loadDirectXFont(std::string fontName, const FontInfo &fontInfo) const;
+
   void drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex = 0 );
+
+  void drawText(ala::Font* font, const FontInfo& fontInfo, const std::string& text, const Rect& boundingRect, const int horizontalAlignment, const int verticalAlignment, const Color& textColor, const Mat4& transformMatrix, const int zIndex = 0);
 
   D3DXMATRIX convertToDirectXMatrix( const Mat4& mat ) const;
 
   RECT convertToWindowsRect( const Rect& rect ) const;
+
+  DWORD convertToDirectXFontWeight(const int fontWeight) const;
+
+  DWORD convertToDirectXTextFormat(const int horizontalAlignment, const int verticalAlignment);
 
   void setProjectionMatrix( const Mat4& mat );
 

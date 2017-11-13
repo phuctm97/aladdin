@@ -20,7 +20,7 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _scale( 1, 1 ),
     _rotation( 0 ),
     _origin( 0.5f, 0.5f ),
-    _childrenInLocking( false ),
+    _childrenInLock( false ),
     _parent( parentTransform ),
     _dirty( true ),
     _inverseDirty( true ) {
@@ -96,6 +96,10 @@ float Transform::getRotation() const {
 
 void Transform::setRotation( const float rotation ) {
   _rotation = rotation;
+  if(_rotation > 360)
+  {
+    _rotation = fmod(rotation, 360.f);
+  }
   setDirty();
 }
 
@@ -117,7 +121,7 @@ Transform* Transform::getParent() const {
 
 void Transform::addChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     addChildInNextFrame( child );
     return;
   }
@@ -137,7 +141,7 @@ void Transform::addChildInNextFrame( Transform* child ) {
 
 void Transform::removeChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     removeChildInNextFrame( child );
     return;
   }
@@ -154,11 +158,11 @@ void Transform::removeChildInNextFrame( Transform* child ) {
 }
 
 void Transform::lockChildren() {
-  _childrenInLocking = true;
+  _childrenInLock = true;
 }
 
 void Transform::unlockChildren() {
-  _childrenInLocking = false;
+  _childrenInLock = false;
 }
 
 void Transform::updateAddAndRemoveChildInNextFrame() {
@@ -182,7 +186,7 @@ void Transform::doRemoveChild( Transform* child ) {
 }
 
 bool Transform::onPreRelease() {
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     releaseInNextFrame();
     return false;
   }
@@ -224,11 +228,11 @@ void Transform::onRender() {
 }
 
 Mat4 Transform::calculateLocalToParentMatrix() const {
-  Mat4 matRotate = Mat4::getRotationZMatrix( D3DXToRadian(_rotation) );
+  Mat4 matRotate = Mat4::getRotationZMatrix( (_rotation) );
   Mat4 matScale = Mat4::getScalingMatrix( _scale );
   Mat4 matTranslate = Mat4::getTranslationMatrix( _position );
 
-  return matRotate * matScale * matTranslate;
+  return matScale * matRotate * matTranslate;
 }
 
 Mat4 Transform::getLocalToWorldMatrix() {

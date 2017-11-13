@@ -59,7 +59,7 @@ public:
   // =======================================================
 
 private:
-  bool _childrenInLocking;
+  bool _childrenInLock;
   std::vector<Transform*> _children;
   Transform* _parent;
   std::vector<Transform*> _childrenToAddInNextFrame;
