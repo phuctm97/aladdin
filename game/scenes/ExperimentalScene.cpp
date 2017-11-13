@@ -3,11 +3,14 @@
  */
 
 #include "ExperimentalScene.h"
+#include "../scripts/CameraController.h"
 
 ExperimentalScene::ExperimentalScene() : _logger( "ExperimentalScene" ) {}
 
 void ExperimentalScene::onPreInitialize() {
-  ala::GameManager::get()->getPrefab( "Background" )->instantiate();
+  new CameraController( getMainCamera() );
+
+  ala::GameManager::get()->getPrefab( "Background" )->instantiate( "Background" );
   ala::GameManager::get()->getPrefab( "Foreground" )->instantiate();
 }
 
