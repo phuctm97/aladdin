@@ -11,7 +11,8 @@ MyApp::MyApp() : Application() {}
 
 void MyApp::onPreInitialize() {
   // configurations
-  setScreenSize( 320, 256 );
+  setResolutionSize( 320, 256 );
+  setScreenSize( 320 * 3, 256 * 3 );
   setTitle( "Aladdin" );
   setFps( 60 );
   Logger::setLogLevel( ALA_LOG_INFO );
