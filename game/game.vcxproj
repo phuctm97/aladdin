@@ -80,9 +80,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <PreBuildEvent>
-      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
-xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -13,8 +13,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) {
   auto input = ala::Input::get();
 
   // Start position
-  transform->setPosition( ala::GameManager::get()->getScreenWidth() / 2,
-                          ala::GameManager::get()->getScreenHeight() / 2 );
+  transform->setPosition( ala::GameManager::get()->getVisibleWidth() / 2,
+                          ala::GameManager::get()->getVisibleHeight() / 2 );
 
   new ala::State( stateManager, "stand_right",
                   [=] {
