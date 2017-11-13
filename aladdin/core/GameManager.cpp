@@ -24,8 +24,8 @@ GameManager* GameManager::get() {
 
 GameManager::GameManager() :
   _logger( "ala::GameManager" ),
-  _screenWidth( 0 ),
-  _screenHeight( 0 ),
+  _visibleWidth( 0 ),
+  _visibleHeight( 0 ),
   _idCounter( 0 ),
   _runningScene( NULL ),
   _sceneToReplaceInNextFrame( NULL ),
@@ -64,12 +64,12 @@ void GameManager::onBackgroundToForeground() {}
 // ==============================================
 // Game Information
 // ==============================================
-float GameManager::getScreenWidth() const {
-  return _screenWidth;
+float GameManager::getVisibleWidth() const {
+  return _visibleWidth;
 }
 
-float GameManager::getScreenHeight() const {
-  return _screenHeight;
+float GameManager::getVisibleHeight() const {
+  return _visibleHeight;
 }
 
 // =============================================
