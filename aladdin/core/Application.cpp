@@ -16,8 +16,9 @@ ALA_CLASS_SOURCE_2(Application, ala::Initializable, ala::Releasable)
 
 Application::Application() :
   _title( "Aladdin Game" ),
-  _screenWidth( 800 ),
-  _screenHeight( 600 ),
+  _resolutionWidth( 800 ),
+  _resolutionHeight( 600 ),
+  _fullScreen( false ),
   _frameCount( 0 ),
   _logger( "ala::Application" ),
   _logStream( 0 ),
@@ -54,27 +55,31 @@ Application::~Application() {
 
   //average fps
   QueryPerformanceCounter( &_currentTimestamp );
-  auto interval = (float( _currentTimestamp.QuadPart - _startTimestamp.QuadPart )) / _freq.QuadPart;
+  const auto interval = (float( _currentTimestamp.QuadPart - _startTimestamp.QuadPart )) / _freq.QuadPart;
   const auto fps = static_cast<int>(roundf( (_frameCount) / interval ));
   _logger.info( "Average FPS: %d", fps );
 }
 
-void Application::setScreenSize( int width, int height ) {
+void Application::setScreenSize( const int width, const int height ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
-  _screenWidth = width;
-  _screenHeight = height;
+  _resolutionWidth = width;
+  _resolutionHeight = height;
 }
 
-int Application::getScreenWidth() const {
-  return _screenWidth;
+int Application::getResolutionWidth() const {
+  return _resolutionWidth;
 }
 
-int Application::getScreenHeight() const {
-  return _screenHeight;
+int Application::getResolutionHeight() const {
+  return _resolutionHeight;
 }
 
-void Application::setTitle( const std::string& title ) {
+  bool Application::isFullScreen() const {
+  return _fullScreen;
+}
+
+  void Application::setTitle( const std::string& title ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _title = title;
@@ -84,7 +89,7 @@ const std::string& Application::getTitle() const {
   return _title;
 }
 
-void Application::setAnimationInterval( float interval ) {
+void Application::setAnimationInterval( const float interval ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   ALA_ASSERT(interval >= 1.f / 61);
@@ -96,8 +101,18 @@ void Application::setFps( const int fps ) {
   setAnimationInterval( 1.0f / fps );
 }
 
+void Application::setFullScreen() {
+  // can only be set before init process
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  _fullScreen = true;
+}
+
 float Application::getAnimationInterval() const {
   return (float( _animationInterval.QuadPart )) / (_freq.QuadPart);
+}
+
+int Application::getFps() const {
+ return static_cast<int>(1.0f / getAnimationInterval());
 }
 
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
@@ -191,8 +206,8 @@ void Application::release() {
 
 void Application::initComponents() {
   // validate application properties
-  ALA_ASSERT(_screenWidth > 0);
-  ALA_ASSERT(_screenHeight > 0);
+  ALA_ASSERT(_resolutionWidth > 0);
+  ALA_ASSERT(_resolutionHeight > 0);
   ALA_ASSERT(!_title.empty());
   //ALA_ASSERT(_animationInterval >= (1000.0f / 61));
 
@@ -203,8 +218,8 @@ void Application::initComponents() {
   Graphics* graphics = Graphics::get();
   graphics->_hInstance = _hInstance;
   graphics->_hWnd = _hWnd;
-  graphics->_screenWidth = static_cast<UINT>(_screenWidth);
-  graphics->_screenHeight = static_cast<UINT>(_screenHeight);
+  graphics->_screenWidth = static_cast<UINT>(_resolutionWidth);
+  graphics->_screenHeight = static_cast<UINT>(_resolutionHeight);
   graphics->initialize();
 
   Input* input = Input::get();
@@ -217,8 +232,8 @@ void Application::initComponents() {
   audio->initialize();
 
   GameManager* gameManager = GameManager::get();
-  gameManager->_screenWidth = static_cast<float>(_screenWidth);
-  gameManager->_screenHeight = static_cast<float>(_screenHeight);
+  gameManager->_visibleWidth = static_cast<float>(_resolutionWidth);
+  gameManager->_visibleHeight = static_cast<float>(_resolutionHeight);
 
   // seed random
   srand( static_cast<unsigned int>(time( 0 )) );
@@ -347,8 +362,8 @@ void Application::initWindowHandle() {
     WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, // windows style
     CW_USEDEFAULT, // windows start position
     CW_USEDEFAULT, // windows start position
-    _screenWidth, // windows size
-    _screenHeight, // windows size
+    _resolutionWidth, // windows size
+    _resolutionHeight, // windows size
     0,
     0,
     _hInstance, // handle instance

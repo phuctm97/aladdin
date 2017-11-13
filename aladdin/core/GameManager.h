@@ -41,12 +41,12 @@ public:
   // Game Information
   // ===============================================
 private:
-  float _screenWidth;
-  float _screenHeight;
+  float _visibleWidth;
+  float _visibleHeight;
 
 public:
-  float getScreenWidth() const;
-  float getScreenHeight() const;
+  float getVisibleWidth() const;
+  float getVisibleHeight() const;
 
   // ===============================================
   // Id Generator

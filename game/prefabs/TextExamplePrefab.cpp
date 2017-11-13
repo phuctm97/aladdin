@@ -6,10 +6,10 @@ void TextExamplePrefab::doInstantiate( ala::GameObject* object ) {
 
   // create rect transform for ui element rendering
   auto transform = new ala::RectTransform( object, ala::Rect(
-                                             ala::Vec2( -ala::GameManager::get()->getScreenWidth() / 2,
-                                                        ala::GameManager::get()->getScreenHeight() / 2 ),
-                                             ala::Size( ala::GameManager::get()->getScreenWidth(),
-                                                        ala::GameManager::get()->getScreenHeight() ) ) );
+                                             ala::Vec2( -ala::GameManager::get()->getVisibleWidth() / 2,
+                                                        ala::GameManager::get()->getVisibleHeight() / 2 ),
+                                             ala::Size( ala::GameManager::get()->getVisibleWidth(),
+                                                        ala::GameManager::get()->getVisibleHeight() ) ) );
 
   // text component
   auto text = new ala::Text( object, ala::FontInfo( ALA_FONT_WEIGHT_BOLD, 80, false ), "crackman.ttf" );

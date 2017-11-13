@@ -17,8 +17,8 @@ void BasicController::onInitialize() {
 
   // set initial position
   transform->setPosition(
-    ala::Vec2( -ala::GameManager::get()->getScreenWidth() / 2 + frameSize.getWidth() / 2,
-               ala::GameManager::get()->getScreenHeight() / 2 - frameSize.getHeight() / 2 ) );
+    ala::Vec2( -ala::GameManager::get()->getVisibleWidth() / 2 + frameSize.getWidth() / 2,
+               ala::GameManager::get()->getVisibleHeight() / 2 - frameSize.getHeight() / 2 ) );
 
   // debug message listener
   subscribeGlobalMessage(
@@ -43,10 +43,10 @@ void BasicController::onUpdate( const float delta ) {
   switch ( _state ) {
   case 'R': {
     if ( transform->getPositionX() + sprite->getFrameSize().getWidth() / 2
-      >= ala::GameManager::get()->getScreenWidth() / 2 ) {
+      >= ala::GameManager::get()->getVisibleWidth() / 2 ) {
 
       // state transform
-      transform->setPositionX( ala::GameManager::get()->getScreenWidth() / 2 - sprite->getFrameSize().getWidth() / 2 );
+      transform->setPositionX( ala::GameManager::get()->getVisibleWidth() / 2 - sprite->getFrameSize().getWidth() / 2 );
       transform->setRotation( -90 );
       _state = 'D';
 
@@ -62,11 +62,11 @@ void BasicController::onUpdate( const float delta ) {
     break;
   case 'D': {
     if ( transform->getPositionY() - sprite->getFrameSize().getHeight() / 2
-      <= -ala::GameManager::get()->getScreenHeight() / 2 ) {
+      <= -ala::GameManager::get()->getVisibleHeight() / 2 ) {
 
       // state transform
       transform->setPositionY(
-        sprite->getFrameSize().getHeight() / 2 - ala::GameManager::get()->getScreenHeight() / 2 );
+        sprite->getFrameSize().getHeight() / 2 - ala::GameManager::get()->getVisibleHeight() / 2 );
       transform->setRotation( -180 );
       _state = 'L';
 
@@ -82,10 +82,10 @@ void BasicController::onUpdate( const float delta ) {
     break;
   case 'L': {
     if ( transform->getPositionX() - sprite->getFrameSize().getWidth() / 2
-      <= -ala::GameManager::get()->getScreenWidth() / 2 ) {
+      <= -ala::GameManager::get()->getVisibleWidth() / 2 ) {
 
       // state transform
-      transform->setPositionX( sprite->getFrameSize().getWidth() / 2 - ala::GameManager::get()->getScreenWidth() / 2 );
+      transform->setPositionX( sprite->getFrameSize().getWidth() / 2 - ala::GameManager::get()->getVisibleWidth() / 2 );
       transform->setRotation( -270 );
       _state = 'U';
 
@@ -101,10 +101,10 @@ void BasicController::onUpdate( const float delta ) {
     break;
   case 'U': {
     if ( transform->getPositionY() + sprite->getFrameSize().getHeight() / 2
-      >= ala::GameManager::get()->getScreenHeight() / 2 ) {
+      >= ala::GameManager::get()->getVisibleHeight() / 2 ) {
 
       // state transform
-      transform->setPositionY( ala::GameManager::get()->getScreenHeight() / 2
+      transform->setPositionY( ala::GameManager::get()->getVisibleHeight() / 2
         - sprite->getFrameSize().getHeight() / 2 );
       transform->setRotation( 0 );
       _state = 'R';
