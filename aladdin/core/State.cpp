@@ -25,7 +25,7 @@ State::~State() {
   _stateManager->detachState( this );
 }
 
-const std::string& State::getName() {
+const std::string& State::getName() const {
   return _name;
 }
 
