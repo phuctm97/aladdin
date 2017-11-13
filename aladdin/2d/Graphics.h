@@ -43,8 +43,8 @@ public:
 private:
   HINSTANCE _hInstance;
   HWND _hWnd;
-  UINT _screenWidth;
-  UINT _screenHeight;
+  UINT _directXBackBufferWidth;
+  UINT _directXBackBufferHeight;
   IDirect3D9* _directX;
   IDirect3DDevice9* _directXDevice;
   LPD3DXSPRITE _directXSprite;

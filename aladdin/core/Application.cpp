@@ -18,6 +18,8 @@ Application::Application() :
   _title( "Aladdin Game" ),
   _resolutionWidth( 800 ),
   _resolutionHeight( 600 ),
+  _screenWidth( 800 ),
+  _screenHeight( 600 ),
   _fullScreen( false ),
   _frameCount( 0 ),
   _logger( "ala::Application" ),
@@ -61,6 +63,13 @@ Application::~Application() {
 }
 
 void Application::setScreenSize( const int width, const int height ) {
+  // can only be set before init process
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
+  _screenWidth = width;
+  _screenHeight = height;
+}
+
+void Application::setResolutionSize( const int width, const int height ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _resolutionWidth = width;
@@ -218,8 +227,8 @@ void Application::initComponents() {
   Graphics* graphics = Graphics::get();
   graphics->_hInstance = _hInstance;
   graphics->_hWnd = _hWnd;
-  graphics->_screenWidth = static_cast<UINT>(_resolutionWidth);
-  graphics->_screenHeight = static_cast<UINT>(_resolutionHeight);
+  graphics->_directXBackBufferWidth = static_cast<UINT>(_resolutionWidth);
+  graphics->_directXBackBufferHeight = static_cast<UINT>(_resolutionHeight);
   graphics->initialize();
 
   Input* input = Input::get();

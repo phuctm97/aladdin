@@ -20,6 +20,8 @@ private:
   std::string _title;
   int _resolutionWidth;
   int _resolutionHeight;
+  int _screenWidth;
+  int _screenHeight;
   bool _fullScreen;
   LARGE_INTEGER _animationInterval;
   std::vector<ResourceInitializer*> _resourceInitializers;
@@ -34,6 +36,8 @@ public:
   virtual ~Application();
 
   void setScreenSize( const int width, const int height );
+
+  void setResolutionSize(const int width, const int height);
 
   int getResolutionWidth() const;
 
