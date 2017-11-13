@@ -20,7 +20,7 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _scale( 1, 1 ),
     _rotation( 0 ),
     _origin( 0.5f, 0.5f ),
-    _childrenInLocking( false ),
+    _childrenInLock( false ),
     _parent( parentTransform ),
     _dirty( true ),
     _inverseDirty( true ) {
@@ -121,7 +121,7 @@ Transform* Transform::getParent() const {
 
 void Transform::addChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     addChildInNextFrame( child );
     return;
   }
@@ -141,7 +141,7 @@ void Transform::addChildInNextFrame( Transform* child ) {
 
 void Transform::removeChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     removeChildInNextFrame( child );
     return;
   }
@@ -158,11 +158,11 @@ void Transform::removeChildInNextFrame( Transform* child ) {
 }
 
 void Transform::lockChildren() {
-  _childrenInLocking = true;
+  _childrenInLock = true;
 }
 
 void Transform::unlockChildren() {
-  _childrenInLocking = false;
+  _childrenInLock = false;
 }
 
 void Transform::updateAddAndRemoveChildInNextFrame() {
@@ -186,7 +186,7 @@ void Transform::doRemoveChild( Transform* child ) {
 }
 
 bool Transform::onPreRelease() {
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     releaseInNextFrame();
     return false;
   }

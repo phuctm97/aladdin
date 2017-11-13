@@ -78,7 +78,7 @@ public:
   // Components
   // ========================================================
 private:
-  bool _componentsInLocking;
+  bool _componentsInLock;
   std::vector<GameObjectComponent*> _components;
   std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
   std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;
