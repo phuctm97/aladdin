@@ -371,8 +371,8 @@ void Application::initWindowHandle() {
     WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, // windows style
     CW_USEDEFAULT, // windows start position
     CW_USEDEFAULT, // windows start position
-    _resolutionWidth, // windows size
-    _resolutionHeight, // windows size
+    _screenWidth, // windows size
+    _screenHeight, // windows size
     0,
     0,
     _hInstance, // handle instance
