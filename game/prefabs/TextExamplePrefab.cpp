@@ -1,6 +1,6 @@
 ﻿#include "TextExamplePrefab.h"
 
-void TextExamplePrefab::doInstantiate( ala::GameObject* object ) {
+void TextExamplePrefab::doInstantiate( ala::GameObject* object ) const {
   // layer
   object->setLayer( "UI" );
 

@@ -11,8 +11,8 @@ class BasicExamplePrefab : public ala::Prefab
 {
 public:
   BasicExamplePrefab(): Prefab( "Basic Example" ) {}
-
-  void doInstantiate( ala::GameObject* object ) override;
+   
+  void doInstantiate( ala::GameObject* object ) const override;
 };
 
 #endif //!__BALL_PREFAB_H__

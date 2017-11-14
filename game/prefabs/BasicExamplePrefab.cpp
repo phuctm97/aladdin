@@ -5,7 +5,7 @@
 #include "BasicExamplePrefab.h"
 #include "../scripts/BasicController.h"
 
-void BasicExamplePrefab::doInstantiate( ala::GameObject* object ) {
+void BasicExamplePrefab::doInstantiate( ala::GameObject* object ) const {
   // layers
   object->setLayer( "Background" );
 

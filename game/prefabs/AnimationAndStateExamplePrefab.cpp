@@ -1,7 +1,7 @@
 ﻿#include "AnimationAndStateExamplePrefab.h"
 #include "../scripts/BasicController.h"
 
-void AnimationAndStateExamplePrefab::doInstantiate( ala::GameObject* object ) {
+void AnimationAndStateExamplePrefab::doInstantiate( ala::GameObject* object ) const {
   // layer
   object->setLayer( "Character" );
 
