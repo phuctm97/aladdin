@@ -13,10 +13,10 @@ void AnimationAndStateExamplePrefab::doInstantiate( ala::GameObject* object ) co
   // line renderer
   const auto lineRenderer = new LineRenderer( object,
                                               {
-                                                ala::Vec2( 50, 50 ), 
-                                                ala::Vec2( 400, 400 ), 
-                                                ala::Vec2( 500, 200 ),
-                                                ala::Vec2( 600, 300 )
+                                                ala::Vec2( 50 / 3, 50 / 3 ),
+                                                ala::Vec2( 400 / 3, 400 / 3 ),
+                                                ala::Vec2( 500 / 3, 200 / 3 ),
+                                                ala::Vec2( 600 / 3, 300 / 3 )
                                               },
                                               ala::Color( 255, 255, 0 ) );
 
