@@ -81,14 +81,8 @@
     <ClCompile Include="scripts\AladdinController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Timer.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\DebugRectPrefab.cpp">
       <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\AnimationEditor.cpp">
-      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\BoxCollider.cpp">
       <Filter>scripts</Filter>
@@ -122,14 +116,8 @@
     <ClInclude Include="scripts\AladdinController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Timer.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\DebugRectPrefab.h">
       <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\AnimationEditor.h">
-      <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\BoxCollider.h">
       <Filter>scripts</Filter>

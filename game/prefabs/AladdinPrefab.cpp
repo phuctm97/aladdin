@@ -1,7 +1,5 @@
 #include "AladdinPrefab.h"
 #include "../scripts/AladdinController.h"
-#include "../scripts/Timer.h"
-#include "../scripts/AnimationEditor.h"
 
 USING_NAMESPACE_ALA;
 
