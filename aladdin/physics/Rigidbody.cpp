@@ -61,6 +61,11 @@ void Rigidbody::onPhysicsUpdate ( const float delta )
   _position += _velocity*delta;
 }
 
+void Rigidbody::resetForce()
+{
+	_forces = 0;
+}
+
 void Rigidbody::addForce ( const Vec2 &force)
 {
   if(_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)

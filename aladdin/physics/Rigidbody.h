@@ -24,6 +24,8 @@ public:
 
   void onPhysicsUpdate(const float delta) override;
 
+	void resetForce();
+
   void addForce(const Vec2 &force);
   void addImpulse(const Vec2 &impulse);
 	void addAcceleration(const Vec2& acceleration);

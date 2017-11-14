@@ -22,6 +22,13 @@ protected:
   void onUpdate( const float delta ) override;
 
   void onRelease() override;
+
+	void onCollisionEnter(const ala::CollisionInfo& collision) override;
+	void onCollisionStay(const ala::CollisionInfo& collision) override;
+	void onCollisionExit(const ala::CollisionInfo& collision) override;
+	void onTriggerEnter(const ala::CollisionInfo& collision) override;
+	void onTriggerStay(const ala::CollisionInfo& collision) override;
+	void onTriggerExit(const ala::CollisionInfo& collision) override;
 };
 
 

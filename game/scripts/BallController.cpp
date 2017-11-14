@@ -11,6 +11,7 @@ BallController::BallController( ala::GameObject* gameObject, const std::string& 
     _logger( "BallController" ) {}
 
 void BallController::onInitialize() {
+	return;
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   auto frameSize = getGameObject()->getComponentT<ala::SpriteRenderer>()->getFrameSize();
   transform->setPosition(
@@ -26,7 +27,7 @@ void BallController::onInitialize() {
 }
 
 void BallController::onUpdate( const float delta ) {
-
+	return;
   auto transform = getGameObject()->getComponentT<ala::Transform>();
   const auto sprite = getGameObject()->getComponentT<ala::SpriteRenderer>();
   auto audioSource = getGameObject()->getComponentT<ala::AudioSource>();
@@ -87,3 +88,33 @@ void BallController::onUpdate( const float delta ) {
 }
 
 void BallController::onRelease() {}
+
+void BallController::onCollisionEnter(const ala::CollisionInfo& collision)
+{
+	_logger.info("Collision enter");
+}
+
+void BallController::onCollisionStay(const ala::CollisionInfo& collision)
+{
+	_logger.info("Collision stay");
+}
+
+void BallController::onCollisionExit(const ala::CollisionInfo& collision)
+{
+	_logger.info("Collision exit");
+}
+
+void BallController::onTriggerEnter(const ala::CollisionInfo& collision)
+{
+	_logger.info("Trigger enter");
+}
+
+void BallController::onTriggerStay(const ala::CollisionInfo& collision)
+{
+	_logger.info("Trigger stay");
+}
+
+void BallController::onTriggerExit(const ala::CollisionInfo& collision)
+{
+	_logger.info("Trigger exit");
+}

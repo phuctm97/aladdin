@@ -193,7 +193,31 @@ bool GameObjectComponent::onPreRelease() {
   return true;
 }
 
-// ===========================================================
+void GameObjectComponent::onCollisionEnter(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onCollisionStay(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onCollisionExit(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerEnter(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerStay(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerExit(const CollisionInfo& collision)
+{
+}
+
+	// ===========================================================
 // Debug memory allocation
 // ===========================================================
 long GameObjectComponent::TOTAL_COMPONENTS_CREATED( 0 );

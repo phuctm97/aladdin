@@ -101,67 +101,190 @@ void PhysicsManager::update ( const float delta )
 {
   if (isReleasing() || isReleased()) return;
 
-	//check collision
-	for(auto it1 = _colliders.begin(); it1 != _colliders.end(); ++it1)
+	std::map<int, std::vector<Collider*>> colliders;
+
+	for(auto collider: _colliders)
 	{
-		for(auto it2 = it1 + 1; it2 != _colliders.end(); ++it2)
+		const auto colliderList = colliders.find(collider->getPhysicsLayer());
+		if(colliderList != colliders.end())
 		{
-			const auto gameObject1 = (*it1)->getGameObject();
-			const auto gameObject2 = (*it2)->getGameObject();
-
-			auto rb1 = gameObject1->getComponentT<Rigidbody>();
-			auto rb2 = gameObject2->getComponentT<Rigidbody>();
-
-			auto rectA = (*it1)->getBoundingRect();
-			auto rectB = (*it2)->getBoundingRect();
-
-			if (abs(rectA.getMidX() - rectB.getMidX()) > rectA.getSize().getWidth()/2 + rectB.getSize().getWidth()/2) continue;
-			if (abs(rectA.getMidY() - rectB.getMidY()) > rectA.getSize().getHeight()/2 + rectB.getSize().getHeight()/2) continue;
-
-			CollisionInfo collisionInfo;
-			if (!getCollisionInfo(gameObject1, gameObject2, collisionInfo))
-			{
-				continue;
-			}
-
-			const Vec2 relativeVelocity = rb2->getVelocity() - rb1->getVelocity();
-			const float velocityAlongNormal = relativeVelocity.dot(collisionInfo.getNormal());
-
-			//do not resolve if objects are seperating
-			if(velocityAlongNormal > 0)
-			{
-				return;
-			}
-
-			const float restitution = MIN(rb1->getPhysicsMaterial().getRestitution(), rb2->getPhysicsMaterial().getRestitution());
-
-			float impulseScalar = -(1 + restitution) * velocityAlongNormal;
-			impulseScalar /= rb1->getInverseMass() + rb2->getInverseMass();
-
-			//apply impulse
-			const Vec2 impulse = collisionInfo.getNormal()* impulseScalar;
-
-			rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
-			rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
-
-			//positional correction
-			const float percent = 0.2; // usually 20% to 80%
-			const float slop = 0.01; // usually 0.01 to 0.1
-			const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
-			rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
-			rb2->setPosition(rb2->getPosition() - correction*rb2->getInverseMass());
-
-			//collision happens
-			_logger.info("collision");
+			colliders[collider->getPhysicsLayer()].push_back(collider);
+		}
+		else
+		{
+			std::vector<Collider*> addingCollider;
+			addingCollider.push_back(collider);
+			colliders[collider->getPhysicsLayer()] = addingCollider;
 		}
 	}
-	
 
-  //update transform position
-  for(auto rigidbody: _rigidbodies)
-  {
-    rigidbody->getGameObject()->getTransform()->setPosition(rigidbody->getPosition());
-  }
+	for(auto layer: colliders)
+	{
+		for (auto it1 = layer.second.begin(); it1 != layer.second.end(); ++it1)
+		{
+			for (auto it2 = it1 + 1; it2 != layer.second.end(); ++it2)
+			{
+				const auto gameObject1 = (*it1)->getGameObject();
+				const auto gameObject2 = (*it2)->getGameObject();
+
+				auto rb1 = gameObject1->getComponentT<Rigidbody>();
+				auto rb2 = gameObject2->getComponentT<Rigidbody>();
+
+				auto rectA = (*it1)->getBoundingRect();
+				auto rectB = (*it2)->getBoundingRect();
+
+				CollisionInfo collisionInfo;
+
+				if (abs(rectA.getMidX() - rectB.getMidX()) > rectA.getSize().getWidth() / 2 + rectB.getSize().getWidth() / 2)
+				{
+					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onTriggerExit(collisionInfo);
+							(*it2)->getGameObject()->onTriggerExit(collisionInfo);
+						}
+					}
+					else
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onCollisionExit(collisionInfo);
+							(*it2)->getGameObject()->onCollisionExit(collisionInfo);
+						}
+					}
+					continue;
+				}
+				if (abs(rectA.getMidY() - rectB.getMidY()) > rectA.getSize().getHeight() / 2 + rectB.getSize().getHeight() / 2)
+				{
+					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onTriggerExit(collisionInfo);
+							(*it2)->getGameObject()->onTriggerExit(collisionInfo);
+						}
+					}
+					else
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onCollisionExit(collisionInfo);
+							(*it2)->getGameObject()->onCollisionExit(collisionInfo);
+
+						}
+					}
+					continue;
+				}
+
+
+				if (!getCollisionInfo(gameObject1, gameObject2, collisionInfo))
+				{
+					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onTriggerExit(collisionInfo);
+							(*it2)->getGameObject()->onTriggerExit(collisionInfo);
+
+						}
+					}
+					else
+					{
+						collisionInfo.setObjectA(gameObject1);
+						collisionInfo.setObjectB(gameObject2);
+						if (isCollidedLastFrame(collisionInfo))
+						{
+							(*it1)->getGameObject()->onCollisionExit(collisionInfo);
+							(*it2)->getGameObject()->onCollisionExit(collisionInfo);
+
+						}
+					}
+					continue;
+				}
+
+				_currentCollidingPairs.push_back(collisionInfo);
+
+				if((*it1)->getTrigger() || (*it2)->getTrigger())
+				{
+					if(!isCollidedLastFrame(collisionInfo))
+					{
+						(*it1)->getGameObject()->onTriggerEnter(collisionInfo);
+						(*it2)->getGameObject()->onTriggerEnter(collisionInfo);
+
+					}
+
+					(*it1)->getGameObject()->onTriggerStay(collisionInfo);
+					(*it2)->getGameObject()->onTriggerStay(collisionInfo);
+
+					continue;
+				}
+
+				if (!isCollidedLastFrame(collisionInfo))
+				{
+					(*it1)->getGameObject()->onCollisionEnter(collisionInfo);
+					(*it2)->getGameObject()->onCollisionEnter(collisionInfo);
+
+				}
+
+				(*it1)->getGameObject()->onCollisionStay(collisionInfo);
+				(*it2)->getGameObject()->onCollisionStay(collisionInfo);
+
+
+				const Vec2 relativeVelocity = rb2->getVelocity() - rb1->getVelocity();
+				const float velocityAlongNormal = relativeVelocity.dot(collisionInfo.getNormal());
+
+				//do not resolve if objects are seperating
+				if (velocityAlongNormal > 0)
+				{
+					return;
+				}
+
+				const float restitution = MIN(rb1->getPhysicsMaterial().getRestitution(), rb2->getPhysicsMaterial().getRestitution());
+
+				float impulseScalar = -(1 + restitution) * velocityAlongNormal;
+				impulseScalar /= rb1->getInverseMass() + rb2->getInverseMass();
+
+				//apply impulse
+				const Vec2 impulse = collisionInfo.getNormal()* impulseScalar;
+				
+				rb1->resetForce();
+				rb2->resetForce();
+				rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
+				rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
+
+				//positional correction
+				const float percent = 0.2; // usually 20% to 80%
+				const float slop = 0.01; // usually 0.01 to 0.1
+				const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
+				rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
+				rb2->setPosition(rb2->getPosition() - correction*rb2->getInverseMass());
+				
+				//TODO: Friction
+			}
+		}
+
+		_lastCollidingPairs.clear();
+		_lastCollidingPairs.insert(_lastCollidingPairs.begin(), _currentCollidingPairs.begin(), _currentCollidingPairs.end());
+		_currentCollidingPairs.clear();
+
+
+		//update transform position
+		for (auto rigidbody : _rigidbodies)
+		{
+			rigidbody->getGameObject()->getTransform()->setPosition(rigidbody->getPosition());
+		}
+	}	
 }
 
 
@@ -204,5 +327,18 @@ void PhysicsManager::detach ( Collider* collider )
   if (isReleasing() || isReleased()) return;
   if (collider == NULL) return;
   StdHelper::vectorErase(_colliders, collider);
+}
+
+bool PhysicsManager::isCollidedLastFrame(const CollisionInfo& collisionInfo)
+{
+	for(const auto collision: _lastCollidingPairs)
+	{
+		if (collisionInfo.isSameObjects(collision))
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 }

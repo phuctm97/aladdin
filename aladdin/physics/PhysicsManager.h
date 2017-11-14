@@ -17,6 +17,9 @@ private:
   std::vector<Collider*> _colliders;
 
 	bool getCollisionInfo(GameObject* a, GameObject* b, CollisionInfo& collisionInfo) const;
+
+	std::vector<CollisionInfo> _lastCollidingPairs;
+	std::vector<CollisionInfo> _currentCollidingPairs;
 public:
   PhysicsManager();
 
@@ -35,6 +38,8 @@ public:
   void attach(Collider* collider);
 
   void detach(Collider* collider);
+
+	bool isCollidedLastFrame(const CollisionInfo& collisionInfo);
 };
 }
 

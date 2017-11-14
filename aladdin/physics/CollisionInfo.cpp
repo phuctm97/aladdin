@@ -55,4 +55,10 @@ const Vec2& CollisionInfo::getNormal() const
 {
 	return _normal;
 }
+
+bool CollisionInfo::isSameObjects(const CollisionInfo& collisionInfo) const
+{
+	return (collisionInfo._objectA == _objectA && collisionInfo._objectB == _objectB)
+	|| (collisionInfo._objectB == _objectA && collisionInfo._objectA == _objectB);
+}
 }

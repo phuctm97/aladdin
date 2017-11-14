@@ -5,12 +5,13 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(Collider, GameObjectComponent)
 
-Collider::Collider(GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size,
+Collider::Collider(GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size, const int physicsLayer,
 	const std::string& name)
 	: GameObjectComponent(gameObject, name),
 	  _offset(offset),
 	  _size(size),
-	  _isTrigger(isTrigger)
+	  _isTrigger(isTrigger),
+		_physicsLayer(physicsLayer)
 {
 }
 
@@ -53,6 +54,16 @@ void Collider::setSize(const Size& size)
 void Collider::setTrigger(const bool trigger)
 {
 	_isTrigger = trigger;
+}
+
+void Collider::setPhysicsLayer(const int physicsLayer)
+{
+	_physicsLayer = physicsLayer;
+}
+
+int Collider::getPhysicsLayer() const
+{
+	return _physicsLayer;
 }
 
 const Vec2& Collider::getOffset() const

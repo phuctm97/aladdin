@@ -25,6 +25,8 @@ public:
 	GameObject* getObjectB() const;
 	float getPenetration() const;
 	const Vec2& getNormal() const;
+
+	bool isSameObjects(const CollisionInfo& collisionInfo) const;
 };
 
 }

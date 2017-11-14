@@ -195,6 +195,159 @@ void GameObject::update( const float delta ) {
   unlockComponents();
 }
 
+void GameObject::onCollisionEnter(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame) 
+	{
+		return;
+	}
+
+	if (!isInitialized()) 
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for(auto component: _components)
+	{
+		component->onCollisionEnter(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onCollisionStay(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onCollisionStay(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onCollisionExit(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onCollisionExit(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onTriggerEnter(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onTriggerEnter(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onTriggerStay(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onTriggerStay(collisionInfo);
+	}
+	unlockComponents();
+}
+
+void GameObject::onTriggerExit(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+	for (auto component : _components)
+	{
+		component->onTriggerExit(collisionInfo);
+	}
+	unlockComponents();
+}
+
 void GameObject::render() {
   if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
