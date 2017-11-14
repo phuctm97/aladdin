@@ -21,7 +21,7 @@ Rigidbody::Rigidbody (GameObject* gameObject, const PhysicsMaterial material, co
 
 void Rigidbody::addAcceleration(const Vec2& acceleration)
 {
-	if (_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+	if (_bodyType == ALA_BODY_TYPE_STATIC)
 	{
 		return;
 	}
@@ -31,7 +31,7 @@ void Rigidbody::addAcceleration(const Vec2& acceleration)
 
 void Rigidbody::addVelocity(const Vec2& velocity)
 {
-	if (_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+	if (_bodyType == ALA_BODY_TYPE_STATIC)
 	{
 		return;
 	}
@@ -68,7 +68,7 @@ void Rigidbody::resetForce()
 
 void Rigidbody::addForce ( const Vec2 &force)
 {
-  if(_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+  if(_bodyType == ALA_BODY_TYPE_STATIC)
   {
     return;
   }
@@ -77,7 +77,7 @@ void Rigidbody::addForce ( const Vec2 &force)
 
 void Rigidbody::addImpulse ( const Vec2& impulse )
 {
-  if (_bodyType == ALA_BODY_TYPE_STATIC || _bodyType == ALA_BODY_TYPE_KINEMATIC)
+  if (_bodyType == ALA_BODY_TYPE_STATIC)
   {
     return;
   }
