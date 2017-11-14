@@ -127,6 +127,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
+    <ClCompile Include="scripts\AnimationEditor.cpp" />
+    <ClCompile Include="scripts\BoxCollider.cpp" />
     <ClCompile Include="scripts\Timer.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\LimitedGravityAffectedVelocityBasedMovement.cpp" />
@@ -144,6 +146,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\DebugRectPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
+    <ClInclude Include="scripts\AnimationEditor.h" />
+    <ClInclude Include="scripts\BoxCollider.h" />
     <ClInclude Include="scripts\Timer.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scripts\LimitedGravityAffectedVelocityBasedMovement.h" />

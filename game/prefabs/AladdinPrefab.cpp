@@ -16,7 +16,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // initial configurations
   object->setLayer( "Character" );
-  transform->setPosition( -80, -70 );
+  transform->setPosition( -80, -40 );
 
   // states
 
