@@ -17,12 +17,10 @@ private:
   std::string _textureName;
 
   std::vector<Rect> _frames;
-
-  std::vector<Vec2> _frameAnchors;
 public:
   AnimationAction();
 
-  AnimationAction( const std::vector<Rect>& frames, const std::vector<Vec2>& frameAnchors, const std::string& actionName, const std::string& textureName, const float interval = 0, const bool loop = true );
+  AnimationAction( const std::vector<Rect>& frames, const std::string& actionName, const std::string& textureName, const float interval = 0, const bool loop = true );
 
   virtual ~AnimationAction();
 

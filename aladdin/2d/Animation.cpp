@@ -25,7 +25,6 @@ void Animation::onLoad ( )
     auto frameNodes = action.children("sprite");
 
     std::vector<Rect> frames;
-    std::vector<Vec2> anchors;
 
     for(auto frame: frameNodes)
     {
@@ -34,14 +33,9 @@ void Animation::onLoad ( )
       rect.setSize(Size(static_cast<float>(frame.attribute( "w" ).as_int()), static_cast<float>(frame.attribute( "h" ).as_int())));
       rect.setTopLeft(Vec2(rect.getTopLeft().getX(), rect.getTopLeft().getY()));
       frames.push_back(rect);
-
-      Vec2 anchor;
-      anchor.setX(frame.attribute("aX").as_float(0.5f));
-      anchor.setY(frame.attribute("aY").as_float(0.5f));
-      anchors.push_back(anchor);
     }
 
-    const auto animationAction = AnimationAction(frames, anchors, actionName, action.attribute("imagePath").as_string(), action.attribute("interval").as_float(), action.attribute("isLoop").as_bool());
+    const auto animationAction = AnimationAction(frames, actionName, action.attribute("imagePath").as_string(), action.attribute("interval").as_float(), action.attribute("isLoop").as_bool());
 
     _frames[actionName] = animationAction;
   }
