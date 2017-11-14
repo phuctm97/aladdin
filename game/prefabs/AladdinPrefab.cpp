@@ -4,20 +4,27 @@
 USING_NAMESPACE_ALA;
 
 void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
-  // ReSharper disable CppNonReclaimedResourceAcquisition
+  const auto gameManager = GameManager::get();
+
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
-    // For animationEditor
-    const auto animationEditor = new AnimationEditor( object, "stop" );
-    object->setLayer( "Character" );
-    object->getTransform()->setPosition( -80, -40 );
-    return;
-    // For animationEditor
+  //    // For animationEditor
+  //    const auto animationEditor = new AnimationEditor( object, "stop" );
+  //    object->setLayer( "Character" );
+  //    object->getTransform()->setPosition( -80, -40 );
+  //    return;
+  //    // For animationEditor
 
-  const auto stateManager = new StateManager( object, "idle_right" );
   const auto timer = new Timer( object );
+  const auto stateManager = new StateManager( object, "idle_right" );
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 40, 50 ) );
   const auto controller = new AladdinController( object );
+  const auto debugRect = gameManager->getPrefab( "Debug Rect" )->instantiate( object )
+                                    ->setLayer( "Character" )
+                                    ->getTransform()
+                                    ->setScale( 50 )
+                                    ->getGameObject();
   const auto transform = object->getTransform();
   const auto input = Input::get();
 
