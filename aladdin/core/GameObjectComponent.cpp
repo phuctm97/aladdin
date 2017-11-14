@@ -47,6 +47,10 @@ GameObject* GameObjectComponent::getGameObject() const {
   return _gameObject;
 }
 
+GameObject* GameObjectComponent::and() const {
+  return _gameObject;
+}
+
 bool GameObjectComponent::isActive() const {
   return _active;
 }

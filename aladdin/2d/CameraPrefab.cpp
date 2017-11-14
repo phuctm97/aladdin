@@ -4,7 +4,7 @@
 NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1 ( CameraPrefab, Prefab )
-void CameraPrefab::doInstantiate(ala::GameObject* object) {
+void CameraPrefab::doInstantiate(ala::GameObject* object) const {
   new ala::Camera(object, ALA_MAIN_CAMERA,
     ala::GameManager::get()->getVisibleWidth(),
     ala::GameManager::get()->getVisibleHeight(),
