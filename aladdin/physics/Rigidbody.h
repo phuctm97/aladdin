@@ -1,5 +1,5 @@
-﻿#ifndef __ALADDIN_PHYSICS_RIGIDBODY_H__
-#define __ALADDIN_PHYSICS_RIGIDBODY_H__
+﻿#ifndef __ALADDIN_PHYSICS_RIGID_BODY_H__
+#define __ALADDIN_PHYSICS_RIGID_BODY_H__
 
 #include "PhysicsInclude.h"
 #include "PhysicsMaterial.h"
@@ -52,4 +52,4 @@ public:
   virtual ~Rigidbody();
 };
 }
-#endif //!__ALADDIN_PHYSICS_RIGIDBODY_H__
+#endif //!__ALADDIN_PHYSICS_RIGID_BODY_H__

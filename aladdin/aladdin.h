@@ -48,5 +48,12 @@
 #include "ui/FontInfo.h"
 #include "ui/RectTransform.h"
 #include "ui/Text.h"
+#include "extra/Timer.h"
+#include "extra/AnimationEditor.h"
+#include "physics/PhysicsManager.h"
+#include "physics/PhysicsMaterial.h"
+#include "physics/Collider.h"
+#include "physics/CollisionInfo.h"
+#include "physics/Rigidbody.h"
 
 #endif //!__ALADDIN_H__
