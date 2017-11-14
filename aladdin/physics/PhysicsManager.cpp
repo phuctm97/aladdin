@@ -101,6 +101,12 @@ void PhysicsManager::update ( const float delta )
 {
   if (isReleasing() || isReleased()) return;
 
+	//update transform position
+	for (auto rigidbody : _rigidbodies)
+	{
+		rigidbody->getGameObject()->getTransform()->setPosition(rigidbody->getPosition());
+	}
+
 	std::map<int, std::vector<Collider*>> colliders;
 
 	for(auto collider: _colliders)
@@ -260,8 +266,17 @@ void PhysicsManager::update ( const float delta )
 				
 				rb1->resetForce();
 				rb2->resetForce();
-				rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
-				rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
+
+				if(rb1->getBodyType() == ALA_BODY_TYPE_DYNAMIC)
+				{
+					rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
+				}
+
+				if(rb2->getBodyType() == ALA_BODY_TYPE_DYNAMIC)
+				{
+					rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
+				}
+
 
 				//positional correction
 				const float percent = 0.2; // usually 20% to 80%
@@ -277,13 +292,6 @@ void PhysicsManager::update ( const float delta )
 		_lastCollidingPairs.clear();
 		_lastCollidingPairs.insert(_lastCollidingPairs.begin(), _currentCollidingPairs.begin(), _currentCollidingPairs.end());
 		_currentCollidingPairs.clear();
-
-
-		//update transform position
-		for (auto rigidbody : _rigidbodies)
-		{
-			rigidbody->getGameObject()->getTransform()->setPosition(rigidbody->getPosition());
-		}
 	}	
 }
 

@@ -48,17 +48,17 @@ void Rigidbody::onPhysicsUpdate ( const float delta )
     return;
   }
 
-  const Vec2 totalForce = _forces + _impulses;
+  const Vec2 totalForce = _forces;
 
   const Vec2 gravityAcceleration = GRAVITY_ACCELERATION * _gravityScale;
 
-  _impulses = Vec2(0,0);
-
   const Vec2 acceleration = totalForce * getInverseMass() + gravityAcceleration;
 
-  _velocity += acceleration*delta;
+  _velocity += acceleration*delta + _impulses * getInverseMass();
 
   _position += _velocity*delta;
+
+	_impulses = Vec2(0, 0);
 }
 
 void Rigidbody::resetForce()
