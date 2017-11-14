@@ -47,15 +47,15 @@ public:
 
   bool isActive() const;
 
-  void setActive( const bool val );
+  GameObject* setActive( const bool val );
 
   bool isSelfInitialize() const;
 
-  void setSelfInitialize( const bool val );
+  GameObject* setSelfInitialize( const bool val );
 
   const std::string& getLayer() const;
 
-  void setLayer( const std::string& layer );
+  GameObject* setLayer( const std::string& layer );
 
   // =========================================================
   // Events
