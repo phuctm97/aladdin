@@ -4,8 +4,6 @@
 
 #include "SpriteRenderer.h"
 #include "Graphics.h"
-#include "Animator.h"
-#include "RectMessageArgs.h"
 
 NAMESPACE_ALA
 {
@@ -15,48 +13,23 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
   : GameObjectComponent( gameObject, name ),
     _sprite( sprite ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 )
+    _zOrder( 0 ),
+    _anchorPoint( 0.5f, 0.5f )
 {
-  auto animator = getGameObject()->getComponentT<Animator>();
-
-  if (animator == NULL || !animator->isInitialized())
-  {
-    _srcRect.setTopLeft(Vec2(0.f, 0.f));
-    _srcRect.setSize(_sprite->getContentSize());
-  }
-  else
-  {
-    _srcRect = animator->getCurrentFrame();
-  }
-
-  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
-  {
-    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
-  });
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& spriteResourceName, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _sprite( NULL ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 ) {
+    _zOrder( 0 ),
+    _anchorPoint(0.5f, 0.5f) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
-  auto animator = getGameObject()->getComponentT<Animator>();
 
-  if (animator == NULL || !animator->isInitialized())
-  {
-    _srcRect.setTopLeft(Vec2(0.f, 0.f));
-    _srcRect.setSize(_sprite->getContentSize());
-  }
-  else
-  {
-    _srcRect = animator->getCurrentFrame();
-  }
-
-  subscribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE, [&](MessageArgs* message)
-  {
-    _srcRect = static_cast < RectMessageArgs* > (message)->getRect();
-  });
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 SpriteRenderer::~SpriteRenderer() {}
@@ -67,6 +40,9 @@ Sprite* SpriteRenderer::getSprite() const {
 
 void SpriteRenderer::setSprite( Sprite* sprite ) {
   _sprite = sprite;
+
+  _srcRect.setTopLeft(Vec2(0.f, 0.f));
+  _srcRect.setSize(_sprite->getContentSize());
 }
 
 const Color& SpriteRenderer::getBackColor() const {
@@ -86,12 +62,30 @@ Size SpriteRenderer::getFrameSize() const {
 
 void SpriteRenderer::setZOrder( const int zOrder ) {
   if (zOrder < 0) _zOrder = 0;
-  else if (zOrder >= 1000) _zOrder = 999;
+  else if (zOrder > ALA_MAX_Z_ORDER) _zOrder = ALA_MAX_Z_ORDER;
   else _zOrder = zOrder;
 }
 
 int SpriteRenderer::getZOrder() const {
   return _zOrder;
+}
+
+const Rect& SpriteRenderer::getSourceRect ( ) const
+{
+  return _srcRect;
+}
+
+void SpriteRenderer::setSourceRect ( const Rect& rect )
+{
+  _srcRect = rect;
+}
+
+const Vec2& SpriteRenderer::getAnchorPoint() const {
+  return _anchorPoint;
+}
+
+void SpriteRenderer::setAnchorPoint( const Vec2& p ) {
+  _anchorPoint = p;
 }
 
 void SpriteRenderer::onInitialize ( )
@@ -101,13 +95,11 @@ void SpriteRenderer::onInitialize ( )
 void SpriteRenderer::onRender() {
   auto transform = getGameObject()->getTransform();
   auto worldZOrder = calculateWorldZOrder();
-  Graphics::get()->drawSprite( _sprite, Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
+  Graphics::get()->drawSprite( _sprite, _anchorPoint, transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
 }
 
 void SpriteRenderer::onRelease ( )
 {
-  // TODO: MessageListener auto release callbacks on destruction, this line may be redundant
-  unsubcribeObjectMessage(getGameObject(), SOURCE_RECT_CHANGE_MESSAGE);
 }
 
 int SpriteRenderer::calculateWorldZOrder() const {

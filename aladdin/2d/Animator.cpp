@@ -1,5 +1,6 @@
 ﻿#include "Animator.h"
 #include "RectMessageArgs.h"
+#include "SpriteRenderer.h"
 
 NAMESPACE_ALA
 {
@@ -21,7 +22,9 @@ void Animator::onUpdate ( const float delta )
   if (_elapsedTime >= _currentAction->getInterval (  ))
   {
     ++_frameIterator;
-    if (_frameIterator == _currentAction->getFrames().end() )
+    ++_frameAnchorIterator;
+    if (_frameIterator == _currentAction->getFrames().end() ||
+        _frameAnchorIterator == _currentAction->getFrameAnchors().end() )
     {
       if(!_currentAction->isLoop (  ))
       {
@@ -36,7 +39,12 @@ void Animator::onUpdate ( const float delta )
     }
     else
     {
-      getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+      auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+      if(spriteRenderer!= NULL)
+      {
+        spriteRenderer->setSourceRect(*_frameIterator);
+        spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+      }
       _elapsedTime = 0;
     }
 
@@ -54,8 +62,15 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
   _currentAction = _animation->getAction(entryAction);
 
   _frameIterator = _currentAction->getFrames (  ).begin();
+  _frameAnchorIterator = _currentAction->getFrameAnchors().begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+  if (spriteRenderer != NULL)
+  {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
+    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+  }
 }
 
 Animator::Animator ( GameObject* gameObject, const std::string &entryAction, const std::string& animationResourceName, const std::string& name )
@@ -67,8 +82,15 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
   _currentAction = _animation->getAction(entryAction);
 
   _frameIterator = _currentAction->getFrames().begin();
+  _frameAnchorIterator = _currentAction->getFrameAnchors().begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+  if (spriteRenderer != NULL)
+  {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
+    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+  }
 
 }
 
@@ -76,8 +98,15 @@ void Animator::setAction ( const std::string& actionName )
 {
   _currentAction = _animation->getAction(actionName);
   _frameIterator = _currentAction->getFrames().begin();
+  _frameAnchorIterator = _currentAction->getFrameAnchors().begin();
   _isPlaying = true;
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+  if (spriteRenderer != NULL)
+  {
+    spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
+    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+  }
 }
 
 const std::string& Animator::getAction ( ) const
@@ -98,14 +127,21 @@ void Animator::pause ( )
 void Animator::playNext ( )
 {
   ++_frameIterator;
+  ++_frameAnchorIterator;
 
-  if(_frameIterator == _currentAction->getFrames (  ).end (  ))
+  if(_frameIterator == _currentAction->getFrames (  ).end (  ) || 
+     _frameAnchorIterator == _currentAction->getFrameAnchors().end())
   {
     playFromStart();
   }
   else
   {
-    getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+    auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+    if (spriteRenderer != NULL)
+    {
+      spriteRenderer->setSourceRect(*_frameIterator);
+      spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+    }
   }
 }
 
@@ -119,8 +155,14 @@ void Animator::playFromStart ( )
   _isPlaying = true;
 
   _frameIterator = _currentAction->getFrames().begin();
+  _frameAnchorIterator = _currentAction->getFrameAnchors().begin();
 
-  getGameObject()->getMessenger()->broadcast(SOURCE_RECT_CHANGE_MESSAGE, new RectMessageArgs(*_frameIterator));
+  auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
+  if (spriteRenderer != NULL)
+  {
+    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setAnchorPoint(*_frameAnchorIterator);
+  }
 }
 
 bool Animator::isPlaying ( ) const

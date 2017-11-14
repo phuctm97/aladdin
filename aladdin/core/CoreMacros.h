@@ -7,7 +7,7 @@
 
 // Common Methods
 #ifndef M_PI
-#define M_PI      3.14159265358
+#define M_PI      3.1415927f
 #endif
 
 #ifndef MIN
@@ -16,6 +16,18 @@
 
 #ifndef MAX
 #define MAX( x, y ) (((x) < (y)) ? (y) : (x))
+#endif
+
+#ifndef ABS
+#define ABS( x ) (x >= 0 ? x : -(x))
+#endif
+
+#ifndef DEGREE_TO_RADIAN
+#define DEGREE_TO_RADIAN(degree) ((degree) * (M_PI/180.f))
+#endif
+
+#ifndef RADIAN_TO_DEGREE
+#define RADIAN_TO_DEGREE(radian) ((radian) * (180.f/M_PI))
 #endif
 
 #undef min
@@ -140,7 +152,8 @@ ALA_DEFINE_CLASS_META_4(_class_, _base1_, _base2_, _base3_, _base4_ )
 #define ALA_CLASS_SOURCE_5( _class_, _base1_, _base2_, _base3_, _base4_, _base5_ ) \
 ALA_DEFINE_CLASS_META_5(_class_, _base1_, _base2_, _base3_, _base4_, _base5_ )
 
-enum {
+enum
+{
   ALA_FALSE,
   ALA_INITIALIZING,
   ALA_INITIALIZED,

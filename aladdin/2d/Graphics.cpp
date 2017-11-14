@@ -4,6 +4,10 @@
 
 #include "Graphics.h"
 #include "Sprite.h"
+#include "../ui/FontInfo.h"
+#include "../ui/Font.h"
+#include "../ui/Text.h"
+#include "../2d/Camera.h"
 
 NAMESPACE_ALA
 {
@@ -79,9 +83,9 @@ void Graphics::initDirectX() {
   ZeroMemory(&d3dpp, sizeof(d3dpp));
   d3dpp.BackBufferCount = 1;
   d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-  d3dpp.BackBufferWidth = _screenWidth;
-  d3dpp.BackBufferHeight = _screenHeight;
-  d3dpp.Windowed = true;
+  d3dpp.BackBufferWidth = _directXBackBufferWidth;
+  d3dpp.BackBufferHeight = _directXBackBufferHeight;
+  d3dpp.Windowed = TRUE;
   d3dpp.hDeviceWindow = _hWnd;
   d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
   result = _directX->CreateDevice(
@@ -102,9 +106,21 @@ void Graphics::initDirectX() {
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXSprite));
   _logger.info( "Created DirectX Sprite" );
+
+  // init DirectX Line
+  result = D3DXCreateLine(_directXDevice, &_directXLine);
+  ALA_ASSERT(result == D3D_OK);
+  ALA_ASSERT(!FAILED(_directXLine));
+  _directXLine->SetGLLines(FALSE);
+  _directXLine->SetAntialias(TRUE);
+  _logger.info("Created DirectX Line");
 }
 
 void Graphics::releaseDirectX() {
+  if(_directXLine) {
+    _directXLine->Release();
+    _logger.info("Released DirectX Line");
+  }
   if ( _directXSprite ) {
     _directXSprite->Release();
     _logger.info( "Released DirectX Sprite" );
@@ -137,9 +153,20 @@ bool Graphics::beginRendering() {
   _directXDevice->SetTransform(D3DTS_WORLD, &_worldMatrix);
   _directXDevice->SetTransform(D3DTS_VIEW, &_viewMatrix);
 
-  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_SORT_DEPTH_BACKTOFRONT ) != D3D_OK ) {
+  if ( _directXSprite->Begin( D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE | D3DXSPRITE_SORT_DEPTH_FRONTTOBACK ) != D3D_OK ) {
     _directXDevice->EndScene();
     _directXDevice->Present( 0, 0, 0, 0 );
+    return false;
+  }
+
+  _directXLine->SetGLLines(FALSE);
+  _directXLine->SetAntialias(TRUE);
+  _directXLine->SetWidth(_directXLineWidth);
+
+  if(_directXLine->Begin() != D3D_OK) {
+    _directXSprite->End();
+    _directXDevice->EndScene();
+    _directXDevice->Present(0, 0, 0, 0);
     return false;
   }
 
@@ -148,6 +175,7 @@ bool Graphics::beginRendering() {
 
 void Graphics::endRendering() {
   // stop rendering
+  _directXLine->End();
   _directXSprite->End();
   _directXDevice->EndScene();
 
@@ -189,6 +217,32 @@ void Graphics::loadSprite( Sprite* sprite ) {
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
 }
 
+void Graphics::setLineWidth( float width ) {
+  _directXLineWidth = width;
+}
+
+ID3DXFont* Graphics::loadDirectXFont ( std::string fontName, const FontInfo& fontInfo ) const
+{
+  ID3DXFont* font;
+
+  D3DXCreateFont(
+    _directXDevice,		// device
+    fontInfo.getFontHeight(),									// font height
+    0,												// font width
+    convertToDirectXFontWeight ( fontInfo.getFontWeight (  ) ),									// font weight
+    1,												//
+    fontInfo.getItalic (  ),										// italic
+    DEFAULT_CHARSET,
+    OUT_DEFAULT_PRECIS,
+    ANTIALIASED_QUALITY,
+    FF_DONTCARE,
+    fontName.c_str (  ),										// font face
+    &font										// pointer font
+  );
+
+  return font;
+}
+
 void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex ) {
   LPDIRECT3DTEXTURE9 texture = sprite->getDirectXTexture();
   ALA_ASSERT(texture);
@@ -198,13 +252,16 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
   D3DXVECTOR3 dPostition;
   dPostition.x = 0;
   dPostition.y = 0;
-  dPostition.z = static_cast<float>(zIndex);
+  dPostition.z = 0;
 
   D3DXMATRIX oldMatrix;
 
+  // reverse z index for back-to-front rendering
+  float reverseZIndex = MAX( ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z );
+  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, reverseZIndex);
   auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
 
-  auto transformationMatrix = convertToDirectXMatrix(flipMatrix* transformMatrix);
+  auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);
 
   _directXSprite->GetTransform( &oldMatrix );
 
@@ -232,6 +289,73 @@ void Graphics::drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& trans
   }
 
   _directXSprite->SetTransform( &oldMatrix );
+}
+
+void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::string& text, const Rect& boundingRect,
+  const int horizontalAlignment, const int verticalAlignment, const Color& textColor, const Mat4& transformMatrix, const int zIndex )
+{
+  D3DXMATRIX oldMatrix;
+
+  const auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
+
+  const auto transformationMatrix = convertToDirectXMatrix(flipMatrix*transformMatrix);
+
+  _directXSprite->GetTransform(&oldMatrix);
+
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
+
+  _directXSprite->SetTransform(&finalMatrix);
+
+  auto directXFont = font->getDirectXFont(fontInfo);
+
+  RECT directXRect;
+  directXRect.left = static_cast<LONG>(boundingRect.getTopLeft().getX());
+  directXRect.top = -static_cast<LONG>(boundingRect.getTopLeft().getY());
+  directXRect.right = static_cast<LONG>(boundingRect.getTopLeft().getX() + boundingRect.getSize().getWidth());
+  directXRect.bottom = static_cast<LONG>(-boundingRect.getTopLeft().getY() + boundingRect.getSize().getHeight());
+
+  const auto directXTextFormat = convertToDirectXTextFormat(horizontalAlignment, verticalAlignment);
+  const auto directXTextColor = D3DXCOLOR(textColor.getR() / 256.f, textColor.getG() / 256.f, textColor.getB() / 256.f, textColor.getA() / 256.f);
+
+  directXFont->DrawTextA(_directXSprite, text.c_str(), -1, &directXRect, directXTextFormat, directXTextColor);
+
+  _directXSprite->SetTransform(&oldMatrix);
+}
+
+void Graphics::drawLine(const std::vector<Vec2>& vertices, const Color& color) {
+  D3DXVECTOR2* arr = new D3DXVECTOR2[vertices.size()];
+
+  for (size_t i = 0; i < vertices.size(); i++) {
+    const auto& vec = vertices[i];
+    arr[i] = D3DXVECTOR2(vec.getX(), vec.getY());
+  }
+  _directXLine->Draw(arr, vertices.size(),
+    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+  delete[]arr;
+}
+
+void Graphics::drawLine(const std::vector<Vec2>& vertices, const Mat4& transformMatrix, const Color& color, const int zIndex) {
+  D3DXVECTOR3* arr = new D3DXVECTOR3[vertices.size()];
+
+  for (size_t i = 0; i < vertices.size(); i++) {
+    const auto& vec = vertices[i];
+    arr[i] = D3DXVECTOR3(vec.getX(), vec.getY(), 0);
+  }
+
+  D3DXMATRIX oldMatrix;
+
+  // reverse z index for back-to-front rendering
+  float reverseZIndex = MAX(ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z);
+  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, reverseZIndex);
+  auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
+  auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);
+  _directXSprite->GetTransform(&oldMatrix);
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
+
+  _directXLine->DrawTransform(arr, vertices.size(), 
+    &finalMatrix,
+    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+  delete[]arr;
 }
 
 D3DXMATRIX Graphics::convertToDirectXMatrix( const Mat4& mat ) const {
@@ -267,6 +391,71 @@ RECT Graphics::convertToWindowsRect( const Rect& srcRect ) const {
   desRect.right = static_cast<LONG>(srcRect.getTopLeft().getX() + srcRect.getSize().getWidth());
   desRect.bottom = static_cast<LONG>(srcRect.getTopLeft().getY() + srcRect.getSize().getHeight());
   return desRect;
+}
+
+DWORD Graphics::convertToDirectXFontWeight ( const int fontWeight ) const
+{
+  switch ( fontWeight )
+  {
+  case ALA_FONT_WEIGHT_LIGHT:
+    return FW_LIGHT;
+  case ALA_FONT_WEIGHT_BOLD:
+    return FW_BOLD;
+  case ALA_FONT_WEIGHT_EXTRABOLD:
+    return FW_EXTRABOLD;
+  case ALA_FONT_WEIGHT_EXTRALIGHT:
+    return FW_EXTRALIGHT;
+  case ALA_FONT_WEIGHT_HEAVY:
+    return FW_HEAVY;
+  case ALA_FONT_WEIGHT_MEDIUM:
+    return FW_MEDIUM;
+  case ALA_FONT_WEIGHT_NORMAL:
+    return FW_NORMAL;
+  case ALA_FONT_WEIGHT_SEMIBOLD:
+    return FW_SEMIBOLD;
+  case ALA_FONT_WEIGHT_THIN:
+    return FW_THIN;
+  default:
+    return FW_NORMAL;
+  }
+}
+
+DWORD Graphics::convertToDirectXTextFormat ( const int horizontalAlignment, const int verticalAlignment )
+{
+  DWORD textFormat;
+  switch ( horizontalAlignment )
+  {
+  case ALA_HORIZONTAL_ALIGNMENT_CENTER:
+    textFormat = DT_CENTER;
+    break;
+  case ALA_HORIZONTAL_ALIGNMENT_LEFT:
+    textFormat = DT_LEFT;
+    break;
+  case ALA_HORIZONTAL_ALIGNMENT_RIGHT:
+    textFormat = DT_RIGHT;
+    break;
+  default:
+    textFormat = DT_CENTER;
+    break;
+  }
+
+  switch (verticalAlignment)
+  {
+  case ALA_VERTICAL_ALIGNMENT_MIDDLE:
+    textFormat |= DT_VCENTER;
+    break;
+  case ALA_VERTICAL_ALIGNMENT_TOP:
+    textFormat |= DT_TOP;
+    break;
+  case ALA_VERTICAL_ALIGNMENT_BOTTOM:
+    textFormat |= DT_BOTTOM;
+    break;
+  default:
+    textFormat |= DT_VCENTER;
+    break;
+  }
+
+  return textFormat;
 }
 
 void Graphics::setProjectionMatrix ( const Mat4& mat )

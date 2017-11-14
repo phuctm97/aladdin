@@ -1,328 +1,372 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TextureAtlas version="1.0">
-	<Action actionName = "climb" interval = "0.1" isLoop = "false">
-		<Rect height="86" width="29" y="327" x="763" />
-		<Rect height="89" width="28" y="0" x="763" />
-		<Rect height="74" width="28" y="948" x="760" />
-		<Rect height="62" width="42" y="0" x="517" />
-		<Rect height="76" width="31" y="778" x="762" />
-		<Rect height="86" width="29" y="415" x="763" />
-		<Rect height="79" width="28" y="586" x="763" />
-		<Rect height="63" width="32" y="948" x="726" />
-		<Rect height="62" width="42" y="759" x="517" />
-		<Rect height="81" width="28" y="503" x="763" />
-	</Action>
-	<Action actionName = "cut" interval = "0.1" isLoop = "false">
-		<Rect height="51" width="45" y="686" x="421"/>
-		<Rect height="62" width="51" y="296" x="316" />
-		<Rect height="74" width="45" y="239" x="469" />
-		<Rect height="50" width="68" y="937" x="0" />
-		<Rect height="53" width="51" y="149" x="315" />
-	</Action>
-	<Action actionName = "cutground" interval = "0.1" isLoop = "false">
-		<Rect height="33" width="47" y="696" x="203" />
-		<Rect height="31" width="45" y="91" x="147" />
-		<Rect height="33" width="71" y="770" x="0" />
-		<Rect height="34" width="92" y="0" x="0" />
-		<Rect height="33" width="84" y="36" x="0" />
-		<Rect height="33" width="71" y="770" x="0" />
-		<Rect height="31" width="45" y="91" x="147" />
-	</Action>
-	<Action actionName = "cutup" interval = "0.1" isLoop = "false">
-		<Rect height="86" width="54" y="338" x="260" />
-		<Rect height="71" width="49" y="409" x="370" />
-		<Rect height="66" width="51" y="689" x="316" />
-		<Rect height="57" width="53" y="570" x="261" />
-		<Rect height="54" width="46" y="0" x="421" />
-		<Rect height="53" width="42" y="0" x="561" />
-		<Rect height="60" width="38" y="483" x="647" />
-		<Rect height="61" width="65" y="564" x="76" />
-		<Rect height="58" width="47" y="482" x="419" />
-		<Rect height="54" width="47" y="482" x="370" />
-		<Rect height="66" width="51" y="689" x="316" />
-		<Rect height="57" width="53" y="570" x="261" />
-		<Rect height="54" width="46" y="0" x="421" />
-		<Rect height="53" width="42" y="0" x="561" />
-		<Rect height="60" width="38" y="483" x="647" />
-		<Rect height="61" width="65" y="564" x="76" />
-		<Rect height="58" width="47" y="482" x="419" />
-		<Rect height="54" width="47" y="482" x="370" />
-		<Rect height="66" width="51" y="689" x="316" />
-		<Rect height="57" width="53" y="570" x="261" />
-		<Rect height="54" width="46" y="0" x="421" />
-		<Rect height="53" width="42" y="0" x="561" />
-		<Rect height="60" width="38" y="483" x="647" />
-		<Rect height="61" width="65" y="564" x="76" />
-		<Rect height="58" width="47" y="482" x="419" />
-		<Rect height="54" width="47" y="482" x="370" />
-		<Rect height="66" width="51" y="689" x="316" />
-		<Rect height="57" width="53" y="570" x="261" />
-		<Rect height="54" width="46" y="0" x="421" />
-		<Rect height="53" width="42" y="0" x="561" />
-		<Rect height="60" width="38" y="483" x="647" />
-		<Rect height="61" width="65" y="564" x="76" />
-		<Rect height="58" width="47" y="482" x="419" />
-		<Rect height="54" width="47" y="482" x="370" />
-		<Rect height="66" width="51" y="689" x="316" />
-		<Rect height="57" width="53" y="570" x="261" />
-		<Rect height="54" width="46" y="0" x="421" />
-		<Rect height="53" width="42" y="0" x="561" />
-		<Rect height="60" width="38" y="483" x="647" />
-		<Rect height="61" width="65" y="564" x="76" />
-		<Rect height="58" width="47" y="482" x="419" />
-		<Rect height="54" width="47" y="482" x="370" />
-		<Rect height="48" width="54" y="0" x="216" />
-		<Rect height="71" width="74" y="564" x="0" />
-	</Action>
-	<Action actionName = "die" interval = "0.1" isLoop = "false">
-		<Rect height="48" width="80" y="156" x="0" />
-		<Rect height="51" width="61" y="910" x="138" />
-		<Rect height="58" width="45" y="788" x="470" />
-		<Rect height="58" width="45" y="315" x="470" />
-		<Rect height="50" width="39" y="325" x="647" />
-		<Rect height="51" width="40" y="638" x="605" />
-		<Rect height="51" width="35" y="615" x="726" />
-		<Rect height="51" width="36" y="375" x="688" />
-		<Rect height="49" width="39" y="274" x="647" />
-		<Rect height="56" width="44" y="848" x="516" />
-		<Rect height="53" width="41" y="55" x="561" />
-	</Action>
-	<Action actionName = "falltoground" interval = "0.1" isLoop = "false">
-		<Rect height="83" width="54" y="696" x="260" />
-		<Rect height="65" width="54" y="208" x="260" />
-		<Rect height="34" width="66" y="910" x="70" />
-		<Rect height="29" width="64" y="989" x="0" />
-		<Rect height="30" width="63" y="387" x="78" />
-		<Rect height="34" width="60" y="963" x="138" />
-		<Rect height="47" width="56" y="963" x="200" />
-		<Rect height="55" width="56" y="734" x="202" />
-		<Rect height="53" width="56" y="641" x="203" />
-		<Rect height="52" width="37" y="727" x="687" />
-		<Rect height="56" width="67" y="852" x="70" />
-	</Action>
-	<Action actionName = "hide" interval = "0.1" isLoop = "true">
-		<Rect height="38" width="52" y="862" x="259" />
-		<Rect height="39" width="52" y="471" x="204" />
-		<Rect height="39" width="52" y="161" x="261" />
-		<Rect height="38" width="52" y="975" x="258" />
-		<Rect height="22" width="63" y="518" x="77" />
-		<Rect height="42" width="55" y="911" x="201" />
-	</Action>
-	<Action actionName = "idle1" interval = "0.1" isLoop = "true">
-		<Rect height="50" width="37" y="592" x="687" />
-		<Rect height="47" width="41" y="0" x="272" />
-		<Rect height="52" width="40" y="745" x="605" />
-		<Rect height="55" width="44" y="848" x="470" />
-		<Rect height="51" width="41" y="110" x="562" />
-		<Rect height="51" width="42" y="791" x="561" />
-		<Rect height="53" width="44" y="964" x="470" />
-	</Action>
-	<Action actionName = "idle2" interval = "0.1" isLoop = "true">
-		<Rect height="52" width="40" y="745" x="605" />
-		<Rect height="53" width="61" y="310" x="79" />
-		<Rect height="54" width="62" y="254" x="79" />
-		<Rect height="53" width="41" y="317" x="562" />
-		<Rect height="53" width="39" y="426" x="606" />
-		<Rect height="53" width="36" y="428" x="688" />
-		<Rect height="53" width="40" y="855" x="605" />
-		<Rect height="53" width="35" y="668" x="726" />
-		<Rect height="56" width="37" y="534" x="687" />
-		<Rect height="56" width="38" y="876" x="647" />
-		<Rect height="56" width="38" y="545" x="647" />
-		<Rect height="55" width="40" y="275" x="605" />
-		<Rect height="54" width="41" y="395" x="561" />
-		<Rect height="54" width="40" y="799" x="605" />
-		<Rect height="53" width="39" y="165" x="647" />
-		<Rect height="58" width="41" y="964" x="561" />
-		<Rect height="58" width="42" y="196" x="561" />
-		<Rect height="49" width="38" y="483" x="687" />
-		<Rect height="49" width="39" y="0" x="647" />
-		<Rect height="49" width="39" y="432" x="647" />
-		<Rect height="52" width="38" y="822" x="647" />
-		<Rect height="52" width="38" y="822" x="647" />
-		<Rect height="51" width="36" y="189" x="726" />
-		<Rect height="57" width="39" y="106" x="647" />
-		<Rect height="55" width="40" y="275" x="605" />
-		<Rect height="54" width="41" y="395" x="561" />
-		<Rect height="54" width="40" y="799" x="605" />
-		<Rect height="53" width="39" y="165" x="647" />
-		<Rect height="53" width="36" y="189" x="688" />
-		<Rect height="53" width="40" y="0" x="605" />
-		<Rect height="53" width="35" y="723" x="726" />
-		<Rect height="56" width="36" y="244" x="688" />
-	</Action>
-	<Action actionName = "injured" interval = "0.1" isLoop = "true">
-		<Rect height="46" width="42" y="645" x="517" />
-		<Rect height="52" width="55" y="372" x="203" />
-		<Rect height="50" width="59" y="248" x="143" />
-		<Rect height="48" width="80" y="156" x="0" />
-		<Rect height="51" width="61" y="910" x="138" />
-		<Rect height="49" width="59" y="683" x="142" />
-	</Action>
-	<Action actionName = "jumpncut" interval = "0.1" isLoop = "true">
-		<Rect height="54" width="52" y="921" x="314" />
-		<Rect height="52" width="50" y="149" x="368" />
-		<Rect height="66" width="47" y="542" x="421" />
-		<Rect height="56" width="52" y="91" x="315" />
-		<Rect height="46" width="80" y="206" x="0" />
-		<Rect height="54" width="47" y="418" x="421" />
-	</Action>
-	<Action actionName = "jumpnfall" interval = "0.1" isLoop = "true">
-		<Rect height="43" width="59" y="759" x="141" />
-		<Rect height="62" width="52" y="481" x="316" />
-		<Rect height="61" width="54" y="275" x="260" />
-		<Rect height="69" width="54" y="791" x="259" />
-		<Rect height="74" width="51" y="545" x="316" />
-		<Rect height="66" width="38" y="934" x="647" />
-		<Rect height="79" width="35" y="534" x="726" />
-		<Rect height="93" width="34" y="0" x="727" />
-		<Rect height="93" width="34" y="419" x="727" />
-		<Rect height="93" width="34" y="853" x="726" />
-	</Action>
-	<Action actionName = "jumpnthrow" interval = "0.1" isLoop = "false">
-		<Rect height="55" width="49" y="352" x="370" />
-		<Rect height="52" width="43" y="239" x="516" />
-		<Rect height="53" width="39" y="51" x="647" />
-		<Rect height="53" width="52" y="106" x="261" />
-		<Rect height="52" width="40" y="691" x="605" />
-	</Action>
-	<Action actionName = "jumpout" interval = "0.1" isLoop = "false">
-		<Rect height="77" width="25" y="151" x="764" />
-		<Rect height="71" width="36" y="302" x="688" />
-		<Rect height="64" width="48" y="111" x="420" />
-		<Rect height="54" width="59" y="627" x="142" />
-		<Rect height="41" width="59" y="419" x="141" />
-		<Rect height="54" width="52" y="50" x="261" />
-		<Rect height="67" width="47" y="349" x="421" />
-		<Rect height="75" width="45" y="375" x="470" />
-	</Action>
-	<Action actionName = "lookaround" interval = "0.1" isLoop = "true">
-		<Rect height="88" width="49" y="203" x="369" />
-		<Rect height="87" width="47" y="260" x="420" />
-		<Rect height="88" width="41" y="933" x="604" />
-		<Rect height="88" width="40" y="105" x="605" />
-		<Rect height="88" width="38" y="732" x="647" />
-	</Action>
-	<Action actionName = "lookup" interval = "0.1" isLoop = "true">
-		<Rect  height="53" width="39" y="377" x="647" />
-		<Rect  height="59" width="45" y="727" x="470" />
-		<Rect  height="58" width="49" y="797" x="369" />
-	</Action>
-	<Action actionName = "push" interval = "0.1" isLoop = "false">
-		<Rect  height="46" width="56" y="863" x="201" />
-		<Rect  height="44" width="65" y="472" x="77" />
-		<Rect  height="45" width="70" y="805" x="0" />
-		<Rect  height="44" width="77" y="341" x="0" />
-		<Rect  height="44" width="72" y="724" x="0" />
-		<Rect  height="44" width="66" y="713" x="74" />
-		<Rect  height="44" width="75" y="518" x="0" />
-		<Rect  height="44" width="81" y="110" x="0" />
-		<Rect  height="44" width="75" y="472" x="0" />
-	</Action>
-	<Action actionName = "roll" interval = "0.1" isLoop = "false">
-		<Rect  height="54" width="49" y="741" x="369" />
-		<Rect  height="32" width="37" y="111" x="369" />
-		<Rect  height="34" width="35" y="383" x="726" />
-		<Rect  height="40" width="38" y="196" x="517" />
-		<Rect  height="31" width="38" y="163" x="562" />
-		<Rect  height="38" width="37" y="332" x="605" />
-		<Rect  height="35" width="39" y="50" x="216" />
-		<Rect  height="42" width="43" y="67" x="516" />
-	</Action>
-	<Action actionName = "run" interval = "0.1" isLoop = "true">
-		<Rect  height="48" width="40" y="55" x="604" />
-		<Rect  height="51" width="43" y="964" x="516" />
-		<Rect  height="53" width="41" y="589" x="562" />
-		<Rect  height="57" width="41" y="530" x="562" />
-		<Rect  height="57" width="52" y="862" x="314" />
-		<Rect  height="54" width="46" y="474" x="468" />
-		<Rect  height="58" width="42" y="645" x="561" />
-		<Rect  height="52" width="41" y="372" x="604" />
-		<Rect  height="54" width="35" y="327" x="726" />
-		<Rect  height="57" width="49" y="293" x="369" />
-		<Rect  height="58" width="55" y="91" x="204" />
-		<Rect  height="55" width="55" y="151" x="204" />
-		<Rect  height="57" width="44" y="905" x="470" />
-	</Action>
-	<Action actionName = "runnjumpncut" interval = "0.1" isLoop = "false">
-		<Rect height="42" width="41" y="451" x="563" />
-		<Rect height="76" width="45" y="452" x="516" />
-		<Rect height="57" width="57" y="804" x="200" />
-		<Rect height="42" width="58" y="371" x="143" />
-		<Rect height="48" width="61" y="419" x="78" />
-		<Rect height="53" width="58" y="462" x="144" />
-		<Rect height="58" width="53" y="629" x="261" />
-		<Rect height="85" width="50" y="925" x="368" />
-		<Rect height="44" width="59" y="846" x="139" />
-	</Action>
-	<Action actionName = "sit" interval = "0.1" isLoop = "false">
-		<Rect  height="49" width="42" y="395" x="517" />
-		<Rect  height="40" width="48" y="977" x="312" />
-		<Rect  height="30" width="54" y="124" x="83" />
-		<Rect  height="35" width="53" y="589" x="143" />
-	</Action>
-	<Action actionName = "stop" interval = "0.1" isLoop = "false">
-		<Rect  height="53" width="54" y="426" x="261" />
-		<Rect  height="56" width="44" y="906" x="516" />
-		<Rect  height="66" width="51" y="621" x="316" />
-		<Rect  height="65" width="46" y="0" x="469" />
-		<Rect  height="64" width="42" y="693" x="517" />
-		<Rect  height="43" width="55" y="426" x="204" />
-		<Rect  height="40" width="52" y="206" x="145" />
-		<Rect  height="52" width="37" y="89" x="688" />
-		<Rect  height="48" width="46" y="56" x="421" />
-	</Action>
-	<Action actionName = "swing" interval = "0.1" isLoop = "false">
-		<Rect  height="78" width="40" y="195" x="605" />
-		<Rect  height="72" width="54" y="208" x="204" />
-		<Rect  height="77" width="52" y="781" x="315" />
-		<Rect  height="80" width="44" y="67" x="470" />
-		<Rect  height="83" width="36" y="242" x="726" />
-		<Rect  height="83" width="43" y="111" x="517" />
-		<Rect  height="77" width="50" y="662" x="369" />
-		<Rect  height="80" width="57" y="124" x="145" />
-		<Rect  height="81" width="47" y="177" x="420" />
-		<Rect  height="78" width="34" y="95" x="727" />
-	</Action>
-	<Action actionName = "swingcut" interval = "0.1" isLoop = "false">
-		<Rect  height="87" width="48" y="832" x="420" />
-		<Rect  height="89" width="52" y="0" x="315" />
-		<Rect  height="90" width="61" y="156" x="82" />
-		<Rect  height="90" width="51" y="204" x="316" />
-		<Rect  height="89" width="48" y="741" x="420" />
-		<Rect  height="89" width="48" y="921" x="420" />
-		<Rect  height="87" width="48" y="832" x="420" />
-	</Action>
-	<Action actionName = "swingthrow" interval = "0.1" isLoop = "false">
-		<Rect  height="87" width="37" y="0" x="688" />
-		<Rect  height="87" width="41" y="844" x="562" />
-		<Rect  height="88" width="51" y="360" x="317" />
-		<Rect  height="89" width="31" y="856" x="762" />
-		<Rect  height="89" width="57" y="0" x="157" />
-	</Action>
-	<Action actionName = "throw" interval = "0.1" isLoop = "false">
-		<Rect  height="56" width="43" y="530" x="517" />
-		<Rect  height="59" width="41" y="256" x="562" />
-		<Rect  height="58" width="38" y="603" x="647" />
-		<Rect  height="60" width="46" y="177" x="469" />
-		<Rect  height="58" width="37" y="943" x="687" />
-		<Rect  height="52" width="39" y="220" x="647" />
-	</Action>
-	<Action actionName = "throwground" interval = "0.1" isLoop = "false">
-		<Rect  height="44" width="37" y="143" x="688" />
-		<Rect  height="48" width="37" y="893" x="687" />
-		<Rect  height="48" width="50" y="61" x="369" />
-		<Rect  height="37" width="82" y="71" x="0" />
-		<Rect  height="37" width="57" y="804" x="141" />
-	</Action>
-	<Action actionName = "walkonbarrier" interval = "0.1" isLoop = "false">
-		<Rect  height="62" width="54" y="911" x="258" />
-		<Rect  height="63" width="50" y="860" x="368" />
-		<Rect  height="60" width="45" y="665" x="470" />
-		<Rect  height="59" width="50" y="0" x="369" />
-		<Rect  height="54" width="56" y="585" x="203" />
-		<Rect  height="59" width="59" y="310" x="142" />
-		<Rect  height="69" width="58" y="518" x="143" />
-		<Rect  height="70" width="55" y="300" x="203" />
-	</Action>
-</TextureAtlas>
+<?xml version="1.0" encoding="utf-8"?>
+<Animations>
+  <Animation name="stand" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="1" y="4" w="21" h="28" oX="1" oY="4" oW="-133" oH="185" />
+    <sprite x="25" y="6" w="23" h="26" oX="25" oY="6" oW="-133" oH="185" />
+    <sprite x="52" y="3" w="22" h="29" oX="52" oY="3" oW="-133" oH="185" />
+    <sprite x="78" y="1" w="25" h="31" oX="78" oY="1" oW="-133" oH="185" />
+    <sprite x="108" y="3" w="23" h="28" oX="108" oY="3" oW="-133" oH="185" />
+    <sprite x="137" y="2" w="24" h="28" oX="137" oY="2" oW="-133" oH="185" />
+    <sprite x="167" y="1" w="24" h="29" oX="167" oY="1" oW="-133" oH="185" />
+  </Animation>
+  <Animation name="stand_waiting" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="3" y="45" w="22" h="29" oX="3" oY="45" oW="116" oH="439" />
+    <sprite x="28" y="44" w="33" h="30" oX="28" oY="44" oW="116" oH="439" />
+    <sprite x="64" y="44" w="34" h="30" oX="64" oY="44" oW="116" oH="439" />
+    <sprite x="98" y="44" w="24" h="30" oX="98" oY="44" oW="116" oH="439" />
+    <sprite x="126" y="44" w="21" h="30" oX="126" oY="44" oW="116" oH="439" />
+    <sprite x="151" y="44" w="20" h="30" oX="151" oY="44" oW="116" oH="439" />
+    <sprite x="176" y="44" w="22" h="30" oX="176" oY="44" oW="116" oH="439" />
+    <sprite x="202" y="43" w="22" h="31" oX="202" oY="43" oW="116" oH="439" />
+    <sprite x="230" y="33" w="24" h="41" oX="230" oY="33" oW="116" oH="439" />
+    <sprite x="256" y="31" w="23" h="43" oX="256" oY="31" oW="116" oH="439" />
+    <sprite x="285" y="34" w="23" h="40" oX="285" oY="34" oW="116" oH="439" />
+    <sprite x="313" y="39" w="23" h="35" oX="313" oY="39" oW="116" oH="439" />
+    <sprite x="341" y="44" w="23" h="30" oX="341" oY="44" oW="116" oH="439" />
+    <sprite x="368" y="44" w="23" h="30" oX="368" oY="44" oW="116" oH="439" />
+    <sprite x="394" y="44" w="22" h="30" oX="394" oY="44" oW="116" oH="439" />
+    <sprite x="1" y="90" w="20" h="30" oX="1" oY="90" oW="116" oH="439" />
+    <sprite x="25" y="91" w="22" h="29" oX="25" oY="91" oW="116" oH="439" />
+    <sprite x="50" y="89" w="22" h="31" oX="50" oY="89" oW="116" oH="439" />
+    <sprite x="77" y="85" w="21" h="35" oX="77" oY="85" oW="116" oH="439" />
+    <sprite x="103" y="83" w="23" h="37" oX="103" oY="83" oW="116" oH="439" />
+    <sprite x="131" y="87" w="23" h="32" oX="131" oY="87" oW="116" oH="439" />
+    <sprite x="158" y="92" w="21" h="27" oX="158" oY="92" oW="116" oH="439" />
+    <sprite x="184" y="92" w="22" h="27" oX="184" oY="92" oW="116" oH="439" />
+    <sprite x="208" y="92" w="22" h="27" oX="208" oY="92" oW="116" oH="439" />
+    <sprite x="234" y="86" w="21" h="33" oX="234" oY="86" oW="116" oH="439" />
+    <sprite x="260" y="82" w="21" h="37" oX="260" oY="82" oW="116" oH="439" />
+    <sprite x="286" y="78" w="20" h="41" oX="286" oY="78" oW="116" oH="439" />
+    <sprite x="313" y="76" w="22" h="43" oX="313" oY="76" oW="116" oH="439" />
+    <sprite x="339" y="85" w="23" h="34" oX="339" oY="85" oW="116" oH="439" />
+    <sprite x="367" y="89" w="23" h="30" oX="367" oY="89" oW="116" oH="439" />
+    <sprite x="394" y="89" w="22" h="30" oX="394" oY="89" oW="116" oH="439" />
+    <sprite x="420" y="90" w="22" h="29" oX="420" oY="90" oW="116" oH="439" />
+  </Animation>
+  <Animation name="stand_throw" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="3" y="129" w="24" h="31" oX="3" oY="129" oW="157" oH="169" />
+    <sprite x="31" y="127" w="23" h="33" oX="31" oY="127" oW="157" oH="169" />
+    <sprite x="60" y="128" w="21" h="32" oX="60" oY="128" oW="157" oH="169" />
+    <sprite x="89" y="127" w="26" h="33" oX="89" oY="127" oW="157" oH="169" />
+    <sprite x="121" y="128" w="21" h="32" oX="121" oY="128" oW="157" oH="169" />
+    <sprite x="147" y="131" w="22" h="29" oX="147" oY="131" oW="157" oH="169" />
+  </Animation>
+  <Animation name="sit" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="113" y="275" w="23" h="28" oX="113" oY="275" oW="204" oH="114" />
+    <sprite x="142" y="280" w="26" h="23" oX="142" oY="280" oW="204" oH="114" />
+    <sprite x="173" y="286" w="30" h="17" oX="173" oY="286" oW="204" oH="114" />
+    <sprite x="208" y="284" w="30" h="20" oX="208" oY="284" oW="204" oH="114" />
+  </Animation>
+  <Animation name="look_up" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="6" y="273" w="21" h="30" oX="6" oY="273" oW="292" oH="73" />
+    <sprite x="32" y="270" w="25" h="33" oX="32" oY="270" oW="292" oH="73" />
+    <sprite x="61" y="270" w="27" h="33" oX="61" oY="270" oW="292" oH="73" />
+  </Animation>
+  <Animation name="sit_throw" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="315" w="21" h="24" oX="4" oY="315" oW="339" oH="153" />
+    <sprite x="31" y="312" w="21" h="27" oX="31" oY="312" oW="339" oH="153" />
+    <sprite x="59" y="315" w="27" h="26" oX="59" oY="315" oW="339" oH="153" />
+    <sprite x="90" y="318" w="45" h="21" oX="90" oY="318" oW="339" oH="153" />
+    <sprite x="141" y="319" w="31" h="21" oX="141" oY="319" oW="339" oH="153" />
+  </Animation>
+  <Animation name="sit_cut" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="353" w="26" h="18" oX="4" oY="353" oW="373" oH="285" />
+    <sprite x="35" y="354" w="25" h="17" oX="35" oY="354" oW="373" oH="285" />
+    <sprite x="63" y="353" w="39" h="18" oX="63" oY="353" oW="373" oH="285" />
+    <sprite x="106" y="352" w="51" h="19" oX="106" oY="352" oW="373" oH="285" />
+    <sprite x="164" y="353" w="46" h="18" oX="164" oY="353" oW="373" oH="285" />
+    <sprite x="216" y="353" w="39" h="18" oX="216" oY="353" oW="373" oH="285" />
+    <sprite x="262" y="354" w="25" h="17" oX="262" oY="354" oW="373" oH="285" />
+  </Animation>
+  <Animation name="jump" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="467" w="33" h="23" oX="4" oY="467" oW="491" oH="347" />
+    <sprite x="41" y="456" w="29" h="35" oX="41" oY="456" oW="491" oH="347" />
+    <sprite x="75" y="457" w="30" h="34" oX="75" oY="457" oW="491" oH="347" />
+    <sprite x="112" y="454" w="29" h="38" oX="112" oY="454" oW="491" oH="347" />
+    <sprite x="148" y="452" w="28" h="41" oX="148" oY="452" oW="491" oH="347" />
+    <sprite x="185" y="457" w="21" h="36" oX="185" oY="457" oW="491" oH="347" />
+    <sprite x="215" y="451" w="19" h="44" oX="215" oY="451" oW="491" oH="347" />
+    <sprite x="247" y="445" w="19" h="52" oX="247" oY="445" oW="491" oH="347" />
+    <sprite x="278" y="446" w="19" h="52" oX="278" oY="446" oW="491" oH="347" />
+    <sprite x="311" y="448" w="19" h="51" oX="311" oY="448" oW="491" oH="347" />
+  </Animation>
+  <Animation name="run" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="7" y="676" w="22" h="26" oX="7" oY="676" oW="693" oH="388" />
+    <sprite x="36" y="674" w="24" h="28" oX="36" oY="674" oW="693" oH="388" />
+    <sprite x="66" y="673" w="22" h="29" oX="66" oY="673" oW="693" oH="388" />
+    <sprite x="94" y="671" w="23" h="31" oX="94" oY="671" oW="693" oH="388" />
+    <sprite x="121" y="671" w="29" h="31" oX="121" oY="671" oW="693" oH="388" />
+    <sprite x="153" y="672" w="26" h="30" oX="153" oY="672" oW="693" oH="388" />
+    <sprite x="184" y="670" w="23" h="32" oX="184" oY="670" oW="693" oH="388" />
+    <sprite x="213" y="673" w="22" h="29" oX="213" oY="673" oW="693" oH="388" />
+    <sprite x="243" y="672" w="19" h="30" oX="243" oY="672" oW="693" oH="388" />
+    <sprite x="269" y="671" w="26" h="31" oX="269" oY="671" oW="693" oH="388" />
+    <sprite x="302" y="670" w="30" h="32" oX="302" oY="670" oW="693" oH="388" />
+    <sprite x="337" y="672" w="30" h="31" oX="337" oY="672" oW="693" oH="388" />
+    <sprite x="374" y="672" w="25" h="31" oX="374" oY="672" oW="693" oH="388" />
+  </Animation>
+  <Animation name="jump_cut" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="7" y="594" w="28" h="30" oX="7" oY="594" oW="622" oH="218" />
+    <sprite x="41" y="593" w="28" h="28" oX="41" oY="593" oW="622" oH="218" />
+    <sprite x="77" y="588" w="26" h="37" oX="77" oY="588" oW="622" oH="218" />
+    <sprite x="110" y="594" w="28" h="31" oX="110" oY="594" oW="622" oH="218" />
+    <sprite x="146" y="587" w="46" h="36" oX="146" oY="587" oW="622" oH="218" />
+    <sprite x="199" y="600" w="32" h="30" oX="199" oY="600" oW="622" oH="218" />
+  </Animation>
+  <Animation name="jump_throw" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="10" y="554" w="27" h="31" oX="10" oY="554" oW="578" oH="158" />
+    <sprite x="42" y="555" w="24" h="29" oX="42" oY="555" oW="578" oH="158" />
+    <sprite x="72" y="556" w="22" h="29" oX="72" oY="556" oW="578" oH="158" />
+    <sprite x="102" y="556" w="28" h="29" oX="102" oY="556" oW="578" oH="158" />
+    <sprite x="139" y="558" w="22" h="28" oX="139" oY="558" oW="578" oH="158" />
+  </Animation>
+  <Animation name="stop" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="6" y="713" w="31" h="32" oX="6" oY="713" oW="750" oH="300" />
+    <sprite x="45" y="714" w="25" h="31" oX="45" oY="714" oW="750" oH="300" />
+    <sprite x="73" y="708" w="29" h="36" oX="73" oY="708" oW="750" oH="300" />
+    <sprite x="110" y="708" w="25" h="35" oX="110" oY="708" oW="750" oH="300" />
+    <sprite x="141" y="709" w="23" h="35" oX="141" oY="709" oW="750" oH="300" />
+    <sprite x="170" y="720" w="29" h="26" oX="170" oY="720" oW="750" oH="300" />
+    <sprite x="207" y="721" w="29" h="24" oX="207" oY="721" oW="750" oH="300" />
+    <sprite x="241" y="717" w="25" h="28" oX="241" oY="717" oW="750" oH="300" />
+    <sprite x="274" y="714" w="28" h="31" oX="274" oY="714" oW="750" oH="300" />
+  </Animation>
+  <Animation name="climb_up" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="5" y="751" w="17" h="48" oX="5" oY="751" oW="793" oH="237" />
+    <sprite x="29" y="751" w="15" h="49" oX="29" oY="751" oW="793" oH="237" />
+    <sprite x="51" y="758" w="16" h="41" oX="51" oY="758" oW="793" oH="237" />
+    <sprite x="73" y="759" w="23" h="35" oX="73" oY="759" oW="793" oH="237" />
+    <sprite x="102" y="752" w="17" h="42" oX="102" oY="752" oW="793" oH="237" />
+    <sprite x="127" y="749" w="16" h="47" oX="127" oY="749" oW="793" oH="237" />
+    <sprite x="151" y="754" w="15" h="44" oX="151" oY="754" oW="793" oH="237" />
+    <sprite x="173" y="759" w="18" h="35" oX="173" oY="759" oW="793" oH="237" />
+    <sprite x="196" y="759" w="23" h="35" oX="196" oY="759" oW="793" oH="237" />
+    <sprite x="224" y="751" w="15" h="45" oX="224" oY="751" oW="793" oH="237" />
+  </Animation>
+  <Animation name="climb_across" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="323" y="812" w="19" h="44" oX="323" oY="812" oW="520" oH="342" />
+    <sprite x="285" y="811" w="26" h="45" oX="285" oY="811" oW="520" oH="342" />
+    <sprite x="237" y="812" w="31" h="45" oX="237" oY="812" oW="520" oH="342" />
+    <sprite x="202" y="811" w="27" h="43" oX="202" oY="811" oW="520" oH="342" />
+    <sprite x="171" y="810" w="24" h="45" oX="171" oY="810" oW="520" oH="342" />
+    <sprite x="142" y="810" w="20" h="45" oX="142" oY="810" oW="520" oH="342" />
+    <sprite x="105" y="811" w="24" h="44" oX="105" oY="811" oW="520" oH="342" />
+    <sprite x="66" y="811" w="29" h="42" oX="66" oY="811" oW="520" oH="342" />
+    <sprite x="31" y="810" w="30" h="40" oX="31" oY="810" oW="520" oH="342" />
+    <sprite x="5" y="809" w="22" h="43" oX="5" oY="809" oW="520" oH="342" />
+  </Animation>
+  <Animation name="climb_cut" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="8" y="976" w="26" h="48" oX="8" oY="976" oW="1008" oH="293" />
+    <sprite x="44" y="976" w="29" h="49" oX="44" oY="976" oW="1008" oH="293" />
+    <sprite x="80" y="971" w="34" h="56" oX="80" oY="971" oW="1008" oH="293" />
+    <sprite x="122" y="978" w="43" h="50" oX="122" oY="978" oW="1008" oH="293" />
+    <sprite x="180" y="978" w="30" h="48" oX="180" oY="978" oW="1008" oH="293" />
+    <sprite x="221" y="979" w="41" h="49" oX="221" oY="979" oW="1008" oH="293" />
+    <sprite x="275" y="979" w="27" h="48" oX="275" oY="979" oW="1008" oH="293" />
+  </Animation>
+  <Animation name="climb_throw" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="7" y="919" w="20" h="48" oX="7" oY="919" oW="946" oH="138" />
+    <sprite x="36" y="919" w="22" h="48" oX="36" oY="919" oW="946" oH="138" />
+    <sprite x="69" y="918" w="28" h="49" oX="69" oY="918" oW="946" oH="138" />
+    <sprite x="105" y="918" w="18" h="49" oX="105" oY="918" oW="946" oH="138" />
+    <sprite x="130" y="918" w="31" h="49" oX="130" oY="918" oW="946" oH="138" />
+  </Animation>
+  <Animation name="climb_jump" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="5" y="1031" w="19" h="41" oX="5" oY="1031" oW="1069" oH="277" />
+    <sprite x="35" y="1033" w="14" h="43" oX="35" oY="1033" oW="1069" oH="277" />
+    <sprite x="55" y="1034" w="20" h="39" oX="55" oY="1034" oW="1069" oH="277" />
+    <sprite x="79" y="1034" w="27" h="35" oX="79" oY="1034" oW="1069" oH="277" />
+    <sprite x="112" y="1034" w="33" h="30" oX="112" oY="1034" oW="1069" oH="277" />
+    <sprite x="155" y="1035" w="32" h="22" oX="155" oY="1035" oW="1069" oH="277" />
+    <sprite x="195" y="1031" w="29" h="30" oX="195" oY="1031" oW="1069" oH="277" />
+    <sprite x="232" y="1032" w="26" h="37" oX="232" oY="1032" oW="1069" oH="277" />
+    <sprite x="266" y="1029" w="24" h="42" oX="266" oY="1029" oW="1069" oH="277" />
+  </Animation>
+  <Animation name="push" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="1081" w="30" h="25" oX="4" oY="1081" oW="1110" oH="395" />
+    <sprite x="41" y="1082" w="36" h="24" oX="41" oY="1082" oW="1110" oH="395" />
+    <sprite x="86" y="1082" w="39" h="25" oX="86" oY="1082" oW="1110" oH="395" />
+    <sprite x="130" y="1082" w="43" h="25" oX="130" oY="1082" oW="1110" oH="395" />
+    <sprite x="180" y="1083" w="40" h="25" oX="180" oY="1083" oW="1110" oH="395" />
+    <sprite x="229" y="1084" w="37" h="24" oX="229" oY="1084" oW="1110" oH="395" />
+    <sprite x="273" y="1084" w="41" h="24" oX="273" oY="1084" oW="1110" oH="395" />
+    <sprite x="322" y="1085" w="45" h="24" oX="322" oY="1085" oW="1110" oH="395" />
+    <sprite x="375" y="1086" w="42" h="24" oX="375" oY="1086" oW="1110" oH="395" />
+  </Animation>
+  <Animation name="die" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="1" y="1232" w="43" h="27" oX="1" oY="1232" oW="1322" oH="624" />
+    <sprite x="48" y="1231" w="33" h="28" oX="48" oY="1231" oW="1322" oH="624" />
+    <sprite x="88" y="1227" w="25" h="32" oX="88" oY="1227" oW="1322" oH="624" />
+    <sprite x="117" y="1227" w="25" h="32" oX="117" oY="1227" oW="1322" oH="624" />
+    <sprite x="145" y="1231" w="22" h="27" oX="145" oY="1231" oW="1322" oH="624" />
+    <sprite x="172" y="1230" w="22" h="28" oX="172" oY="1230" oW="1322" oH="624" />
+    <sprite x="199" y="1230" w="19" h="28" oX="199" oY="1230" oW="1322" oH="624" />
+    <sprite x="224" y="1230" w="20" h="28" oX="224" oY="1230" oW="1322" oH="624" />
+    <sprite x="250" y="1231" w="22" h="27" oX="250" oY="1231" oW="1322" oH="624" />
+    <sprite x="278" y="1228" w="25" h="31" oX="278" oY="1228" oW="1322" oH="624" />
+    <sprite x="309" y="1229" w="22" h="29" oX="309" oY="1229" oW="1322" oH="624" />
+    <sprite x="339" y="1231" w="21" h="28" oX="339" oY="1231" oW="1322" oH="624" />
+    <sprite x="365" y="1231" w="22" h="29" oX="365" oY="1231" oW="1322" oH="624" />
+    <sprite x="1" y="1288" w="20" h="28" oX="1" oY="1288" oW="1322" oH="624" />
+    <sprite x="27" y="1285" w="20" h="31" oX="27" oY="1285" oW="1322" oH="624" />
+    <sprite x="53" y="1286" w="24" h="30" oX="53" oY="1286" oW="1322" oH="624" />
+    <sprite x="81" y="1287" w="34" h="29" oX="81" oY="1287" oW="1322" oH="624" />
+    <sprite x="123" y="1289" w="33" h="28" oX="123" oY="1289" oW="1322" oH="624" />
+    <sprite x="163" y="1274" w="42" h="46" oX="163" oY="1274" oW="1322" oH="624" />
+    <sprite x="211" y="1274" w="43" h="47" oX="211" oY="1274" oW="1322" oH="624" />
+    <sprite x="262" y="1274" w="42" h="47" oX="262" oY="1274" oW="1322" oH="624" />
+    <sprite x="313" y="1275" w="37" h="46" oX="313" oY="1275" oW="1322" oH="624" />
+    <sprite x="361" y="1276" w="36" h="45" oX="361" oY="1276" oW="1322" oH="624" />
+    <sprite x="405" y="1280" w="36" h="41" oX="405" oY="1280" oW="1322" oH="624" />
+    <sprite x="447" y="1281" w="37" h="41" oX="447" oY="1281" oW="1322" oH="624" />
+    <sprite x="490" y="1281" w="36" h="41" oX="490" oY="1281" oW="1322" oH="624" />
+    <sprite x="535" y="1283" w="37" h="41" oX="535" oY="1283" oW="1322" oH="624" />
+    <sprite x="579" y="1283" w="36" h="41" oX="579" oY="1283" oW="1322" oH="624" />
+  </Animation>
+  <Animation name="1" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="205" y="13" w="4" h="4" oX="205" oY="13" oW="-259" oH="86" />
+    <sprite x="217" y="12" w="4" h="6" oX="217" oY="12" oW="-259" oH="86" />
+    <sprite x="228" y="9" w="11" h="10" oX="228" oY="9" oW="-259" oH="86" />
+    <sprite x="245" y="8" w="16" h="13" oX="245" oY="8" oW="-259" oH="86" />
+    <sprite x="267" y="7" w="17" h="14" oX="267" oY="7" oW="-259" oH="86" />
+    <sprite x="293" y="7" w="17" h="15" oX="293" oY="7" oW="-259" oH="86" />
+  </Animation>
+  <Animation name="2" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="6" y="231" w="23" h="30" oX="6" oY="231" oW="255" oH="403" />
+    <sprite x="36" y="227" w="21" h="34" oX="36" oY="227" oW="255" oH="403" />
+    <sprite x="61" y="227" w="37" h="34" oX="61" oY="227" oW="255" oH="403" />
+    <sprite x="106" y="228" w="26" h="33" oX="106" oY="228" oW="255" oH="403" />
+    <sprite x="137" y="230" w="25" h="30" oX="137" oY="230" oW="255" oH="403" />
+    <sprite x="164" y="233" w="30" h="27" oX="164" oY="233" oW="255" oH="403" />
+    <sprite x="200" y="221" w="41" h="39" oX="200" oY="221" oW="255" oH="403" />
+    <sprite x="249" y="213" w="30" h="47" oX="249" oY="213" oW="255" oH="403" />
+    <sprite x="287" y="221" w="27" h="39" oX="287" oY="221" oW="255" oH="403" />
+    <sprite x="322" y="223" w="28" h="37" oX="322" oY="223" oW="255" oH="403" />
+    <sprite x="355" y="228" w="29" h="32" oX="355" oY="228" oW="255" oH="403" />
+    <sprite x="388" y="230" w="26" h="30" oX="388" oY="230" oW="255" oH="403" />
+  </Animation>
+  <Animation name="run_jump" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="5" y="389" w="23" h="23" oX="5" oY="389" oW="413" oH="322" />
+    <sprite x="36" y="376" w="25" h="42" oX="36" oY="376" oW="413" oH="322" />
+    <sprite x="68" y="378" w="31" h="32" oX="68" oY="378" oW="413" oH="322" />
+    <sprite x="109" y="385" w="32" h="23" oX="109" oY="385" oW="413" oH="322" />
+    <sprite x="150" y="384" w="34" h="26" oX="150" oY="384" oW="413" oH="322" />
+    <sprite x="193" y="381" w="32" h="30" oX="193" oY="381" oW="413" oH="322" />
+    <sprite x="231" y="379" w="29" h="32" oX="231" oY="379" oW="413" oH="322" />
+    <sprite x="271" y="375" w="27" h="47" oX="271" oY="375" oW="413" oH="322" />
+    <sprite x="309" y="396" w="32" h="25" oX="309" oY="396" oW="413" oH="322" />
+  </Animation>
+  <Animation name="jump_down" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="8" y="497" w="30" h="46" oX="8" oY="497" oW="569" oH="543" />
+    <sprite x="47" y="502" w="30" h="36" oX="47" oY="502" oW="569" oH="543" />
+    <sprite x="80" y="519" w="36" h="21" oX="80" oY="519" oW="569" oH="543" />
+    <sprite x="118" y="523" w="35" h="16" oX="118" oY="523" oW="569" oH="543" />
+    <sprite x="158" y="524" w="38" h="16" oX="158" oY="524" oW="569" oH="543" />
+    <sprite x="202" y="523" w="42" h="18" oX="202" oY="523" oW="569" oH="543" />
+    <sprite x="248" y="515" w="48" h="26" oX="248" oY="515" oW="569" oH="543" />
+    <sprite x="303" y="512" w="47" h="30" oX="303" oY="512" oW="569" oH="543" />
+    <sprite x="355" y="510" w="53" h="34" oX="355" oY="510" oW="569" oH="543" />
+    <sprite x="413" y="510" w="52" h="34" oX="413" oY="510" oW="569" oH="543" />
+    <sprite x="471" y="510" w="56" h="34" oX="471" oY="510" oW="569" oH="543" />
+    <sprite x="534" y="512" w="56" h="27" oX="534" oY="512" oW="569" oH="543" />
+  </Animation>
+  <Animation name="3" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="6" y="636" w="27" h="30" oX="6" oY="636" oW="670" oH="252" />
+    <sprite x="41" y="641" w="21" h="18" oX="41" oY="641" oW="670" oH="252" />
+    <sprite x="74" y="640" w="19" h="18" oX="74" oY="640" oW="670" oH="252" />
+    <sprite x="104" y="640" w="22" h="22" oX="104" oY="640" oW="670" oH="252" />
+    <sprite x="139" y="642" w="21" h="18" oX="139" oY="642" oW="670" oH="252" />
+    <sprite x="168" y="639" w="21" h="21" oX="168" oY="639" oW="670" oH="252" />
+    <sprite x="199" y="640" w="22" h="20" oX="199" oY="640" oW="670" oH="252" />
+    <sprite x="230" y="637" w="24" h="24" oX="230" oY="637" oW="670" oH="252" />
+  </Animation>
+  <Animation name="climb_lookaround" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="3" y="863" w="27" h="48" oX="3" oY="863" oW="897" oH="157" />
+    <sprite x="35" y="863" w="26" h="48" oX="35" oY="863" oW="897" oH="157" />
+    <sprite x="68" y="863" w="22" h="48" oX="68" oY="863" oW="897" oH="157" />
+    <sprite x="100" y="862" w="22" h="49" oX="100" oY="862" oW="897" oH="157" />
+    <sprite x="130" y="862" w="21" h="48" oX="130" oY="862" oW="897" oH="157" />
+  </Animation>
+  <Animation name="4" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="5" y="1119" w="30" h="35" oX="5" oY="1119" oW="1156" oH="294" />
+    <sprite x="45" y="1121" w="27" h="35" oX="45" oY="1121" oW="1156" oH="294" />
+    <sprite x="82" y="1123" w="25" h="33" oX="82" oY="1123" oW="1156" oH="294" />
+    <sprite x="116" y="1124" w="28" h="33" oX="116" oY="1124" oW="1156" oH="294" />
+    <sprite x="150" y="1126" w="31" h="30" oX="150" oY="1126" oW="1156" oH="294" />
+    <sprite x="188" y="1126" w="32" h="33" oX="188" oY="1126" oW="1156" oH="294" />
+    <sprite x="229" y="1122" w="32" h="38" oX="229" oY="1122" oW="1156" oH="294" />
+    <sprite x="269" y="1122" w="30" h="39" oX="269" oY="1122" oW="1156" oH="294" />
+  </Animation>
+  <Animation name="5" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="1164" w="29" h="22" oX="4" oY="1164" oW="1199" oH="207" />
+    <sprite x="37" y="1164" w="29" h="22" oX="37" oY="1164" oW="1199" oH="207" />
+    <sprite x="71" y="1164" w="29" h="22" oX="71" oY="1164" oW="1199" oH="207" />
+    <sprite x="104" y="1164" w="29" h="22" oX="104" oY="1164" oW="1199" oH="207" />
+    <sprite x="142" y="1173" w="35" h="12" oX="142" oY="1173" oW="1199" oH="207" />
+    <sprite x="183" y="1162" w="31" h="24" oX="183" oY="1162" oW="1199" oH="207" />
+  </Animation>
+  <Animation name="6" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="4" y="1195" w="24" h="26" oX="4" oY="1195" oW="1216" oH="209" />
+    <sprite x="31" y="1192" w="31" h="29" oX="31" oY="1192" oW="1216" oH="209" />
+    <sprite x="67" y="1193" w="32" h="27" oX="67" oY="1193" oW="1216" oH="209" />
+    <sprite x="104" y="1193" w="44" h="27" oX="104" oY="1193" oW="1216" oH="209" />
+    <sprite x="155" y="1192" w="34" h="28" oX="155" oY="1192" oW="1216" oH="209" />
+    <sprite x="193" y="1192" w="33" h="27" oX="193" oY="1192" oW="1216" oH="209" />
+  </Animation>
+  <Animation name="7" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="1" y="1364" w="35" h="38" oX="1" oY="1364" oW="1455" oH="416" />
+    <sprite x="42" y="1366" w="32" h="36" oX="42" oY="1366" oW="1455" oH="416" />
+    <sprite x="78" y="1384" w="12" h="18" oX="78" oY="1384" oW="1455" oH="416" />
+    <sprite x="95" y="1381" w="13" h="21" oX="95" oY="1381" oW="1455" oH="416" />
+    <sprite x="113" y="1376" w="13" h="26" oX="113" oY="1376" oW="1455" oH="416" />
+    <sprite x="134" y="1370" w="15" h="32" oX="134" oY="1370" oW="1455" oH="416" />
+    <sprite x="153" y="1365" w="21" h="37" oX="153" oY="1365" oW="1455" oH="416" />
+    <sprite x="183" y="1357" w="21" h="45" oX="183" oY="1357" oW="1455" oH="416" />
+    <sprite x="210" y="1357" w="24" h="47" oX="210" oY="1357" oW="1455" oH="416" />
+    <sprite x="244" y="1354" w="29" h="48" oX="244" oY="1354" oW="1455" oH="416" />
+    <sprite x="281" y="1347" w="24" h="55" oX="281" oY="1347" oW="1455" oH="416" />
+    <sprite x="311" y="1339" w="27" h="63" oX="311" oY="1339" oW="1455" oH="416" />
+    <sprite x="344" y="1328" w="24" h="74" oX="344" oY="1328" oW="1455" oH="416" />
+    <sprite x="376" y="1324" w="22" h="78" oX="376" oY="1324" oW="1455" oH="416" />
+    <sprite x="1" y="1415" w="25" h="34" oX="1" oY="1415" oW="1455" oH="416" />
+    <sprite x="33" y="1416" w="27" h="32" oX="33" oY="1416" oW="1455" oH="416" />
+    <sprite x="67" y="1416" w="20" h="31" oX="67" oY="1416" oW="1455" oH="416" />
+    <sprite x="91" y="1415" w="22" h="34" oX="91" oY="1415" oW="1455" oH="416" />
+    <sprite x="118" y="1416" w="20" h="33" oX="118" oY="1416" oW="1455" oH="416" />
+    <sprite x="145" y="1414" w="21" h="35" oX="145" oY="1414" oW="1455" oH="416" />
+    <sprite x="171" y="1415" w="26" h="33" oX="171" oY="1415" oW="1455" oH="416" />
+    <sprite x="205" y="1415" w="20" h="33" oX="205" oY="1415" oW="1455" oH="416" />
+  </Animation>
+  <Animation name="8" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="1" y="1415" w="25" h="34" oX="1" oY="1415" oW="1446" oH="231" />
+    <sprite x="33" y="1416" w="27" h="32" oX="33" oY="1416" oW="1446" oH="231" />
+    <sprite x="67" y="1416" w="20" h="31" oX="67" oY="1416" oW="1446" oH="231" />
+    <sprite x="91" y="1415" w="22" h="34" oX="91" oY="1415" oW="1446" oH="231" />
+    <sprite x="118" y="1416" w="20" h="33" oX="118" oY="1416" oW="1446" oH="231" />
+    <sprite x="145" y="1414" w="21" h="35" oX="145" oY="1414" oW="1446" oH="231" />
+    <sprite x="171" y="1415" w="26" h="33" oX="171" oY="1415" oW="1446" oH="231" />
+    <sprite x="205" y="1415" w="20" h="33" oX="205" oY="1415" oW="1446" oH="231" />
+  </Animation>
+  <Animation name="9" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="5" y="1464" w="28" h="17" oX="5" oY="1464" oW="1482" oH="161" />
+    <sprite x="37" y="1464" w="28" h="16" oX="37" oY="1464" oW="1482" oH="161" />
+    <sprite x="70" y="1464" w="28" h="16" oX="70" oY="1464" oW="1482" oH="161" />
+    <sprite x="104" y="1464" w="28" h="16" oX="104" oY="1464" oW="1482" oH="161" />
+    <sprite x="138" y="1464" w="28" h="16" oX="138" oY="1464" oW="1482" oH="161" />
+  </Animation>
+  <Animation name="10" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="183" y="1458" w="26" h="33" oX="183" oY="1458" oW="1313" oH="301" />
+    <sprite x="214" y="1459" w="26" h="33" oX="214" oY="1459" oW="1313" oH="301" />
+    <sprite x="243" y="1459" w="25" h="33" oX="243" oY="1459" oW="1313" oH="301" />
+    <sprite x="272" y="1460" w="25" h="33" oX="272" oY="1460" oW="1313" oH="301" />
+    <sprite x="302" y="1461" w="25" h="32" oX="302" oY="1461" oW="1313" oH="301" />
+    <sprite x="332" y="1462" w="24" h="32" oX="332" oY="1462" oW="1313" oH="301" />
+    <sprite x="361" y="1464" w="27" h="31" oX="361" oY="1464" oW="1313" oH="301" />
+    <sprite x="394" y="1464" w="27" h="31" oX="394" oY="1464" oW="1313" oH="301" />
+    <sprite x="426" y="1465" w="27" h="31" oX="426" oY="1465" oW="1313" oH="301" />
+    <sprite x="458" y="1465" w="27" h="31" oX="458" oY="1465" oW="1313" oH="301" />
+  </Animation>
+  <Animation name="11" imagePath="aladdin.png" width="619" height="1500" interval="0.1" isLoop="true">
+    <sprite x="245" y="1410" w="270" h="39" oX="245" oY="1410" oW="1320" oH="270" />
+  </Animation>
+</Animations>

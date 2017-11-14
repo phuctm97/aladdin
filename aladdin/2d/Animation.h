@@ -2,7 +2,6 @@
 #define __ALADDIN_2D_ANIMATION_H__
 
 #include "2dInclude.h"
-#include "Rect.h"
 #include "AnimationAction.h"
 
 NAMESPACE_ALA

@@ -41,12 +41,12 @@ public:
   // Game Information
   // ===============================================
 private:
-  float _screenWidth;
-  float _screenHeight;
+  float _visibleWidth;
+  float _visibleHeight;
 
 public:
-  float getScreenWidth() const;
-  float getScreenHeight() const;
+  float getVisibleWidth() const;
+  float getVisibleHeight() const;
 
   // ===============================================
   // Id Generator
@@ -68,19 +68,19 @@ public:
 
   void detach( GameObject* gameObject );
 
-  std::vector<GameObject*> getAllObjects();
+  std::vector<GameObject*> getAllObjects() const;
 
-  GameObject* getObjectById( const long id );
-
-  template <class T>
-  T* getObjectTById( const long id );
-
-  std::vector<GameObject*> getAllObjectsByName( const std::string& name );
-
-  GameObject* getObjectByName( const std::string& name );
+  GameObject* getObjectById( const long id ) const;
 
   template <class T>
-  T* getObjectTByName( const std::string& name );
+  T* getObjectTById( const long id ) const;
+
+  std::vector<GameObject*> getAllObjectsByName( const std::string& name ) const;
+
+  GameObject* getObjectByName( const std::string& name ) const;
+
+  template <class T>
+  T* getObjectTByName( const std::string& name ) const;
 
   // ===============================================
   // Scene Management
@@ -91,6 +91,8 @@ private:
 
 public:
   Scene* getRunningScene() const;
+
+  GameObject* getMainCamera() const;
 
   void replaceScene( Scene* scene );
 
@@ -160,7 +162,7 @@ public:
 // ===============================================
 
 template <class T>
-T* GameManager::getObjectTById( const long id ) {
+T* GameManager::getObjectTById( const long id ) const {
   const auto objectIt = _attachedObjects.find( id );
   if ( objectIt == _attachedObjects.end() ) return NULL;
 
@@ -172,7 +174,7 @@ T* GameManager::getObjectTById( const long id ) {
 }
 
 template <class T>
-T* GameManager::getObjectTByName( const std::string& name ) {
+T* GameManager::getObjectTByName( const std::string& name ) const {
   for ( auto& pair : _attachedObjects ) {
     auto object = pair.second;
     if ( object == NULL ) continue;

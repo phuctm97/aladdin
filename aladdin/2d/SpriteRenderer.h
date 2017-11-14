@@ -8,15 +8,15 @@
 #include "2dInclude.h"
 #include "Sprite.h"
 #include "Rect.h"
-#include "../core/MessageListener.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_2(SpriteRenderer, ala::GameObjectComponent, ala::MessageListener)
+ALA_CLASS_HEADER_1(SpriteRenderer, ala::GameObjectComponent)
 private:
   Sprite* _sprite;
   Color _backColor;
   int _zOrder;
+  Vec2 _anchorPoint;
 
   Rect _srcRect;
 
@@ -40,6 +40,14 @@ public:
   void setZOrder( const int zOrder );
 
   int getZOrder() const;
+
+  const Rect& getSourceRect() const;
+
+  void setSourceRect(const Rect& rect);
+
+  const Vec2& getAnchorPoint() const;
+
+  void setAnchorPoint(const Vec2& p);
 
 protected:
   void onInitialize() override;

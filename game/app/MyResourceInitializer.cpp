@@ -3,24 +3,33 @@
  */
 
 #include "MyResourceInitializer.h"
-#include "../prefabs/BallPrefab.h"
-#include "../prefabs/CameraPrefab.h"
-#include "../prefabs/AnimationExamplePrefab.h"
+#include "../prefabs/BasicExamplePrefab.h"
+#include "../prefabs/AnimationAndStateExamplePrefab.h"
+#include "../prefabs/TextExamplePrefab.h"
 
-void MyResourceInitializer::run() {
+void MyResourceInitializer::doRun() {
+  auto gameManager = ala::GameManager::get();
+
+  // Layers
+  gameManager->addLayer( "Background" );
+  gameManager->addLayer( "Character" );
+  gameManager->addLayer( "UI" );
+
   // Textures
   new ala::Sprite( "ball.png", "textures/ball.png" );
-  new ala::Sprite( "sprites.png", "textures/sprites.png" );
-  new ala::Animation( "sprites.animation", "animations/sprites.animation" );
+  new ala::Sprite( "aladdin.png", "textures/aladdin.png" );
 
-  new ala::Sprite("aladdin.png", "textures/aladdin.png");
-  new ala::Animation("aladdin.animation", "animations/aladdin.animation");
+  // Animations
+  new ala::Animation( "aladdin.animation", "animations/aladdin.animation" );
 
-  // Audio
+  // Fonts
+  new ala::Font( "crackman.ttf", "crackman.ttf", "fonts" );
+
+  // Audio clips
   new ala::AudioClip( "wow.wav", "audio/sfx/wow.wav" );
 
   // Prefabs
-  new AnimationExamplePrefab();
-  new BallPrefab();
-  new CameraPrefab();
+  new AnimationAndStateExamplePrefab();
+  new BasicExamplePrefab();
+  new TextExamplePrefab();
 }

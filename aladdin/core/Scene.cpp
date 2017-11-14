@@ -6,6 +6,7 @@
 #include "StdHelper.h"
 #include "GameResource.h"
 #include "GameManager.h"
+#include "../2d/2dMacros.h"
 
 NAMESPACE_ALA
 {
@@ -15,7 +16,7 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 // Basic
 // ================================================
 
-Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLocking( false ) {
+Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLock( false ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -38,6 +39,9 @@ Scene::~Scene() {
 void Scene::initialize() {
   // make sure scene is not initialized;
   ALA_ASSERT((!isInitializing()) && (!isInitialized()));
+
+  // required framework objects
+  ala::GameManager::get()->getPrefab(ALA_MAIN_CAMERA)->instantiate(ALA_MAIN_CAMERA);
 
   onPreInitialize();
 
@@ -66,7 +70,10 @@ void Scene::initialize() {
   onPostInitialize();
 }
 
-void Scene::onPreInitialize() {}
+void Scene::onPreInitialize()
+{
+  
+}
 
 void Scene::onPostInitialize() {}
 
@@ -163,7 +170,7 @@ void Scene::onPostRender() {}
 
 void Scene::release() {
   // check lock
-  if ( _gameObjectInLocking ) {
+  if ( _gameObjectInLock ) {
     releaseInNextFrame();
     return;
   }
@@ -209,15 +216,23 @@ void Scene::onPostRelease() {}
 // Objects Management
 // ==================================================
 
-GameObject* Scene::getGameObject( const long id ) {
+GameObject* Scene::getGameObject( const long id ) const {
   const auto it = _gameObjects.find( id );
   if ( it == _gameObjects.end() ) return NULL;
   return it->second;
 }
 
+GameObject* Scene::getMainCamera() const {
+  for(const auto it: _gameObjects) {
+    const auto object = it.second;
+    if (object->getName() == ALA_MAIN_CAMERA) return object;
+  }
+  return NULL;
+}
+
 void Scene::addGameObject( GameObject* gameObject ) {
   // check lock
-  if ( _gameObjectInLocking ) {
+  if ( _gameObjectInLock ) {
     addGameObjectInNextFrame( gameObject );
     return;
   }
@@ -235,7 +250,7 @@ void Scene::addGameObjectInNextFrame( GameObject* gameObject ) {
 
 void Scene::removeGameObject( GameObject* gameObject ) {
   // check lock
-  if ( _gameObjectInLocking ) {
+  if ( _gameObjectInLock ) {
     removeGameObjectInNextFrame( gameObject );
     return;
   }
@@ -252,11 +267,11 @@ void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
 }
 
 void Scene::lockGameObjects() {
-  _gameObjectInLocking = true;
+  _gameObjectInLock = true;
 }
 
 void Scene::unlockGameObjects() {
-  _gameObjectInLocking = false;
+  _gameObjectInLock = false;
 }
 
 void Scene::updateAddAndRemoveGameObjects() {
