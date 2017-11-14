@@ -50,7 +50,7 @@ void LineRenderer::onRender() {
   auto worldZOrder = calculateWorldZOrder();
 
   // TODO: draw with transform
-  Graphics::get()->drawLine( _vertices, _color );
+  Graphics::get()->drawLine( _vertices, getGameObject()->getTransform()->getLocalToWorldMatrix()* GameManager::get()->getRunningScene()->getMainCamera()->getTransform()->getLocalToWorldMatrix(), _color, worldZOrder );
 }
 
 int LineRenderer::calculateWorldZOrder() const {
