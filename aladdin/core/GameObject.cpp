@@ -139,6 +139,34 @@ void GameObject::initialize() {
   setActive( true );
 }
 
+void GameObject::updatePhysics ( const float delta )
+{
+  if (isReleasing() || isReleased()) return;
+
+  // update to release in next frame
+  if (_toReleaseInNextFrame) {
+    return;
+  }
+
+  if (!isInitialized()) {
+    if (isSelfInitialize()) {
+      initialize();
+    }
+    else return;
+  }
+
+  if (!isActive()) return;
+
+  lockComponents();
+
+  // update components
+  for (auto component : _components) {
+    component->updatePhysics(delta);
+  }
+
+  unlockComponents();
+}
+
 void GameObject::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
 
@@ -169,6 +197,159 @@ void GameObject::update( const float delta ) {
   }
 
   unlockComponents();
+}
+
+void GameObject::onCollisionEnter(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame) 
+	{
+		return;
+	}
+
+	if (!isInitialized()) 
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for(auto component: _components)
+	{
+		component->onCollisionEnter(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onCollisionStay(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onCollisionStay(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onCollisionExit(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onCollisionExit(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onTriggerEnter(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onTriggerEnter(collisionInfo);
+	}
+
+	unlockComponents();
+}
+
+void GameObject::onTriggerStay(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+
+	for (auto component : _components)
+	{
+		component->onTriggerStay(collisionInfo);
+	}
+	unlockComponents();
+}
+
+void GameObject::onTriggerExit(const CollisionInfo& collisionInfo)
+{
+	if (isReleasing() || isReleased()) return;
+
+	if (_toReleaseInNextFrame)
+	{
+		return;
+	}
+
+	if (!isInitialized())
+	{
+		return;
+	}
+
+	if (!isActive()) return;
+
+	lockComponents();
+	for (auto component : _components)
+	{
+		component->onTriggerExit(collisionInfo);
+	}
+	unlockComponents();
 }
 
 void GameObject::render() {

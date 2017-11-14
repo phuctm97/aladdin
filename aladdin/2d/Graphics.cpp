@@ -344,11 +344,17 @@ void Graphics::drawLine(const std::vector<Vec2>& vertices, const Mat4& transform
 
   D3DXMATRIX oldMatrix;
 
-  // reverse z index for back-to-front rendering
-  float reverseZIndex = MAX(ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z);
+	// reverse z index for back-to-front rendering
+	float reverseZIndex = MAX(ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z);
+
+	D3DXMATRIX matProj, matView;
+	D3DXVECTOR3 vEye(0.0f, 0.0f, -50), vAt(0.0f, 0.0f, 0.0f), vUp(0.0f, 1.0f, 0.0f);
+	D3DXMatrixOrthoOffCenterLH(&matProj, 0.0f, GameManager::get()->getVisibleWidth(), GameManager::get()->getVisibleHeight(), 0.0f, ALA_CAMERA_MIN_Z, ALA_CAMERA_MAX_Z);
+	D3DXMatrixLookAtLH(&matView, &vEye, &vAt, &vUp);
+
   auto translationMatrix = Mat4::getTranslationMatrix(0, 0, reverseZIndex);
   auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
-  auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);
+  auto transformationMatrix = convertToDirectXMatrix(/*translationMatrix*flipMatrix**/ transformMatrix)*matView*matProj;
   _directXSprite->GetTransform(&oldMatrix);
   D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
 

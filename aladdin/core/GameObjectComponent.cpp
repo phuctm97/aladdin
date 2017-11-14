@@ -89,10 +89,42 @@ void GameObjectComponent::initialize() {
   setActive( true );
 }
 
+void GameObjectComponent::updatePhysics ( const float delta )
+{
+  if (isReleasing() || isReleased()) return;
+
+  // update to release in next frame
+  if (_toReleaseInNextFrame) {
+    return;
+  }
+
+  onPrePhysicsUpdate(delta);
+
+  if (!isInitialized()) {
+    if (isSelfInitialize()) {
+      initialize();
+    }
+    else return;
+  }
+
+  if (!isActive()) return;
+
+  // inheritance update
+  onPhysicsUpdate(delta);
+}
+
 void GameObjectComponent::onInitialize() {}
 
 bool GameObjectComponent::onPreInitialize() {
   return true;
+}
+
+void GameObjectComponent::onPhysicsUpdate ( const float delta )
+{
+}
+
+void GameObjectComponent::onPrePhysicsUpdate ( const float delta )
+{
 }
 
 void GameObjectComponent::update( const float delta ) {
@@ -165,7 +197,31 @@ bool GameObjectComponent::onPreRelease() {
   return true;
 }
 
-// ===========================================================
+void GameObjectComponent::onCollisionEnter(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onCollisionStay(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onCollisionExit(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerEnter(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerStay(const CollisionInfo& collision)
+{
+}
+
+void GameObjectComponent::onTriggerExit(const CollisionInfo& collision)
+{
+}
+
+	// ===========================================================
 // Debug memory allocation
 // ===========================================================
 long GameObjectComponent::TOTAL_COMPONENTS_CREATED( 0 );

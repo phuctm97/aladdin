@@ -57,12 +57,12 @@ float Rect::getMinY ( ) const
 
 float Rect::getMidY ( ) const
 {
-  return _topLeft.getY() - _size.getHeight() / 2;
+  return _topLeft.getY() + _size.getHeight() / 2;
 }
 
 float Rect::getMaxY ( ) const
 {
-  return _topLeft.getY() - _size.getHeight();
+  return _topLeft.getY() + _size.getHeight();
 }
 
 bool Rect::equals ( const Rect& rect ) const
