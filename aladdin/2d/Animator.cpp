@@ -40,7 +40,8 @@ void Animator::onUpdate ( const float delta )
       auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
       if(spriteRenderer!= NULL)
       {
-        spriteRenderer->setSourceRect(*_frameIterator);
+        spriteRenderer->setSourceRect(_frameIterator->first);
+        spriteRenderer->setOffset(_frameIterator->second);
       }
       _elapsedTime = 0;
     }
@@ -64,7 +65,8 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, Ani
   if (spriteRenderer != NULL)
   {
     spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
-    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setSourceRect(_frameIterator->first);
+    spriteRenderer->setOffset(_frameIterator->second);
   }
 }
 
@@ -82,7 +84,8 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
   if (spriteRenderer != NULL)
   {
     spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
-    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setSourceRect(_frameIterator->first);
+    spriteRenderer->setOffset(_frameIterator->second);
   }
 
 }
@@ -96,7 +99,8 @@ void Animator::setAction ( const std::string& actionName )
   if (spriteRenderer != NULL)
   {
     spriteRenderer->setSprite(static_cast < Sprite* > (GameManager::get()->getResource(_currentAction->getTextureName())));
-    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setSourceRect(_frameIterator->first);
+    spriteRenderer->setOffset(_frameIterator->second);
   }
 }
 
@@ -105,9 +109,13 @@ const std::string& Animator::getAction ( ) const
   return _currentAction->getActionName();
 }
 
-Rect Animator::getCurrentFrame ( ) const
+const Rect& Animator::getCurrentFrameRect ( ) const
 {
-  return *_frameIterator;
+  return _frameIterator->first;
+}
+
+const Vec2& Animator::getCurrentFrameOffset() const {
+  return _frameIterator->second;
 }
 
 void Animator::pause ( )
@@ -128,7 +136,8 @@ void Animator::playNext ( )
     auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
     if (spriteRenderer != NULL)
     {
-      spriteRenderer->setSourceRect(*_frameIterator);
+      spriteRenderer->setSourceRect(_frameIterator->first);
+      spriteRenderer->setOffset(_frameIterator->second);
     }
   }
 }
@@ -147,7 +156,8 @@ void Animator::playFromStart ( )
   auto spriteRenderer = getGameObject()->getComponentT<SpriteRenderer>();
   if (spriteRenderer != NULL)
   {
-    spriteRenderer->setSourceRect(*_frameIterator);
+    spriteRenderer->setSourceRect(_frameIterator->first);
+    spriteRenderer->setOffset(_frameIterator->second);
   }
 }
 

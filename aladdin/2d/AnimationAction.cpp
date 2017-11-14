@@ -6,7 +6,7 @@ ALA_CLASS_SOURCE_0(ala::AnimationAction)
 
 AnimationAction::AnimationAction ( ): _loop( false ), _interval( 0 ) {}
 
-AnimationAction::AnimationAction(const std::vector<ala::Rect>& frames, const std::string& actionName, const std::string& textureName, const float interval, const bool loop)
+AnimationAction::AnimationAction(const std::vector<std::pair<Rect, Vec2>>& frames, const std::string& actionName, const std::string& textureName, const float interval, const bool loop)
 {
   _frames = frames;
   _interval = interval;
@@ -17,7 +17,7 @@ AnimationAction::AnimationAction(const std::vector<ala::Rect>& frames, const std
 
 AnimationAction::~AnimationAction() {}
 
-const std::vector<ala::Rect>& AnimationAction::getFrames() const
+const std::vector<std::pair<Rect, Vec2>>& AnimationAction::getFrames() const
 {
   return _frames;
 }

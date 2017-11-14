@@ -16,6 +16,7 @@ private:
   Sprite* _sprite;
   Color _backColor;
   int _zOrder;
+  Vec2 _offset;
 
   Rect _srcRect;
 
@@ -44,6 +45,9 @@ public:
 
   void setSourceRect(const Rect& rect);
 
+  const Vec2& getOffset() const;
+
+  void setOffset( const Vec2& offset );
 protected:
   void onInitialize() override;
   void onRender() override;
