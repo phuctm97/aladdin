@@ -9,12 +9,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   // ReSharper disable CppNonReclaimedResourceAcquisition
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
-  //  const auto animationEditor = new AnimationEditor( object, "sit_attack_2_to_sit" );
-  //
-  //  // initial configurations
-  //  object->setLayer( "Character" );
-  //  object->getTransform()->setPosition( -80, -40 );
-  //  return;
+//  const auto animationEditor = new AnimationEditor( object, "stop" );
+//
+//  // initial configurations
+//  object->setLayer( "Character" );
+//  object->getTransform()->setPosition( -80, -40 );
+//  return;
 
   const auto stateManager = new StateManager( object, "idle_right" );
   const auto timer = new Timer( object );
@@ -268,6 +268,44 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                transform->setScaleX( ABS(transform->getScale().getX()) );
              }, NULL, NULL );
 
+  new State( stateManager, "run_left",
+             [=] {
+               animator->setAction( "start_run" );
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               timer->start( 1 );
+             },
+             [=]( float dt ) {
+               if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
+                 animator->setAction( "run" );
+               }
+             }
+             , NULL );
+
+  new State( stateManager, "run_right",
+             [=] {
+               animator->setAction( "start_run" );
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               timer->start( 1 );
+             },
+             [=]( float dt ) {
+               if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
+                 animator->setAction( "run" );
+               }
+             }
+             , NULL );
+
+  new State( stateManager, "stop_left",
+             [=] {
+               animator->setAction( "stop" );
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+             }, NULL, NULL );
+
+  new State( stateManager, "stop_right",
+             [=] {
+               animator->setAction( "stop" );
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+             }, NULL, NULL );
+
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
@@ -411,4 +449,45 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "sit_attack_2_right", "sit_right", [=] {
     return !animator->isPlaying();
   } );
+
+  new StateTransition( stateManager, "idle_left", "run_left", [=] {
+    return input->getKey( ALA_KEY_LEFT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "idle_left", "run_right", [=] {
+    return input->getKey( ALA_KEY_RIGHT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "idle_right", "run_left", [=] {
+    return input->getKey( ALA_KEY_LEFT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "idle_right", "run_right", [=] {
+    return input->getKey( ALA_KEY_RIGHT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "run_left", "idle_left", [=] {
+    return !input->getKey( ALA_KEY_LEFT_ARROW ) && !timer->isDone();
+  } );
+
+  new StateTransition( stateManager, "run_right", "idle_right", [=] {
+    return !input->getKey( ALA_KEY_RIGHT_ARROW ) && !timer->isDone();
+  } );
+
+  new StateTransition( stateManager, "run_left", "stop_left", [=] {
+    return !input->getKey( ALA_KEY_LEFT_ARROW ) && timer->isDone();
+  } );
+
+  new StateTransition( stateManager, "run_right", "stop_right", [=] {
+    return !input->getKey( ALA_KEY_RIGHT_ARROW ) && timer->isDone();
+  } );
+
+  new StateTransition( stateManager, "stop_left", "idle_left", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "stop_right", "idle_right", [=] {
+    return !animator->isPlaying();
+  } );
+
 }

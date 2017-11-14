@@ -163,4 +163,35 @@
     <sprite x="256" y="579" w="57" h="36" offsetX="2" offsetY="-5.5" />
     <sprite x="378" y="516" w="52" h="34" offsetX="5.5" offsetY="-7.5" />
   </Animation>
+  <Animation name="run" imagePath="aladdin.png" interval="0.065" isLoop="true">
+    <sprite x="120" y="1220" w="40" h="52" />
+    <sprite x="171" y="1216" w="40" h="56" />
+    <sprite x="220" y="1216" w="51" h="56" />
+    <sprite x="279" y="1219" w="45" h="53" />
+    <sprite x="334" y="1215" w="41" h="57" />
+    <sprite x="386" y="1221" w="40" h="51" />
+    <sprite x="440" y="1219" w="34" h="53" />
+    <sprite x="488" y="1216" w="48" h="56" />
+    <sprite x="547" y="1215" w="54" h="57" />
+    <sprite x="611" y="1219" w="54" h="54" />
+    <sprite x="679" y="1218" w="43" h="56" />
+  </Animation>
+  <Animation name="start_run" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="3" y="9" w="37" h="49" />
+    <sprite x="14" y="1225" w="39" h="47" />
+    <sprite x="66" y="1222" w="42" h="50" />
+    <sprite x="120" y="1220" w="40" h="52" />
+  </Animation>
+  <Animation name="stop" imagePath="aladdin.png" interval="0.065" isLoop="false">
+    <sprite x="11" y="1293" w="56" h="56" offsetX="10.5" offsetY="-1.5" />
+    <sprite x="83" y="1294" w="43" h="55" offsetX="14.5" offsetY="-1.5" />
+    <sprite x="134" y="1284" w="50" h="65" offsetX="7" offsetY="4.5" />
+    <sprite x="200" y="1283" w="45" h="64" offsetX="5" offsetY="4" />
+    <sprite x="256" y="1285" w="41" h="63" offsetX="1" offsetY="2.5" />
+    <sprite x="309" y="1306" w="54" h="45" offsetX="8.5" offsetY="-8.5" />
+    <sprite x="376" y="1308" w="51" h="43" offsetX="7" offsetY="-9.5" />
+    <sprite x="437" y="1300" w="45" h="51" offsetX="4" offsetY="-5.5" />
+    <sprite x="498" y="1294" w="50" h="56" offsetX="6" offsetY="-2" />
+    <sprite x="3" y="9" w="37" h="49" offsetX="0" offsetY="0" />
+  </Animation>
 </Animations>
