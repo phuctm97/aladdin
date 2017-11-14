@@ -7,12 +7,13 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   // ReSharper disable CppNonReclaimedResourceAcquisition
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
-//  const auto animationEditor = new AnimationEditor( object, "stop" );
-//
-//  // initial configurations
-//  object->setLayer( "Character" );
-//  object->getTransform()->setPosition( -80, -40 );
-//  return;
+
+    // For animationEditor
+    const auto animationEditor = new AnimationEditor( object, "stop" );
+    object->setLayer( "Character" );
+    object->getTransform()->setPosition( -80, -40 );
+    return;
+    // For animationEditor
 
   const auto stateManager = new StateManager( object, "idle_right" );
   const auto timer = new Timer( object );
