@@ -106,9 +106,21 @@ void Graphics::initDirectX() {
   ALA_ASSERT(result == D3D_OK);
   ALA_ASSERT(!FAILED(_directXSprite));
   _logger.info( "Created DirectX Sprite" );
+
+  // init DirectX Line
+  result = D3DXCreateLine(_directXDevice, &_directXLine);
+  ALA_ASSERT(result == D3D_OK);
+  ALA_ASSERT(!FAILED(_directXLine));
+  _directXLine->SetGLLines(FALSE);
+  _directXLine->SetAntialias(TRUE);
+  _logger.info("Created DirectX Line");
 }
 
 void Graphics::releaseDirectX() {
+  if(_directXLine) {
+    _directXLine->Release();
+    _logger.info("Released DirectX Line");
+  }
   if ( _directXSprite ) {
     _directXSprite->Release();
     _logger.info( "Released DirectX Sprite" );
@@ -147,11 +159,23 @@ bool Graphics::beginRendering() {
     return false;
   }
 
+  _directXLine->SetGLLines(FALSE);
+  _directXLine->SetAntialias(TRUE);
+  _directXLine->SetWidth(_directXLineWidth);
+
+  if(_directXLine->Begin() != D3D_OK) {
+    _directXSprite->End();
+    _directXDevice->EndScene();
+    _directXDevice->Present(0, 0, 0, 0);
+    return false;
+  }
+
   return true;
 }
 
 void Graphics::endRendering() {
   // stop rendering
+  _directXLine->End();
   _directXSprite->End();
   _directXDevice->EndScene();
 
@@ -191,6 +215,10 @@ void Graphics::loadSprite( Sprite* sprite ) {
   ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
+}
+
+void Graphics::setLineWidth( float width ) {
+  _directXLineWidth = width;
 }
 
 ID3DXFont* Graphics::loadDirectXFont ( std::string fontName, const FontInfo& fontInfo ) const
@@ -292,6 +320,42 @@ void Graphics::drawText ( Font* font, const FontInfo& fontInfo, const std::strin
   directXFont->DrawTextA(_directXSprite, text.c_str(), -1, &directXRect, directXTextFormat, directXTextColor);
 
   _directXSprite->SetTransform(&oldMatrix);
+}
+
+void Graphics::drawLine(const std::vector<Vec2>& vertices, const Color& color) {
+  D3DXVECTOR2* arr = new D3DXVECTOR2[vertices.size()];
+
+  for (size_t i = 0; i < vertices.size(); i++) {
+    const auto& vec = vertices[i];
+    arr[i] = D3DXVECTOR2(vec.getX(), vec.getY());
+  }
+  _directXLine->Draw(arr, vertices.size(),
+    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+  delete[]arr;
+}
+
+void Graphics::drawLine(const std::vector<Vec2>& vertices, const Mat4& transformMatrix, const Color& color, const int zIndex) {
+  D3DXVECTOR3* arr = new D3DXVECTOR3[vertices.size()];
+
+  for (size_t i = 0; i < vertices.size(); i++) {
+    const auto& vec = vertices[i];
+    arr[i] = D3DXVECTOR3(vec.getX(), vec.getY(), 0);
+  }
+
+  D3DXMATRIX oldMatrix;
+
+  // reverse z index for back-to-front rendering
+  float reverseZIndex = MAX(ALA_CAMERA_MAX_Z - zIndex, ALA_CAMERA_MIN_Z);
+  auto translationMatrix = Mat4::getTranslationMatrix(0, 0, reverseZIndex);
+  auto flipMatrix = Mat4::getScalingMatrix(1, -1, 1);
+  auto transformationMatrix = convertToDirectXMatrix(translationMatrix*flipMatrix* transformMatrix);
+  _directXSprite->GetTransform(&oldMatrix);
+  D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
+
+  _directXLine->DrawTransform(arr, vertices.size(), 
+    &finalMatrix,
+    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+  delete[]arr;
 }
 
 D3DXMATRIX Graphics::convertToDirectXMatrix( const Mat4& mat ) const {

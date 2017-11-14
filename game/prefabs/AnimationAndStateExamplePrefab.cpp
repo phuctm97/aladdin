@@ -1,81 +1,89 @@
 ﻿#include "AnimationAndStateExamplePrefab.h"
 #include "../scripts/BasicController.h"
 
+USING_NAMESPACE_ALA;
+
 void AnimationAndStateExamplePrefab::doInstantiate( ala::GameObject* object ) const {
   // layer
   object->setLayer( "Character" );
 
   // sprite renderer
-  new ala::SpriteRenderer( object, "aladdin.png" );
+  const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
+
+  // line renderer
+  const auto lineRenderer = new LineRenderer( object,
+                                              {
+                                                ala::Vec2( 50, 50 ), 
+                                                ala::Vec2( 400, 400 ), 
+                                                ala::Vec2( 500, 200 ),
+                                                ala::Vec2( 600, 300 )
+                                              },
+                                              ala::Color( 255, 255, 0 ) );
 
   // animator component for animation
-  new ala::Animator( object, "stand", "aladdin.animation" );
+  const auto animator = new Animator( object, "stand", "aladdin.animation" );
 
   // state manager to control object state
-  auto stateManager = new ala::StateManager( object, "stand-right" );
+  const auto stateManager = new StateManager( object, "stand-right" );
 
-  auto transform = object->getTransform();
+  const auto transform = object->getTransform();
   transform->setScale( 3 );
 
   // state definitions
-  new ala::State( stateManager, "stand-right",
-                  [=] {
-                    auto animator = object->getComponentT<ala::Animator>();
-                    animator->setAction( "stand" );
-                  }, NULL, NULL );
-  new ala::State( stateManager, "stand-left",
-                  [=] {
-                    auto animator = object->getComponentT<ala::Animator>();
-                    animator->setAction( "stand" );
-                  }, NULL, NULL );
-  new ala::State( stateManager, "go-right",
-                  [=] {
-                    auto animator = object->getComponentT<ala::Animator>();
-                    animator->setAction( "run" );
-                    transform->setScaleX( ABS(transform->getScale().getX()) );
-                  },
-                  [=]( float dt ) {
-                    auto position = transform->getPosition();
-                    position.setX( position.getX() + 200 * dt );
-                    transform->setPosition( position );
-                  },
-                  NULL );
-  new ala::State( stateManager, "go-left",
-                  [=] {
-                    auto animator = object->getComponentT<ala::Animator>();
-                    animator->setAction( "run" );
-                    transform->setScaleX( -ABS(transform->getScale().getX()) );
-                  },
-                  [=]( float dt ) {
-                    auto position = transform->getPosition();
-                    position.setX( position.getX() - 200 * dt );
-                    transform->setPosition( position );
-                  },
-                  NULL );
+  new State( stateManager, "stand-right",
+             [=] {
+               animator->setAction( "stand" );
+             }, NULL, NULL );
+  new State( stateManager, "stand-left",
+             [=] {
+               animator->setAction( "stand" );
+             }, NULL, NULL );
+  new State( stateManager, "go-right",
+             [=] {
+               animator->setAction( "run" );
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+             },
+             [=]( float dt ) {
+               auto position = transform->getPosition();
+               position.setX( position.getX() + 200 * dt );
+               transform->setPosition( position );
+             },
+             NULL );
+  new State( stateManager, "go-left",
+             [=] {
+               animator->setAction( "run" );
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+             },
+             [=]( float dt ) {
+               auto position = transform->getPosition();
+               position.setX( position.getX() - 200 * dt );
+               transform->setPosition( position );
+             },
+             NULL );
 
   // state transitions
-  new ala::StateTransition( stateManager, "go-left", "go-right", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
+  new StateTransition( stateManager, "go-left", "go-right", [] {
+    return Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "go-left", "stand-left", [] {
-    return ala::Input::get()->getKeyUp( ALA_KEY_LEFT_ARROW );
+  new StateTransition( stateManager, "go-left", "stand-left", [] {
+    return Input::get()->getKeyUp( ALA_KEY_LEFT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "go-right", "go-left", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
+  new StateTransition( stateManager, "go-right", "go-left", [] {
+    return Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "go-right", "stand-right", [] {
-    return ala::Input::get()->getKeyUp( ALA_KEY_RIGHT_ARROW );
+  new StateTransition( stateManager, "go-right", "stand-right", [] {
+    return Input::get()->getKeyUp( ALA_KEY_RIGHT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "stand-left", "go-left", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
+  new StateTransition( stateManager, "stand-left", "go-left", [] {
+    return Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "stand-left", "go-right", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
+  new StateTransition( stateManager, "stand-left", "go-right", [] {
+    return Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "stand-right", "go-left", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
+  new StateTransition( stateManager, "stand-right", "go-left", [] {
+    return Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
-  new ala::StateTransition( stateManager, "stand-right", "go-right", [] {
-    return ala::Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
+  new StateTransition( stateManager, "stand-right", "go-right", [] {
+    return Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
 }
