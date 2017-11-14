@@ -25,7 +25,7 @@ bool AnimationEditor::onPreInitialize() {
   spriteRendererDuplicate->initialize();
 
   _logger.info(
-    "AnimationEditor used:\nUse J, K, L, I for movement, F1 to go to next frame, F2 to log edited animation code" );
+    "AnimationEditor used:\n\t- Use J, K, L, I for movement.\n\t- F1 to go to next frame.\n\t- F2 to log edited animation code.\n");
 
   return true;
 }
