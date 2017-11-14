@@ -16,6 +16,9 @@
     <Filter Include="pugixml">
       <UniqueIdentifier>{862b369d-8247-49a1-aeaf-a36d4d1d8d1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="physics">
+      <UniqueIdentifier>{f2409a31-caea-4f13-937b-d7a239acc3fa}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ui">
       <UniqueIdentifier>{6b9312b5-92b6-4c63-b939-c0dc97c9e69e}</UniqueIdentifier>
     </Filter>
@@ -174,6 +177,27 @@
     </ClInclude>
     <ClInclude Include="core\State.h">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Collider.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\Rigidbody.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsMacro.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsInclude.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsManager.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsMaterial.h">
+      <Filter>physics</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\CollisionInfo.h">
+      <Filter>physics</Filter>
     </ClInclude>
     <ClInclude Include="ui\Font.h">
       <Filter>ui</Filter>
@@ -335,6 +359,21 @@
     </ClCompile>
     <ClCompile Include="2d\LineRenderer.cpp">
       <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Collider.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\Rigidbody.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsManager.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\PhysicsMaterial.cpp">
+      <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\CollisionInfo.cpp">
+      <Filter>physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

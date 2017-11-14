@@ -11,7 +11,8 @@
 
 NAMESPACE_ALA
 {
-class Scene;
+	class CollisionInfo;
+	class Scene;
 
 ALA_CLASS_HEADER_2(GameObject, ala::Initializable, ala::Releasable)
   // =========================================================================
@@ -63,7 +64,17 @@ public:
 public:
   void initialize() override;
 
+  void updatePhysics(const float delta);
+
   void update( const float delta );
+
+	void onCollisionEnter(const CollisionInfo& collisionInfo);
+	void onCollisionStay(const CollisionInfo& collisionInfo);
+	void onCollisionExit(const CollisionInfo& collisionInfo);
+
+	void onTriggerEnter(const CollisionInfo& collisionInfo);
+	void onTriggerStay(const CollisionInfo& collisionInfo);
+	void onTriggerExit(const CollisionInfo& collisionInfo);
 
   void render();
 
