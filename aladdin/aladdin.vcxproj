@@ -173,13 +173,17 @@
     <ClInclude Include="core\StringMessageArgs.h" />
     <ClInclude Include="core\Transform.h" />
     <ClInclude Include="core\Vec2.h" />
+    <ClInclude Include="extra\AnimationEditor.h" />
+    <ClInclude Include="extra\ExtraInclude.h" />
+    <ClInclude Include="extra\ExtraMacros.h" />
+    <ClInclude Include="extra\Timer.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
     <ClInclude Include="input\InputMarcos.h" />
     <ClInclude Include="physics\Collider.h" />
     <ClInclude Include="physics\CollisionInfo.h" />
     <ClInclude Include="physics\PhysicsInclude.h" />
-    <ClInclude Include="physics\PhysicsMacro.h" />
+    <ClInclude Include="physics\PhysicsMacros.h" />
     <ClInclude Include="physics\PhysicsManager.h" />
     <ClInclude Include="physics\PhysicsMaterial.h" />
     <ClInclude Include="physics\Rigidbody.h" />
@@ -232,6 +236,8 @@
     <ClCompile Include="core\StringMessageArgs.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
+    <ClCompile Include="extra\AnimationEditor.cpp" />
+    <ClCompile Include="extra\Timer.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="physics\Collider.cpp" />
     <ClCompile Include="physics\CollisionInfo.cpp" />

@@ -22,6 +22,9 @@
     <Filter Include="ui">
       <UniqueIdentifier>{6b9312b5-92b6-4c63-b939-c0dc97c9e69e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="extra">
+      <UniqueIdentifier>{2328f052-db27-4f00-949b-c39d5c662683}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\CoreInclude.h">
@@ -184,9 +187,6 @@
     <ClInclude Include="physics\Rigidbody.h">
       <Filter>physics</Filter>
     </ClInclude>
-    <ClInclude Include="physics\PhysicsMacro.h">
-      <Filter>physics</Filter>
-    </ClInclude>
     <ClInclude Include="physics\PhysicsInclude.h">
       <Filter>physics</Filter>
     </ClInclude>
@@ -216,6 +216,21 @@
     </ClInclude>
     <ClInclude Include="2d\LineRenderer.h">
       <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\ExtraMacros.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\ExtraInclude.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\Timer.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\AnimationEditor.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="physics\PhysicsMacros.h">
+      <Filter>physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +389,12 @@
     </ClCompile>
     <ClCompile Include="physics\CollisionInfo.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\Timer.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\AnimationEditor.cpp">
+      <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
