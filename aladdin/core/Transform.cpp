@@ -256,7 +256,7 @@ Mat4 Transform::getLocalToWorldMatrix() {
       _localToWorldMatrix = calculateLocalToParentMatrix();
     }
     else {
-      _localToWorldMatrix = _parent->getLocalToWorldMatrix() * calculateLocalToParentMatrix();
+      _localToWorldMatrix = calculateLocalToParentMatrix() * _parent->getLocalToWorldMatrix();
     }
 
     _dirty = false;
