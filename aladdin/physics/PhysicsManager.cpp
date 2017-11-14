@@ -279,8 +279,8 @@ void PhysicsManager::update ( const float delta )
 
 
 				//positional correction
-				const float percent = 0.2; // usually 20% to 80%
-				const float slop = 0.01; // usually 0.01 to 0.1
+				const float percent = 0.2f; // usually 20% to 80%
+				const float slop = 0.01f; // usually 0.01 to 0.1
 				const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
 				rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
 				rb2->setPosition(rb2->getPosition() - correction*rb2->getInverseMass());

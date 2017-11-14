@@ -20,8 +20,6 @@ Rect Collider::getBoundingRect() const
 	Rect rect;
 
 	rect.setTopLeft(getGameObject()->getTransform()->getWorldPosition() + Vec2(-_size.getWidth()/2, -_size.getHeight()/2));
-	OutputDebugString(std::to_string(getGameObject()->getTransform()->getWorldPosition().getX()).c_str());
-	OutputDebugString("\n");
 	rect.setSize(_size);
 
 	return rect;
