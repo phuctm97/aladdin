@@ -28,6 +28,10 @@ public:
   void setHeight( const float height );
 
 	float getArea() const;
+
+  bool operator==(const Size& s) const;
+
+  bool operator!=(const Size& s) const;
 };
 }
 

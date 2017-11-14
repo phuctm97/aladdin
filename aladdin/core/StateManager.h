@@ -8,9 +8,10 @@ NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1 ( StateManager, GameObjectComponent )
 private:
-  std::string _startState;
-  
+  std::string _startStateName;
+
   State* _currentState;
+  State* _previousState;
 
   std::map<std::string, State*> _states;
 
@@ -32,6 +33,10 @@ public:
   void detachState( State* state );
 
   State* getState( const std::string& name );
+
+  State* getPreviousState() const;
+
+  std::string getPreviousStateName() const;
 };
 }
 

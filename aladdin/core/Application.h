@@ -18,8 +18,11 @@ ALA_CLASS_HEADER_2(Application, ala::Initializable, ala::Releasable)
 private:
   // Configuration information
   std::string _title;
+  int _resolutionWidth;
+  int _resolutionHeight;
   int _screenWidth;
   int _screenHeight;
+  bool _fullScreen;
   LARGE_INTEGER _animationInterval;
   std::vector<ResourceInitializer*> _resourceInitializers;
 
@@ -32,21 +35,29 @@ public:
 
   virtual ~Application();
 
-  void setScreenSize( int width, int height );
+  void setScreenSize( const int width, const int height );
 
-  int getScreenWidth() const;
+  void setResolutionSize(const int width, const int height);
 
-  int getScreenHeight() const;
+  int getResolutionWidth() const;
+
+  int getResolutionHeight() const;
+
+  bool isFullScreen() const;
 
   void setTitle( const std::string& title );
 
   const std::string& getTitle() const;
 
-  void setAnimationInterval( float interval );
+  void setAnimationInterval( const float interval );
 
   void setFps( const int fps );
 
+  void setFullScreen();
+
   float getAnimationInterval() const;
+
+  int getFps() const;
 
   void registerResourceInitializer( ResourceInitializer* initializer );
 

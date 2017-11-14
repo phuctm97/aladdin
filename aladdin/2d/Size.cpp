@@ -33,4 +33,12 @@ float Size::getArea() const
 {
 	return _height*_width;
 }
+
+bool Size::operator==( const Size& s ) const {
+  return _width == s._width && s._height == _height;
+}
+
+bool Size::operator!=( const Size& s ) const {
+  return !operator==( s );
+}
 }

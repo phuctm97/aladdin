@@ -48,15 +48,15 @@ public:
 
   bool isActive() const;
 
-  void setActive( const bool val );
+  GameObject* setActive( const bool val );
 
   bool isSelfInitialize() const;
 
-  void setSelfInitialize( const bool val );
+  GameObject* setSelfInitialize( const bool val );
 
   const std::string& getLayer() const;
 
-  void setLayer( const std::string& layer );
+  GameObject* setLayer( const std::string& layer );
 
   // =========================================================
   // Events
@@ -89,7 +89,7 @@ public:
   // Components
   // ========================================================
 private:
-  bool _componentsInLocking;
+  bool _componentsInLock;
   std::vector<GameObjectComponent*> _components;
   std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
   std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;

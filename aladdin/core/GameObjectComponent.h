@@ -39,6 +39,8 @@ public:
 
   GameObject* getGameObject() const;
 
+  GameObject* and() const;
+
   bool isActive() const;
 
   void setActive( const bool val );

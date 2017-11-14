@@ -20,7 +20,7 @@ Transform::Transform( GameObject* gameObject, Transform* parentTransform, const 
     _scale( 1, 1 ),
     _rotation( 0 ),
     _origin( 0.5f, 0.5f ),
-    _childrenInLocking( false ),
+    _childrenInLock( false ),
     _parent( parentTransform ),
     _dirty( true ),
     _inverseDirty( true ) {
@@ -45,58 +45,71 @@ float Transform::getPositionY() const {
   return _position.getY();
 }
 
-void Transform::setPosition( const Vec2& position ) {
+Transform* Transform::setPosition( const Vec2& position ) {
   _position = position;
   setDirty();
+  return this;
 }
 
-void Transform::setPosition( const float x, const float y ) {
+Transform* Transform::setPosition( const float x, const float y ) {
   _position = Vec2( x, y );
   setDirty();
+  return this;
 }
 
-void Transform::setPositionX( const float x ) {
+Transform* Transform::setPositionX( const float x ) {
   _position.setX( x );
   setDirty();
+  return this;
 }
 
-void Transform::setPositionY( const float y ) {
+Transform* Transform::setPositionY( const float y ) {
   _position.setY( y );
   setDirty();
+  return this;
 }
 
 const Vec2& Transform::getScale() const {
   return _scale;
 }
 
-void Transform::setScale( const Vec2& scale ) {
+Transform* Transform::setScale( const Vec2& scale ) {
   _scale = scale;
   setDirty();
+  return this;
 }
 
-void Transform::setScaleX( const float x ) {
+Transform* Transform::setScaleX( const float x ) {
   _scale.setX( x );
   setDirty();
+  return this;
 }
 
-void Transform::setScaleY( const float y ) {
+Transform* Transform::setScaleY( const float y ) {
   _scale.setY( y );
   setDirty();
+  return this;
 }
 
-void Transform::setScale( const float scale ) {
+Transform* Transform::setScale( const float scale ) {
   _scale.setX( scale );
   _scale.setY( scale );
   setDirty();
+  return this;
 }
 
 float Transform::getRotation() const {
   return _rotation;
 }
 
-void Transform::setRotation( const float rotation ) {
+Transform* Transform::setRotation( const float rotation ) {
   _rotation = rotation;
+  if(_rotation > 360)
+  {
+    _rotation = fmod(rotation, 360.f);
+  }
   setDirty();
+  return this;
 }
 
 Vec2 Transform::getWorldPosition()
@@ -123,7 +136,7 @@ Transform* Transform::getParent() const {
 
 void Transform::addChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     addChildInNextFrame( child );
     return;
   }
@@ -143,7 +156,7 @@ void Transform::addChildInNextFrame( Transform* child ) {
 
 void Transform::removeChild( Transform* child ) {
   // check lock
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     removeChildInNextFrame( child );
     return;
   }
@@ -160,11 +173,11 @@ void Transform::removeChildInNextFrame( Transform* child ) {
 }
 
 void Transform::lockChildren() {
-  _childrenInLocking = true;
+  _childrenInLock = true;
 }
 
 void Transform::unlockChildren() {
-  _childrenInLocking = false;
+  _childrenInLock = false;
 }
 
 void Transform::updateAddAndRemoveChildInNextFrame() {
@@ -188,7 +201,7 @@ void Transform::doRemoveChild( Transform* child ) {
 }
 
 bool Transform::onPreRelease() {
-  if ( _childrenInLocking ) {
+  if ( _childrenInLock ) {
     releaseInNextFrame();
     return false;
   }
@@ -230,11 +243,11 @@ void Transform::onRender() {
 }
 
 Mat4 Transform::calculateLocalToParentMatrix() const {
-  Mat4 matRotate = Mat4::getRotationZMatrix( D3DXToRadian(_rotation) );
+  Mat4 matRotate = Mat4::getRotationZMatrix( (_rotation) );
   Mat4 matScale = Mat4::getScalingMatrix( _scale );
   Mat4 matTranslate = Mat4::getTranslationMatrix( _position );
 
-  return matRotate * matScale * matTranslate;
+  return matScale * matRotate * matTranslate;
 }
 
 Mat4 Transform::getLocalToWorldMatrix() {

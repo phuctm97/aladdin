@@ -3,6 +3,7 @@
 */
 
 #include "GameManager.h"
+#include "../2d/2dMacros.h"
 
 NAMESPACE_ALA
 {
@@ -23,8 +24,8 @@ GameManager* GameManager::get() {
 
 GameManager::GameManager() :
   _logger( "ala::GameManager" ),
-  _screenWidth( 0 ),
-  _screenHeight( 0 ),
+  _visibleWidth( 0 ),
+  _visibleHeight( 0 ),
   _idCounter( 0 ),
   _runningScene( NULL ),
   _sceneToReplaceInNextFrame( NULL ),
@@ -63,12 +64,12 @@ void GameManager::onBackgroundToForeground() {}
 // ==============================================
 // Game Information
 // ==============================================
-float GameManager::getScreenWidth() const {
-  return _screenWidth;
+float GameManager::getVisibleWidth() const {
+  return _visibleWidth;
 }
 
-float GameManager::getScreenHeight() const {
-  return _screenHeight;
+float GameManager::getVisibleHeight() const {
+  return _visibleHeight;
 }
 
 // =============================================
@@ -94,7 +95,7 @@ void GameManager::detach( GameObject* gameObject ) {
   _attachedObjects.erase( gameObject->getId() );
 }
 
-std::vector<GameObject*> GameManager::getAllObjects() {
+std::vector<GameObject*> GameManager::getAllObjects() const {
   std::vector<GameObject*> ret;
 
   for ( const auto it : _attachedObjects ) {
@@ -104,7 +105,7 @@ std::vector<GameObject*> GameManager::getAllObjects() {
   return ret;
 }
 
-GameObject* GameManager::getObjectById( const long id ) {
+GameObject* GameManager::getObjectById( const long id ) const {
   const auto objectIt = _attachedObjects.find( id );
   if ( objectIt == _attachedObjects.end() ) return NULL;
 
@@ -112,7 +113,7 @@ GameObject* GameManager::getObjectById( const long id ) {
   return object;
 }
 
-std::vector<GameObject*> GameManager::getAllObjectsByName( const std::string& name ) {
+std::vector<GameObject*> GameManager::getAllObjectsByName( const std::string& name ) const {
   std::vector<GameObject*> ret;
 
   for ( auto& pair : _attachedObjects ) {
@@ -126,7 +127,7 @@ std::vector<GameObject*> GameManager::getAllObjectsByName( const std::string& na
   return ret;
 }
 
-GameObject* GameManager::getObjectByName( const std::string& name ) {
+GameObject* GameManager::getObjectByName( const std::string& name ) const {
   for ( auto& pair : _attachedObjects ) {
     const auto object = pair.second;
     if ( object == NULL ) continue;
@@ -143,6 +144,10 @@ GameObject* GameManager::getObjectByName( const std::string& name ) {
 
 Scene* GameManager::getRunningScene() const {
   return _runningScene;
+}
+
+GameObject* GameManager::getMainCamera() const {
+  return getObjectByName(ALA_MAIN_CAMERA);
 }
 
 void GameManager::replaceScene( Scene* scene ) {

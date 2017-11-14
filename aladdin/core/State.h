@@ -25,7 +25,7 @@ public:
 
   virtual ~State();
 
-  const std::string& getName();
+  const std::string& getName() const;
 
   std::function<void()> onStateEnter;
 

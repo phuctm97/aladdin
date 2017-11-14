@@ -122,12 +122,14 @@ protected:
   // ==================================================
 private:
   std::unordered_map<long, GameObject*> _gameObjects;
-  bool _gameObjectInLocking;
+  bool _gameObjectInLock;
   std::vector<GameObject*> _gameObjectsToAddInNextFrame;
   std::vector<GameObject*> _gameObjectsToRemoveInNextFrame;
 
 public:
-  GameObject* getGameObject( const long id );
+  GameObject* getGameObject( const long id ) const;
+
+  GameObject* getMainCamera() const;
 
   /**
    * \brief Attach game object to scene, this will not change game object's parent, you should not call this method directly

@@ -9,25 +9,34 @@ NAMESPACE_ALA
 ALA_CLASS_HEADER_0 (AnimationAction)
 private:
   bool _loop;
+  
   float _interval;
 
   std::string _actionName;
 
+  std::string _textureName;
+
   std::vector<Rect> _frames;
+
+  std::vector<Vec2> _frameAnchors;
 public:
   AnimationAction();
 
-  AnimationAction( const std::vector<Rect>& frames, const std::string& actionName, const float interval = 0, const bool loop = true );
+  AnimationAction( const std::vector<Rect>& frames, const std::vector<Vec2>& frameAnchors, const std::string& actionName, const std::string& textureName, const float interval = 0, const bool loop = true );
 
   virtual ~AnimationAction();
 
   const std::vector<Rect>& getFrames() const;
+  
+  const std::vector<Vec2>& getFrameAnchors() const;
 
   float getInterval() const;
 
   bool isLoop() const;
 
   const std::string& getActionName() const;
+
+  const std::string& getTextureName() const;
 };
 }
 

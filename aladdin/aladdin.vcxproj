@@ -130,7 +130,9 @@
     <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
     <ClInclude Include="2d\Camera.h" />
+    <ClInclude Include="2d\CameraPrefab.h" />
     <ClInclude Include="2d\Graphics.h" />
+    <ClInclude Include="2d\LineRenderer.h" />
     <ClInclude Include="2d\RectMessageArgs.h" />
     <ClInclude Include="2d\Rect.h" />
     <ClInclude Include="2d\Size.h" />
@@ -183,13 +185,19 @@
     <ClInclude Include="physics\Rigidbody.h" />
     <ClInclude Include="pugixml\pugiconfig.hpp" />
     <ClInclude Include="pugixml\pugixml.hpp" />
+    <ClInclude Include="ui\Font.h" />
+    <ClInclude Include="ui\FontInfo.h" />
+    <ClInclude Include="ui\RectTransform.h" />
+    <ClInclude Include="ui\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2d\Animation.cpp" />
     <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
+    <ClCompile Include="2d\CameraPrefab.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
+    <ClCompile Include="2d\LineRenderer.cpp" />
     <ClCompile Include="2d\RectMessageArgs.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
     <ClCompile Include="2d\Size.cpp" />
@@ -231,6 +239,10 @@
     <ClCompile Include="physics\PhysicsMaterial.cpp" />
     <ClCompile Include="physics\Rigidbody.cpp" />
     <ClCompile Include="pugixml\pugixml.cpp" />
+    <ClCompile Include="ui\Font.cpp" />
+    <ClCompile Include="ui\FontInfo.cpp" />
+    <ClCompile Include="ui\RectTransform.cpp" />
+    <ClCompile Include="ui\Text.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
