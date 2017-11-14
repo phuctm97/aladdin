@@ -13,7 +13,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
   : GameObjectComponent( gameObject, name ),
     _sprite( sprite ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 )
+    _zOrder( 0 ),
+    _offset(0, 0)
 {
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
   _srcRect.setSize(_sprite->getContentSize());
@@ -23,7 +24,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
   : GameObjectComponent( gameObject, name ),
     _sprite( NULL ),
     _backColor( 255, 255, 255 ),
-    _zOrder( 0 ) {
+    _zOrder( 0 ),
+    _offset(0, 0) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
@@ -78,14 +80,23 @@ void SpriteRenderer::setSourceRect ( const Rect& rect )
   _srcRect = rect;
 }
 
+const Vec2& SpriteRenderer::getOffset() const { return _offset; }
+
+void SpriteRenderer::setOffset( const Vec2& offset ) { _offset = offset; }
+
 void SpriteRenderer::onInitialize ( )
 {
 }
 
 void SpriteRenderer::onRender() {
-  auto transform = getGameObject()->getTransform();
-  auto worldZOrder = calculateWorldZOrder();
+  const auto transform = getGameObject()->getTransform();
+  const auto worldZOrder = calculateWorldZOrder();
+
+  const auto oldPosition = transform->getPosition();
+  transform->setPositionX(transform->getPositionX() + _offset.getX()*transform->getScale().getX());
+  transform->setPositionY(transform->getPositionY() + _offset.getY()*transform->getScale().getY());
   Graphics::get()->drawSprite( _sprite, Vec2(0.5f, 0.5f), transform->getLocalToWorldMatrix(), _backColor, _srcRect, worldZOrder);
+  transform->setPosition( oldPosition );
 }
 
 void SpriteRenderer::onRelease ( )
@@ -93,8 +104,8 @@ void SpriteRenderer::onRelease ( )
 }
 
 int SpriteRenderer::calculateWorldZOrder() const {
-  int layerIndex = GameManager::get()->getLayerIndex(getGameObject()->getLayer());
-  int worldZOrder = layerIndex * 1000 + _zOrder;
+  const auto layerIndex = GameManager::get()->getLayerIndex(getGameObject()->getLayer());
+  const auto worldZOrder = layerIndex * 1000 + _zOrder;
   return worldZOrder;
 }
 }

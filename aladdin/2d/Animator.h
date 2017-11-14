@@ -12,7 +12,7 @@ private:
   Animation* _animation;
 
   AnimationAction* _currentAction;
-  std::vector<Rect>::const_iterator _frameIterator;
+  std::vector<std::pair<Rect, Vec2>>::const_iterator _frameIterator;
 
   float _elapsedTime;
 
@@ -29,7 +29,8 @@ public:
   void setAction(const std::string& actionName);
   const std::string& getAction() const;
 
-  Rect getCurrentFrame() const;
+  const Rect& getCurrentFrameRect() const;
+  const Vec2& getCurrentFrameOffset() const;
 
   void pause();
   void playNext();
