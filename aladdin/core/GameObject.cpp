@@ -90,24 +90,28 @@ bool GameObject::isActive() const {
   return _active;
 }
 
-void GameObject::setActive( const bool val ) {
+GameObject* GameObject::setActive( const bool val ) {
   _active = val;
+  return this;
 }
 
 bool GameObject::isSelfInitialize() const {
   return _selfInitialize;
+  return this;
 }
 
-void GameObject::setSelfInitialize( const bool val ) {
+GameObject* GameObject::setSelfInitialize( const bool val ) {
   _selfInitialize = val;
+  return this;
 }
 
 const std::string& GameObject::getLayer() const {
   return _layer;
 }
 
-void GameObject::setLayer( const std::string& layer ) {
+GameObject* GameObject::setLayer( const std::string& layer ) {
   _layer = layer;
+  return this;
 }
 
 // ===========================================================

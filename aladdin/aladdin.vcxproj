@@ -132,6 +132,7 @@
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\CameraPrefab.h" />
     <ClInclude Include="2d\Graphics.h" />
+    <ClInclude Include="2d\LineRenderer.h" />
     <ClInclude Include="2d\RectMessageArgs.h" />
     <ClInclude Include="2d\Rect.h" />
     <ClInclude Include="2d\Size.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\CameraPrefab.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
+    <ClCompile Include="2d\LineRenderer.cpp" />
     <ClCompile Include="2d\RectMessageArgs.cpp" />
     <ClCompile Include="2d\Rect.cpp" />
     <ClCompile Include="2d\Size.cpp" />

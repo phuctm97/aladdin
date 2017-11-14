@@ -48,6 +48,8 @@ private:
   IDirect3D9* _directX;
   IDirect3DDevice9* _directXDevice;
   LPD3DXSPRITE _directXSprite;
+  FLOAT _directXLineWidth;
+  LPD3DXLINE _directXLine;
 
   D3DXMATRIX _projectionMatrix;
   D3DXMATRIX _worldMatrix;
@@ -63,11 +65,17 @@ public:
 
   void loadSprite( Sprite* sprite );
 
-  ID3DXFont* loadDirectXFont(std::string fontName, const FontInfo &fontInfo) const;
+  void setLineWidth(float width);
+
+  void drawLine(const std::vector<Vec2>& vertices, const Color& color);
+
+  void drawLine(const std::vector<Vec2>& vertices, const Mat4& transformMatrix, const Color& color, const int zIndex);
 
   void drawSprite( Sprite* sprite, const Vec2& origin, const Mat4& transformMatrix, const Color& backColor, const Rect& srcRect, const int zIndex = 0 );
 
   void drawText(ala::Font* font, const FontInfo& fontInfo, const std::string& text, const Rect& boundingRect, const int horizontalAlignment, const int verticalAlignment, const Color& textColor, const Mat4& transformMatrix, const int zIndex = 0);
+
+  ID3DXFont* loadDirectXFont(std::string fontName, const FontInfo &fontInfo) const;
 
   D3DXMATRIX convertToDirectXMatrix( const Mat4& mat ) const;
 
