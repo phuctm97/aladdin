@@ -4,7 +4,7 @@
 
 USING_NAMESPACE_ALA;
 
-void AladdinPrefab::doInstantiate( ala::GameObject* object ) {
+void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   // ReSharper disable CppNonReclaimedResourceAcquisition
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
@@ -16,7 +16,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) {
 
   // initial configurations
   object->setLayer( "Character" );
-  spriteRenderer->setAnchorPoint( Vec2( 0.5f, 0 ) );
   transform->setPosition( -80, -70 );
 
   // states

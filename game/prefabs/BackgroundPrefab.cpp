@@ -2,7 +2,7 @@
 
 USING_NAMESPACE_ALA;
 
-void BackgroundPrefab::doInstantiate( ala::GameObject* object ) {
+void BackgroundPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto gameManager = GameManager::get();
 
   // ReSharper disable CppNonReclaimedResourceAcquisition

@@ -9,7 +9,7 @@ public:
   AladdinPrefab() : Prefab( "Aladdin" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) override;
+  void doInstantiate( ala::GameObject* object ) const override;
 };
 
 #endif //!__ALADDIN_PREFAB_H__

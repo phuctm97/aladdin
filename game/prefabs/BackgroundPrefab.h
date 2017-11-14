@@ -12,7 +12,7 @@ class BackgroundPrefab : public ala::Prefab
 public:
   BackgroundPrefab() : Prefab( "Background" ) { }
 
-  void doInstantiate( ala::GameObject* object ) override;
+  void doInstantiate( ala::GameObject* object ) const override;
 };
 
 #endif //!__BACKGROUND_PREFAB_H__

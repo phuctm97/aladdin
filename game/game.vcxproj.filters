@@ -46,6 +46,9 @@
     <Filter Include="animations\playable_characters">
       <UniqueIdentifier>{29c760ca-292d-4d44-bca3-77672270b5f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="texures\debug">
+      <UniqueIdentifier>{d88f67d4-6bb6-432c-bf16-ff3b8fbc7067}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -81,6 +84,9 @@
     <ClCompile Include="scripts\Timer.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\DebugRectPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -113,6 +119,9 @@
     <ClInclude Include="scripts\Timer.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\DebugRectPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\miscellaneous\throwable_apple.png">
@@ -126,6 +135,9 @@
     </Image>
     <Image Include="textures\backgrounds\scene_1_1.png">
       <Filter>texures\backgrounds</Filter>
+    </Image>
+    <Image Include="textures\debug\1pixel_red.png">
+      <Filter>texures\debug</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

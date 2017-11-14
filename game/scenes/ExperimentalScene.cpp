@@ -5,14 +5,18 @@
 #include "ExperimentalScene.h"
 #include "../scripts/CameraController.h"
 
+USING_NAMESPACE_ALA;
+
 ExperimentalScene::ExperimentalScene() : _logger( "ExperimentalScene" ) {}
 
 void ExperimentalScene::onPreInitialize() {
+  // ReSharper disable CppNonReclaimedResourceAcquisition
   new CameraController( getMainCamera() );
 
-  ala::GameManager::get()->getPrefab( "Background" )->instantiate( "Background" );
-  ala::GameManager::get()->getPrefab( "Foreground" )->instantiate();
-  ala::GameManager::get()->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
+  const auto gameManager = GameManager::get();
+  gameManager->getPrefab( "Background" )->instantiate( "Background" );
+  gameManager->getPrefab( "Foreground" )->instantiate();
+  gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
 }
 
 void ExperimentalScene::onPreRelease() {}

@@ -123,6 +123,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
+    <ClCompile Include="prefabs\DebugRectPrefab.cpp" />
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
@@ -140,6 +141,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BackgroundPrefab.h" />
+    <ClInclude Include="prefabs\DebugRectPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\Timer.h" />
@@ -153,6 +155,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\debug\1pixel_red.png" />
     <Image Include="textures\miscellaneous\throwable_apple.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
