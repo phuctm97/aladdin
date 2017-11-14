@@ -11,7 +11,7 @@ public:
     : Prefab( ALA_MAIN_CAMERA ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) override;
+  void doInstantiate( ala::GameObject* object ) const override;
 };
 }
 

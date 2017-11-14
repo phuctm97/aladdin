@@ -13,6 +13,7 @@ private:
 
   AnimationAction* _currentAction;
   std::vector<Rect>::const_iterator _frameIterator;
+  std::vector<Vec2>::const_iterator _frameAnchorIterator;
 
   float _elapsedTime;
 

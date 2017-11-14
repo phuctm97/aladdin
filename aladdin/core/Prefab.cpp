@@ -26,12 +26,23 @@ const std::string& Prefab::getName() const {
   return _name;
 }
 
-GameObject* Prefab::instantiate( const std::string& name ) {
-  if ( isReleasing() || isReleased() ) return NULL;
+GameObject* Prefab::instantiate( const std::string& name ) const {
   return instantiate( GameManager::get()->getRunningScene(), name );
 }
 
-GameObject* Prefab::instantiate( Scene* scene, const std::string& name ) {
+GameObject* Prefab::instantiate( const Vec2& position, const std::string& name ) const {
+  return instantiate( GameManager::get()->getRunningScene(), position, name );
+}
+
+GameObject* Prefab::instantiate( const Vec2& position, const Vec2& scale, const std::string& name ) const {
+  return instantiate(GameManager::get()->getRunningScene(), position, scale, name);
+}
+GameObject* Prefab::instantiate( const Vec2& position, const Vec2& scale, const float rotation,
+  const std::string& name ) const {
+  return instantiate(GameManager::get()->getRunningScene(), position, scale, rotation, name);
+}
+
+GameObject* Prefab::instantiate( Scene* scene, const std::string& name ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
   const auto object = new GameObject( scene, name );
@@ -40,11 +51,75 @@ GameObject* Prefab::instantiate( Scene* scene, const std::string& name ) {
   return object;
 }
 
-GameObject* Prefab::instantiate( GameObject* parentObject, const std::string& name ) {
+GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( scene, name );
+  object->getTransform()->setPosition( position );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2& scale,
+                                 const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( scene, name );
+  object->getTransform()->setPosition( position );
+  object->getTransform()->setScale( scale );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const float rotation,
+                                 const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( scene, name );
+  object->getTransform()->setPosition( position );
+  object->getTransform()->setScale( scale );
+  object->getTransform()->setRotation( rotation );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( GameObject* parentObject, const std::string& name ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
   const auto object = new GameObject( parentObject, name );
   doInstantiate( object );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( GameObject* parentObject, const Vec2& position, const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( parentObject, name );
+  object->getTransform()->setPosition( position );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( GameObject* parentObject, const Vec2& position, const Vec2& scale,
+                                 const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( parentObject, name );
+  object->getTransform()->setPosition( position );
+  object->getTransform()->setScale( scale );
+
+  return object;
+}
+
+GameObject* Prefab::instantiate( GameObject* parentObject, const Vec2& position, const Vec2& scale,
+                                 const float rotation, const std::string& name ) const {
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = instantiate( parentObject, name );
+  object->getTransform()->setPosition( position );
+  object->getTransform()->setScale( scale );
+  object->getTransform()->setRotation( rotation );
 
   return object;
 }

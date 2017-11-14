@@ -32,27 +32,27 @@ public:
 
   float getPositionY() const;
 
-  void setPosition( const Vec2& position );
+  Transform* setPosition( const Vec2& position );
 
-  void setPosition( const float x, const float y );
+  Transform* setPosition( const float x, const float y );
 
-  void setPositionX( const float x );
+  Transform* setPositionX( const float x );
 
-  void setPositionY( const float y );
+  Transform* setPositionY( const float y );
 
   const Vec2& getScale() const;
 
-  void setScale( const Vec2& scale );
+  Transform* setScale( const Vec2& scale );
 
-  void setScaleX( const float x );
+  Transform* setScaleX( const float x );
 
-  void setScaleY( const float y );
+  Transform* setScaleY( const float y );
 
-  void setScale( const float scale );
+  Transform* setScale( const float scale );
 
   float getRotation() const;
 
-  void setRotation( const float rotation );
+  Transform* setRotation( const float rotation );
 
   // =======================================================
   // Children management
