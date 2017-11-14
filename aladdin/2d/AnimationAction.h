@@ -25,6 +25,8 @@ public:
   virtual ~AnimationAction();
 
   const std::vector<std::pair<Rect, Vec2>>& getFrames() const;
+
+  std::vector<std::pair<Rect, Vec2>>& getFrames();
   
   float getInterval() const;
 

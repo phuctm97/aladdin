@@ -90,6 +90,10 @@ Animator::Animator ( GameObject* gameObject, const std::string &entryAction, con
 
 }
 
+Animation* Animator::getAnimation() const {
+  return _animation;
+}
+
 void Animator::setAction ( const std::string& actionName )
 {
   _currentAction = _animation->getAction(actionName);
@@ -104,7 +108,7 @@ void Animator::setAction ( const std::string& actionName )
   }
 }
 
-const std::string& Animator::getAction ( ) const
+const std::string& Animator::getActionName ( ) const
 {
   return _currentAction->getActionName();
 }
@@ -116,6 +120,14 @@ const Rect& Animator::getCurrentFrameRect ( ) const
 
 const Vec2& Animator::getCurrentFrameOffset() const {
   return _frameIterator->second;
+}
+
+AnimationAction* Animator::getAction() const {
+  return _currentAction;
+}
+
+int Animator::getCurrentFrameIndex() const {
+  return std::distance(_currentAction->getFrames().begin(), _frameIterator);
 }
 
 void Animator::pause ( )

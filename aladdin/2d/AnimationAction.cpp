@@ -22,6 +22,10 @@ const std::vector<std::pair<Rect, Vec2>>& AnimationAction::getFrames() const
   return _frames;
 }
 
+std::vector<std::pair<Rect, Vec2>>& AnimationAction::getFrames() {
+  return _frames;
+}
+
 float AnimationAction::getInterval() const
 {
   return _interval;
