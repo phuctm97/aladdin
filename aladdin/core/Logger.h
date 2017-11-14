@@ -6,6 +6,7 @@
 #define __ALADDIN_CORE_LOGGER_H__
 
 #include "ClassMeta.h"
+#define LOGGER_BUFFER 4096
 
 enum {
   ALA_LOG_DEBUG = 0,
@@ -19,6 +20,7 @@ ALA_CLASS_HEADER_0(Logger)
 private:
   static int __logLevel;
   std::string _className;
+  char* _buffer;
 
 public:
   static void setLogLevel( int level );

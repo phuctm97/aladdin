@@ -16,39 +16,41 @@ void Logger::setLogLevel( int level ) {
 }
 
 Logger::Logger( const std::string& className ) : _className( className ) {
+  _buffer = new char[LOGGER_BUFFER];
   TOTAL_LOGGERS_CREATED++;
 }
 
 Logger::~Logger() {
+  delete[]_buffer;
   TOTAL_LOGGERS_DELETED++;
 }
 
 void Logger::debug( char const* const format, ... ) const {
   if ( __logLevel > ALA_LOG_DEBUG ) return;
 
-  char buffer[256];
+  std::fill(_buffer, _buffer + LOGGER_BUFFER, '\0');
 
   va_list args;
   va_start(args, format);
-  vsprintf( buffer, format, args );
-  va_end(args);
+  vsprintf(_buffer, format, args );
 
-  std::string logString = "[D] [" + _className + "] : " + buffer;
+  std::string logString = "[D] [" + _className + "] : " + _buffer;
   if ( logString.back() != '\n' )logString += "\n";
 
   printf( logString.c_str() );
+  va_end(args);
 }
 
 void Logger::info( char const* const format, ... ) const {
   if ( __logLevel > ALA_LOG_INFO ) return;
 
+  std::fill(_buffer, _buffer + LOGGER_BUFFER, '\0');
+
   va_list args;
   va_start(args, format);
+  vsprintf(_buffer, format, args );
 
-  char buffer[256];
-  vsprintf( buffer, format, args );
-
-  std::string logString = "[I] [" + _className + "] : " + buffer;
+  std::string logString = "[I] [" + _className + "] : " + _buffer;
   if ( logString.back() != '\n' )logString += "\n";
 
   printf( logString.c_str() );
@@ -58,13 +60,13 @@ void Logger::info( char const* const format, ... ) const {
 void Logger::error( char const* const format, ... ) const {
   if ( __logLevel > ALA_LOG_ERROR ) return;
 
+  std::fill(_buffer, _buffer + LOGGER_BUFFER, '\0');
+
   va_list args;
   va_start(args, format);
+  vsprintf(_buffer, format, args );
 
-  char buffer[256];
-  vsprintf( buffer, format, args );
-
-  std::string logString = "[E] [" + _className + "]: " + buffer;
+  std::string logString = "[E] [" + _className + "]: " + _buffer;
   if ( logString.back() != '\n' )logString += "\n";
 
   printf( logString.c_str() );
