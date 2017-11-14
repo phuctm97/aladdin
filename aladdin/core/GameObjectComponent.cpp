@@ -11,27 +11,32 @@ NAMESPACE_ALA
 // Basic
 // ================================================
 
-ALA_CLASS_SOURCE_0(ala::GameObjectComponent, "ala::GameObjectComponent")
+ALA_CLASS_SOURCE_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
     _gameObject( gameObject ),
-    _inited( false ),
-    _released( false ) {
+    _active( false ),
+    _toReleaseInNextFrame( false ) {
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  // check game object
   ALA_ASSERT(gameObject != NULL);
 
-  gameObject->attach( this );
+  // attach to game object
+  _gameObject->addComponent( this );
+
+  TOTAL_COMPONENTS_CREATED++;
 }
 
 GameObjectComponent::~GameObjectComponent() {
-  if ( _inited && (!_released) ) {
-    release();
-
+  if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(_released);
+    ALA_ASSERT(isReleased());
   }
 
-  _gameObject->detach( this );
+  TOTAL_COMPONENTS_DELETED++;
 }
 
 const std::string& GameObjectComponent::getName() const {
@@ -42,70 +47,127 @@ GameObject* GameObjectComponent::getGameObject() const {
   return _gameObject;
 }
 
+GameObject* GameObjectComponent::and() const {
+  return _gameObject;
+}
+
+bool GameObjectComponent::isActive() const {
+  return _active;
+}
+
+void GameObjectComponent::setActive( const bool val ) {
+  _active = val;
+}
+
+bool GameObjectComponent::isSelfInitialize() const {
+  return _selfInitialize;
+}
+
+void GameObjectComponent::setSelfInitialize( const bool val ) {
+  _selfInitialize = val;
+}
 
 // =================================================
 // Events
 // =================================================
 
-void GameObjectComponent::init() {
+void GameObjectComponent::initialize() {
   // make sure object is not initialized;
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
-  if ( !onInit() ) {
-    _inited = false;
-    return;
-  }
+  if ( !onPreInitialize() ) return;
 
-  _inited = true;
+  setToInitializing();
 
-  // make sure object initialized after initialization
-  ALA_ASSERT(_inited);
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  onInitialize();
+
+  setToInitialized();
+
+  // activate
+  setActive( true );
 }
 
-bool GameObjectComponent::onInit() {
+void GameObjectComponent::onInitialize() {}
+
+bool GameObjectComponent::onPreInitialize() {
   return true;
 }
 
-void GameObjectComponent::update( float delta ) {
-  // make sure object is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+void GameObjectComponent::update( const float delta ) {
+  if ( isReleasing() || isReleased() ) return;
 
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  onPreUpdate( delta );
+
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
+
+  if ( !isActive() ) return;
+
+  // inheritance update
   onUpdate( delta );
 }
 
-void GameObjectComponent::onUpdate( float delta ) {}
+void GameObjectComponent::onUpdate( const float delta ) {}
+
+void GameObjectComponent::onPreUpdate( const float delta ) {}
 
 void GameObjectComponent::onRender() {}
 
 void GameObjectComponent::render() {
-  // make sure object is initialized and not released
-  if ( (!_inited) || (_released) )
-    return;
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
 
   onRender();
 }
 
 void GameObjectComponent::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!_released);
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+
+  if ( !onPreRelease() ) return;
+
+  setToReleasing();
+
+  // TODO: lock mutual exclusive when run in multithreading mode
 
   onRelease();
 
-  _released = true;
+  // remove from game object
+  _gameObject->removeComponent( this );
 
-  // make sure object released after release
-  ALA_ASSERT(_released);
+  setToReleased();
+
+  // destroy
+  delete this;
+}
+
+void GameObjectComponent::releaseInNextFrame() {
+  // make sure object is initialized and not released
+  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  _toReleaseInNextFrame = true;
 }
 
 void GameObjectComponent::onRelease() {}
 
-bool GameObjectComponent::isInited() const {
-  return _inited;
+bool GameObjectComponent::onPreRelease() {
+  return true;
 }
 
-bool GameObjectComponent::isReleased() const {
-  return _released;
-}
+// ===========================================================
+// Debug memory allocation
+// ===========================================================
+long GameObjectComponent::TOTAL_COMPONENTS_CREATED( 0 );
+long GameObjectComponent::TOTAL_COMPONENTS_DELETED( 0 );
 }

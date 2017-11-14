@@ -5,16 +5,16 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include <core/Application.h>
+#include <aladdin.h>
 
 class MyApp : public ala::Application {
 public:
   MyApp();
 
 protected:
-  void init() override;
+  void onPreInitialize() override;
 
-  void release() override;
+  void onPostInitialize() override;
 };
 
 #endif //!__MY_APP_H__

@@ -3,6 +3,4 @@ Debug
 Release
 bin
 *.obj
-*.lib
-*.dll
-*.exe
+/aladdin.sln.DotSettings.user

@@ -7,11 +7,23 @@
     <Filter Include="scenes">
       <UniqueIdentifier>{eb0a6ca3-8a1f-44cd-a4c9-5c84e6ea5d75}</UniqueIdentifier>
     </Filter>
-    <Filter Include="logs">
-      <UniqueIdentifier>{29a1946a-7d31-4017-8713-654ebc54e3b5}</UniqueIdentifier>
+    <Filter Include="texures">
+      <UniqueIdentifier>{dc8c514d-9117-4d7e-9261-edc980421837}</UniqueIdentifier>
     </Filter>
-    <Filter Include="resources">
-      <UniqueIdentifier>{7789209a-1f0e-4ffe-bea8-368b8cad459b}</UniqueIdentifier>
+    <Filter Include="prefabs">
+      <UniqueIdentifier>{06af661b-e60c-4b71-be13-42ab78410376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scripts">
+      <UniqueIdentifier>{8abd1086-4f7e-4275-9697-a2646390a106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{d11a369c-7d56-49de-bff0-ee23c4387ba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio\sfx">
+      <UniqueIdentifier>{0fa2c2a0-8353-43a0-a406-bfa0aca9b011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations">
+      <UniqueIdentifier>{6f2110f8-5cca-4925-a665-f5a8eb1bcb0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,7 +33,22 @@
     <ClCompile Include="app\MyApp.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\IntroScene.cpp">
+    <ClCompile Include="app\MyResourceInitializer.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\TextExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\BasicExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AnimationAndStateExamplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\BasicController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\DemoScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,13 +56,44 @@
     <ClInclude Include="app\MyApp.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\IntroScene.h">
+    <ClInclude Include="app\MyResourceInitializer.h">
+      <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\TextExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\BasicExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AnimationAndStateExamplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\BasicController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\DemoScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="log.txt">
-      <Filter>logs</Filter>
-    </Text>
+    <Image Include="textures\ball.png">
+      <Filter>texures</Filter>
+    </Image>
+    <Image Include="textures\aladdin.png">
+      <Filter>texures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\sfx\wow.wav">
+      <Filter>audio\sfx</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\aladdin.animation">
+      <Filter>animations</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="log.txt" />
   </ItemGroup>
 </Project>
