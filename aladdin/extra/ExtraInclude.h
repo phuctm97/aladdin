@@ -11,6 +11,7 @@
 #include "../core/GameManager.h"
 #include "../2d/SpriteRenderer.h"
 #include "../2d/Animator.h"
+#include "../2d/Graphics.h"
 #include "../input/Input.h"
 
 #include "ExtraMacros.h"

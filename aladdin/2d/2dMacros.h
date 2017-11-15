@@ -9,6 +9,7 @@
 
 #define ALA_MAIN_CAMERA "Aladdin Main Camera"
 
+#define ALA_EMPTY_SPRITE(R, G, B, A) ("Aladdin Empty Sprite " + std::string({ (char)(R), (char)(G), (char)(B), (char)(A) }))
 #define ALA_EMPTY_RED_SPRITE "Aladdin Empty Red Sprite"
 #define ALA_EMPTY_GREEN_SPRITE "Aladdin Empty Green Sprite"
 #define ALA_EMPTY_BLUE_SPRITE "Aladdin Empty Blue Sprite"

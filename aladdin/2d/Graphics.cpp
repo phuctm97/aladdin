@@ -511,6 +511,6 @@ void Graphics::setViewMatrix ( const Mat4& mat )
 void Graphics::fillDirectXTextureRed(D3DXVECTOR4* pOut, const D3DXVECTOR2* pTexCoord, const D3DXVECTOR2* pTexelSize,
   LPVOID pData) {
   const auto color = static_cast<Color*>(pData);
-  *pOut = D3DXVECTOR4(color->getR() / 255.f, color->getG() / 255.f, color->getB() / 255.f, 1.f);
+  *pOut = D3DXVECTOR4(color->getR() / 255.f, color->getG() / 255.f, color->getB() / 255.f, color->getA() / 255.f);
 }
 }
