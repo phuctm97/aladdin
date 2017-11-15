@@ -4,8 +4,11 @@
 USING_NAMESPACE_ALA;
 
 void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
+  // constants
   const auto gameManager = GameManager::get();
+  const auto input = Input::get();
 
+  // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
@@ -18,17 +21,10 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
-  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 40, 50 ) );
   const auto controller = new AladdinController( object );
-  const auto debugRect = gameManager->getPrefab( "Debug Rect" )->instantiate( object )
-                                    ->setLayer( "Character" )
-                                    ->getTransform()
-                                    ->setScale( 50 )
-                                    ->getGameObject();
   const auto transform = object->getTransform();
-  const auto input = Input::get();
 
-  // initial configurations
+  // configurations
   object->setLayer( "Character" );
   transform->setPosition( -80, -40 );
 

@@ -3,16 +3,18 @@
 USING_NAMESPACE_ALA;
 
 void BackgroundPrefab::doInstantiate( ala::GameObject* object ) const {
+  // constants
   const auto gameManager = GameManager::get();
 
-  // ReSharper disable CppNonReclaimedResourceAcquisition
+  // components
   const auto spriteRenderer = new SpriteRenderer( object, "background.png" );
-
-  object->setLayer( "Background" );
   auto transform = object->getTransform();
 
-  transform->setPosition( Vec2( spriteRenderer->getFrameSize().getWidth() / 2,
-                                spriteRenderer->getFrameSize().getHeight() / 2 )
+  // configurations
+  object->setLayer( "Background" );
+
+  const auto frameSize = spriteRenderer->getFrameSize();
+  transform->setPosition( Vec2( frameSize.getWidth() / 2, frameSize.getHeight() / 2 )
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 }

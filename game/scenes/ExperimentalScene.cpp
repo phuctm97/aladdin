@@ -17,6 +17,7 @@ void ExperimentalScene::onPreInitialize() {
   gameManager->getPrefab( "Background" )->instantiate( "Background" );
   gameManager->getPrefab( "Foreground" )->instantiate();
   gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
+  gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
 }
 
 void ExperimentalScene::onPreRelease() {}

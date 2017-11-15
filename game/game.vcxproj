@@ -125,11 +125,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
     <ClCompile Include="prefabs\DebugRectPrefab.cpp" />
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
+    <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
-    <ClCompile Include="scripts\BoxCollider.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
-    <ClCompile Include="scripts\LimitedGravityAffectedVelocityBasedMovement.cpp" />
+    <ClCompile Include="scripts\ColliderDebugRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -143,11 +143,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\BackgroundPrefab.h" />
     <ClInclude Include="prefabs\DebugRectPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
+    <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
-    <ClInclude Include="scripts\BoxCollider.h" />
     <ClInclude Include="scripts\CameraController.h" />
-    <ClInclude Include="scripts\LimitedGravityAffectedVelocityBasedMovement.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\ColliderDebugRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />

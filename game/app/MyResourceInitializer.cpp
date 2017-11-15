@@ -7,6 +7,7 @@
 #include "../prefabs/BackgroundPrefab.h"
 #include "../prefabs/ForegroundPrefab.h"
 #include "../prefabs/DebugRectPrefab.h"
+#include "../prefabs/GroundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -33,5 +34,6 @@ void MyResourceInitializer::doRun() {
 
   new BackgroundPrefab();
   new ForegroundPrefab();
+  new GroundPrefab();
   new AladdinPrefab();
 }

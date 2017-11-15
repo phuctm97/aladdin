@@ -72,9 +72,6 @@
     <ClCompile Include="scripts\CameraController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\LimitedGravityAffectedVelocityBasedMovement.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scenes\ExperimentalScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
@@ -84,7 +81,10 @@
     <ClCompile Include="prefabs\DebugRectPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\BoxCollider.cpp">
+    <ClCompile Include="prefabs\GroundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ColliderDebugRenderer.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,9 +107,6 @@
     <ClInclude Include="scripts\CameraController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\LimitedGravityAffectedVelocityBasedMovement.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scenes\ExperimentalScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
@@ -119,7 +116,10 @@
     <ClInclude Include="prefabs\DebugRectPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\BoxCollider.h">
+    <ClInclude Include="prefabs\GroundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ColliderDebugRenderer.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
