@@ -65,6 +65,8 @@ public:
 
   void loadSprite( Sprite* sprite );
 
+  void loadEmptySprite(Sprite* sprite);
+
   void setLineWidth(float width);
 
   void drawLine(const std::vector<Vec2>& vertices, const Color& color);
@@ -90,6 +92,8 @@ public:
   void setWorldMatrix( const Mat4& mat );
   
   void setViewMatrix( const Mat4& mat );
+
+  static VOID WINAPI fillDirectXTextureRed(D3DXVECTOR4* pOut, const D3DXVECTOR2* pTexCoord, const D3DXVECTOR2* pTexelSize, LPVOID pData);
 };
 }
 

@@ -184,6 +184,11 @@ void Graphics::endRendering() {
 }
 
 void Graphics::loadSprite( Sprite* sprite ) {
+  if( sprite->getSourceFile().empty()) {
+    loadEmptySprite(sprite);
+    return;
+  }
+
   if ( sprite->getDirectXTexture() ) {
     sprite->getDirectXTexture()->Release();
   }
@@ -215,6 +220,30 @@ void Graphics::loadSprite( Sprite* sprite ) {
   ALA_ASSERT(result == D3D_OK);
   sprite->setDirectXTexture( texture );
   sprite->setContentSize( Size( static_cast<float>(info.Width), static_cast<float>(info.Height) ) );
+}
+
+void Graphics::loadEmptySprite( Sprite* sprite ) {
+  if (sprite->getDirectXTexture()) {
+    sprite->getDirectXTexture()->Release();
+  }
+  HRESULT result;
+
+  // create texture
+  LPDIRECT3DTEXTURE9 texture = NULL;
+  result = D3DXCreateTexture(
+    _directXDevice, //Direct3D device object
+    1, //bitmap image width
+    1, //bitmap image height
+    1, //mip-map levels (1 for no chain)
+    D3DPOOL_DEFAULT, //the type of surface (standard)
+    D3DFMT_UNKNOWN, //surface format (default)
+    D3DPOOL_DEFAULT, //memory class for the texture
+    &texture); //destination texture
+  D3DXFillTexture(texture, Graphics::fillDirectXTextureRed, LPVOID( &sprite->getTransColor() ));
+
+  ALA_ASSERT(result == D3D_OK);
+  sprite->setDirectXTexture(texture);
+  sprite->setContentSize(Size(static_cast<float>(1), static_cast<float>(1)));
 }
 
 void Graphics::setLineWidth( float width ) {
@@ -477,5 +506,11 @@ void Graphics::setWorldMatrix ( const Mat4& mat )
 void Graphics::setViewMatrix ( const Mat4& mat )
 {
   _viewMatrix = convertToDirectXMatrix(mat);
+}
+
+void Graphics::fillDirectXTextureRed(D3DXVECTOR4* pOut, const D3DXVECTOR2* pTexCoord, const D3DXVECTOR2* pTexelSize,
+  LPVOID pData) {
+  const auto color = static_cast<Color*>(pData);
+  *pOut = D3DXVECTOR4(color->getR() / 255.f, color->getG() / 255.f, color->getB() / 255.f, 1.f);
 }
 }

@@ -55,5 +55,6 @@
 #include "physics/Collider.h"
 #include "physics/CollisionInfo.h"
 #include "physics/Rigidbody.h"
+#include "physics/ColliderRenderer.h"
 
 #endif //!__ALADDIN_H__

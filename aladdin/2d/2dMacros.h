@@ -7,9 +7,11 @@
 
 #include "../core/CoreMacros.h"
 
-#ifndef ALA_MAIN_CAMERA
 #define ALA_MAIN_CAMERA "Aladdin Main Camera"
-#endif
+
+#define ALA_EMPTY_RED_SPRITE "Aladdin Empty Red Sprite"
+#define ALA_EMPTY_GREEN_SPRITE "Aladdin Empty Green Sprite"
+#define ALA_EMPTY_BLUE_SPRITE "Aladdin Empty Blue Sprite"
 
 #define ALA_CAMERA_MIN_Z 0.0f
 #define ALA_CAMERA_MAX_Z 100000.0f
