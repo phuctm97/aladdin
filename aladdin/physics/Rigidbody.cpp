@@ -7,7 +7,7 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(Rigidbody, GameObjectComponent)
 
-Rigidbody::Rigidbody (GameObject* gameObject, const PhysicsMaterial material, const int bodyType, const float gravityScale, const std::string& name)
+Rigidbody::Rigidbody (GameObject* gameObject, const PhysicsMaterial& material, const int bodyType, const float gravityScale, const std::string& name)
   : GameObjectComponent ( gameObject, name ),
     _position ( gameObject->getTransform (  )->getPosition (  ) ),
     _velocity ( 0 ),

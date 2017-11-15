@@ -19,6 +19,8 @@ bool PhysicsManager::getCollisionInfo(GameObject* a, GameObject* b, CollisionInf
 	const auto rigidbodyA = a->getComponentT<Rigidbody>();
 	const auto rigidbodyB = b->getComponentT<Rigidbody>();
 
+  if (colliderA == NULL || colliderB == NULL || rigidbodyA == NULL || rigidbodyB == NULL) return false;
+
 	auto n = rigidbodyB->getPosition() - rigidbodyA->getPosition();
 
 	auto rectA = colliderA->getBoundingRect();
@@ -267,27 +269,34 @@ void PhysicsManager::update ( const float delta )
 				rb1->resetForce();
 				rb2->resetForce();
 
+        //positional correction
+        const float percent = 0.2f; // usually 20% to 80%
+        const float slop = 0.01f; // usually 0.01 to 0.1
+        const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
+
 				if(rb1->getBodyType() == ALA_BODY_TYPE_DYNAMIC)
 				{
 					rb1->setVelocity(rb1->getVelocity() - impulse * rb1->getInverseMass());
+
+          rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
 				}
 
 				if(rb2->getBodyType() == ALA_BODY_TYPE_DYNAMIC)
 				{
 					rb2->setVelocity(rb2->getVelocity() + impulse * rb2->getInverseMass());
+
+          rb2->setPosition(rb2->getPosition() + correction*rb2->getInverseMass());
 				}
-
-
-				//positional correction
-				const float percent = 0.2f; // usually 20% to 80%
-				const float slop = 0.01f; // usually 0.01 to 0.1
-				const Vec2 correction = collisionInfo.getNormal()* (MAX(collisionInfo.getPenetration() - slop, 0.0f) / (rb1->getInverseMass() + rb2->getInverseMass())) * percent;
-				rb1->setPosition(rb1->getPosition() - correction*rb1->getInverseMass());
-				rb2->setPosition(rb2->getPosition() - correction*rb2->getInverseMass());
 				
-				//TODO: Friction
+				// TODO: Friction
 			}
 		}
+
+    //update transform position
+    for (auto rigidbody : _rigidbodies)
+    {
+      rigidbody->getGameObject()->getTransform()->setPosition(rigidbody->getPosition());
+    }
 
 		_lastCollidingPairs.clear();
 		_lastCollidingPairs.insert(_lastCollidingPairs.begin(), _currentCollidingPairs.begin(), _currentCollidingPairs.end());

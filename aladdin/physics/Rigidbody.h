@@ -20,7 +20,7 @@ private:
   Vec2 _forces;
   Vec2 _impulses;
 public:
-  Rigidbody(GameObject* gameObject, const PhysicsMaterial material, const int bodyType = ALA_BODY_TYPE_DYNAMIC, const float gravityScale = 0, const std::string& name = "");
+  Rigidbody(GameObject* gameObject, const PhysicsMaterial& material, const int bodyType = ALA_BODY_TYPE_DYNAMIC, const float gravityScale = 0, const std::string& name = "");
 
   void onPhysicsUpdate(const float delta) override;
 
