@@ -16,7 +16,7 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 // Basic
 // ================================================
 
-Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLock( false ) {
+Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLock( false ), _gravityAcceleration( 0, -100.0f ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -292,6 +292,14 @@ void Scene::doAddGameObject( GameObject* gameObject ) {
 
 void Scene::doRemoveGameObject( GameObject* gameObject ) {
   _gameObjects.erase( gameObject->getId() );
+}
+
+const Vec2& Scene::getGravityAcceleration() const {
+  return _gravityAcceleration;
+}
+
+void Scene::setGravityAcceleration( const Vec2& v ) {
+  _gravityAcceleration = v;
 }
 
 // =============================================
