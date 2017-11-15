@@ -50,7 +50,13 @@ void Rigidbody::onPhysicsUpdate ( const float delta )
 
   const Vec2 totalForce = _forces;
 
-  const Vec2 gravityAcceleration = GRAVITY_ACCELERATION * _gravityScale;
+  Scene* scene = NULL;
+  {
+    GameObject *p = getGameObject();
+    while (p->getParentScene() == NULL) p = p->getTransform()->getParent()->getGameObject();
+    scene = p->getParentScene();
+  }
+  const Vec2 gravityAcceleration = scene->getGravityAcceleration() * _gravityScale;
 
   const Vec2 acceleration = totalForce * getInverseMass() + gravityAcceleration;
 

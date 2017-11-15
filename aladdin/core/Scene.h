@@ -49,20 +49,20 @@ protected:
   virtual void onPostInitialize();
 
 public:
-  void updatePhysics(const float delta);
+  void updatePhysics( const float delta );
 
 protected:
   /**
   * \brief Happen before scene, its objects and components were physically updated
   * \param delta
   */
-  virtual void onPrePhysicsUpdate(const float delta);
+  virtual void onPrePhysicsUpdate( const float delta );
 
 
   /**
   * \brief Happen after scene, its objects and components were physically updated
   */
-  virtual void onPostPhysicsUpdate(const float delta);
+  virtual void onPostPhysicsUpdate( const float delta );
 
 public:
   void update( const float delta );
@@ -157,6 +157,17 @@ private:
   void doAddGameObject( GameObject* gameObject );
 
   void doRemoveGameObject( GameObject* gameObject );
+
+  // ================================================
+  // Physics
+  // ================================================
+private:
+  Vec2 _gravityAcceleration;
+
+public:
+  const Vec2& getGravityAcceleration() const;
+
+  void setGravityAcceleration( const Vec2& v );
 
   // =============================================
   // Debug memory allocation
