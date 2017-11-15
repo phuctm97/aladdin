@@ -235,6 +235,9 @@
     <ClInclude Include="physics\ColliderRenderer.h">
       <Filter>physics</Filter>
     </ClInclude>
+    <ClInclude Include="extra\RectRenderer.h">
+      <Filter>extra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -401,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="physics\ColliderRenderer.cpp">
       <Filter>physics</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\RectRenderer.cpp">
+      <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

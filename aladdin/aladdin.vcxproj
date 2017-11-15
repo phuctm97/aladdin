@@ -176,6 +176,7 @@
     <ClInclude Include="extra\AnimationEditor.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
+    <ClInclude Include="extra\RectRenderer.h" />
     <ClInclude Include="extra\Timer.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
+    <ClCompile Include="extra\RectRenderer.cpp" />
     <ClCompile Include="extra\Timer.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="physics\Collider.cpp" />

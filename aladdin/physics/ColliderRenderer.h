@@ -1,5 +1,5 @@
-#ifndef __ALADDIN_COLLIDER_RENDERER_H__
-#define __ALADDIN_COLLIDER_RENDERER_H__
+#ifndef __ALADDIN_PHYSICS_COLLIDER_RENDERER_H__
+#define __ALADDIN_PHYSICS_COLLIDER_RENDERER_H__
 
 #include "PhysicsInclude.h"
 #include "Collider.h"
@@ -34,4 +34,4 @@ private:
 };
 }
 
-#endif //!__ALADDIN_COLLIDER_RENDERER_H__
+#endif //!__ALADDIN_PHYSICS_COLLIDER_RENDERER_H__
