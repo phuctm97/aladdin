@@ -1,5 +1,4 @@
 #include "AladdinPrefab.h"
-#include "../scripts/AladdinController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -7,6 +6,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto runVelocity = 130.0f;
+  const auto stopAcceleration = 4.0f;
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
@@ -24,7 +25,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto colliderRenderer = new ColliderRenderer( collider, ALA_COLLIDER_RENDERER_GREEN );
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
-  const auto controller = new AladdinController( object );
   const auto transform = object->getTransform();
 
   // configurations
@@ -46,6 +46,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  timer->start( 0.5f );
                }
                transform->setScaleX( -ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer->isDone() ) {
@@ -108,6 +109,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  timer->start( 0.5f );
                }
                transform->setScaleX( ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer->isDone() ) {
@@ -278,6 +280,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                animator->setAction( "start_run" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                timer->start( 1 );
+               body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
@@ -291,6 +294,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                animator->setAction( "start_run" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
                timer->start( 1 );
+               body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
@@ -303,13 +307,39 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "stop" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               float newVelocity = 0;
+               if ( body->getVelocity() < 0 ) {
+                 newVelocity = body->getVelocity().getX() + stopAcceleration;
+                 if ( newVelocity > 0 ) newVelocity = 0;
+               }
+               else if ( body->getVelocity() > 0 ) {
+                 newVelocity = body->getVelocity().getX() - stopAcceleration;
+                 if ( newVelocity < 0 ) newVelocity = 0;
+               }
+
+               body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
+             }, NULL );
 
   new State( stateManager, "stop_right",
              [=] {
                animator->setAction( "stop" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               float newVelocity = 0;
+               if ( body->getVelocity() < 0 ) {
+                 newVelocity = body->getVelocity().getX() + stopAcceleration;
+                 if ( newVelocity > 0 ) newVelocity = 0;
+               }
+               else if ( body->getVelocity() > 0 ) {
+                 newVelocity = body->getVelocity().getX() - stopAcceleration;
+                 if ( newVelocity < 0 ) newVelocity = 0;
+               }
+
+               body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
+             }, NULL );
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
