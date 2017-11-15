@@ -128,7 +128,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
-    <ClCompile Include="scripts\ColliderDebugRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -145,7 +144,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
-    <ClInclude Include="scripts\ColliderDebugRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -153,7 +151,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
-    <Image Include="textures\debug\1pixel_red.png" />
     <Image Include="textures\miscellaneous\throwable_apple.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>

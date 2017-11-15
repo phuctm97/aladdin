@@ -1,5 +1,4 @@
 #include "GroundPrefab.h"
-#include "../scripts/ColliderDebugRenderer.h"
 
 USING_NAMESPACE_ALA;
 
@@ -12,7 +11,7 @@ void GroundPrefab::doInstantiate( ala::GameObject* object ) const {
   // components
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
   const auto collider = new Collider( object, false, false, groundSize );
-  const auto colliderDebugRenderer = new ColliderDebugRenderer( object, "debug_red.png", 0.5f );
+  const auto colliderRenderer = new ColliderRenderer(collider, ALA_COLLIDER_RENDERER_RED, 0.5f );
   const auto transform = object->getTransform();
 
   // configurations
