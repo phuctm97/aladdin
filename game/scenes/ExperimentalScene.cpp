@@ -10,10 +10,14 @@ USING_NAMESPACE_ALA;
 ExperimentalScene::ExperimentalScene() : _logger( "ExperimentalScene" ) {}
 
 void ExperimentalScene::onPreInitialize() {
-  // ReSharper disable CppNonReclaimedResourceAcquisition
+  // constants
+  const auto gameManager = GameManager::get();
+
+  // configurations
+  setGravityAcceleration( Vec2( 0, -400.0f ) );
   new CameraController( getMainCamera() );
 
-  const auto gameManager = GameManager::get();
+  // initial objects
   gameManager->getPrefab( "Background" )->instantiate( "Background" );
   gameManager->getPrefab( "Foreground" )->instantiate();
   gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );

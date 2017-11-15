@@ -1,4 +1,5 @@
 #include "AladdinPrefab.h"
+#include "../scripts/AladdinController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -6,7 +7,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
-  const auto runVelocity = 130.0f;
+
+  const auto density = 5.0f;
+  const auto runVelocity = 140.0f;
   const auto stopAcceleration = 4.0f;
 
   // components
@@ -20,16 +23,17 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   //    return;
   //    // For animationEditor
 
-  const auto body = new Rigidbody( object, PhysicsMaterial( 5.0f ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
+  const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   const auto colliderRenderer = new ColliderRenderer( collider, ALA_COLLIDER_RENDERER_GREEN );
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
+  const auto controller = new AladdinController( object );
   const auto transform = object->getTransform();
 
   // configurations
   object->setLayer( "Character" );
-  transform->setPosition( -80, 0 );
+  transform->setPosition( -80, -38 );
 
   // states
 
@@ -341,6 +345,23 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
              }, NULL );
 
+  new State( stateManager, "jump_left",
+             [=] {
+               animator->setAction( "jump" );
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               controller->resetCollidedWithGround();
+               body->addImpulse( Vec2( 0, 2500000.0f ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "jump_right",
+             [=] {
+               animator->setAction( "jump" );
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               controller->resetCollidedWithGround();
+               body->addImpulse( Vec2( 0, 2500000.0f) );
+             }, NULL, NULL );
+
+
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
@@ -524,5 +545,22 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "stop_right", "idle_right", [=] {
     return !animator->isPlaying();
   } );
+
+  new StateTransition( stateManager, "idle_left", "jump_left", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "idle_right", "jump_right", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "jump_left", "idle_left", [=] {
+    return controller->isCollidedWithGround();
+  } );
+
+  new StateTransition( stateManager, "jump_right", "idle_right", [=] {
+    return controller->isCollidedWithGround();
+  } );
+
 
 }
