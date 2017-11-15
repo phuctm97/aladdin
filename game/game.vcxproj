@@ -123,7 +123,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
-    <ClCompile Include="prefabs\DebugRectPrefab.cpp" />
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
@@ -141,7 +140,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BackgroundPrefab.h" />
-    <ClInclude Include="prefabs\DebugRectPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
