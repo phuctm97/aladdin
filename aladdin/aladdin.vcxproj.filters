@@ -232,6 +232,9 @@
     <ClInclude Include="physics\PhysicsMacros.h">
       <Filter>physics</Filter>
     </ClInclude>
+    <ClInclude Include="physics\ColliderRenderer.h">
+      <Filter>physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -395,6 +398,9 @@
     </ClCompile>
     <ClCompile Include="extra\AnimationEditor.cpp">
       <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="physics\ColliderRenderer.cpp">
+      <Filter>physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

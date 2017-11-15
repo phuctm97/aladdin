@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "GameManager.h"
 #include "../2d/Graphics.h"
+#include "../2d/Sprite.h"
 #include "../input/Input.h"
 #include "../audio/Audio.h"
 #include "../physics/PhysicsManager.h"
@@ -263,6 +264,11 @@ void Application::initComponents() {
 }
 
 void Application::initResources() {
+  // default resource
+  new Sprite(ALA_EMPTY_RED_SPRITE, "", Color(255, 0, 0));
+  new Sprite(ALA_EMPTY_GREEN_SPRITE, "", Color(0, 255, 0));
+  new Sprite(ALA_EMPTY_BLUE_SPRITE, "", Color(0, 0, 255));
+
   // run & release resource initializers
   for ( auto initializer : _resourceInitializers ) {
     if ( initializer ) {

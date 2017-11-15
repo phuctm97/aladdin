@@ -5,6 +5,8 @@
 #include "../core/Vec2.h"
 #include "../2d/Size.h"
 #include "../2d/Rect.h"
+#include "../2d/Sprite.h"
+#include "../2d/Graphics.h"
 #include "../core/GameObjectComponent.h"
 #include "../core/GameManager.h"
 #include "../core/Transform.h"

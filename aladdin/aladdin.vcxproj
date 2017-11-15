@@ -181,6 +181,7 @@
     <ClInclude Include="input\InputInclude.h" />
     <ClInclude Include="input\InputMarcos.h" />
     <ClInclude Include="physics\Collider.h" />
+    <ClInclude Include="physics\ColliderRenderer.h" />
     <ClInclude Include="physics\CollisionInfo.h" />
     <ClInclude Include="physics\PhysicsInclude.h" />
     <ClInclude Include="physics\PhysicsMacros.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="extra\Timer.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="physics\Collider.cpp" />
+    <ClCompile Include="physics\ColliderRenderer.cpp" />
     <ClCompile Include="physics\CollisionInfo.cpp" />
     <ClCompile Include="physics\PhysicsManager.cpp" />
     <ClCompile Include="physics\PhysicsMaterial.cpp" />
