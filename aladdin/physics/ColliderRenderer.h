@@ -9,6 +9,9 @@ NAMESPACE_ALA
 ALA_CLASS_HEADER_1(ColliderRenderer, ala::GameObjectComponent)
 private:
   ala::Collider* _collider;
+  ala::Sprite* _redSprite;
+  ala::Sprite* _greenSprite;
+  ala::Sprite* _blueSprite;
   ala::Sprite* _sprite;
   ala::Color _backColor;
   int _zOrder;
@@ -28,6 +31,12 @@ public:
 
 protected:
   void onRender() override;
+
+public:
+  void onCollisionEnter( const CollisionInfo& collision ) override;
+  void onCollisionExit( const CollisionInfo& collision ) override;
+  void onTriggerEnter( const CollisionInfo& collision ) override;
+  void onTriggerExit( const CollisionInfo& collision ) override;
 
 private:
   int calculateWorldZOrder() const;

@@ -11,9 +11,12 @@
 #include "Prefab.h"
 #include "Logger.h"
 #include "Messenger.h"
+#include "Color.h"
 
 NAMESPACE_ALA
 {
+class Sprite;
+
 ALA_CLASS_HEADER_1(GameManager, ala::Releasable)
   // ==============================================
   // Basic
@@ -114,6 +117,8 @@ public:
   void detach( GameResource* resource );
 
   GameResource* getResource( const std::string& name );
+
+  Sprite* getEmptySprite( const ala::Color& color );
 
   std::vector<GameResource*> getResourcesWith( Scene* scope );
 

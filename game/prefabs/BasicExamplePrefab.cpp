@@ -12,6 +12,7 @@ void BasicExamplePrefab::doInstantiate( ala::GameObject* object ) const {
   object->setLayer( "Background" );
 
   new SpriteRenderer( object, "ball.png" );
+  new RectRenderer( object, Vec2( 0, 0 ), Size( 30, 30 ), Color( 255, 0, 0 ) );
   new AudioSource( object, "wow.wav" );
   new BasicController( object );
 }

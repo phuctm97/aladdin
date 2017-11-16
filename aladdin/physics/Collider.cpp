@@ -74,7 +74,7 @@ const Size& Collider::getSize() const
 	return _size;
 }
 
-bool Collider::getTrigger() const
+bool Collider::isTrigger() const
 {
 	return _isTrigger;
 }

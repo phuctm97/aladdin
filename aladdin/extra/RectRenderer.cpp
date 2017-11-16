@@ -10,14 +10,7 @@ RectRenderer::RectRenderer( ala::GameObject* gameObject,
   : GameObjectComponent( gameObject, name ), _sprite( NULL ),
     _offset( offset ), _size( size ),
     _zOrder( 0 ) {
-
-  const std::string resourceName = ALA_EMPTY_SPRITE(color.getR(), color.getG(), color.getB(), color.getA());
-  auto resource = GameManager::get()->getResource( resourceName );
-  if ( resource == NULL ) {
-    resource = new Sprite( resourceName, "", color );
-    resource->load();
-  }
-  _sprite = static_cast<Sprite*>(resource);
+  _sprite = GameManager::get()->getEmptySprite( color );
 }
 
 int RectRenderer::getZOrder() const { return _zOrder; }
@@ -40,7 +33,8 @@ void RectRenderer::onRender() {
   const auto oldScale = transform->getScale();
   transform->setPositionX( transform->getPositionX() + _offset.getX() * transform->getScale().getX() );
   transform->setPositionY( transform->getPositionY() + _offset.getY() * transform->getScale().getY() );
-  transform->setScale( Vec2( _size.getWidth(), _size.getHeight() ) );
+  transform->setScale( Vec2( _size.getWidth() * transform->getScale().getX(),
+                             _size.getHeight() * transform->getScale().getY() ) );
   Graphics::get()->drawSprite( _sprite,
                                Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), Color( 255, 255, 255 ),
                                Rect( Vec2( 0, 0 ), _sprite->getContentSize() ), worldZOrder );
