@@ -25,7 +25,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
-  const auto colliderRenderer = new ColliderRenderer( collider, ALA_COLLIDER_RENDERER_GREEN );
+  const auto colliderRenderer = new ColliderRenderer( collider );
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
   const auto controller = new AladdinController( object );
