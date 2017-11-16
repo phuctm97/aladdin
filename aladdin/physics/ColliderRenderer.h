@@ -18,7 +18,7 @@ private:
 
 public:
   ColliderRenderer( ala::Collider* collider,
-                    const int type, const float opacity = 0.4f,
+                    const float opacity = 0.4f,
                     const std::string& name = "" );
 
   int getZOrder() const;

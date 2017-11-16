@@ -5,7 +5,7 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_1(ala::ColliderRenderer, ala::GameObjectComponent)
 
 ColliderRenderer::ColliderRenderer( ala::Collider* collider,
-                                    const int type, const float opacity,
+                                    const float opacity,
                                     const std::string& name )
   : GameObjectComponent( collider->getGameObject(), name ),
     _collider( collider ),
@@ -64,7 +64,7 @@ void ColliderRenderer::onTriggerEnter( const CollisionInfo& collision ) {
 }
 
 void ColliderRenderer::onTriggerExit( const CollisionInfo& collision ) {
-  if (!_collider->isTrigger()) return;
+  if ( !_collider->isTrigger() ) return;
   _sprite = _redSprite;
 }
 
