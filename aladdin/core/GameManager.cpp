@@ -4,6 +4,7 @@
 
 #include "GameManager.h"
 #include "../2d/2dMacros.h"
+#include "../2d/Sprite.h"
 
 NAMESPACE_ALA
 {
@@ -147,7 +148,7 @@ Scene* GameManager::getRunningScene() const {
 }
 
 GameObject* GameManager::getMainCamera() const {
-  return getObjectByName(ALA_MAIN_CAMERA);
+  return getObjectByName( ALA_MAIN_CAMERA );
 }
 
 void GameManager::replaceScene( Scene* scene ) {
@@ -204,6 +205,28 @@ GameResource* GameManager::getResource( const std::string& name ) {
   const auto it = _attachedResources.find( name );
   if ( it == _attachedResources.end() ) return NULL;
   return it->second;
+}
+
+Sprite* GameManager::getEmptySprite( const ala::Color& color ) {
+  std::string colorHex = "";
+  {
+    std::stringstream stringBuilder;
+    stringBuilder << std::hex << std::setw( 2 ) << std::setfill( '0' ) << int( color.getR() );
+    stringBuilder << std::hex << std::setw( 2 ) << std::setfill( '0' ) << int( color.getG() );
+    stringBuilder << std::hex << std::setw( 2 ) << std::setfill( '0' ) << int( color.getB() );
+    stringBuilder << std::hex << std::setw( 2 ) << std::setfill( '0' ) << int( color.getA() );
+    colorHex = stringBuilder.str();
+  }
+  const auto resourceName = ALA_EMPTY_SPRITE + std::string( " " ) + colorHex;
+
+  const auto resource = getResource( resourceName );
+  if ( resource == NULL ) {
+    const auto sprite = new Sprite( resourceName, "", color );
+    sprite->load();
+
+    return sprite;
+  }
+  return static_cast<Sprite*>(resource);
 }
 
 std::vector<GameResource*> GameManager::getResourcesWith( Scene* scope ) {

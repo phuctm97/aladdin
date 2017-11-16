@@ -11,21 +11,10 @@ ColliderRenderer::ColliderRenderer( ala::Collider* collider,
     _collider( collider ),
     _backColor( 255, 255, 255, (static_cast<unsigned char>(opacity * 255)) ),
     _zOrder( 0 ) {
-
-  switch ( type ) {
-  case ALA_COLLIDER_RENDERER_RED:
-    _sprite = static_cast<Sprite*>(GameManager::get()->getResource( ALA_EMPTY_RED_SPRITE ));
-    break;
-  case ALA_COLLIDER_RENDERER_GREEN:
-    _sprite = static_cast<Sprite*>(GameManager::get()->getResource( ALA_EMPTY_GREEN_SPRITE ));
-    break;
-  case ALA_COLLIDER_RENDERER_BLUE:
-    _sprite = static_cast<Sprite*>(GameManager::get()->getResource( ALA_EMPTY_BLUE_SPRITE ));
-    break;
-  default:
-    _sprite = static_cast<Sprite*>(GameManager::get()->getResource( ALA_EMPTY_RED_SPRITE ));
-    break;
-  }
+  _redSprite = GameManager::get()->getEmptySprite( Color( 255, 0, 0 ) );
+  _greenSprite = GameManager::get()->getEmptySprite( Color( 0, 255, 0 ) );
+  _blueSprite = GameManager::get()->getEmptySprite( Color( 0, 0, 255 ) );
+  _sprite = _redSprite;
 }
 
 int ColliderRenderer::getZOrder() const { return _zOrder; }
@@ -50,12 +39,33 @@ void ColliderRenderer::onRender() {
   const auto oldScale = transform->getScale();
   transform->setPositionX( transform->getPositionX() + offset.getX() * transform->getScale().getX() );
   transform->setPositionY( transform->getPositionY() + offset.getY() * transform->getScale().getY() );
-  transform->setScale( Vec2( _collider->getSize().getWidth(), _collider->getSize().getHeight() ) );
+  transform->setScale( Vec2( _collider->getSize().getWidth() * transform->getScale().getX(),
+                             _collider->getSize().getHeight() * transform->getScale().getY() ) );
   Graphics::get()->drawSprite( _sprite,
                                Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), _backColor,
                                Rect( Vec2( 0, 0 ), _sprite->getContentSize() ), worldZOrder );
   transform->setPosition( oldPosition );
   transform->setScale( oldScale );
+}
+
+void ColliderRenderer::onCollisionEnter( const CollisionInfo& collision ) {
+  if ( _collider->isTrigger() ) return;
+  _sprite = _greenSprite;
+}
+
+void ColliderRenderer::onCollisionExit( const CollisionInfo& collision ) {
+  if ( _collider->isTrigger() ) return;
+  _sprite = _redSprite;
+}
+
+void ColliderRenderer::onTriggerEnter( const CollisionInfo& collision ) {
+  if ( !_collider->isTrigger() ) return;
+  _sprite = _blueSprite;
+}
+
+void ColliderRenderer::onTriggerExit( const CollisionInfo& collision ) {
+  if (!_collider->isTrigger()) return;
+  _sprite = _redSprite;
 }
 
 int ColliderRenderer::calculateWorldZOrder() const {

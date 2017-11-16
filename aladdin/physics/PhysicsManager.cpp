@@ -145,7 +145,7 @@ void PhysicsManager::update ( const float delta )
 
 				if (abs(rectA.getMidX() - rectB.getMidX()) > rectA.getSize().getWidth() / 2 + rectB.getSize().getWidth() / 2)
 				{
-					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					if ((*it1)->isTrigger() || (*it2)->isTrigger())
 					{
 						collisionInfo.setObjectA(gameObject1);
 						collisionInfo.setObjectB(gameObject2);
@@ -169,7 +169,7 @@ void PhysicsManager::update ( const float delta )
 				}
 				if (abs(rectA.getMidY() - rectB.getMidY()) > rectA.getSize().getHeight() / 2 + rectB.getSize().getHeight() / 2)
 				{
-					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					if ((*it1)->isTrigger() || (*it2)->isTrigger())
 					{
 						collisionInfo.setObjectA(gameObject1);
 						collisionInfo.setObjectB(gameObject2);
@@ -196,7 +196,7 @@ void PhysicsManager::update ( const float delta )
 
 				if (!getCollisionInfo(gameObject1, gameObject2, collisionInfo))
 				{
-					if ((*it1)->getTrigger() || (*it2)->getTrigger())
+					if ((*it1)->isTrigger() || (*it2)->isTrigger())
 					{
 						collisionInfo.setObjectA(gameObject1);
 						collisionInfo.setObjectB(gameObject2);
@@ -223,7 +223,7 @@ void PhysicsManager::update ( const float delta )
 
 				_currentCollidingPairs.push_back(collisionInfo);
 
-				if((*it1)->getTrigger() || (*it2)->getTrigger())
+				if((*it1)->isTrigger() || (*it2)->isTrigger())
 				{
 					if(!isCollidedLastFrame(collisionInfo))
 					{

@@ -31,7 +31,7 @@ public:
 
 	const Vec2& getOffset() const;
 	const Size& getSize() const;
-	bool getTrigger() const;
+	bool isTrigger() const;
 	int getPhysicsLayer() const;
 };
 }

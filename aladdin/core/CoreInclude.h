@@ -13,7 +13,9 @@
 #include <cstdarg>
 #include <ctime>
 #include <string>
+#include <locale>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <fstream>
 #include <vector>
