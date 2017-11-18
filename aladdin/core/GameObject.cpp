@@ -10,7 +10,7 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_2(ala::GameObject, ala::Initializable, ala::Releasable)
 
-GameObject::GameObject( Scene* parentScene, const std::string& name )
+GameObject::GameObject( Scene* parentScene, const std::string& name, const std::string& quadIndex )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _parentScene( parentScene ),
@@ -32,7 +32,7 @@ GameObject::GameObject( Scene* parentScene, const std::string& name )
   ALA_ASSERT(_parentScene != NULL);
 
   // attach to Scene
-  _parentScene->addGameObject( this );
+  _parentScene->addGameObject( this, quadIndex );
 
   // for debug memory allocation
   TOTAL_OBJECTS_CREATED++;
@@ -139,29 +139,28 @@ void GameObject::initialize() {
   setActive( true );
 }
 
-void GameObject::updatePhysics ( const float delta )
-{
-  if (isReleasing() || isReleased()) return;
+void GameObject::updatePhysics( const float delta ) {
+  if ( isReleasing() || isReleased() ) return;
 
   // update to release in next frame
-  if (_toReleaseInNextFrame) {
+  if ( _toReleaseInNextFrame ) {
     return;
   }
 
-  if (!isInitialized()) {
-    if (isSelfInitialize()) {
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
       initialize();
     }
     else return;
   }
 
-  if (!isActive()) return;
+  if ( !isActive() ) return;
 
   lockComponents();
 
   // update components
-  for (auto component : _components) {
-    component->updatePhysics(delta);
+  for ( auto component : _components ) {
+    component->updatePhysics( delta );
   }
 
   unlockComponents();
@@ -199,157 +198,133 @@ void GameObject::update( const float delta ) {
   unlockComponents();
 }
 
-void GameObject::onCollisionEnter(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onCollisionEnter( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame) 
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized()) 
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
+  lockComponents();
 
-	for(auto component: _components)
-	{
-		component->onCollisionEnter(collisionInfo);
-	}
+  for ( auto component : _components ) {
+    component->onCollisionEnter( collisionInfo );
+  }
 
-	unlockComponents();
+  unlockComponents();
 }
 
-void GameObject::onCollisionStay(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onCollisionStay( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame)
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized())
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
+  lockComponents();
 
-	for (auto component : _components)
-	{
-		component->onCollisionStay(collisionInfo);
-	}
+  for ( auto component : _components ) {
+    component->onCollisionStay( collisionInfo );
+  }
 
-	unlockComponents();
+  unlockComponents();
 }
 
-void GameObject::onCollisionExit(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onCollisionExit( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame)
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized())
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
+  lockComponents();
 
-	for (auto component : _components)
-	{
-		component->onCollisionExit(collisionInfo);
-	}
+  for ( auto component : _components ) {
+    component->onCollisionExit( collisionInfo );
+  }
 
-	unlockComponents();
+  unlockComponents();
 }
 
-void GameObject::onTriggerEnter(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onTriggerEnter( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame)
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized())
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
+  lockComponents();
 
-	for (auto component : _components)
-	{
-		component->onTriggerEnter(collisionInfo);
-	}
+  for ( auto component : _components ) {
+    component->onTriggerEnter( collisionInfo );
+  }
 
-	unlockComponents();
+  unlockComponents();
 }
 
-void GameObject::onTriggerStay(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onTriggerStay( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame)
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized())
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
+  lockComponents();
 
-	for (auto component : _components)
-	{
-		component->onTriggerStay(collisionInfo);
-	}
-	unlockComponents();
+  for ( auto component : _components ) {
+    component->onTriggerStay( collisionInfo );
+  }
+  unlockComponents();
 }
 
-void GameObject::onTriggerExit(const CollisionInfo& collisionInfo)
-{
-	if (isReleasing() || isReleased()) return;
+void GameObject::onTriggerExit( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() ) return;
 
-	if (_toReleaseInNextFrame)
-	{
-		return;
-	}
+  if ( _toReleaseInNextFrame ) {
+    return;
+  }
 
-	if (!isInitialized())
-	{
-		return;
-	}
+  if ( !isInitialized() ) {
+    return;
+  }
 
-	if (!isActive()) return;
+  if ( !isActive() ) return;
 
-	lockComponents();
-	for (auto component : _components)
-	{
-		component->onTriggerExit(collisionInfo);
-	}
-	unlockComponents();
+  lockComponents();
+  for ( auto component : _components ) {
+    component->onTriggerExit( collisionInfo );
+  }
+  unlockComponents();
 }
 
 void GameObject::render() {
@@ -499,17 +474,17 @@ void GameObject::updateAddAndRemoveComponentInNextFrame() {
 }
 
 void GameObject::doAddComponent( GameObjectComponent* component ) {
-  if(component != _transform && ALA_IS_INSTANCE_OF(component, Transform)) {
+  if ( component != _transform && ALA_IS_INSTANCE_OF(component, Transform) ) {
     ALA_ASSERT(!isInitializing() && !isInitialized() && !isReleasing() && !isReleased());
-    
+
     // TODO: move children from old transform to new transform
 
-    doRemoveComponent(_transform);
+    doRemoveComponent( _transform );
     _transform = static_cast<Transform*>(component);
-    _components.insert(_components.begin(), _transform);
+    _components.insert( _components.begin(), _transform );
   }
   else {
-    _components.emplace_back(component);
+    _components.emplace_back( component );
   }
 }
 

@@ -238,6 +238,15 @@
     <ClInclude Include="extra\RectRenderer.h">
       <Filter>extra</Filter>
     </ClInclude>
+    <ClInclude Include="core\QuadNode.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\QuadTree.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\QuadTreeRenderer.h">
+      <Filter>extra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -406,6 +415,15 @@
       <Filter>physics</Filter>
     </ClCompile>
     <ClCompile Include="extra\RectRenderer.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="core\QuadNode.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\QuadTree.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\QuadTreeRenderer.cpp">
       <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>
