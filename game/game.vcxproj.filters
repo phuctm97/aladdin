@@ -78,10 +78,10 @@
     <ClCompile Include="prefabs\GroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\Throwable_applePrefab.cpp">
+    <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Throwable_appleController.cpp">
+    <ClCompile Include="scripts\ThrowableAppleController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,17 +113,14 @@
     <ClInclude Include="prefabs\GroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\Throwable_applePrefab.h">
+    <ClInclude Include="prefabs\ThrowableApplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Throwable_appleController.h">
+    <ClInclude Include="scripts\ThrowableAppleController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\miscellaneous\throwable_apple.png">
-      <Filter>texures\miscellaneous</Filter>
-    </Image>
     <Image Include="textures\playable_characters\aladdin.png">
       <Filter>texures\playable_characters</Filter>
     </Image>

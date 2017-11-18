@@ -7,7 +7,7 @@
 #include "../prefabs/BackgroundPrefab.h"
 #include "../prefabs/ForegroundPrefab.h"
 #include "../prefabs/GroundPrefab.h"
-#include "../prefabs/Throwable_applePrefab.h"
+#include "../prefabs/ThrowableApplePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -18,13 +18,11 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Background" );
   gameManager->addLayer( "Character" );
   gameManager->addLayer( "Foreground" );
-  gameManager->addLayer( "Apple");
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
-  new Sprite( "throwable_apple.png", "textures/miscellaneous/throwable_apple.png");
 
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
@@ -34,5 +32,5 @@ void MyResourceInitializer::doRun() {
   new ForegroundPrefab();
   new GroundPrefab();
   new AladdinPrefab();
-  new Throwable_applePrefab();
+  new ThrowableApplePrefab();
 }
