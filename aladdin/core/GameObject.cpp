@@ -313,9 +313,13 @@ void GameObject::resolveLockedTasks() {
   onResolveLockedTasks();
 
   // update components
+  lockComponents();
+  
   for ( const auto component : _components ) {
     component->resolveLockedTasks();
   }
+
+  unlockComponents();
 }
 
 void GameObject::onResolveLockedTasks() { }
