@@ -17,7 +17,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
   // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "jump_acttack_to_idle1" );
+  //const auto animationEditor = new AnimationEditor( object, "run_attack" );
   //object->setLayer( "Character" );
   //object->getTransform()->setPosition( -80, -40 );
   //return;
@@ -527,6 +527,16 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL );
 
+  new State(stateManager, "run_left_attack",
+	  [=] {
+	  animator->setAction("run_attack");
+  },NULL, NULL);
+
+  new State(stateManager, "run_right_attack",
+	  [=] {
+	  animator->setAction("run_attack");
+  }, NULL, NULL);
+
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
@@ -813,5 +823,37 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition(stateManager, "run_right_to_jump_attack", "run_left_to_jump_attack", [=] {
 	  return input->getKeyDown(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "run_left", "run_left_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+
+  new StateTransition(stateManager, "run_right", "run_right_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+
+  new StateTransition(stateManager, "run_right_attack", "run_left", [=] {
+	  return input->getKey(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "run_left_attack", "run_right", [=] {
+	  return input->getKey(ALA_KEY_RIGHT_ARROW);
+  });
+
+  new StateTransition(stateManager, "run_left_attack", "run_left", [=] {
+	  return input->getKey(ALA_KEY_LEFT_ARROW) && !animator->isPlaying();
+  });
+
+  new StateTransition(stateManager, "run_right_attack", "run_right", [=] {
+	  return input->getKey(ALA_KEY_RIGHT_ARROW) && !animator->isPlaying();
+  });
+
+  new StateTransition(stateManager, "run_left_attack", "idle_left", [=] {
+	  return !input->getKey(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "run_right_attack", "idle_right", [=] {
+	  return !input->getKey(ALA_KEY_RIGHT_ARROW);
   });
 }
