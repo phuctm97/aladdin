@@ -1,4 +1,5 @@
 #include "ColliderRenderer.h"
+#include "CollisionInfo.h"
 
 NAMESPACE_ALA
 {
@@ -49,21 +50,25 @@ void ColliderRenderer::onRender() {
 }
 
 void ColliderRenderer::onCollisionEnter( const CollisionInfo& collision ) {
+  if ( collision.getColliderA() != _collider && collision.getColliderB() != _collider ) return;
   if ( _collider->isTrigger() ) return;
   _sprite = _greenSprite;
 }
 
 void ColliderRenderer::onCollisionExit( const CollisionInfo& collision ) {
+  if ( collision.getColliderA() != _collider && collision.getColliderB() != _collider ) return;
   if ( _collider->isTrigger() ) return;
   _sprite = _redSprite;
 }
 
 void ColliderRenderer::onTriggerEnter( const CollisionInfo& collision ) {
+  if ( collision.getColliderA() != _collider && collision.getColliderB() != _collider ) return;
   if ( !_collider->isTrigger() ) return;
   _sprite = _blueSprite;
 }
 
 void ColliderRenderer::onTriggerExit( const CollisionInfo& collision ) {
+  if ( collision.getColliderA() != _collider && collision.getColliderB() != _collider ) return;
   if ( !_collider->isTrigger() ) return;
   _sprite = _redSprite;
 }

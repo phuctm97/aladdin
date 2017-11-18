@@ -19,14 +19,8 @@ Rect Collider::getBoundingRect() const {
 
   const auto transform = getGameObject()->getTransform();
 
-  const auto oldPosition = transform->getPosition();
-  transform->setPosition( oldPosition + _offset );
-
-  rect.setTopLeft(
-    getGameObject()->getTransform()->getWorldPosition() + Vec2( -_size.getWidth() / 2, -_size.getHeight() / 2 ) );
+  rect.setTopLeft( transform->getWorldPosition() + _offset + Vec2( -_size.getWidth() / 2, -_size.getHeight() / 2 ) );
   rect.setSize( _size );
-
-  transform->setPosition( oldPosition );
 
   return rect;
 }
