@@ -7,6 +7,7 @@
 #include "GameResource.h"
 #include "GameManager.h"
 #include "../2d/2dMacros.h"
+#include "../2d/Camera.h"
 
 NAMESPACE_ALA
 {
@@ -16,7 +17,11 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 // Basic
 // ================================================
 
-Scene::Scene(): _toReleaseInNextFrame( false ), _gameObjectInLock( false ), _gravityAcceleration( 0, -100.0f ) {
+Scene::Scene(): _toReleaseInNextFrame( false ),
+                _gameObjectInLock( false ),
+                _quadTree( NULL ),
+                _physicsEnabled( false ),
+                _gravityAcceleration( 0, -100.0f ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
 
@@ -41,7 +46,7 @@ void Scene::initialize() {
   ALA_ASSERT((!isInitializing()) && (!isInitialized()));
 
   // required framework objects
-  ala::GameManager::get()->getPrefab(ALA_MAIN_CAMERA)->instantiate(ALA_MAIN_CAMERA);
+  ala::GameManager::get()->getPrefab( ALA_MAIN_CAMERA )->instantiate( ALA_MAIN_CAMERA );
 
   onPreInitialize();
 
@@ -70,46 +75,57 @@ void Scene::initialize() {
   onPostInitialize();
 }
 
-void Scene::onPreInitialize()
-{
-  
-}
+void Scene::onPreInitialize() { }
 
 void Scene::onPostInitialize() {}
 
-void Scene::updatePhysics ( const float delta )
-{
-  if (isReleasing() || isReleased()) return;
+void Scene::updatePhysics( const float delta ) {
+  if ( isReleasing() || isReleased() ) return;
+
+  if ( !isPhysicsEnabled() ) return;
 
   // update to release in next frame
-  if (_toReleaseInNextFrame) {
+  if ( _toReleaseInNextFrame ) {
     return;
   }
 
-  if (!isInitialized()) return;
+  if ( !isInitialized() ) return;
 
   lockGameObjects();
 
-  onPrePhysicsUpdate(delta);
+  onPrePhysicsUpdate( delta );
 
   // update game objects
-  for (const auto it : _gameObjects) {
-    auto object = it.second;
-    object->updatePhysics(delta);
+
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->updatePhysics( delta );
+    }
+  }
+  else {
+    updateQuadTreeVisibility();
+
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->updatePhysics( delta );
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->updatePhysics( delta );
+    }
   }
 
-  onPostPhysicsUpdate(delta);
+  onPostPhysicsUpdate( delta );
 
   unlockGameObjects();
 }
 
-void Scene::onPrePhysicsUpdate ( const float delta )
-{
-}
+void Scene::onPrePhysicsUpdate( const float delta ) {}
 
-void Scene::onPostPhysicsUpdate ( const float delta )
-{
-}
+void Scene::onPostPhysicsUpdate( const float delta ) {}
 
 void Scene::update( const float delta ) {
   if ( isReleasing() || isReleased() ) return;
@@ -131,9 +147,24 @@ void Scene::update( const float delta ) {
   onPreUpdate( delta );
 
   // update game objects
-  for ( const auto it : _gameObjects ) {
-    auto object = it.second;
-    object->update( delta );
+
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->update( delta );
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->update( delta );
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->update( delta );
+    }
   }
 
   onPostUpdate( delta );
@@ -154,10 +185,25 @@ void Scene::render() {
   onPreRender();
 
   // render game objects
-  for ( const auto it : _gameObjects ) {
-    auto object = it.second;
-    object->render();
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->render();
+    }
   }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->render();
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->render();
+    }
+  }
+
 
   onPostRender();
 
@@ -181,6 +227,9 @@ void Scene::release() {
   onPreRelease();
 
   setToReleasing();
+
+  // release quad tree
+  if ( _quadTree != NULL ) delete _quadTree;
 
   // release game objects
   std::vector<GameObject*> gameObjectsToRelease;
@@ -223,14 +272,14 @@ GameObject* Scene::getGameObject( const long id ) const {
 }
 
 GameObject* Scene::getMainCamera() const {
-  for(const auto it: _gameObjects) {
+  for ( const auto it : _gameObjects ) {
     const auto object = it.second;
-    if (object->getName() == ALA_MAIN_CAMERA) return object;
+    if ( object->getName() == ALA_MAIN_CAMERA ) return object;
   }
   return NULL;
 }
 
-void Scene::addGameObject( GameObject* gameObject ) {
+void Scene::addGameObject( GameObject* gameObject, const std::string& quadIndex ) {
   // check lock
   if ( _gameObjectInLock ) {
     addGameObjectInNextFrame( gameObject );
@@ -239,13 +288,13 @@ void Scene::addGameObject( GameObject* gameObject ) {
 
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
-  doAddGameObject( gameObject );
+  doAddGameObject( gameObject, quadIndex );
 }
 
-void Scene::addGameObjectInNextFrame( GameObject* gameObject ) {
+void Scene::addGameObjectInNextFrame( GameObject* gameObject, const std::string& quadIndex ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
-  _gameObjectsToAddInNextFrame.push_back( gameObject );
+  _gameObjectsToAddInNextFrame.push_back( std::make_pair( gameObject, quadIndex ) );
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
@@ -266,6 +315,36 @@ void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
   _gameObjectsToRemoveInNextFrame.push_back( gameObject );
 }
 
+QuadTree* Scene::getQuadTree() const {
+  return _quadTree;
+}
+
+void Scene::enableQuadTree( const float spaceMinX, const float spaceMinY,
+                            const float spaceMaxX, const float spaceMaxY,
+                            const int level ) {
+  _quadTree = new QuadTree( spaceMinX, spaceMinY, spaceMaxX, spaceMaxY, level );
+}
+
+bool Scene::isQuadTreeEnabled() const {
+  return _quadTree != NULL;
+}
+
+void Scene::updateQuadTreeVisibility() const {
+  const auto camera = getMainCamera();
+  const auto cameraPosition = camera->getTransform()->getPosition();
+  const auto halfVisibleWidth = GameManager::get()->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
+
+  // TODO: calculate with camera scale
+
+  const auto cameraMinX = cameraPosition.getX() - halfVisibleWidth;
+  const auto cameraMinY = cameraPosition.getY() - halfVisibleHeight;
+  const auto cameraMaxX = cameraPosition.getX() + halfVisibleWidth;
+  const auto cameraMaxY = cameraPosition.getY() + halfVisibleHeight;
+
+  _quadTree->updateVisibility( cameraMinX, cameraMinY, cameraMaxX, cameraMaxY );
+}
+
 void Scene::lockGameObjects() {
   _gameObjectInLock = true;
 }
@@ -275,8 +354,8 @@ void Scene::unlockGameObjects() {
 }
 
 void Scene::updateAddAndRemoveGameObjects() {
-  for ( auto object : _gameObjectsToAddInNextFrame ) {
-    doAddGameObject( object );
+  for ( const auto it : _gameObjectsToAddInNextFrame ) {
+    doAddGameObject( it.first, it.second );
   }
   _gameObjectsToAddInNextFrame.clear();
 
@@ -286,20 +365,40 @@ void Scene::updateAddAndRemoveGameObjects() {
   _gameObjectsToRemoveInNextFrame.clear();
 }
 
-void Scene::doAddGameObject( GameObject* gameObject ) {
+void Scene::doAddGameObject( GameObject* gameObject, const std::string& quadIndex ) {
   _gameObjects.emplace( gameObject->getId(), gameObject );
+
+  if ( quadIndex.empty() ) {
+    _dynamicGameObjects.emplace( gameObject->getId(), gameObject );
+  }
+  else {
+    _quadTree->getNode( quadIndex )->addGameObject( gameObject );
+    _gameObjectToQuadNode.emplace( gameObject->getId(), quadIndex );
+  }
 }
 
 void Scene::doRemoveGameObject( GameObject* gameObject ) {
   _gameObjects.erase( gameObject->getId() );
+  _dynamicGameObjects.erase( gameObject->getId() );
+
+  const auto it = _gameObjectToQuadNode.find( gameObject->getId() );
+  if ( it != _gameObjectToQuadNode.cend() ) {
+    _quadTree->getNode( it->second )->removeGameObject( gameObject );
+    _gameObjectToQuadNode.erase( it );
+  }
 }
 
 const Vec2& Scene::getGravityAcceleration() const {
   return _gravityAcceleration;
 }
 
-void Scene::setGravityAcceleration( const Vec2& v ) {
-  _gravityAcceleration = v;
+void Scene::enablePhysics( const Vec2& gravity ) {
+  _physicsEnabled = true;
+  _gravityAcceleration = gravity;
+}
+
+bool Scene::isPhysicsEnabled() const {
+  return _physicsEnabled;
 }
 
 // =============================================

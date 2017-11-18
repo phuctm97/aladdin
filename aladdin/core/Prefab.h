@@ -20,23 +20,31 @@ public:
 
   const std::string& getName() const;
 
-  GameObject* instantiate( const std::string& name = "" ) const;
+  GameObject* instantiate( const std::string& name = "", const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( const Vec2& position, const std::string& name = "" ) const;
+  GameObject* instantiate( const Vec2& position,
+                           const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( const Vec2& position, const Vec2& scale, const std::string& name = "" ) const;
+  GameObject* instantiate( const Vec2& position, const Vec2& scale,
+                           const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
   GameObject* instantiate( const Vec2& position, const Vec2& scale, const float rotation,
-                           const std::string& name = "" ) const;
+                           const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( Scene* scene, const std::string& name = "" ) const;
+  GameObject* instantiate( Scene* scene, const std::string& name = "", const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( Scene* scene, const Vec2& position, const std::string& name = "" ) const;
+  GameObject* instantiate( Scene* scene, const Vec2& position, const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const std::string& name = "" ) const;
+  GameObject* instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
   GameObject* instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const float rotation,
-                           const std::string& name = "" ) const;
+                           const std::string& name = "",
+                           const std::string& quadIndex = "" ) const;
 
   GameObject* instantiate( GameObject* parentObject, const std::string& name = "" ) const;
 

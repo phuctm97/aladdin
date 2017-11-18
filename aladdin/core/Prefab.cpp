@@ -26,45 +26,48 @@ const std::string& Prefab::getName() const {
   return _name;
 }
 
-GameObject* Prefab::instantiate( const std::string& name ) const {
-  return instantiate( GameManager::get()->getRunningScene(), name );
+GameObject* Prefab::instantiate( const std::string& name, const std::string& quadIndex ) const {
+  return instantiate( GameManager::get()->getRunningScene(), name, quadIndex );
 }
 
-GameObject* Prefab::instantiate( const Vec2& position, const std::string& name ) const {
-  return instantiate( GameManager::get()->getRunningScene(), position, name );
+GameObject* Prefab::instantiate( const Vec2& position, const std::string& name, const std::string& quadIndex ) const {
+  return instantiate( GameManager::get()->getRunningScene(), position, name, quadIndex );
 }
 
-GameObject* Prefab::instantiate( const Vec2& position, const Vec2& scale, const std::string& name ) const {
-  return instantiate(GameManager::get()->getRunningScene(), position, scale, name);
+GameObject* Prefab::instantiate( const Vec2& position, const Vec2& scale, const std::string& name,
+                                 const std::string& quadIndex ) const {
+  return instantiate( GameManager::get()->getRunningScene(), position, scale, name, quadIndex );
 }
+
 GameObject* Prefab::instantiate( const Vec2& position, const Vec2& scale, const float rotation,
-  const std::string& name ) const {
-  return instantiate(GameManager::get()->getRunningScene(), position, scale, rotation, name);
+                                 const std::string& name, const std::string& quadIndex ) const {
+  return instantiate( GameManager::get()->getRunningScene(), position, scale, rotation, name, quadIndex );
 }
 
-GameObject* Prefab::instantiate( Scene* scene, const std::string& name ) const {
+GameObject* Prefab::instantiate( Scene* scene, const std::string& name, const std::string& quadIndex ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
-  const auto object = new GameObject( scene, name );
+  const auto object = new GameObject( scene, name, quadIndex );
   doInstantiate( object );
 
   return object;
 }
 
-GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const std::string& name ) const {
+GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const std::string& name,
+                                 const std::string& quadIndex ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
-  const auto object = instantiate( scene, name );
+  const auto object = instantiate( scene, name, quadIndex );
   object->getTransform()->setPosition( position );
 
   return object;
 }
 
-GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2& scale,
-                                 const std::string& name ) const {
+GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const std::string& name,
+                                 const std::string& quadIndex ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
-  const auto object = instantiate( scene, name );
+  const auto object = instantiate( scene, name, quadIndex );
   object->getTransform()->setPosition( position );
   object->getTransform()->setScale( scale );
 
@@ -72,10 +75,11 @@ GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2&
 }
 
 GameObject* Prefab::instantiate( Scene* scene, const Vec2& position, const Vec2& scale, const float rotation,
-                                 const std::string& name ) const {
+                                 const std::string& name,
+                                 const std::string& quadIndex ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
-  const auto object = instantiate( scene, name );
+  const auto object = instantiate( scene, name, quadIndex );
   object->getTransform()->setPosition( position );
   object->getTransform()->setScale( scale );
   object->getTransform()->setRotation( rotation );

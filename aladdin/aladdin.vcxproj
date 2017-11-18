@@ -155,6 +155,8 @@
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
     <ClInclude Include="core\GameResource.h" />
+    <ClInclude Include="core\QuadNode.h" />
+    <ClInclude Include="core\QuadTree.h" />
     <ClInclude Include="core\State.h" />
     <ClInclude Include="core\Mat4.h" />
     <ClInclude Include="core\MessageArgs.h" />
@@ -176,6 +178,7 @@
     <ClInclude Include="extra\AnimationEditor.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
+    <ClInclude Include="extra\QuadTreeRenderer.h" />
     <ClInclude Include="extra\RectRenderer.h" />
     <ClInclude Include="extra\Timer.h" />
     <ClInclude Include="input\Input.h" />
@@ -221,6 +224,8 @@
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
     <ClCompile Include="core\GameResource.cpp" />
+    <ClCompile Include="core\QuadNode.cpp" />
+    <ClCompile Include="core\QuadTree.cpp" />
     <ClCompile Include="core\State.cpp" />
     <ClCompile Include="core\Mat4.cpp" />
     <ClCompile Include="core\MessageArgs.cpp" />
@@ -239,6 +244,7 @@
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
+    <ClCompile Include="extra\QuadTreeRenderer.cpp" />
     <ClCompile Include="extra\RectRenderer.cpp" />
     <ClCompile Include="extra\Timer.cpp" />
     <ClCompile Include="input\Input.cpp" />
