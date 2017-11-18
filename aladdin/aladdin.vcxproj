@@ -175,6 +175,7 @@
     <ClInclude Include="core\StringMessageArgs.h" />
     <ClInclude Include="core\Transform.h" />
     <ClInclude Include="core\Vec2.h" />
+    <ClInclude Include="extra\Action.h" />
     <ClInclude Include="extra\AnimationEditor.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="core\StringMessageArgs.cpp" />
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
+    <ClCompile Include="extra\Action.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
     <ClCompile Include="extra\QuadTreeRenderer.cpp" />
     <ClCompile Include="extra\RectRenderer.cpp" />

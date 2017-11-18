@@ -80,16 +80,7 @@ void Scene::onPreInitialize() { }
 void Scene::onPostInitialize() {}
 
 void Scene::updatePhysics( const float delta ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( !isPhysicsEnabled() ) return;
-
-  // update to release in next frame
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isPhysicsEnabled() ) return;
 
   lockGameObjects();
 
@@ -104,8 +95,6 @@ void Scene::updatePhysics( const float delta ) {
     }
   }
   else {
-    updateQuadTreeVisibility();
-
     for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
       for ( const auto object : visibleNode->getGameObjects() ) {
         object->updatePhysics( delta );
@@ -128,19 +117,7 @@ void Scene::onPrePhysicsUpdate( const float delta ) {}
 void Scene::onPostPhysicsUpdate( const float delta ) {}
 
 void Scene::update( const float delta ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  // update to release in next frame
-  if ( _toReleaseInNextFrame ) {
-    release();
-    _toReleaseInNextFrame = false;
-    return;
-  }
-
-  // update actions
-  updateAddAndRemoveGameObjects();
-
-  if ( !isInitialized() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() ) return;
 
   lockGameObjects();
 
@@ -261,6 +238,53 @@ void Scene::onPreRelease() {}
 
 void Scene::onPostRelease() {}
 
+void Scene::resolveLockedTasks() {
+  if ( isReleasing() || isReleased() ) return;
+
+  // lazy initialization
+  if ( !isInitialized() ) {
+    initialize();
+  }
+
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  // update locked actions
+  updateAddAndRemoveGameObjects();
+
+  // update quad tree
+  updateQuadTreeVisibility();
+
+  // client
+  onResolveLockedTasks();
+
+  // update game object locked tasks
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->resolveLockedTasks();
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->resolveLockedTasks();
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->resolveLockedTasks();
+    }
+  }
+}
+
+void Scene::onResolveLockedTasks() { }
+
 // ==================================================
 // Objects Management
 // ==================================================
@@ -306,13 +330,13 @@ void Scene::removeGameObject( GameObject* gameObject ) {
 
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
-  doRemoveGameObject( gameObject );
+  doRemoveGameObject( gameObject->getId() );
 }
 
 void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
   if ( isReleasing() || isReleased() ) return;
   if ( gameObject == NULL ) return;
-  _gameObjectsToRemoveInNextFrame.push_back( gameObject );
+  _gameObjectsToRemoveInNextFrame.push_back( gameObject->getId() );
 }
 
 QuadTree* Scene::getQuadTree() const {
@@ -359,8 +383,8 @@ void Scene::updateAddAndRemoveGameObjects() {
   }
   _gameObjectsToAddInNextFrame.clear();
 
-  for ( auto object : _gameObjectsToRemoveInNextFrame ) {
-    doRemoveGameObject( object );
+  for ( auto objectId : _gameObjectsToRemoveInNextFrame ) {
+    doRemoveGameObject( objectId );
   }
   _gameObjectsToRemoveInNextFrame.clear();
 }
@@ -377,15 +401,18 @@ void Scene::doAddGameObject( GameObject* gameObject, const std::string& quadInde
   }
 }
 
-void Scene::doRemoveGameObject( GameObject* gameObject ) {
-  _gameObjects.erase( gameObject->getId() );
-  _dynamicGameObjects.erase( gameObject->getId() );
+void Scene::doRemoveGameObject( const long id ) {
+  const auto gameObjectIt = _gameObjects.find( id );
+  if ( gameObjectIt == _gameObjects.cend() ) return;
 
-  const auto it = _gameObjectToQuadNode.find( gameObject->getId() );
-  if ( it != _gameObjectToQuadNode.cend() ) {
-    _quadTree->getNode( it->second )->removeGameObject( gameObject );
-    _gameObjectToQuadNode.erase( it );
+  const auto gameObjectToQuadNodeIt = _gameObjectToQuadNode.find( id );
+  if ( gameObjectToQuadNodeIt != _gameObjectToQuadNode.cend() ) {
+    _quadTree->getNode( gameObjectToQuadNodeIt->second )->removeGameObject( gameObjectIt->second );
+    _gameObjectToQuadNode.erase( gameObjectToQuadNodeIt );
   }
+
+  _gameObjects.erase( id );
+  _dynamicGameObjects.erase( id );
 }
 
 const Vec2& Scene::getGravityAcceleration() const {

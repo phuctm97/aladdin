@@ -117,6 +117,11 @@ protected:
    */
   virtual void onPostRelease();
 
+public:
+  void resolveLockedTasks();
+
+  virtual void onResolveLockedTasks();
+
   // ==================================================
   // Objects Management
   // ==================================================
@@ -124,7 +129,7 @@ private:
   std::unordered_map<long, GameObject*> _gameObjects;
   bool _gameObjectInLock;
   std::vector<std::pair<GameObject*, std::string>> _gameObjectsToAddInNextFrame;
-  std::vector<GameObject*> _gameObjectsToRemoveInNextFrame;
+  std::vector<long> _gameObjectsToRemoveInNextFrame;
 
   QuadTree* _quadTree;
   std::unordered_map<long, GameObject*> _dynamicGameObjects;
@@ -170,7 +175,7 @@ private:
 
   void doAddGameObject( GameObject* gameObject, const std::string& quadIndex = "" );
 
-  void doRemoveGameObject( GameObject* gameObject );
+  void doRemoveGameObject( const long id );
 
   // ================================================
   // Physics

@@ -86,11 +86,11 @@ int Application::getResolutionHeight() const {
   return _resolutionHeight;
 }
 
-  bool Application::isFullScreen() const {
+bool Application::isFullScreen() const {
   return _fullScreen;
 }
 
-  void Application::setTitle( const std::string& title ) {
+void Application::setTitle( const std::string& title ) {
   // can only be set before init process
   ALA_ASSERT((!isInitializing()) && (!isInitialized()) && (!isReleased()) && (!isReleasing()));
   _title = title;
@@ -123,7 +123,7 @@ float Application::getAnimationInterval() const {
 }
 
 int Application::getFps() const {
- return static_cast<int>(1.0f / getAnimationInterval());
+  return static_cast<int>(1.0f / getAnimationInterval());
 }
 
 void Application::registerResourceInitializer( ResourceInitializer* initializer ) {
@@ -147,18 +147,25 @@ void Application::updateInput() {
   Input::get()->update();
 }
 
-void Application::updatePhysics ( const float delta )
-{
+void Application::resolveLockedTasks() {
   // update running scene
   auto runningScene = GameManager::get()->getRunningScene();
-  if (runningScene) {
-    runningScene->updatePhysics(delta);
+  if ( runningScene ) {
+    runningScene->resolveLockedTasks();
   }
-
-  PhysicsManager::get()->update(delta);
 }
 
-  void Application::updateGame( const float delta ) {
+void Application::updatePhysics( const float delta ) {
+  // update running scene
+  auto runningScene = GameManager::get()->getRunningScene();
+  if ( runningScene ) {
+    runningScene->updatePhysics( delta );
+  }
+
+  PhysicsManager::get()->update( delta );
+}
+
+void Application::updateGame( const float delta ) {
   // update game manager
   GameManager::get()->update( delta );
 
@@ -182,7 +189,7 @@ void Application::renderGraphics() {
 }
 
 void Application::backgroundToForeground() {
-  _logger.info("On Background to Foreground");
+  _logger.info( "On Background to Foreground" );
 
   Input::get()->onBackgroundToForeground();
   Audio::get()->onBackgroundToForeground();
@@ -320,9 +327,7 @@ void Application::releaseComponents() {
   physicsManager->release();
 }
 
-void Application::onBackgroundToForeground() {
-  
-}
+void Application::onBackgroundToForeground() { }
 
 // ===================================================
 // Platform specific
@@ -476,8 +481,11 @@ void Application::processGame() {
   // update input
   updateInput();
 
+  // do locked tasks
+  resolveLockedTasks();
+
   // update physics
-  updatePhysics(_delta);
+  updatePhysics( _delta );
 
   // update game
   updateGame( _delta );

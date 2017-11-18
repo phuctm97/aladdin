@@ -247,6 +247,9 @@
     <ClInclude Include="extra\QuadTreeRenderer.h">
       <Filter>extra</Filter>
     </ClInclude>
+    <ClInclude Include="extra\Action.h">
+      <Filter>extra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -424,6 +427,9 @@
       <Filter>core</Filter>
     </ClCompile>
     <ClCompile Include="extra\QuadTreeRenderer.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\Action.cpp">
       <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>

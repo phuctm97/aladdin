@@ -97,7 +97,6 @@ GameObject* GameObject::setActive( const bool val ) {
 
 bool GameObject::isSelfInitialize() const {
   return _selfInitialize;
-  return this;
 }
 
 GameObject* GameObject::setSelfInitialize( const bool val ) {
@@ -140,21 +139,7 @@ void GameObject::initialize() {
 }
 
 void GameObject::updatePhysics( const float delta ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  // update to release in next frame
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    if ( isSelfInitialize() ) {
-      initialize();
-    }
-    else return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -167,26 +152,7 @@ void GameObject::updatePhysics( const float delta ) {
 }
 
 void GameObject::update( const float delta ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  // update to release in next frame
-  if ( _toReleaseInNextFrame ) {
-    release();
-    _toReleaseInNextFrame = false;
-    return;
-  }
-
-  // update actions
-  updateAddAndRemoveComponentInNextFrame();
-
-  if ( !isInitialized() ) {
-    if ( isSelfInitialize() ) {
-      initialize();
-    }
-    else return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -199,17 +165,7 @@ void GameObject::update( const float delta ) {
 }
 
 void GameObject::onCollisionEnter( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -221,17 +177,7 @@ void GameObject::onCollisionEnter( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::onCollisionStay( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -243,17 +189,7 @@ void GameObject::onCollisionStay( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::onCollisionExit( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -265,17 +201,7 @@ void GameObject::onCollisionExit( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::onTriggerEnter( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -287,17 +213,7 @@ void GameObject::onTriggerEnter( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::onTriggerStay( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
 
@@ -308,17 +224,7 @@ void GameObject::onTriggerStay( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::onTriggerExit( const CollisionInfo& collisionInfo ) {
-  if ( isReleasing() || isReleased() ) return;
-
-  if ( _toReleaseInNextFrame ) {
-    return;
-  }
-
-  if ( !isInitialized() ) {
-    return;
-  }
-
-  if ( !isActive() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
   lockComponents();
   for ( auto component : _components ) {
@@ -328,7 +234,7 @@ void GameObject::onTriggerExit( const CollisionInfo& collisionInfo ) {
 }
 
 void GameObject::render() {
-  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
+  if ( isReleasing() || isReleased() || !isInitialized() ) return;
 
   lockComponents();
 
@@ -382,6 +288,38 @@ void GameObject::releaseInNextFrame() {
   _toReleaseInNextFrame = true;
 }
 
+void GameObject::resolveLockedTasks() {
+  if ( isReleasing() || isReleased() ) return;
+
+  // lazy init
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
+
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  // update actions
+  updateAddAndRemoveComponentInNextFrame();
+
+  // client
+  onResolveLockedTasks();
+
+  // update components
+  for ( const auto component : _components ) {
+    component->resolveLockedTasks();
+  }
+}
+
+void GameObject::onResolveLockedTasks() { }
+
 // ============================================================
 // Components
 // ============================================================
@@ -417,14 +355,12 @@ void GameObject::removeComponent( GameObjectComponent* component ) {
 
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
-  ALA_ASSERT(isDefaultComponents(component));
   doRemoveComponent( component );
 }
 
 void GameObject::removeComponentInNextFrame( GameObjectComponent* component ) {
   if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
-  ALA_ASSERT(isDefaultComponents(component));
   _componentsToRemoveInNextFrame.push_back( component );
 }
 

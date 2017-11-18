@@ -54,7 +54,7 @@ public:
 
   Transform* setRotation( const float rotation );
 
-	Vec2 getWorldPosition();
+  Vec2 getWorldPosition();
 
   // =======================================================
   // Children management
@@ -103,10 +103,10 @@ private:
 
 protected:
   bool onPreRelease() override;
-  
+
   void onRelease() override;
 
-  void onPreUpdate( const float delta ) override;
+  void onResolvedLockedTasks() override;
 
   void onUpdate( const float delta ) override;
 

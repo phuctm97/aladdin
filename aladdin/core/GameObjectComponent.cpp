@@ -17,6 +17,7 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
   : _name( name ),
     _gameObject( gameObject ),
     _active( false ),
+    _selfInitialize( true ),
     _toReleaseInNextFrame( false ) {
   // check initial state
   ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
@@ -89,46 +90,48 @@ void GameObjectComponent::initialize() {
   setActive( true );
 }
 
-void GameObjectComponent::updatePhysics ( const float delta )
-{
-  if (isReleasing() || isReleased()) return;
-
-  // update to release in next frame
-  if (_toReleaseInNextFrame) {
-    return;
-  }
-
-  onPrePhysicsUpdate(delta);
-
-  if (!isInitialized()) {
-    if (isSelfInitialize()) {
-      initialize();
-    }
-    else return;
-  }
-
-  if (!isActive()) return;
-
-  // inheritance update
-  onPhysicsUpdate(delta);
-}
-
 void GameObjectComponent::onInitialize() {}
 
 bool GameObjectComponent::onPreInitialize() {
   return true;
 }
 
-void GameObjectComponent::onPhysicsUpdate ( const float delta )
-{
+void GameObjectComponent::updatePhysics( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  // inheritance update
+  onPhysicsUpdate( delta );
 }
 
-void GameObjectComponent::onPrePhysicsUpdate ( const float delta )
-{
-}
+void GameObjectComponent::onPhysicsUpdate( const float delta ) {}
 
 void GameObjectComponent::update( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  // inheritance update
+  onUpdate( delta );
+}
+
+void GameObjectComponent::onUpdate( const float delta ) {}
+
+void GameObjectComponent::onRender() {}
+
+void GameObjectComponent::render() {
+  if ( isReleasing() || isReleased() || !isInitialized() ) return;
+
+  onRender();
+}
+
+void GameObjectComponent::resolveLockedTasks() {
   if ( isReleasing() || isReleased() ) return;
+
+  // lazy init
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
 
   // update to release in next frame
   if ( _toReleaseInNextFrame ) {
@@ -137,31 +140,7 @@ void GameObjectComponent::update( const float delta ) {
     return;
   }
 
-  onPreUpdate( delta );
-
-  if ( !isInitialized() ) {
-    if ( isSelfInitialize() ) {
-      initialize();
-    }
-    else return;
-  }
-
-  if ( !isActive() ) return;
-
-  // inheritance update
-  onUpdate( delta );
-}
-
-void GameObjectComponent::onUpdate( const float delta ) {}
-
-void GameObjectComponent::onPreUpdate( const float delta ) {}
-
-void GameObjectComponent::onRender() {}
-
-void GameObjectComponent::render() {
-  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
-
-  onRender();
+  onResolvedLockedTasks();
 }
 
 void GameObjectComponent::release() {
@@ -197,31 +176,21 @@ bool GameObjectComponent::onPreRelease() {
   return true;
 }
 
-void GameObjectComponent::onCollisionEnter(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onResolvedLockedTasks() {}
 
-void GameObjectComponent::onCollisionStay(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onCollisionEnter( const CollisionInfo& collision ) {}
 
-void GameObjectComponent::onCollisionExit(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onCollisionStay( const CollisionInfo& collision ) {}
 
-void GameObjectComponent::onTriggerEnter(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onCollisionExit( const CollisionInfo& collision ) {}
 
-void GameObjectComponent::onTriggerStay(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onTriggerEnter( const CollisionInfo& collision ) {}
 
-void GameObjectComponent::onTriggerExit(const CollisionInfo& collision)
-{
-}
+void GameObjectComponent::onTriggerStay( const CollisionInfo& collision ) {}
 
-	// ===========================================================
+void GameObjectComponent::onTriggerExit( const CollisionInfo& collision ) {}
+
+// ===========================================================
 // Debug memory allocation
 // ===========================================================
 long GameObjectComponent::TOTAL_COMPONENTS_CREATED( 0 );
