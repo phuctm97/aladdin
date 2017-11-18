@@ -14,8 +14,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, Sprite* sprite, const st
     _sprite( sprite ),
     _backColor( 255, 255, 255 ),
     _zOrder( 0 ),
-    _offset(0, 0)
-{
+    _offset(0, 0),
+    _visible( true ) {
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
   _srcRect.setSize(_sprite->getContentSize());
 }
@@ -25,7 +25,8 @@ SpriteRenderer::SpriteRenderer( GameObject* gameObject, const std::string& sprit
     _sprite( NULL ),
     _backColor( 255, 255, 255 ),
     _zOrder( 0 ),
-    _offset(0, 0) {
+    _offset(0, 0),
+    _visible(true) {
   _sprite = static_cast<Sprite*>(GameManager::get()->getResource( spriteResourceName ));
 
   _srcRect.setTopLeft(Vec2(0.f, 0.f));
@@ -83,12 +84,16 @@ void SpriteRenderer::setSourceRect ( const Rect& rect )
 const Vec2& SpriteRenderer::getOffset() const { return _offset; }
 
 void SpriteRenderer::setOffset( const Vec2& offset ) { _offset = offset; }
+bool SpriteRenderer::isVisible() const { return _visible; }
+void SpriteRenderer::setVisible( const bool visible ) { _visible = visible; }
 
 void SpriteRenderer::onInitialize ( )
 {
 }
 
 void SpriteRenderer::onRender() {
+  if (!_visible) return;
+
   const auto transform = getGameObject()->getTransform();
   const auto worldZOrder = calculateWorldZOrder();
 
