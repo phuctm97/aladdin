@@ -206,4 +206,15 @@
     <sprite x="504" y="810" w="33" h="92" />
     <sprite x="564" y="812" w="33" h="92" />
   </Animation>
+  <Animation name="apple_explode" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="373" y="24" w="6" h="6" offsetX="0" offsetY="0" />
+    <sprite x="394" y="23" w="6" h="9" offsetX="0" offsetY="0" />
+    <sprite x="414" y="18" w="19" h="17" offsetX="0" offsetY="0" />
+    <sprite x="444" y="16" w="28" h="21" offsetX="0" offsetY="0" />
+    <sprite x="485" y="14" w="30" h="24" offsetX="0" offsetY="0" />
+    <sprite x="532" y="13" w="29" h="26" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="apple" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="373" y="24" w="6" h="6" offsetX="0" offsetY="0" />
+  </Animation>
 </Animations>

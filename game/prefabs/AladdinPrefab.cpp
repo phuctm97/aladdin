@@ -16,12 +16,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
-  //    // For animationEditor
-  //    const auto animationEditor = new AnimationEditor( object, "stop" );
-  //    object->setLayer( "Character" );
-  //    object->getTransform()->setPosition( -80, -40 );
-  //    return;
-  //    // For animationEditor
+      /* For animationEditor
+      const auto animationEditor = new AnimationEditor( object, "apple" );
+      object->setLayer( "Character" );
+      object->getTransform()->setPosition( -80, -40 );
+      return;
+       For animationEditor*/
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
@@ -213,13 +213,29 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "attack_3" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+			   timer->start(0.1f);
+             }, [=](float)
+			 {
+				 if (timer->isDone())
+				 {
+					 gameManager->getPrefab("throwable_apple")->instantiate(transform->getPosition() + Vec2(collider->getSize().getWidth() / 2, collider->getSize().getHeight() / 2), "throwable_apple");
+					 timer->start(5.0f);
+				 }
+			 }, NULL);
 
   new State( stateManager, "attack_3_right",
              [=] {
                animator->setAction( "attack_3" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+			   timer->start(0.1f);
+			  }, [=](float)
+			  {
+				if(timer->isDone())
+				{
+					gameManager->getPrefab("throwable_apple")->instantiate(transform->getPosition()+ Vec2(collider->getSize().getWidth()/2, collider->getSize().getHeight()/2), "throwable_apple");
+					timer->start(5.0f);
+				}
+			  }, NULL);
 
   new State( stateManager, "sit_left",
              [=] {

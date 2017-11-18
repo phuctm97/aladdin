@@ -125,9 +125,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
+    <ClCompile Include="prefabs\Throwable_applePrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\Throwable_appleController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -141,9 +143,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\BackgroundPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
+    <ClInclude Include="prefabs\Throwable_applePrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\Throwable_appleController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
