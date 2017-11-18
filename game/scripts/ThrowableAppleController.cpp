@@ -18,3 +18,8 @@ void ThrowableAppleController::onTriggerEnter( const ala::CollisionInfo& collisi
 }
 
 void ThrowableAppleController::resetCollidedWithGround() { _collidedWithGround = false; }
+
+void ThrowableAppleController::chekDirectionLeft()
+{
+	direction = true;
+}

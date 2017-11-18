@@ -1,5 +1,6 @@
 #include "AladdinPrefab.h"
 #include "../scripts/AladdinController.h"
+#include "../scripts/ThrowableAppleController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -216,9 +217,10 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                timer->start( 0.1f );
              }, [=]( float ) {
                if ( timer->isDone() ) {
-                 gameManager->getPrefab( "Throwable Apple" )->instantiate(
+              const auto apple=   gameManager->getPrefab( "Throwable Apple" )->instantiate(
                    transform->getPosition() + Vec2( collider->getSize().getWidth() / 2,
                                                     collider->getSize().getHeight() / 2 ) );
+			  //apple->getComponentT<ThrowableAppleController>()->chekDirectionLeft();
                  timer->start( 5.0f );
                }
              }, NULL );
