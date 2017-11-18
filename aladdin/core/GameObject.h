@@ -85,6 +85,11 @@ public:
 
   void releaseInNextFrame();
 
+public:
+  void resolveLockedTasks();
+
+  virtual void onResolveLockedTasks();
+
   // ========================================================
   // Components
   // ========================================================
