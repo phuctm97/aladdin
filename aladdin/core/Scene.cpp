@@ -263,6 +263,8 @@ void Scene::resolveLockedTasks() {
   onResolveLockedTasks();
 
   // update game object locked tasks
+  lockGameObjects();
+
   if ( !isQuadTreeEnabled() ) {
     for ( const auto it : _gameObjects ) {
       auto object = it.second;
@@ -281,6 +283,8 @@ void Scene::resolveLockedTasks() {
       object->resolveLockedTasks();
     }
   }
+
+  unlockGameObjects();
 }
 
 void Scene::onResolveLockedTasks() { }
