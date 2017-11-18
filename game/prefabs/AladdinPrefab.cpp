@@ -307,13 +307,31 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "sit_attack_2" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+			   timer->start(0.1f);
+             }, [=](float) {
+				 if (timer->isDone()) {
+					 const auto apple = gameManager->getPrefab("Throwable Apple")->instantiate(
+						 transform->getPosition() + Vec2(-collider->getSize().getWidth() / 2,
+							 0));
+					 ((ThrowableAppleController*)apple->getComponent("controller"))->chekDirectionLeft('L');
+					 timer->start(5.0f);
+				 }
+			 }, NULL);
 
   new State( stateManager, "sit_attack_2_right",
              [=] {
                animator->setAction( "sit_attack_2" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+			   timer->start(0.1f);
+             }, [=](float) {
+				 if (timer->isDone()) {
+					 const auto apple = gameManager->getPrefab("Throwable Apple")->instantiate(
+						 transform->getPosition() + Vec2(collider->getSize().getWidth() / 2,
+							 0));
+					 ((ThrowableAppleController*)apple->getComponent("controller"))->chekDirectionLeft('R');
+					 timer->start(5.0f);
+				 }
+			 }, NULL);
 
   new State( stateManager, "run_left",
              [=] {
