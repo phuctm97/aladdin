@@ -17,7 +17,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
       //// For animationEditor
-      //const auto animationEditor = new AnimationEditor( object, "run_to_jump" );
+      //const auto animationEditor = new AnimationEditor( object, "run_jump_to_idle_1" );
       //object->setLayer( "Character" );
       //object->getTransform()->setPosition( -80, -40 );
       //return;
@@ -42,7 +42,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 			   if (stateManager->getPreviousStateName() == "jump_left") {
 				   animator->setAction("fall_to_idle_1");
 			   }
-			   else if (stateManager->getPreviousStateName() == "run_to_jump") {
+			   else if (stateManager->getPreviousStateName() == "run_left_to_jump") {
 				   animator->setAction("run_jump_to_idle_1");
 			   }
 			   else if ( stateManager->getPreviousStateName() == "face_up_left" ) {
@@ -55,7 +55,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  animator->setAction( "idle_1" );
                  timer->start( 0.5f );
                }
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               //transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
@@ -113,7 +113,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 		   	   if (stateManager->getPreviousStateName() == "jump_right") {
 				   animator->setAction("fall_to_idle_1");
 			   }
-			   else if (stateManager->getPreviousStateName() == "run_to_jump") {
+			   else if (stateManager->getPreviousStateName() == "run_right_to_jump") {
 				   animator->setAction("run_jump_to_idle_1");
 			   }
                else if ( stateManager->getPreviousStateName() == "face_up_right" ) {
@@ -126,7 +126,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  animator->setAction( "idle_1" );
                  timer->start( 0.5f );
                }
-               transform->setScaleX( ABS(transform->getScale().getX()) );
+               //transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              },
              [=]( float dt ) {
@@ -410,7 +410,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 				animator->setAction("run_to_jump");
 				//transform->setScaleX(-ABS(transform->getScale().getX()));
 				controller->resetCollidedWithGround();
-				body->addImpulse(Vec2(0, 2500000.0f));
+				body->addImpulse(Vec2(0, 2650000.0f));
 			},
 			[=](float dt) {
 				if (body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump")
@@ -425,12 +425,14 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 					transform->setScaleX(ABS(transform->getScale().getX()));
 					body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
 				}
+				if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
+					body->setVelocity(Vec2(0, body->getVelocity().getY()));
 			}, NULL);
   new State(stateManager, "run_right_to_jump",
 	  [=] {
 	  animator->setAction("run_to_jump");
 	  controller->resetCollidedWithGround();
-	  body->addImpulse(Vec2(0, 2500000.0f));
+	  body->addImpulse(Vec2(0, 2650000.0f));
   },
 	  [=](float dt) {
 	  if (body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump")
@@ -445,6 +447,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
 		  transform->setScaleX(-ABS(transform->getScale().getX()));
 	  }
+	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
+		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
   }, NULL);
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
