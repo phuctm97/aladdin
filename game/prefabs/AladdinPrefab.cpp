@@ -218,9 +218,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              }, [=]( float ) {
                if ( timer->isDone() ) {
               const auto apple=   gameManager->getPrefab( "Throwable Apple" )->instantiate(
-                   transform->getPosition() + Vec2( collider->getSize().getWidth() / 2,
+                   transform->getPosition() + Vec2( -collider->getSize().getWidth() / 2,
                                                     collider->getSize().getHeight() / 2 ) );
-			  //apple->getComponentT<ThrowableAppleController>()->chekDirectionLeft();
+			  ((ThrowableAppleController*)apple->getComponent("controller"))->chekDirectionLeft('L');
                  timer->start( 5.0f );
                }
              }, NULL );
@@ -232,9 +232,10 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                timer->start( 0.1f );
              }, [=]( float ) {
                if ( timer->isDone() ) {
-                 gameManager->getPrefab( "Throwable Apple" )->instantiate(
+               const auto apple =  gameManager->getPrefab( "Throwable Apple" )->instantiate(
                    transform->getPosition() + Vec2( collider->getSize().getWidth() / 2,
                                                     collider->getSize().getHeight() / 2 ) );
+			   ((ThrowableAppleController*)apple->getComponent("controller"))->chekDirectionLeft('R');
                  timer->start( 5.0f );
                }
              }, NULL );

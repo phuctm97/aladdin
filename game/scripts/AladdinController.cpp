@@ -13,7 +13,7 @@ void AladdinController::resetCollidedWithGround() { _collidedWithGround = false;
 void AladdinController::onUpdate( const float delta ) {}
 
 void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getGameObject()->getName() == "Ground" || collision.getColliderA()->getGameObject()->getName() == "Ground" ) {
+  if ( collision.getColliderA()->getGameObject()->getName() == "Ground" || collision.getColliderB()->getGameObject()->getName() == "Ground" ) {
     _collidedWithGround = true;
   }
 }
