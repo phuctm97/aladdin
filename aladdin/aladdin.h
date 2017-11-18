@@ -57,5 +57,12 @@
 #include "extra/Timer.h"
 #include "extra/AnimationEditor.h"
 #include "extra/RectRenderer.h"
+#include "extra/Action.h"
+#include "extra/ActionManager.h"
+#include "extra/Blink.h"
+#include "extra/MoveBy.h"
+#include "extra/RotateBy.h"
+#include "extra/Sequence.h"
+#include "extra/Repeat.h"
 
 #endif //!__ALADDIN_H__

@@ -17,8 +17,8 @@ private:
   Color _backColor;
   int _zOrder;
   Vec2 _offset;
-
   Rect _srcRect;
+  bool _visible;
 
 public:
   SpriteRenderer( GameObject* gameObject, Sprite* sprite = NULL, const std::string& name = "" );
@@ -43,11 +43,15 @@ public:
 
   const Rect& getSourceRect() const;
 
-  void setSourceRect(const Rect& rect);
+  void setSourceRect( const Rect& rect );
 
   const Vec2& getOffset() const;
 
   void setOffset( const Vec2& offset );
+
+  bool isVisible() const;
+
+  void setVisible( const bool visible );
 protected:
   void onInitialize() override;
   void onRender() override;
