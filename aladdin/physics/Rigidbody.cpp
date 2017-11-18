@@ -136,15 +136,20 @@ int Rigidbody::getBodyType ( ) const
   return _bodyType;
 }
 
-float Rigidbody::getMass ( ) const
+float Rigidbody::getMass() const
 {
-	const auto collider = getGameObject()->getComponentT<Collider>();
-	if(collider == nullptr)
-	{
-		return 0;
-	}
+  const auto colliders = getGameObject()->getAllComponentTs<Collider>();
 
-	return collider->getSize().getArea() * _material.getDensity();
+  if (colliders.empty())
+  {
+    return 0;
+  }
+
+  float mass = 0;
+  for (const auto collider : colliders) {
+    mass += collider->getSize().getArea() * _material.getDensity();
+  }
+  return mass;
 }
 
 float Rigidbody::getInverseMass() const

@@ -185,7 +185,7 @@ std::vector<T*> GameObject::getAllComponentTs() const {
 
   for ( GameObjectComponent* component : _components ) {
     if ( component != NULL && ALA_IS_INSTANCE_OF( component, T) ) {
-      ret.emplace_back( component );
+      ret.emplace_back( static_cast<T*>(component) );
     }
   }
   return ret;

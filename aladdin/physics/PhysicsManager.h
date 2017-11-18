@@ -16,7 +16,7 @@ private:
   std::vector<Rigidbody*> _rigidbodies;
   std::vector<Collider*> _colliders;
 
-	bool getCollisionInfo(GameObject* a, GameObject* b, CollisionInfo& collisionInfo) const;
+  bool getCollisionInfo(Collider* a, Collider* b, CollisionInfo& collisionInfo) const;
 
 	std::vector<CollisionInfo> _lastCollidingPairs;
 	std::vector<CollisionInfo> _currentCollidingPairs;
