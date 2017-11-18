@@ -16,7 +16,7 @@ void ExperimentalScene::onPreInitialize() {
   // configurations
   enableQuadTree( -gameManager->getVisibleWidth() / 2, -gameManager->getVisibleHeight() / 2,
                   -gameManager->getVisibleWidth() / 2 + 4771, -gameManager->getVisibleHeight() / 2 + 688 );
-  enablePhysics( Vec2( 0, -400.0f ) );
+  enablePhysics( Vec2( 0, -500.0f ) );
 
   new CameraController( getMainCamera() );
 
@@ -25,7 +25,6 @@ void ExperimentalScene::onPreInitialize() {
   gameManager->getPrefab( "Foreground" )->instantiate();
   gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
-  //gameManager->getPrefab("throwable_apple")->instantiate("throwable_apple");
 }
 
 void ExperimentalScene::onPreRelease() {}
