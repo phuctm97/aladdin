@@ -25,6 +25,7 @@ void ExperimentalScene::onPreInitialize() {
   gameManager->getPrefab( "Foreground" )->instantiate();
   gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
+  //gameManager->getPrefab("throwable_apple")->instantiate("throwable_apple");
 }
 
 void ExperimentalScene::onPreRelease() {}
