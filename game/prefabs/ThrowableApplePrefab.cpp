@@ -20,7 +20,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "apple" );
 
-  const auto controller = new ThrowableAppleController( object );
+  const auto controller = new ThrowableAppleController( object, "controller" );
   const auto transform = object->getTransform();
 
   // configurations
@@ -31,21 +31,28 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "apple" );
                controller->resetCollidedWithGround();
-               transform->setScaleX( ABS(transform->getScale().getX()) );
-               body->addImpulse( Vec2( 0, 7000.0f ) );
-               body->setVelocity( Vec2( throwVelocity, body->getVelocity().getY() ) );
+				 if(controller->getDirection()=='L')
+				 {
+					 transform->setScaleX(-ABS(transform->getScale().getX()));
+					 body->addImpulse(Vec2(-20000.0f, 1000.0f));
+				 }
+				 else
+				 {
+					 transform->setScaleX(ABS(transform->getScale().getX()));
+					 body->addImpulse(Vec2(20000.0f, 1000.0f));
+				 } 
              }, NULL, NULL );
   new State( stateManager, "apple_explode",
              [=] {
                animator->setAction( "apple_explode" );
                body->setVelocity( Vec2( 0, 0 ) );
                body->setGravityScale( 0 );
-             }, NULL
-             , [=] {
-               if ( !animator->isPlaying() ) {
-                 object->release();
-               }
-             } );
+             }, [=](float dt) {
+				 if (!animator->isPlaying()) {
+					 object->release();
+				 }
+			 }
+             ,  NULL);
 
   new StateTransition( stateManager, "apple", "apple_explode", [=] {
     return controller->isCollidedWithGround();
