@@ -14,7 +14,7 @@ void ExperimentalScene::onPreInitialize() {
   const auto gameManager = GameManager::get();
 
   // configurations
-  setGravityAcceleration( Vec2( 0, -400.0f ) );
+  setGravityAcceleration( Vec2( 0, -500.0f ) );
   new CameraController( getMainCamera() );
 
   // initial objects

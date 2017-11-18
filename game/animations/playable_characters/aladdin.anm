@@ -200,10 +200,41 @@
     <sprite x="137" y="829" w="53" h="60" />
     <sprite x="203" y="824" w="53" h="68" />
     <sprite x="269" y="820" w="50" h="73" />
-    <sprite x="336" y="829" w="37" h="65" />
-    <sprite x="390" y="818" w="34" h="78" />
-    <sprite x="448" y="808" w="33" h="92" />
-    <sprite x="504" y="810" w="33" h="92" />
-    <sprite x="564" y="812" w="33" h="92" />
   </Animation>
+
+  <Animation name="fall" imagePath="aladdin.png" interval="0.25" isLoop="false">
+    <sprite x="336" y="829" w="37" h="65" offsetX="0" offsetY="0" />
+    <sprite x="390" y="818" w="34" h="78" offsetX="0" offsetY="0" />
+    <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="0" />
+  </Animation>
+  
+  <Animation name="fall_to_idle_1" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="560" y="719" w="58" h="43" offsetX="-1.5" offsetY="-3" />
+    <sprite x="560" y="719" w="58" h="43" offsetX="-1.5" offsetY="-3" />
+    <sprite x="3" y="9" w="36" h="49" offsetX="0" offsetY="0" />
+    <sprite x="3" y="9" w="36" h="49" offsetX="0" offsetY="0" />
+    <sprite x="3" y="9" w="36" h="49" offsetX="0" offsetY="0" />
+  </Animation>
+
+  <Animation name="run_to_jump" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="10" y="705" w="40" h="41" offsetX="0" offsetY="0" />
+        <sprite x="66" y="683" w="44" h="75" offsetX="0" offsetY="0" />
+        <sprite x="124" y="686" w="56" h="56" offsetX="0" offsetY="0" />
+        <sprite x="199" y="698" w="57" h="41" offsetX="0" offsetY="0" />
+        <sprite x="273" y="696" w="60" h="47" offsetX="0" offsetY="0" />
+</Animation>
+  
+  <Animation name="run_to_jump_fall" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
+        <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
+        <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
+        <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
+        <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="0" />
+</Animation>
+  
+  <Animation name="run_jump_to_idle_1" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="560" y="719" w="58" h="43" offsetX="0" offsetY="0" />
+        <sprite x="3" y="9" w="36" h="49" offsetX="0" offsetY="0" />
+</Animation>
+  
 </Animations>
