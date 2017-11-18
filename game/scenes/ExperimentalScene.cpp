@@ -14,7 +14,10 @@ void ExperimentalScene::onPreInitialize() {
   const auto gameManager = GameManager::get();
 
   // configurations
-  setGravityAcceleration( Vec2( 0, -500.0f ) );
+  enableQuadTree( -gameManager->getVisibleWidth() / 2, -gameManager->getVisibleHeight() / 2,
+                  -gameManager->getVisibleWidth() / 2 + 4771, -gameManager->getVisibleHeight() / 2 + 688 );
+  enablePhysics( Vec2( 0, -500.0f ) );
+
   new CameraController( getMainCamera() );
 
   // initial objects

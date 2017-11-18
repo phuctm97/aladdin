@@ -9,7 +9,7 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include "GameObject.h"
+#include "QuadTree.h"
 
 NAMESPACE_ALA
 {
@@ -117,14 +117,23 @@ protected:
    */
   virtual void onPostRelease();
 
+public:
+  void resolveLockedTasks();
+
+  virtual void onResolveLockedTasks();
+
   // ==================================================
   // Objects Management
   // ==================================================
 private:
   std::unordered_map<long, GameObject*> _gameObjects;
   bool _gameObjectInLock;
-  std::vector<GameObject*> _gameObjectsToAddInNextFrame;
-  std::vector<GameObject*> _gameObjectsToRemoveInNextFrame;
+  std::vector<std::pair<GameObject*, std::string>> _gameObjectsToAddInNextFrame;
+  std::vector<long> _gameObjectsToRemoveInNextFrame;
+
+  QuadTree* _quadTree;
+  std::unordered_map<long, GameObject*> _dynamicGameObjects;
+  std::unordered_map<long, std::string> _gameObjectToQuadNode;
 
 public:
   GameObject* getGameObject( const long id ) const;
@@ -135,9 +144,9 @@ public:
    * \brief Attach game object to scene, this will not change game object's parent, you should not call this method directly
    * \param gameObject Game object to attach
    */
-  void addGameObject( GameObject* gameObject );
+  void addGameObject( GameObject* gameObject, const std::string& quadIndex = "" );
 
-  void addGameObjectInNextFrame( GameObject* gameObject );
+  void addGameObjectInNextFrame( GameObject* gameObject, const std::string& quadIndex = "" );
 
   /**
    * \brief Detach game object from scene, this will not change game object's parent or release it, you should not call this method directly
@@ -147,27 +156,40 @@ public:
 
   void removeGameObjectInNextFrame( GameObject* gameObject );
 
+  void enableQuadTree( const float spaceMinX, const float spaceMinY,
+                       const float spaceMaxX, const float spaceMaxY,
+                       const int level = 3 );
+
+  QuadTree* getQuadTree() const;
+
+  bool isQuadTreeEnabled() const;
+
 private:
+  void updateQuadTreeVisibility() const;
+
   void lockGameObjects();
 
   void unlockGameObjects();
 
   void updateAddAndRemoveGameObjects();
 
-  void doAddGameObject( GameObject* gameObject );
+  void doAddGameObject( GameObject* gameObject, const std::string& quadIndex = "" );
 
-  void doRemoveGameObject( GameObject* gameObject );
+  void doRemoveGameObject( const long id );
 
   // ================================================
   // Physics
   // ================================================
 private:
+  bool _physicsEnabled;
   Vec2 _gravityAcceleration;
 
 public:
   const Vec2& getGravityAcceleration() const;
 
-  void setGravityAcceleration( const Vec2& v );
+  void enablePhysics( const Vec2& gravity );
+
+  bool isPhysicsEnabled() const;
 
   // =============================================
   // Debug memory allocation

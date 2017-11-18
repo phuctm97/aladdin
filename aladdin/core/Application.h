@@ -37,7 +37,7 @@ public:
 
   void setScreenSize( const int width, const int height );
 
-  void setResolutionSize(const int width, const int height);
+  void setResolutionSize( const int width, const int height );
 
   int getResolutionWidth() const;
 
@@ -69,7 +69,9 @@ public:
 private:
   void updateInput();
 
-  void updatePhysics(const float delta);
+  void resolveLockedTasks();
+
+  void updatePhysics( const float delta );
 
   void updateGame( const float delta );
 

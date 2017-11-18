@@ -16,16 +16,15 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
-      // //For animationEditor
-      //const auto animationEditor = new AnimationEditor( object, "jump_acttack_to_idle1" );
-      //object->setLayer( "Character" );
-      //object->getTransform()->setPosition( -80, -40 );
-      //return;
-      // //For animationEditor
+  // //For animationEditor
+  //const auto animationEditor = new AnimationEditor( object, "jump_acttack_to_idle1" );
+  //object->setLayer( "Character" );
+  //object->getTransform()->setPosition( -80, -40 );
+  //return;
+  // //For animationEditor
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
-  //const auto colliderRenderer = new ColliderRenderer( collider );
   const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
   const auto controller = new AladdinController( object );
@@ -39,13 +38,14 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new State( stateManager, "idle_left",
              [=] {
-			   if (stateManager->getPreviousStateName() == "jump_left") {
-				   animator->setAction("fall_to_idle_1");
-			   }
-			   else if (stateManager->getPreviousStateName() == "jump_left_attack" || stateManager->getPreviousStateName() == "run_left_to_jump") {
-				   animator->setAction("touched_ground");
-			   }
-			   else if ( stateManager->getPreviousStateName() == "face_up_left" ) {
+               if ( stateManager->getPreviousStateName() == "jump_left" ) {
+                 animator->setAction( "fall_to_idle_1" );
+               }
+               else if ( stateManager->getPreviousStateName() == "jump_left_attack" || stateManager->
+                 getPreviousStateName() == "run_left_to_jump" ) {
+                 animator->setAction( "touched_ground" );
+               }
+               else if ( stateManager->getPreviousStateName() == "face_up_left" ) {
                  animator->setAction( "face_up_to_idle_1" );
                }
                else if ( stateManager->getPreviousStateName() == "sit_left" ) {
@@ -61,9 +61,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer->isDone() ) {
                  if ( animator->getActionName() == "idle_4_to_1" ||
-					 animator->getActionName() == "fall_to_idle_1" ||
-					 animator->getActionName() == "touched_ground" ||
-					 animator->getActionName() == "face_up_to_idle_1" ||
+                   animator->getActionName() == "fall_to_idle_1" ||
+                   animator->getActionName() == "touched_ground" ||
+                   animator->getActionName() == "face_up_to_idle_1" ||
                    animator->getActionName() == "stand_up" ) {
                    animator->setAction( "idle_1" );
                    timer->start( 0.5f );
@@ -110,12 +110,13 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new State( stateManager, "idle_right",
              [=] {
-		   	   if (stateManager->getPreviousStateName() == "jump_right") {
-				   animator->setAction("fall_to_idle_1");
-			   }
-			   else if (stateManager->getPreviousStateName() == "jump_right_attack" || stateManager->getPreviousStateName() == "run_right_to_jump") {
-				   animator->setAction("touched_ground");
-			   }
+               if ( stateManager->getPreviousStateName() == "jump_right" ) {
+                 animator->setAction( "fall_to_idle_1" );
+               }
+               else if ( stateManager->getPreviousStateName() == "jump_right_attack" || stateManager->
+                 getPreviousStateName() == "run_right_to_jump" ) {
+                 animator->setAction( "touched_ground" );
+               }
                else if ( stateManager->getPreviousStateName() == "face_up_right" ) {
                  animator->setAction( "face_up_to_idle_1" );
                }
@@ -132,8 +133,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer->isDone() ) {
                  if ( animator->getActionName() == "idle_4_to_1" ||
-				   animator->getActionName() == "fall_to_idle_1" ||
-				   animator->getActionName() == "touched_ground" ||
+                   animator->getActionName() == "fall_to_idle_1" ||
+                   animator->getActionName() == "touched_ground" ||
                    animator->getActionName() == "face_up_to_idle_1" ||
                    animator->getActionName() == "stand_up" ) {
                    animator->setAction( "idle_1" );
@@ -229,13 +230,29 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "attack_3" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+               timer->start( 0.1f );
+             }, [=]( float ) {
+               if ( timer->isDone() ) {
+                 gameManager->getPrefab( "Throwable Apple" )->instantiate(
+                   transform->getPosition() + Vec2( collider->getSize().getWidth() / 2,
+                                                    collider->getSize().getHeight() / 2 ) );
+                 timer->start( 5.0f );
+               }
+             }, NULL );
 
   new State( stateManager, "attack_3_right",
              [=] {
                animator->setAction( "attack_3" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
+               timer->start( 0.1f );
+             }, [=]( float ) {
+               if ( timer->isDone() ) {
+                 gameManager->getPrefab( "Throwable Apple" )->instantiate(
+                   transform->getPosition() + Vec2( collider->getSize().getWidth() / 2,
+                                                    collider->getSize().getHeight() / 2 ) );
+                 timer->start( 5.0f );
+               }
+             }, NULL );
 
   new State( stateManager, "sit_left",
              [=] {
@@ -368,176 +385,160 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                controller->resetCollidedWithGround();
                body->addImpulse( Vec2( 0, 3000000.0f ) );
              },
-			 [=](float dt) {
-				 if (body->getVelocity().getY() < -10 && animator->getActionName() == "jump")
-					 animator->setAction("fall");
-				 if (input->getKey(ALA_KEY_LEFT_ARROW))
-				 {
-					 transform->setScaleX(-ABS(transform->getScale().getX()));
-					 body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-				 }
-				 if (input->getKey(ALA_KEY_RIGHT_ARROW))
-				 {
-					 transform->setScaleX(ABS(transform->getScale().getX()));
-					 body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-				 }
-			 }, NULL);
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -10 && animator->getActionName() == "jump" )
+                 animator->setAction( "fall" );
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+             }, NULL );
 
   new State( stateManager, "jump_right",
              [=] {
                animator->setAction( "jump" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
                controller->resetCollidedWithGround();
-               body->addImpulse( Vec2( 0, 3000000.0f) );
+               body->addImpulse( Vec2( 0, 3000000.0f ) );
              },
-			 [=](float dt) {
-				 if (body->getVelocity().getY() < -10 && animator->getActionName() == "jump")
-					 animator->setAction("fall");
-				 if (input->getKey(ALA_KEY_LEFT_ARROW))
-				 {
-					 transform->setScaleX(-ABS(transform->getScale().getX()));
-					 body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-				 }
-				 if (input->getKey(ALA_KEY_RIGHT_ARROW))
-				 {
-					 transform->setScaleX(ABS(transform->getScale().getX()));
-					 body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-				 }
-			 }, NULL );
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -10 && animator->getActionName() == "jump" )
+                 animator->setAction( "fall" );
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+             }, NULL );
 
-  new State(stateManager, "run_left_to_jump", 
-			[=] {
-				animator->setAction("run_to_jump");
-				//transform->setScaleX(-ABS(transform->getScale().getX()));
-				controller->resetCollidedWithGround();
-				body->addImpulse(Vec2(0, 2650000.0f));
-			},
-			[=](float dt) {
-				if (body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump")
-					animator->setAction("run_to_jump_fall");
-				if (input->getKey(ALA_KEY_LEFT_ARROW))
-				{
-					transform->setScaleX(-ABS(transform->getScale().getX()));
-					body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-				}
-				if (input->getKey(ALA_KEY_RIGHT_ARROW))
-				{
-					transform->setScaleX(ABS(transform->getScale().getX()));
-					body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-				}
-				if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-					body->setVelocity(Vec2(0, body->getVelocity().getY()));
-			}, NULL);
-  new State(stateManager, "run_right_to_jump",
-	  [=] {
-	  animator->setAction("run_to_jump");
-	  controller->resetCollidedWithGround();
-	  body->addImpulse(Vec2(0, 2650000.0f));
-  },
-	  [=](float dt) {
-	  if (body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump")
-		  animator->setAction("run_to_jump_fall");
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
-	  {
-		  transform->setScaleX(ABS(transform->getScale().getX()));
-		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW))
-	  {
-		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-		  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-  }, NULL);
+  new State( stateManager, "run_left_to_jump",
+             [=] {
+               animator->setAction( "run_to_jump" );
+               //transform->setScaleX(-ABS(transform->getScale().getX()));
+               controller->resetCollidedWithGround();
+               body->addImpulse( Vec2( 0, 2650000.0f ) );
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump" )
+                 animator->setAction( "run_to_jump_fall" );
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
+  new State( stateManager, "run_right_to_jump",
+             [=] {
+               animator->setAction( "run_to_jump" );
+               controller->resetCollidedWithGround();
+               body->addImpulse( Vec2( 0, 2650000.0f ) );
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < 0 && animator->getActionName() == "run_to_jump" )
+                 animator->setAction( "run_to_jump_fall" );
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
 
-  new State(stateManager, "jump_left_attack",
-	  [=] {
-	  animator->setAction("jump_attack");
-	  //controller->resetCollidedWithGround();
-  },
-	  [=](float dt) {
-	  if (body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack")
-		  animator->setAction("jump_attack_fall");
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
-	  {
-		  transform->setScaleX(ABS(transform->getScale().getX()));
-		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW))
-	  {
-		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-		  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-  }, NULL);
+  new State( stateManager, "jump_left_attack",
+             [=] {
+               animator->setAction( "jump_attack" );
+               //controller->resetCollidedWithGround();
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack" )
+                 animator->setAction( "jump_attack_fall" );
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
 
-  new State(stateManager, "jump_right_attack",
-	  [=] {
-	  animator->setAction("jump_attack");
-	  //controller->resetCollidedWithGround();
-  },
-	  [=](float dt) {
-	  if (body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack")
-		  animator->setAction("jump_attack_fall");
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
-	  {
-	  transform->setScaleX(ABS(transform->getScale().getX()));
-	  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW))
-	  {
-	  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-	  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-	  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-  }, NULL);
+  new State( stateManager, "jump_right_attack",
+             [=] {
+               animator->setAction( "jump_attack" );
+               //controller->resetCollidedWithGround();
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack" )
+                 animator->setAction( "jump_attack_fall" );
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
 
-  new State(stateManager, "run_left_to_jump_attack",
-	  [=] {
-	  animator->setAction("jump_attack");
-	  //controller->resetCollidedWithGround();
-  },
-	  [=](float dt) {
-	  if (body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack")
-		  animator->setAction("jump_attack_fall");
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
-	  {
-		  transform->setScaleX(ABS(transform->getScale().getX()));
-		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW))
-	  {
-		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-		  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-  }, NULL);
+  new State( stateManager, "run_left_to_jump_attack",
+             [=] {
+               animator->setAction( "jump_attack" );
+               //controller->resetCollidedWithGround();
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack" )
+                 animator->setAction( "jump_attack_fall" );
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
 
-  new State(stateManager, "run_right_to_jump_attack",
-	  [=] {
-	  animator->setAction("jump_attack");
-	  //controller->resetCollidedWithGround();
-  },
-	  [=](float dt) {
-	  if (body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack")
-		  animator->setAction("jump_attack_fall");
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
-	  {
-		  transform->setScaleX(ABS(transform->getScale().getX()));
-		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW))
-	  {
-		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-		  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-  }, NULL);
+  new State( stateManager, "run_right_to_jump_attack",
+             [=] {
+               animator->setAction( "jump_attack" );
+               //controller->resetCollidedWithGround();
+             },
+             [=]( float dt ) {
+               if ( body->getVelocity().getY() < -3 && animator->getActionName() == "jump_attack" )
+                 animator->setAction( "jump_attack_fall" );
+               if ( input->getKey( ALA_KEY_RIGHT_ARROW ) ) {
+                 transform->setScaleX( ABS(transform->getScale().getX()) );
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+               if ( input->getKey( ALA_KEY_LEFT_ARROW ) ) {
+                 body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+                 transform->setScaleX( -ABS(transform->getScale().getX()) );
+               }
+               if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL );
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
@@ -739,59 +740,59 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     return controller->isCollidedWithGround();
   } );
 
-  new StateTransition(stateManager, "run_left", "run_left_to_jump", [=] {
-	  return input->getKeyDown(ALA_KEY_D);
-  });
+  new StateTransition( stateManager, "run_left", "run_left_to_jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
 
-  new StateTransition(stateManager, "run_right", "run_right_to_jump", [=] {
-	  return input->getKeyDown(ALA_KEY_D);
-  });
+  new StateTransition( stateManager, "run_right", "run_right_to_jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
 
-  new StateTransition(stateManager, "run_left_to_jump", "run_left", [=] {
-	  return controller->isCollidedWithGround() && input->getKey(ALA_KEY_LEFT_ARROW);
-  });
+  new StateTransition( stateManager, "run_left_to_jump", "run_left", [=] {
+    return controller->isCollidedWithGround() && input->getKey( ALA_KEY_LEFT_ARROW );
+  } );
 
-  new StateTransition(stateManager, "run_right_to_jump", "run_right", [=] {
-	  return controller->isCollidedWithGround() && input->getKey(ALA_KEY_RIGHT_ARROW);
-  });
+  new StateTransition( stateManager, "run_right_to_jump", "run_right", [=] {
+    return controller->isCollidedWithGround() && input->getKey( ALA_KEY_RIGHT_ARROW );
+  } );
 
-  new StateTransition(stateManager, "run_left_to_jump", "idle_left", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "run_left_to_jump", "idle_left", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "run_right_to_jump", "idle_right", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "run_right_to_jump", "idle_right", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "jump_left", "jump_left_attack", [=] {
-	  return input->getKeyDown(ALA_KEY_S);
-  });
+  new StateTransition( stateManager, "jump_left", "jump_left_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
 
-  new StateTransition(stateManager, "jump_right", "jump_right_attack", [=] {
-	  return input->getKeyDown(ALA_KEY_S);
-  });
+  new StateTransition( stateManager, "jump_right", "jump_right_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
 
-  new StateTransition(stateManager, "jump_left_attack", "idle_left", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "jump_left_attack", "idle_left", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "jump_right_attack", "idle_right", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "jump_right_attack", "idle_right", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "run_left_to_jump_attack", "idle_left", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "run_left_to_jump_attack", "idle_left", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "run_right_to_jump_attack", "idle_right", [=] {
-	  return controller->isCollidedWithGround();
-  });
+  new StateTransition( stateManager, "run_right_to_jump_attack", "idle_right", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
-  new StateTransition(stateManager, "run_left_to_jump", "run_left_to_jump_attack", [=] {
-	  return input->getKeyDown(ALA_KEY_S);
-  });
+  new StateTransition( stateManager, "run_left_to_jump", "run_left_to_jump_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
 
-  new StateTransition(stateManager, "run_right_to_jump", "run_right_to_jump_attack", [=] {
-	  return input->getKeyDown(ALA_KEY_S);
-  });
+  new StateTransition( stateManager, "run_right_to_jump", "run_right_to_jump_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
 }

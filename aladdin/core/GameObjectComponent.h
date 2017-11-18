@@ -11,8 +11,8 @@
 
 NAMESPACE_ALA
 {
-	class CollisionInfo;
-	class GameObject;
+class CollisionInfo;
+class GameObject;
 
 ALA_CLASS_HEADER_2(GameObjectComponent, ala::Initializable, ala::Releasable)
   // =====================================================
@@ -65,17 +65,13 @@ protected:
   * \brief Happen when component is updated
   * \param delta
   */
-  virtual void onPhysicsUpdate(const float delta);
-
-  virtual void onPrePhysicsUpdate(const float delta);
+  virtual void onPhysicsUpdate( const float delta );
 
   /**
    * \brief Happen when component is updated
    * \param delta 
    */
   virtual void onUpdate( const float delta );
-
-  virtual void onPreUpdate( const float delta );
 
 
   /**
@@ -91,23 +87,27 @@ protected:
 
   virtual bool onPreRelease();
 
+  virtual void onResolvedLockedTasks();
+
 
 public:
   void initialize() override;
 
-  void updatePhysics(const float delta);
+  void updatePhysics( const float delta );
 
   void update( const float delta );
 
   void render();
 
-	virtual void onCollisionEnter(const CollisionInfo& collision);
-	virtual void onCollisionStay(const CollisionInfo& collision);
-	virtual void onCollisionExit(const CollisionInfo& collision);
+  void resolveLockedTasks();
 
-	virtual void onTriggerEnter(const CollisionInfo& collision);
-	virtual void onTriggerStay(const CollisionInfo& collision);
-	virtual void onTriggerExit(const CollisionInfo& collision);
+  virtual void onCollisionEnter( const CollisionInfo& collision );
+  virtual void onCollisionStay( const CollisionInfo& collision );
+  virtual void onCollisionExit( const CollisionInfo& collision );
+
+  virtual void onTriggerEnter( const CollisionInfo& collision );
+  virtual void onTriggerStay( const CollisionInfo& collision );
+  virtual void onTriggerExit( const CollisionInfo& collision );
 
   /**
    * \brief Release and destroy component, automatically removed from game object

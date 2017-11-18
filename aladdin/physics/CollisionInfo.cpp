@@ -4,61 +4,50 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_0(CollisionInfo)
 
-CollisionInfo::CollisionInfo(GameObject* a, GameObject* b, float penetration, Vec2 normal)
-{
-	_objectA = a;
-	_objectB = b;
-	_penetration = penetration;
-	_normal = normal;
+CollisionInfo::CollisionInfo( Collider* a, Collider* b, const float penetration, const Vec2& normal ) {
+  _colliderA = a;
+  _colliderB = b;
+  _penetration = penetration;
+  _normal = normal;
 }
 
-CollisionInfo::~CollisionInfo()
-{
+CollisionInfo::~CollisionInfo() {}
+
+void CollisionInfo::setColliderA( Collider* colliderA ) {
+  _colliderA = colliderA;
 }
 
-void CollisionInfo::setObjectA(GameObject* objectA)
-{
-	_objectA = objectA;
+void CollisionInfo::setColliderB( Collider* colliderB ) {
+  _colliderB = colliderB;
 }
 
-void CollisionInfo::setObjectB(GameObject* objectB)
-{
-	_objectB = objectB;
+
+void CollisionInfo::setPenetration( const float penetration ) {
+  _penetration = penetration;
 }
 
-void CollisionInfo::setPenetration(const float penetration)
-{
-	_penetration = penetration;
+void CollisionInfo::setNormal( const Vec2& normal ) {
+  _normal = normal;
 }
 
-void CollisionInfo::setNormal(const Vec2& normal)
-{
-	_normal = normal;
+Collider* CollisionInfo::getColliderA() const {
+  return _colliderA;
 }
 
-GameObject* CollisionInfo::getObjectA() const
-{
-	return _objectA;
+Collider* CollisionInfo::getColliderB() const {
+  return _colliderB;
 }
 
-GameObject* CollisionInfo::getObjectB() const
-{
-	return _objectB;
+float CollisionInfo::getPenetration() const {
+  return _penetration;
 }
 
-float CollisionInfo::getPenetration() const
-{
-	return _penetration;
+const Vec2& CollisionInfo::getNormal() const {
+  return _normal;
 }
 
-const Vec2& CollisionInfo::getNormal() const
-{
-	return _normal;
-}
-
-bool CollisionInfo::isSameObjects(const CollisionInfo& collisionInfo) const
-{
-	return (collisionInfo._objectA == _objectA && collisionInfo._objectB == _objectB)
-	|| (collisionInfo._objectB == _objectA && collisionInfo._objectA == _objectB);
+bool CollisionInfo::hasSameColliders( const CollisionInfo& collisionInfo ) const {
+  return (collisionInfo._colliderA == _colliderA && collisionInfo._colliderB == _colliderB)
+    || (collisionInfo._colliderA == _colliderB && collisionInfo._colliderB == _colliderA);
 }
 }

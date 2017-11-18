@@ -104,18 +104,16 @@ float Transform::getRotation() const {
 
 Transform* Transform::setRotation( const float rotation ) {
   _rotation = rotation;
-  if(_rotation > 360)
-  {
-    _rotation = fmod(rotation, 360.f);
+  if ( _rotation > 360 ) {
+    _rotation = fmod( rotation, 360.f );
   }
   setDirty();
   return this;
 }
 
-Vec2 Transform::getWorldPosition()
-{
-	auto worldToLocal = getLocalToWorldMatrix();
-	return Vec2(worldToLocal.get41(), worldToLocal.get42());
+Vec2 Transform::getWorldPosition() {
+  auto worldToLocal = getLocalToWorldMatrix();
+  return Vec2( worldToLocal.get41(), worldToLocal.get42() );
 }
 
 // =======================================================
@@ -218,8 +216,16 @@ void Transform::onRelease() {
   }
 }
 
-void Transform::onPreUpdate( const float delta ) {
+void Transform::onResolvedLockedTasks() {
   updateAddAndRemoveChildInNextFrame();
+
+  lockChildren();
+
+  for ( auto transform : _children ) {
+    transform->getGameObject()->resolveLockedTasks();
+  }
+
+  unlockChildren();
 }
 
 void Transform::onUpdate( const float delta ) {
