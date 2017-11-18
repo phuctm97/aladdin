@@ -218,6 +218,14 @@ void Transform::onRelease() {
 
 void Transform::onResolvedLockedTasks() {
   updateAddAndRemoveChildInNextFrame();
+
+  lockChildren();
+
+  for ( auto transform : _children ) {
+    transform->getGameObject()->resolveLockedTasks();
+  }
+
+  unlockChildren();
 }
 
 void Transform::onUpdate( const float delta ) {
