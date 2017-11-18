@@ -223,7 +223,7 @@
         <sprite x="199" y="698" w="57" h="41" offsetX="0" offsetY="0" />
         <sprite x="273" y="696" w="60" h="47" offsetX="0" offsetY="0" />
   </Animation>
-  
+
   <Animation name="run_to_jump_fall" imagePath="aladdin.png" interval="0.15" isLoop="false">
         <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
         <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
@@ -233,9 +233,22 @@
         <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="0" />
   </Animation>
 
-  <Animation name="run_jump_to_idle_1" imagePath="aladdin.png" interval="0.08" isLoop="false">
+  <Animation name="touched_ground" imagePath="aladdin.png" interval="0.08" isLoop="false">
     <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="16.5" />
     <sprite x="560" y="719" w="58" h="43" offsetX="0" offsetY="-3" />
+  </Animation>
+
+  <Animation name="jump_attack" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="13" y="1077" w="51" h="53" offsetX="0" offsetY="0" />
+        <sprite x="75" y="1075" w="49" h="51" offsetX="0" offsetY="0" />
+        <sprite x="140" y="1067" w="46" h="65" offsetX="0" offsetY="0" />
+        <sprite x="199" y="1078" w="51" h="55" offsetX="0" offsetY="0" />
+  </Animation>
+  
+  <Animation name="jump_attack_fall" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="266" y="1070" w="82" h="59" offsetX="0" offsetY="0" />
+        <sprite x="361" y="1087" w="58" h="54" offsetX="0" offsetY="0" />
+        <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
   </Animation>
   
 </Animations>
