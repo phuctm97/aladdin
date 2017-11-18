@@ -17,8 +17,6 @@ public:
   bool isDone() const;
 
 protected:
-  void onPreUpdate( const float delta ) override;
-
   void onUpdate( const float delta ) override;
 };
 }
