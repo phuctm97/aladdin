@@ -19,10 +19,10 @@ bool PhysicsManager::getCollisionInfo( Collider* colliderA, Collider* colliderB,
 
   if ( colliderA == NULL || colliderB == NULL || rigidbodyA == NULL || rigidbodyB == NULL ) return false;
 
-  auto n = rigidbodyB->getPosition() - rigidbodyA->getPosition();
-
   auto rectA = colliderA->getBoundingRect();
   auto rectB = colliderB->getBoundingRect();
+
+  auto n = Vec2(rectB.getMidX(), rectB.getMidY()) - Vec2(rectA.getMidX(), rectA.getMidY());
 
   const float aExtentX = rectA.getSize().getWidth() / 2;
   const float bExtentX = rectB.getSize().getWidth() / 2;
