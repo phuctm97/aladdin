@@ -511,40 +511,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL );
-  new State(stateManager, "jump_throw_apple_left",
-	  [=] {
-	  animator->setAction("jump_throw_apple");
-	  timer2->start(0.1f);
-	  timer3->start(0.3f);
-  }, [=](float dt) {
-	  if (timer2->isDone())
-	  {
-		  const auto apple = gameManager->getPrefab("Throwable Apple")->instantiate(
-			  transform->getPosition() + Vec2(-collider->getSize().getWidth() / 2,
-				  collider->getSize().getHeight() / 2));
-		  ((ThrowableAppleController*)apple->getComponent("controller"))->chekDirectionLeft('L');
-			  animator->setAction("jump_throw_apple_fall");
-			  timer2->start(2.0f);
-	  }
-		  
-	  if (input->getKey(ALA_KEY_RIGHT_ARROW)) {
-		  transform->setScaleX(ABS(transform->getScale().getX()));
-		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
-	  }
-	  if (input->getKey(ALA_KEY_LEFT_ARROW)) {
-		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
-		  transform->setScaleX(-ABS(transform->getScale().getX()));
-	  }
-	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
-		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
-	  if(input->getKeyDown(ALA_KEY_A) && timer3->isDone() )
-	  {
-		  timer2->start(0.1f);
-		  timer3->start(0.3f);
-		  animator->setAction("jump_throw_apple");
-	  }
-  }
-  , NULL);
 
   new State( stateManager, "run_left_to_jump_attack",
              [=] {

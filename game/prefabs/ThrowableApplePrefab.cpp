@@ -27,11 +27,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   object->setLayer( "Character" );
 
   // states
-  new State( stateManager, "apple",
-             [=] {
-               animator->setAction( "apple" );
-               controller->resetCollidedWithGround();
-             }, NULL, NULL );
+
   new State( stateManager, "apple_explode",
              [=] {
                animator->setAction( "apple_explode" );
