@@ -75,7 +75,6 @@ void Graphics::initDirectX() {
 
   // init DirectX
   _directX = Direct3DCreate9( D3D_SDK_VERSION );
-  ALA_ASSERT(!FAILED(_directX));
   _logger.info( "Initialized DirectX" );
 
   // init DirectX device
@@ -96,21 +95,18 @@ void Graphics::initDirectX() {
     &d3dpp,
     &_directXDevice );
 
-  ALA_ASSERT(result == D3D_OK);
-  ALA_ASSERT(!FAILED(_directXDevice));
+  ALA_ASSERT(!FAILED(result));
   _logger.info( "Created DirectX Device" );
 
 
   // init DirectX Sprite
   result = D3DXCreateSprite( _directXDevice, &_directXSprite );
-  ALA_ASSERT(result == D3D_OK);
-  ALA_ASSERT(!FAILED(_directXSprite));
+  ALA_ASSERT(!FAILED(result));
   _logger.info( "Created DirectX Sprite" );
 
   // init DirectX Line
   result = D3DXCreateLine(_directXDevice, &_directXLine);
-  ALA_ASSERT(result == D3D_OK);
-  ALA_ASSERT(!FAILED(_directXLine));
+  ALA_ASSERT(!FAILED(result));
   _directXLine->SetGLLines(FALSE);
   _directXLine->SetAntialias(TRUE);
   _logger.info("Created DirectX Line");
@@ -358,8 +354,8 @@ void Graphics::drawLine(const std::vector<Vec2>& vertices, const Color& color) {
     const auto& vec = vertices[i];
     arr[i] = D3DXVECTOR2(vec.getX(), vec.getY());
   }
-  _directXLine->Draw(arr, vertices.size(),
-    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+  _directXLine->Draw(arr,static_cast<DWORD>(vertices.size()),
+    D3DCOLOR_ARGB(static_cast<DWORD>(color.getA()), static_cast<DWORD>(color.getR()), static_cast<DWORD>(color.getG()), static_cast<DWORD>(color.getB())));
   delete[]arr;
 }
 
@@ -387,9 +383,9 @@ void Graphics::drawLine(const std::vector<Vec2>& vertices, const Mat4& transform
   _directXSprite->GetTransform(&oldMatrix);
   D3DXMATRIX finalMatrix = transformationMatrix * oldMatrix;
 
-  _directXLine->DrawTransform(arr, vertices.size(), 
+  _directXLine->DrawTransform(arr, static_cast<DWORD>(vertices.size()), 
     &finalMatrix,
-    D3DCOLOR_ARGB(color.getA(), color.getR(), color.getG(), color.getB()));
+    D3DCOLOR_ARGB(static_cast<DWORD>(color.getA()), static_cast<DWORD>(color.getR()), static_cast<DWORD>(color.getG()), static_cast<DWORD>(color.getB())));
   delete[]arr;
 }
 
