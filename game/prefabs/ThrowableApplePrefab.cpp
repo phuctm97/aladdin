@@ -18,7 +18,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 4, 5 ) );
   const auto timer = new Timer( object );
-  const auto stateManager = new StateManager( object, "apple" );
+  const auto stateManager = new StateManager( object, "apple_left" );
 
   const auto controller = new ThrowableAppleController( object, "controller" );
   const auto transform = object->getTransform();
@@ -31,16 +31,6 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "apple" );
                controller->resetCollidedWithGround();
-				 if(controller->getDirection()=='L')
-				 {
-					 transform->setScaleX(-ABS(transform->getScale().getX()));
-					 body->addImpulse(Vec2(-20000.0f, 1000.0f));
-				 }
-				 else
-				 {
-					 transform->setScaleX(ABS(transform->getScale().getX()));
-					 body->addImpulse(Vec2(20000.0f, 1000.0f));
-				 } 
              }, NULL, NULL );
   new State( stateManager, "apple_explode",
              [=] {
@@ -54,7 +44,25 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
 			 }
              ,  NULL);
 
-  new StateTransition( stateManager, "apple", "apple_explode", [=] {
+  new State(stateManager, "apple_left",
+	  [=]{
+	  animator->setAction("apple");
+	  controller->resetCollidedWithGround();
+	  transform->setScaleX(-ABS(transform->getScale().getX()));
+  },NULL,NULL);
+  new State(stateManager, "apple_right",
+	  [=] {
+	  animator->setAction("apple");
+	  controller->resetCollidedWithGround();
+	  transform->setScaleX(ABS(transform->getScale().getX()));
+  }, NULL, NULL);
+
+
+  new StateTransition( stateManager, "apple_left", "apple_explode", [=] {
     return controller->isCollidedWithGround();
   } );
+  new StateTransition(stateManager, "apple_right", "apple_explode", [=] {
+	  return controller->isCollidedWithGround();
+  });
+
 }

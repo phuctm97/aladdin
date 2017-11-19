@@ -15,7 +15,7 @@ public:
   bool isCollidedWithGround() const;
 
   void resetCollidedWithGround();
-
+  void throwApple(char direction, float directX, float directY, float impulseX, float impulseY);
 protected:
   void onUpdate( const float delta ) override;
 
