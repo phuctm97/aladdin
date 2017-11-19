@@ -26,6 +26,8 @@ public:
 
   virtual ~StateManager();
 
+  void changeState( const std::string& name );
+
   void changeState( State* state );
 
   void attachState( State* state );

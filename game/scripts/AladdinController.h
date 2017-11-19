@@ -6,7 +6,6 @@
 class AladdinController : public ala::GameObjectComponent
 {
 private:
-  ala::Logger _logger;
   bool _collidedWithGround;
 
 public:
@@ -16,6 +15,7 @@ public:
 
   void resetCollidedWithGround();
 
+  void throwApple( char direction, float directX, float directY, float impulseX, float impulseY ) const;
 protected:
   void onUpdate( const float delta ) override;
 

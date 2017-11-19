@@ -231,6 +231,7 @@
   <Animation name="touched_ground" imagePath="aladdin.png" interval="0.08" isLoop="false">
     <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="16.5" />
     <sprite x="560" y="719" w="58" h="43" offsetX="0" offsetY="-3" />
+    <sprite x="3" y="9" w="37" h="49" />
   </Animation>
   <Animation name="jump_attack" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="13" y="1077" w="51" h="53" offsetX="0" offsetY="0" />
@@ -255,13 +256,24 @@
   <Animation name="apple" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="373" y="24" w="6" h="6" offsetX="0" offsetY="0" />
   </Animation>
-
+  <Animation name="jump_throw_apple" imagePath="aladdin.png" interval="0.2" isLoop="false">
+    <sprite x="19" y="1005" w="48" h="54" offsetX="0" offsetY="0" />
+    <sprite x="77" y="1007" w="42" h="51" offsetX="0" offsetY="0" />
+    <sprite x="132" y="1008" w="38" h="52" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="jump_throw_apple_fall" imagePath="aladdin.png" interval="0.2" isLoop="false">
+    <sprite x="185" y="1008" w="51" h="52" offsetX="0" offsetY="0" />
+    <sprite x="253" y="1012" w="39" h="51" offsetX="0" offsetY="0" />
+    <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
+    <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
+    <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="17.5" />
+  </Animation>
   <Animation name="run_attack" imagePath="aladdin.png" interval="0.05" isLoop="false">
-        <sprite x="498" y="1388" w="34" h="51" offsetX="0" offsetY="1" />
-        <sprite x="591" y="1379" w="50" h="59" offsetX="0" offsetY="5" />
-        <sprite x="698" y="1386" w="49" h="52" offsetX="0" offsetY="1.5" />
-        <sprite x="807" y="1379" w="47" h="59" offsetX="0" offsetY="5" />
-        <sprite x="912" y="1378" w="72" h="59" offsetX="0" offsetY="5" />
-        <sprite x="1020" y="1388" w="59" h="49" offsetX="0" offsetY="0" />
+    <sprite x="498" y="1388" w="34" h="51" offsetX="0" offsetY="1" />
+    <sprite x="591" y="1379" w="50" h="59" offsetX="0" offsetY="5" />
+    <sprite x="698" y="1386" w="49" h="52" offsetX="0" offsetY="1.5" />
+    <sprite x="807" y="1379" w="47" h="59" offsetX="0" offsetY="5" />
+    <sprite x="912" y="1378" w="72" h="59" offsetX="0" offsetY="5" />
+    <sprite x="1020" y="1388" w="59" h="49" offsetX="0" offsetY="0" />
   </Animation>
 </Animations>
