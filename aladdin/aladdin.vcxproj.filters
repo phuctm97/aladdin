@@ -244,10 +244,25 @@
     <ClInclude Include="core\QuadTree.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="extra\QuadTreeRenderer.h">
+    <ClInclude Include="extra\Action.h">
       <Filter>extra</Filter>
     </ClInclude>
-    <ClInclude Include="extra\Action.h">
+    <ClInclude Include="extra\ActionManager.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\Blink.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\MoveBy.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\RotateBy.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\Sequence.h">
+      <Filter>extra</Filter>
+    </ClInclude>
+    <ClInclude Include="extra\Repeat.h">
       <Filter>extra</Filter>
     </ClInclude>
   </ItemGroup>
@@ -426,10 +441,25 @@
     <ClCompile Include="core\QuadTree.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="extra\QuadTreeRenderer.cpp">
+    <ClCompile Include="extra\Action.cpp">
       <Filter>extra</Filter>
     </ClCompile>
-    <ClCompile Include="extra\Action.cpp">
+    <ClCompile Include="extra\ActionManager.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\Blink.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\MoveBy.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\RotateBy.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\Sequence.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\Repeat.cpp">
       <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>

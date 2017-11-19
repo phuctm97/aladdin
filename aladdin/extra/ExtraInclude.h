@@ -9,6 +9,7 @@
 #include "../core/GameObjectComponent.h"
 #include "../core/Transform.h"
 #include "../core/GameManager.h"
+#include "../core/StdHelper.h"
 #include "../2d/SpriteRenderer.h"
 #include "../2d/Animator.h"
 #include "../2d/Graphics.h"

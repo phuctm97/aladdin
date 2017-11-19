@@ -17,7 +17,6 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 4, 5 ) );
-  const auto timer = new Timer( object );
   const auto stateManager = new StateManager( object, "apple_left" );
 
   const auto controller = new ThrowableAppleController( object, "controller" );
@@ -33,32 +32,34 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
                animator->setAction( "apple_explode" );
                body->setVelocity( Vec2( 0, 0 ) );
                body->setGravityScale( 0 );
-             }, [=](float dt) {
-				 if (!animator->isPlaying()) {
-					 object->release();
-				 }
-			 }
-             ,  NULL);
+             }, [=]( float dt ) {
+               if ( !animator->isPlaying() ) {
+                 object->release();
+               }
+             }
+             , NULL );
 
-  new State(stateManager, "apple_left",
-	  [=]{
-	  animator->setAction("apple");
-	  controller->resetCollidedWithGround();
-	  transform->setScaleX(-ABS(transform->getScale().getX()));
-  },NULL,NULL);
-  new State(stateManager, "apple_right",
-	  [=] {
-	  animator->setAction("apple");
-	  controller->resetCollidedWithGround();
-	  transform->setScaleX(ABS(transform->getScale().getX()));
-  }, NULL, NULL);
+  new State( stateManager, "apple_left",
+             [=] {
+               animator->setAction( "apple" );
+               controller->resetCollidedWithGround();
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+             },NULL,NULL );
+
+  new State( stateManager, "apple_right",
+             [=] {
+               animator->setAction( "apple" );
+               controller->resetCollidedWithGround();
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+             }, NULL, NULL );
 
 
   new StateTransition( stateManager, "apple_left", "apple_explode", [=] {
     return controller->isCollidedWithGround();
   } );
-  new StateTransition(stateManager, "apple_right", "apple_explode", [=] {
-	  return controller->isCollidedWithGround();
-  });
+
+  new StateTransition( stateManager, "apple_right", "apple_explode", [=] {
+    return controller->isCollidedWithGround();
+  } );
 
 }

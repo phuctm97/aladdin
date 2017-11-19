@@ -157,15 +157,13 @@ void Input::initDirectXInput() {
     IID_IDirectInput8,
     reinterpret_cast<void**>(&_directXInput),
     NULL );
-  ALA_ASSERT(result == DI_OK);
-  ALA_ASSERT(!FAILED(_directXInput));
+  ALA_ASSERT(!FAILED(result));
 
   _logger.info( "Created DirectX Input" );
 
   // init DirectX Input Keyboard
   result = _directXInput->CreateDevice( GUID_SysKeyboard, &_directXInputKeyboard, NULL );
-  ALA_ASSERT(result == DI_OK);
-  ALA_ASSERT(!FAILED(_directXInputKeyboard));
+  ALA_ASSERT(!FAILED(result));
 
   _logger.info( "Created DirectX Input Keyboard Device" );
 

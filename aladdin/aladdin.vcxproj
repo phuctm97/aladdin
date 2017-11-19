@@ -32,20 +32,20 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,9 +70,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
     <IncludePath>$(SolutionDir)directx\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)direcx\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)directx\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)direcx\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)directx\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)direcx\Lib\x64;$(LibraryPath)</LibraryPath>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)directx\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)direcx\Lib\x64;$(LibraryPath)</LibraryPath>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,7 +114,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Lib>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;dsound.lib;dxerr.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)directx\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -104,11 +131,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;dsound.lib;dxerr.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)directx\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -117,11 +152,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;dsound.lib;dxerr.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)directx\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="2d\2dInclude.h" />
@@ -176,11 +219,16 @@
     <ClInclude Include="core\Transform.h" />
     <ClInclude Include="core\Vec2.h" />
     <ClInclude Include="extra\Action.h" />
+    <ClInclude Include="extra\ActionManager.h" />
     <ClInclude Include="extra\AnimationEditor.h" />
+    <ClInclude Include="extra\Blink.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
-    <ClInclude Include="extra\QuadTreeRenderer.h" />
+    <ClInclude Include="extra\MoveBy.h" />
     <ClInclude Include="extra\RectRenderer.h" />
+    <ClInclude Include="extra\Repeat.h" />
+    <ClInclude Include="extra\RotateBy.h" />
+    <ClInclude Include="extra\Sequence.h" />
     <ClInclude Include="extra\Timer.h" />
     <ClInclude Include="input\Input.h" />
     <ClInclude Include="input\InputInclude.h" />
@@ -245,9 +293,14 @@
     <ClCompile Include="core\Transform.cpp" />
     <ClCompile Include="core\Vec2.cpp" />
     <ClCompile Include="extra\Action.cpp" />
+    <ClCompile Include="extra\ActionManager.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
-    <ClCompile Include="extra\QuadTreeRenderer.cpp" />
+    <ClCompile Include="extra\Blink.cpp" />
+    <ClCompile Include="extra\MoveBy.cpp" />
     <ClCompile Include="extra\RectRenderer.cpp" />
+    <ClCompile Include="extra\Repeat.cpp" />
+    <ClCompile Include="extra\RotateBy.cpp" />
+    <ClCompile Include="extra\Sequence.cpp" />
     <ClCompile Include="extra\Timer.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="physics\Collider.cpp" />
