@@ -38,7 +38,7 @@ long Messenger::subscribe( const std::string& messageId, const std::function<voi
 void Messenger::unsubscribe( const std::string& messageId, const long token ) {
   if ( isReleased() || isReleasing() ) return;
 
-  int rc = _callbacks[messageId].erase( token );
+  _callbacks[messageId].erase( token );
 }
 
 void Messenger::release() {

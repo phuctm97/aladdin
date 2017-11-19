@@ -127,7 +127,7 @@ AnimationAction* Animator::getAction() const {
 }
 
 int Animator::getCurrentFrameIndex() const {
-  return std::distance(_currentAction->getFrames().begin(), _frameIterator);
+  return static_cast<int>(std::distance( _currentAction->getFrames().begin(), _frameIterator ));
 }
 
 void Animator::pause ( )
