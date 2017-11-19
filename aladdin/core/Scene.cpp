@@ -257,7 +257,9 @@ void Scene::resolveLockedTasks() {
   updateAddAndRemoveGameObjects();
 
   // update quad tree
-  updateQuadTreeVisibility();
+  if ( isQuadTreeEnabled() ) {
+    updateQuadTreeVisibility();
+  }
 
   // client
   onResolveLockedTasks();
