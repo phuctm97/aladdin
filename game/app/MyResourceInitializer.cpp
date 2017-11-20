@@ -26,8 +26,8 @@ void MyResourceInitializer::doRun() {
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
 
   // Fonts
-  new Font( "aladdin.ttf", "fonts/aladdin.ttf" );
-  new Font( "arcade.ttf", "fonts/arcade.ttf" );
+  new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
+  new Font( "arcade.ttf", "arcade.ttf", "fonts" );
 
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
