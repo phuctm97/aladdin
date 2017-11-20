@@ -8,7 +8,8 @@ class NodeController : public ala::GameObjectComponent
 {
 private:
 	ala::Logger _logger;
-	int speed = 1;
+	int _speed = 1;
+
 public: 
 	NodeController(ala::GameObject*  gameObject, const std::string& name = "");
 

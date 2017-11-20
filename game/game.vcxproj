@@ -153,12 +153,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
-    <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
-    <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
+    <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
+    <ClCompile Include="prefabs\RopePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
+    <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
@@ -173,11 +174,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
-    <ClInclude Include="prefabs\BackgroundPrefab.h" />
-    <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
+    <ClInclude Include="prefabs\NormalTextPrefab.h" />
+    <ClInclude Include="prefabs\RopePrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
+    <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
@@ -190,10 +192,17 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\miscellaneous\cutscenes.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\miscellaneous\cutscenes.anm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\arcade.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

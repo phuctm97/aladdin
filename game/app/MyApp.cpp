@@ -4,6 +4,7 @@
 #include "MyApp.h"
 #include "MyResourceInitializer.h"
 #include "../scenes/ExperimentalScene.h"
+#include "../scenes/MenuScene.h"
 
 USING_NAMESPACE_ALA;
 

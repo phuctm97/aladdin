@@ -104,25 +104,6 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 
 #pragma endregion
 
-#pragma region Rope
-
-	// 1st rope
-	const auto firstRopeSize = Size(5, 250);
-	const auto firstRopeOffset = Vec2(2091, 90 + firstRopeSize.getHeight()/2);
-	const auto firstRopeCollider = new Collider(object, true, firstRopeOffset, firstRopeSize, 0, "FirstRope");
-
-	//// 2nd rope
-	const auto secondRopeSize = Size(5, 193);
-	const auto secondRopeOffset = Vec2(1548, 193 / 2 + 329);
-	const auto secondRopeCollider = new Collider(object, true, secondRopeOffset, secondRopeSize, 0, "SecondRope");
-
-#pragma endregion
-
-	// Triggers
-
-
-
-
 	// configurations
 	transform->setPosition(Vec2(-halfVisibleSize.getWidth(),
 		-halfVisibleSize.getHeight()));
@@ -144,8 +125,8 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto mapWallAtStairGroupOneColliderRenderer = new ColliderRenderer(mapWallAtStairGroupOne);
 
 
-	const auto firstRopeColliderRenderer = new ColliderRenderer(firstRopeCollider);
-	const auto secondRopeColliderRenderer = new ColliderRenderer(secondRopeCollider);
+	/*const auto firstRopeColliderRenderer = new ColliderRenderer(firstRopeCollider);
+	const auto secondRopeColliderRenderer = new ColliderRenderer(secondRopeCollider);*/
 
 
 }

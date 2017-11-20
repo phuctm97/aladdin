@@ -33,10 +33,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto controller = new AladdinController( object );
   const auto transform = object->getTransform();
 
-  // configurations
-  object->setLayer( "Character" );
-  transform->setPosition( -80, -38 );
-
   // states
 
   new State( stateManager, "idle_left",

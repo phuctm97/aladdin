@@ -46,6 +46,12 @@
     <Filter Include="animations\playable_characters">
       <UniqueIdentifier>{29c760ca-292d-4d44-bca3-77672270b5f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\miscellaneous">
+      <UniqueIdentifier>{7274b298-065d-4c3e-9ba3-0a0ef1c5047c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fonts">
+      <UniqueIdentifier>{8aa2c938-3569-4bf5-a8fa-4b796314f793}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -58,12 +64,6 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AladdinPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\BackgroundPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ForegroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\CameraController.cpp">
@@ -90,6 +90,15 @@
     <ClCompile Include="scripts\NodeController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\MenuScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\NormalTextPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\RopePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -99,12 +108,6 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AladdinPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\BackgroundPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ForegroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\CameraController.h">
@@ -131,6 +134,15 @@
     <ClInclude Include="scripts\NodeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="scenes\MenuScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\NormalTextPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\RopePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -142,6 +154,9 @@
     <Image Include="textures\backgrounds\scene_1_1.png">
       <Filter>texures\backgrounds</Filter>
     </Image>
+    <Image Include="textures\miscellaneous\cutscenes.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -151,5 +166,15 @@
     <Xml Include="animations\playable_characters\aladdin.anm">
       <Filter>animations\playable_characters</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\miscellaneous\cutscenes.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\arcade.ttf">
+      <Filter>fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
