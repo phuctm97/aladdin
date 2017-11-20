@@ -15,6 +15,7 @@ ALA_CLASS_SOURCE_2(ala::GameObjectComponent, ala::Initializable, ala::Releasable
 
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
+    _tag( -1 ),
     _gameObject( gameObject ),
     _active( false ),
     _selfInitialize( true ),
@@ -42,6 +43,13 @@ GameObjectComponent::~GameObjectComponent() {
 
 const std::string& GameObjectComponent::getName() const {
   return _name;
+}
+
+int GameObjectComponent::getTag() const { return _tag; }
+
+void GameObjectComponent::setTag( const int tag ) {
+  ALA_ASSERT(tag >= 0);
+  _tag = tag;
 }
 
 GameObject* GameObjectComponent::getGameObject() const {

@@ -21,6 +21,7 @@ ALA_CLASS_HEADER_2(GameObject, ala::Initializable, ala::Releasable)
 private:
   long _id;
   std::string _name;
+  int _tag;
   Scene* _parentScene;
   std::string _layer;
   bool _active;
@@ -57,6 +58,10 @@ public:
   const std::string& getLayer() const;
 
   GameObject* setLayer( const std::string& layer );
+
+  GameObject* setTag( const int tag );
+
+  int getTag() const;
 
   // =========================================================
   // Events
@@ -98,6 +103,7 @@ private:
   std::vector<GameObjectComponent*> _components;
   std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
   std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;
+  std::vector<GameObjectComponent*> _componentsNotRefreshed;
 
 public:
   /**
@@ -116,17 +122,23 @@ public:
 
   void removeComponentInNextFrame( GameObjectComponent* component );
 
-  GameObjectComponent* getComponent( const std::string& name ) const;
+  void refreshComponent();
 
-  std::vector<GameObjectComponent*> getAllComponents() const;
+  GameObjectComponent* getComponent( const std::string& name );
 
-  std::vector<GameObjectComponent*> getAllComponents( const std::string& name ) const;
+  GameObjectComponent* getComponent( const int tag );
+
+  std::vector<GameObjectComponent*> getAllComponents();
+
+  std::vector<GameObjectComponent*> getAllComponents( const std::string& name );
+
+  std::vector<GameObjectComponent*> getAllComponents( const int tag );
 
   template <class T>
-  T* getComponentT() const;
+  T* getComponentT();
 
   template <class T>
-  std::vector<T*> getAllComponentTs() const;
+  std::vector<T*> getAllComponentTs();
 
 private:
   void lockComponents();
@@ -148,7 +160,7 @@ private:
   bool isDefaultComponents( GameObjectComponent* component );
 
 public:
-  Transform* getTransform() const;
+  Transform* getTransform();
 
   // ===========================================================
   // Messenger
@@ -175,7 +187,9 @@ public:
 // ========================================================
 
 template <class T>
-T* GameObject::getComponentT() const {
+T* GameObject::getComponentT() {
+  refreshComponent();
+
   for ( GameObjectComponent* component : _components ) {
     if ( component != NULL && ALA_IS_INSTANCE_OF(component, T) ) {
       return static_cast<T*>(component);
@@ -185,7 +199,9 @@ T* GameObject::getComponentT() const {
 }
 
 template <class T>
-std::vector<T*> GameObject::getAllComponentTs() const {
+std::vector<T*> GameObject::getAllComponentTs() {
+  refreshComponent();
+
   std::vector<T*> ret;
 
   for ( GameObjectComponent* component : _components ) {
