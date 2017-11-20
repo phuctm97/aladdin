@@ -1,11 +1,10 @@
-#include "NormalTextPrefab.h"
+#include "BigTextPrefab.h"
 
 USING_NAMESPACE_ALA;
 
-void NormalTextPrefab::doInstantiate( ala::GameObject* object ) const {
+void BigTextPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto transform = new RectTransform( object, Rect( Vec2( 0, 0 ),
                                                           GameManager::get()->getVisibleWidth(),
                                                           GameManager::get()->getVisibleHeight() ) );
-  const auto text = new Text( object, FontInfo( ALA_FONT_WEIGHT_BOLD, 18 ), "arcade.ttf", Color( 255, 255, 255 ),
-                              ALA_HORIZONTAL_ALIGNMENT_LEFT );
+  const auto text = new Text( object, FontInfo( ALA_FONT_WEIGHT_BOLD, 50 ), "aladdin.ttf", Color( 255, 255, 255 ) );
 }

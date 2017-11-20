@@ -7,6 +7,7 @@
 #include "../prefabs/AladdinPrefab.h"
 #include "../prefabs/GroundPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
+#include "../prefabs/BigTextPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -25,6 +26,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
 
   // Fonts
+  new Font( "aladdin.ttf", "fonts/aladdin.ttf" );
   new Font( "arcade.ttf", "fonts/arcade.ttf" );
 
   // Animations
@@ -33,6 +35,7 @@ void MyResourceInitializer::doRun() {
 
   // Prefabs
   new NormalTextPrefab();
+  new BigTextPrefab();
 
   new AladdinPrefab();
   new ThrowableApplePrefab();
