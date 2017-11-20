@@ -6,7 +6,8 @@ ALA_CLASS_SOURCE_1(ala::StateManager, ala::GameObjectComponent)
 
 
 StateManager::StateManager( GameObject* gameObject, const std::string& startState, const std::string& name ) :
-  GameObjectComponent( gameObject, name ), _startStateName( startState ), _previousState( NULL ), _currentState( NULL ) {}
+  GameObjectComponent( gameObject, name ), _startStateName( startState ), _previousState( NULL ),
+  _currentState( NULL ) {}
 
 StateManager::~StateManager() {}
 
@@ -36,16 +37,25 @@ void StateManager::onRelease() {
 }
 
 void StateManager::changeState( State* state ) {
-  if ( state ) {
-    if ( _currentState->onStateExit != NULL ) {
-      _currentState->onStateExit();
-    }
-    _previousState = _currentState;
-    _currentState = state;
-    if ( _currentState->onStateEnter != NULL ) {
-      _currentState->onStateEnter();
-    }
+  if ( !state ) return;
+
+  if ( !isInitialized() ) {
+    _startStateName = state->getName();
+    return;
   }
+
+  if ( _currentState->onStateExit != NULL ) {
+    _currentState->onStateExit();
+  }
+  _previousState = _currentState;
+  _currentState = state;
+  if ( _currentState->onStateEnter != NULL ) {
+    _currentState->onStateEnter();
+  }
+}
+
+void StateManager::changeState( const std::string& name ) {
+  changeState( getState( name ) );
 }
 
 void StateManager::attachState( State* state ) {
