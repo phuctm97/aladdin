@@ -3,7 +3,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1 (Font, ala::GameResource)
+ALA_CLASS_SOURCE_1 (ala::Font, ala::GameResource)
 
 Font::Font (const std::string& name, const std::string& fontName, const std::string&fontPath, Scene* scope)
   :GameResource ( name, scope )
