@@ -113,7 +113,7 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 
 	//// 2nd rope
 	const auto secondRopeSize = Size(5, 193);
-	const auto secondRopeOffset = Vec2(1549, 193 / 2 + 329);
+	const auto secondRopeOffset = Vec2(1548, 193 / 2 + 329);
 	const auto secondRopeCollider = new Collider(object, true, secondRopeOffset, secondRopeSize, 0, "SecondRope");
 
 #pragma endregion
