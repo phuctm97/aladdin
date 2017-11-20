@@ -1119,5 +1119,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 	  return input->getKeyDown(ALA_KEY_A);
   });
 
+  new StateTransition(stateManager, "run_left_to_throw", "run_left_to_jump_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+
 
 }
