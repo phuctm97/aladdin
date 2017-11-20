@@ -1099,4 +1099,18 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 	  return input->getKeyDown(ALA_KEY_LEFT_ARROW);
   });
 
+  new StateTransition(stateManager, "jump_throw_apple_left", "jump_left_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "jump_throw_apple_right", "jump_right_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "jump_left_attack", "jump_throw_apple_left", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+  new StateTransition(stateManager, "jump_right_attack", "jump_throw_apple_right", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+
+
 }
