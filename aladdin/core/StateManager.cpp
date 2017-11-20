@@ -44,7 +44,7 @@ void StateManager::changeState( State* state ) {
   if ( !state ) return;
 
   if ( !isInitialized() ) {
-    _currentState = state;
+    _startStateName = state->getName();
     return;
   }
 

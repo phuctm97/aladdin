@@ -3,7 +3,7 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_1(Collider, GameObjectComponent)
+ALA_CLASS_SOURCE_1(ala::Collider, ala::GameObjectComponent)
 
 Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size,
                     const int physicsLayer,
