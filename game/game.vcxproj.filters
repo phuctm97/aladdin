@@ -84,6 +84,12 @@
     <ClCompile Include="scripts\ThrowableAppleController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\NodePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\NodeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -117,6 +123,12 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\ThrowableAppleController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\NodePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\NodeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

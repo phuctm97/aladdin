@@ -23,7 +23,7 @@ void CameraController::onUpdate( const float delta ) {
   const auto backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
   const auto backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
 
-  const auto aladdin = GameManager::get()->getObjectByName( "Aladdin" );
+  const auto aladdin = GameManager::get()->getObjectByName( "Node" );
   if ( aladdin == NULL ) return;
 
   const auto& aladdinPosition = aladdin->getTransform()->getPosition();

@@ -156,10 +156,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="prefabs\BackgroundPrefab.cpp" />
     <ClCompile Include="prefabs\ForegroundPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
+    <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,10 +176,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="prefabs\BackgroundPrefab.h" />
     <ClInclude Include="prefabs\ForegroundPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
+    <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
   </ItemGroup>
   <ItemGroup>
