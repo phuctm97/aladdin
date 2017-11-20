@@ -53,11 +53,17 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 		Vec2(fourthGroundOffset.getX() + fourthGroundSize.getWidth() / 2 + mapBlockerSize.getWidth() / 2, -firstGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
 		mapBlockerSize, 0, "MapEndBlocker");
 
+	const auto mapWallAtStairGroupOne = new Collider(object, false,
+		Vec2(1470, 75), Size(11, 91), 0, "MapWallAtStairGroupOne");
+
+
+
 #pragma endregion
 
 #pragma region Stair
 
 #pragma region Stair group 1
+
 	/// Stair 1
 	const auto stairG1No1Size = Size(41, 75);
 	const auto stairG1No1Offset = Vec2(1160 + stairG1No1Size.getWidth() / 2, 0 + stairG1No1Size.getHeight() / 2);
@@ -89,6 +95,9 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto stairG1No6Collider = new Collider(object, false, stairG1No6Offset, stairG1No6Size, 0, "stairG1No6");
 
 	// Stair 7
+	const auto stairG1No7Size = Size(99, 9);
+	const auto stairG1No7Offset = Vec2(1401 + stairG1No7Size.getWidth()/2, 114 + stairG1No7Size.getHeight()/2);
+	const auto stairG1No7Collider = new Collider(object, false, stairG1No7Offset, stairG1No7Size, 0, "StairG1No7");
 
 
 #pragma endregion
@@ -109,6 +118,8 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 
 #pragma endregion
 
+	// Triggers
+
 
 	// configurations
 	transform->setPosition(Vec2(-halfVisibleSize.getWidth(),
@@ -126,6 +137,10 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto stairG1No4ColliderRenderer = new ColliderRenderer(stairG1No4Collider);
 	const auto stairG1No5ColliderRenderer = new ColliderRenderer(stairG1No5Collider);
 	const auto stairG1No6CollciderRenderer = new ColliderRenderer(stairG1No6Collider);
+	const auto stairG1No7CollciderRenderer = new ColliderRenderer(stairG1No7Collider);
+
+	const auto mapWallAtStairGroupOneColliderRenderer = new ColliderRenderer(mapWallAtStairGroupOne);
+
 
 	// const auto firstRopeColliderRenderer = new ColliderRenderer(firstRopeCollider);
 

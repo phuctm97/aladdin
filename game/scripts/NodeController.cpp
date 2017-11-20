@@ -38,7 +38,7 @@ void NodeController::onUpdate(const float delta)
 		_logger.info("Speed = %d\n", speed);
 	}
 
-	if (input->getKeyDown(ALA_KEY_F4)) {
+	if (input->getKeyDown(ALA_KEY_F2)) {
 		speed--;
 		_logger.info("Speed = %d\n", speed);
 	}
