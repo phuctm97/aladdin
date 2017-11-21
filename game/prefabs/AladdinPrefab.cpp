@@ -25,7 +25,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
-  //  const auto colliderRenderer =	new ColliderRenderer(collider);
+  const auto colliderRenderer =	new ColliderRenderer(collider);
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
   const auto timer3 = new Timer( object );
@@ -42,7 +42,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                else if ( stateManager->getPreviousStateName() == "jump_left_attack" ||
                  stateManager->getPreviousStateName() == "run_left_to_jump" ||
-                 stateManager->getPreviousStateName() == "jump_throw_apple_left" ) {
+                 stateManager->getPreviousStateName() == "jump_throw_apple_left"  ||
+				   stateManager->getPreviousStateName() == "run_left_to_throw")
+			   {
                  animator->setAction( "touched_ground" );
                }
                else if ( stateManager->getPreviousStateName() == "face_up_left" ) {
@@ -115,7 +117,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                else if ( stateManager->getPreviousStateName() == "jump_right_attack" ||
                  stateManager->getPreviousStateName() == "run_right_to_jump" ||
-                 stateManager->getPreviousStateName() == "jump_throw_apple_right" ) {
+                 stateManager->getPreviousStateName() == "jump_throw_apple_right" ||
+				   stateManager->getPreviousStateName() == "run_right_to_throw") {
                  animator->setAction( "touched_ground" );
                }
                else if ( stateManager->getPreviousStateName() == "face_up_right" ) {
@@ -539,15 +542,88 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL );
 
+  new State(stateManager, "run_left_to_throw",
+	  [=] {
+	  if (stateManager->getPreviousStateName() != "run_right_to_throw")
+	  {
+		  animator->setAction("jump_throw_apple");
+		  timer2->start(0.1f);
+		  timer3->start(0.3f);
+	  }
+  },
+	  [=](float dt) {
+	  if (timer2->isDone()) {
+		  controller->throwApple('L', 0.0f, -10.0f, -20000.0f, 1000.0f);
+		  animator->setAction("jump_throw_apple_fall");
+		  timer2->start(2.0f);
+	  }
+
+	  if (input->getKey(ALA_KEY_RIGHT_ARROW)) {
+		  transform->setScaleX(ABS(transform->getScale().getX()));
+		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
+	  }
+	  if (input->getKey(ALA_KEY_LEFT_ARROW)) {
+		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
+		  transform->setScaleX(-ABS(transform->getScale().getX()));
+	  }
+	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
+		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
+	  if (input->getKeyDown(ALA_KEY_A) && timer3->isDone()) {
+		  timer2->start(0.1f);
+		  timer3->start(0.3f);
+		  animator->setAction("jump_throw_apple");
+	  }
+  }
+  , NULL);
+
+  new State(stateManager, "run_right_to_throw",
+	  [=] {
+	  if (stateManager->getPreviousStateName() != "run_left_to_throw")
+	  {
+		  animator->setAction("jump_throw_apple");
+		  timer2->start(0.1f);
+		  timer3->start(0.3f);
+	  }
+  },
+	  [=](float dt) {
+	  if (timer2->isDone()) {
+		  controller->throwApple('R', 0.0f, -10.0f, 20000.0f, 1000.0f);
+		  animator->setAction("jump_throw_apple_fall");
+		  timer2->start(2.0f);
+	  }
+
+	  if (input->getKey(ALA_KEY_RIGHT_ARROW)) {
+		  transform->setScaleX(ABS(transform->getScale().getX()));
+		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
+	  }
+	  if (input->getKey(ALA_KEY_LEFT_ARROW)) {
+		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
+		  transform->setScaleX(-ABS(transform->getScale().getX()));
+	  }
+	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW) || input->getKeyUp(ALA_KEY_LEFT_ARROW))
+		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
+	  if (input->getKeyDown(ALA_KEY_A) && timer3->isDone()) {
+		  timer2->start(0.1f);
+		  timer3->start(0.3f);
+		  animator->setAction("jump_throw_apple");
+	  }
+  }
+  , NULL);
+
   new State( stateManager, "jump_throw_apple_left",
-             [=] {
-               animator->setAction( "jump_throw_apple" );
-               timer2->start( 0.1f );
-               timer3->start( 0.3f );
+		[=] {
+			  if (stateManager->getPreviousStateName() != "jump_throw_apple_right")
+			  {
+				  animator->setAction("jump_throw_apple");
+				  timer2->start(0.1f);
+				  timer3->start(0.3f);
+			  }
              },
              [=]( float dt ) {
                if ( timer2->isDone() ) {
-                 controller->throwApple( 'L', 0.0f, -10.0f, -20000.0f, 1000.0f );
+                 controller->throwApple('L',
+					 -(collider->getSize().getHeight()-5.0f),
+					 -(collider->getSize().getHeight() / 4), -20000.0f, 1000.0f);
                  animator->setAction( "jump_throw_apple_fall" );
                  timer2->start( 2.0f );
                }
@@ -572,9 +648,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new State( stateManager, "jump_throw_apple_right",
              [=] {
-               animator->setAction( "jump_throw_apple" );
-               timer2->start( 0.1f );
-               timer3->start( 0.3f );
+			  if (stateManager->getPreviousStateName() != "jump_throw_apple_left")
+			  {
+				  animator->setAction("jump_throw_apple");
+				  timer2->start(0.1f);
+				  timer3->start(0.3f);
+			  }
              },
              [=]( float dt ) {
                if ( timer2->isDone() ) {
@@ -924,10 +1003,27 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_left_to_jump", "run_left_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
+  new StateTransition(stateManager, "run_left_to_jump", "run_left_to_throw", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+  new StateTransition(stateManager, "run_right_to_jump", "run_right_to_throw", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+  new StateTransition(stateManager, "run_left_to_throw", "idle_left", [=] {
+	  return controller->isCollidedWithGround();
+  });
+
+
+  new StateTransition(stateManager, "run_right_to_throw", "idle_right", [=] {
+	  return controller->isCollidedWithGround();
+  });
+
+
 
   new StateTransition( stateManager, "run_right_to_jump", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
+
 
   new StateTransition( stateManager, "jump_left", "jump_throw_apple_left", [=] {
     return input->getKeyDown( ALA_KEY_A );
@@ -936,7 +1032,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "jump_throw_apple_left", "idle_left", [=] {
     return controller->isCollidedWithGround();
   } );
-
+  new StateTransition(stateManager, "jump_throw_apple_left", "jump_throw_apple_right", [=] {
+	  return input->getKeyDown(ALA_KEY_RIGHT_ARROW);
+  });
+  new StateTransition(stateManager, "jump_throw_apple_right", "jump_throw_apple_left", [=] {
+	  return input->getKeyDown(ALA_KEY_LEFT_ARROW);
+  });
   new StateTransition( stateManager, "jump_throw_apple_right", "idle_right", [=] {
     return controller->isCollidedWithGround();
   } );
@@ -952,6 +1053,13 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_right_to_jump_attack", "run_left_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
+  //new StateTransition(stateManager, "run_left_to_thow", "run_right_to_throw", [=] {
+	 // return input->getKeyDown(ALA_KEY_RIGHT_ARROW);
+  //});
+  //new StateTransition(stateManager, "run_right_to_throw", "throw", [=] {
+	 // return input->getKeyDown(ALA_KEY_LEFT_ARROW);
+  //});
+
 
   new StateTransition( stateManager, "run_left", "run_left_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
@@ -984,4 +1092,39 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_right_attack", "idle_right", [=] {
     return !input->getKey( ALA_KEY_RIGHT_ARROW );
   } );
+  new StateTransition(stateManager, "run_left_to_throw", "run_right_to_throw", [=] {
+	  return input->getKeyDown(ALA_KEY_RIGHT_ARROW);
+  });
+  new StateTransition(stateManager, "run_right_to_throw", "run_left_to_throw", [=] {
+	  return input->getKeyDown(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "jump_throw_apple_left", "jump_left_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "jump_throw_apple_right", "jump_right_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "jump_left_attack", "jump_throw_apple_left", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+  new StateTransition(stateManager, "jump_right_attack", "jump_throw_apple_right", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+
+  new StateTransition(stateManager, "run_left_to_jump_attack", "jump_throw_apple_left", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+  new StateTransition(stateManager, "run_right_to_jump_attack", "jump_throw_apple_right", [=] {
+	  return input->getKeyDown(ALA_KEY_A);
+  });
+
+  new StateTransition(stateManager, "run_left_to_throw", "run_left_to_jump_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+  new StateTransition(stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
+	  return input->getKeyDown(ALA_KEY_S);
+  });
+
+
 }
