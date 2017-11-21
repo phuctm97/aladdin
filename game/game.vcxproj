@@ -97,7 +97,9 @@
     </ClCompile>
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,7 +111,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +130,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,7 +149,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -153,6 +158,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
+    <ClCompile Include="prefabs\BigTextPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
@@ -171,6 +177,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
+    <ClInclude Include="prefabs\BigTextPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
@@ -196,6 +203,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <None Include="animations\miscellaneous\cutscenes.anm" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="fonts\aladdin.ttf" />
     <Font Include="fonts\arcade.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

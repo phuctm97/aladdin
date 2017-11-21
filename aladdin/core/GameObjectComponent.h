@@ -20,6 +20,7 @@ ALA_CLASS_HEADER_2(GameObjectComponent, ala::Initializable, ala::Releasable)
   // =====================================================
 private:
   std::string _name;
+  int _tag;
   GameObject* _gameObject;
   bool _active;
   bool _selfInitialize;
@@ -36,6 +37,10 @@ public:
   virtual ~GameObjectComponent();
 
   const std::string& getName() const;
+
+  int getTag() const;
+
+  void setTag( const int tag );
 
   GameObject* getGameObject() const;
 
