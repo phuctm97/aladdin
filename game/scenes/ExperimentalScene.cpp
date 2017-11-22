@@ -42,6 +42,9 @@ void ExperimentalScene::onPreInitialize() {
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -40 ) );
 
+  const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
+  thin_enemy->setLayer("Character");
+  thin_enemy->getTransform()->setPosition(Vec2(160, -40));
 
   gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
 }

@@ -34,9 +34,6 @@
     <Filter Include="texures\bosses">
       <UniqueIdentifier>{75d5b006-831d-4b59-b1b0-f65956aa7bae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="texures\enemies">
-      <UniqueIdentifier>{177ee673-e1ac-4433-8e09-68a7a48e0e4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="texures\playable_characters">
       <UniqueIdentifier>{4408fdca-1d79-4e73-bbb5-0392844a5db1}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,12 @@
     </Filter>
     <Filter Include="fonts">
       <UniqueIdentifier>{8aa2c938-3569-4bf5-a8fa-4b796314f793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="texures\enemies">
+      <UniqueIdentifier>{785a139d-09f9-4d46-b147-badb7be3ce6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations\enemies">
+      <UniqueIdentifier>{3208c9f3-ebb0-49d0-b7da-ce9e15980e91}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +93,12 @@
     <ClCompile Include="prefabs\NormalTextPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\ThinGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ThinGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -125,6 +134,12 @@
     <ClInclude Include="prefabs\NormalTextPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\ThinGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ThinGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -139,6 +154,9 @@
     <Image Include="textures\miscellaneous\cutscenes.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
+    <Image Include="textures\enemies\guards.png">
+      <Filter>texures\enemies</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -152,6 +170,9 @@
   <ItemGroup>
     <None Include="animations\miscellaneous\cutscenes.anm">
       <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\enemies\guards.anm">
+      <Filter>animations\enemies</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animations>
+  <Animation name="enemy_guard_run" imagePath="guards.png" interval="0.07" isLoop="true">
+    <sprite x="2" y="9" w="44" h="66" offsetX="0" offsetY="8.5" />
+    <sprite x="53" y="10" w="44" h="65" offsetX="0" offsetY="7.5" />
+    <sprite x="109" y="11" w="45" h="64" offsetX="0" offsetY="7.5" />
+    <sprite x="164" y="11" w="44" h="64" offsetX="0" offsetY="7.5" />
+    <sprite x="214" y="10" w="36" h="65" offsetX="0" offsetY="7.5" />
+    <sprite x="259" y="9" w="42" h="66" offsetX="0" offsetY="8.5" />
+    <sprite x="308" y="9" w="49" h="66" offsetX="0" offsetY="8.5" />
+    <sprite x="363" y="11" w="35" h="64" offsetX="0" offsetY="7.5" />
+  </Animation>
+</Animations>

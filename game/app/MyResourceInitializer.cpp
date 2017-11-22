@@ -7,6 +7,7 @@
 #include "../prefabs/AladdinPrefab.h"
 #include "../prefabs/GroundPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
+#include "../prefabs/ThinGuardPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -23,6 +24,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
+  new Sprite( "guards.png", "textures/enemies/guards.png");
 
   // Fonts
   new Font( "arcade.ttf", "fonts/arcade.ttf" );
@@ -30,6 +32,7 @@ void MyResourceInitializer::doRun() {
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
+  new Animation( "guards.anm", "animations/enemies/guards.anm");
 
   // Prefabs
   new NormalTextPrefab();
@@ -37,4 +40,5 @@ void MyResourceInitializer::doRun() {
   new AladdinPrefab();
   new ThrowableApplePrefab();
   new GroundPrefab();
+  new ThinGuardPrefab();
 }
