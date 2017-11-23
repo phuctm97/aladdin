@@ -98,7 +98,8 @@
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +111,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +130,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,7 +149,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
     <PreBuildEvent>
       <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
 xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
-xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Command>
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -185,6 +189,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"</Comm
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\crackman.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,6 +9,8 @@ USING_NAMESPACE_ALA;
 DemoScene::DemoScene() : _ballDirectionChangedListener( 0 ), _logger( "DemoScene" ) {}
 
 void DemoScene::onPreInitialize() {
+  enablePhysics(Vec2(0, -200));
+
   const auto gameManager = GameManager::get();
   const auto cameraTransform = gameManager->getMainCamera()->getTransform();
   cameraTransform->setPositionX( cameraTransform->getPositionX() + 100 );

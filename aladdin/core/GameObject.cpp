@@ -389,8 +389,6 @@ void GameObject::refreshComponent() {
 
   for ( const auto component : componentsNotRefreshed ) {
     if ( component != _transform && ALA_IS_INSTANCE_OF(component, Transform) ) {
-      ALA_ASSERT(!isInitializing() && !isInitialized() && !isReleasing() && !isReleased());
-
       // TODO: move children from old transform to new transform
 
       if ( !_transform->isInitialized() ) {

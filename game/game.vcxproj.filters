@@ -25,6 +25,9 @@
     <Filter Include="animations">
       <UniqueIdentifier>{6f2110f8-5cca-4925-a665-f5a8eb1bcb0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="fonts">
+      <UniqueIdentifier>{8fb5963f-e249-43a0-bcce-0ea5a9dd7743}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -95,5 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\crackman.ttf">
+      <Filter>fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
