@@ -6,13 +6,12 @@ NAMESPACE_ALA
 ALA_CLASS_SOURCE_1(ala::Collider, ala::GameObjectComponent)
 
 Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size,
-                    const int tag, const int physicsLayer,
+                    const int physicsLayer,
                     const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _offset( offset ),
     _size( size ),
     _isTrigger( isTrigger ),
-    _tag( tag ),
     _physicsLayer( physicsLayer ) {}
 
 Rect Collider::getBoundingRect() const {

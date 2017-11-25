@@ -11,12 +11,11 @@ private:
 	Size _size;
 
 	bool _isTrigger;
-  int _tag;
   std::unordered_set<int> _ignoredTags;
 
 	int _physicsLayer;
 public:
-	Collider(GameObject* gameObject, const bool isTrigger = false, const Vec2 &offset = Vec2(0,0), const Size &size = Size(0,0), const int tag = 0, const int physicsLayer = 0, const std::string &name = "");
+	Collider(GameObject* gameObject, const bool isTrigger = false, const Vec2 &offset = Vec2(0,0), const Size &size = Size(0,0), const int physicsLayer = 0, const std::string &name = "");
 
 	Rect getBoundingRect() const;
 
