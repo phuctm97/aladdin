@@ -1,4 +1,5 @@
 #include "ThrowableAppleController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -11,18 +12,16 @@ bool ThrowableAppleController::isCollidedWithGround() const {
 }
 
 void ThrowableAppleController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getGameObject()->getName() == "Ground" ||
-    collision.getColliderB()->getGameObject()->getName() == "Ground" ) {
+  if ( collision.getColliderA()->getTag() == GROUND_TAG ||
+    collision.getColliderB()->getTag() == GROUND_TAG ) {
     _collidedWithGround = true;
   }
 
-  if (collision.getColliderA()->getGameObject()->getName() == "Enemy" ||
-	  collision.getColliderB()->getGameObject()->getName() == "Enemy") {
+  if (collision.getColliderA()->getTag() == ENEMY_TAG ||
+	  collision.getColliderB()->getTag() == ENEMY_TAG) {
 	  _colliedWithEnemy = true;
   }
 }
-
-void ThrowableAppleController::resetCollidedWithGround() { _collidedWithGround = false; }
 
 bool ThrowableAppleController::isCollidedWithEnemy() const
 {

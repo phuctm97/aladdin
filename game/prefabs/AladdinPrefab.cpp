@@ -1,5 +1,6 @@
 #include "AladdinPrefab.h"
 #include "../scripts/AladdinController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -25,7 +26,10 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
-  //const auto colliderRenderer =	new ColliderRenderer(collider);
+  collider->setTag(ALADDIN_TAG);
+  collider->ignoreTag(ENEMY_TAG);
+
+  const auto colliderRenderer =	new ColliderRenderer(collider);
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
   const auto timer3 = new Timer( object );

@@ -10,4 +10,13 @@
     <sprite x="308" y="9" w="49" h="66" offsetX="0" offsetY="8.5" />
     <sprite x="363" y="11" w="35" h="64" offsetX="0" offsetY="7.5" />
   </Animation>
+  <Animation name="enemy_guard_attack" imagePath="guards.png" interval="0.07" isLoop="true
+             ">
+    <sprite x="9" y="82" w="36" h="73" offsetX="0" offsetY="12" />
+    <sprite x="53" y="96" w="48" h="59" offsetX="0" offsetY="5" />
+    <sprite x="109" y="98" w="91" h="57" offsetX="-29" offsetY="4" />
+    <sprite x="203" y="97" w="85" h="58" offsetX="-26" offsetY="4.5" />
+    <sprite x="292" y="96" w="76" h="59" offsetX="-19" offsetY="5" />
+    <sprite x="382" y="96" w="40" h="59" offsetX="0" offsetY="5" />
+  </Animation>
 </Animations>

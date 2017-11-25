@@ -146,6 +146,7 @@
     <ClInclude Include="prefabs\BigTextPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="Define.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">

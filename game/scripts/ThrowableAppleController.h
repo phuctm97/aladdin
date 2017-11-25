@@ -16,8 +16,6 @@ public:
 
   bool isCollidedWithEnemy() const;
 
-  void resetCollidedWithGround();
-
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 };
 
