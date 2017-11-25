@@ -18,6 +18,8 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Background" );
   gameManager->addLayer( "Character" );
   gameManager->addLayer( "Foreground" );
+  gameManager->addLayer( "Apple");
+  gameManager->addLayer( "Enemy");
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
