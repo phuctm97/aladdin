@@ -22,7 +22,7 @@ bool PhysicsManager::getCollisionInfo( Collider* colliderA, Collider* colliderB,
   auto rectA = colliderA->getBoundingRect();
   auto rectB = colliderB->getBoundingRect();
 
-  auto n = Vec2(rectB.getMidX(), rectB.getMidY()) - Vec2(rectA.getMidX(), rectA.getMidY());
+  auto n = Vec2( rectB.getMidX(), rectB.getMidY() ) - Vec2( rectA.getMidX(), rectA.getMidY() );
 
   const float aExtentX = rectA.getSize().getWidth() / 2;
   const float bExtentX = rectB.getSize().getWidth() / 2;
@@ -113,6 +113,7 @@ void PhysicsManager::update( const float delta ) {
         const auto colliderA = *itA;
         const auto colliderB = *itB;
         if ( colliderA == colliderB ) continue;
+        if ( colliderA->isIgnoredBy( colliderB ) || colliderB->isIgnoredBy( colliderA ) ) continue;
 
         const auto gameObjectA = colliderA->getGameObject();
         const auto gameObjectB = colliderB->getGameObject();
