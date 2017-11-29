@@ -39,6 +39,10 @@ public:
   State* getPreviousState() const;
 
   std::string getPreviousStateName() const;
+
+  State* getCurrentState() const;
+
+  std::string getCurrentStateName() const;
 };
 }
 
