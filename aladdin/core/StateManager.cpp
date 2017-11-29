@@ -81,4 +81,12 @@ State* StateManager::getPreviousState() const {
 std::string StateManager::getPreviousStateName() const {
   return _previousState == NULL ? "" : _previousState->getName();
 }
+
+State* StateManager::getCurrentState() const {
+  return _currentState;
+}
+
+std::string StateManager::getCurrentStateName() const {
+  return _currentState == NULL ? "" : _currentState->getName();
+}
 }
