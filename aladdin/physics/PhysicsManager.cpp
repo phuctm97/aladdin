@@ -113,6 +113,7 @@ void PhysicsManager::update( const float delta ) {
         const auto colliderA = *itA;
         const auto colliderB = *itB;
         if ( colliderA == colliderB ) continue;
+        if ( !colliderA->isActive() || !colliderB->isActive() ) continue;
         if ( colliderA->isIgnoredBy( colliderB ) || colliderB->isIgnoredBy( colliderA ) ) continue;
 
         const auto gameObjectA = colliderA->getGameObject();

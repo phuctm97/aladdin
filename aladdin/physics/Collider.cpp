@@ -55,6 +55,10 @@ void Collider::ignoreTag( const int tag ) {
   _ignoredTags.emplace( tag );
 }
 
+void Collider::unignoreTag( const int tag ) {
+  _ignoredTags.erase( tag );
+}
+
 int Collider::getPhysicsLayer() const {
   return _physicsLayer;
 }

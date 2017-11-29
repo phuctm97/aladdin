@@ -30,6 +30,7 @@ public:
 	void setTrigger(const bool trigger);
 	void setPhysicsLayer(const int physicsLayer);
   void ignoreTag(const int tag);
+  void unignoreTag(const int tag);
 
 	const Vec2& getOffset() const;
 	const Size& getSize() const;
