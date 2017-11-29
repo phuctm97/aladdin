@@ -41,7 +41,13 @@ void CameraController::onUpdate( const float delta ) {
   const auto aladdinStateManager = aladdin->getComponentT<StateManager>();
   if ( aladdinStateManager != NULL &&
     (aladdinStateManager->getCurrentStateName() == "face_up_left" ||
-      aladdinStateManager->getCurrentStateName() == "face_up_right") ) {
+      aladdinStateManager->getCurrentStateName() == "face_up_right" ||
+      aladdinStateManager->getCurrentStateName() == "attack_2_left" ||
+      aladdinStateManager->getCurrentStateName() == "attack_2_right" ||
+      (aladdinStateManager->getCurrentStateName() == "idle_left" &&
+        aladdinStateManager->getPreviousStateName() == "attack_2_left") ||
+      (aladdinStateManager->getCurrentStateName() == "idle_right" &&
+        aladdinStateManager->getPreviousStateName() == "attack_2_right")) ) {
     _targetPosition.setY( aladdinPosition.getY() + halfVisibleHeight * 0.7f );
   }
   else {

@@ -40,7 +40,7 @@ void ExperimentalScene::onPreInitialize() {
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->setLayer( "Character" );
-  aladdin->getTransform()->setPosition( Vec2( -80, -40 ) );
+  aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
 
   gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
