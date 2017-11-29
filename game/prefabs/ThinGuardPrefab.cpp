@@ -18,7 +18,7 @@ void ThinGuardPrefab::doInstantiate(ala::GameObject* object) const
 	const auto animator = new Animator(object, "enemy_guard_run", "guards.anm");
 
 	// For animationEditor
-	/*const auto animationEditor = new AnimationEditor( object, "enemy_guard_attack" );
+	/*const auto animationEditor = new AnimationEditor( object, "fat_guard_run" );
 	object->getTransform()->setPosition( 80, -40 );
 	return;*/
 	// For animationEditor

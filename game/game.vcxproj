@@ -159,6 +159,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
+    <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
@@ -167,6 +168,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
   </ItemGroup>
@@ -181,6 +183,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
+    <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
@@ -189,6 +192,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
   </ItemGroup>
@@ -206,7 +210,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Xml Include="animations\playable_characters\aladdin.anm" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="animations\enemies\guards.anm" />
+    <None Include="animations\enemies\guards.anm">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="animations\miscellaneous\cutscenes.anm" />
   </ItemGroup>
   <ItemGroup>

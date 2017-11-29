@@ -9,6 +9,7 @@
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/ThinGuardPrefab.h"
 #include "../prefabs/BigTextPrefab.h"
+#include "../prefabs/FatGuardPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -46,4 +47,5 @@ void MyResourceInitializer::doRun() {
   new ThrowableApplePrefab();
   new GroundPrefab();
   new ThinGuardPrefab();
+  new FatGuardPrefab();
 }

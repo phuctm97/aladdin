@@ -102,6 +102,12 @@
     <ClCompile Include="prefabs\BigTextPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FatGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -147,6 +153,12 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Define.h" />
+    <ClInclude Include="scripts\FatGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FatGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
