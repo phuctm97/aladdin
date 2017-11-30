@@ -20,6 +20,8 @@ void ExperimentalScene::onPreInitialize() {
 
   // initial objects
   const auto background = new GameObject( this, "Background" );
+  background->setTag( BACKGROUND_TAG );
+
   const auto backgroundSpriteRenderer = new SpriteRenderer( background, "background.png" );
   background->setLayer( "Background" );
   background->getTransform()->setPosition(
@@ -30,6 +32,8 @@ void ExperimentalScene::onPreInitialize() {
 
 
   const auto foreground = new GameObject( this, "Foreground" );
+  foreground->setTag( FOREGROUND_TAG );
+
   const auto foregroundSpriteRenderer = new SpriteRenderer( foreground, "foreground.png" );
   foreground->setLayer( "Foreground" );
   foreground->getTransform()->setPosition(
@@ -40,20 +44,20 @@ void ExperimentalScene::onPreInitialize() {
 
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
-  aladdin->setTag(ALADDIN_TAG);
+  aladdin->setTag( ALADDIN_TAG );
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
-  const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
-  thin_enemy->setLayer("Enemy");
-  thin_enemy->getTransform()->setPosition(Vec2(200, -40));
-
-  const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
-  fat_enemy->setLayer("Enemy");
-  fat_enemy->getTransform()->setPosition(Vec2(500, -60));
+  //  const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
+  //  thin_enemy->setLayer("Enemy");
+  //  thin_enemy->getTransform()->setPosition(Vec2(200, -40));
+  //
+  //  const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
+  //  fat_enemy->setLayer("Enemy");
+  //  fat_enemy->getTransform()->setPosition(Vec2(500, -60));
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
-  ground->setTag(GROUND_TAG);
+  ground->setTag( GROUND_TAG );
 }
 
 void ExperimentalScene::onPreRelease() {}
