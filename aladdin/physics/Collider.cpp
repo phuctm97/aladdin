@@ -5,13 +5,13 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(ala::Collider, ala::GameObjectComponent)
 
-Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size,
-                    const int physicsLayer,
+Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size, 
+                    const float massScale, const int physicsLayer,
                     const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _offset( offset ),
     _size( size ),
-    _isTrigger( isTrigger ),
+    _isTrigger( isTrigger ), _massScale( massScale ),
     _physicsLayer( physicsLayer ) {}
 
 Rect Collider::getBoundingRect() const {
@@ -59,6 +59,10 @@ void Collider::unignoreTag( const int tag ) {
   _ignoredTags.erase( tag );
 }
 
+void Collider::setMassScale( const float scale ) {
+  _massScale = scale;
+}
+
 int Collider::getPhysicsLayer() const {
   return _physicsLayer;
 }
@@ -82,4 +86,9 @@ const Size& Collider::getSize() const {
 bool Collider::isTrigger() const {
   return _isTrigger;
 }
+
+float Collider::getMassScale() const {
+  return _massScale;
+}
+
 }
