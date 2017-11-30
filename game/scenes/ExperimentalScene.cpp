@@ -4,6 +4,7 @@
 
 #include "ExperimentalScene.h"
 #include "../scripts/CameraController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -39,11 +40,20 @@ void ExperimentalScene::onPreInitialize() {
 
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
+  aladdin->setTag(ALADDIN_TAG);
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
+  const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
+  thin_enemy->setLayer("Enemy");
+  thin_enemy->getTransform()->setPosition(Vec2(200, -40));
 
-  gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
+  const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
+  fat_enemy->setLayer("Enemy");
+  fat_enemy->getTransform()->setPosition(Vec2(500, -60));
+
+  const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
+  ground->setTag(GROUND_TAG);
 }
 
 void ExperimentalScene::onPreRelease() {}

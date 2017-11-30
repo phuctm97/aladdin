@@ -23,7 +23,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto transform = object->getTransform();
 
   // configurations
-  object->setLayer( "Character" );
+  object->setLayer( "Apple" );
 
   // states
 
@@ -42,24 +42,21 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   new State( stateManager, "apple_left",
              [=] {
                animator->setAction( "apple" );
-               controller->resetCollidedWithGround();
                transform->setScaleX( -ABS(transform->getScale().getX()) );
              },NULL,NULL );
 
   new State( stateManager, "apple_right",
              [=] {
                animator->setAction( "apple" );
-               controller->resetCollidedWithGround();
                transform->setScaleX( ABS(transform->getScale().getX()) );
              }, NULL, NULL );
 
 
   new StateTransition( stateManager, "apple_left", "apple_explode", [=] {
-    return controller->isCollidedWithGround();
+    return controller->isCollidedWithGround() || controller->isCollidedWithEnemy();
   } );
 
   new StateTransition( stateManager, "apple_right", "apple_explode", [=] {
-    return controller->isCollidedWithGround();
+    return controller->isCollidedWithGround() || controller->isCollidedWithEnemy();
   } );
-
 }

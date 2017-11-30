@@ -1,5 +1,6 @@
 #include "AladdinPrefab.h"
 #include "../scripts/AladdinController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -37,8 +38,13 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
+  collider->setTag(ALADDIN_TAG);
+  collider->ignoreTag(ENEMY_TAG);
+
   const auto colliderRenderer = new ColliderRenderer( collider );
   const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
+  swordCollider->setActive(false);
+  
   const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
@@ -72,7 +78,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               swordCollider->setActive(false);
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
@@ -147,7 +152,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               swordCollider->setActive(false);
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
