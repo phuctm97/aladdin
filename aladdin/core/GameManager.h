@@ -73,17 +73,15 @@ public:
 
   std::vector<GameObject*> getAllObjects() const;
 
-  GameObject* getObjectById( const long id ) const;
-
-  template <class T>
-  T* getObjectTById( const long id ) const;
+  GameObject* getObjectById(const long id) const;
 
   std::vector<GameObject*> getAllObjectsByName( const std::string& name ) const;
 
   GameObject* getObjectByName( const std::string& name ) const;
 
-  template <class T>
-  T* getObjectTByName( const std::string& name ) const;
+  std::vector<GameObject*> getAllObjectsByTag(const int tag) const;
+
+  GameObject* getObjectByTag(const int tag) const;
 
   // ===============================================
   // Scene Management
@@ -161,36 +159,6 @@ public:
 };
 
 // TEMPLATE DEFINITIONS
-
-// ===============================================
-// Object Management
-// ===============================================
-
-template <class T>
-T* GameManager::getObjectTById( const long id ) const {
-  const auto objectIt = _attachedObjects.find( id );
-  if ( objectIt == _attachedObjects.end() ) return NULL;
-
-  const auto object = objectIt->second;
-  if ( ALA_IS_INSTANCE_OF( object, T) ) {
-    return static_cast<T *>(object);
-  }
-  return NULL;
-}
-
-template <class T>
-T* GameManager::getObjectTByName( const std::string& name ) const {
-  for ( auto& pair : _attachedObjects ) {
-    auto object = pair.second;
-    if ( object == NULL ) continue;
-    if ( object->getName() == name ) {
-      if ( ALA_IS_INSTANCE_OF(object, T) ) {
-        return static_cast<T *>(object);
-      }
-    }
-  }
-  return NULL;
-}
 }
 
 #endif //__ALADDIN_CORE_GAME_MANAGER_H__
