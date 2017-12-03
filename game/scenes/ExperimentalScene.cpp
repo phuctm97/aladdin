@@ -48,9 +48,13 @@ void ExperimentalScene::onPreInitialize() {
   thin_enemy->setLayer("Enemy");
   thin_enemy->getTransform()->setPosition(Vec2(200, -40));
 
-  const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
+  /*const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
   fat_enemy->setLayer("Enemy");
-  fat_enemy->getTransform()->setPosition(Vec2(500, -60));
+  fat_enemy->getTransform()->setPosition(Vec2(500, -60));*/
+
+  const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
+  adorable_enemy->setLayer("Enemy");
+  adorable_enemy->getTransform()->setPosition(Vec2(500, -60));
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
   ground->setTag(GROUND_TAG);

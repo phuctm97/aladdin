@@ -32,7 +32,6 @@ void ThinGuardPrefab::doInstantiate(ala::GameObject* object) const
 	const auto stateManager = new StateManager(object, "enemy_guard_run_left");
 	const auto controller = new ThinGuardController(object);
 	const auto transform = object->getTransform();
-	const auto aladdin = GameManager::get()->getObjectByName("Aladdin");
 	// states
 
 	new State(stateManager, "enemy_guard_run_left",

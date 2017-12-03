@@ -10,6 +10,8 @@
 #include "../prefabs/ThinGuardPrefab.h"
 #include "../prefabs/BigTextPrefab.h"
 #include "../prefabs/FatGuardPrefab.h"
+#include "../prefabs/AdorableGuardPrefab.h"
+#include "../prefabs/ThrowableKnifePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -22,6 +24,7 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Foreground" );
   gameManager->addLayer( "Apple");
   gameManager->addLayer( "Enemy");
+  gameManager->addLayer( "Knife");
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
@@ -48,4 +51,6 @@ void MyResourceInitializer::doRun() {
   new GroundPrefab();
   new ThinGuardPrefab();
   new FatGuardPrefab();
+  new AdorableGuardPrefab();
+  new ThrowableKnifePrefab();
 }
