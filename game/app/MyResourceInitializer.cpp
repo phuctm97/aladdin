@@ -4,12 +4,14 @@
 
 #include "MyResourceInitializer.h"
 #include "../prefabs/NormalTextPrefab.h"
+#include "../prefabs/BigTextPrefab.h"
 #include "../prefabs/AladdinPrefab.h"
-#include "../prefabs/GroundPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/ThinGuardPrefab.h"
-#include "../prefabs/BigTextPrefab.h"
 #include "../prefabs/FatGuardPrefab.h"
+#include "../prefabs/GroundPrefab.h"
+#include "../prefabs/RopePrefab.h"
+#include "../prefabs/NodePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -43,7 +45,13 @@ void MyResourceInitializer::doRun() {
 
   new AladdinPrefab();
   new ThrowableApplePrefab();
-  new GroundPrefab();
+  
   new ThinGuardPrefab();
   new FatGuardPrefab();
+  
+  new GroundPrefab();
+  new RopePrefab();
+  
+  // Dev tools
+  new NodePrefab();
 }

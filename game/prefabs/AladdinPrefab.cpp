@@ -10,7 +10,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto input = Input::get();
 
   const auto density = 5.0f;
-  const auto runVelocity = 140.0f;
+  const auto runVelocity = 500.0f;
   const auto stopAcceleration = 4.0f;
   const auto swordOffset1 = Vec2( 45, 10 );
   const auto swordSize1 = Size( 40, 45 );

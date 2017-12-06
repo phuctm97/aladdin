@@ -87,10 +87,19 @@
     <ClCompile Include="scripts\ThrowableAppleController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\NodePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\NodeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
     <ClCompile Include="scenes\MenuScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\NormalTextPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\RopePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\ThinGuardController.cpp">
@@ -137,10 +146,19 @@
     <ClInclude Include="scripts\ThrowableAppleController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\NodePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\NodeController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
     <ClInclude Include="scenes\MenuScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\NormalTextPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\RopePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\ThinGuardController.h">
