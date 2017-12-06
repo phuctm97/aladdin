@@ -6,10 +6,10 @@
 class StairPrefab : public ala::Prefab
 {
 public:
-	StairPrefab() : Prefab("Stair") {}
+  StairPrefab() : Prefab( "Stair" ) {}
 
 protected:
-	void doInitianate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object ) const override;
 };
 
 #endif // !_STAIR_PREFAB_H__

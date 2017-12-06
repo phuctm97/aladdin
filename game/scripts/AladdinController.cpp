@@ -1,5 +1,6 @@
 #include "AladdinController.h"
 #include "ThrowableAppleController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,8 +14,8 @@ void AladdinController::resetCollidedWithGround() { _collidedWithGround = false;
 void AladdinController::onUpdate( const float delta ) {}
 
 void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getGameObject()->getName() == "Ground" ||
-    collision.getColliderB()->getGameObject()->getName() == "Ground" ) {
+  if ( collision.getColliderA()->getGameObject()->getTag() == GROUND_TAG ||
+    collision.getColliderB()->getGameObject()->getTag() == GROUND_TAG ) {
     _collidedWithGround = true;
   }
 }

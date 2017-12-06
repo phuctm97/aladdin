@@ -1,5 +1,5 @@
-#ifndef __DEFINE_H__
-#define __DEFINE_H__
+#ifndef __GAME_DEFINE_H__
+#define __GAME_DEFINE_H__
 
 enum
 {
@@ -10,5 +10,4 @@ enum
   FOREGROUND_TAG
 };
 
-#endif
-//!__DEFINE_H__
+#endif //!__GAME_DEFINE_H__
