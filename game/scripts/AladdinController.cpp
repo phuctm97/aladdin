@@ -5,7 +5,7 @@
 USING_NAMESPACE_ALA;
 
 AladdinController::AladdinController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ) {}
+  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _logger( "AladdinController" ) {}
 
 bool AladdinController::isCollidedWithGround() const { return _collidedWithGround; }
 
@@ -18,6 +18,10 @@ void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) 
     collision.getColliderB()->getGameObject()->getTag() == GROUND_TAG ) {
     _collidedWithGround = true;
   }
+}
+
+void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+
 }
 
 void AladdinController::throwApple( const char direction, const float directX, const float directY,

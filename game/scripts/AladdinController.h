@@ -6,6 +6,7 @@
 class AladdinController : public ala::GameObjectComponent
 {
 private:
+  ala::Logger _logger;
   bool _collidedWithGround;
 
 public:
@@ -21,6 +22,8 @@ protected:
 
 public:
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
+
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 };
 
 #endif //!__ALADDIN_CONTROLLER_H__

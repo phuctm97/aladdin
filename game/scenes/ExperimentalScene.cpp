@@ -70,6 +70,11 @@ void ExperimentalScene::onPreInitialize() {
   aladdin->setTag( ALADDIN_TAG );
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+
+  const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1" );
+  guardOne->setTag( ENEMY_TAG );
+  guardOne->setLayer( "Character" );
+  guardOne->getTransform()->setPosition( Vec2( 80, -25 ) );
 }
 
 void ExperimentalScene::onPreRelease() {}

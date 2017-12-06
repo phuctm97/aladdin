@@ -43,6 +43,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto colliderRenderer = new ColliderRenderer( collider );
   const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
+  swordCollider->setTag( SWORD_TAG );
   swordCollider->setActive( false );
 
   const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
