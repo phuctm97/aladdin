@@ -13,6 +13,7 @@ ALA_CLASS_SOURCE_2(ala::GameObject, ala::Initializable, ala::Releasable)
 GameObject::GameObject( Scene* parentScene, const std::string& name, const std::string& quadIndex )
   : _id( GameManager::get()->newId() ),
     _name( name ),
+    _tag( -1 ),
     _parentScene( parentScene ),
     _active( false ),
     _selfInitialize( true ),
@@ -41,6 +42,7 @@ GameObject::GameObject( Scene* parentScene, const std::string& name, const std::
 GameObject::GameObject( GameObject* parentObject, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
+    _tag( -1 ),
     _parentScene( NULL ),
     _active( false ),
     _selfInitialize( true ),
@@ -111,6 +113,16 @@ const std::string& GameObject::getLayer() const {
 GameObject* GameObject::setLayer( const std::string& layer ) {
   _layer = layer;
   return this;
+}
+
+GameObject* GameObject::setTag( const int tag ) {
+  ALA_ASSERT(tag >= 0);
+  _tag = tag;
+  return this;
+}
+
+int GameObject::getTag() const {
+  return _tag;
 }
 
 // ===========================================================
@@ -314,7 +326,7 @@ void GameObject::resolveLockedTasks() {
 
   // update components
   lockComponents();
-  
+
   for ( const auto component : _components ) {
     component->resolveLockedTasks();
   }
@@ -329,46 +341,73 @@ void GameObject::onResolveLockedTasks() { }
 // ============================================================
 
 void GameObject::addComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
+
   // check lock
   if ( _componentsInLock ) {
     addComponentInNextFrame( component );
     return;
   }
 
-  if ( isReleasing() || isReleased() ) return;
-  if ( component == NULL ) return;
-  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
-
   doAddComponent( component );
 }
 
 void GameObject::addComponentInNextFrame( GameObjectComponent* component ) {
-  if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
-  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
+  if ( isReleasing() || isReleased() ) return;
 
   _componentsToAddInNextFrame.push_back( component );
 }
 
 void GameObject::removeComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
+
   // check lock 
   if ( _componentsInLock ) {
     removeComponentInNextFrame( component );
     return;
   }
 
-  if ( isReleasing() || isReleased() ) return;
-  if ( component == NULL ) return;
   doRemoveComponent( component );
 }
 
 void GameObject::removeComponentInNextFrame( GameObjectComponent* component ) {
-  if ( isReleasing() || isReleased() ) return;
   if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
+
   _componentsToRemoveInNextFrame.push_back( component );
 }
 
-GameObjectComponent* GameObject::getComponent( const std::string& name ) const {
+void GameObject::refreshComponent() {
+  if ( _componentsNotRefreshed.empty() ) return;
+
+  std::vector<GameObjectComponent*> componentsNotRefreshed;
+  componentsNotRefreshed.insert( componentsNotRefreshed.begin(),
+                                 _componentsNotRefreshed.cbegin(), _componentsNotRefreshed.cend() );
+
+  for ( const auto component : componentsNotRefreshed ) {
+    if ( component != _transform && ALA_IS_INSTANCE_OF(component, Transform) ) {
+      // TODO: move children from old transform to new transform
+
+      if ( !_transform->isInitialized() ) {
+        _transform->initialize();
+      }
+      _transform->release();
+      _transform = static_cast<Transform*>(component);
+
+      StdHelper::vectorErase<GameObjectComponent*>( _components, _transform );
+      _components.insert( _components.begin(), _transform );
+    }
+  }
+
+  _componentsNotRefreshed.clear();
+}
+
+GameObjectComponent* GameObject::getComponent( const std::string& name ) {
+  refreshComponent();
+
   for ( auto component : _components ) {
     if ( component != NULL && component->getName() == name ) {
       return component;
@@ -377,7 +416,20 @@ GameObjectComponent* GameObject::getComponent( const std::string& name ) const {
   return NULL;
 }
 
-std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::string& name ) const {
+GameObjectComponent* GameObject::getComponent( const int tag ) {
+  refreshComponent();
+
+  for ( auto component : _components ) {
+    if ( component != NULL && component->getTag() == tag ) {
+      return component;
+    }
+  }
+  return NULL;
+}
+
+std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::string& name ) {
+  refreshComponent();
+
   std::vector<GameObjectComponent*> ret;
 
   for ( auto component : _components ) {
@@ -389,7 +441,23 @@ std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::strin
   return ret;
 }
 
-std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
+std::vector<GameObjectComponent*> GameObject::getAllComponents( const int tag ) {
+  refreshComponent();
+
+  std::vector<GameObjectComponent*> ret;
+
+  for ( auto component : _components ) {
+    if ( component != NULL && component->getTag() == tag ) {
+      ret.emplace_back( component );
+    }
+  }
+
+  return ret;
+}
+
+std::vector<GameObjectComponent*> GameObject::getAllComponents() {
+  refreshComponent();
+
   return _components;
 }
 
@@ -414,21 +482,16 @@ void GameObject::updateAddAndRemoveComponentInNextFrame() {
 }
 
 void GameObject::doAddComponent( GameObjectComponent* component ) {
-  if ( component != _transform && ALA_IS_INSTANCE_OF(component, Transform) ) {
-    ALA_ASSERT(!isInitializing() && !isInitialized() && !isReleasing() && !isReleased());
+  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
 
-    // TODO: move children from old transform to new transform
+  _componentsNotRefreshed.emplace_back( component );
 
-    doRemoveComponent( _transform );
-    _transform = static_cast<Transform*>(component);
-    _components.insert( _components.begin(), _transform );
-  }
-  else {
-    _components.emplace_back( component );
-  }
+  _components.emplace_back( component );
 }
 
 void GameObject::doRemoveComponent( GameObjectComponent* component ) {
+  StdHelper::vectorErase<GameObjectComponent*>( _componentsNotRefreshed, component );
+
   StdHelper::vectorErase<GameObjectComponent*>( _components, component );
 }
 
@@ -441,7 +504,9 @@ bool GameObject::isDefaultComponents( GameObjectComponent* component ) {
   return false;
 }
 
-Transform* GameObject::getTransform() const {
+Transform* GameObject::getTransform() {
+  refreshComponent();
+
   return _transform;
 }
 

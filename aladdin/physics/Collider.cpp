@@ -5,13 +5,13 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(ala::Collider, ala::GameObjectComponent)
 
-Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size,
-                    const int physicsLayer,
+Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& offset, const Size& size, 
+                    const float massScale, const int physicsLayer,
                     const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _offset( offset ),
     _size( size ),
-    _isTrigger( isTrigger ),
+    _isTrigger( isTrigger ), _massScale( massScale ),
     _physicsLayer( physicsLayer ) {}
 
 Rect Collider::getBoundingRect() const {
@@ -51,8 +51,28 @@ void Collider::setPhysicsLayer( const int physicsLayer ) {
   _physicsLayer = physicsLayer;
 }
 
+void Collider::ignoreTag( const int tag ) {
+  _ignoredTags.emplace( tag );
+}
+
+void Collider::unignoreTag( const int tag ) {
+  _ignoredTags.erase( tag );
+}
+
+void Collider::setMassScale( const float scale ) {
+  _massScale = scale;
+}
+
 int Collider::getPhysicsLayer() const {
   return _physicsLayer;
+}
+
+const std::unordered_set<int>& Collider::getIgnoredTags() const {
+  return _ignoredTags;
+}
+
+bool Collider::isIgnoredBy( Collider* other ) const {
+  return _ignoredTags.count( other->getTag() ) > 0;
 }
 
 const Vec2& Collider::getOffset() const {
@@ -66,4 +86,9 @@ const Size& Collider::getSize() const {
 bool Collider::isTrigger() const {
   return _isTrigger;
 }
+
+float Collider::getMassScale() const {
+  return _massScale;
+}
+
 }

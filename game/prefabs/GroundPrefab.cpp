@@ -1,4 +1,5 @@
 #include "GroundPrefab.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -123,10 +124,4 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto stairG1No7CollciderRenderer = new ColliderRenderer(stairG1No7Collider);
 
 	const auto mapWallAtStairGroupOneColliderRenderer = new ColliderRenderer(mapWallAtStairGroupOne);
-
-
-	/*const auto firstRopeColliderRenderer = new ColliderRenderer(firstRopeCollider);
-	const auto secondRopeColliderRenderer = new ColliderRenderer(secondRopeCollider);*/
-
-
 }

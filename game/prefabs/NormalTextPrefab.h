@@ -1,5 +1,5 @@
 #ifndef __NORMAL_TEXT_PREFAB_H__
-#define __MAIN_MENU_OPTION_PREFAB_H__
+#define __NORMAL_TEXT_PREFAB_H__
 
 #include <aladdin.h>
 
