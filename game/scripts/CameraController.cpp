@@ -1,4 +1,5 @@
 #include "CameraController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -23,7 +24,7 @@ void CameraController::onUpdate( const float delta ) {
   const auto backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
   const auto backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
 
-  const auto aladdin = GameManager::get()->getObjectByName( "Node" );
+  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
   const auto& aladdinPosition = aladdin->getTransform()->getPosition();

@@ -1,7 +1,3 @@
 #include "StairPrefab.h"
 
-void StairPrefab::doInitianate(ala::GameObject * object) const
-{
-
-
-}
+void StairPrefab::doInstantiate( ala::GameObject* object ) const {}

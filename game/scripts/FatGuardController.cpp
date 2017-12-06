@@ -3,22 +3,23 @@
 
 USING_NAMESPACE_ALA;
 FatGuardController::FatGuardController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name), _collidedWithGround(false), _colliedWithAladdin(false) {}
+  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _couldAttackAladdin( false ),
+    _couldSeeAladdin( false ), _onRightOfAladdin( false ) {}
 
 bool FatGuardController::isCollidedWithGround() const { return _collidedWithGround; }
 
-bool FatGuardController::isCollidedWithAladdin() const
+bool FatGuardController::couldAttackAladdin() const
 {
-	return _colliedWithAladdin;
+	return _couldAttackAladdin;
 }
 
-bool FatGuardController::isSeeingWithAladdin() const
+bool FatGuardController::coundSeeAladdin() const
 {
-	return _seeAladdin;
+	return _couldSeeAladdin;
 }
-bool FatGuardController::isInTheLeftAladdin() const
+bool FatGuardController::isOnRightOfAladdin() const
 {
-	return _aladdinPosition;
+	return _onRightOfAladdin;
 }
 
 
@@ -31,25 +32,25 @@ void FatGuardController::onUpdate(const float delta)
 
 	if (ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) < 60)
 	{
-		_colliedWithAladdin = true;
+		_couldAttackAladdin = true;
 	}
 	else
 	{
-		_colliedWithAladdin = false;
+		_couldAttackAladdin = false;
 	}
 	if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() < (visibleWidth*0.8))
 	{
-		_seeAladdin = true;
+		_couldSeeAladdin = true;
 	}
 	else if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() > (visibleWidth / 2))
 	{
-		_seeAladdin = false;
+		_couldSeeAladdin = false;
 	}
 	if (aladdin->getTransform()->getPosition().getX() < getGameObject()->getTransform()->getPosition().getX())
 	{
-		_aladdinPosition = true; //Aladdin is in the left of enemy
+		_onRightOfAladdin = true; //Aladdin is in the left of enemy
 	}
-	else _aladdinPosition = false; //Aladdin is in the right of enemy
+	else _onRightOfAladdin = false; //Aladdin is in the right of enemy
 }
 
 void FatGuardController::onCollisionEnter(const ala::CollisionInfo& collision) {
