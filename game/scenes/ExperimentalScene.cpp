@@ -42,19 +42,19 @@ void ExperimentalScene::onPreInitialize() {
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->setTag(ALADDIN_TAG);
   aladdin->setLayer( "Character" );
-  aladdin->getTransform()->setPosition( Vec2( -80, -40 ) );
+  aladdin->getTransform()->setPosition( Vec2( 500, -40 ) );
 
-  const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
+ /* const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
   thin_enemy->setLayer("Enemy");
   thin_enemy->getTransform()->setPosition(Vec2(200, -40));
-
+*/
   /*const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
   fat_enemy->setLayer("Enemy");
   fat_enemy->getTransform()->setPosition(Vec2(500, -60));*/
 
   const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
   adorable_enemy->setLayer("Enemy");
-  adorable_enemy->getTransform()->setPosition(Vec2(500, -60));
+  adorable_enemy->getTransform()->setPosition(Vec2(200, -40));
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
   ground->setTag(GROUND_TAG);

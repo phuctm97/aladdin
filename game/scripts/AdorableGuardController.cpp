@@ -4,7 +4,7 @@
 
 USING_NAMESPACE_ALA;
 AdorableGuardController::AdorableGuardController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name), _collidedWithGround(false), _colliedWithAladdin(false) {}
+	: GameObjectComponent(gameObject, name), _collidedWithGround(false), _colliedWithAladdin(false), _isRunFromEnemy(false), _seeAladdin(false){}
 
 bool AdorableGuardController::isCollidedWithGround() const { return _collidedWithGround; }
 
@@ -20,6 +20,11 @@ bool AdorableGuardController::isSeeingWithAladdin() const
 bool AdorableGuardController::isInTheLeftAladdin() const
 {
 	return _aladdinPosition;
+}
+
+bool AdorableGuardController::isRunFromEnemy() const
+{
+	return _isRunFromEnemy;
 }
 
 
@@ -38,19 +43,24 @@ void AdorableGuardController::onUpdate(const float delta)
 	{
 		_colliedWithAladdin = false;
 	}
-	if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() < (visibleWidth*0.8))
+	if (ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) < (visibleWidth*0.4))
 	{
 		_seeAladdin = true;
 	}
-	else if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() > (visibleWidth / 2))
-	{
-		_seeAladdin = false;
-	}
+	else _seeAladdin = false;
 	if (aladdin->getTransform()->getPosition().getX() < getGameObject()->getTransform()->getPosition().getX())
 	{
 		_aladdinPosition = true; //Aladdin is in the left of enemy
 	}
 	else _aladdinPosition = false; //Aladdin is in the right of enemy
+	if (ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) > (visibleWidth*0.4))
+	{
+		_isRunFromEnemy = true;
+	}
+	else
+	{
+		_isRunFromEnemy = false;
+	}
 }
 
 void AdorableGuardController::onCollisionEnter(const ala::CollisionInfo& collision) {
@@ -66,7 +76,7 @@ void AdorableGuardController::throwKnife(const char direction, const float direc
 	const auto collider = getGameObject()->getComponentT<Collider>();
 
 	const auto knife = GameManager::get()->getPrefab("Throwable Knife")->instantiate(
-		transform->getPosition() + Vec2(collider->getSize().getWidth() / 2 + directX,
+		transform->getPosition() + Vec2(-collider->getSize().getWidth() / 2 + directX,
 			collider->getSize().getHeight() / 2 + directY));
 	const auto knifeStateManager = static_cast<StateManager*>(knife->getComponentT<StateManager>());
 

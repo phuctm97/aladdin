@@ -10,6 +10,7 @@ private:
 	bool _colliedWithAladdin;
 	bool _seeAladdin;
 	bool _aladdinPosition;
+	bool _isRunFromEnemy;
 
 protected:
 	void onUpdate(const float delta) override;
@@ -20,6 +21,7 @@ public:
 	bool isCollidedWithAladdin() const;
 	bool isSeeingWithAladdin() const;
 	bool isInTheLeftAladdin() const;
+	bool isRunFromEnemy() const;
 	void onCollisionEnter(const ala::CollisionInfo& collision) override;
 	void throwKnife(const char direction, const float directX, const float directY,
 					const float impulseX, const float impulseY) const;
