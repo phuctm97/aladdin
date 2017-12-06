@@ -6,6 +6,10 @@
 
 class CameraController : ala::GameObjectComponent
 {
+private:
+  ala::Vec2 _targetPosition;
+  float _movingSpeed;
+
 public:
   // ReSharper disable CppNonExplicitConvertingConstructor
   CameraController( ala::GameObject* gameObject, const std::string& name = "" );

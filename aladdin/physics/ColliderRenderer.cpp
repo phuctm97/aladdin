@@ -31,8 +31,10 @@ float ColliderRenderer::getOpacity() const {
 }
 
 void ColliderRenderer::onRender() {
-  const auto transform = getGameObject()->getTransform();
   if ( _collider == NULL ) return;
+  if ( !_collider->isActive() ) return;
+
+  const auto transform = getGameObject()->getTransform();
   const auto worldZOrder = calculateWorldZOrder();
 
   const auto offset = _collider->getOffset();

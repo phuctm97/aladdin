@@ -147,7 +147,7 @@ float Rigidbody::getMass() const
 
   float mass = 0;
   for (const auto collider : colliders) {
-    mass += collider->getSize().getArea() * _material.getDensity();
+    mass += collider->getSize().getArea() * _material.getDensity() * collider->getMassScale();
   }
   return mass;
 }
