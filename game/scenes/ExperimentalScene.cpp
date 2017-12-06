@@ -4,6 +4,7 @@
 
 #include "ExperimentalScene.h"
 #include "../scripts/CameraController.h"
+#include "../scripts/NodeController.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
@@ -20,6 +21,8 @@ void ExperimentalScene::onPreInitialize() {
 
   // initial objects
   const auto background = new GameObject( this, "Background" );
+  background->setTag( BACKGROUND_TAG );
+
   const auto backgroundSpriteRenderer = new SpriteRenderer( background, "background.png" );
   background->setLayer( "Background" );
   background->getTransform()->setPosition(
@@ -30,6 +33,8 @@ void ExperimentalScene::onPreInitialize() {
 
 
   const auto foreground = new GameObject( this, "Foreground" );
+  foreground->setTag( FOREGROUND_TAG );
+
   const auto foregroundSpriteRenderer = new SpriteRenderer( foreground, "foreground.png" );
   foreground->setLayer( "Foreground" );
   foreground->getTransform()->setPosition(
@@ -38,26 +43,37 @@ void ExperimentalScene::onPreInitialize() {
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 
+  const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
+  ground->setTag( GROUND_TAG );
+
+  const auto ropeOne = gameManager->getPrefab( "Rope" )->instantiate( "Rope 1" );
+  ropeOne->setLayer( "Background" );
+  ropeOne->getTransform()->setPosition( Vec2( 1931, 86 ) );
+  ropeOne->getComponentT<Collider>()->setSize( Size( 5, 250 ) );
+
+  const auto ropeTwo = gameManager->getPrefab( "Rope" )->instantiate( "Rope 2" );
+  ropeTwo->setLayer( "Background" );
+  ropeTwo->getTransform()->setPosition( Vec2( 1387, 298 ) );
+  ropeTwo->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
+
+  const auto ropeThree = gameManager->getPrefab( "Rope" )->instantiate( "Rope 3" );
+  ropeThree->setLayer( "Background" );
+  ropeThree->getTransform()->setPosition( Vec2( 2539, 345 ) );
+  ropeThree->getComponentT<Collider>()->setSize( Size( 5, 249 ) );
+
+  const auto ropeFour = gameManager->getPrefab( "Rope" )->instantiate( "Rope 4" );
+  ropeFour->setLayer( "Background" );
+  ropeFour->getTransform()->setPosition( Vec2( 4555, 99 ) );
+  ropeFour->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
-  aladdin->setTag(ALADDIN_TAG);
+  aladdin->setTag( ALADDIN_TAG );
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
-
- /* const auto thin_enemy = gameManager->getPrefab("Thin Guard")->instantiate("Thin Guard");
-  thin_enemy->setLayer("Enemy");
-  thin_enemy->getTransform()->setPosition(Vec2(200, -40));
-*/
-  /*const auto fat_enemy = gameManager->getPrefab("Fat Guard")->instantiate("Fat Guard");
-  fat_enemy->setLayer("Enemy");
-  fat_enemy->getTransform()->setPosition(Vec2(500, -60));*/
 
   const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
   adorable_enemy->setLayer("Enemy");
   adorable_enemy->getTransform()->setPosition(Vec2(200, -40));
-
-  const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
-  ground->setTag(GROUND_TAG);
 }
 
 void ExperimentalScene::onPreRelease() {}

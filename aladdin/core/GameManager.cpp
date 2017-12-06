@@ -139,6 +139,31 @@ GameObject* GameManager::getObjectByName( const std::string& name ) const {
   return NULL;
 }
 
+std::vector<GameObject*> GameManager::getAllObjectsByTag( const int tag ) const {
+  std::vector<GameObject*> ret;
+
+  for (auto& pair : _attachedObjects) {
+    auto object = pair.second;
+    if (object == NULL) continue;
+    if (object->getTag() == tag) {
+      ret.emplace_back(object);
+    }
+  }
+
+  return ret;
+}
+
+GameObject* GameManager::getObjectByTag( const int tag ) const {
+  for (auto& pair : _attachedObjects) {
+    const auto object = pair.second;
+    if (object == NULL) continue;
+    if (object->getTag() == tag) {
+      return object;
+    }
+  }
+  return NULL;
+}
+
 // ==================================================
 // Scene Management
 // ==================================================

@@ -1,8 +1,14 @@
-#ifndef __DEFINE_H__
-#define __DEFINE_H__
+#ifndef __GAME_DEFINE_H__
+#define __GAME_DEFINE_H__
 
-#define ALADDIN_TAG 1
-#define ENEMY_TAG 2
-#define GROUND_TAG 3
+enum
+{
+  ALADDIN_TAG,
+  ENEMY_TAG,
+  GROUND_TAG,
+  BACKGROUND_TAG,
+  FOREGROUND_TAG,
+  SWORD_TAG,
+};
 
-#endif //!__DEFINE_H__
+#endif //!__GAME_DEFINE_H__

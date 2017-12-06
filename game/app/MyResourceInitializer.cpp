@@ -4,12 +4,15 @@
 
 #include "MyResourceInitializer.h"
 #include "../prefabs/NormalTextPrefab.h"
+#include "../prefabs/BigTextPrefab.h"
 #include "../prefabs/AladdinPrefab.h"
-#include "../prefabs/GroundPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/ThinGuardPrefab.h"
-#include "../prefabs/BigTextPrefab.h"
 #include "../prefabs/FatGuardPrefab.h"
+#include "../prefabs/GroundPrefab.h"
+#include "../prefabs/RopePrefab.h"
+#include "../prefabs/StairPrefab.h"
+#include "../prefabs/NodePrefab.h"
 #include "../prefabs/AdorableGuardPrefab.h"
 #include "../prefabs/ThrowableKnifePrefab.h"
 
@@ -22,16 +25,13 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Background" );
   gameManager->addLayer( "Character" );
   gameManager->addLayer( "Foreground" );
-  gameManager->addLayer( "Apple");
-  gameManager->addLayer( "Enemy");
-  gameManager->addLayer( "Knife");
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
-  new Sprite( "guards.png", "textures/enemies/guards.png");
+  new Sprite( "guards.png", "textures/enemies/guards.png" );
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -40,7 +40,7 @@ void MyResourceInitializer::doRun() {
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
-  new Animation( "guards.anm", "animations/enemies/guards.anm");
+  new Animation( "guards.anm", "animations/enemies/guards.anm" );
 
   // Prefabs
   new NormalTextPrefab();
@@ -48,9 +48,16 @@ void MyResourceInitializer::doRun() {
 
   new AladdinPrefab();
   new ThrowableApplePrefab();
-  new GroundPrefab();
+
   new ThinGuardPrefab();
   new FatGuardPrefab();
+
+  new RopePrefab();
+  new StairPrefab();
+
+  // Dev tools
+  new NodePrefab();
   new AdorableGuardPrefab();
   new ThrowableKnifePrefab();
+  new GroundPrefab();
 }
