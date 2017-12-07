@@ -55,6 +55,9 @@
     <Filter Include="animations\enemies">
       <UniqueIdentifier>{3208c9f3-ebb0-49d0-b7da-ce9e15980e91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\bosses">
+      <UniqueIdentifier>{ae6ce757-92a4-4d44-9fc5-97d83c1b9214}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -120,6 +123,9 @@
     <ClCompile Include="prefabs\StairPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FirePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -183,6 +189,9 @@
     <ClInclude Include="prefabs\StairPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\FirePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -216,6 +225,9 @@
     </None>
     <None Include="animations\enemies\guards.anm">
       <Filter>animations\enemies</Filter>
+    </None>
+    <None Include="animations\bosses\jafar.anm">
+      <Filter>animations\bosses</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

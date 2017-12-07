@@ -160,6 +160,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
+    <ClCompile Include="prefabs\FirePrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
@@ -188,6 +189,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
+    <ClInclude Include="prefabs\FirePrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
@@ -218,6 +220,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Xml Include="animations\playable_characters\aladdin.anm" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="animations\bosses\jafar.anm" />
     <None Include="animations\enemies\guards.anm">
       <SubType>Designer</SubType>
     </None>

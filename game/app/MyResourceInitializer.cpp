@@ -13,6 +13,7 @@
 #include "../prefabs/RopePrefab.h"
 #include "../prefabs/StairPrefab.h"
 #include "../prefabs/NodePrefab.h"
+#include "../prefabs/FirePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -30,6 +31,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
+  new Sprite( "jafar.png", "textures/bosses/jafar.png" );
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -39,6 +41,7 @@ void MyResourceInitializer::doRun() {
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
+  new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
 
   // Prefabs
   new NormalTextPrefab();
@@ -53,6 +56,7 @@ void MyResourceInitializer::doRun() {
   new GroundPrefab();
   new RopePrefab();
   new StairPrefab();
+  new FirePrefab();
 
   // Dev tools
   new NodePrefab();

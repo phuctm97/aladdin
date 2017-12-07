@@ -71,10 +71,8 @@ void ExperimentalScene::onPreInitialize() {
   aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
-  const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1" );
-  guardOne->setTag( ENEMY_TAG );
-  guardOne->setLayer( "Character" );
-  guardOne->getTransform()->setPosition( Vec2( 80, -25 ) );
+  const auto fire = gameManager->getPrefab( "Fire" )->instantiate();
+  fire->getTransform()->setPosition( Vec2( 80, -28 ) );
 }
 
 void ExperimentalScene::onPreRelease() {}
