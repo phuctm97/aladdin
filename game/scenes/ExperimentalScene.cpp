@@ -44,35 +44,28 @@ void ExperimentalScene::onPreInitialize() {
             gameManager->getVisibleHeight() / 2 ) );
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
-  ground->setTag( GROUND_TAG );
 
   const auto ropeOne = gameManager->getPrefab( "Rope" )->instantiate( "Rope 1" );
-  ropeOne->setLayer( "Background" );
   ropeOne->getTransform()->setPosition( Vec2( 1931, 86 ) );
   ropeOne->getComponentT<Collider>()->setSize( Size( 5, 250 ) );
 
   const auto ropeTwo = gameManager->getPrefab( "Rope" )->instantiate( "Rope 2" );
-  ropeTwo->setLayer( "Background" );
   ropeTwo->getTransform()->setPosition( Vec2( 1387, 298 ) );
   ropeTwo->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
   const auto ropeThree = gameManager->getPrefab( "Rope" )->instantiate( "Rope 3" );
-  ropeThree->setLayer( "Background" );
   ropeThree->getTransform()->setPosition( Vec2( 2539, 345 ) );
   ropeThree->getComponentT<Collider>()->setSize( Size( 5, 249 ) );
 
   const auto ropeFour = gameManager->getPrefab( "Rope" )->instantiate( "Rope 4" );
-  ropeFour->setLayer( "Background" );
   ropeFour->getTransform()->setPosition( Vec2( 4555, 99 ) );
   ropeFour->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
-  aladdin->setTag( ALADDIN_TAG );
-  aladdin->setLayer( "Character" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
-  const auto fire = gameManager->getPrefab( "Fire" )->instantiate();
-  fire->getTransform()->setPosition( Vec2( 80, -28 ) );
+  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
+  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 }
 
 void ExperimentalScene::onPreRelease() {}

@@ -8,7 +8,7 @@ class NodeController : public ala::GameObjectComponent
 {
 private:
 	ala::Logger _logger;
-	int _speed = 1;
+	float _speed;
 
 public: 
 	NodeController(ala::GameObject*  gameObject, const std::string& name = "");
@@ -18,6 +18,7 @@ public:
 protected:
 	void onUpdate(const float delta) override;
 
+  bool onPreInitialize() override;
 };
 
 

@@ -126,6 +126,12 @@
     <ClCompile Include="prefabs\FirePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CharcoalBurnerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -192,6 +198,12 @@
     <ClInclude Include="prefabs\FirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\CharcoalBurnerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CharcoalBurnerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -207,6 +219,9 @@
       <Filter>texures\miscellaneous</Filter>
     </Image>
     <Image Include="textures\enemies\guards.png">
+      <Filter>texures\enemies</Filter>
+    </Image>
+    <Image Include="textures\enemies\civilian-enemies.png">
       <Filter>texures\enemies</Filter>
     </Image>
   </ItemGroup>
@@ -228,6 +243,9 @@
     </None>
     <None Include="animations\bosses\jafar.anm">
       <Filter>animations\bosses</Filter>
+    </None>
+    <None Include="animations\enemies\civilian-enemies.anm">
+      <Filter>animations\enemies</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
