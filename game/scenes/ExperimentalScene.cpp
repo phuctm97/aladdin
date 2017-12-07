@@ -61,11 +61,17 @@ void ExperimentalScene::onPreInitialize() {
   ropeFour->getTransform()->setPosition( Vec2( 4555, 99 ) );
   ropeFour->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
+  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 1" );
+  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
+
+  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 2" );
+  charcoalBurnerTwo->getTransform()->setPosition( Vec2( 730.5f, -50 ) );
+
+  const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 3" );
+  charcoalBurnerThree->getTransform()->setPosition( Vec2( 906.5f, -50 ) );
+
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
-
-  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
-  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 }
 
 void ExperimentalScene::onPreRelease() {}

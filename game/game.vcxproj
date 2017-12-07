@@ -212,6 +212,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+    <Text Include="note.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />

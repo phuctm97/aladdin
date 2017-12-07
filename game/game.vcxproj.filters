@@ -228,6 +228,7 @@
   <ItemGroup>
     <Text Include="log.txt" />
     <Text Include="log.txt" />
+    <Text Include="note.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm">
