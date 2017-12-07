@@ -12,7 +12,7 @@ void CameraController::onUpdate( const float delta ) {
   const auto halfVisibleWidth = GameManager::get()->getVisibleWidth() / 2;
   const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
 
-  const auto background = GameManager::get()->getObjectByName( "Background" );
+  const auto background = GameManager::get()->getObjectByTag( BACKGROUND_TAG );
   if ( background == NULL ) return;
 
   const auto& backgroundPosition = background->getTransform()->getPosition();
