@@ -132,6 +132,12 @@
     <ClCompile Include="scripts\CharcoalBurnerController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\HubPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\HubController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -204,6 +210,12 @@
     <ClInclude Include="scripts\CharcoalBurnerController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\HubPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\HubController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -223,6 +235,12 @@
     </Image>
     <Image Include="textures\enemies\civilian-enemies.png">
       <Filter>texures\enemies</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\items.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\numbers.png">
+      <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +265,12 @@
     </None>
     <None Include="animations\enemies\civilian-enemies.anm">
       <Filter>animations\enemies</Filter>
+    </None>
+    <None Include="animations\miscellaneous\items.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\numbers.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

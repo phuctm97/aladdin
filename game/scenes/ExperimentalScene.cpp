@@ -31,7 +31,6 @@ void ExperimentalScene::onPreInitialize() {
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 
-
   const auto foreground = new GameObject( this, "Foreground" );
   foreground->setTag( FOREGROUND_TAG );
 
@@ -42,6 +41,8 @@ void ExperimentalScene::onPreInitialize() {
           foregroundSpriteRenderer->getFrameSize().getHeight() / 2 )
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
+
+  const auto hub = gameManager->getPrefab( "Hub" )->instantiate( "Hub" );
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
 

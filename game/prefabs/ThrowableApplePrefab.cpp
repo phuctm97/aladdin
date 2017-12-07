@@ -23,7 +23,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto transform = object->getTransform();
 
   // configurations
-  object->setLayer( "Apple" );
+  object->setLayer( "Character" );
 
   // states
 
