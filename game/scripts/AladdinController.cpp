@@ -5,35 +5,19 @@
 USING_NAMESPACE_ALA;
 
 AladdinController::AladdinController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _health( 10 ), _lives( 3 ), _apples( 5 ),
-    _logger( "AladdinController" ) {}
+  : GameObjectComponent( gameObject, name ), _logger( "AladdinController" ),
+    _collidedWithGround( false ), _colliedWithKnife( false ),
+    _health( 10 ), _lives( 3 ), _apples( 5 ) {}
 
 bool AladdinController::isCollidedWithGround() const { return _collidedWithGround; }
 
-bool AladdinController::isCollidedWithKnife() const
-{
-	return _colliedWithKnife;
-}
-
-bool AladdinController::isAladdinRightPosition() const
-{
-	return _aladdinPosition;
+bool AladdinController::isCollidedWithKnife() const {
+  return _colliedWithKnife;
 }
 
 void AladdinController::resetCollidedWithGround() { _collidedWithGround = false; }
 
-void AladdinController::onUpdate( const float delta )
-{
-	const auto adorableguard = GameManager::get()->getObjectByName("Adorable Guard");
-	if (adorableguard == NULL) return;
-
-	const auto visibleWidth = GameManager::get()->getVisibleWidth();
-
-	if (adorableguard->getTransform()->getPosition().getX() < getGameObject()->getTransform()->getPosition().getX())
-	{
-		_aladdinPosition = true; //Aladdin is in the right of enemy
-	}
-	else _aladdinPosition = false; //Aladdin is in the left of enemy
+void AladdinController::onUpdate( const float delta ) {
 }
 
 void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
@@ -44,10 +28,10 @@ void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) 
 }
 
 void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-	if (collision.getColliderA()->getTag() == KNIFE_TAG ||
-		collision.getColliderB()->getTag() == KNIFE_TAG) {
-		_colliedWithKnife = true;
-	}
+  if ( collision.getColliderA()->getTag() == KNIFE_TAG ||
+    collision.getColliderB()->getTag() == KNIFE_TAG ) {
+    _colliedWithKnife = true;
+  }
 
 }
 

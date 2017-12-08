@@ -1383,33 +1383,4 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
-	new StateTransition(stateManager, "idle_right", "aladdin_hitted_right", [=] {
-		if ( controller->isCollidedWithKnife() && controller->isAladdinRightPosition() )
-		{
-			return true;
-		}
-		else return false;
-	});
-	new StateTransition(stateManager, "idle_left", "aladdin_hitted_left", [=] {
-		if (controller->isCollidedWithKnife() && controller->isAladdinRightPosition())
-		{
-			return true;
-		}
-		else return false;
-	});
-
-	new StateTransition(stateManager, "idle_left", "aladdin_hitted_left", [=] {
-		if (controller->isCollidedWithKnife() && !controller->isAladdinRightPosition())
-		{
-			return true;
-		}
-		else return false;
-	});
-	new StateTransition(stateManager, "idle_right", "aladdin_hitted_right", [=] {
-		if (controller->isCollidedWithKnife() && !controller->isAladdinRightPosition())
-		{
-			return true;
-		}
-		else return false;
-	});
 }

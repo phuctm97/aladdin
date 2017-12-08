@@ -6,6 +6,7 @@
 #include "../scripts/CameraController.h"
 #include "../scripts/NodeController.h"
 #include "../Define.h"
+#include "../scripts/ThinGuardController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -70,6 +71,10 @@ void ExperimentalScene::onPreInitialize() {
 
   const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 3" );
   charcoalBurnerThree->getTransform()->setPosition( Vec2( 906.5f, -50 ) );
+
+  const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1" );
+  guardOne->getTransform()->setPositionY( -25 );
+  static_cast<ThinGuardController*>(guardOne->getComponent( "Controller" ))->set( 430, 670 );
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

@@ -23,113 +23,190 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto colliderRenderer = new ColliderRenderer( collider );
   const auto timer1 = new Timer( object );
-  const auto stateManager = new StateManager( object, "enemy_guard_run_left" );
-  const auto controller = new ThinGuardController( object );
+  const auto stateManager = new StateManager( object, "initial" );
+  const auto controller = new ThinGuardController( object, "Controller" );
   const auto transform = object->getTransform();
+
+  // configurations
+  object->setLayer( "Character" );
+  object->setTag( ENEMY_TAG );
+
   // states
 
-  new State( stateManager, "enemy_guard_run_left",
+  new State( stateManager, "initial",
+             [=] {
+               float midX = (controller->getMinX() + controller->getMaxX()) / 2;
+               transform->setPositionX( midX );
+               animator->setAction( "enemy_guard_idle" );
+             }, NULL, NULL );
+
+  new State( stateManager, "idle_left",
+             [=] {
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               animator->setAction( "enemy_guard_idle" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "idle_right",
+             [=] {
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               animator->setAction( "enemy_guard_idle" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "run_left",
              [=] {
                animator->setAction( "enemy_guard_run" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-               timer1->start( 2 );
                body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "enemy_guard_run_left_to_Aladdin",
-             [=] {
-               animator->setAction( "enemy_guard_run" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
-             }, NULL, NULL );
-
-  new State( stateManager, "enemy_guard_run_right",
+  new State( stateManager, "run_right",
              [=] {
                animator->setAction( "enemy_guard_run" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-               timer1->start( 2 );
-               body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
-
-             }, NULL, NULL );
-  new State( stateManager, "enemy_guard_run_right_to_Aladdin",
-             [=] {
-               animator->setAction( "enemy_guard_run" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-               timer1->start( 2 );
                body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "enemy_guard_attack_left",
+  new State( stateManager, "attack_left",
              [=] {
                animator->setAction( "enemy_guard_attack" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "enemy_guard_attack_right",
+  new State( stateManager, "attack_right",
              [=] {
                animator->setAction( "enemy_guard_attack" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new StateTransition( stateManager, "enemy_guard_run_left", "enemy_guard_run_right", [=] {
-    return timer1->isDone();
+  new StateTransition( stateManager, "initial", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_right", "enemy_guard_run_left", [=] {
-    return timer1->isDone();
+  new StateTransition( stateManager, "run_right", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_left", "enemy_guard_run_left_to_Aladdin", [=] {
-    return controller->coundSeeAladdin();
+  new StateTransition( stateManager, "idle_left", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_left_to_Aladdin", "enemy_guard_attack_left", [=] {
-    return controller->couldAttackAladdin();
+  new StateTransition( stateManager, "idle_right", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_attack_left", "enemy_guard_run_left_to_Aladdin", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == true ) {
-      return true;
-    }
-    else return false;
+  new StateTransition( stateManager, "attack_left", "run_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_right", "enemy_guard_run_right_to_Aladdin", [=] {
-    return controller->coundSeeAladdin();
+  new StateTransition( stateManager, "attack_right", "run_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_right", "enemy_guard_attack_right", [=] {
-    return controller->couldAttackAladdin();
+  new StateTransition( stateManager, "initial", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_attack_right", "enemy_guard_run_right_to_Aladdin", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == false ) {
-      return true;
-    }
-    else return false;
+  new StateTransition( stateManager, "run_left", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_right", "enemy_guard_run_right_to_Aladdin", [=] {
-    return controller->coundSeeAladdin();
+  new StateTransition( stateManager, "idle_left", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_attack_left", "enemy_guard_run_right_to_Aladdin", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == false ) {
-      return true;
-    }
-    else return false;
+  new StateTransition( stateManager, "idle_right", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_run_right_to_Aladdin", "enemy_guard_attack_right", [=] {
-    return controller->couldAttackAladdin();
+  new StateTransition( stateManager, "attack_left", "run_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
 
-  new StateTransition( stateManager, "enemy_guard_attack_right", "enemy_guard_run_left_to_Aladdin", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == true ) {
-      return true;
-    }
-    else return false;
+  new StateTransition( stateManager, "attack_right", "run_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "idle_left", [=] {
+    return transform->getPositionX() <= controller->getMinX();
+  } );
+
+  new StateTransition( stateManager, "run_right", "idle_right", [=] {
+    return transform->getPositionX() >= controller->getMaxX();
+  } );
+
+  new StateTransition( stateManager, "initial", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "initial", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "initial", [=] {
+    return controller->isTooFarFromAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "initial", [=] {
+    return controller->isTooFarFromAladdin();
   } );
 }

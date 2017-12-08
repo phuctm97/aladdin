@@ -9,7 +9,6 @@ private:
   ala::Logger _logger;
   bool _collidedWithGround;
   bool _colliedWithKnife;
-  bool _aladdinPosition;
   int _health;
   int _lives;
   int _apples;
@@ -20,8 +19,6 @@ public:
   bool isCollidedWithGround() const;
 
   bool isCollidedWithKnife() const;
-
-  bool isAladdinRightPosition() const;
 
   void resetCollidedWithGround();
 
@@ -38,6 +35,7 @@ public:
   void setHealth( const int health );
 
   int getHealth() const;
+
 protected:
   void onUpdate( const float delta ) override;
 
