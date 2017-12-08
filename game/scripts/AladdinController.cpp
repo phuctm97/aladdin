@@ -5,7 +5,7 @@
 USING_NAMESPACE_ALA;
 
 AladdinController::AladdinController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _lives( 3 ), _apples( 5 ),
+  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _health( 10 ), _lives( 3 ), _apples( 5 ),
     _logger( "AladdinController" ) {}
 
 bool AladdinController::isCollidedWithGround() const { return _collidedWithGround; }
@@ -61,4 +61,12 @@ void AladdinController::setApples( const int apples ) {
 
 int AladdinController::getApples() const {
   return _apples;
+}
+
+void AladdinController::setHealth( const int health ) {
+  _health = health;
+}
+
+int AladdinController::getHealth() const {
+  return _health;
 }

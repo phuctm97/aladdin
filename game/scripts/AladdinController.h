@@ -8,6 +8,7 @@ class AladdinController : public ala::GameObjectComponent
 private:
   ala::Logger _logger;
   bool _collidedWithGround;
+  int _health;
   int _lives;
   int _apples;
 
@@ -27,6 +28,10 @@ public:
   void setApples( const int apples );
 
   int getApples() const;
+
+  void setHealth( const int health );
+
+  int getHealth() const;
 protected:
   void onUpdate( const float delta ) override;
 

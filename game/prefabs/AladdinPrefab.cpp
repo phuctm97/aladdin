@@ -60,6 +60,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   object->setLayer( "Character" );
   controller->setLives( 3 );
   controller->setApples( 5 );
+  controller->setHealth( 10 );
 
   // states
   new State( stateManager, "idle_left",

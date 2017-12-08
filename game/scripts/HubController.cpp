@@ -1,6 +1,6 @@
 #include "HubController.h"
-#include "../Define.h"
 #include "AladdinController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
