@@ -67,11 +67,17 @@ void ExperimentalScene::onPreInitialize() {
   const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
   charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 
+  const auto camel = gameManager->getPrefab("camel")->instantiate();
+  camel->getTransform()->setPosition(Vec2(0, -25));
+
+  /*const auto saliva = gameManager->getPrefab("saliva")->instantiate();
+  saliva->getTransform()->setPosition(Vec2(20, -15));*/
+
   const auto handEnemy_1 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_1->getTransform()->setPosition(Vec2(1632.5, 91.5));
   const auto handEnemy_2 = gameManager->getPrefab("Hand Enemy")->instantiate();
-  handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));/*
-  const auto handEnemy_3 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));
+  /*const auto handEnemy_3 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_3->getTransform()->setPosition(Vec2(1792.5, 235));
   const auto handEnemy_4 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_4->getTransform()->setPosition(Vec2(1680.5, 235.5));

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Animations>
+  <Animation name="fly_straight" imagePath="saliva.png" interval="0.1" isLoop="true">
+    <sprite x="1" y="2" w="11" h="8" offsetX="0" offsetY="0" />
+    <sprite x="17" y="2" w="7" h="7" offsetX="0" offsetY="0" />
+    <sprite x="31" y="1" w="7" h="9" offsetX="0" offsetY="0" />
+    <sprite x="44" y="3" w="9" h="6" offsetX="0" offsetY="0" />
+    <sprite x="58" y="2" w="9" h="8" offsetX="0" offsetY="0" />
+    <sprite x="72" y="1" w="9" h="9" offsetX="0" offsetY="0" />
+    <sprite x="86" y="1" w="9" h="9" offsetX="0" offsetY="0" />
+    <sprite x="100" y="1" w="9" h="9" offsetX="0" offsetY="0" />
+  </Animation>
+</Animations>

@@ -971,6 +971,32 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                swordCollider->setActive( false );
              } );
 
+  new State(stateManager, "push_wall_right",
+	  [=] {
+	  animator->setAction("push");
+	  transform->setScaleX(ABS(transform->getScale().getX()));
+	  body->setVelocity(Vec2(0, 0));
+  },
+	  [=](float dt) {
+	  if (!animator->isPlaying()) {
+		  animator->setAction("push_loop");
+	  }
+  }
+  , NULL);
+
+  new State(stateManager, "push_wall_left",
+	  [=] {
+	  animator->setAction("push");
+	  transform->setScaleX(-ABS(transform->getScale().getX()));
+	  body->setVelocity(Vec2(0, 0));
+  },
+	  [=](float dt) {
+	  if (!animator->isPlaying()) {
+		  animator->setAction("push_loop");
+	  }
+  }
+  , NULL);
+
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
@@ -1370,4 +1396,20 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
+
+  new StateTransition(stateManager, "run_left", "push_wall_left", [=] {
+	  return input->getKey(ALA_KEY_H);
+  });
+
+  new StateTransition(stateManager, "run_right", "push_wall_right", [=] {
+	  return input->getKey(ALA_KEY_H);
+  });
+
+  new StateTransition(stateManager, "push_wall_left", "idle_left", [=] {
+	  return input->getKeyUp(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "push_wall_right", "idle_right", [=] {
+	  return input->getKeyUp(ALA_KEY_RIGHT_ARROW);
+  });
 }

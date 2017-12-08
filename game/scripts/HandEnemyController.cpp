@@ -4,7 +4,7 @@
 USING_NAMESPACE_ALA;
 
 HandEnemyController::HandEnemyController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name) {}
+	: GameObjectComponent(gameObject, name), _nearAladdin(false) {}
 
 bool HandEnemyController::isAladdinNear() const { return _nearAladdin; }
 

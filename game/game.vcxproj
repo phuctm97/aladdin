@@ -159,6 +159,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
+    <ClCompile Include="prefabs\CamelPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\FirePrefab.cpp" />
@@ -167,6 +168,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
+    <ClCompile Include="prefabs\SalivaPrefab.cpp" />
     <ClCompile Include="prefabs\StairPrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
@@ -174,11 +176,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
+    <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
     <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\SalivaController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
     <ClCompile Include="scripts\ThrowVaseController.cpp" />
@@ -194,6 +198,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
+    <ClInclude Include="prefabs\CamelPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\FirePrefab.h" />
@@ -202,18 +207,21 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
+    <ClInclude Include="prefabs\SalivaPrefab.h" />
     <ClInclude Include="prefabs\StairPrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowVasePrefab.h" />
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AladdinController.h" />
+    <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
     <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\SalivaController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
     <ClInclude Include="scripts\ThrowVaseController.h" />
@@ -227,6 +235,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\enemies\civilian-enemies.png" />
     <Image Include="textures\enemies\guards.png" />
     <Image Include="textures\miscellaneous\cutscenes.png" />
+    <Image Include="textures\non_playable_characters\camel.png" />
+    <Image Include="textures\non_playable_characters\saliva.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +251,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
       <SubType>Designer</SubType>
     </None>
     <None Include="animations\miscellaneous\cutscenes.anm" />
+    <None Include="animations\non_playable_characters\camel.anm" />
+    <None Include="animations\non_playable_characters\saliva.anm" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

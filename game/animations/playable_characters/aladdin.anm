@@ -276,5 +276,25 @@
     <sprite x="912" y="1378" w="72" h="59" offsetX="0" offsetY="5" />
     <sprite x="1020" y="1388" w="59" h="49" offsetX="0" offsetY="0" />
   </Animation>
-
+  <Animation name="push" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="7" y="1959" w="55" h="45" offsetX="0" offsetY="-4" />
+        <sprite x="75" y="1961" w="64" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="157" y="1961" w="69" h="44" offsetX="0" offsetY="-4.5" />
+        <sprite x="237" y="1962" w="76" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="327" y="1964" w="71" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="416" y="1965" w="65" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="495" y="1965" w="74" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="585" y="1966" w="80" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="681" y="1968" w="74" h="43" offsetX="0" offsetY="-5" />
+  </Animation>
+  <Animation name="push_loop" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="75" y="1961" w="64" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="157" y="1961" w="69" h="44" offsetX="0" offsetY="-4.5" />
+        <sprite x="237" y="1962" w="76" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="327" y="1964" w="71" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="416" y="1965" w="65" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="495" y="1965" w="74" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="585" y="1966" w="80" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="681" y="1968" w="74" h="43" offsetX="0" offsetY="-5" />
+  </Animation>
 </Animations>

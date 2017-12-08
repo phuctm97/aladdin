@@ -17,6 +17,8 @@
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs//HandEnemyPrefab.h"
 #include "../prefabs//ThrowVasePrefab.h"
+#include "../prefabs//SalivaPrefab.h"
+#include "../prefabs//CamelPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -36,6 +38,8 @@ void MyResourceInitializer::doRun() {
   new Sprite( "guards.png", "textures/enemies/guards.png" );
   new Sprite( "civilian-enemies.png", "textures/enemies/civilian-enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
+  new Sprite("camel.png", "textures/non_playable_characters/camel.png");
+  new Sprite("saliva.png", "textures/non_playable_characters/saliva.png");
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -47,6 +51,8 @@ void MyResourceInitializer::doRun() {
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "civilian-enemies.anm", "animations/enemies/civilian-enemies.anm" );
+  new Animation("camel.anm", "animations/non_playable_characters/camel.anm");
+  new Animation("saliva.anm", "animations/non_playable_characters/saliva.anm");
 
   // Prefabs
   new NormalTextPrefab();
@@ -55,6 +61,9 @@ void MyResourceInitializer::doRun() {
   new AladdinPrefab();
   new ThrowableApplePrefab();
   new ThrowVasePrefab();
+
+  new SalivaPrefab();
+  new CamelPrefab();
 
   new ThinGuardPrefab();
   new FatGuardPrefab();
