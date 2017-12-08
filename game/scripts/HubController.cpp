@@ -1,11 +1,15 @@
 #include "HubController.h"
+#include "../Define.h"
+#include "AladdinController.h"
 
 USING_NAMESPACE_ALA;
 
 HubController::HubController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ) {}
+  : GameObjectComponent( gameObject, name ), _lives( 0 ), _apples( 0 ) {}
 
-void HubController::setLives( const int lives ) const {
+void HubController::setLives( const int lives ) {
+  if ( _lives == lives ) return;
+
   const auto gameManager = GameManager::get();
   const auto firstNumber = gameManager->getObjectByName( "Hub Lives 1" );
   const auto firstSpriteRenderer = firstNumber->getComponentT<SpriteRenderer>();
@@ -35,9 +39,17 @@ void HubController::setLives( const int lives ) const {
     stringBuilder << second;
     secondAnimator->setAction( stringBuilder.str() );
   }
+
+  _lives = filteredLives;
 }
 
-void HubController::setApples( const int apples ) const {
+int HubController::getLives() const {
+  return _lives;
+}
+
+void HubController::setApples( const int apples ) {
+  if ( _apples == apples ) return;
+
   const auto gameManager = GameManager::get();
   const auto firstNumber = gameManager->getObjectByName( "Hub Apples 1" );
   const auto firstSpriteRenderer = firstNumber->getComponentT<SpriteRenderer>();
@@ -67,6 +79,31 @@ void HubController::setApples( const int apples ) const {
     stringBuilder << second;
     secondAnimator->setAction( stringBuilder.str() );
   }
+
+  _apples = filteredApples;
+}
+
+int HubController::getApples() const {
+  return _apples;
+}
+
+void HubController::onInitialize() {
+  _lives = 0;
+  setLives( 3 );
+
+  _apples = 0;
+  setApples( 5 );
+}
+
+void HubController::onUpdate( const float delta ) {
+  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin == NULL ) return;
+
+  const auto aladdinController = static_cast<AladdinController*>(aladdin->getComponent( "Controller" ));
+  if ( aladdinController == NULL ) return;
+
+  setLives( aladdinController->getLives() );
+  setApples( aladdinController->getApples() );
 }
 
 void HubController::onRender() {
