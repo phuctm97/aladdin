@@ -4,9 +4,9 @@
 
 #include "ExperimentalScene.h"
 #include "../scripts/CameraController.h"
+#include "../scripts/GuardController.h"
 #include "../scripts/NodeController.h"
 #include "../Define.h"
-#include "../scripts/ThinGuardController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -74,7 +74,11 @@ void ExperimentalScene::onPreInitialize() {
 
   const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1" );
   guardOne->getTransform()->setPositionY( -25 );
-  static_cast<ThinGuardController*>(guardOne->getComponent( "Controller" ))->set( 430, 670 );
+  static_cast<GuardController*>(guardOne->getComponent( "Controller" ))->set( 550, 430, 670 );
+
+  const auto guardTwo = gameManager->getPrefab( "Fat Guard" )->instantiate( "Guard 2" );
+  guardTwo->getTransform()->setPositionY( -25 );
+  static_cast<GuardController*>(guardTwo->getComponent( "Controller" ))->set( 818, 620, 992 );
 
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

@@ -1,31 +1,39 @@
-#include "ThinGuardController.h"
+#include "GuardController.h"
 #include "../Define.h"
 
 
 USING_NAMESPACE_ALA;
 
-ThinGuardController::ThinGuardController( ala::GameObject* gameObject, const std::string& name )
+GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _couldAttackAladdin( false ), _couldSeeAladdin( false ), _onRightOfAladdin( false ), _tooFarFromAladdin( true ),
     _minX( 0 ), _maxX( 0 ) {}
 
-bool ThinGuardController::couldAttackAladdin() const {
+bool GuardController::couldAttackAladdin() const {
   return _couldAttackAladdin;
 }
 
-bool ThinGuardController::couldSeeAladdin() const {
+bool GuardController::couldSeeAladdin() const {
   return _couldSeeAladdin;
 }
 
-bool ThinGuardController::isOnRightOfAladdin() const {
+bool GuardController::isOnRightOfAladdin() const {
   return _onRightOfAladdin;
 }
 
-bool ThinGuardController::isTooFarFromAladdin() const {
+bool GuardController::isTooFarFromAladdin() const {
   return _tooFarFromAladdin;
 }
 
-void ThinGuardController::onUpdate( const float delta ) {
+float GuardController::getInitialX() const {
+  return _initialX;
+}
+
+void GuardController::setInitialX( const float initialX ) {
+  _initialX = initialX;
+}
+
+void GuardController::onUpdate( const float delta ) {
   const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
@@ -40,15 +48,16 @@ void ThinGuardController::onUpdate( const float delta ) {
   _onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
 }
 
-float ThinGuardController::getMinX() const { return _minX; }
+float GuardController::getMinX() const { return _minX; }
 
-void ThinGuardController::setMinX( const float minX ) { _minX = minX; }
+void GuardController::setMinX( const float minX ) { _minX = minX; }
 
-float ThinGuardController::getMaxX() const { return _maxX; }
+float GuardController::getMaxX() const { return _maxX; }
 
-void ThinGuardController::setMaxX( const float maxX ) { _maxX = maxX; }
+void GuardController::setMaxX( const float maxX ) { _maxX = maxX; }
 
-void ThinGuardController::set( const float minX, const float maxX ) {
+void GuardController::set( const float initialX, const float minX, const float maxX ) {
+  setInitialX( initialX );
   setMinX( minX );
   setMaxX( maxX );
 }

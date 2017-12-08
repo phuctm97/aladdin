@@ -1,5 +1,5 @@
 #include "FatGuardPrefab.h"
-#include "../scripts/FatGuardController.h"
+#include "../scripts/GuardController.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
@@ -14,7 +14,7 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
-  const auto animator = new Animator( object, "fat_guard_provocative", "guards.anm" );
+  const auto animator = new Animator( object, "fat_guard_idle", "guards.anm" );
 
   // For animationEditor
   //const auto animationEditor = new AnimationEditor( object, "fat_guard_attack2" );
@@ -25,13 +25,338 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   collider->setTag( ENEMY_TAG );
+  collider->ignoreTag( ALADDIN_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
   const auto colliderRenderer = new ColliderRenderer( collider );
-  const auto timer1 = new Timer( object );
-  const auto stateManager = new StateManager( object, "fat_guard_provocative_left" );
-  const auto controller = new FatGuardController( object );
+  const auto stateManager = new StateManager( object, "initial" );
+  const auto controller = new GuardController( object, "Controller" );
   const auto transform = object->getTransform();
 
+  // configurations
+  object->setLayer( "Character" );
+  object->setTag( ENEMY_TAG );
+
+  // states
+  new State( stateManager, "initial",
+             [=] {
+               transform->setPositionX( controller->getInitialX() );
+               animator->setAction( "fat_guard_idle" );
+             }, NULL, NULL );
+
+  new State( stateManager, "idle_left",
+             [=] {
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               animator->setAction( "fat_guard_idle" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "idle_right",
+             [=] {
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               animator->setAction( "fat_guard_idle" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "provoke_left",
+             [=] {
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               animator->setAction( "fat_guard_provoke" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "provoke_right",
+             [=] {
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               animator->setAction( "fat_guard_provoke" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "run_left",
+             [=] {
+               animator->setAction( "fat_guard_run" );
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "run_right",
+             [=] {
+               animator->setAction( "fat_guard_run" );
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "attack_left",
+             [=] {
+               const auto r = rand() % 5;
+               if ( r < 2 ) {
+                 animator->setAction( "fat_guard_attack_1" );
+               }
+               else {
+                 animator->setAction( "fat_guard_attack_2" );
+               }
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new State( stateManager, "attack_right",
+             [=] {
+               const auto r = rand() % 5;
+               if ( r < 2 ) {
+                 animator->setAction( "fat_guard_attack_1" );
+               }
+               else {
+                 animator->setAction( "fat_guard_attack_2" );
+               }
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
+  new StateTransition( stateManager, "initial", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "provoke_left", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "initial", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "run_left", [=] {
+    return transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "run_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "run_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() > controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "idle_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() <= controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "idle_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() <= controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "provoke_left", "run_left", [=] {
+    return !animator->isPlaying() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "provoke_right", "run_left", [=] {
+    return !animator->isPlaying() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "initial", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "provoke_right", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "initial", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "run_right", [=] {
+    return transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "run_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "run_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() < controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "idle_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() >= controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "idle_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() >= controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "provoke_left", "run_right", [=] {
+    return !animator->isPlaying() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "provoke_right", "run_right", [=] {
+    return !animator->isPlaying() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "idle_left", [=] {
+    return transform->getPositionX() <= controller->getMinX();
+  } );
+
+  new StateTransition( stateManager, "run_right", "idle_right", [=] {
+    return transform->getPositionX() >= controller->getMaxX();
+  } );
+
+  new StateTransition( stateManager, "initial", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_right", "attack_left", [=] {
+    return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "initial", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_right", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "run_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack_left", "attack_right", [=] {
+    return controller->couldAttackAladdin() && !controller->isOnRightOfAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_left", "initial", [=] {
+    return controller->isTooFarFromAladdin();
+  } );
+
+  new StateTransition( stateManager, "idle_right", "initial", [=] {
+    return controller->isTooFarFromAladdin();
+  } );
+
+  /*
   new State( stateManager, "fat_guard_provocative_left",
              [=] {
                animator->setAction( "fat_guard_provocative" );
@@ -138,5 +463,5 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
       return true;
     else return false;
   } );
-
+  */
 }

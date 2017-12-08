@@ -105,17 +105,11 @@
     <ClCompile Include="prefabs\RopePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\ThinGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\BigTextPrefab.cpp">
       <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\FatGuardController.cpp">
-      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\FatGuardPrefab.cpp">
       <Filter>prefabs</Filter>
@@ -148,6 +142,9 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\HubController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GuardController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,9 +191,6 @@
     <ClInclude Include="prefabs\RopePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\ThinGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\ThinGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -204,9 +198,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Define.h" />
-    <ClInclude Include="scripts\FatGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\FatGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -238,6 +229,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\HubController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GuardController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

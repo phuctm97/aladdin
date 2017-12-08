@@ -1,5 +1,5 @@
 #include "ThinGuardPrefab.h"
-#include "../scripts/ThinGuardController.h"
+#include "../scripts/GuardController.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
@@ -14,17 +14,17 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
-  const auto animator = new Animator( object, "enemy_guard_run", "guards.anm" );
+  const auto animator = new Animator( object, "thin_guard_idle", "guards.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   collider->setTag( ENEMY_TAG );
   collider->ignoreTag( ALADDIN_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
   const auto colliderRenderer = new ColliderRenderer( collider );
-  const auto timer1 = new Timer( object );
   const auto stateManager = new StateManager( object, "initial" );
-  const auto controller = new ThinGuardController( object, "Controller" );
+  const auto controller = new GuardController( object, "Controller" );
   const auto transform = object->getTransform();
 
   // configurations
@@ -35,49 +35,48 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new State( stateManager, "initial",
              [=] {
-               float midX = (controller->getMinX() + controller->getMaxX()) / 2;
-               transform->setPositionX( midX );
-               animator->setAction( "enemy_guard_idle" );
+               transform->setPositionX( controller->getInitialX() );
+               animator->setAction( "thin_guard_idle" );
              }, NULL, NULL );
 
   new State( stateManager, "idle_left",
              [=] {
                transform->setScaleX( ABS(transform->getScale().getX()) );
-               animator->setAction( "enemy_guard_idle" );
+               animator->setAction( "thin_guard_idle" );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
   new State( stateManager, "idle_right",
              [=] {
                transform->setScaleX( -ABS(transform->getScale().getX()) );
-               animator->setAction( "enemy_guard_idle" );
+               animator->setAction( "thin_guard_idle" );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
   new State( stateManager, "run_left",
              [=] {
-               animator->setAction( "enemy_guard_run" );
+               animator->setAction( "thin_guard_run" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
   new State( stateManager, "run_right",
              [=] {
-               animator->setAction( "enemy_guard_run" );
+               animator->setAction( "thin_guard_run" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
   new State( stateManager, "attack_left",
              [=] {
-               animator->setAction( "enemy_guard_attack" );
+               animator->setAction( "thin_guard_attack" );
                transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
   new State( stateManager, "attack_right",
              [=] {
-               animator->setAction( "enemy_guard_attack" );
+               animator->setAction( "thin_guard_attack" );
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
@@ -114,6 +113,18 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
       controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
   } );
 
+  new StateTransition(stateManager, "attack_left", "idle_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() <= controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  });
+
+  new StateTransition(stateManager, "attack_right", "idle_left", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() <= controller->getMinX() &&
+      controller->couldSeeAladdin() && controller->isOnRightOfAladdin();
+  });
+
   new StateTransition( stateManager, "initial", "run_right", [=] {
     return transform->getPositionX() < controller->getMaxX() &&
       controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
@@ -145,6 +156,18 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
       transform->getPositionX() < controller->getMaxX() &&
       controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
   } );
+
+  new StateTransition(stateManager, "attack_left", "idle_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() >= controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  });
+
+  new StateTransition(stateManager, "attack_right", "idle_right", [=] {
+    return !controller->couldAttackAladdin() &&
+      transform->getPositionX() >= controller->getMaxX() &&
+      controller->couldSeeAladdin() && !controller->isOnRightOfAladdin();
+  });
 
   new StateTransition( stateManager, "run_left", "idle_left", [=] {
     return transform->getPositionX() <= controller->getMinX();
