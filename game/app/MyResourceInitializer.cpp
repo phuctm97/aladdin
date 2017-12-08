@@ -11,10 +11,10 @@
 #include "../prefabs/FatGuardPrefab.h"
 #include "../prefabs/GroundPrefab.h"
 #include "../prefabs/RopePrefab.h"
-#include "../prefabs/StairPrefab.h"
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
+#include "../prefabs/StairGroupOnePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -58,9 +58,9 @@ void MyResourceInitializer::doRun() {
 
   new GroundPrefab();
   new RopePrefab();
-  new StairPrefab();
   new FirePrefab();
   new CharcoalBurnerPrefab();
+  new StairGroupOnePrefab();
 
   // Dev tools
   new NodePrefab();
