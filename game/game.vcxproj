@@ -158,9 +158,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
+    <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
+    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
+    <ClCompile Include="prefabs\FirePrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
@@ -174,6 +177,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AdorableGuardController.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
+    <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
@@ -190,9 +195,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
+    <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
+    <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
+    <ClInclude Include="prefabs\FirePrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
@@ -206,6 +214,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
@@ -214,22 +224,30 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
+    <Text Include="note.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\enemies\civilian-enemies.png" />
     <Image Include="textures\enemies\guards.png" />
     <Image Include="textures\miscellaneous\cutscenes.png" />
+    <Image Include="textures\miscellaneous\items.png" />
+    <Image Include="textures\miscellaneous\numbers.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="animations\bosses\jafar.anm" />
+    <None Include="animations\enemies\civilian-enemies.anm" />
     <None Include="animations\enemies\guards.anm">
       <SubType>Designer</SubType>
     </None>
     <None Include="animations\miscellaneous\cutscenes.anm" />
+    <None Include="animations\miscellaneous\items.anm" />
+    <None Include="animations\miscellaneous\numbers.anm" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

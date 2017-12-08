@@ -31,7 +31,6 @@ void ExperimentalScene::onPreInitialize() {
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 
-
   const auto foreground = new GameObject( this, "Foreground" );
   foreground->setTag( FOREGROUND_TAG );
 
@@ -43,37 +42,37 @@ void ExperimentalScene::onPreInitialize() {
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 
+  const auto hub = gameManager->getPrefab( "Hub" )->instantiate( "Hub" );
+
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
-  ground->setTag( GROUND_TAG );
 
   const auto ropeOne = gameManager->getPrefab( "Rope" )->instantiate( "Rope 1" );
-  ropeOne->setLayer( "Background" );
   ropeOne->getTransform()->setPosition( Vec2( 1931, 86 ) );
   ropeOne->getComponentT<Collider>()->setSize( Size( 5, 250 ) );
 
   const auto ropeTwo = gameManager->getPrefab( "Rope" )->instantiate( "Rope 2" );
-  ropeTwo->setLayer( "Background" );
   ropeTwo->getTransform()->setPosition( Vec2( 1387, 298 ) );
   ropeTwo->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
   const auto ropeThree = gameManager->getPrefab( "Rope" )->instantiate( "Rope 3" );
-  ropeThree->setLayer( "Background" );
   ropeThree->getTransform()->setPosition( Vec2( 2539, 345 ) );
   ropeThree->getComponentT<Collider>()->setSize( Size( 5, 249 ) );
 
   const auto ropeFour = gameManager->getPrefab( "Rope" )->instantiate( "Rope 4" );
-  ropeFour->setLayer( "Background" );
   ropeFour->getTransform()->setPosition( Vec2( 4555, 99 ) );
   ropeFour->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
-  const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
-  aladdin->setTag( ALADDIN_TAG );
-  aladdin->setLayer( "Character" );
-  aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 1" );
+  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 
-  const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
-  adorable_enemy->setLayer("Enemy");
-  adorable_enemy->getTransform()->setPosition(Vec2(200, -40));
+  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 2" );
+  charcoalBurnerTwo->getTransform()->setPosition( Vec2( 730.5f, -50 ) );
+
+  const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 3" );
+  charcoalBurnerThree->getTransform()->setPosition( Vec2( 906.5f, -50 ) );
+
+  const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
+  aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 }
 
 void ExperimentalScene::onPreRelease() {}
