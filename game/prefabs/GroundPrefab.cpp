@@ -54,9 +54,6 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 		Vec2(fourthGroundOffset.getX() + fourthGroundSize.getWidth() / 2 + mapBlockerSize.getWidth() / 2, fourthGroundOffset.getY()-fourthGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
 		mapBlockerSize, 1, 0, "MapEndBlocker");
 
-	const auto mapWallAtStairGroupOne = new Collider(object, false,
-		Vec2(1470, 75), Size(11, 81), 1, 0, "MapWallAtStairGroupOne");
-
 
 
 #pragma endregion
@@ -74,5 +71,4 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto thirdGroundColliderRenderer = new ColliderRenderer(thirdGroundCollider);
 	const auto fourthGroundColliderRenderer = new ColliderRenderer(fourthGroundCollider);
 
-	const auto mapWallAtStairGroupOneColliderRenderer = new ColliderRenderer(mapWallAtStairGroupOne);
 }

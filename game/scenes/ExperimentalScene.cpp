@@ -109,6 +109,16 @@ void ExperimentalScene::onPreInitialize() {
 #pragma endregion
 #pragma endregion
 
+
+#pragma region MapBlocker
+  const auto mapBlocker = gameManager->getPrefab("MapBlocker")->instantiate();
+  mapBlocker->getTransform()->setPosition(Vec2(1310.5f, -41.5f));
+
+  //mapBlocker->setTag(ALADDIN_TAG);
+  //new NodeController(mapBlocker);
+#pragma endregion
+
+
 }
 
 void ExperimentalScene::onPreRelease() {}

@@ -15,6 +15,7 @@
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/StairGroupOnePrefab.h"
+#include "../prefabs/StaticMapBlockerPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -61,6 +62,7 @@ void MyResourceInitializer::doRun() {
   new FirePrefab();
   new CharcoalBurnerPrefab();
   new StairGroupOnePrefab();
+  new StaticMapBlockerPrefab();
 
   // Dev tools
   new NodePrefab();
