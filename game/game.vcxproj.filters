@@ -132,6 +132,18 @@
     <ClCompile Include="scripts\CharcoalBurnerController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\ThrowVasePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThrowVaseController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HandEnemyPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\HandEnemyController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -202,6 +214,18 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\CharcoalBurnerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ThrowVasePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThrowVaseController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HandEnemyPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\HandEnemyController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

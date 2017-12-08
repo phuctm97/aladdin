@@ -66,6 +66,34 @@ void ExperimentalScene::onPreInitialize() {
 
   const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
   charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
+
+  const auto handEnemy_1 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_1->getTransform()->setPosition(Vec2(1632.5, 91.5));
+  const auto handEnemy_2 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));/*
+  const auto handEnemy_3 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_3->getTransform()->setPosition(Vec2(1792.5, 235));
+  const auto handEnemy_4 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_4->getTransform()->setPosition(Vec2(1680.5, 235.5));
+  const auto handEnemy_5 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_5->getTransform()->setPosition(Vec2(1584.5, 411));
+  const auto handEnemy_6 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_6->getTransform()->setPosition(Vec2(1792.5, 411));
+  const auto handEnemy_7 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_7->getTransform()->setPosition(Vec2(1952.5, 411));
+  const auto handEnemy_8 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_8->getTransform()->setPosition(Vec2(2352.5, 219));
+  const auto handEnemy_9 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_9->getTransform()->setPosition(Vec2(3616.5, 27.5));
+  const auto handEnemy_10 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_10->getTransform()->setPosition(Vec2(3792.5, 27.5));
+  const auto handEnemy_11 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_11->getTransform()->setPosition(Vec2(3856.5, 59.5));
+  const auto handEnemy_12 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  handEnemy_12->getTransform()->setPosition(Vec2(3152.5, 203));
+  */
+  /*handEnemy_12->setTag(ALADDIN_TAG);
+  new NodeController(handEnemy);*/
 }
 
 void ExperimentalScene::onPreRelease() {}

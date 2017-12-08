@@ -163,21 +163,25 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\FirePrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
+    <ClCompile Include="prefabs\HandEnemyPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
     <ClCompile Include="prefabs\StairPrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
+    <ClCompile Include="prefabs\ThrowVasePrefab.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
+    <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
+    <ClCompile Include="scripts\ThrowVaseController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -194,21 +198,25 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\FirePrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
+    <ClInclude Include="prefabs\HandEnemyPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
     <ClInclude Include="prefabs\StairPrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
+    <ClInclude Include="prefabs\ThrowVasePrefab.h" />
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AladdinController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
+    <ClInclude Include="scripts\ThrowVaseController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -226,7 +234,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm" />
-    <None Include="animations\enemies\civilian-enemies.anm" />
+    <None Include="animations\enemies\civilian-enemies.anm">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="animations\enemies\guards.anm">
       <SubType>Designer</SubType>
     </None>

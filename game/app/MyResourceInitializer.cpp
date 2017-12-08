@@ -15,6 +15,8 @@
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
+#include "../prefabs//HandEnemyPrefab.h"
+#include "../prefabs//ThrowVasePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -52,9 +54,11 @@ void MyResourceInitializer::doRun() {
 
   new AladdinPrefab();
   new ThrowableApplePrefab();
+  new ThrowVasePrefab();
 
   new ThinGuardPrefab();
   new FatGuardPrefab();
+  new HandEnemyPrefab();
 
   new GroundPrefab();
   new RopePrefab();

@@ -30,9 +30,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
   // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "run_attack" );
+  //const auto animationEditor = new AnimationEditor( object, "throw" );
   //object->setLayer( "Character" );
-  //object->getTransform()->setPosition( -80, -40 );
+  //object->getTransform()->setPosition( -90, -40 );
   //return;
   // //For animationEditor
 

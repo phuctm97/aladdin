@@ -1,3 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animations>
+  <Animation name="throw" imagePath="civilian-enemies.png" interval="0.1" isLoop="false">
+    <sprite x="11" y="35" w="10" h="21" offsetX="0" offsetY="0" />
+    <sprite x="42" y="32" w="16" h="24" offsetX="0" offsetY="-1.5" />
+    <sprite x="73" y="29" w="22" h="31" offsetX="0" offsetY="0" />
+    <sprite x="107" y="29" w="28" h="30" offsetX="2.5" offsetY="0" />
+    <sprite x="145" y="26" w="40" h="35" offsetX="10" offsetY="13.5" />
+    <sprite x="194" y="26" w="40" h="40" offsetX="9" offsetY="10.5" />
+    <sprite x="251" y="27" w="42" h="40" offsetX="9.5" offsetY="3.5" />
+    <sprite x="306" y="31" w="24" h="21" offsetX="0" offsetY="8.5" />
+    <sprite x="345" y="36" w="17" h="12" offsetX="-1.5" offsetY="5" />
+    <sprite x="382" y="37" w="7" h="5" offsetX="-7" offsetY="3" />
+  </Animation>
+  <Animation name="vase_fall" imagePath="civilian-enemies.png" interval="0.07" isLoop="true">
+    <sprite x="15" y="97" w="27" h="20" offsetX="0" offsetY="0" />
+    <sprite x="56" y="95" w="23" h="23" offsetX="0" offsetY="0" />
+    <sprite x="90" y="95" w="25" h="21" offsetX="0" offsetY="0" />
+    <sprite x="127" y="98" w="26" h="15" offsetX="0" offsetY="0" />
+    <sprite x="164" y="92" w="23" h="23" offsetX="0" offsetY="0" />
+    <sprite x="204" y="94" w="20" h="24" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="vase_break" imagePath="civilian-enemies.png" interval="0.1" isLoop="false">
+    <sprite x="235" y="100" w="36" h="14" offsetX="0" offsetY="0" />
+    <sprite x="292" y="94" w="67" h="21" offsetX="0" offsetY="0" />
+    <sprite x="376" y="94" w="75" h="25" offsetX="0" offsetY="0" />
+    <sprite x="472" y="88" w="85" h="33" offsetX="0" offsetY="0" />
+    <sprite x="578" y="85" w="95" h="32" offsetX="0" offsetY="0" />
+    <sprite x="695" y="83" w="95" h="35" offsetX="0" offsetY="0" />
+    <sprite x="814" y="84" w="101" h="35" offsetX="0" offsetY="0" />
+    <sprite x="954" y="81" w="101" h="29" offsetX="0" offsetY="0" />
+  </Animation>
 </Animations>
