@@ -33,6 +33,12 @@ void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
     _colliedWithKnife = true;
   }
 
+  if (collision.getColliderA()->getGameObject()->getTag() == APPLE_TAG ||
+	  collision.getColliderB()->getGameObject()->getTag() == APPLE_TAG)
+  {
+	  setApples(getApples() + 1);
+  }
+
 }
 
 void AladdinController::throwApple( const char direction, const float directX, const float directY,

@@ -15,8 +15,8 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 #pragma region Ground
 
 	// First ground
-	const auto firstGroundSize = Size(1475 -5, 63);
-	const auto firstGroundOffset = Vec2(firstGroundSize.getWidth() / 2 - 5, firstGroundSize.getHeight() / 2);
+	const auto firstGroundSize = Size(1475 -5 - 20, 63);
+	const auto firstGroundOffset = Vec2(firstGroundSize.getWidth() / 2 - 5 - 10, firstGroundSize.getHeight() / 2);
 	const auto firstGroundCollider = new Collider(object, false, firstGroundOffset, firstGroundSize, 1, 0, "FirstGround");
 
 
@@ -47,7 +47,7 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto mapBlockerSize = Size(20, 688);
 
 	const auto mapStartBlocker = new Collider(object, false,
-		Vec2(firstGroundOffset.getX()-firstGroundSize.getWidth() / 2 - mapBlockerSize.getWidth() / 2, firstGroundOffset.getY()-firstGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
+		Vec2(firstGroundOffset.getX()-firstGroundSize.getWidth() / 2 - mapBlockerSize.getWidth() / 2 + 10, firstGroundOffset.getY()-firstGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
 		mapBlockerSize, 1, 0, "MapStartBlocker");
 
 	const auto mapEndBlocker = new Collider(object, false,

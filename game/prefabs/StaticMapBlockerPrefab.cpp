@@ -1,5 +1,6 @@
 #include "StaticMapBlockerPrefab.h"
 #include "../scripts/StaticMapBlockerController.h"
+#include "../Define.h"
 USING_NAMESPACE_ALA;
 
 void StaticMapBlockerPrefab::doInstantiate(ala::GameObject * object) const
@@ -9,7 +10,8 @@ void StaticMapBlockerPrefab::doInstantiate(ala::GameObject * object) const
 
 	// Components
 	const auto mapWallAtStairGroupOne = new Collider(object, false,
-		Vec2(), Size(11, 81), 1, 0, "MapWallAtStairGroupOne");
+		Vec2(), Size(31, 81), 1, 0, "MapWallAtStairGroupOne");
+	mapWallAtStairGroupOne->ignoreTag(GROUND_TAG);
 	new StaticMapBlockerController(object);
 
 	// Render

@@ -11,7 +11,8 @@ enum
   SWORD_TAG,
 	KNIFE_TAG,
   CHARCOAL_BURNER_TAG,
-  HUB_TAG
+  HUB_TAG,
+  APPLE_TAG
 };
 
 #endif //!__GAME_DEFINE_H__

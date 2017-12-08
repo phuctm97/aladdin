@@ -158,6 +158,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
+    <ClCompile Include="prefabs\ApplePrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
@@ -177,6 +178,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AdorableGuardController.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
+    <ClCompile Include="scripts\AppleController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
@@ -197,6 +199,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
+    <ClInclude Include="prefabs\ApplePrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
@@ -215,6 +218,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AdorableGuardController.h" />
     <ClInclude Include="scripts\AladdinController.h" />
+    <ClInclude Include="scripts\AppleController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
@@ -236,11 +240,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\enemies\civilian-enemies.png" />
     <Image Include="textures\enemies\guards.png" />
     <Image Include="textures\miscellaneous\cutscenes.png" />
+    <Image Include="textures\miscellaneous\enemy_explosions.png" />
     <Image Include="textures\miscellaneous\items.png" />
     <Image Include="textures\miscellaneous\numbers.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="animations\miscellaneous\apple.anm" />
     <Xml Include="animations\playable_characters\aladdin.anm" />
   </ItemGroup>
   <ItemGroup>

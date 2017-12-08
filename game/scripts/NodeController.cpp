@@ -93,8 +93,7 @@ void NodeController::onUpdate(const float delta) {
 
 	if (input->getKeyDown(ALA_KEY_F4)) {
 		if (collider != NULL) {
-			_rectObject = new GameObject(GameManager::get()->getRunningScene());
-			new RectRenderer(_rectObject, collider->getOffset(), collider->getSize(), Color(0, 255, 255), "");
+			_logger.info("%.1f, %.1f", transform->getPositionX(), transform->getPositionY());
 		}
 	}
 
