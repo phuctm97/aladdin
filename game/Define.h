@@ -9,6 +9,7 @@ enum
   BACKGROUND_TAG,
   FOREGROUND_TAG,
   SWORD_TAG,
+	KNIFE_TAG,
 };
 
 #endif //!__GAME_DEFINE_H__

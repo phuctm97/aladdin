@@ -1,5 +1,6 @@
 #include "ThrowableKnifePrefab.h"
 #include "../scripts/ThrowableKnifeController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -25,6 +26,7 @@ void ThrowableKnifePrefab::doInstantiate(ala::GameObject* object) const
 
 	// configurations
 	object->setLayer("Apple");
+	collider->setTag(KNIFE_TAG);
 
 	// states
 	new State(stateManager, "knife_destroy",
@@ -50,11 +52,11 @@ void ThrowableKnifePrefab::doInstantiate(ala::GameObject* object) const
 
 
 	new StateTransition(stateManager, "throwable_knife_left", "knife_destroy", [=] {
-		return controller->isCollidedWithGround();
+		return controller->isCollidedWithGround() || controller->isColliedWithAladdin();
 	});
 
 	new StateTransition(stateManager, "throwable_knife_right", "knife_destroy", [=] {
-		return controller->isCollidedWithGround();
+		return controller->isCollidedWithGround() || controller->isColliedWithAladdin();
 	});
 }
 

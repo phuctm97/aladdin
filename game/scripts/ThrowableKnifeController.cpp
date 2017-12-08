@@ -20,9 +20,19 @@ void ThrowableKnifeController::onTriggerEnter(const ala::CollisionInfo& collisio
 		collision.getColliderB()->getTag() == ENEMY_TAG) {
 		_colliedWithEnemy = true;
 	}
+
+	if (collision.getColliderA()->getTag() == ALADDIN_TAG ||
+		collision.getColliderB()->getTag() == ALADDIN_TAG) {
+		_colliedWithAladdin = true;
+	}
 }
 
 bool ThrowableKnifeController::isCollidedWithEnemy() const
 {
 	return _colliedWithEnemy;
+}
+
+bool ThrowableKnifeController::isColliedWithAladdin() const
+{
+	return _colliedWithAladdin;
 }
