@@ -8,15 +8,34 @@ class AladdinController : public ala::GameObjectComponent
 private:
   ala::Logger _logger;
   bool _collidedWithGround;
+  bool _colliedWithKnife;
+  int _health;
+  int _lives;
+  int _apples;
 
 public:
   AladdinController( ala::GameObject* gameObject, const std::string& name = "" );
 
   bool isCollidedWithGround() const;
 
+  bool isCollidedWithKnife() const;
+
   void resetCollidedWithGround();
 
-  void throwApple( char direction, float directX, float directY, float impulseX, float impulseY ) const;
+  void throwApple( char direction, float directX, float directY, float impulseX, float impulseY );
+
+  void setLives( const int lives );
+
+  int getLives() const;
+
+  void setApples( const int apples );
+
+  int getApples() const;
+
+  void setHealth( const int health );
+
+  int getHealth() const;
+
 protected:
   void onUpdate( const float delta ) override;
 

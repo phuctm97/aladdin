@@ -120,6 +120,21 @@
     <ClCompile Include="prefabs\FatGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\AdorableGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AdorableGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThrowableKnifeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StairPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
     <ClCompile Include="prefabs\FirePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -136,6 +151,12 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\StaticMapBlockerController.cpp">
+	  <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HubPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\HubController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -198,6 +219,21 @@
     <ClInclude Include="prefabs\FatGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\AdorableGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AdorableGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThrowableKnifeController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
     <ClInclude Include="prefabs\FirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -214,6 +250,12 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\StaticMapBlockerController.h">
+	  <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HubPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\HubController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
@@ -235,6 +277,12 @@
     </Image>
     <Image Include="textures\enemies\civilian-enemies.png">
       <Filter>texures\enemies</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\items.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\numbers.png">
+      <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +307,12 @@
     </None>
     <None Include="animations\enemies\civilian-enemies.anm">
       <Filter>animations\enemies</Filter>
+    </None>
+    <None Include="animations\miscellaneous\items.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\numbers.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

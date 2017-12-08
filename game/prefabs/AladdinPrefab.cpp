@@ -30,7 +30,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
   // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "run_attack" );
+  //const auto animationEditor = new AnimationEditor( object, "aladdin_hitted" );
   //object->setLayer( "Character" );
   //object->getTransform()->setPosition( -80, -40 );
   //return;
@@ -52,12 +52,15 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto timer3 = new Timer( object );
   const auto timer4 = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
-  const auto controller = new AladdinController( object );
+  const auto controller = new AladdinController( object, "Controller" );
   const auto transform = object->getTransform();
 
   // configurations
   object->setTag( ALADDIN_TAG );
   object->setLayer( "Character" );
+  controller->setLives( 3 );
+  controller->setApples( 5 );
+  controller->setHealth( 10 );
 
   // states
   new State( stateManager, "idle_left",
@@ -742,7 +745,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               if ( input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
+               if ( controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
                  timer2->start( 0.1f );
                  timer3->start( 0.3f );
                  animator->setAction( "jump_throw_apple" );
@@ -775,7 +778,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               if ( input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
+               if ( controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
                  timer2->start( 0.1f );
                  timer3->start( 0.3f );
                  animator->setAction( "jump_throw_apple" );
@@ -810,7 +813,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               if ( input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
+               if ( controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
                  timer2->start( 0.1f );
                  timer3->start( 0.3f );
                  animator->setAction( "jump_throw_apple" );
@@ -843,7 +846,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                if ( input->getKeyUp( ALA_KEY_RIGHT_ARROW ) || input->getKeyUp( ALA_KEY_LEFT_ARROW ) )
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               if ( input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
+               if ( controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A ) && timer3->isDone() ) {
                  timer2->start( 0.1f );
                  timer3->start( 0.3f );
                  animator->setAction( "jump_throw_apple" );
@@ -972,6 +975,16 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                swordCollider->setActive( false );
              } );
+	new State( stateManager, "aladdin_hitted_right", [=] {
+		animator->setAction("aladdin_hitted");
+		transform->setScaleX(ABS(transform->getScale().getX()));
+		body->setVelocity(Vec2(0, 0));
+	}, NULL, NULL);
+	new State(stateManager, "aladdin_hitted_left", [=] {
+		animator->setAction("aladdin_hitted");
+		transform->setScaleX(-ABS(transform->getScale().getX()));
+		body->setVelocity(Vec2(0, 0));
+	}, NULL, NULL);
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
@@ -998,11 +1011,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "idle_left", "attack_3_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "idle_right", "attack_3_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "attack_3_left", "idle_left", [=] {
@@ -1038,11 +1051,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "face_up_left", "attack_3_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "face_up_right", "attack_3_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "face_up_left", "face_up_right", [=] {
@@ -1102,11 +1115,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "sit_left", "sit_attack_2_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "sit_right", "sit_attack_2_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "sit_attack_2_left", "sit_left", [=] {
@@ -1250,11 +1263,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "run_left_to_jump", "run_left_to_throw", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_right_to_jump", "run_right_to_throw", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_left_to_throw", "idle_left", [=] {
@@ -1270,7 +1283,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "jump_left", "jump_throw_apple_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "jump_throw_apple_left", "idle_left", [=] {
@@ -1278,11 +1291,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "jump_throw_apple_left", "jump_throw_apple_right", [=] {
-    return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
 
   new StateTransition( stateManager, "jump_throw_apple_right", "jump_throw_apple_left", [=] {
-    return input->getKeyDown( ALA_KEY_LEFT_ARROW );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
 
   new StateTransition( stateManager, "jump_throw_apple_right", "idle_right", [=] {
@@ -1290,7 +1303,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "jump_right", "jump_throw_apple_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_left_to_jump_attack", "run_right_to_jump_attack", [=] {
@@ -1334,11 +1347,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "run_left_to_throw", "run_right_to_throw", [=] {
-    return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
 
   new StateTransition( stateManager, "run_right_to_throw", "run_left_to_throw", [=] {
-    return input->getKeyDown( ALA_KEY_LEFT_ARROW );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
 
   new StateTransition( stateManager, "jump_throw_apple_left", "jump_left_attack", [=] {
@@ -1350,19 +1363,19 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "jump_left_attack", "jump_throw_apple_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "jump_right_attack", "jump_throw_apple_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_left_to_jump_attack", "jump_throw_apple_left", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_right_to_jump_attack", "jump_throw_apple_right", [=] {
-    return input->getKeyDown( ALA_KEY_A );
+    return controller->getApples() > 0 && input->getKeyDown( ALA_KEY_A );
   } );
 
   new StateTransition( stateManager, "run_left_to_throw", "run_left_to_jump_attack", [=] {

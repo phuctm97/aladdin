@@ -5,16 +5,15 @@
 USING_NAMESPACE_ALA;
 
 ThinGuardController::ThinGuardController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _collidedWithGround( false ), _couldAttackAladdin( false ),
-    _couldSeeAladdin( false ), _onRightOfAladdin( false ) {}
-
-bool ThinGuardController::isCollidedWithGround() const { return _collidedWithGround; }
+  : GameObjectComponent( gameObject, name ),
+    _couldAttackAladdin( false ), _couldSeeAladdin( false ), _onRightOfAladdin( false ), _tooFarFromAladdin( true ),
+    _minX( 0 ), _maxX( 0 ) {}
 
 bool ThinGuardController::couldAttackAladdin() const {
   return _couldAttackAladdin;
 }
 
-bool ThinGuardController::coundSeeAladdin() const {
+bool ThinGuardController::couldSeeAladdin() const {
   return _couldSeeAladdin;
 }
 
@@ -22,37 +21,34 @@ bool ThinGuardController::isOnRightOfAladdin() const {
   return _onRightOfAladdin;
 }
 
+bool ThinGuardController::isTooFarFromAladdin() const {
+  return _tooFarFromAladdin;
+}
 
 void ThinGuardController::onUpdate( const float delta ) {
-  const auto aladdin = GameManager::get()->getObjectByName( "Aladdin" );
+  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
   const auto visibleWidth = GameManager::get()->getVisibleWidth();
+  const auto guardPosition = getGameObject()->getTransform()->getPosition();
+  const auto aladdinPosition = aladdin->getTransform()->getPosition();
 
-  if ( ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) < 60
-  ) {
-    _couldAttackAladdin = true;
-  }
-  else {
-    _couldAttackAladdin = false;
-  }
-  if ( getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() < (
-    visibleWidth * 0.3) ) {
-    _couldSeeAladdin = true;
-  }
-  else if ( getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() > (
-    visibleWidth / 2) ) {
-    _couldSeeAladdin = false;
-  }
-  if ( aladdin->getTransform()->getPosition().getX() < getGameObject()->getTransform()->getPosition().getX() ) {
-    _onRightOfAladdin = true; //Aladdin is in the left of enemy
-  }
-  else _onRightOfAladdin = false; //Aladdin is in the right of enemy
+  const auto distanceToAladdin = ABS(guardPosition.getX() - aladdinPosition.getX());
+  _couldSeeAladdin = distanceToAladdin < visibleWidth * 0.6f;
+  _tooFarFromAladdin = distanceToAladdin > visibleWidth * 0.7f;
+  _couldAttackAladdin = distanceToAladdin < 70;
+  _onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
 }
 
-void ThinGuardController::onCollisionEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getTag() == GROUND_TAG ||
-    collision.getColliderB()->getTag() == GROUND_TAG ) {
-    _collidedWithGround = true;
-  }
+float ThinGuardController::getMinX() const { return _minX; }
+
+void ThinGuardController::setMinX( const float minX ) { _minX = minX; }
+
+float ThinGuardController::getMaxX() const { return _maxX; }
+
+void ThinGuardController::setMaxX( const float maxX ) { _maxX = maxX; }
+
+void ThinGuardController::set( const float minX, const float maxX ) {
+  setMinX( minX );
+  setMaxX( maxX );
 }
