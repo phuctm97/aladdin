@@ -8,6 +8,8 @@ class AladdinController : public ala::GameObjectComponent
 private:
   ala::Logger _logger;
   bool _collidedWithGround;
+  bool _colliedWithKnife;
+  bool _aladdinPosition;
   int _health;
   int _lives;
   int _apples;
@@ -16,6 +18,10 @@ public:
   AladdinController( ala::GameObject* gameObject, const std::string& name = "" );
 
   bool isCollidedWithGround() const;
+
+  bool isCollidedWithKnife() const;
+
+  bool isAladdinRightPosition() const;
 
   void resetCollidedWithGround();
 

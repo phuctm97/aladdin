@@ -5,17 +5,19 @@
 #include "MyResourceInitializer.h"
 #include "../prefabs/NormalTextPrefab.h"
 #include "../prefabs/BigTextPrefab.h"
+#include "../prefabs/HubPrefab.h"
 #include "../prefabs/AladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/ThinGuardPrefab.h"
 #include "../prefabs/FatGuardPrefab.h"
+#include "../prefabs/AdorableGuardPrefab.h"
+#include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/GroundPrefab.h"
 #include "../prefabs/RopePrefab.h"
 #include "../prefabs/StairPrefab.h"
-#include "../prefabs/NodePrefab.h"
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
-#include "../prefabs/HubPrefab.h"
+#include "../prefabs/NodePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -62,6 +64,8 @@ void MyResourceInitializer::doRun() {
 
   new ThinGuardPrefab();
   new FatGuardPrefab();
+  new AdorableGuardPrefab();
+  new ThrowableKnifePrefab();
 
   new GroundPrefab();
   new RopePrefab();

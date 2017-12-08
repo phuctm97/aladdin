@@ -30,7 +30,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
   // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "run_attack" );
+  //const auto animationEditor = new AnimationEditor( object, "aladdin_hitted" );
   //object->setLayer( "Character" );
   //object->getTransform()->setPosition( -80, -40 );
   //return;
@@ -973,6 +973,16 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                swordCollider->setActive( false );
              } );
+	new State( stateManager, "aladdin_hitted_right", [=] {
+		animator->setAction("aladdin_hitted");
+		transform->setScaleX(ABS(transform->getScale().getX()));
+		body->setVelocity(Vec2(0, 0));
+	}, NULL, NULL);
+	new State(stateManager, "aladdin_hitted_left", [=] {
+		animator->setAction("aladdin_hitted");
+		transform->setScaleX(-ABS(transform->getScale().getX()));
+		body->setVelocity(Vec2(0, 0));
+	}, NULL, NULL);
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
@@ -1373,4 +1383,33 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
+	new StateTransition(stateManager, "idle_right", "aladdin_hitted_right", [=] {
+		if ( controller->isCollidedWithKnife() && controller->isAladdinRightPosition() )
+		{
+			return true;
+		}
+		else return false;
+	});
+	new StateTransition(stateManager, "idle_left", "aladdin_hitted_left", [=] {
+		if (controller->isCollidedWithKnife() && controller->isAladdinRightPosition())
+		{
+			return true;
+		}
+		else return false;
+	});
+
+	new StateTransition(stateManager, "idle_left", "aladdin_hitted_left", [=] {
+		if (controller->isCollidedWithKnife() && !controller->isAladdinRightPosition())
+		{
+			return true;
+		}
+		else return false;
+	});
+	new StateTransition(stateManager, "idle_right", "aladdin_hitted_right", [=] {
+		if (controller->isCollidedWithKnife() && !controller->isAladdinRightPosition())
+		{
+			return true;
+		}
+		else return false;
+	});
 }
