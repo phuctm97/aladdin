@@ -6,8 +6,8 @@ USING_NAMESPACE_ALA;
 
 AladdinController::AladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _logger( "AladdinController" ),
-    _collidedWithGround( false ), _colliedWithKnife( false ),
-    _health( 10 ), _lives( 3 ), _apples( 5 ) {}
+    _collidedWithGround( false ), _colliedWithKnife( false ), _health( 10 ),
+    _lives( 3 ), _apples( 5 ), _recovering( false ) {}
 
 bool AladdinController::isCollidedWithGround() const { return _collidedWithGround; }
 
@@ -17,8 +17,7 @@ bool AladdinController::isCollidedWithKnife() const {
 
 void AladdinController::resetCollidedWithGround() { _collidedWithGround = false; }
 
-void AladdinController::onUpdate( const float delta ) {
-}
+void AladdinController::onUpdate( const float delta ) {}
 
 void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
   if ( collision.getColliderA()->getGameObject()->getTag() == GROUND_TAG ||
@@ -27,12 +26,31 @@ void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) 
   }
 }
 
-void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getTag() == KNIFE_TAG ||
-    collision.getColliderB()->getTag() == KNIFE_TAG ) {
-    _colliedWithKnife = true;
-  }
+void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {}
 
+void AladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
+    onHitCharcoalBurner( otherObject );
+  }
+}
+
+void AladdinController::onHitCharcoalBurner( ala::GameObject* burnerObject ) {
+  if ( _recovering ) return;
+
+  const auto stateManager = getGameObject()->getComponentT<StateManager>();
+  if ( stateManager->getCurrentStateName() == "idle_left" ) {
+    stateManager->changeState( "hitted_left" );
+    setRecovering();
+  }
+  else if ( stateManager->getCurrentStateName() == "idle_right" ) {
+    stateManager->changeState( "hitted_right" );
+    setRecovering();
+  }
 }
 
 void AladdinController::throwApple( const char direction, const float directX, const float directY,
@@ -81,4 +99,24 @@ void AladdinController::setHealth( const int health ) {
 
 int AladdinController::getHealth() const {
   return _health;
+}
+
+bool AladdinController::isRecovering() const {
+  return _recovering;
+}
+
+void AladdinController::setRecovering() {
+  if ( _recovering ) return;
+
+  _recovering = true;
+  _logger.info( "Recovering start" );
+
+  const auto actionManager = getGameObject()->getComponentT<ActionManager>();
+  actionManager->play( new Sequence( {
+    new Blink( 0.05f, 10 ),
+    new CallFunc( [this] {
+      this->_recovering = false;
+      this->_logger.info( "Recovering finished" );
+    } )
+  } ) );
 }

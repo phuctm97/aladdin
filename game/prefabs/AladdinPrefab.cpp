@@ -52,6 +52,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto timer3 = new Timer( object );
   const auto timer4 = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
+  const auto actionManager = new ActionManager( object );
   const auto controller = new AladdinController( object, "Controller" );
   const auto transform = object->getTransform();
 
@@ -973,16 +974,18 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                swordCollider->setActive( false );
              } );
-	new State( stateManager, "aladdin_hitted_right", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
-	new State(stateManager, "aladdin_hitted_left", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(-ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
+
+  new State( stateManager, "hitted_left", [=] {
+    animator->setAction( "hitted" );
+    transform->setScaleX( -ABS(transform->getScale().getX()) );
+    body->setVelocity( Vec2( 0, 0 ) );
+  }, NULL, NULL );
+
+  new State( stateManager, "hitted_right", [=] {
+    animator->setAction( "hitted" );
+    transform->setScaleX( ABS(transform->getScale().getX()) );
+    body->setVelocity( Vec2( 0, 0 ) );
+  }, NULL, NULL );
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
@@ -1382,5 +1385,13 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "hitted_left", "idle_left", [=] {
+    return !animator->isPlaying() || input->getKeyDown( ALA_KEY_LEFT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "hitted_right", "idle_right", [=] {
+    return !animator->isPlaying() || input->getKeyDown( ALA_KEY_RIGHT_ARROW );;
   } );
 }

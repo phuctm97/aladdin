@@ -12,6 +12,7 @@ private:
   int _health;
   int _lives;
   int _apples;
+  bool _recovering;
 
 public:
   AladdinController( ala::GameObject* gameObject, const std::string& name = "" );
@@ -36,6 +37,10 @@ public:
 
   int getHealth() const;
 
+  bool isRecovering() const;
+
+  void setRecovering();
+
 protected:
   void onUpdate( const float delta ) override;
 
@@ -43,6 +48,10 @@ public:
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
+
+  void onTriggerStay( const ala::CollisionInfo& collision ) override;
+private:
+  void onHitCharcoalBurner( ala::GameObject* burnerObject );
 };
 
 #endif //!__ALADDIN_CONTROLLER_H__
