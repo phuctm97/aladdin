@@ -1,51 +1,82 @@
 #include "GuardController.h"
+#include "DirectionController.h"
 #include "../Define.h"
 
 
 USING_NAMESPACE_ALA;
 
+ALA_CLASS_SOURCE_1(GuardController, ala::GameObjectComponent)
+
 GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _couldAttackAladdin( false ), _couldSeeAladdin( false ), _onRightOfAladdin( false ), _tooFarFromAladdin( true ),
+    _state( 0 ),
     _initialX( 0 ), _minX( 0 ), _maxX( 0 ) {}
 
-bool GuardController::couldAttackAladdin() const {
-  return _couldAttackAladdin;
+bool GuardController::isIdling() const {
+  return _state == 0;
 }
 
-bool GuardController::couldSeeAladdin() const {
-  return _couldSeeAladdin;
+bool GuardController::isChasingAladdin() const {
+  return _state == 1;
 }
 
-bool GuardController::isOnRightOfAladdin() const {
-  return _onRightOfAladdin;
+bool GuardController::isAttacking() const {
+  return _state == 2;
 }
 
-bool GuardController::isTooFarFromAladdin() const {
-  return _tooFarFromAladdin;
-}
-
-float GuardController::getInitialX() const {
-  return _initialX;
-}
-
-void GuardController::setInitialX( const float initialX ) {
-  _initialX = initialX;
+void GuardController::onInitialize() {
+  const auto transform = getGameObject()->getTransform();
+  transform->setPosition( _initialX );
 }
 
 void GuardController::onUpdate( const float delta ) {
   const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
+  const auto transform = getGameObject()->getTransform();
+  const auto direction = getGameObject()->getComponentT<DirectionController>();
+
   const auto visibleWidth = GameManager::get()->getVisibleWidth();
   const auto guardPosition = getGameObject()->getTransform()->getPosition();
   const auto aladdinPosition = aladdin->getTransform()->getPosition();
-
   const auto distanceToAladdin = ABS(guardPosition.getX() - aladdinPosition.getX());
-  _couldSeeAladdin = distanceToAladdin < visibleWidth * 0.6f;
-  _tooFarFromAladdin = distanceToAladdin > visibleWidth * 0.7f;
-  _couldAttackAladdin = distanceToAladdin < 70;
-  _onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
+
+  // keep in bound
+  if ( guardPosition.getX() < _minX ) {
+    transform->setPositionX( _minX );
+  }
+  else if ( guardPosition.getX() > _maxX ) {
+    transform->setPositionX( _maxX );
+  }
+
+  // direction
+  const auto onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
+  if ( onRightOfAladdin ) direction->setLeft();
+  else direction->setRight();
+
+  // attack
+  const auto couldAttackAladdin = distanceToAladdin < 70;
+  if ( couldAttackAladdin ) {
+    _state = 2;
+    return;
+  }
+
+  // chase
+  const auto couldSeeAladdin = distanceToAladdin < visibleWidth * 0.6f;
+
+  if ( couldSeeAladdin &&
+    ((guardPosition.getX() < _maxX && !onRightOfAladdin) ||
+      (guardPosition.getX() > _minX && onRightOfAladdin)) ) {
+    _state = 1;
+  }
+  else {
+    _state = 0;
+
+    const auto tooFarFromAladdin = distanceToAladdin > visibleWidth * 0.7f;
+    if ( tooFarFromAladdin ) {
+      transform->setPositionX( _initialX );
+    }
+  }
 }
 
 void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
@@ -61,29 +92,24 @@ void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
 
 void GuardController::onHit() {
   const auto stateManager = getGameObject()->getComponentT<StateManager>();
-  const auto currentStateName = stateManager->getCurrentStateName();
-
-  if ( currentStateName == "hit_left" || currentStateName == "hit_right" )
+  if ( stateManager->getCurrentStateName() == "hit" )
     return;
 
-  if ( currentStateName.substr( currentStateName.length() - 4 ) == "left" ) {
-    stateManager->changeState( "hit_left" );
+  if ( stateManager->getState( "hit" ) != NULL ) {
+    stateManager->changeState( "hit" );
   }
-  else {
-    stateManager->changeState( "hit_right" );
-  }
+}
+
+float GuardController::getInitialX() const {
+  return _initialX;
 }
 
 float GuardController::getMinX() const { return _minX; }
 
-void GuardController::setMinX( const float minX ) { _minX = minX; }
-
 float GuardController::getMaxX() const { return _maxX; }
 
-void GuardController::setMaxX( const float maxX ) { _maxX = maxX; }
-
 void GuardController::set( const float initialX, const float minX, const float maxX ) {
-  setInitialX( initialX );
-  setMinX( minX );
-  setMaxX( maxX );
+  _initialX = initialX;
+  _minX = minX;
+  _maxX = maxX;
 }

@@ -37,6 +37,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   collider->setTag( ALADDIN_TAG );
+  collider->ignoreTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
   const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );

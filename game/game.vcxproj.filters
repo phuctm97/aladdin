@@ -150,6 +150,9 @@
     <ClCompile Include="scripts\DirectionController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -238,6 +241,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\DirectionController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

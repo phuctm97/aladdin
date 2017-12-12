@@ -3,33 +3,30 @@
 
 #include <aladdin.h>
 
-class GuardController : public ala::GameObjectComponent
-{
+ALA_CLASS_HEADER_1( GuardController, ala::GameObjectComponent)
 private:
-  bool _couldAttackAladdin;
-  bool _couldSeeAladdin;
-  bool _onRightOfAladdin;
-  bool _tooFarFromAladdin;
   float _initialX;
   float _minX;
   float _maxX;
 
+protected:
+  int _state;
+
 public:
   GuardController( ala::GameObject* gameObject, const std::string& name = "" );
-  bool couldAttackAladdin() const;
-  bool couldSeeAladdin() const;
-  bool isOnRightOfAladdin() const;
-  bool isTooFarFromAladdin() const;
 
   float getInitialX() const;
-  void setInitialX( const float initialX );
   float getMinX() const;
-  void setMinX( const float minX );
   float getMaxX() const;
-  void setMaxX( const float maxX );
   void set( const float initialX, const float minX, const float maxX );
 
+  bool isIdling() const;
+  bool isChasingAladdin() const;
+  bool isAttacking() const;
+
 protected:
+  void onInitialize() override;
+
   void onUpdate( const float delta ) override;
 
 public:
