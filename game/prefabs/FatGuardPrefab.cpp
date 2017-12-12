@@ -73,6 +73,12 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
+  new State( stateManager, "hit",
+             [=] {
+               animator->setAction( "fat_guard_hit" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             }, NULL, NULL );
+
   new StateTransition( stateManager, "idle", "provoke", [=] {
     return controller->isChasingAladdin() && controller->willProvokeBeforeChasing();
   } );
@@ -107,5 +113,9 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "attack", "idle", [=] {
     return controller->isIdling();
+  } );
+
+  new StateTransition( stateManager, "hit", "idle", [=] {
+    return !animator->isPlaying();
   } );
 }

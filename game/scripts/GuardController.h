@@ -10,6 +10,7 @@ private:
   float _maxX;
 
 protected:
+  int _health;
   int _state;
 
 public:
@@ -19,6 +20,9 @@ public:
   float getMinX() const;
   float getMaxX() const;
   void set( const float initialX, const float minX, const float maxX );
+
+  int getHealth() const;
+  void setHealth( const int health );
 
   bool isIdling() const;
   bool isChasingAladdin() const;
@@ -33,7 +37,7 @@ public:
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
 private:
-  void onHit();
+  void onHit( const int damage );
 };
 
 #endif //!__GUARD_CONTROLLER_H__

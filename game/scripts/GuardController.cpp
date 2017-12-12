@@ -10,7 +10,7 @@ ALA_CLASS_SOURCE_1(GuardController, ala::GameObjectComponent)
 GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _state( 0 ),
-    _initialX( 0 ), _minX( 0 ), _maxX( 0 ) {}
+    _initialX( 0 ), _minX( 0 ), _maxX( 0 ), _health( 2 ) {}
 
 bool GuardController::isIdling() const {
   return _state == 0;
@@ -30,11 +30,13 @@ void GuardController::onInitialize() {
 }
 
 void GuardController::onUpdate( const float delta ) {
-  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
+  const auto gameManager = GameManager::get();
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
   const auto transform = getGameObject()->getTransform();
   const auto direction = getGameObject()->getComponentT<DirectionController>();
+  const auto stateManager = getGameObject()->getComponentT<StateManager>();
 
   const auto visibleWidth = GameManager::get()->getVisibleWidth();
   const auto guardPosition = getGameObject()->getTransform()->getPosition();
@@ -85,18 +87,27 @@ void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
-  if ( otherObject->getTag() == ALADDIN_TAG && otherCollider->getTag() == SWORD_TAG ) {
-    onHit();
+  if ( otherObject->getTag() == ALADDIN_TAG &&
+    (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG) ) {
+    onHit( rand() % 2 + 1 );
   }
 }
 
-void GuardController::onHit() {
+void GuardController::onHit( const int damage ) {
   const auto stateManager = getGameObject()->getComponentT<StateManager>();
   if ( stateManager->getCurrentStateName() == "hit" )
     return;
 
   if ( stateManager->getState( "hit" ) != NULL ) {
     stateManager->changeState( "hit" );
+  }
+
+  _health -= damage;
+  if ( _health <= 0 ) {
+    const auto object = getGameObject();
+
+    GameManager::get()->getPrefab( "Enemy Explosion" )->instantiate( object->getTransform()->getPosition() );
+    object->release();
   }
 }
 
@@ -108,8 +119,16 @@ float GuardController::getMinX() const { return _minX; }
 
 float GuardController::getMaxX() const { return _maxX; }
 
+int GuardController::getHealth() const {
+  return _health;
+}
+
 void GuardController::set( const float initialX, const float minX, const float maxX ) {
   _initialX = initialX;
   _minX = minX;
   _maxX = maxX;
+}
+
+void GuardController::setHealth( const int health ) {
+  _health = health;
 }

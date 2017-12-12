@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Animations>
+  <Animation name="1" imagePath="enemy_explosions.png" interval="0.08" isLoop="false">
+    <sprite x="35" y="330" w="15" h="11" offsetX="0" offsetY="0" />
+    <sprite x="79" y="311" w="51" h="33" offsetX="0.5" offsetY="6" />
+    <sprite x="141" y="310" w="54" h="34" offsetX="0.5" offsetY="6" />
+    <sprite x="200" y="308" w="57" h="37" offsetX="0" offsetY="5.5" />
+    <sprite x="261" y="308" w="60" h="37" offsetX="-1" offsetY="4.5" />
+    <sprite x="319" y="306" w="65" h="38" offsetX="-3" offsetY="5.5" />
+    <sprite x="399" y="320" w="30" h="25" offsetX="-2.5" offsetY="-0.5" />
+    <sprite x="464" y="320" w="28" h="25" offsetX="-0.5" offsetY="0" />
+    <sprite x="527" y="321" w="28" h="24" offsetX="0" offsetY="0" />
+    <sprite x="590" y="321" w="26" h="24" offsetX="0" offsetY="0" />
+  </Animation>
+</Animations>

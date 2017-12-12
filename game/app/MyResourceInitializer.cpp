@@ -18,6 +18,7 @@
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/NodePrefab.h"
+#include "../prefabs/EnemyExplosionPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -35,6 +36,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
+  new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
   new Sprite( "numbers.png", "textures/miscellaneous/numbers.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
@@ -48,6 +50,7 @@ void MyResourceInitializer::doRun() {
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
+  new Animation( "enemy_explosions.anm", "animations/miscellaneous/enemy_explosions.anm" );
   new Animation( "items.anm", "animations/miscellaneous/items.anm" );
   new Animation( "numbers.anm", "animations/miscellaneous/numbers.anm" );
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
@@ -61,6 +64,7 @@ void MyResourceInitializer::doRun() {
 
   new AladdinPrefab();
   new ThrowableApplePrefab();
+  new EnemyExplosionPrefab();
 
   new ThinGuardPrefab();
   new FatGuardPrefab();

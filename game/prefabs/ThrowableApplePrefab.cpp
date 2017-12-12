@@ -1,5 +1,6 @@
 #include "ThrowableApplePrefab.h"
 #include "../scripts/ThrowableAppleController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,17 +14,26 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
+
   const auto animator = new Animator( object, "apple", "aladdin.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
+  
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 4, 5 ) );
+  collider->setTag( APPLE_TAG );
+  collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( ALADDIN_TAG );
+
   const auto stateManager = new StateManager( object, "apple_left" );
 
   const auto controller = new ThrowableAppleController( object, "controller" );
+  
+  // helpers
   const auto transform = object->getTransform();
 
   // configurations
   object->setLayer( "Character" );
+  object->setTag( ALADDIN_TAG );
 
   // states
 

@@ -79,6 +79,15 @@
     <sprite x="178" y="451" w="113" h="55" offsetX="-33.5" offsetY="3" />
     <sprite x="302" y="434" w="88" h="72" offsetX="-24" offsetY="11.5" />
   </Animation>
+  <Animation name="fat_guard_hit" imagePath="guards.png" interval="0.05" isLoop="false">
+    <sprite x="6" y="538" w="53" h="47" offsetX="1.5" offsetY="-1" />
+    <sprite x="71" y="515" w="62" h="70" offsetX="12" offsetY="10" />
+    <sprite x="138" y="529" w="64" h="56" offsetX="12" offsetY="2.5" />
+    <sprite x="210" y="520" w="70" h="73" offsetX="12" offsetY="4" />
+    <sprite x="290" y="522" w="73" h="63" offsetX="11.5" offsetY="7.5" />
+    <sprite x="382" y="530" w="65" h="55" offsetX="9.5" offsetY="3.5" />
+    <sprite x="6" y="378" w="54" h="51" offsetX="-1" offsetY="2" />
+  </Animation>
   <Animation name="throwable_knife" imagePath="guards.png" interval="0.07" isLoop="true">
     <sprite x="73" y="678" w="10" h="24" offsetX="0" offsetY="0" />
     <sprite x="97" y="680" w="25" h="16" offsetX="0" offsetY="0" />
