@@ -178,6 +178,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AdorableGuardController.cpp" />
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CollisionInfoTracker.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
@@ -218,6 +219,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\CollisionInfoTracker.h" />
     <ClInclude Include="scripts\DirectionController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\HubController.h" />

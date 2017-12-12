@@ -156,6 +156,9 @@
     <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\CollisionInfoTracker.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -251,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="prefabs\EnemyExplosionPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CollisionInfoTracker.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,10 +9,12 @@ CharcoalBurnerController::CharcoalBurnerController( ala::GameObject* gameObject,
     _firingMinX( 0 ), _firingMaxX( 0 ), _firingOffsetY( 21 ) {}
 
 void CharcoalBurnerController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-  const auto other = collision.getColliderA()->getGameObject() == getGameObject()
-                       ? collision.getColliderB()->getGameObject()
-                       : collision.getColliderA()->getGameObject();
-  if ( other->getTag() == ALADDIN_TAG ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ALADDIN_TAG && otherCollider->getTag() == ALADDIN_TAG ) {
     _firing = true;
     _firingTimer = 0;
   }
@@ -21,10 +23,12 @@ void CharcoalBurnerController::onTriggerEnter( const ala::CollisionInfo& collisi
 void CharcoalBurnerController::onTriggerStay( const ala::CollisionInfo& collision ) { }
 
 void CharcoalBurnerController::onTriggerExit( const ala::CollisionInfo& collision ) {
-  const auto other = collision.getColliderA()->getGameObject() == getGameObject()
-                       ? collision.getColliderB()->getGameObject()
-                       : collision.getColliderA()->getGameObject();
-  if ( other->getTag() == ALADDIN_TAG ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ALADDIN_TAG && otherCollider->getTag() == ALADDIN_TAG ) {
     _firing = false;
   }
 }

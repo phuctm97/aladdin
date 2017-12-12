@@ -1,5 +1,5 @@
 #include "ThrowableApplePrefab.h"
-#include "../scripts/ThrowableAppleController.h"
+#include "../scripts/CollisionInfoTracker.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
@@ -9,8 +9,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
 
-  const auto density = 3.0f;
-  const auto throwVelocity = 150.0f;
+  const auto density = 2.5f;
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
@@ -18,16 +17,18 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto animator = new Animator( object, "apple", "aladdin.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
-  
+
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 4, 5 ) );
   collider->setTag( APPLE_TAG );
   collider->ignoreTag( APPLE_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto stateManager = new StateManager( object, "apple_left" );
+  const auto stateManager = new StateManager( object, "left" );
 
-  const auto controller = new ThrowableAppleController( object, "controller" );
-  
+  const auto actionManager = new ActionManager( object );
+
+  const auto collision = new CollisionInfoChecker( object );
+
   // helpers
   const auto transform = object->getTransform();
 
@@ -36,36 +37,41 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   object->setTag( ALADDIN_TAG );
 
   // states
+  new State( stateManager, "left",
+             [=] {
+               animator->setAction( "apple" );
+               actionManager->stopAll();
+               actionManager->play( new Repeat( new RotateBy( 360, 0.1f) ) );
 
-  new State( stateManager, "apple_explode",
+               transform->setScaleX( -ABS(transform->getScale().getX()) );
+             }, NULL, NULL );
+
+  new State( stateManager, "right",
+             [=] {
+               animator->setAction( "apple" );
+               actionManager->stopAll();
+               actionManager->play( new Repeat( new RotateBy( -360, 0.1f ) ) );
+
+               transform->setScaleX( ABS(transform->getScale().getX()) );
+             }, NULL, NULL );
+
+  new State( stateManager, "explode",
              [=] {
                animator->setAction( "apple_explode" );
+               actionManager->stopAll();
                body->setVelocity( Vec2( 0, 0 ) );
                body->setGravityScale( 0 );
              }, [=]( float dt ) {
                if ( !animator->isPlaying() ) {
                  object->release();
                }
-             }
-             , NULL );
+             }, NULL );
 
-  new State( stateManager, "apple_left",
-             [=] {
-               animator->setAction( "apple" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-             },NULL,NULL );
-
-  new State( stateManager, "apple_right",
-             [=] {
-               animator->setAction( "apple" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
-
-  new StateTransition( stateManager, "apple_left", "apple_explode", [=] {
-    return controller->isCollided();
+  new StateTransition( stateManager, "left", "explode", [=] {
+    return collision->collided();
   } );
 
-  new StateTransition( stateManager, "apple_right", "apple_explode", [=] {
-    return controller->isCollided();
+  new StateTransition( stateManager, "right", "explode", [=] {
+    return collision->collided();
   } );
 }

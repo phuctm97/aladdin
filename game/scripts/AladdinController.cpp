@@ -67,10 +67,10 @@ void AladdinController::throwApple( const char direction, const float directX, c
   const auto appleStateManager = static_cast<StateManager*>(apple->getComponentT<StateManager>());
 
   if ( direction == 'L' ) {
-    appleStateManager->changeState( "apple_left" );
+    appleStateManager->changeState( "left" );
   }
   else {
-    appleStateManager->changeState( "apple_right" );
+    appleStateManager->changeState( "right" );
   }
 
   const auto appleBody = apple->getComponentT<Rigidbody>();
