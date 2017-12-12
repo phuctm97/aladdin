@@ -17,6 +17,8 @@ public:
   void resetCollidedWithGround();
 
   void throwApple( char direction, float directX, float directY, float impulseX, float impulseY ) const;
+
+  void enableAbu(float positionX, float positionY) const;
 protected:
   void onUpdate( const float delta ) override;
 

@@ -44,3 +44,12 @@ void AladdinController::throwApple( const char direction, const float directX, c
   const auto appleBody = apple->getComponentT<Rigidbody>();
   appleBody->addImpulse( Vec2( impulseX, impulseY ) );
 }
+
+void AladdinController::enableAbu(float positionX, float positionY) const {
+	const auto transform = getGameObject()->getTransform();
+	const auto collider = getGameObject()->getComponentT<Collider>();
+
+	const auto abu = GameManager::get()->getPrefab("abu")->instantiate(
+		transform->getPosition() + Vec2(collider->getSize().getWidth() / 2 + positionX,
+			collider->getSize().getHeight() / 2 + positionY));
+}

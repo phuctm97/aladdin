@@ -22,7 +22,7 @@ void CamelPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto timer = new Timer(object);
 	//const auto body = new Rigidbody(object, PhysicsMaterial(density), ALA_BODY_TYPE_DYNAMIC, 1.5f);
 	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ANIMAL_TAG);
+	collider->setTag(ENEMY_TAG);
 	collider->ignoreTag(ALADDIN_TAG);
 
 	//const auto colliderRenderer = new ColliderRenderer(collider);
@@ -31,7 +31,7 @@ void CamelPrefab::doInstantiate(ala::GameObject* object) const {
 	const auto transform = object->getTransform();
 
 	// configurations
-	object->setTag(ANIMAL_TAG);
+	object->setTag(ENEMY_TAG);
 	object->setLayer("Background");
 
 	// states

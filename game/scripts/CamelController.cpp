@@ -9,7 +9,6 @@ CamelController::CamelController(ala::GameObject* gameObject, const std::string&
 bool CamelController::isAladdinOnBack() const { return _aladdinOnBack; }
 
 void CamelController::onUpdate(const float delta) {
-
 	const auto aladdin = GameManager::get()->getObjectByName("Aladdin");
 	if (aladdin == NULL) return;
 

@@ -67,16 +67,28 @@ void ExperimentalScene::onPreInitialize() {
   const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
   charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 
-  const auto camel = gameManager->getPrefab("camel")->instantiate();
-  camel->getTransform()->setPosition(Vec2(0, -25));
+  /*const auto camel = gameManager->getPrefab("camel")->instantiate();
+  camel->getTransform()->setPosition(Vec2(1400, -55));*/
 
-  /*const auto saliva = gameManager->getPrefab("saliva")->instantiate();
-  saliva->getTransform()->setPosition(Vec2(20, -15));*/
+  /*const auto spring = gameManager->getPrefab("spring")->instantiate();
+  spring->getTransform()->setPosition(Vec2(100, -25));*/
 
+  /*const auto peddler = gameManager->getPrefab("peddler")->instantiate();
+  peddler->getTransform()->setPosition(Vec2(-80, -25));*/
+
+  /*spring->setTag(ALADDIN_TAG);
+  new NodeController(spring);
+  return;*/
+
+  /*X: 3322.000000; Y: 323.500000
+  3335.000000; Y: 416.500000
+  */
+
+  /*
   const auto handEnemy_1 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_1->getTransform()->setPosition(Vec2(1632.5, 91.5));
   const auto handEnemy_2 = gameManager->getPrefab("Hand Enemy")->instantiate();
-  handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));
+  handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));*/
   /*const auto handEnemy_3 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_3->getTransform()->setPosition(Vec2(1792.5, 235));
   const auto handEnemy_4 = gameManager->getPrefab("Hand Enemy")->instantiate();
@@ -98,8 +110,7 @@ void ExperimentalScene::onPreInitialize() {
   const auto handEnemy_12 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_12->getTransform()->setPosition(Vec2(3152.5, 203));
   */
-  /*handEnemy_12->setTag(ALADDIN_TAG);
-  new NodeController(handEnemy);*/
+  
 }
 
 void ExperimentalScene::onPreRelease() {}

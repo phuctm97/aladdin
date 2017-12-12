@@ -29,19 +29,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
-  // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "throw" );
-  //object->setLayer( "Character" );
-  //object->getTransform()->setPosition( -90, -40 );
-  //return;
-  // //For animationEditor
-
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   collider->setTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
-  const auto colliderRenderer = new ColliderRenderer( collider );
+  //const auto colliderRenderer = new ColliderRenderer( collider );
   const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
   swordCollider->setTag( SWORD_TAG );
   swordCollider->setActive( false );
@@ -65,6 +58,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( stateManager->getPreviousStateName() == "jump_left" ) {
                  animator->setAction( "fall_to_idle_1" );
                }
+			   else if (stateManager->getPreviousStateName() == "jump_rotate_left") {
+				   animator->setAction("grounding");
+			   }
                else if ( stateManager->getPreviousStateName() == "jump_left_attack" ||
                  stateManager->getPreviousStateName() == "run_left_to_jump" ||
                  stateManager->getPreviousStateName() == "jump_throw_apple_left" ||
@@ -88,6 +84,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( !animator->isPlaying() && timer1->isDone() ) {
                  if ( animator->getActionName() == "idle_4_to_1" ||
                    animator->getActionName() == "fall_to_idle_1" ||
+				   animator->getActionName() == "grounding" ||
                    animator->getActionName() == "touched_ground" ||
                    animator->getActionName() == "face_up_to_idle_1" ||
                    animator->getActionName() == "stand_up" ) {
@@ -139,6 +136,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( stateManager->getPreviousStateName() == "jump_right" ) {
                  animator->setAction( "fall_to_idle_1" );
                }
+			   else if (stateManager->getPreviousStateName() == "jump_rotate_right") {
+				   animator->setAction("grounding");
+			   }
                else if ( stateManager->getPreviousStateName() == "jump_right_attack" ||
                  stateManager->getPreviousStateName() == "run_right_to_jump" ||
                  stateManager->getPreviousStateName() == "jump_throw_apple_right" ||
@@ -162,6 +162,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( !animator->isPlaying() && timer1->isDone() ) {
                  if ( animator->getActionName() == "idle_4_to_1" ||
                    animator->getActionName() == "fall_to_idle_1" ||
+				   animator->getActionName() == "grounding" ||
                    animator->getActionName() == "touched_ground" ||
                    animator->getActionName() == "face_up_to_idle_1" ||
                    animator->getActionName() == "stand_up" ) {
@@ -207,6 +208,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  }
                }
              }, NULL );
+
+  ////For animationEditor
+  //const auto animationEditor = new AnimationEditor(object, "image");
+  //return;
+  ////For animationEditor
 
   new State( stateManager, "attack_1_left",
              [=] {
@@ -997,9 +1003,83 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   }
   , NULL);
 
+  new State(stateManager, "jump_rotate_left",
+	  [=] {
+	  if (stateManager->getPreviousStateName() != "jump_rotate_right") {
+		  animator->setAction("jump_rotate");
+		  transform->setScaleX(-ABS(transform->getScale().getX()));
+		  controller->resetCollidedWithGround();
+		  body->addImpulse(Vec2(0, 3500000.0f));
+	  }
+	  else {
+		  transform->setScaleX(-ABS(transform->getScale().getX()));
+	  }
+  },
+	  [=](float dt) {
+	  if (!animator->isPlaying() && animator->getActionName() == "jump_rotate")
+		  animator->setAction("rotate_loop");
+	  if (body->getVelocity().getY() < -290 && animator->getActionName() == "rotate_loop")
+		  animator->setAction("jump_rotate_fall");
+
+	  if (input->getKey(ALA_KEY_LEFT_ARROW))
+		  body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
+
+	  if (input->getKeyUp(ALA_KEY_LEFT_ARROW))
+		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
+  }, NULL);
+
+  new State(stateManager, "jump_rotate_right",
+	  [=] {
+	  if (stateManager->getPreviousStateName() != "jump_rotate_left") {
+		  animator->setAction("jump_rotate");
+		  transform->setScaleX(ABS(transform->getScale().getX()));
+		  controller->resetCollidedWithGround();
+		  body->addImpulse(Vec2(0, 3500000.0f));
+	  }
+	  else {
+		  transform->setScaleX(ABS(transform->getScale().getX()));
+	  }
+  },
+	  [=](float dt) {
+	  if (!animator->isPlaying() && animator->getActionName() == "jump_rotate")
+		  animator->setAction("rotate_loop");
+	  if (body->getVelocity().getY() < -290 && animator->getActionName() == "rotate_loop")
+		  animator->setAction("jump_rotate_fall");
+
+	  if (input->getKey(ALA_KEY_RIGHT_ARROW))
+		  body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
+
+	  if (input->getKeyUp(ALA_KEY_RIGHT_ARROW))
+		  body->setVelocity(Vec2(0, body->getVelocity().getY()));
+  }, NULL);
+
+  new State(stateManager, "death",
+	  [=] {
+	  animator->setAction("die");
+	  controller->enableAbu(55,-55);
+  }, NULL, NULL);
+
+  new State(stateManager, "revival",
+	  [=] {
+	  animator->setAction("revive");
+  }, NULL, NULL);
+
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
   } );
+
+  new StateTransition(stateManager, "idle_left", "death", [=] {
+	  return input->getKeyDown(ALA_KEY_Y);
+  });
+
+  new StateTransition(stateManager, "idle_right", "death", [=] {
+	  return input->getKeyDown(ALA_KEY_Y);
+  });
+
+  new StateTransition(stateManager, "death", "revival", [=] {
+	  return input->getKeyDown(ALA_KEY_U);
+  });
+
 
   new StateTransition( stateManager, "idle_right", "idle_left", [=] {
     return input->getKeyDown( ALA_KEY_LEFT_ARROW );
@@ -1411,5 +1491,28 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition(stateManager, "push_wall_right", "idle_right", [=] {
 	  return input->getKeyUp(ALA_KEY_RIGHT_ARROW);
+  });
+
+  new StateTransition(stateManager, "jump_left", "jump_rotate_left", [=] {
+	  return input->getKeyDown(ALA_KEY_K);
+  });
+
+  new StateTransition(stateManager, "jump_right", "jump_rotate_right", [=] {
+	  return input->getKeyDown(ALA_KEY_K);
+  });
+  new StateTransition(stateManager, "jump_rotate_left", "idle_left", [=] {
+	  return controller->isCollidedWithGround();
+  });
+
+  new StateTransition(stateManager, "jump_rotate_right", "idle_right", [=] {
+	  return controller->isCollidedWithGround();
+  });
+
+  new StateTransition(stateManager, "jump_rotate_right", "jump_rotate_left", [=] {
+	  return input->getKeyDown(ALA_KEY_LEFT_ARROW);
+  });
+
+  new StateTransition(stateManager, "jump_rotate_left", "jump_rotate_right", [=] {
+	  return input->getKeyDown(ALA_KEY_RIGHT_ARROW);
   });
 }

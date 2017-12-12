@@ -159,6 +159,21 @@
     <ClCompile Include="prefabs\SalivaPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\SpringPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\SpringController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PeddlerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PeddlerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AbuPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -255,6 +270,21 @@
     <ClInclude Include="prefabs\SalivaPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\SpringPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\SpringController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PeddlerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PeddlerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AbuPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -279,6 +309,15 @@
       <Filter>texures\nonplayable_characters</Filter>
     </Image>
     <Image Include="textures\non_playable_characters\saliva.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\non_playable_characters\spring.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\non_playable_characters\peddler.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\non_playable_characters\abu.png">
       <Filter>texures\nonplayable_characters</Filter>
     </Image>
   </ItemGroup>
@@ -308,6 +347,15 @@
       <Filter>animations\non_playable_characters</Filter>
     </None>
     <None Include="animations\non_playable_characters\saliva.anm">
+      <Filter>animations\non_playable_characters</Filter>
+    </None>
+    <None Include="animations\non_playable_characters\spring.anm">
+      <Filter>animations\non_playable_characters</Filter>
+    </None>
+    <None Include="animations\non_playable_characters\peddler.anm">
+      <Filter>animations\non_playable_characters</Filter>
+    </None>
+    <None Include="animations\non_playable_characters\abu.anm">
       <Filter>animations\non_playable_characters</Filter>
     </None>
   </ItemGroup>
