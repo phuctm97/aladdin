@@ -8,6 +8,9 @@ class AladdinController : public ala::GameObjectComponent
 private:
   ala::Logger _logger;
   bool _collidedWithGround;
+  bool _collidedWithRope;
+  float _collidedRopePositionX;
+
   bool _colliedWithKnife;
   int _health;
   int _lives;
@@ -20,6 +23,10 @@ public:
   bool isCollidedWithGround() const;
 
   bool isCollidedWithKnife() const;
+
+  bool isCollidedWithRope() const;
+
+  float getCollidedRopePositionX() const;
 
   void resetCollidedWithGround();
 
@@ -50,8 +57,10 @@ public:
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
   void onTriggerStay( const ala::CollisionInfo& collision ) override;
+
+  void onTriggerExit( const ala::CollisionInfo& collision ) override;
 private:
-  void onHitCharcoalBurner( ala::GameObject* burnerObject );
+  void onHit();
 };
 
 #endif //!__ALADDIN_CONTROLLER_H__

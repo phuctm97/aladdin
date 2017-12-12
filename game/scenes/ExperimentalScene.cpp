@@ -20,7 +20,7 @@ void ExperimentalScene::onPreInitialize() {
   enablePhysics( Vec2( 0, -500.0f ) );
 
   enableQuadTree( -gameManager->getVisibleWidth() / 2, gameManager->getVisibleHeight() / 2,
-                  4771 - gameManager->getVisibleWidth() / 2, 688 - gameManager->getVisibleHeight() / 2 );
+                  4771 - gameManager->getVisibleWidth() / 2, 688 - gameManager->getVisibleHeight() / 2, 3 );
 
   new CameraController( getMainCamera() );
 

@@ -5,13 +5,22 @@ USING_NAMESPACE_ALA;
 
 AladdinController::AladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _logger( "AladdinController" ),
-    _collidedWithGround( false ), _colliedWithKnife( false ), _health( 10 ),
+    _collidedWithGround( false ), _collidedWithRope( false ), _collidedRopePositionX( 0 ), _colliedWithKnife( false ),
+    _health( 10 ),
     _lives( 3 ), _apples( 5 ), _recovering( false ) {}
 
 bool AladdinController::isCollidedWithGround() const { return _collidedWithGround; }
 
 bool AladdinController::isCollidedWithKnife() const {
   return _colliedWithKnife;
+}
+
+bool AladdinController::isCollidedWithRope() const {
+  return _collidedWithRope;
+}
+
+float AladdinController::getCollidedRopePositionX() const {
+  return _collidedRopePositionX;
 }
 
 void AladdinController::resetCollidedWithGround() { _collidedWithGround = false; }
@@ -25,7 +34,27 @@ void AladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) 
   }
 }
 
-void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {}
+void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
+    onHit();
+  }
+  else if ( otherObject->getTag() == ROPE_TAG ) {
+    if ( !_collidedWithRope ) {
+      const auto transform = getGameObject()->getTransform();
+      const auto ropeTransform = otherObject->getTransform();
+
+      if ( ABS(transform->getPositionX() - ropeTransform->getPositionX()) <= 15 ) {
+        _collidedRopePositionX = ropeTransform->getPositionX();
+        _collidedWithRope = true;
+      }
+    }
+  }
+}
 
 void AladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
   const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
@@ -34,11 +63,33 @@ void AladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
   const auto otherObject = otherCollider->getGameObject();
 
   if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
-    onHitCharcoalBurner( otherObject );
+    onHit();
+  }
+  else if ( otherObject->getTag() == ROPE_TAG ) {
+    if ( !_collidedWithRope ) {
+      const auto transform = getGameObject()->getTransform();
+      const auto ropeTransform = otherObject->getTransform();
+
+      if ( ABS(transform->getPositionX() - ropeTransform->getPositionX()) <= 15 ) {
+        _collidedRopePositionX = ropeTransform->getPositionX();
+        _collidedWithRope = true;
+      }
+    }
   }
 }
 
-void AladdinController::onHitCharcoalBurner( ala::GameObject* burnerObject ) {
+void AladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ROPE_TAG ) {
+    _collidedWithRope = false;
+  }
+}
+
+void AladdinController::onHit() {
   if ( _recovering ) return;
 
   const auto stateManager = getGameObject()->getComponentT<StateManager>();

@@ -13,6 +13,12 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto density = 5.0f;
   const auto runVelocity = 100.0f;
 
+  const auto swordOffset1 = Vec2( -30, -5 );
+  const auto swordSize1 = Size( 50, 15 );
+
+  const auto swordOffset2 = Vec2( -45, 20 );
+  const auto swordSize2 = Size( 50, 45 );
+
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
@@ -25,6 +31,11 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   collider->ignoreTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
+  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0, 0, "Sword" );
+  swordCollider->setTag( SWORD_TAG );
+  swordCollider->ignoreTag( ENEMY_TAG );
+  swordCollider->setActive( false );
+
   const auto stateManager = new StateManager( object, "idle" );
 
   const auto direction = new DirectionController( object, false );
@@ -32,10 +43,14 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto controller = new FatGuardController( object );
 
   // helpers
+  const auto timer = new Timer( object );
+
   const auto transform = object->getTransform();
 
   // collider renderers
-  const auto colliderRenderer = new ColliderRenderer( collider );
+  //  const auto colliderRenderer = new ColliderRenderer( collider );
+  //
+  //  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
 
   // configurations
   object->setLayer( "Character" );
@@ -47,6 +62,7 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "fat_guard_idle" );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              }, NULL, NULL );
 
   new State( stateManager, "provoke",
@@ -66,12 +82,33 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
                const auto r = rand() % 5;
                if ( r < 2 ) {
                  animator->setAction( "fat_guard_attack_1" );
+                 swordCollider->setOffset( swordOffset1 );
+                 swordCollider->setSize( swordSize1 );
                }
                else {
                  animator->setAction( "fat_guard_attack_2" );
+                 swordCollider->setOffset( swordOffset2 );
+                 swordCollider->setSize( swordSize2 );
                }
+               timer->start( 0.15f );
+
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               if ( timer->isDone() ) {
+                 if ( !swordCollider->isActive() ) {
+                   swordCollider->setActive( true );
+                   timer->start( 0.2f );
+                 }
+                 else {
+                   swordCollider->setActive( false );
+                   timer->start( 5 );
+                 }
+               }
+             },
+             [=] {
+               swordCollider->setActive( false );
+             } );
 
   new State( stateManager, "hit",
              [=] {
@@ -105,6 +142,10 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "run", "attack", [=] {
     return controller->isAttacking();
+  } );
+
+  new StateTransition( stateManager, "attack", "attack", [=] {
+    return controller->isAttacking() && !animator->isPlaying();
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {

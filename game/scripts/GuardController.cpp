@@ -9,8 +9,7 @@ ALA_CLASS_SOURCE_1(GuardController, ala::GameObjectComponent)
 
 GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _state( 0 ),
-    _initialX( 0 ), _minX( 0 ), _maxX( 0 ), _health( 2 ) {}
+    _initialX( 0 ), _minX( 0 ), _maxX( 0 ), _health( 2 ), _state( 0 ) {}
 
 bool GuardController::isIdling() const {
   return _state == 0;

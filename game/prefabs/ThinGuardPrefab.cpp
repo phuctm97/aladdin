@@ -13,6 +13,9 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto density = 5.0f;
   const auto runVelocity = 100.0f;
 
+  const auto swordOffset = Vec2( -50, 5 );
+  const auto swordSize = Size( 50, 32 );
+
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
@@ -25,6 +28,11 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   collider->ignoreTag( ENEMY_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
+  const auto swordCollider = new Collider( object, true, swordOffset, swordSize, 0, 0, "Sword" );
+  swordCollider->setTag( SWORD_TAG );
+  swordCollider->ignoreTag( ENEMY_TAG );
+  swordCollider->setActive( false );
+
   const auto stateManager = new StateManager( object, "idle" );
 
   const auto direction = new DirectionController( object, false );
@@ -32,10 +40,14 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto controller = new GuardController( object );
 
   // helpers
+  const auto timer = new Timer( object );
+
   const auto transform = object->getTransform();
 
   // collider renderers
-  const auto colliderRenderer = new ColliderRenderer( collider );
+  //  const auto colliderRenderer = new ColliderRenderer( collider );
+  //
+  //  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
 
   // configurations
   object->setLayer( "Character" );
@@ -46,6 +58,7 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "thin_guard_idle" );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              }, NULL, NULL );
 
   new State( stateManager, "run",
@@ -58,7 +71,23 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                animator->setAction( "thin_guard_attack" );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-             }, NULL, NULL );
+               timer->start( 0.15f );
+             },
+             [=]( float dt ) {
+               if ( timer->isDone() ) {
+                 if ( !swordCollider->isActive() ) {
+                   swordCollider->setActive( true );
+                   timer->start( 0.2f );
+                 }
+                 else {
+                   swordCollider->setActive( false );
+                   timer->start( 5 );
+                 }
+               }
+             },
+             [=] {
+               swordCollider->setActive( false );
+             } );
 
   new State( stateManager, "hit",
              [=] {
@@ -80,6 +109,10 @@ void ThinGuardPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "run", "attack", [=] {
     return controller->isAttacking();
+  } );
+
+  new StateTransition( stateManager, "attack", "attack", [=] {
+    return controller->isAttacking() && !animator->isPlaying();
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {

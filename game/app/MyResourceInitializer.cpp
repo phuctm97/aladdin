@@ -27,7 +27,9 @@ void MyResourceInitializer::doRun() {
 
   // Layers
   gameManager->addLayer( "Background" );
+  gameManager->addLayer( "Sub Background" );
   gameManager->addLayer( "Character" );
+  gameManager->addLayer( "Sub Character" );
   gameManager->addLayer( "Foreground" );
   gameManager->addLayer( "UI" );
 

@@ -60,9 +60,9 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto timer4 = new Timer( object );
 
   // collider renderers
-  const auto colliderRenderer = new ColliderRenderer( collider );
+    const auto colliderRenderer = new ColliderRenderer( collider );
 
-  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
+  //  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
 
   // configurations
   object->setTag( ALADDIN_TAG );
@@ -985,6 +985,33 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                swordCollider->setActive( false );
              } );
 
+  new State( stateManager, "climb",
+             [=] {
+               animator->setAction( "climb" );
+               animator->pause();
+
+               body->setVelocity( Vec2( 0, 0 ) );
+               body->setGravityScale( 0 );
+
+               transform->setPositionX( controller->getCollidedRopePositionX() );
+             },
+             [=]( float dt ) {
+               if ( !input->getKey( ALA_KEY_UP_ARROW ) && !input->getKey( ALA_KEY_DOWN_ARROW ) &&
+                 animator->isPlaying() ) {
+                 animator->pause();
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+               else if ( input->getKey( ALA_KEY_UP_ARROW ) && !animator->isPlaying() ) {
+                 animator->play();
+                 body->setVelocity( Vec2( 0, 50 ) );
+               }
+               else if ( input->getKey( ALA_KEY_DOWN_ARROW ) && !animator->isPlaying() ) {
+                 animator->play();
+                 body->setVelocity( Vec2( 0, -50 ) );
+               }
+             },
+             NULL );
+
   new State( stateManager, "hit_left", [=] {
     animator->setAction( "hit" );
     transform->setScaleX( -ABS(transform->getScale().getX()) );
@@ -1403,5 +1430,21 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "hit_right", "idle_right", [=] {
     return !animator->isPlaying() || input->getKeyDown( ALA_KEY_RIGHT_ARROW );;
+  } );
+
+  new StateTransition( stateManager, "jump_left", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "jump_right", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "run_left_to_jump", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "run_right_to_jump", "climb", [=] {
+    return controller->isCollidedWithRope();
   } );
 }

@@ -33,7 +33,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto transform = object->getTransform();
 
   // configurations
-  object->setLayer( "Character" );
+  object->setLayer( "Sub Character" );
   object->setTag( ALADDIN_TAG );
 
   // states

@@ -21,5 +21,5 @@ void EnemyExplosionPrefab::doInstantiate( ala::GameObject* object ) const {
              NULL );
 
   // configurations
-  object->setLayer( "Background" );
+  object->setLayer( "Sub Background" );
 }

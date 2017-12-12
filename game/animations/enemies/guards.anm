@@ -14,7 +14,7 @@
     <sprite x="308" y="9" w="49" h="66" offsetX="0" offsetY="8.5" />
     <sprite x="363" y="11" w="35" h="64" offsetX="0" offsetY="7.5" />
   </Animation>
-  <Animation name="thin_guard_attack" imagePath="guards.png" interval="0.07" isLoop="true
+  <Animation name="thin_guard_attack" imagePath="guards.png" interval="0.07" isLoop="false
              ">
     <sprite x="9" y="82" w="36" h="73" offsetX="0" offsetY="12" />
     <sprite x="53" y="96" w="48" h="59" offsetX="0" offsetY="5" />
@@ -64,7 +64,7 @@
     <sprite x="221" y="317" w="48" h="52" offsetX="2.5" offsetY="1" />
     <sprite x="278" y="317" w="43" h="52" offsetX="5" offsetY="1.5" />
   </Animation>
-  <Animation name="fat_guard_attack_1" imagePath="guards.png" interval="0.07" isLoop="true">
+  <Animation name="fat_guard_attack_1" imagePath="guards.png" interval="0.07" isLoop="false">
     <sprite x="6" y="378" w="54" h="51" offsetX="5" offsetY="1" />
     <sprite x="65" y="386" w="66" h="43" offsetX="0" offsetY="-3" />
     <sprite x="140" y="388" w="69" h="41" offsetX="0" offsetY="-3.5" />
@@ -72,7 +72,7 @@
     <sprite x="297" y="385" w="87" h="44" offsetX="-8" offsetY="-2.5" />
     <sprite x="395" y="384" w="94" h="45" offsetX="-10" offsetY="-2.5" />
   </Animation>
-  <Animation name="fat_guard_attack_2" imagePath="guards.png" interval="0.07" isLoop="true">
+  <Animation name="fat_guard_attack_2" imagePath="guards.png" interval="0.07" isLoop="false">
     <sprite x="6" y="447" w="42" h="59" offsetX="-1" offsetY="5" />
     <sprite x="61" y="434" w="42" h="72" offsetX="0" offsetY="11.5" />
     <sprite x="116" y="441" w="51" h="65" offsetX="1.5" offsetY="8" />
