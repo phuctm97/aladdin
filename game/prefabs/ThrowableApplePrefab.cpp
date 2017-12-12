@@ -25,8 +25,6 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto stateManager = new StateManager( object, "left" );
 
-  const auto actionManager = new ActionManager( object );
-
   const auto collision = new CollisionInfoChecker( object );
 
   // helpers
@@ -40,28 +38,22 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   new State( stateManager, "left",
              [=] {
                animator->setAction( "apple" );
-               actionManager->stopAll();
-               actionManager->play( new Repeat( new RotateBy( 360, 0.1f) ) );
-
                transform->setScaleX( -ABS(transform->getScale().getX()) );
              }, NULL, NULL );
 
   new State( stateManager, "right",
              [=] {
                animator->setAction( "apple" );
-               actionManager->stopAll();
-               actionManager->play( new Repeat( new RotateBy( -360, 0.1f ) ) );
-
                transform->setScaleX( ABS(transform->getScale().getX()) );
              }, NULL, NULL );
 
   new State( stateManager, "explode",
              [=] {
                animator->setAction( "apple_explode" );
-               actionManager->stopAll();
                body->setVelocity( Vec2( 0, 0 ) );
                body->setGravityScale( 0 );
-             }, [=]( float dt ) {
+             },
+             [=]( float dt ) {
                if ( !animator->isPlaying() ) {
                  object->release();
                }

@@ -10,6 +10,7 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto collider = new Collider( object, true, Vec2(), Size( 90, 4 ) );
   collider->setTag( CHARCOAL_BURNER_TAG );
+  collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( GROUND_TAG );
 
   const auto controller = new CharcoalBurnerController( object );

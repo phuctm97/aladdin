@@ -3,11 +3,15 @@
 USING_NAMESPACE_ALA;
 
 void EnemyExplosionPrefab::doInstantiate( ala::GameObject* object ) const {
-  new SpriteRenderer( object, "enemy_explosions.png" );
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "enemy_explosions.png" );
+
   const auto animator = new Animator( object, "1", "enemy_explosions.anm" );
 
-  const auto stateManager = new StateManager( object, "initial" );
-  new State( stateManager, "initial",
+  const auto stateManager = new StateManager( object, "explode" );
+
+  // states
+  new State( stateManager, "explode",
              NULL,
              [=]( float dt ) {
                if ( !animator->isPlaying() ) {
@@ -16,5 +20,6 @@ void EnemyExplosionPrefab::doInstantiate( ala::GameObject* object ) const {
              },
              NULL );
 
+  // configurations
   object->setLayer( "Background" );
 }
