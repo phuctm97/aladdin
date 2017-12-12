@@ -58,7 +58,7 @@ void AladdinController::throwApple( const char direction, const float directX, c
   _apples -= 1;
 
   const auto transform = getGameObject()->getTransform();
-  const auto collider = getGameObject()->getComponentT<Collider>();
+  const auto collider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
 
   const auto apple = GameManager::get()->getPrefab( "Throwable Apple" )->instantiate(
     transform->getPosition() + Vec2( collider->getSize().getWidth() / 2 + directX,

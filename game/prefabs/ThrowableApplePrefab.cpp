@@ -5,6 +5,8 @@
 USING_NAMESPACE_ALA;
 
 void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
+  Logger( "ThrowableApplePrefab" ).info( "new apple" );
+
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();

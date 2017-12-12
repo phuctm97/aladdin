@@ -6,10 +6,8 @@
 class CharcoalBurnerController : ala::GameObjectComponent
 {
 private:
-  bool _firing;
-  float _firingTimer;
-  float _firingInterval;
-  float _firingMinX, _firingMaxX, _firingOffsetY;
+  bool _touchingAladdin;
+  float _firingMinX, _firingMaxX, _firingX;
 
 public:
   CharcoalBurnerController( ala::GameObject* gameObject, const std::string& name = "" );
@@ -20,6 +18,9 @@ public:
 
   void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
+  float getFiringX() const;
+  
+  bool isTouchingAladdin() const;
 
 protected:
   void onInitialize() override;
@@ -27,7 +28,7 @@ protected:
   void onUpdate( const float delta ) override;
 
 private:
-  void fire( const float x ) const;
+  void updateFiringX();
 };
 
 #endif //!__CHARCOAL_BURNER_CONTROLLER_H__

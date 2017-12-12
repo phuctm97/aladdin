@@ -32,12 +32,12 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
-  const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
+  const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ), 1, 0, "Body" );
   collider->setTag( ALADDIN_TAG );
   collider->ignoreTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
-  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
+  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0, 0, "Sword" );
   swordCollider->setTag( SWORD_TAG );
   swordCollider->ignoreTag( ALADDIN_TAG );
   swordCollider->setActive( false );
@@ -45,18 +45,18 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto stateManager = new StateManager( object, "idle_right" );
 
   const auto actionManager = new ActionManager( object );
-  
+
   const auto controller = new AladdinController( object, "Controller" );
 
   // helpers
   const auto transform = object->getTransform();
-  
+
   const auto timer1 = new Timer( object );
-  
+
   const auto timer2 = new Timer( object );
-  
+
   const auto timer3 = new Timer( object );
-  
+
   const auto timer4 = new Timer( object );
 
   // collider renderers
@@ -95,6 +95,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
@@ -169,6 +170,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
