@@ -31,8 +31,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // //For animationEditor
   //const auto animationEditor = new AnimationEditor( object, "aladdin_hitted" );
-  //object->setLayer( "Character" );
-  //object->getTransform()->setPosition( -80, -40 );
   //return;
   // //For animationEditor
 
@@ -41,20 +39,24 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   collider->setTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
-  const auto colliderRenderer = new ColliderRenderer( collider );
   const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
   swordCollider->setTag( SWORD_TAG );
   swordCollider->setActive( false );
 
-  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
+  const auto stateManager = new StateManager( object, "idle_right" );
+  const auto actionManager = new ActionManager( object );
+  const auto controller = new AladdinController( object, "Controller" );
+
+  // helpers
+  const auto transform = object->getTransform();
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
   const auto timer3 = new Timer( object );
   const auto timer4 = new Timer( object );
-  const auto stateManager = new StateManager( object, "idle_right" );
-  const auto actionManager = new ActionManager( object );
-  const auto controller = new AladdinController( object, "Controller" );
-  const auto transform = object->getTransform();
+
+  // collider renderers
+  const auto colliderRenderer = new ColliderRenderer( collider );
+  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
 
   // configurations
   object->setTag( ALADDIN_TAG );
