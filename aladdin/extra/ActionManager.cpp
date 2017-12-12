@@ -12,6 +12,19 @@ void ActionManager::play( Action* action ) {
   addAction( action );
 }
 
+void ActionManager::stopAll() {
+
+  std::vector<Action*> actions;
+
+  for ( const auto action : _actions ) {
+    actions.push_back( action );
+  }
+
+  for ( const auto action : actions ) {
+    action->release();
+  }
+}
+
 void ActionManager::onUpdate( const float delta ) {
   lockActions();
 
