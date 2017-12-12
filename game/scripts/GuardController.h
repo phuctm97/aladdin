@@ -14,9 +14,6 @@ private:
   float _minX;
   float _maxX;
 
-protected:
-  void onUpdate( const float delta ) override;
-
 public:
   GuardController( ala::GameObject* gameObject, const std::string& name = "" );
   bool couldAttackAladdin() const;
@@ -31,6 +28,15 @@ public:
   float getMaxX() const;
   void setMaxX( const float maxX );
   void set( const float initialX, const float minX, const float maxX );
+
+protected:
+  void onUpdate( const float delta ) override;
+
+public:
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
+
+private:
+  void onHit();
 };
 
 #endif //!__GUARD_CONTROLLER_H__

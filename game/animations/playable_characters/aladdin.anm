@@ -276,7 +276,7 @@
     <sprite x="912" y="1378" w="72" h="59" offsetX="0" offsetY="5" />
     <sprite x="1020" y="1388" w="59" h="49" offsetX="0" offsetY="0" />
   </Animation>
-  <Animation name="hitted" imagePath="aladdin.png" interval="0.07" isLoop="false">
+  <Animation name="hit" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="9" y="2167" w="41" h="45" offsetX="3" offsetY="-4" />
     <sprite x="58" y="2161" w="54" h="51" offsetX="-1.5" offsetY="-1" />
     <sprite x="122" y="2162" w="58" h="49" offsetX="0" offsetY="-2.5" />

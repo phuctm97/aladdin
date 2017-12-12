@@ -975,14 +975,14 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                swordCollider->setActive( false );
              } );
 
-  new State( stateManager, "hitted_left", [=] {
-    animator->setAction( "hitted" );
+  new State( stateManager, "hit_left", [=] {
+    animator->setAction( "hit" );
     transform->setScaleX( -ABS(transform->getScale().getX()) );
     body->setVelocity( Vec2( 0, 0 ) );
   }, NULL, NULL );
 
-  new State( stateManager, "hitted_right", [=] {
-    animator->setAction( "hitted" );
+  new State( stateManager, "hit_right", [=] {
+    animator->setAction( "hit" );
     transform->setScaleX( ABS(transform->getScale().getX()) );
     body->setVelocity( Vec2( 0, 0 ) );
   }, NULL, NULL );
@@ -1387,11 +1387,11 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     return input->getKeyDown( ALA_KEY_S );
   } );
 
-  new StateTransition( stateManager, "hitted_left", "idle_left", [=] {
+  new StateTransition( stateManager, "hit_left", "idle_left", [=] {
     return !animator->isPlaying() || input->getKeyDown( ALA_KEY_LEFT_ARROW );
   } );
 
-  new StateTransition( stateManager, "hitted_right", "idle_right", [=] {
+  new StateTransition( stateManager, "hit_right", "idle_right", [=] {
     return !animator->isPlaying() || input->getKeyDown( ALA_KEY_RIGHT_ARROW );;
   } );
 }

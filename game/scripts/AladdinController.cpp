@@ -44,11 +44,11 @@ void AladdinController::onHitCharcoalBurner( ala::GameObject* burnerObject ) {
 
   const auto stateManager = getGameObject()->getComponentT<StateManager>();
   if ( stateManager->getCurrentStateName() == "idle_left" ) {
-    stateManager->changeState( "hitted_left" );
+    stateManager->changeState( "hit_left" );
     setRecovering();
   }
   else if ( stateManager->getCurrentStateName() == "idle_right" ) {
-    stateManager->changeState( "hitted_right" );
+    stateManager->changeState( "hit_right" );
     setRecovering();
   }
 }
@@ -109,14 +109,10 @@ void AladdinController::setRecovering() {
   if ( _recovering ) return;
 
   _recovering = true;
-  _logger.info( "Recovering start" );
 
   const auto actionManager = getGameObject()->getComponentT<ActionManager>();
   actionManager->play( new Sequence( {
     new Blink( 0.05f, 10 ),
-    new CallFunc( [this] {
-      this->_recovering = false;
-      this->_logger.info( "Recovering finished" );
-    } )
+    new CallFunc( [this] { this->_recovering = false; } )
   } ) );
 }

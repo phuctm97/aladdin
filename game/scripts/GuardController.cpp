@@ -7,7 +7,7 @@ USING_NAMESPACE_ALA;
 GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _couldAttackAladdin( false ), _couldSeeAladdin( false ), _onRightOfAladdin( false ), _tooFarFromAladdin( true ),
-    _minX( 0 ), _maxX( 0 ) {}
+    _initialX( 0 ), _minX( 0 ), _maxX( 0 ) {}
 
 bool GuardController::couldAttackAladdin() const {
   return _couldAttackAladdin;
@@ -46,6 +46,32 @@ void GuardController::onUpdate( const float delta ) {
   _tooFarFromAladdin = distanceToAladdin > visibleWidth * 0.7f;
   _couldAttackAladdin = distanceToAladdin < 70;
   _onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
+}
+
+void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ALADDIN_TAG && otherCollider->getTag() == SWORD_TAG ) {
+    onHit();
+  }
+}
+
+void GuardController::onHit() {
+  const auto stateManager = getGameObject()->getComponentT<StateManager>();
+  const auto currentStateName = stateManager->getCurrentStateName();
+
+  if ( currentStateName == "hit_left" || currentStateName == "hit_right" )
+    return;
+
+  if ( currentStateName.substr( currentStateName.length() - 4 ) == "left" ) {
+    stateManager->changeState( "hit_left" );
+  }
+  else {
+    stateManager->changeState( "hit_right" );
+  }
 }
 
 float GuardController::getMinX() const { return _minX; }
