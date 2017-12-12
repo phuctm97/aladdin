@@ -7,8 +7,9 @@ NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_1(Sequence, ala::Action)
 private:
-  Action* _currentAction;
-  std::queue<Action*> _actions;
+  std::vector<Action*>::const_iterator _currentActionIterator;
+
+  std::vector<Action*> _actions;
 
 public:
   Sequence( const std::vector<Action*>& actions );
@@ -17,6 +18,8 @@ protected:
   void onStart() override;
 
   void onUpdate( const float delta ) override;
+
+  void onRelease() override;
 };
 }
 

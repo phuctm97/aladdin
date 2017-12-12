@@ -265,6 +265,9 @@
     <ClInclude Include="extra\Repeat.h">
       <Filter>extra</Filter>
     </ClInclude>
+    <ClInclude Include="extra\CallFunc.h">
+      <Filter>extra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -460,6 +463,9 @@
       <Filter>extra</Filter>
     </ClCompile>
     <ClCompile Include="extra\Repeat.cpp">
+      <Filter>extra</Filter>
+    </ClCompile>
+    <ClCompile Include="extra\CallFunc.cpp">
       <Filter>extra</Filter>
     </ClCompile>
   </ItemGroup>
