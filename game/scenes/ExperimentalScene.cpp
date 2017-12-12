@@ -69,11 +69,19 @@ void ExperimentalScene::onPreInitialize() {
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->setTag( ALADDIN_TAG );
   aladdin->setLayer( "Character" );
-  aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+  aladdin->getTransform()->setPosition( Vec2( 900, -25 ) );
 
-  const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
+  /*const auto adorable_enemy = gameManager->getPrefab("Adorable Guard")->instantiate("Adorable Guard");
   adorable_enemy->setLayer("Enemy");
-  adorable_enemy->getTransform()->setPosition(Vec2(200, -40));
+  adorable_enemy->getTransform()->setPosition(Vec2(500, -40));*/
+
+  const auto nake_enemy = gameManager->getPrefab("Nake Guard")->instantiate("Nake Guard");
+  nake_enemy->setLayer("Enemy");
+  nake_enemy->getTransform()->setPosition(Vec2(500, -40));
+
+  /*const auto hide_enemy = gameManager->getPrefab("Hide Guard")->instantiate("Hide Guard");
+  hide_enemy->setLayer("Enemy");
+  hide_enemy->getTransform()->setPosition(Vec2(200, -40));*/
 }
 
 void ExperimentalScene::onPreRelease() {}

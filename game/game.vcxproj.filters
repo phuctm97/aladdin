@@ -132,6 +132,18 @@
     <ClCompile Include="prefabs\StairPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\HideGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HideGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\NakeGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\NakeGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -207,6 +219,18 @@
     <ClInclude Include="prefabs\StairPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\HideGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HideGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\NakeGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\NakeGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -224,6 +248,9 @@
     <Image Include="textures\enemies\guards.png">
       <Filter>texures\enemies</Filter>
     </Image>
+    <Image Include="textures\enemies\guards2.png">
+      <Filter>texures\enemies</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -232,6 +259,9 @@
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm">
       <Filter>animations\playable_characters</Filter>
+    </Xml>
+    <Xml Include="animations\enemies\guards2.anm">
+      <Filter>animations\enemies</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>

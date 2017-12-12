@@ -15,6 +15,8 @@
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/AdorableGuardPrefab.h"
 #include "../prefabs/ThrowableKnifePrefab.h"
+#include "../prefabs/HideGuardPrefab.h"
+#include "../prefabs/NakeGuardPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -32,6 +34,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
+  new Sprite( "guards2.png", "textures/enemies/guards2.png");
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -41,6 +44,7 @@ void MyResourceInitializer::doRun() {
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
+  new Animation("guards2.anm", "animations/enemies/guards2.anm");
 
   // Prefabs
   new NormalTextPrefab();
@@ -51,6 +55,8 @@ void MyResourceInitializer::doRun() {
 
   new ThinGuardPrefab();
   new FatGuardPrefab();
+  new HideGuardPrefab();
+  new NakeGuardPrefab();
 
   new RopePrefab();
   new StairPrefab();

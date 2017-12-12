@@ -966,16 +966,17 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                swordCollider->setActive( false );
              } );
-	new State( stateManager, "aladdin_hitted_right", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
-	new State(stateManager, "aladdin_hitted_left", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(-ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
+					//COMMENT FOR TESTING WITH ENEMY 
+	//new State( stateManager, "aladdin_hitted_right", [=] {
+	//	animator->setAction("aladdin_hitted");
+	//	transform->setScaleX(ABS(transform->getScale().getX()));
+	//	body->setVelocity(Vec2(0, 0));
+	//}, NULL, NULL);
+	//new State(stateManager, "aladdin_hitted_left", [=] {
+	//	animator->setAction("aladdin_hitted");
+	//	transform->setScaleX(-ABS(transform->getScale().getX()));
+	//	body->setVelocity(Vec2(0, 0));
+	//}, NULL, NULL);
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
