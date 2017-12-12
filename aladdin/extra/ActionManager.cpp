@@ -38,9 +38,8 @@ void ActionManager::onResolvedLockedTasks() {
 
   for ( const auto action : _actionsToRemoveInNextFrame ) {
     doRemoveAction( action );
-
   }
-  _actionsToAddInNextFrame.clear();
+  _actionsToRemoveInNextFrame.clear();
 }
 
 void ActionManager::onRelease() {

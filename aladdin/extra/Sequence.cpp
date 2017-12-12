@@ -4,32 +4,36 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1( ala::Sequence, ala::Action )
 
-Sequence::Sequence( const std::vector<Action*>& actions ) : _currentAction( NULL ) {
-  for ( const auto action : actions ) _actions.push( action );
+Sequence::Sequence( const std::vector<Action*>& actions ) : _actions( actions ) {}
+
+void Sequence::onStart() {
+  _currentActionIterator = _actions.cbegin();
+  if ( _currentActionIterator == _actions.cend() )
+    done();
+  else {
+    (*_currentActionIterator)->start( getActionManager() );
+  }
 }
 
-void Sequence::onStart() {}
-
 void Sequence::onUpdate( const float delta ) {
-  if ( _actions.empty() && _currentAction == NULL ) {
-    done();
-    return;
-  }
+  const auto currentAction = *_currentActionIterator;
 
-  if ( _currentAction == NULL ) {
-    _currentAction = _actions.front();
-    _actions.pop();
-  }
-
-  if ( !_currentAction->isStarted() ) {
-    _currentAction->start( getActionManager() );
-  }
-  else if ( _currentAction->isDone() ) {
-    _currentAction->release();
-    _currentAction = NULL;
+  if ( currentAction->isDone() ) {
+    ++_currentActionIterator;
+    if ( _currentActionIterator == _actions.cend() )
+      done();
+    else {
+      (*_currentActionIterator)->start( getActionManager() );
+    }
   }
   else {
-    _currentAction->update( delta );
+    currentAction->update( delta );
+  }
+}
+
+void Sequence::onRelease() {
+  for ( const auto action : _actions ) {
+    action->release();
   }
 }
 }

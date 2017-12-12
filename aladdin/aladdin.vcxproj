@@ -222,6 +222,7 @@
     <ClInclude Include="extra\ActionManager.h" />
     <ClInclude Include="extra\AnimationEditor.h" />
     <ClInclude Include="extra\Blink.h" />
+    <ClInclude Include="extra\CallFunc.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
     <ClInclude Include="extra\MoveBy.h" />
@@ -296,6 +297,7 @@
     <ClCompile Include="extra\ActionManager.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
     <ClCompile Include="extra\Blink.cpp" />
+    <ClCompile Include="extra\CallFunc.cpp" />
     <ClCompile Include="extra\MoveBy.cpp" />
     <ClCompile Include="extra\RectRenderer.cpp" />
     <ClCompile Include="extra\Repeat.cpp" />
