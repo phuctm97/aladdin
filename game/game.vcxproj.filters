@@ -156,6 +156,9 @@
     <ClCompile Include="scripts\CollisionInfoTracker.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\AgrabahMarketScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -251,6 +254,9 @@
     </ClInclude>
     <ClInclude Include="scripts\CollisionInfoTracker.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\AgrabahMarketScene.h">
+      <Filter>scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

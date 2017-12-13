@@ -173,6 +173,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
+    <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AdorableGuardController.cpp" />
@@ -212,6 +213,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
+    <ClInclude Include="scenes\AgrabahMarketScene.h" />
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AdorableGuardController.h" />
     <ClInclude Include="scripts\AladdinController.h" />

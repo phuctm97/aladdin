@@ -1,6 +1,9 @@
 #include "MenuScene.h"
+#include "AgrabahMarketScene.h"
 
 USING_NAMESPACE_ALA;
+
+ALA_CLASS_SOURCE_1(MenuScene, ala::Scene)
 
 void MenuScene::onPreInitialize() {
   // constants
@@ -84,7 +87,7 @@ void MenuScene::onPreInitialize() {
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 Logger( "MenuScene" ).info( "To Argrabah Market Scene" );
+                 gameManager->replaceScene( new AgrabahMarketScene() );
                }
              },
              NULL );
