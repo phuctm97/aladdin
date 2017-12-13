@@ -45,6 +45,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
   new Sprite( "title.png", "textures/miscellaneous/title.png" );
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
+  new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
   new Sprite( "menu_select.png", "textures/miscellaneous/menu_select.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
   new Sprite( "numbers.png", "textures/miscellaneous/numbers.png" );
@@ -56,6 +57,7 @@ void MyResourceInitializer::doRun() {
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
   new Font( "arcade.ttf", "arcade.ttf", "fonts" );
   new BitmapFont( "one.fnt", "fonts/one.fnt" );
+  new BitmapFont( "two.fnt", "fonts/two.fnt" );
 
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );

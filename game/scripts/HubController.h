@@ -5,27 +5,17 @@
 
 class HubController : public ala::GameObjectComponent
 {
-private:
-  int _lives;
-  int _apples;
-
 public:
   HubController( ala::GameObject* gameObject, const std::string& name = "" );
 
-  void setLives( const int lives );
+  void setLives( const int lives ) const;
 
-  int getLives() const;
+  void setApples( const int apples ) const;
 
-  void setApples( const int apples );
-
-  int getApples() const;
+  void setScores( const int scores ) const;
 
 protected:
-  void onInitialize() override;
-
   void onUpdate( const float delta ) override;
-  
-  void onRender() override;
 };
 
 

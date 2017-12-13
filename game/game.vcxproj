@@ -183,6 +183,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\AppleController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CameraFollower.cpp" />
     <ClCompile Include="scripts\CollisionInfoTracker.cpp" />
     <ClCompile Include="scripts\DebugCameraController.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
@@ -232,6 +233,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\AppleController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scripts\CameraFollower.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
     <ClInclude Include="scripts\CollisionInfoTracker.h" />
     <ClInclude Include="scripts\DebugCameraController.h" />
@@ -258,6 +260,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\miscellaneous\cutscenes.png" />
     <Image Include="textures\miscellaneous\enemy_explosions.png" />
     <Image Include="textures\miscellaneous\font_one.png" />
+    <Image Include="textures\miscellaneous\font_two.png" />
     <Image Include="textures\miscellaneous\game_title.png" />
     <Image Include="textures\miscellaneous\items.png" />
     <Image Include="textures\miscellaneous\menu_select.png" />
@@ -279,6 +282,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <None Include="animations\miscellaneous\items.anm" />
     <None Include="animations\miscellaneous\numbers.anm" />
     <None Include="fonts\one.fnt" />
+    <None Include="fonts\two.fnt" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

@@ -38,6 +38,8 @@ void AgrabahMarketScene::onPreInitialize() {
     - Vec2( gameManager->getVisibleWidth() / 2,
             gameManager->getVisibleHeight() / 2 ) );
 
+  const auto hub = gameManager->getPrefab( "Hub" )->instantiate( "Hub" );
+
   const auto ground = gameManager->getPrefab( "Agrabah Market Ground" )->instantiate( "Ground" );
 
   const auto stairOne = gameManager->getPrefab( "Stair" )->instantiate( "Start 1" );

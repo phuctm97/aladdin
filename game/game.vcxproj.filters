@@ -180,6 +180,11 @@
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\CameraFollower.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -300,6 +305,11 @@
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\CameraFollower.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -336,6 +346,9 @@
       <Filter>texures\miscellaneous</Filter>
     </Image>
     <Image Include="textures\miscellaneous\menu_select.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\font_two.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>
@@ -375,6 +388,9 @@
       <Filter>animations\miscellaneous</Filter>
     </None>
     <None Include="fonts\one.fnt">
+      <Filter>fonts</Filter>
+    </None>
+    <None Include="fonts\two.fnt">
       <Filter>fonts</Filter>
     </None>
   </ItemGroup>
