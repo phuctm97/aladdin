@@ -12,12 +12,15 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
   const auto density = 5.0f;
-
+  const auto runVelocity = 140.0f;
+  const auto stopAcceleration = 4.0f;
   const auto throwImpulse = Vec2( 20000.0f, 1000.0f );
   const auto swordOffset1 = Vec2( 45, 10 );
   const auto swordSize1 = Size( 40, 45 );
   const auto swordOffset2 = Vec2( 55, -2.5f );
   const auto swordSize2 = Size( 40, 20 );
+  const auto swordOffset3 = Vec2( 30, 10 );
+  const auto swordSize3 = Size( 35, 40 );
   const auto swordOffset5 = Vec2( -35, 20 );
   const auto swordSize5 = Size( 25, 40 );
   const auto swordOffset6 = Vec2( 35, 25 );
@@ -536,6 +539,105 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              }, NULL );
 
+  new State( stateManager, "run",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "start_run" );
+                 timer1->start( 2 );
+               }
+             },
+             [=]( float dt ) {
+               // animation effect
+               {
+                 if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
+                   animator->setAction( "run" );
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+             },
+             NULL );
+
+  new State( stateManager, "stop",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "stop" );
+               }
+             },
+             [=]( float dt ) {
+               // move
+               {
+                 float newVelocity = 0;
+                 if ( body->getVelocity() < 0 ) {
+                   newVelocity = body->getVelocity().getX() + stopAcceleration;
+                   if ( newVelocity > 0 ) newVelocity = 0;
+                 }
+                 else if ( body->getVelocity() > 0 ) {
+                   newVelocity = body->getVelocity().getX() - stopAcceleration;
+                   if ( newVelocity < 0 ) newVelocity = 0;
+                 }
+
+                 body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
+               }
+             }, NULL );
+
+  new State( stateManager, "run_attack",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "run_attack" );
+               }
+
+               // sword
+               {
+                 swordCollider->setOffset( swordOffset3 );
+                 swordCollider->setSize( swordSize3 );
+                 swordCollider->setActive( false );
+                 timer4->start( 0.2f );
+               }
+             },
+             [=]( float dt ) {
+               // move
+               {
+                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+
+               // sword
+               {
+                 if ( timer4->isDone() ) {
+                   if ( !swordCollider->isActive() ) {
+                     swordCollider->setActive( true );
+                     timer4->start( 0.2f );
+                   }
+                   else {
+                     swordCollider->setActive( false );
+                   }
+                 }
+               }
+             },
+             [=] {
+               // sword
+               {
+                 swordCollider->setActive( false );
+               }
+             } );
+
+
   new StateTransition( stateManager, "idle", "attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
   } );
@@ -608,5 +710,31 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "face_up_throw", "face_up", [=] {
     return input->getKey( ALA_KEY_UP_ARROW ) && !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "idle", "run", [=] {
+    return !animator->isPlaying() &&
+    ((direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW ))
+      || (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW )));
+  } );
+
+  new StateTransition( stateManager, "run", "run_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "run_attack", "run", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "run", "stop", [=] {
+    return !input->getKey( ALA_KEY_RIGHT_ARROW ) && !input->getKey( ALA_KEY_LEFT_ARROW ) && timer1->isDone();
+  } );
+
+  new StateTransition( stateManager, "run", "idle", [=] {
+    return !input->getKey( ALA_KEY_RIGHT_ARROW ) && !input->getKey( ALA_KEY_LEFT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "stop", "idle", [=] {
+    return !animator->isPlaying();
   } );
 }
