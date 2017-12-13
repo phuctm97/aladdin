@@ -169,9 +169,6 @@
     <ClCompile Include="scripts\DebugCameraController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -187,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="scripts\ThinGuardController.cpp">
       <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StairOnePrefab.cpp">
+      <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,9 +297,6 @@
     <ClInclude Include="scripts\DebugCameraController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\StairPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -315,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="scripts\ThinGuardController.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairOnePrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

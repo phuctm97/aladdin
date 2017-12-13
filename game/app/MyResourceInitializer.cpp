@@ -17,7 +17,7 @@
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
-#include "../prefabs/StairPrefab.h"
+#include "../prefabs/StairOnePrefab.h"
 #include "../prefabs/StaticMapBlockerPrefab.h"
 #include "../prefabs/ApplePrefab.h"
 #include "../prefabs/NodePrefab.h"
@@ -91,7 +91,7 @@ void MyResourceInitializer::doRun() {
   new RopePrefab();
   new FirePrefab();
   new CharcoalBurnerPrefab();
-  new StairPrefab();
+  new StairOnePrefab();
   new StaticMapBlockerPrefab();
   new ApplePrefab();
 

@@ -172,7 +172,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
-    <ClCompile Include="prefabs\StairPrefab.cpp" />
+    <ClCompile Include="prefabs\StairOnePrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
@@ -221,7 +221,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
-    <ClInclude Include="prefabs\StairPrefab.h" />
+    <ClInclude Include="prefabs\StairOnePrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
