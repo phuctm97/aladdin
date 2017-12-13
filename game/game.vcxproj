@@ -237,7 +237,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\enemies\guards.png" />
     <Image Include="textures\miscellaneous\cutscenes.png" />
     <Image Include="textures\miscellaneous\enemy_explosions.png" />
+    <Image Include="textures\miscellaneous\font_one.png" />
+    <Image Include="textures\miscellaneous\game_title.png" />
     <Image Include="textures\miscellaneous\items.png" />
+    <Image Include="textures\miscellaneous\menu_select.png" />
     <Image Include="textures\miscellaneous\numbers.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
@@ -254,6 +257,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <None Include="animations\miscellaneous\enemy_explosions.anm" />
     <None Include="animations\miscellaneous\items.anm" />
     <None Include="animations\miscellaneous\numbers.anm" />
+    <None Include="fonts\one.fnt" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

@@ -281,6 +281,15 @@
     <Image Include="textures\miscellaneous\enemy_explosions.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
+    <Image Include="textures\miscellaneous\game_title.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\font_one.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\menu_select.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
@@ -313,6 +322,9 @@
     </None>
     <None Include="animations\miscellaneous\enemy_explosions.anm">
       <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="fonts\one.fnt">
+      <Filter>fonts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

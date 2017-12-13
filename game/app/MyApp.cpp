@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new ExperimentalScene() );
+  startWithScene( new MenuScene() );
 }
