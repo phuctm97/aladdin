@@ -1,17 +1,14 @@
 #ifndef __CAMERA_CONTROLLER_H__
 #define __CAMERA_CONTROLLER_H__
 
-
 #include <aladdin.h>
 
-class CameraController : ala::GameObjectComponent
-{
+ALA_CLASS_HEADER_1( CameraController, ala::GameObjectComponent)
 private:
   ala::Vec2 _targetPosition;
   float _movingSpeed;
 
 public:
-  // ReSharper disable CppNonExplicitConvertingConstructor
   CameraController( ala::GameObject* gameObject, const std::string& name = "" );
 
 protected:

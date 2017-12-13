@@ -81,9 +81,6 @@
     <ClCompile Include="scripts\AladdinController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\GroundPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
     <ClCompile Include="scripts\CharcoalBurnerController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairGroupOnePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -171,6 +165,21 @@
     <ClCompile Include="scenes\AgrabahMarketScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\ThinGuardController.cpp" />
+    <ClCompile Include="scripts\ThrowableAppleController.cpp" />
+    <ClCompile Include="scripts\DebugCameraController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StairPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -190,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="scripts\AladdinController.h">
       <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\GroundPrefab.h">
-      <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\ThrowableApplePrefab.h">
       <Filter>prefabs</Filter>
@@ -243,9 +249,6 @@
     <ClInclude Include="scripts\CharcoalBurnerController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\StairGroupOnePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -281,6 +284,21 @@
     </ClInclude>
     <ClInclude Include="scenes\AgrabahMarketScene.h">
       <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\ThinGuardController.h" />
+    <ClInclude Include="scripts\ThrowableAppleController.h" />
+    <ClInclude Include="scripts\DebugCameraController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PlayableAladdinPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

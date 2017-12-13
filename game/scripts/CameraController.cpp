@@ -3,6 +3,8 @@
 
 USING_NAMESPACE_ALA;
 
+ALA_CLASS_SOURCE_1(CameraController, ala::GameObjectComponent)
+
 CameraController::CameraController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _targetPosition( 0, 0 ), _movingSpeed( 7.0f ) {}
 

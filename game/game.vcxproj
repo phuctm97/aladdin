@@ -166,12 +166,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\FirePrefab.cpp" />
-    <ClCompile Include="prefabs\GroundPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp" />
+    <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
-    <ClCompile Include="prefabs\StairGroupOnePrefab.cpp" />
+    <ClCompile Include="prefabs\StairPrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
@@ -183,6 +184,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AppleController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CollisionInfoTracker.cpp" />
+    <ClCompile Include="scripts\DebugCameraController.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
@@ -213,12 +215,13 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\FirePrefab.h" />
-    <ClInclude Include="prefabs\GroundPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h" />
+    <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
-    <ClInclude Include="prefabs\StairGroupOnePrefab.h" />
+    <ClInclude Include="prefabs\StairPrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
@@ -231,6 +234,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
     <ClInclude Include="scripts\CollisionInfoTracker.h" />
+    <ClInclude Include="scripts\DebugCameraController.h" />
     <ClInclude Include="scripts\DirectionController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\HubController.h" />
