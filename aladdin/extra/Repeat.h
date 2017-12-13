@@ -18,6 +18,8 @@ protected:
   void onStart() override;
   
   void onUpdate( float delta ) override;
+
+  void onRelease() override;
 };
 }
 

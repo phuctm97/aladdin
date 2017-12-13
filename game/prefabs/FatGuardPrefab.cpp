@@ -1,4 +1,5 @@
 #include "FatGuardPrefab.h"
+#include "../scripts/DirectionController.h"
 #include "../scripts/FatGuardController.h"
 #include "../Define.h"
 
@@ -12,131 +13,150 @@ void FatGuardPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto density = 5.0f;
   const auto runVelocity = 100.0f;
 
+  const auto swordOffset1 = Vec2( -30, -5 );
+  const auto swordSize1 = Size( 50, 15 );
+
+  const auto swordOffset2 = Vec2( -45, 20 );
+  const auto swordSize2 = Size( 50, 45 );
+
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
-  const auto animator = new Animator( object, "fat_guard_provocative", "guards.anm" );
 
-  // For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "fat_guard_attack2" );
-  //object->getTransform()->setPosition( 80, -40 );
-  //return;
-  // For animationEditor
+  const auto animator = new Animator( object, "fat_guard_idle", "guards.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
+
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
   collider->setTag( ENEMY_TAG );
+  collider->ignoreTag( ALADDIN_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
-  const auto colliderRenderer = new ColliderRenderer( collider );
-  const auto timer1 = new Timer( object );
-  const auto stateManager = new StateManager( object, "fat_guard_provocative_left" );
+  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0, 0, "Sword" );
+  swordCollider->setTag( SWORD_TAG );
+  swordCollider->ignoreTag( ENEMY_TAG );
+  swordCollider->setActive( false );
+
+  const auto stateManager = new StateManager( object, "idle" );
+
+  const auto direction = new DirectionController( object, false );
+
   const auto controller = new FatGuardController( object );
+
+  // helpers
+  const auto timer = new Timer( object );
+
   const auto transform = object->getTransform();
 
-  new State( stateManager, "fat_guard_provocative_left",
+  // collider renderers
+  //  const auto colliderRenderer = new ColliderRenderer( collider );
+  //
+  //  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
+
+  // configurations
+  object->setLayer( "Character" );
+  object->setTag( ENEMY_TAG );
+
+  // states
+
+  new State( stateManager, "idle",
              [=] {
-               animator->setAction( "fat_guard_provocative" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
+               animator->setAction( "fat_guard_idle" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              }, NULL, NULL );
 
-  new State( stateManager, "fat_guard_provocative_right",
+  new State( stateManager, "provoke",
              [=] {
-               animator->setAction( "fat_guard_provocative" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
+               animator->setAction( "fat_guard_provoke" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "fat_guard_run_left",
+  new State( stateManager, "run",
              [=] {
                animator->setAction( "fat_guard_run" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( -runVelocity, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "fat_guard_run_right",
+  new State( stateManager, "attack",
              [=] {
-               animator->setAction( "fat_guard_run" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               const auto r = rand() % 5;
+               if ( r < 2 ) {
+                 animator->setAction( "fat_guard_attack_1" );
+                 swordCollider->setOffset( swordOffset1 );
+                 swordCollider->setSize( swordSize1 );
+               }
+               else {
+                 animator->setAction( "fat_guard_attack_2" );
+                 swordCollider->setOffset( swordOffset2 );
+                 swordCollider->setSize( swordSize2 );
+               }
+               timer->start( 0.15f );
+
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+             },
+             [=]( float dt ) {
+               if ( timer->isDone() ) {
+                 if ( !swordCollider->isActive() ) {
+                   swordCollider->setActive( true );
+                   timer->start( 0.2f );
+                 }
+                 else {
+                   swordCollider->setActive( false );
+                   timer->start( 5 );
+                 }
+               }
+             },
+             [=] {
+               swordCollider->setActive( false );
+             } );
+
+  new State( stateManager, "hit",
+             [=] {
+               animator->setAction( "fat_guard_hit" );
+               body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
              }, NULL, NULL );
 
-  new State( stateManager, "fat_guard_attack_left",
-             [=] {
-               animator->setAction( "fat_guard_attack2" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
-               timer1->start( 0.8 );
-             }, [=]( float dt ) {
-               if ( timer1->isDone() && animator->isPlaying() ) {
-                 auto var = rand() % 7;
-                 if ( var <= 2 ) {
-                   animator->setAction( "fat_guard_attack1" );
-                   timer1->start( 0.8 );
-                 }
-                 else {
-                   animator->setAction( "fat_guard_attack2" );
-                   timer1->start( 0.8 );
-                 }
-               }
-             }, NULL );
-
-  new State( stateManager, "fat_guard_attack_right",
-             [=] {
-               animator->setAction( "fat_guard_attack2" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-               body->setVelocity( Vec2( 0, 0 ) );
-               timer1->start( 0.8 );
-             }, [=]( float dt ) {
-               if ( timer1->isDone() && animator->isPlaying() ) {
-                 auto var = rand() % 7;
-                 if ( var <= 2 ) {
-                   animator->setAction( "fat_guard_attack1" );
-                   timer1->start( 0.8 );
-                 }
-                 else {
-                   animator->setAction( "fat_guard_attack2" );
-                   timer1->start( 0.8 );
-                 }
-               }
-             }, NULL );
-
-  new StateTransition( stateManager, "fat_guard_provocative_left", "fat_guard_provocative_right", [=] {
-    return !controller->isOnRightOfAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_provocative_right", "fat_guard_provocative_left", [=] {
-    return controller->isOnRightOfAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_provocative_left", "fat_guard_run_left", [=] {
-    return controller->coundSeeAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_provocative_right", "fat_guard_run_right", [=] {
-    return controller->coundSeeAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_run_left", "fat_guard_attack_left", [=] {
-    return controller->couldAttackAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_run_right", "fat_guard_attack_right", [=] {
-    return controller->couldAttackAladdin();
-  } );
-  new StateTransition( stateManager, "fat_guard_attack_right", "fat_guard_run_right", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == false )
-      return true;
-    else return false;
-  } );
-  new StateTransition( stateManager, "fat_guard_attack_right", "fat_guard_run_left", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == true )
-      return true;
-    else return false;
-  } );
-  new StateTransition( stateManager, "fat_guard_attack_left", "fat_guard_run_left", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == true )
-      return true;
-    else return false;
-  } );
-  new StateTransition( stateManager, "fat_guard_attack_left", "fat_guard_run_right", [=] {
-    if ( controller->couldAttackAladdin() == false && controller->isOnRightOfAladdin() == false )
-      return true;
-    else return false;
+  new StateTransition( stateManager, "idle", "provoke", [=] {
+    return controller->isChasingAladdin() && controller->willProvokeBeforeChasing();
   } );
 
+  new StateTransition( stateManager, "attack", "provoke", [=] {
+    return controller->isChasingAladdin() && controller->willProvokeBeforeChasing();
+  } );
+
+  new StateTransition( stateManager, "idle", "run", [=] {
+    return controller->isChasingAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack", "run", [=] {
+    return controller->isChasingAladdin();
+  } );
+
+  new StateTransition( stateManager, "provoke", "run", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "idle", "attack", [=] {
+    return controller->isAttacking();
+  } );
+
+  new StateTransition( stateManager, "run", "attack", [=] {
+    return controller->isAttacking();
+  } );
+
+  new StateTransition( stateManager, "attack", "attack", [=] {
+    return controller->isAttacking() && !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "run", "idle", [=] {
+    return controller->isIdling();
+  } );
+
+  new StateTransition( stateManager, "attack", "idle", [=] {
+    return controller->isIdling();
+  } );
+
+  new StateTransition( stateManager, "hit", "idle", [=] {
+    return !animator->isPlaying();
+  } );
 }

@@ -64,5 +64,6 @@
 #include "extra/RotateBy.h"
 #include "extra/Sequence.h"
 #include "extra/Repeat.h"
+#include "extra/CallFunc.h"
 
 #endif //!__ALADDIN_H__

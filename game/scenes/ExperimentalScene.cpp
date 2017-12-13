@@ -4,21 +4,29 @@
 
 #include "ExperimentalScene.h"
 #include "../scripts/CameraController.h"
+#include "../scripts/GuardController.h"
 #include "../scripts/NodeController.h"
 #include "../Define.h"
-#include "../scripts/ThinGuardController.h"
 
 USING_NAMESPACE_ALA;
 
 ExperimentalScene::ExperimentalScene() : _logger("ExperimentalScene") {}
 
 void ExperimentalScene::onPreInitialize() {
-	// constants
-	const auto gameManager = GameManager::get();
 
-	// configurations
-	enablePhysics(Vec2(0, -500.0f));
-	new CameraController(getMainCamera());
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto halfVisibleWidth = gameManager->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
+
+  // configurations
+  enablePhysics( Vec2( 0, -500.0f ) );
+
+  //  enableQuadTree( -halfVisibleWidth, -halfVisibleHeight,
+  //                  4771 - halfVisibleWidth, 688 - halfVisibleHeight, 3 );
+
+  new CameraController( getMainCamera() );
+
 
 	// initial objects
 	const auto background = new GameObject(this, "Background");
@@ -74,11 +82,16 @@ void ExperimentalScene::onPreInitialize() {
 
 	const auto guardOne = gameManager->getPrefab("Thin Guard")->instantiate("Guard 1");
 	guardOne->getTransform()->setPositionY(-25);
-	static_cast<ThinGuardController*>(guardOne->getComponent("Controller"))->set(430, 670);
+	guardOne->getComponentT<GuardController>()->set( 550, 430, 670 );
+	
+	const auto guardTwo = gameManager->getPrefab( "Fat Guard" )->instantiate( "Guard 2" );
+    guardTwo->getTransform()->setPositionY( -25 );
+    guardTwo->getComponentT<GuardController>()->set( 818, 620, 992 );
 
 	const auto aladdin = gameManager->getPrefab("Aladdin")->instantiate("Aladdin");
 	//aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 	aladdin->getTransform()->setPosition(Vec2(150, -25));
+	
 
 #pragma region Stair
 #pragma region Group One
@@ -142,6 +155,8 @@ void ExperimentalScene::onPreInitialize() {
 	runningApple->setTag(ALADDIN_TAG);
 	new NodeController(runningApple);*/
 #pragma endregion
+
+  
 
 
 }

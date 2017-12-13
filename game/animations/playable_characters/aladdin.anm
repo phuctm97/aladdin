@@ -276,12 +276,25 @@
     <sprite x="912" y="1378" w="72" h="59" offsetX="0" offsetY="5" />
     <sprite x="1020" y="1388" w="59" h="49" offsetX="0" offsetY="0" />
   </Animation>
-  <Animation name="aladdin_hitted" imagePath="aladdin.png" interval="0.08" isLoop="true">
+  <Animation name="hit" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="9" y="2167" w="41" h="45" offsetX="3" offsetY="-4" />
     <sprite x="58" y="2161" w="54" h="51" offsetX="-1.5" offsetY="-1" />
     <sprite x="122" y="2162" w="58" h="49" offsetX="0" offsetY="-2.5" />
     <sprite x="189" y="2163" w="79" h="47" offsetX="-8.5" offsetY="-3.5" />
     <sprite x="282" y="2160" w="60" h="50" offsetX="-1.5" offsetY="-2" />
     <sprite x="351" y="2161" w="58" h="48" offsetX="0" offsetY="-2.5" />
+    <sprite x="3" y="9" w="37" h="49" />
+  </Animation>
+  <Animation name="climb" imagePath="aladdin.png" interval="0.1" isLoop="true">
+    <sprite x="11" y="1362" w="28" h="85" offsetX="1.5" offsetY="2" />
+    <sprite x="53" y="1361" w="27" h="88" offsetX="1" offsetY="0.5" />
+    <sprite x="94" y="1374" w="27" h="73" offsetX="1" offsetY="-4.5" />
+    <sprite x="133" y="1377" w="41" h="61" offsetX="-3" offsetY="-1.5" />
+    <sprite x="186" y="1363" w="30" h="75" offsetX="1.5" offsetY="4.5" />
+    <sprite x="231" y="1358" w="28" h="85" offsetX="2.5" offsetY="2.5" />
+    <sprite x="274" y="1367" w="27" h="78" offsetX="3" offsetY="-2" />
+    <sprite x="314" y="1377" w="31" h="62" offsetX="3" offsetY="-2" />
+    <sprite x="356" y="1377" w="41" h="61" offsetX="6" offsetY="-0.5" />
+    <sprite x="406" y="1362" w="27" h="80" offsetX="1" offsetY="2" />
   </Animation>
 </Animations>

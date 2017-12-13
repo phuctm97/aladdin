@@ -27,33 +27,42 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
+
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
-  // //For animationEditor
-  //const auto animationEditor = new AnimationEditor( object, "aladdin_hitted" );
-  //object->setLayer( "Character" );
-  //object->getTransform()->setPosition( -80, -40 );
-  //return;
-  // //For animationEditor
-
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
-  const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
+
+  const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ), 1, 0, "Body" );
   collider->setTag( ALADDIN_TAG );
+  collider->ignoreTag( ALADDIN_TAG );
   collider->ignoreTag( ENEMY_TAG );
 
-  const auto colliderRenderer = new ColliderRenderer( collider );
-  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0 );
+  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0, 0, "Sword" );
   swordCollider->setTag( SWORD_TAG );
+  swordCollider->ignoreTag( ALADDIN_TAG );
   swordCollider->setActive( false );
 
-  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
-  const auto timer1 = new Timer( object );
-  const auto timer2 = new Timer( object );
-  const auto timer3 = new Timer( object );
-  const auto timer4 = new Timer( object );
   const auto stateManager = new StateManager( object, "idle_right" );
+
+  const auto actionManager = new ActionManager( object );
+
   const auto controller = new AladdinController( object, "Controller" );
+
+  // helpers
   const auto transform = object->getTransform();
+
+  const auto timer1 = new Timer( object );
+
+  const auto timer2 = new Timer( object );
+
+  const auto timer3 = new Timer( object );
+
+  const auto timer4 = new Timer( object );
+
+  // collider renderers
+    const auto colliderRenderer = new ColliderRenderer( collider );
+
+  //  const auto swordColliderRenderer = new ColliderRenderer( swordCollider );
 
   // configurations
   object->setTag( ALADDIN_TAG );
@@ -86,6 +95,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( -ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
@@ -160,6 +170,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                transform->setScaleX( ABS(transform->getScale().getX()) );
                body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               swordCollider->setActive( false );
              },
              [=]( float dt ) {
                if ( !animator->isPlaying() && timer1->isDone() ) {
@@ -975,16 +986,45 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                swordCollider->setActive( false );
              } );
-	new State( stateManager, "aladdin_hitted_right", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
-	new State(stateManager, "aladdin_hitted_left", [=] {
-		animator->setAction("aladdin_hitted");
-		transform->setScaleX(-ABS(transform->getScale().getX()));
-		body->setVelocity(Vec2(0, 0));
-	}, NULL, NULL);
+
+  new State( stateManager, "climb",
+             [=] {
+               animator->setAction( "climb" );
+               animator->pause();
+
+               body->setVelocity( Vec2( 0, 0 ) );
+               body->setGravityScale( 0 );
+
+               transform->setPositionX( controller->getCollidedRopePositionX() );
+             },
+             [=]( float dt ) {
+               if ( !input->getKey( ALA_KEY_UP_ARROW ) && !input->getKey( ALA_KEY_DOWN_ARROW ) &&
+                 animator->isPlaying() ) {
+                 animator->pause();
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+               else if ( input->getKey( ALA_KEY_UP_ARROW ) && !animator->isPlaying() ) {
+                 animator->play();
+                 body->setVelocity( Vec2( 0, 50 ) );
+               }
+               else if ( input->getKey( ALA_KEY_DOWN_ARROW ) && !animator->isPlaying() ) {
+                 animator->play();
+                 body->setVelocity( Vec2( 0, -50 ) );
+               }
+             },
+             NULL );
+
+  new State( stateManager, "hit_left", [=] {
+    animator->setAction( "hit" );
+    transform->setScaleX( -ABS(transform->getScale().getX()) );
+    body->setVelocity( Vec2( 0, 0 ) );
+  }, NULL, NULL );
+
+  new State( stateManager, "hit_right", [=] {
+    animator->setAction( "hit" );
+    transform->setScaleX( ABS(transform->getScale().getX()) );
+    body->setVelocity( Vec2( 0, 0 ) );
+  }, NULL, NULL );
 
   new StateTransition( stateManager, "idle_left", "idle_right", [=] {
     return input->getKeyDown( ALA_KEY_RIGHT_ARROW );
@@ -1384,5 +1424,29 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "run_right_to_throw", "run_right_to_jump_attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "hit_left", "idle_left", [=] {
+    return !animator->isPlaying() || input->getKeyDown( ALA_KEY_LEFT_ARROW );
+  } );
+
+  new StateTransition( stateManager, "hit_right", "idle_right", [=] {
+    return !animator->isPlaying() || input->getKeyDown( ALA_KEY_RIGHT_ARROW );;
+  } );
+
+  new StateTransition( stateManager, "jump_left", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "jump_right", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "run_left_to_jump", "climb", [=] {
+    return controller->isCollidedWithRope();
+  } );
+
+  new StateTransition( stateManager, "run_right_to_jump", "climb", [=] {
+    return controller->isCollidedWithRope();
   } );
 }

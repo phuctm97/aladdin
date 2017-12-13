@@ -87,9 +87,6 @@
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\ThrowableAppleController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\NodePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -105,17 +102,11 @@
     <ClCompile Include="prefabs\RopePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\ThinGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\BigTextPrefab.cpp">
       <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\FatGuardController.cpp">
-      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\FatGuardPrefab.cpp">
       <Filter>prefabs</Filter>
@@ -160,6 +151,21 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\AppleController.cpp">
+	  <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DirectionController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CollisionInfoTracker.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,9 +194,6 @@
     <ClInclude Include="prefabs\ThrowableApplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\ThrowableAppleController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\NodePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -206,9 +209,6 @@
     <ClInclude Include="prefabs\RopePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\ThinGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\ThinGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -216,9 +216,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="Define.h" />
-    <ClInclude Include="scripts\FatGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\FatGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -262,6 +259,21 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\AppleController.h">
+	  <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DirectionController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EnemyExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CollisionInfoTracker.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
@@ -324,6 +336,9 @@
       <Filter>animations\miscellaneous</Filter>
     </None>
     <None Include="animations\miscellaneous\numbers.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\enemy_explosions.anm">
       <Filter>animations\miscellaneous</Filter>
     </None>
   </ItemGroup>

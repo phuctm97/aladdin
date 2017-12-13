@@ -159,6 +159,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ApplePrefab.cpp" />
+    <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
@@ -180,13 +181,17 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AladdinController.cpp" />
     <ClCompile Include="scripts\AppleController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CollisionInfoTracker.cpp" />
+    <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
+    <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
+    <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\ThrowableKnifeController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +205,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
     <ClInclude Include="prefabs\ApplePrefab.h" />
+    <ClInclude Include="prefabs\EnemyExplosionPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
@@ -222,12 +228,16 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\CollisionInfoTracker.h" />
+    <ClInclude Include="scripts\DirectionController.h" />
+    <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
+    <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\ThrowableKnifeController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +266,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
       <SubType>Designer</SubType>
     </None>
     <None Include="animations\miscellaneous\cutscenes.anm" />
+    <None Include="animations\miscellaneous\enemy_explosions.anm" />
     <None Include="animations\miscellaneous\items.anm" />
     <None Include="animations\miscellaneous\numbers.anm" />
   </ItemGroup>
