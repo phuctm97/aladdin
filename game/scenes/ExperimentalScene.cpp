@@ -64,8 +64,26 @@ void ExperimentalScene::onPreInitialize() {
   const auto aladdin = gameManager->getPrefab( "Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
 
-  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
-  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
+  /*const auto extra_health = gameManager->getPrefab("extra health")->instantiate();
+  extra_health->getTransform()->setPosition(Vec2(100, -25));*/
+
+  /*const auto spend_these = gameManager->getPrefab("spend these")->instantiate();
+  spend_these->getTransform()->setPosition(Vec2(120, -25));*/
+
+  /*const auto abu_bonus = gameManager->getPrefab("abu bonus")->instantiate();
+  abu_bonus->getTransform()->setPosition(Vec2(150, -25));*/
+
+  /*const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
+  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );*/
+
+  /*const auto restart = gameManager->getPrefab("restart point")->instantiate();
+  restart->getTransform()->setPosition(Vec2(30, -35));*/
+
+  const auto genie_bonus = gameManager->getPrefab("genie bonus")->instantiate();
+  genie_bonus->getTransform()->setPosition(Vec2(190, -15));
+
+  const auto genie_lamp = gameManager->getPrefab("genie lamp")->instantiate();
+  genie_lamp->getTransform()->setPosition(Vec2(50, -45));
 
   /*const auto camel = gameManager->getPrefab("camel")->instantiate();
   camel->getTransform()->setPosition(Vec2(1400, -55));*/
@@ -84,8 +102,8 @@ void ExperimentalScene::onPreInitialize() {
   3335.000000; Y: 416.500000
   */
 
-  /*
-  const auto handEnemy_1 = gameManager->getPrefab("Hand Enemy")->instantiate();
+  
+  /*const auto handEnemy_1 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_1->getTransform()->setPosition(Vec2(1632.5, 91.5));
   const auto handEnemy_2 = gameManager->getPrefab("Hand Enemy")->instantiate();
   handEnemy_2->getTransform()->setPosition(Vec2(1680.5, 60));*/

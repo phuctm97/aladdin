@@ -174,6 +174,51 @@
     <ClCompile Include="prefabs\AbuPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\RestartPointPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\RestartPointController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ExtraHealthController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ExtraHealthPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SpendThesePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\SpendTheseController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AbuBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\AbuBonusController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GenieBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GenieBonusController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ItemExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\BigExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GenieLampPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GenieLampController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -285,6 +330,51 @@
     <ClInclude Include="prefabs\AbuPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\RestartPointPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\RestartPointController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ExtraHealthController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ExtraHealthPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SpendThesePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\SpendTheseController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AbuBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\AbuBonusController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GenieBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GenieBonusController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ItemExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\BigExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GenieLampPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GenieLampController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
@@ -319,6 +409,15 @@
     </Image>
     <Image Include="textures\non_playable_characters\abu.png">
       <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\enemy_explosions.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\item_explosion.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\Items.png">
+      <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +456,15 @@
     </None>
     <None Include="animations\non_playable_characters\abu.anm">
       <Filter>animations\non_playable_characters</Filter>
+    </None>
+    <None Include="animations\miscellaneous\items.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\item_explosion.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\enemy_explosions.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

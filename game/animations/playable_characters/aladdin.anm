@@ -323,55 +323,55 @@
     <sprite x="491" y="680" w="49" h="84" oX="491" oY="680" oW="781" oH="409" />
   </Animation>
   <Animation name="grounding" imagePath="aladdin.png" interval="0.05" isLoop="false">
-    <sprite x="15" y="901" w="53" h="82" oX="15" oY="901" oW="1029" oH="982" />
-    <sprite x="87" y="911" w="53" h="64" oX="87" oY="911" oW="1029" oH="982" />
-    <sprite x="145" y="942" w="66" h="36" oX="145" oY="942" oW="1029" oH="982" />
-    <sprite x="215" y="949" w="63" h="28" oX="215" oY="949" oW="1029" oH="982" />
-    <sprite x="288" y="950" w="67" h="29" oX="288" oY="950" oW="1029" oH="982" />
-    <sprite x="366" y="948" w="75" h="33" oX="366" oY="948" oW="1029" oH="982" />
-    <sprite x="451" y="935" w="85" h="46" oX="451" oY="935" oW="1029" oH="982" />
-    <sprite x="549" y="928" w="85" h="54" oX="549" oY="928" oW="1029" oH="982" />
-    <sprite x="644" y="925" w="95" h="60" oX="644" oY="925" oW="1029" oH="982" />
-    <sprite x="748" y="925" w="95" h="60" oX="748" oY="925" oW="1029" oH="982" />
-    <sprite x="853" y="926" w="101" h="59" oX="853" oY="926" oW="1029" oH="982" />
-    <sprite x="968" y="928" w="101" h="49" oX="968" oY="928" oW="1029" oH="982" />
+    <sprite x="15" y="901" w="53" h="82" offsetX="5" offsetY="17" />
+    <sprite x="87" y="911" w="53" h="64" offsetX="2" offsetY="8" />
+    <sprite x="145" y="942" w="66" h="36" offsetX="1.5" offsetY="-9" />
+    <sprite x="215" y="949" w="63" h="28" offsetX="-1" offsetY="-12" />
+    <sprite x="288" y="950" w="67" h="29" offsetX="2.5" offsetY="-11.5" />
+    <sprite x="366" y="948" w="75" h="33" offsetX="1" offsetY="-9.5" />
+    <sprite x="451" y="935" w="85" h="46" offsetX="0" offsetY="-4" />
+    <sprite x="549" y="928" w="85" h="54" offsetX="0" offsetY="-1" />
+    <sprite x="644" y="925" w="95" h="60" offsetX="0" offsetY="-1" />
+    <sprite x="748" y="925" w="95" h="60" offsetX="-1" offsetY="-1" />
+    <sprite x="853" y="926" w="101" h="59" offsetX="-1" offsetY="-1.5" />
+    <sprite x="968" y="928" w="101" h="49" offsetX="-1" offsetY="0.5" />
   </Animation>
 
   <Animation name="die" imagePath="aladdin.png" interval="0.1" isLoop="true">
-    <sprite x="282" y="2160" w="60" h="50" oX="282" oY="2160" oW="2109" oH="1069" />
-    <sprite x="160" y="2224" w="44" h="57" oX="160" oY="2224" oW="2109" oH="1069" />
-    <sprite x="213" y="2224" w="44" h="57" oX="213" oY="2224" oW="2109" oH="1069" />
-    <sprite x="266" y="2231" w="36" h="49" oX="266" oY="2231" oW="2109" oH="1069" />
-    <sprite x="312" y="2230" w="39" h="50" oX="312" oY="2230" oW="2109" oH="1069" />
-    <sprite x="361" y="2230" w="34" h="50" oX="361" oY="2230" oW="2109" oH="1069" />
-    <sprite x="407" y="2230" w="35" h="50" oX="407" oY="2230" oW="2109" oH="1069" />
-    <sprite x="454" y="2232" w="38" h="48" oX="454" oY="2232" oW="2109" oH="1069" />
-    <sprite x="505" y="2227" w="43" h="55" oX="505" oY="2227" oW="2109" oH="1069" />
-    <sprite x="560" y="2228" w="40" h="52" oX="560" oY="2228" oW="2109" oH="1069" />
-    <sprite x="614" y="2232" w="38" h="49" oX="614" oY="2232" oW="2109" oH="1069" />
-    <sprite x="661" y="2232" w="39" h="50" oX="661" oY="2232" oW="2109" oH="1069" />
-    <sprite x="361" y="2230" w="34" h="50" oX="361" oY="2230" oW="2109" oH="1069" />
-    <sprite x="407" y="2230" w="35" h="50" oX="407" oY="2230" oW="2109" oH="1069" />
-    <sprite x="454" y="2232" w="38" h="48" oX="454" oY="2232" oW="2109" oH="1069" />
-    <sprite x="505" y="2227" w="43" h="55" oX="505" oY="2227" oW="2109" oH="1069" />
-    <sprite x="2" y="2335" w="36" h="50" oX="2" oY="2335" oW="2109" oH="1069" />
-    <sprite x="49" y="2329" w="36" h="56" oX="49" oY="2329" oW="2109" oH="1069" />
-    <sprite x="97" y="2331" w="42" h="54" oX="97" oY="2331" oW="2109" oH="1069" />
-    <sprite x="149" y="2333" w="59" h="52" oX="149" oY="2333" oW="2109" oH="1069" />
-    <sprite x="223" y="2336" w="60" h="50" oX="223" oY="2336" oW="2109" oH="1069" />
-    <sprite x="296" y="2310" w="75" h="82" oX="296" oY="2310" oW="2109" oH="1069" />
-    <sprite x="383" y="2309" w="76" h="84" oX="383" oY="2309" oW="2109" oH="1069" />
-    <sprite x="477" y="2309" w="73" h="84" oX="477" oY="2309" oW="2109" oH="1069" />
-    <sprite x="567" y="2311" w="67" h="82" oX="567" oY="2311" oW="2109" oH="1069" />
-    <sprite x="654" y="2313" w="65" h="87" oX="654" oY="2313" oW="2109" oH="1069" />
-    <sprite x="734" y="2321" w="65" h="73" oX="734" oY="2321" oW="2109" oH="1069" />
-    <sprite x="811" y="2323" w="65" h="73" oX="811" oY="2323" oW="2109" oH="1069" />
-    <sprite x="888" y="2323" w="65" h="73" oX="888" oY="2323" oW="2109" oH="1069" />
-    <sprite x="970" y="2325" w="65" h="73" oX="970" oY="2325" oW="2109" oH="1069" />
-    <sprite x="1049" y="2325" w="65" h="73" oX="1049" oY="2325" oW="2109" oH="1069" />
+    <sprite x="282" y="2160" w="60" h="50" offsetX="0" offsetY="1" />
+    <sprite x="160" y="2224" w="44" h="57" offsetX="5.5" offsetY="4.5" />
+    <sprite x="213" y="2224" w="44" h="57" offsetX="2.5" offsetY="4.5" />
+    <sprite x="266" y="2231" w="36" h="49" offsetX="0.5" offsetY="0.5" />
+    <sprite x="312" y="2230" w="39" h="50" offsetX="1" offsetY="1" />
+    <sprite x="361" y="2230" w="34" h="50" offsetX="-0.5" offsetY="1" />
+    <sprite x="407" y="2230" w="35" h="50" offsetX="-1" offsetY="1" />
+    <sprite x="454" y="2232" w="38" h="48" offsetX="-0.5" offsetY="0" />
+    <sprite x="505" y="2227" w="43" h="55" offsetX="-5" offsetY="2.5" />
+    <sprite x="560" y="2228" w="40" h="52" offsetX="-5.5" offsetY="2" />
+    <sprite x="614" y="2232" w="38" h="49" offsetX="-2.5" offsetY="0.5" />
+    <sprite x="661" y="2232" w="39" h="50" offsetX="-1" offsetY="1" />
+    <sprite x="361" y="2230" w="34" h="50" offsetX="-2.5" offsetY="1" />
+    <sprite x="407" y="2230" w="35" h="50" offsetX="-2" offsetY="1" />
+    <sprite x="454" y="2232" w="38" h="48" offsetX="-0.5" offsetY="0" />
+    <sprite x="505" y="2227" w="43" h="55" offsetX="-5" offsetY="2.5" />
+    <sprite x="2" y="2335" w="36" h="50" offsetX="-0.5" offsetY="1.5" />
+    <sprite x="49" y="2329" w="36" h="56" offsetX="0.5" offsetY="4" />
+    <sprite x="97" y="2331" w="42" h="54" offsetX="2.5" offsetY="3" />
+    <sprite x="149" y="2333" w="59" h="52" offsetX="0" offsetY="2" />
+    <sprite x="223" y="2336" w="60" h="50" offsetX="-4.5" offsetY="1" />
+    <sprite x="296" y="2310" w="75" h="82" offsetX="0" offsetY="3" />
+    <sprite x="383" y="2309" w="76" h="84" offsetX="-0.5" offsetY="4" />
+    <sprite x="477" y="2309" w="73" h="84" offsetX="1" offsetY="4" />
+    <sprite x="567" y="2311" w="67" h="82" offsetX="-1" offsetY="3" />
+    <sprite x="654" y="2313" w="65" h="87" offsetX="-1" offsetY="-0.5" />
+    <sprite x="734" y="2321" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="811" y="2323" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="888" y="2323" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="970" y="2325" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="1049" y="2325" w="65" h="73" offsetX="-1" offsetY="-1.5" />
   </Animation>
 
-  <Animation name="revive" imagePath="aladdin.png" interval="0.05" isLoop="true">
+  <Animation name="revive" imagePath="aladdin.png" interval="0.04" isLoop="true">
     <sprite x="2" y="2472" w="63" h="68" offsetX="3" offsetY="10.5" />
     <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
     <sprite x="77" y="2475" w="53" h="65" offsetX="0" offsetY="9" />

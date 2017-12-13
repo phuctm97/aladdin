@@ -21,7 +21,16 @@
 #include "../prefabs/CamelPrefab.h"
 #include "../prefabs/SpringPrefab.h"
 #include "../prefabs/PeddlerPrefab.h"
-#include "../prefabs///AbuPrefab.h"
+#include "../prefabs/AbuPrefab.h"
+#include "../prefabs/RestartPointPrefab.h"
+#include "../prefabs/ExtraHealthPrefab.h"
+#include "../prefabs/SpendThesePrefab.h"
+#include "../prefabs/AbuBonusPrefab.h"
+#include "../prefabs/GenieBonusPrefab.h"
+#include "../prefabs/ExplosionPrefab.h"
+#include "../prefabs/ItemExplosionPrefab.h"
+#include "../prefabs/BigExplosionPrefab.h"
+#include "../prefabs/GenieLampPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -46,6 +55,9 @@ void MyResourceInitializer::doRun() {
   new Sprite("spring.png", "textures/non_playable_characters/spring.png");
   new Sprite("peddler.png", "textures/non_playable_characters/peddler.png");
   new Sprite("abu.png", "textures/non_playable_characters/abu.png");
+  new Sprite("items.png", "textures/miscellaneous/items.png");
+  new Sprite("enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png");
+  new Sprite("item_explosion.png", "textures/miscellaneous/item_explosion.png");
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -62,6 +74,9 @@ void MyResourceInitializer::doRun() {
   new Animation("spring.anm", "animations/non_playable_characters/spring.anm");
   new Animation("peddler.anm", "animations/non_playable_characters/peddler.anm");
   new Animation("abu.anm", "animations/non_playable_characters/abu.anm");
+  new Animation("items.anm", "animations/miscellaneous/items.anm");
+  new Animation("enemy_explosions.anm", "animations/miscellaneous/enemy_explosions.anm");
+  new Animation("item_explosion.anm", "animations/miscellaneous/item_explosion.anm");
 
   // Prefabs
   new NormalTextPrefab();
@@ -72,6 +87,15 @@ void MyResourceInitializer::doRun() {
   new ThrowVasePrefab();
   new SpringPrefab();
   new AbuPrefab();
+  new RestartPointPrefab();
+  new ExtraHealthPrefab();
+  new SpendThesePrefab();
+  new AbuBonusPrefab();
+  new GenieBonusPrefab();
+  new ExplosionPrefab();
+  new ItemExplosionPrefab();
+  new BigExplosionPrefab();
+  new GenieLampPrefab();
 
   new SalivaPrefab();
   new CamelPrefab();

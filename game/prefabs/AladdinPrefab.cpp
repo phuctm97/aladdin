@@ -52,6 +52,14 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   object->setTag( ALADDIN_TAG );
   object->setLayer( "Character" );
 
+
+  ////For animationEditor
+  //new State(stateManager, "null", NULL, NULL, NULL);
+  //
+  //const auto animationEditor = new AnimationEditor(object, "grounding");
+  //return;
+  ////For animationEditor
+
   // states
   new State( stateManager, "idle_left",
              [=] {
@@ -208,11 +216,6 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  }
                }
              }, NULL );
-
-  ////For animationEditor
-  //const auto animationEditor = new AnimationEditor(object, "image");
-  //return;
-  ////For animationEditor
 
   new State( stateManager, "attack_1_left",
              [=] {
