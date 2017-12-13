@@ -1,6 +1,7 @@
 #include "HubController.h"
 #include "AladdinController.h"
 #include "../Define.h"
+#include "PlayableAladdinController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -48,7 +49,7 @@ void HubController::onUpdate( const float delta ) {
   const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
-  const auto aladdinController = static_cast<AladdinController*>(aladdin->getComponent( "Controller" ));
+  const auto aladdinController = aladdin->getComponentT<PlayableAladdinController>();
   if ( aladdinController == NULL ) return;
 
   setLives( aladdinController->getLives() );

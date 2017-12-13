@@ -192,6 +192,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
@@ -242,6 +243,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
     <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />

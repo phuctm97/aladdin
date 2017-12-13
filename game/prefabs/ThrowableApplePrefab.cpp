@@ -1,12 +1,11 @@
 #include "ThrowableApplePrefab.h"
 #include "../scripts/CollisionInfoTracker.h"
 #include "../Define.h"
+#include "../scripts/DirectionController.h"
 
 USING_NAMESPACE_ALA;
 
 void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
-  Logger( "ThrowableApplePrefab" ).info( "new apple" );
-
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
@@ -25,7 +24,11 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   collider->ignoreTag( APPLE_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto stateManager = new StateManager( object, "left" );
+  const auto stateManager = new StateManager( object, "initial" );
+
+  const auto actionManager = new ActionManager( object );
+
+  const auto direction = new DirectionController( object );
 
   const auto collision = new CollisionInfoChecker( object );
 
@@ -37,21 +40,18 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   object->setTag( ALADDIN_TAG );
 
   // states
-  new State( stateManager, "left",
+  new State( stateManager, "initial",
              [=] {
                animator->setAction( "apple" );
-               transform->setScaleX( -ABS(transform->getScale().getX()) );
-             }, NULL, NULL );
-
-  new State( stateManager, "right",
-             [=] {
-               animator->setAction( "apple" );
-               transform->setScaleX( ABS(transform->getScale().getX()) );
+               actionManager->play( new RotateBy( 360 * 15, 1 ) );
              }, NULL, NULL );
 
   new State( stateManager, "explode",
              [=] {
                animator->setAction( "apple_explode" );
+               actionManager->stopAll();
+               transform->setRotation( 0 );
+
                body->setVelocity( Vec2( 0, 0 ) );
                body->setGravityScale( 0 );
              },
@@ -61,11 +61,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
                }
              }, NULL );
 
-  new StateTransition( stateManager, "left", "explode", [=] {
-    return collision->collided();
-  } );
-
-  new StateTransition( stateManager, "right", "explode", [=] {
+  new StateTransition( stateManager, "initial", "explode", [=] {
     return collision->collided();
   } );
 }

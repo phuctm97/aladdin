@@ -9,12 +9,15 @@ CameraController::CameraController( ala::GameObject* gameObject, const std::stri
   : GameObjectComponent( gameObject, name ), _targetPosition( 0, 0 ), _movingSpeed( 7.0f ) {}
 
 void CameraController::onUpdate( const float delta ) {
-  auto transform = getGameObject()->getTransform();
+  const auto gameManager = GameManager::get();
+  const auto input = Input::get();
 
-  const auto halfVisibleWidth = GameManager::get()->getVisibleWidth() / 2;
-  const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
+  const auto transform = getGameObject()->getTransform();
 
-  const auto background = GameManager::get()->getObjectByTag( BACKGROUND_TAG );
+  const auto halfVisibleWidth = gameManager->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
+
+  const auto background = gameManager->getObjectByTag( BACKGROUND_TAG );
   if ( background == NULL ) return;
 
   const auto& backgroundPosition = background->getTransform()->getPosition();
@@ -26,7 +29,7 @@ void CameraController::onUpdate( const float delta ) {
   const auto backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
   const auto backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
 
-  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
   if ( aladdin == NULL ) return;
 
   const auto& aladdinPosition = aladdin->getTransform()->getPosition();
@@ -42,15 +45,12 @@ void CameraController::onUpdate( const float delta ) {
 
   // aladdin vertical direction
   const auto aladdinStateManager = aladdin->getComponentT<StateManager>();
+  const auto aladdinAnimator = aladdin->getComponentT<Animator>();
+
   if ( aladdinStateManager != NULL &&
-    (aladdinStateManager->getCurrentStateName() == "face_up_left" ||
-      aladdinStateManager->getCurrentStateName() == "face_up_right" ||
-      aladdinStateManager->getCurrentStateName() == "attack_2_left" ||
-      aladdinStateManager->getCurrentStateName() == "attack_2_right" ||
-      (aladdinStateManager->getCurrentStateName() == "idle_left" &&
-        aladdinStateManager->getPreviousStateName() == "attack_2_left") ||
-      (aladdinStateManager->getCurrentStateName() == "idle_right" &&
-        aladdinStateManager->getPreviousStateName() == "attack_2_right")) ) {
+    (aladdinStateManager->getCurrentStateName() == "face_up" ||
+      aladdinStateManager->getCurrentStateName() == "face_up_attack" ||
+      aladdinStateManager->getCurrentStateName() == "face_up_throw") ) {
     _targetPosition.setY( aladdinPosition.getY() + halfVisibleHeight * 0.7f );
   }
   else {

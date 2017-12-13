@@ -185,6 +185,9 @@
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\PlayableAladdinController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -310,6 +313,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\PlayableAladdinController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">
