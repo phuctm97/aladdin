@@ -191,12 +191,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
-    <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
-    <ClCompile Include="scripts\ThrowableAppleController.cpp" />
     <ClCompile Include="scripts\ThrowableKnifeController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -242,12 +240,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
-    <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
     <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
-    <ClInclude Include="scripts\ThrowableAppleController.h" />
     <ClInclude Include="scripts\ThrowableKnifeController.h" />
   </ItemGroup>
   <ItemGroup>

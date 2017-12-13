@@ -166,8 +166,6 @@
       <Filter>scenes</Filter>
     </ClCompile>
     <ClCompile Include="scripts\FatGuardController.cpp" />
-    <ClCompile Include="scripts\ThinGuardController.cpp" />
-    <ClCompile Include="scripts\ThrowableAppleController.cpp" />
     <ClCompile Include="scripts\DebugCameraController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -184,8 +182,10 @@
     <ClCompile Include="scripts\CameraFollower.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThinGuardController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -294,8 +294,6 @@
       <Filter>scenes</Filter>
     </ClInclude>
     <ClInclude Include="scripts\FatGuardController.h" />
-    <ClInclude Include="scripts\ThinGuardController.h" />
-    <ClInclude Include="scripts\ThrowableAppleController.h" />
     <ClInclude Include="scripts\DebugCameraController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -312,8 +310,10 @@
     <ClInclude Include="scripts\CameraFollower.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThinGuardController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
