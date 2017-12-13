@@ -263,6 +263,9 @@ void Application::initComponents() {
   GameManager* gameManager = GameManager::get();
   gameManager->_visibleWidth = static_cast<float>(_resolutionWidth);
   gameManager->_visibleHeight = static_cast<float>(_resolutionHeight);
+  gameManager->_exitFunc = [this] {
+    DestroyWindow( _hWnd );
+  };
 
   PhysicsManager* physicsManager = PhysicsManager::get();
 
