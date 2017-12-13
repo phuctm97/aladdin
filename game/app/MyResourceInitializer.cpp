@@ -14,16 +14,19 @@
 #include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/GroundPrefab.h"
 #include "../prefabs/RopePrefab.h"
-#include "../prefabs/StairPrefab.h"
+#include "../prefabs/NodePrefab.h"
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
+#include "../prefabs/StairGroupOnePrefab.h"
+#include "../prefabs/StaticMapBlockerPrefab.h"
+#include "../prefabs/ApplePrefab.h"
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
 
 USING_NAMESPACE_ALA;
 
 void MyResourceInitializer::doRun() {
-  auto gameManager = GameManager::get();
+	auto gameManager = GameManager::get();
 
   // Layers
   gameManager->addLayer( "Background" );
@@ -62,27 +65,32 @@ void MyResourceInitializer::doRun() {
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "civilian-enemies.anm", "animations/enemies/civilian-enemies.anm" );
+  new Animation("apple.anm", "animations/miscellaneous/apple.anm");
 
-  // Prefabs
-  new NormalTextPrefab();
-  new BigTextPrefab();
-  new HubPrefab();
+	// Prefabs
+	new NormalTextPrefab();
+	new BigTextPrefab();
+	new HubPrefab();
 
-  new AladdinPrefab();
-  new ThrowableApplePrefab();
-  new EnemyExplosionPrefab();
 
-  new ThinGuardPrefab();
-  new FatGuardPrefab();
-  new AdorableGuardPrefab();
-  new ThrowableKnifePrefab();
+	new AladdinPrefab();
+	new ThrowableApplePrefab();
+	new EnemyExplosionPrefab();
 
-  new GroundPrefab();
-  new RopePrefab();
-  new StairPrefab();
-  new FirePrefab();
-  new CharcoalBurnerPrefab();
 
-  // Dev tools
-  new NodePrefab();
+	new ThinGuardPrefab();
+	new FatGuardPrefab();
+	new AdorableGuardPrefab();
+	new ThrowableKnifePrefab();
+
+	new GroundPrefab();
+	new RopePrefab();
+	new FirePrefab();
+	new CharcoalBurnerPrefab();
+	new StairGroupOnePrefab();
+	new StaticMapBlockerPrefab();
+	new ApplePrefab();
+
+	// Dev tools
+	new NodePrefab();
 }

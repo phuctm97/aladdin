@@ -508,7 +508,8 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
                  animator->setAction( "run" );
                }
-             }
+			   body->setVelocity(Vec2(-runVelocity, body->getVelocity().getY()));
+			 }
              , NULL );
 
   new State( stateManager, "run_right",
@@ -522,6 +523,7 @@ void AladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                if ( !animator->isPlaying() && animator->getActionName() == "start_run" ) {
                  animator->setAction( "run" );
                }
+			   body->setVelocity(Vec2(runVelocity, body->getVelocity().getY()));
              }
              , NULL );
 

@@ -54,6 +54,12 @@ void AladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
       }
     }
   }
+  
+  if (collision.getColliderA()->getGameObject()->getTag() == APPLE_TAG ||
+	  collision.getColliderB()->getGameObject()->getTag() == APPLE_TAG)
+  {
+	  setApples(getApples() + 1);
+  }
 }
 
 void AladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
@@ -88,6 +94,8 @@ void AladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {
     _collidedWithRope = false;
   }
 }
+
+  
 
 void AladdinController::onHit() {
   if ( _recovering ) return;

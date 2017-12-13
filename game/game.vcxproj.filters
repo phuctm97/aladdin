@@ -123,9 +123,6 @@
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\FirePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -135,10 +132,25 @@
     <ClCompile Include="scripts\CharcoalBurnerController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\StairGroupOnePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StaticMapBlockerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
     <ClCompile Include="prefabs\HubPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\HubController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ApplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\AppleController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\GuardController.cpp">
@@ -222,9 +234,6 @@
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\StairPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\FirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -234,10 +243,25 @@
     <ClInclude Include="scripts\CharcoalBurnerController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\StairGroupOnePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StaticMapBlockerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StaticMapBlockerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
     <ClInclude Include="prefabs\HubPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\HubController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ApplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\AppleController.h">
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\GuardController.h">
@@ -305,6 +329,9 @@
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm">
       <Filter>animations\playable_characters</Filter>
+    </Xml>
+    <Xml Include="animations\miscellaneous\apple.anm">
+      <Filter>animations\miscellaneous</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
