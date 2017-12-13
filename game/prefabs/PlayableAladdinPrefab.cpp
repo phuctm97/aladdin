@@ -2,6 +2,7 @@
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
 #include "../scripts/PlayableAladdinController.h"
+#include "../scripts/CollisionInfoTracker.h"
 
 USING_NAMESPACE_ALA;
 
@@ -21,6 +22,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto swordSize2 = Size( 40, 20 );
   const auto swordOffset3 = Vec2( 30, 10 );
   const auto swordSize3 = Size( 35, 40 );
+  const auto swordOffset4 = Vec2( 42, 8 );
+  const auto swordSize4 = Size( 40, 55 );
   const auto swordOffset5 = Vec2( -35, 20 );
   const auto swordSize5 = Size( 25, 40 );
   const auto swordOffset6 = Vec2( 35, 25 );
@@ -44,6 +47,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   swordCollider->setActive( false );
 
   const auto stateManager = new StateManager( object, "idle" );
+
+  const auto collision = new CollisionInfoTracker( object );
 
   const auto direction = new DirectionController( object, true, 1 );
 
@@ -72,17 +77,24 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   controller->setApples( 10 );
 
   // states
+  //    new State( stateManager, "null", NULL, NULL, NULL );
+  //    new AnimationEditor( object, "jump_throw_apple" );
+
   new State( stateManager, "idle",
              [=] {
                // animation effect
                {
-                 if ( stateManager->getPreviousStateName() == "jump" ) {
-                   animator->setAction( "fall_to_idle_1" );
+                 if ( stateManager->getPreviousStateName() == "fall" ) {
+                   if ( animator->getActionName() == "jump_attack_fall" ||
+                     animator->getActionName() == "jump_throw_apple_fall" ) {
+                     animator->setAction( "touched_ground" );
+                   }
+                   else {
+                     animator->setAction( "fall_to_idle_1" );
+                   }
                  }
                  else if ( stateManager->getPreviousStateName() == "jump_attack" ||
-                   stateManager->getPreviousStateName() == "run_and_jump" ||
-                   stateManager->getPreviousStateName() == "run_and_throw" ||
-                   stateManager->getPreviousStateName() == "jump_throw_apple" ) {
+                   stateManager->getPreviousStateName() == "jump_throw" ) {
                    animator->setAction( "touched_ground" );
                  }
                  else if ( stateManager->getPreviousStateName() == "face_up" ) {
@@ -603,6 +615,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  animator->setAction( "run_attack" );
                }
 
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
                // sword
                {
                  swordCollider->setOffset( swordOffset3 );
@@ -615,6 +637,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                // move
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
                }
 
                // sword
@@ -636,6 +668,228 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setActive( false );
                }
              } );
+
+  new State( stateManager, "jump",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "jump" );
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 body->addImpulse( Vec2( 0, 3000000.0f ) );
+               }
+             },
+             [=]( float dt ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+
+                 if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               }
+             }, NULL );
+
+  new State( stateManager, "fall",
+             [=] {
+               // animation effect
+               {
+                 if ( stateManager->getPreviousStateName() == "jump_attack" ) {
+                   animator->setAction( "jump_attack_fall" );
+                 }
+                 else if ( stateManager->getPreviousStateName() == "jump_throw" ) {
+                   animator->setAction( "jump_throw_apple_fall" );
+                 }
+                 else {
+                   animator->setAction( "fall" );
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+             },
+             [=]( float dt ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+
+                 if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               }
+             }, NULL );
+
+  new State( stateManager, "jump_attack",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "jump_attack" );
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // sword
+               {
+                 swordCollider->setOffset( swordOffset4 );
+                 swordCollider->setSize( swordSize4 );
+                 swordCollider->setActive( false );
+                 timer4->start( 0.4f );
+               }
+             },
+             [=]( float dt ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+
+                 if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               }
+
+               // sword
+               {
+                 if ( timer4->isDone() ) {
+                   if ( !swordCollider->isActive() ) {
+                     swordCollider->setActive( true );
+                     timer4->start( 0.2f );
+                   }
+                   else {
+                     swordCollider->setActive( false );
+                     timer4->start( 5 );
+                   }
+                 }
+               }
+             },
+             [=] {
+               // sword
+               {
+                 swordCollider->setActive( false );
+               }
+             } );
+
+  new State( stateManager, "jump_throw",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "jump_throw_apple" );
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // throw
+               {
+                 timer2->start( 0.15f );
+               }
+             },
+             [=]( float dt ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move
+               {
+                 if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+
+                 if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               }
+
+               // throw
+               {
+                 if ( timer2->isDone() ) {
+                   if ( direction->isRight() ) {
+                     controller->throwApple( 'R', 0.0f, -(collider->getSize().getHeight() / 4), throwImpulse.getX(),
+                                             throwImpulse.getY() );
+                   }
+                   else {
+                     controller->throwApple( 'L', 0.0f, -(collider->getSize().getHeight() / 4), throwImpulse.getX(),
+                                             throwImpulse.getY() );
+                   }
+                   timer2->start( 2.0f );
+                 }
+               }
+             }
+             , NULL );
 
 
   new StateTransition( stateManager, "idle", "attack", [=] {
@@ -731,10 +985,59 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return !input->getKey( ALA_KEY_RIGHT_ARROW ) && !input->getKey( ALA_KEY_LEFT_ARROW );
+    return (direction->isRight() && !input->getKey( ALA_KEY_RIGHT_ARROW ))
+      || (direction->isLeft() && !input->getKey( ALA_KEY_LEFT_ARROW ));
   } );
 
   new StateTransition( stateManager, "stop", "idle", [=] {
     return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "idle", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "jump", "jump_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "jump", "jump_throw", [=] {
+    return input->getKeyDown( ALA_KEY_A ) && controller->getApples() > 0;
+  } );
+
+  new StateTransition( stateManager, "jump", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  } );
+
+  new StateTransition( stateManager, "jump_attack", "fall", [=] {
+    return body->getVelocity().getY() < -10 && !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "jump_throw", "fall", [=] {
+    return body->getVelocity().getY() < -10 && !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "fall", "jump_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "fall", "jump_throw", [=] {
+    return input->getKeyDown( ALA_KEY_A ) && controller->getApples() > 0;
+  } );
+
+  new StateTransition( stateManager, "fall", "idle", [=] {
+    return collision->collidedWithObjectTag( GROUND_TAG );
+  } );
+
+  new StateTransition( stateManager, "jump", "idle", [=] {
+    return collision->collidedWithObjectTag( GROUND_TAG );
+  } );
+
+  new StateTransition( stateManager, "jump_attack", "idle", [=] {
+    return collision->collidedWithObjectTag( GROUND_TAG );
+  } );
+
+  new StateTransition( stateManager, "jump_throw", "idle", [=] {
+    return collision->collidedWithObjectTag( GROUND_TAG );
   } );
 }

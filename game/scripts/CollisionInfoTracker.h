@@ -3,14 +3,14 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(CollisionInfoChecker, ala::GameObjectComponent)
+ALA_CLASS_HEADER_1(CollisionInfoTracker, ala::GameObjectComponent)
 private:
   std::unordered_set<int> _collidedObjects;
   std::unordered_set<int> _collidedObjectTags;
   std::unordered_set<int> _collidedColliderTags;
 
 public:
-  CollisionInfoChecker( ala::GameObject* gameObject, const std::string& name = "" );
+  CollisionInfoTracker( ala::GameObject* gameObject, const std::string& name = "" );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 

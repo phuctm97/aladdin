@@ -30,7 +30,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto direction = new DirectionController( object );
 
-  const auto collision = new CollisionInfoChecker( object );
+  const auto collision = new CollisionInfoTracker( object );
 
   // helpers
   const auto transform = object->getTransform();

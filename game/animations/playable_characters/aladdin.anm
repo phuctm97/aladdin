@@ -235,15 +235,15 @@
   </Animation>
   <Animation name="jump_attack" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="13" y="1077" w="51" h="53" offsetX="0" offsetY="0" />
-    <sprite x="75" y="1075" w="49" h="51" offsetX="0" offsetY="0" />
-    <sprite x="140" y="1067" w="46" h="65" offsetX="0" offsetY="0" />
-    <sprite x="199" y="1078" w="51" h="55" offsetX="0" offsetY="0" />
+    <sprite x="75" y="1075" w="49" h="51" offsetX="2" offsetY="6.5" />
+    <sprite x="140" y="1067" w="46" h="65" offsetX="2.5" offsetY="12.5" />
+    <sprite x="199" y="1078" w="51" h="55" offsetX="2" offsetY="7.5" />
+    <sprite x="266" y="1070" w="82" h="59" offsetX="20.5" offsetY="10.5" />
+    <sprite x="361" y="1087" w="58" h="54" offsetX="6.5" offsetY="-3" />
+    <sprite x="350" y="692" w="57" h="52" offsetX="13" offsetY="0" />
   </Animation>
-
   <Animation name="jump_attack_fall" imagePath="aladdin.png" interval="0.1" isLoop="false">
-    <sprite x="266" y="1070" w="82" h="59" offsetX="0" offsetY="0" />
-    <sprite x="361" y="1087" w="58" h="54" offsetX="0" offsetY="0" />
-    <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
+    <sprite x="419" y="688" w="52" h="57" offsetX="13.5" offsetY="-2.5" />
   </Animation>
   <Animation name="apple_explode" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="373" y="24" w="6" h="6" offsetX="0" offsetY="0" />
@@ -256,17 +256,16 @@
   <Animation name="apple" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="373" y="24" w="6" h="6" offsetX="0" offsetY="0" />
   </Animation>
-  <Animation name="jump_throw_apple" imagePath="aladdin.png" interval="0.2" isLoop="false">
+  <Animation name="jump_throw_apple" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="19" y="1005" w="48" h="54" offsetX="0" offsetY="0" />
-    <sprite x="77" y="1007" w="42" h="51" offsetX="0" offsetY="0" />
-    <sprite x="132" y="1008" w="38" h="52" offsetX="0" offsetY="0" />
+    <sprite x="77" y="1007" w="42" h="51" offsetX="-1" offsetY="3.5" />
+    <sprite x="132" y="1008" w="38" h="52" offsetX="-0.5" offsetY="2" />
+    <sprite x="185" y="1008" w="51" h="52" offsetX="3" offsetY="3" />
+    <sprite x="253" y="1012" w="39" h="51" offsetX="-2" offsetY="1.5" />
+    <sprite x="350" y="692" w="57" h="52" offsetX="10" offsetY="0" />
   </Animation>
   <Animation name="jump_throw_apple_fall" imagePath="aladdin.png" interval="0.2" isLoop="false">
-    <sprite x="185" y="1008" w="51" h="52" offsetX="0" offsetY="0" />
-    <sprite x="253" y="1012" w="39" h="51" offsetX="0" offsetY="0" />
-    <sprite x="350" y="692" w="57" h="52" offsetX="0" offsetY="0" />
-    <sprite x="419" y="688" w="52" h="57" offsetX="0" offsetY="0" />
-    <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="17.5" />
+    <sprite x="419" y="688" w="52" h="57" offsetX="9.5" offsetY="-2.5" />
   </Animation>
   <Animation name="run_attack" imagePath="aladdin.png" interval="0.05" isLoop="false">
     <sprite x="498" y="1388" w="34" h="51" offsetX="0" offsetY="1" />
