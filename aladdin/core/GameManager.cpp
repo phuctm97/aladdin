@@ -27,6 +27,7 @@ GameManager::GameManager() :
   _logger( "ala::GameManager" ),
   _visibleWidth( 0 ),
   _visibleHeight( 0 ),
+  _exitFunc( NULL ),
   _idCounter( 0 ),
   _runningScene( NULL ),
   _sceneToReplaceInNextFrame( NULL ),
@@ -174,6 +175,12 @@ Scene* GameManager::getRunningScene() const {
 
 GameObject* GameManager::getMainCamera() const {
   return getObjectByName( ALA_MAIN_CAMERA );
+}
+
+void GameManager::exit() {
+  if ( _exitFunc != NULL ) {
+    _exitFunc();
+  }
 }
 
 void GameManager::replaceScene( Scene* scene ) {
