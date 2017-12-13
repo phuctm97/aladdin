@@ -151,7 +151,7 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\AppleController.cpp">
-	  <Filter>scripts</Filter>
+      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\GuardController.cpp">
       <Filter>scripts</Filter>
@@ -166,6 +166,13 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\CollisionInfoTracker.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\ThinGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThrowableAppleController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
@@ -259,7 +266,7 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\AppleController.h">
-	  <Filter>scripts</Filter>
+      <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\GuardController.h">
       <Filter>scripts</Filter>
@@ -274,6 +281,13 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\CollisionInfoTracker.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\ThinGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThrowableAppleController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

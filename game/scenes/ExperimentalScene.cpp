@@ -143,7 +143,7 @@ void ExperimentalScene::onPreInitialize() {
 
 	float appleGroupOneX[] = { 325.5f, 355.0f, 388.0f, 691.5f, 723.0f, 755.5f, 869.5f, 901.5f, 932.0f,1363.0f, 1396.5f, 1409.0f, 1490.5f, 1526.0f, 1559.0f, 1589.0f, 1619.5f };
 	float appleGroupOneY[] = { 27.5f, 43.0f, 27.5f, 25.5f, 44.5f, 25.5f, 27.0f, 45.0f, 27.0f, 90.5f, 75.0f, 41.0f, 14.5f, 29.5f, 14.5f, 29.5f, 14.5f };
-	for (int index = 0; index < sizeof(appleGroupOneX); index++)
+	for (int index = 0; index < 17; index++)
 	{
 		const auto newApple = gameManager->getPrefab("Apple")->instantiate();
 		newApple->getTransform()->setPosition(Vec2(appleGroupOneX[index], appleGroupOneY[index]));

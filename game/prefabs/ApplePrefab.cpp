@@ -19,6 +19,7 @@ void ApplePrefab::doInstantiate(ala::GameObject * object) const
 	new AppleController(object);
 
 	object->setTag(APPLE_TAG);
+	collider->ignoreTag(APPLE_TAG);
 
 	// State
 	const auto stateManager = new StateManager(object, "static");
