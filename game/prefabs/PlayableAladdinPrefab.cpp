@@ -86,7 +86,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                {
                  if ( stateManager->getPreviousStateName() == "fall" ) {
                    if ( animator->getActionName() == "jump_attack_fall" ||
-                     animator->getActionName() == "jump_throw_apple_fall" ) {
+                     animator->getActionName() == "jump_throw_apple_fall" ||
+                     animator->getActionName() == "run_to_jump_fall" ) {
                      animator->setAction( "touched_ground" );
                    }
                    else {
@@ -581,8 +582,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
                }
-             },
-             NULL );
+             },NULL );
 
   new State( stateManager, "stop",
              [=] {
@@ -673,7 +673,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
              [=] {
                // animation effect
                {
-                 animator->setAction( "jump" );
+                 if ( stateManager->getPreviousStateName() == "run" ) {
+                   animator->setAction( "run_to_jump" );
+                 }
+                 else {
+                   animator->setAction( "jump" );
+                 }
                }
 
                // direction
@@ -725,7 +730,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                    animator->setAction( "jump_throw_apple_fall" );
                  }
                  else {
-                   animator->setAction( "fall" );
+                   if ( animator->getActionName() == "run_to_jump" ) {
+                     animator->setAction( "run_to_jump_fall" );
+                   }
+                   else {
+                     animator->setAction( "fall" );
+                   }
                  }
                }
 
@@ -888,8 +898,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                    timer2->start( 2.0f );
                  }
                }
-             }
-             , NULL );
+             }, NULL );
 
 
   new StateTransition( stateManager, "idle", "attack", [=] {
@@ -967,8 +976,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return !animator->isPlaying() &&
-    ((direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW ))
+    return ((direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW ))
       || (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW )));
   } );
 
@@ -994,6 +1002,42 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "idle", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "attack", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "throw", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "sit", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "sit_attack", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "sit_throw", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "face_up", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition(stateManager, "face_up_attack", "jump", [=] {
+    return input->getKeyDown(ALA_KEY_D);
+  });
+
+  new StateTransition(stateManager, "face_up_throw", "jump", [=] {
+    return input->getKeyDown(ALA_KEY_D);
+  });
+
+  new StateTransition( stateManager, "run", "jump", [=] {
     return input->getKeyDown( ALA_KEY_D );
   } );
 
