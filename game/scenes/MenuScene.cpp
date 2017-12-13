@@ -129,7 +129,7 @@ void MenuScene::onPreInitialize() {
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 Logger( "MenuScene" ).info( "Exit" );
+                 GameManager::get()->exit();
                }
              }, NULL );
 
