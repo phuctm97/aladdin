@@ -15,12 +15,14 @@ ExperimentalScene::ExperimentalScene() : _logger( "ExperimentalScene" ) {}
 void ExperimentalScene::onPreInitialize() {
   // constants
   const auto gameManager = GameManager::get();
+  const auto halfVisibleWidth = gameManager->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
 
   // configurations
   enablePhysics( Vec2( 0, -500.0f ) );
 
-  enableQuadTree( -gameManager->getVisibleWidth() / 2, gameManager->getVisibleHeight() / 2,
-                  4771 - gameManager->getVisibleWidth() / 2, 688 - gameManager->getVisibleHeight() / 2, 3 );
+  //  enableQuadTree( -halfVisibleWidth, -halfVisibleHeight,
+  //                  4771 - halfVisibleWidth, 688 - halfVisibleHeight, 3 );
 
   new CameraController( getMainCamera() );
 
@@ -51,37 +53,37 @@ void ExperimentalScene::onPreInitialize() {
 
   const auto ground = gameManager->getPrefab( "Ground" )->instantiate( "Ground" );
 
-  const auto ropeOne = gameManager->getPrefab( "Rope" )->instantiate( "Rope 1", "0" );
+  const auto ropeOne = gameManager->getPrefab( "Rope" )->instantiate( "Rope 1" );
   ropeOne->getTransform()->setPosition( Vec2( 1931, 86 ) );
   ropeOne->getComponentT<Collider>()->setSize( Size( 5, 250 ) );
 
-  const auto ropeTwo = gameManager->getPrefab( "Rope" )->instantiate( "Rope 2", "0" );
+  const auto ropeTwo = gameManager->getPrefab( "Rope" )->instantiate( "Rope 2" );
   ropeTwo->getTransform()->setPosition( Vec2( 1387, 298 ) );
   ropeTwo->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
-  const auto ropeThree = gameManager->getPrefab( "Rope" )->instantiate( "Rope 3", "0" );
+  const auto ropeThree = gameManager->getPrefab( "Rope" )->instantiate( "Rope 3" );
   ropeThree->getTransform()->setPosition( Vec2( 2539, 345 ) );
   ropeThree->getComponentT<Collider>()->setSize( Size( 5, 249 ) );
 
-  const auto ropeFour = gameManager->getPrefab( "Rope" )->instantiate( "Rope 4", "0" );
+  const auto ropeFour = gameManager->getPrefab( "Rope" )->instantiate( "Rope 4" );
   ropeFour->getTransform()->setPosition( Vec2( 4555, 99 ) );
   ropeFour->getComponentT<Collider>()->setSize( Size( 5, 193 ) );
 
-  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 1", "000" );
+  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 1" );
   charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 
-  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 2", "001" );
+  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 2" );
   charcoalBurnerTwo->getTransform()->setPosition( Vec2( 730.5f, -50 ) );
 
   const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )
-                                              ->instantiate( "Charcoal Burner 3", "001" );
+                                              ->instantiate( "Charcoal Burner 3" );
   charcoalBurnerThree->getTransform()->setPosition( Vec2( 906.5f, -50 ) );
 
-  const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1", "00" );
+  const auto guardOne = gameManager->getPrefab( "Thin Guard" )->instantiate( "Guard 1" );
   guardOne->getTransform()->setPositionY( -25 );
   guardOne->getComponentT<GuardController>()->set( 550, 430, 670 );
 
-  const auto guardTwo = gameManager->getPrefab( "Fat Guard" )->instantiate( "Guard 2", "00" );
+  const auto guardTwo = gameManager->getPrefab( "Fat Guard" )->instantiate( "Guard 2" );
   guardTwo->getTransform()->setPositionY( -25 );
   guardTwo->getComponentT<GuardController>()->set( 818, 620, 992 );
 

@@ -26,9 +26,12 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto transform = object->getTransform();
 
+  // collider renderers
+  new ColliderRenderer( collider );
+
   // configurations
   object->setTag( CHARCOAL_BURNER_TAG );
-  object->setLayer( "Background" );
+  object->setLayer( "Sub Background" );
 
   // states
   new State( stateManager, "nothing", NULL, NULL, NULL );
