@@ -32,7 +32,9 @@ void Action::update( const float delta ) {
 void Action::release() {
   onRelease();
 
-  _actionManager->removeAction( this );
+  if ( _actionManager != NULL ) {
+    _actionManager->removeAction( this );
+  }
 
   delete this;
 }
