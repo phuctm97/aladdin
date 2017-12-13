@@ -1,6 +1,8 @@
 #include "AgrabahMarketScene.h"
 #include "../Define.h"
 #include "../scripts/CameraController.h"
+#include "../scripts/DebugCameraController.h"
+#include "../scripts/NodeController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -41,6 +43,21 @@ void AgrabahMarketScene::onPreInitialize() {
   const auto ground = gameManager->getPrefab( "Agrabah Market Ground" )->instantiate( "Ground" );
 
   const auto stairOne = gameManager->getPrefab( "Stair 1" )->instantiate( "Start 1" );
+
+  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 1" );
+  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
+
+  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 2" );
+  charcoalBurnerTwo->getTransform()->setPosition( Vec2( 730.5f, -50 ) );
+
+  const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 3" );
+  charcoalBurnerThree->getTransform()->setPosition( Vec2( 906.5f, -50 ) );
+
+  const auto charcoalBurnerFour = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 4" );
+  charcoalBurnerFour->getTransform()->setPosition( Vec2( 1915.5f, -79 ) );
+
+  const auto charcoalBurnerFive = gameManager->getPrefab( "Charcoal Burner" )->instantiate( "Charcoal Burner 5" );
+  charcoalBurnerFive->getTransform()->setPosition( Vec2( 2987, -82 ) );
 
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

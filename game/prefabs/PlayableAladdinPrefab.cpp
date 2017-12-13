@@ -48,6 +48,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto stateManager = new StateManager( object, "idle" );
 
+  const auto actionManager = new ActionManager( object );
+
   const auto collision = new CollisionInfoTracker( object );
 
   const auto direction = new DirectionController( object, true, 1 );
@@ -62,8 +64,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto timer2 = new Timer( object );
 
   const auto timer3 = new Timer( object );
-
-  const auto timer4 = new Timer( object );
 
   // collider renderers
   new ColliderRenderer( collider );
@@ -210,16 +210,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setOffset( swordOffset1 );
                  swordCollider->setSize( swordSize1 );
                  swordCollider->setActive( false );
-                 timer4->start( 0.2f );
+                 timer3->start( 0.2f );
                }
              },
              [=]( float dt ) {
                // sword
                {
-                 if ( timer4->isDone() ) {
+                 if ( timer3->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer4->start( 0.2f );
+                     timer3->start( 0.2f );
                    }
                    else {
                      swordCollider->setActive( false );
@@ -335,26 +335,26 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setOffset( swordOffset5 );
                  swordCollider->setSize( swordSize5 );
                  swordCollider->setActive( false );
-                 timer4->start( 0.2f );
+                 timer3->start( 0.2f );
                }
              },
              [=]( float dt ) {
                // sword
                {
-                 if ( timer4->isDone() ) {
+                 if ( timer3->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer4->start( 0.25f );
+                     timer3->start( 0.25f );
                    }
                    else {
                      swordCollider->setActive( false );
                      if ( swordCollider->getOffset() == swordOffset5 ) {
                        swordCollider->setOffset( swordOffset6 );
                        swordCollider->setSize( swordSize6 );
-                       timer4->start( 0.15f );
+                       timer3->start( 0.15f );
                      }
                      else {
-                       timer4->start( 5 );
+                       timer3->start( 5 );
                      }
                    }
                  }
@@ -480,16 +480,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setOffset( swordOffset2 );
                  swordCollider->setSize( swordSize2 );
                  swordCollider->setActive( false );
-                 timer4->start( 0.2f );
+                 timer3->start( 0.2f );
                }
              },
              [=]( float dt ) {
                // sword
                {
-                 if ( timer4->isDone() ) {
+                 if ( timer3->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer4->start( 0.2f );
+                     timer3->start( 0.2f );
                    }
                    else {
                      swordCollider->setActive( false );
@@ -630,7 +630,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setOffset( swordOffset3 );
                  swordCollider->setSize( swordSize3 );
                  swordCollider->setActive( false );
-                 timer4->start( 0.2f );
+                 timer3->start( 0.2f );
                }
              },
              [=]( float dt ) {
@@ -651,10 +651,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
                // sword
                {
-                 if ( timer4->isDone() ) {
+                 if ( timer3->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer4->start( 0.2f );
+                     timer3->start( 0.2f );
                    }
                    else {
                      swordCollider->setActive( false );
@@ -794,7 +794,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  swordCollider->setOffset( swordOffset4 );
                  swordCollider->setSize( swordSize4 );
                  swordCollider->setActive( false );
-                 timer4->start( 0.4f );
+                 timer3->start( 0.4f );
                }
              },
              [=]( float dt ) {
@@ -821,14 +821,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
                // sword
                {
-                 if ( timer4->isDone() ) {
+                 if ( timer3->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer4->start( 0.2f );
+                     timer3->start( 0.2f );
                    }
                    else {
                      swordCollider->setActive( false );
-                     timer4->start( 5 );
+                     timer3->start( 5 );
                    }
                  }
                }
@@ -900,6 +900,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              }, NULL );
 
+  new State( stateManager, "hit", [=] {
+    // animation effect 
+    {
+      animator->setAction( "hit" );
+    }
+  }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "attack", [=] {
     return input->getKeyDown( ALA_KEY_S );
@@ -1029,13 +1035,13 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     return input->getKeyDown( ALA_KEY_D );
   } );
 
-  new StateTransition(stateManager, "face_up_attack", "jump", [=] {
-    return input->getKeyDown(ALA_KEY_D);
-  });
+  new StateTransition( stateManager, "face_up_attack", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
 
-  new StateTransition(stateManager, "face_up_throw", "jump", [=] {
-    return input->getKeyDown(ALA_KEY_D);
-  });
+  new StateTransition( stateManager, "face_up_throw", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
 
   new StateTransition( stateManager, "run", "jump", [=] {
     return input->getKeyDown( ALA_KEY_D );
@@ -1083,5 +1089,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "jump_throw", "idle", [=] {
     return collision->collidedWithObjectTag( GROUND_TAG );
+  } );
+
+  new StateTransition( stateManager, "hit", "idle", [=] {
+    return !animator->isPlaying();
   } );
 }

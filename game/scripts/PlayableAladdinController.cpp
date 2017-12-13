@@ -1,5 +1,6 @@
 #include "PlayableAladdinController.h"
 #include "DirectionController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
@@ -72,4 +73,40 @@ void PlayableAladdinController::throwApple( const char direction,
 
   const auto appleBody = apple->getComponentT<Rigidbody>();
   appleBody->addImpulse( Vec2( impulseX, impulseY ) );
+}
+
+void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {}
+
+void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
+    onHit();
+  }
+}
+
+void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
+    onHit();
+  }
+}
+
+void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {}
+
+void PlayableAladdinController::onHit() {
+  if ( _recovering ) return;
+
+  const auto stateManager = getGameObject()->getComponentT<StateManager>();
+  if ( stateManager->getCurrentStateName() == "idle" ) {
+    setRecovering();
+    stateManager->changeState( "hit" );
+  }
 }

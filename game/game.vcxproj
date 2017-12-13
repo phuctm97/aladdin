@@ -165,7 +165,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
-    <ClCompile Include="prefabs\FirePrefab.cpp" />
+    <ClCompile Include="prefabs\FlamePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp" />
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
@@ -214,7 +214,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\BigTextPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
-    <ClInclude Include="prefabs\FirePrefab.h" />
+    <ClInclude Include="prefabs\FlamePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h" />
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />

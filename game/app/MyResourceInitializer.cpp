@@ -15,7 +15,7 @@
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/RopePrefab.h"
 #include "../prefabs/NodePrefab.h"
-#include "../prefabs/FirePrefab.h"
+#include "../prefabs/FlamePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/StairOnePrefab.h"
 #include "../prefabs/StaticMapBlockerPrefab.h"
@@ -89,7 +89,7 @@ void MyResourceInitializer::doRun() {
 
   new AgrabahMarketGroundPrefab();
   new RopePrefab();
-  new FirePrefab();
+  new FlamePrefab();
   new CharcoalBurnerPrefab();
   new StairOnePrefab();
   new StaticMapBlockerPrefab();

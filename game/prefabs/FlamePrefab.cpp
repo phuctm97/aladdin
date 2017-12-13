@@ -1,8 +1,8 @@
-#include "FirePrefab.h"
+#include "FlamePrefab.h"
 
 USING_NAMESPACE_ALA;
 
-void FirePrefab::doInstantiate( ala::GameObject* object ) const {
+void FlamePrefab::doInstantiate( ala::GameObject* object ) const {
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "jafar.png" );
 

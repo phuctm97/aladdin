@@ -32,6 +32,17 @@ public:
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
+
+  void onCollisionEnter(const ala::CollisionInfo& collision) override;
+
+  void onTriggerEnter(const ala::CollisionInfo& collision) override;
+
+  void onTriggerStay(const ala::CollisionInfo& collision) override;
+
+  void onTriggerExit(const ala::CollisionInfo& collision) override;
+
+private:
+  void onHit();
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__

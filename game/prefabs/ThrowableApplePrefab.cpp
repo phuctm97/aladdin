@@ -22,6 +22,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 4, 5 ) );
   collider->setTag( APPLE_TAG );
   collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
   const auto stateManager = new StateManager( object, "initial" );

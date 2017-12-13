@@ -120,9 +120,6 @@
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\FirePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -188,6 +185,9 @@
     <ClCompile Include="prefabs\StairOnePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FlamePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -246,9 +246,6 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\FirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h">
@@ -314,6 +311,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\StairOnePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FlamePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
