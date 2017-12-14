@@ -18,7 +18,7 @@ void StaticMapBlockerController::onCollisionEnter(const ala::CollisionInfo & col
 
 void StaticMapBlockerController::onCollisionStay(const ala::CollisionInfo & collision)
 {
-	_logger.info("Stay");
+	//_logger.info("Stay");
 }
 
 void StaticMapBlockerController::onCollisionExit(const ala::CollisionInfo & collision)

@@ -18,10 +18,13 @@
 #include "../prefabs/FirePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/StairGroupOnePrefab.h"
+#include "../prefabs/StairGroupTwoPrefab.h"
 #include "../prefabs/StaticMapBlockerPrefab.h"
 #include "../prefabs/ApplePrefab.h"
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
+#include "../prefabs/HorizontalBarPrefab.h"
+#include "../prefabs/PlatformPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -84,8 +87,11 @@ void MyResourceInitializer::doRun() {
 	new FirePrefab();
 	new CharcoalBurnerPrefab();
 	new StairGroupOnePrefab();
+	new StairGroupTwoPrefab();
 	new StaticMapBlockerPrefab();
 	new ApplePrefab();
+	new HorizontalBarPrefab();
+	new PlatformPrefab();
 
 	// Dev tools
 	new NodePrefab();

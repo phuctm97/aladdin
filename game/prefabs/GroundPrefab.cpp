@@ -35,7 +35,7 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 
 
 	// Fourth ground
-	const auto fourthGroundSize = Size(1952, 30);
+	const auto fourthGroundSize = Size(1992, 30);
 	const auto fourthGroundOffset = Vec2(thirdGroundOffset.getX() + thirdGroundSize.getWidth() / 2 + fourthGroundSize.getWidth() / 2,
 		fourthGroundSize.getHeight() / 2);
 	const auto fourthGroundCollider = new Collider(object, false, fourthGroundOffset, fourthGroundSize, 1, 0, "FourthGround");
@@ -51,7 +51,7 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 		mapBlockerSize, 1, 0, "MapStartBlocker");
 
 	const auto mapEndBlocker = new Collider(object, false,
-		Vec2(fourthGroundOffset.getX() + fourthGroundSize.getWidth() / 2 + mapBlockerSize.getWidth() / 2, fourthGroundOffset.getY()-fourthGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
+		Vec2(-19+fourthGroundOffset.getX() + fourthGroundSize.getWidth() / 2 + mapBlockerSize.getWidth() / 2, fourthGroundOffset.getY()-fourthGroundSize.getHeight() / 2 + mapBlockerSize.getHeight() / 2),
 		mapBlockerSize, 1, 0, "MapEndBlocker");
 
 

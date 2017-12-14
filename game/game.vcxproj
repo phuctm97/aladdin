@@ -160,6 +160,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ApplePrefab.cpp" />
     <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\HorizontalBarPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
     <ClCompile Include="prefabs\BigTextPrefab.cpp" />
@@ -167,6 +168,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\FirePrefab.cpp" />
     <ClCompile Include="prefabs\GroundPrefab.cpp" />
+    <ClCompile Include="prefabs\PlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\StairGroupTwoPrefab.cpp" />
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
@@ -188,6 +191,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\PlatformController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\ThinGuardController.cpp" />
@@ -206,6 +210,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
     <ClInclude Include="prefabs\ApplePrefab.h" />
     <ClInclude Include="prefabs\EnemyExplosionPrefab.h" />
+    <ClInclude Include="prefabs\HorizontalBarPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
     <ClInclude Include="prefabs\BigTextPrefab.h" />
@@ -213,6 +218,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\FirePrefab.h" />
     <ClInclude Include="prefabs\GroundPrefab.h" />
+    <ClInclude Include="prefabs\PlatformPrefab.h" />
+    <ClInclude Include="prefabs\StairGroupTwoPrefab.h" />
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\NormalTextPrefab.h" />
@@ -234,6 +241,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\PlatformController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
     <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\ThinGuardController.h" />
