@@ -4,26 +4,19 @@
 
 #include "MyResourceInitializer.h"
 #include "../prefabs/NodePrefab.h"
+#include "../prefabs/SpritePrefab.h"
+#include "../prefabs/MenuSelectPrefab.h"
+#include "../prefabs/BitmapTextPrefab.h"
 #include "../prefabs/HubPrefab.h"
-#include "../prefabs/AladdinPrefab.h"
+#include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
-#include "../prefabs/ThinGuardPrefab.h"
-#include "../prefabs/FatGuardPrefab.h"
-#include "../prefabs/AdorableGuardPrefab.h"
-#include "../prefabs/ThrowableKnifePrefab.h"
+#include "../prefabs/EnemyExplosionPrefab.h"
+#include "../prefabs/GuardOnePrefab.h"
+#include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
-#include "../prefabs/RopePrefab.h"
-#include "../prefabs/NodePrefab.h"
+#include "../prefabs/StairOnePrefab.h"
 #include "../prefabs/FlamePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
-#include "../prefabs/StairOnePrefab.h"
-#include "../prefabs/StaticMapBlockerPrefab.h"
-#include "../prefabs/ApplePrefab.h"
-#include "../prefabs/EnemyExplosionPrefab.h"
-#include "../prefabs/PlayableAladdinPrefab.h"
-#include "../prefabs/SpritePrefab.h"
-#include "../prefabs/BitmapTextPrefab.h"
-#include "../prefabs/MenuSelectPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -79,23 +72,15 @@ void MyResourceInitializer::doRun() {
 
   new HubPrefab();
   new PlayableAladdinPrefab();
-  new AladdinPrefab();
   new ThrowableApplePrefab();
   new EnemyExplosionPrefab();
-
-
-  new ThinGuardPrefab();
-  new FatGuardPrefab();
-  new AdorableGuardPrefab();
-  new ThrowableKnifePrefab();
+  new GuardOnePrefab();
+  new GuardTwoPrefab();
 
   new AgrabahMarketGroundPrefab();
-  new RopePrefab();
+  new StairOnePrefab();
   new FlamePrefab();
   new CharcoalBurnerPrefab();
-  new StairOnePrefab();
-  new StaticMapBlockerPrefab();
-  new ApplePrefab();
 
   // Dev tools
   new NodePrefab();

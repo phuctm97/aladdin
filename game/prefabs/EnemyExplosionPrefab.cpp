@@ -2,7 +2,9 @@
 
 USING_NAMESPACE_ALA;
 
-void EnemyExplosionPrefab::doInstantiate( ala::GameObject* object ) const {
+ALA_CLASS_SOURCE_1(EnemyExplosionPrefab, ala::PrefabV2)
+
+void EnemyExplosionPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "enemy_explosions.png" );
 

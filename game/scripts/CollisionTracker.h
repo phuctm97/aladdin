@@ -1,16 +1,16 @@
-#ifndef __COLLISION_INFO_TRACKER_H__
-#define __COLLISION_INFO_TRACKER_H__
+#ifndef __COLLISION_TRACKER_H__
+#define __COLLISION_TRACKER_H__
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(CollisionInfoTracker, ala::GameObjectComponent)
+ALA_CLASS_HEADER_1(CollisionTracker, ala::GameObjectComponent)
 private:
   std::unordered_set<int> _collidedObjects;
   std::unordered_set<int> _collidedObjectTags;
   std::unordered_set<int> _collidedColliderTags;
 
 public:
-  CollisionInfoTracker( ala::GameObject* gameObject, const std::string& name = "" );
+  CollisionTracker( ala::GameObject* gameObject, const std::string& name = "" );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 
@@ -25,9 +25,6 @@ public:
   bool collidedWithColliderTag( const int tag ) const;
 
   bool collided() const;
-
-protected:
-  void onRender() override;
 };
 
-#endif //!__COLLISION_INFO_TRACKER_H__
+#endif //!__COLLISION_TRACKER_H__

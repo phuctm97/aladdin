@@ -2,7 +2,7 @@
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
 #include "../scripts/PlayableAladdinController.h"
-#include "../scripts/CollisionInfoTracker.h"
+#include "../scripts/CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
@@ -50,7 +50,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto actionManager = new ActionManager( object );
 
-  const auto collision = new CollisionInfoTracker( object );
+  const auto collisionTracker = new CollisionTracker( object );
 
   const auto direction = new DirectionController( object, true, 1 );
 
@@ -679,6 +679,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  else {
                    animator->setAction( "jump" );
                  }
+
+                 collisionTracker->reset();
                }
 
                // direction
@@ -737,6 +739,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                      animator->setAction( "fall" );
                    }
                  }
+
+                 collisionTracker->reset();
                }
 
                // direction
@@ -1076,19 +1080,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "fall", "idle", [=] {
-    return collision->collidedWithObjectTag( GROUND_TAG );
+    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
   } );
 
   new StateTransition( stateManager, "jump", "idle", [=] {
-    return collision->collidedWithObjectTag( GROUND_TAG );
+    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
   } );
 
   new StateTransition( stateManager, "jump_attack", "idle", [=] {
-    return collision->collidedWithObjectTag( GROUND_TAG );
+    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
   } );
 
   new StateTransition( stateManager, "jump_throw", "idle", [=] {
-    return collision->collidedWithObjectTag( GROUND_TAG );
+    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
   } );
 
   new StateTransition( stateManager, "hit", "idle", [=] {

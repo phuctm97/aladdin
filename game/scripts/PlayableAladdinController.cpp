@@ -8,7 +8,10 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ) {}
+  : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
+    _selfTransform( NULL ),
+    _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
+    _throwableApplePrefab( NULL ) {}
 
 void PlayableAladdinController::setLives( const int lives ) {
   _lives = lives;
@@ -43,8 +46,7 @@ void PlayableAladdinController::setRecovering() {
 
   _recovering = true;
 
-  const auto actionManager = getGameObject()->getComponentT<ActionManager>();
-  actionManager->play( new Sequence( {
+  _selfActionManager->play( new Sequence( {
     new Blink( 0.05f, 10 ),
     new CallFunc( [this] { this->_recovering = false; } )
   } ) );
@@ -56,23 +58,14 @@ void PlayableAladdinController::throwApple( const char direction,
   if ( _apples <= 0 ) return;
   _apples -= 1;
 
-  const auto transform = getGameObject()->getTransform();
-  const auto collider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
+  std::stringstream argsStream;
+  argsStream << direction << ' ' << impulseX << ' ' << impulseY;
 
-  const auto apple = GameManager::get()->getPrefab( "Throwable Apple" )->instantiate(
-    transform->getPosition() + Vec2( collider->getSize().getWidth() / 2 + offsetX,
-                                     collider->getSize().getHeight() / 2 + offsetY ) );
-  const auto appleDirection = apple->getComponentT<DirectionController>();
-
-  if ( direction == 'L' ) {
-    appleDirection->setLeft();
-  }
-  else {
-    appleDirection->setRight();
-  }
-
-  const auto appleBody = apple->getComponentT<Rigidbody>();
-  appleBody->addImpulse( Vec2( impulseX, impulseY ) );
+  _throwableApplePrefab->instantiateWithArgs( argsStream.str() )
+                       ->getTransform()
+                       ->setPosition( _selfTransform->getPosition() +
+                         Vec2( _selfBodyCollider->getSize().getWidth() / 2 + offsetX,
+                               _selfBodyCollider->getSize().getHeight() / 2 + offsetY ) );
 }
 
 void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {}
@@ -101,12 +94,19 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
 
 void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {}
 
+void PlayableAladdinController::onInitialize() {
+  _selfTransform = getGameObject()->getTransform();
+  _selfActionManager = getGameObject()->getComponentT<ActionManager>();
+  _selfStateManager = getGameObject()->getComponentT<StateManager>();
+  _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
+  _throwableApplePrefab = GameManager::get()->getPrefabV2( "Throwable Apple" );
+}
+
 void PlayableAladdinController::onHit() {
   if ( _recovering ) return;
 
-  const auto stateManager = getGameObject()->getComponentT<StateManager>();
-  if ( stateManager->getCurrentStateName() == "idle" ) {
+  if ( _selfStateManager->getCurrentStateName() == "idle" ) {
     setRecovering();
-    stateManager->changeState( "hit" );
+    _selfStateManager->changeState( "hit" );
   }
 }

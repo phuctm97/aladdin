@@ -1,13 +1,14 @@
-#include "GuardOnePrefab.h"
+#include "GuardTwoPrefab.h"
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
+#include "../scripts/CharcoalBurnerCollisionTracker.h"
 #include "../scripts/GuardController.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(GuardOnePrefab, ala::PrefabV2)
+ALA_CLASS_SOURCE_1(GuardTwoPrefab, ala::PrefabV2)
 
-void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // args
   const auto initialX = nextFloat( argsStream );
   const auto leftBoundX = nextFloat( argsStream );
@@ -16,14 +17,18 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   // constants
   const auto density = 5.0f;
   const auto runVelocity = 100.0f;
+  const auto runOneLegVelocity = 60.0f;
 
-  const auto swordOffset = Vec2( -50, 5 );
-  const auto swordSize = Size( 50, 32 );
+  const auto swordOffset1 = Vec2( -30, -5 );
+  const auto swordSize1 = Size( 50, 15 );
+
+  const auto swordOffset2 = Vec2( -45, 20 );
+  const auto swordSize2 = Size( 50, 45 );
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
-  const auto animator = new Animator( object, "thin_guard_idle", "guards.anm" );
+  const auto animator = new Animator( object, "fat_guard_idle", "guards.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -32,7 +37,7 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   collider->ignoreTag( ENEMY_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto swordCollider = new Collider( object, true, swordOffset, swordSize, 0, 0, "Sword" );
+  const auto swordCollider = new Collider( object, true, Vec2(), Size( 0, 0 ), 0, 0, "Sword" );
   swordCollider->setTag( SWORD_TAG );
   swordCollider->ignoreTag( ENEMY_TAG );
   swordCollider->setActive( false );
@@ -41,10 +46,12 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   const auto direction = new DirectionController( object, false );
 
-  const auto controller = new GuardController( object );
-  controller->setInitialX( initialX );
-  controller->setLeftBoundX( leftBoundX );
-  controller->setRightBoundX( rightBoundX );
+  const auto charcoalBurnerCollison = new CharcoalBurnerCollisionTracker( object );
+
+  const auto ai = new GuardController( object );
+  ai->setInitialX( initialX );
+  ai->setLeftBoundX( leftBoundX );
+  ai->setRightBoundX( rightBoundX );
 
   // helpers
   const auto timer = new Timer( object );
@@ -64,7 +71,7 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              [=] {
                // animation effect
                {
-                 animator->setAction( "thin_guard_idle" );
+                 animator->setAction( "fat_guard_idle" );
                }
 
                // move
@@ -80,35 +87,58 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              [=]( float dt ) {
                // reset
                {
-                 if ( controller->isTooFarFromAladdin() ) {
-                   transform->setPositionX( controller->getInitialX() );
+                 if ( ai->isTooFarFromAladdin() ) {
+                   transform->setPositionX( ai->getInitialX() );
                  }
                }
 
                // direction
                {
-                 int directionToFace = controller->getDirectionToFaceToAladdin();
+                 int directionToFace = ai->getDirectionToFaceToAladdin();
                  if ( directionToFace == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToFace == 'R' && direction->isLeft() ) direction->setRight();
                }
              }, NULL );
 
-  new State( stateManager, "attack",
+  new State( stateManager, "provoke",
              [=] {
                // animation effect
                {
-                 animator->setAction( "thin_guard_attack" );
+                 animator->setAction( "fat_guard_provoke" );
+               }
+             }, NULL, NULL );
+
+  new State( stateManager, "attack",
+             [=] {
+               const auto r = rand() % 5;
+
+               // animation effect
+               {
+                 if ( r < 2 ) {
+                   animator->setAction( "fat_guard_attack_1" );
+                 }
+                 else {
+                   animator->setAction( "fat_guard_attack_2" );
+                 }
                }
 
                // sword
                {
                  timer->start( 0.15f );
+                 if ( r < 2 ) {
+                   swordCollider->setOffset( swordOffset1 );
+                   swordCollider->setSize( swordSize1 );
+                 }
+                 else {
+                   swordCollider->setOffset( swordOffset2 );
+                   swordCollider->setSize( swordSize2 );
+                 }
                }
              },
              [=]( float dt ) {
                // direction
                {
-                 int directionToFace = controller->getDirectionToFaceToAladdin();
+                 int directionToFace = ai->getDirectionToFaceToAladdin();
                  if ( directionToFace == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToFace == 'R' && direction->isLeft() ) direction->setRight();
                }
@@ -138,7 +168,7 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              [=] {
                // animation effect 
                {
-                 animator->setAction( "thin_guard_run" );
+                 animator->setAction( "fat_guard_run" );
                }
              },
              [=]( float dt ) {
@@ -149,51 +179,72 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
                // direction
                {
-                 char directionToGo = controller->getDirectionToGoToAttackAladdin();
+                 char directionToGo = ai->getDirectionToGoToAttackAladdin();
                  if ( directionToGo == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToGo == 'R' && direction->isLeft() ) direction->setRight();
                }
 
                // bound 
                {
-                 controller->keepInBound();
+                 ai->keepInBound();
                }
              }, NULL );
 
-  new State( stateManager, "hit",
+  new State( stateManager, "run_one_leg",
              [=] {
-               // animation effect
+               // animation effect 
                {
-                 animator->setAction( "thin_guard_hit" );
+                 animator->setAction( "fat_guard_run_one_leg" );
                }
-
+             },
+             [=]( float dt ) {
                // move
                {
-                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                 body->setVelocity( Vec2( runOneLegVelocity, body->getVelocity().getY() ) );
                }
-             }, NULL, NULL );
+
+               // bound 
+               {
+                 ai->keepInBound();
+               }
+             }, NULL );
+
+  new StateTransition( stateManager, "idle", "provoke", [=] {
+    const auto r = rand() % 5;
+    return r < 2 && ai->isAbleToSeeAladdin() && !ai->isAbleToAttackAladdin() &&
+    ((direction->isRight() && ai->isAbleToGoRight()) ||
+      (direction->isLeft() && ai->isAbleToGoLeft()));
+  } );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return controller->isAbleToSeeAladdin() && !controller->isAbleToAttackAladdin() &&
-    ((direction->isRight() && controller->isAbleToGoRight()) ||
-      (direction->isLeft() && controller->isAbleToGoLeft()));
+    return ai->isAbleToSeeAladdin() && !ai->isAbleToAttackAladdin() &&
+    ((direction->isRight() && ai->isAbleToGoRight()) ||
+      (direction->isLeft() && ai->isAbleToGoLeft()));
   } );
 
-  new StateTransition( stateManager, "run", "idle", [=] {
-    return controller->isAbleToAttackAladdin() ||
-      (direction->isLeft() && !controller->isAbleToGoLeft()) ||
-      (direction->isRight() && !controller->isAbleToGoRight());
-  } );
-
-  new StateTransition( stateManager, "idle", "attack", [=] {
-    return controller->isAbleToAttackAladdin();
-  } );
-
-  new StateTransition( stateManager, "attack", "idle", [=] {
+  new StateTransition( stateManager, "provoke", "run", [=] {
     return !animator->isPlaying();
   } );
 
-  new StateTransition( stateManager, "hit", "idle", [=] {
+  new StateTransition( stateManager, "run", "idle", [=] {
+    return ai->isAbleToAttackAladdin() ||
+      (direction->isLeft() && !ai->isAbleToGoLeft()) ||
+      (direction->isRight() && !ai->isAbleToGoRight());
+  } );
+
+  new StateTransition( stateManager, "run", "run_one_leg", [=] {
+    return charcoalBurnerCollison->isBeingCollided();
+  } );
+
+  new StateTransition( stateManager, "run_one_leg", "run", [=] {
+    return !charcoalBurnerCollison->isBeingCollided();
+  } );
+
+  new StateTransition( stateManager, "idle", "attack", [=] {
+    return ai->isAbleToAttackAladdin();
+  } );
+
+  new StateTransition( stateManager, "attack", "idle", [=] {
     return !animator->isPlaying();
   } );
 }

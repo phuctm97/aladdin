@@ -1,13 +1,13 @@
 #include "HubPrefab.h"
-#include "../scripts/HubController.h"
 #include "../Define.h"
+#include "../scripts/HubController.h"
 #include "../scripts/CameraFollower.h"
 
 USING_NAMESPACE_ALA;
 
-HubPrefab::HubPrefab(): Prefab( "Hub" ) {}
+ALA_CLASS_SOURCE_1(HubPrefab, ala::PrefabV2)
 
-void HubPrefab::doInstantiate( ala::GameObject* object ) const {
+void HubPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto visibleWidth = gameManager->getVisibleWidth();

@@ -3,13 +3,13 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(GuardOnePrefab, ala::Prefab)
+ALA_CLASS_HEADER_1(GuardOnePrefab, ala::PrefabV2)
 public:
   GuardOnePrefab()
-    : Prefab( "Guard 1" ) {}
+    : PrefabV2( "Guard 1" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 

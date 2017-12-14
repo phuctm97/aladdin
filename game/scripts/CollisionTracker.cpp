@@ -1,13 +1,13 @@
-#include "CollisionInfoTracker.h"
+#include "CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(CollisionInfoTracker, ala::GameObjectComponent)
+ALA_CLASS_SOURCE_1(CollisionTracker, ala::GameObjectComponent)
 
-CollisionInfoTracker::CollisionInfoTracker( ala::GameObject* gameObject, const std::string& name )
+CollisionTracker::CollisionTracker( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ) {}
 
-void CollisionInfoTracker::onCollisionEnter( const ala::CollisionInfo& collision ) {
+void CollisionTracker::onCollisionEnter( const ala::CollisionInfo& collision ) {
   const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
                                ? collision.getColliderB()
                                : collision.getColliderA();
@@ -18,7 +18,7 @@ void CollisionInfoTracker::onCollisionEnter( const ala::CollisionInfo& collision
   _collidedColliderTags.emplace( otherCollider->getTag() );
 }
 
-void CollisionInfoTracker::onTriggerEnter( const ala::CollisionInfo& collision ) {
+void CollisionTracker::onTriggerEnter( const ala::CollisionInfo& collision ) {
   const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
                                ? collision.getColliderB()
                                : collision.getColliderA();
@@ -29,28 +29,24 @@ void CollisionInfoTracker::onTriggerEnter( const ala::CollisionInfo& collision )
   _collidedColliderTags.emplace( otherCollider->getTag() );
 }
 
-void CollisionInfoTracker::reset() {
+void CollisionTracker::reset() {
   _collidedObjects.clear();
   _collidedObjectTags.clear();
   _collidedColliderTags.clear();
 }
 
-bool CollisionInfoTracker::collidedWithObject( const int id ) const {
+bool CollisionTracker::collidedWithObject( const int id ) const {
   return _collidedObjects.count( id ) > 0;
 }
 
-bool CollisionInfoTracker::collidedWithObjectTag( const int tag ) const {
+bool CollisionTracker::collidedWithObjectTag( const int tag ) const {
   return _collidedObjectTags.count( tag ) > 0;
 }
 
-bool CollisionInfoTracker::collidedWithColliderTag( const int tag ) const {
+bool CollisionTracker::collidedWithColliderTag( const int tag ) const {
   return _collidedColliderTags.count(tag) > 0;
 }
 
-bool CollisionInfoTracker::collided() const {
+bool CollisionTracker::collided() const {
   return !_collidedObjects.empty();
-}
-
-void CollisionInfoTracker::onRender() {
-  reset();
 }

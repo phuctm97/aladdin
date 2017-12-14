@@ -10,6 +10,12 @@ private:
   int _apples;
   bool _recovering;
 
+  ala::Transform* _selfTransform;
+  ala::ActionManager* _selfActionManager;
+  ala::StateManager* _selfStateManager;
+  ala::Collider* _selfBodyCollider;
+  ala::PrefabV2* _throwableApplePrefab;
+
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );
 
@@ -33,13 +39,16 @@ public:
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
 
-  void onCollisionEnter(const ala::CollisionInfo& collision) override;
+  void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 
-  void onTriggerEnter(const ala::CollisionInfo& collision) override;
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
-  void onTriggerStay(const ala::CollisionInfo& collision) override;
+  void onTriggerStay( const ala::CollisionInfo& collision ) override;
 
-  void onTriggerExit(const ala::CollisionInfo& collision) override;
+  void onTriggerExit( const ala::CollisionInfo& collision ) override;
+
+protected:
+  void onInitialize() override;
 
 private:
   void onHit();

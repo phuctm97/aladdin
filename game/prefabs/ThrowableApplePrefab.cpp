@@ -1,11 +1,16 @@
 #include "ThrowableApplePrefab.h"
-#include "../scripts/CollisionInfoTracker.h"
+#include "../scripts/CollisionTracker.h"
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
 
 USING_NAMESPACE_ALA;
 
-void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
+void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const auto dir = nextChar( argsStream );
+  const auto impulseX = nextFloat( argsStream );
+  const auto impulseY = nextFloat( argsStream );
+
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
@@ -30,8 +35,10 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   const auto actionManager = new ActionManager( object );
 
   const auto direction = new DirectionController( object );
+  if ( dir == 'L' ) direction->setLeft();
+  else if ( dir == 'R' ) direction->setRight();
 
-  const auto collision = new CollisionInfoTracker( object );
+  const auto collisionTracker = new CollisionTracker( object );
 
   // helpers
   const auto transform = object->getTransform();
@@ -43,26 +50,45 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object ) const {
   // states
   new State( stateManager, "initial",
              [=] {
-               animator->setAction( "apple" );
-               actionManager->play( new RotateBy( 360 * 15, 1 ) );
+               // animation effect
+               {
+                 animator->setAction( "apple" );
+                 actionManager->play( new RotateBy( 360 * 15, 1 ) );
+
+                 collisionTracker->reset();
+               }
+
+               // move
+               {
+                 body->addImpulse( Vec2( impulseX, impulseY ) );
+               }
              }, NULL, NULL );
 
   new State( stateManager, "explode",
              [=] {
-               animator->setAction( "apple_explode" );
-               actionManager->stopAll();
-               transform->setRotation( 0 );
+               // animation effect
+               {
+                 animator->setAction( "apple_explode" );
+                 actionManager->stopAll();
+                 transform->setRotation( 0 );
+               }
 
-               body->setVelocity( Vec2( 0, 0 ) );
-               body->setGravityScale( 0 );
+               // move
+               {
+                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setGravityScale( 0 );
+               }
              },
              [=]( float dt ) {
-               if ( !animator->isPlaying() ) {
-                 object->release();
+               // release
+               {
+                 if ( !animator->isPlaying() ) {
+                   object->release();
+                 }
                }
              }, NULL );
 
   new StateTransition( stateManager, "initial", "explode", [=] {
-    return collision->collided();
+    return collisionTracker->collided();
   } );
 }

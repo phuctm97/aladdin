@@ -3,9 +3,9 @@
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(AgrabahMarketGroundPrefab, ala::Prefab)
+ALA_CLASS_SOURCE_1(AgrabahMarketGroundPrefab, ala::PrefabV2)
 
-void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object ) const {
+void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto halfVisibleSize = Size( gameManager->getVisibleWidth() / 2, gameManager->getVisibleHeight() / 2 );

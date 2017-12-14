@@ -3,14 +3,13 @@
 
 #include <aladdin.h>
 
-class EnemyExplosionPrefab : public ala::Prefab
-{
+ALA_CLASS_HEADER_1( EnemyExplosionPrefab, ala::PrefabV2)
 public:
   EnemyExplosionPrefab()
-    : Prefab( "Enemy Explosion" ) {}
+    : PrefabV2( "Enemy Explosion" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 

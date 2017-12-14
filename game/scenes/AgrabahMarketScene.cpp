@@ -18,46 +18,51 @@ void AgrabahMarketScene::onPreInitialize() {
   new CameraController( getMainCamera() );
 
   // initial objects
-  const auto background = new GameObject( this, "Background" );
-  background->setTag( BACKGROUND_TAG );
-  const auto backgroundSpriteRenderer = new SpriteRenderer( background, "background.png" );
-  background->setLayer( "Background" );
-  background->getTransform()->setPosition(
-    Vec2( backgroundSpriteRenderer->getFrameSize().getWidth() / 2,
-          backgroundSpriteRenderer->getFrameSize().getHeight() / 2 )
-    - Vec2( gameManager->getVisibleWidth() / 2,
-            gameManager->getVisibleHeight() / 2 ) );
+  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "background.png 0", "Background" )
+             ->setTag( BACKGROUND_TAG )
+             ->setLayer( "Background" )
+             ->getTransform()
+             ->setPosition( Vec2( 2385.5f, 344 ) - Vec2( gameManager->getVisibleWidth() / 2,
+                                                         gameManager->getVisibleHeight() / 2 ) );
 
-  const auto foreground = new GameObject( this, "Foreground" );
-  foreground->setTag( FOREGROUND_TAG );
-  const auto foregroundSpriteRenderer = new SpriteRenderer( foreground, "foreground.png" );
-  foreground->setLayer( "Foreground" );
-  foreground->getTransform()->setPosition(
-    Vec2( foregroundSpriteRenderer->getFrameSize().getWidth() / 2,
-          foregroundSpriteRenderer->getFrameSize().getHeight() / 2 )
-    - Vec2( gameManager->getVisibleWidth() / 2,
-            gameManager->getVisibleHeight() / 2 ) );
+  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "foreground.png 0", "Foreground" )
+             ->setTag( FOREGROUND_TAG )
+             ->setLayer( "Foreground" )
+             ->getTransform()
+             ->setPosition( Vec2( 2385.5f, 344 ) - Vec2( gameManager->getVisibleWidth() / 2,
+                                                         gameManager->getVisibleHeight() / 2 ) );
 
-  const auto hub = gameManager->getPrefab( "Hub" )->instantiate( "Hub" );
+  gameManager->getPrefabV2( "Hub" )->instantiateWithArgs( "", "Hub" );
 
-  const auto ground = gameManager->getPrefab( "Agrabah Market Ground" )->instantiate( "Ground" );
+  gameManager->getPrefabV2( "Agrabah Market Ground" )->instantiateWithArgs( "", "Ground" );
 
-  const auto stairOne = gameManager->getPrefab( "Stair 1" )->instantiate( "Start 1" );
+  gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 360.5f, -50 ) );
 
-  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate(
-    Vec2( 360.5f, -50 ), "Charcoal Burner 1" );
+  gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 2" )
+             ->getTransform()
+             ->setPosition( Vec2( 730.5f, -50 ) );
 
-  const auto charcoalBurnerTwo = gameManager->getPrefab( "Charcoal Burner" )->instantiate(
-    Vec2( 730.5f, -50 ), "Charcoal Burner 2" );
+  gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 3" )
+             ->getTransform()
+             ->setPosition( Vec2( 906.5f, -50 ) );
 
-  const auto charcoalBurnerThree = gameManager->getPrefab( "Charcoal Burner" )->instantiate(
-    Vec2( 906.5f, -50 ), "Charcoal Burner 3" );
+  gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 4" )
+             ->getTransform()
+             ->setPosition( Vec2( 1915.5f, -79 ) );
 
-  const auto charcoalBurnerFour = gameManager->getPrefab( "Charcoal Burner" )->instantiate(
-    Vec2( 1915.5f, -79 ), "Charcoal Burner 4" );
+  gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "110", "Charcoal Burner 4" )
+             ->getTransform()
+             ->setPosition( Vec2( 2987, -82 ) );
 
-  const auto charcoalBurnerFive = gameManager->getPrefab( "Charcoal Burner" )->instantiate(
-    Vec2( 2987, -82 ), "Charcoal Burner 5" );
+  gameManager->getPrefabV2( "Stair 1" )->instantiateWithArgs( "", "Start 1" );
+
+  gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
+             ->getTransform()->setPositionY( -25 );
+
+//  gameManager->getPrefabV2( "Guard 2" )->instantiateWithArgs( "550 200 670", "Guard 2" )
+//             ->getTransform()->setPositionY( -25 );
 
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

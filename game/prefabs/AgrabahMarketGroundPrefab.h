@@ -3,13 +3,13 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1( AgrabahMarketGroundPrefab, ala::Prefab)
+ALA_CLASS_HEADER_1( AgrabahMarketGroundPrefab, ala::PrefabV2)
 public:
   AgrabahMarketGroundPrefab()
-    : Prefab( "Agrabah Market Ground" ) {}
+    : PrefabV2( "Agrabah Market Ground" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__AGRABAH_MARKET_GROUND_PREFAB_H__

@@ -3,12 +3,12 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(StairOnePrefab, ala::Prefab)
+ALA_CLASS_HEADER_1(StairOnePrefab, ala::PrefabV2)
 public:
-  StairOnePrefab() : Prefab( "Stair 1" ) {}
+  StairOnePrefab() : PrefabV2( "Stair 1" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__STAIR_ONE_PREFAB_H__

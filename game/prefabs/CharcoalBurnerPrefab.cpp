@@ -1,10 +1,13 @@
 #include "CharcoalBurnerPrefab.h"
-#include "../scripts/CharcoalBurnerController.h"
 #include "../Define.h"
+#include "../scripts/CharcoalBurnerController.h"
 
 USING_NAMESPACE_ALA;
 
-void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object ) const {
+void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const auto width = nextFloat( argsStream );
+
   // constants
   const auto gameManager = GameManager::get();
   const auto flamePrefab = gameManager->getPrefab( "Flame" );
@@ -12,7 +15,7 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object ) const {
   // components
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC, 0 );
 
-  const auto collider = new Collider( object, true, Vec2(), Size( 90, 4 ) );
+  const auto collider = new Collider( object, true, Vec2(), Size( width, 4 ) );
   collider->setTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( GROUND_TAG );
