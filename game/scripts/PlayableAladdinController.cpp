@@ -88,7 +88,7 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
   const auto otherObject = otherCollider->getGameObject();
 
   if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
-    onHit();
+    onHitCharcoalBurner();
   }
 }
 
@@ -102,11 +102,15 @@ void PlayableAladdinController::onInitialize() {
   _throwableApplePrefab = GameManager::get()->getPrefabV2( "Throwable Apple" );
 }
 
+void PlayableAladdinController::onHitCharcoalBurner() {
+  if ( _selfStateManager->getCurrentStateName() == "idle" ) {
+    onHit();
+  }
+}
+
 void PlayableAladdinController::onHit() {
   if ( _recovering ) return;
 
-  if ( _selfStateManager->getCurrentStateName() == "idle" ) {
-    setRecovering();
-    _selfStateManager->changeState( "hit" );
-  }
+  setRecovering();
+  _selfStateManager->changeState( "hit" );
 }

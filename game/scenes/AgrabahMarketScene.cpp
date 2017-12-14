@@ -61,8 +61,8 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
              ->getTransform()->setPositionY( -25 );
 
-//  gameManager->getPrefabV2( "Guard 2" )->instantiateWithArgs( "550 200 670", "Guard 2" )
-//             ->getTransform()->setPositionY( -25 );
+  gameManager->getPrefabV2( "Guard 2" )->instantiateWithArgs( "818 595 1010", "Guard 2" )
+             ->getTransform()->setPositionY( -25 );
 
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

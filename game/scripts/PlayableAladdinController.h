@@ -51,6 +51,8 @@ protected:
   void onInitialize() override;
 
 private:
+  void onHitCharcoalBurner();
+
   void onHit();
 };
 

@@ -909,6 +909,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     {
       animator->setAction( "hit" );
     }
+
+    // move
+    {
+      body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+    }
   }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "attack", [=] {

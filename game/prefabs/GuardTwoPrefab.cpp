@@ -16,7 +16,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   // constants
   const auto density = 5.0f;
-  const auto runVelocity = 100.0f;
+  const auto runVelocity = 140.0f;
   const auto runOneLegVelocity = 60.0f;
 
   const auto swordOffset1 = Vec2( -30, -5 );
@@ -209,6 +209,20 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                }
              }, NULL );
 
+  new State( stateManager, "hit",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "fat_guard_hit" );
+               }
+
+               // move
+               {
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+               }
+             }, NULL, NULL );
+
+
   new StateTransition( stateManager, "idle", "provoke", [=] {
     const auto r = rand() % 5;
     return r < 2 && ai->isAbleToSeeAladdin() && !ai->isAbleToAttackAladdin() &&
@@ -247,4 +261,13 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   new StateTransition( stateManager, "attack", "idle", [=] {
     return !animator->isPlaying();
   } );
+
+  new StateTransition( stateManager, "hit", "run_one_leg", [=] {
+    return stateManager->getPreviousStateName() == "run_one_leg" && !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "hit", "idle", [=] {
+    return !animator->isPlaying();
+  } );
+
 }
