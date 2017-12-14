@@ -139,7 +139,7 @@ private:
 
   void processMessage();
 
-  void processGame();
+  void processGame( const bool skipRender = false, const bool skipUpdate = false);
 
   static LRESULT wndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam );
 };

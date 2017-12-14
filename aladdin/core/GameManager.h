@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "GameResource.h"
 #include "Prefab.h"
+#include "PrefabV2.h"
 #include "Logger.h"
 #include "Messenger.h"
 #include "Color.h"
@@ -140,6 +141,8 @@ public:
   void removePrefab( Prefab* prefab );
 
   Prefab* getPrefab( const std::string& name );
+
+  PrefabV2* getPrefabV2(const std::string& name);
 
   std::vector<Prefab*> getAllPrefabs();
 
