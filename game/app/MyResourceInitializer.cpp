@@ -21,6 +21,9 @@
 #include "../prefabs/ApplePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
+#include "../prefabs/SpritePrefab.h"
+#include "../prefabs/BitmapTextPrefab.h"
+#include "../prefabs/MenuSelectPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -69,9 +72,12 @@ void MyResourceInitializer::doRun() {
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
 
   // Prefabs
+  new SpritePrefab();
+  new BitmapTextPrefab();
+
+  new MenuSelectPrefab();
+
   new HubPrefab();
-
-
   new PlayableAladdinPrefab();
   new AladdinPrefab();
   new ThrowableApplePrefab();
