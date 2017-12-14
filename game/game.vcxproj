@@ -160,9 +160,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
     <ClCompile Include="prefabs\ApplePrefab.cpp" />
     <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardOnePrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinPrefab.cpp" />
-    <ClCompile Include="prefabs\BigTextPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\FatGuardPrefab.cpp" />
     <ClCompile Include="prefabs\FlamePrefab.cpp" />
@@ -170,7 +170,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
-    <ClCompile Include="prefabs\NormalTextPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
     <ClCompile Include="prefabs\StairOnePrefab.cpp" />
     <ClCompile Include="prefabs\ThinGuardPrefab.cpp" />
@@ -209,9 +208,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
     <ClInclude Include="prefabs\ApplePrefab.h" />
     <ClInclude Include="prefabs\EnemyExplosionPrefab.h" />
+    <ClInclude Include="prefabs\GuardOnePrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\AladdinPrefab.h" />
-    <ClInclude Include="prefabs\BigTextPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\FatGuardPrefab.h" />
     <ClInclude Include="prefabs\FlamePrefab.h" />
@@ -219,7 +218,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
-    <ClInclude Include="prefabs\NormalTextPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
     <ClInclude Include="prefabs\StairOnePrefab.h" />
     <ClInclude Include="prefabs\ThinGuardPrefab.h" />

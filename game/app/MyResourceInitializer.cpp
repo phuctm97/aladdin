@@ -3,8 +3,7 @@
  */
 
 #include "MyResourceInitializer.h"
-#include "../prefabs/NormalTextPrefab.h"
-#include "../prefabs/BigTextPrefab.h"
+#include "../prefabs/NodePrefab.h"
 #include "../prefabs/HubPrefab.h"
 #include "../prefabs/AladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
@@ -20,7 +19,6 @@
 #include "../prefabs/StairOnePrefab.h"
 #include "../prefabs/StaticMapBlockerPrefab.h"
 #include "../prefabs/ApplePrefab.h"
-#include "../prefabs/NodePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
 
@@ -71,8 +69,6 @@ void MyResourceInitializer::doRun() {
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
 
   // Prefabs
-  new NormalTextPrefab();
-  new BigTextPrefab();
   new HubPrefab();
 
 

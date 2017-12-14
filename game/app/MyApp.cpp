@@ -17,7 +17,7 @@ void MyApp::onPreInitialize() {
   setTitle( "Aladdin" );
 
   setFps( 60 );
-  Logger::setLogLevel( ALA_LOG_INFO );
+  Logger::setLogLevel( ALA_LOG_DEBUG );
 
   // resource initializers
   registerResourceInitializer( new MyResourceInitializer() );
@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AgrabahMarketScene() );
+  startWithScene( new MenuScene() );
 }
