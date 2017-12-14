@@ -30,6 +30,14 @@
 #define RADIAN_TO_DEGREE(radian) ((radian) * (180.f/M_PI))
 #endif
 
+#ifndef LTRIM
+#define LTRIM(s) s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) { return !std::isspace(ch, std::locale()); }))
+#endif
+
+#ifndef RTRIM
+#define RTRIM(s) s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) { return !std::isspace(ch, std::locale()); }).base(), s.end())
+#endif
+
 #undef min
 #undef max
 
