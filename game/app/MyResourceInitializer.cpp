@@ -45,15 +45,19 @@ void MyResourceInitializer::doRun() {
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
+  new Sprite( "title.png", "textures/miscellaneous/title.png" );
+  new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
+  new Sprite( "menu_select.png", "textures/miscellaneous/menu_select.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
   new Sprite( "numbers.png", "textures/miscellaneous/numbers.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
   new Sprite( "civilian-enemies.png", "textures/enemies/civilian-enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
 
-	// Fonts
-	new Font("aladdin.ttf", "aladdin.ttf", "fonts");
-	new Font("arcade.ttf", "arcade.ttf", "fonts");
+  // Fonts
+  new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
+  new Font( "arcade.ttf", "arcade.ttf", "fonts" );
+  new BitmapFont( "one.fnt", "fonts/one.fnt" );
 
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
@@ -64,7 +68,7 @@ void MyResourceInitializer::doRun() {
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "civilian-enemies.anm", "animations/enemies/civilian-enemies.anm" );
-  	new Animation("apple.anm", "animations/miscellaneous/apple.anm");
+  new Animation("apple.anm", "animations/miscellaneous/apple.anm");
 
 	// Prefabs
 	new NormalTextPrefab();

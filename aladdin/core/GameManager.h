@@ -46,6 +46,7 @@ public:
 private:
   float _visibleWidth;
   float _visibleHeight;
+  std::function<void()> _exitFunc;
 
 public:
   float getVisibleWidth() const;
@@ -73,15 +74,15 @@ public:
 
   std::vector<GameObject*> getAllObjects() const;
 
-  GameObject* getObjectById(const long id) const;
+  GameObject* getObjectById( const long id ) const;
 
   std::vector<GameObject*> getAllObjectsByName( const std::string& name ) const;
 
   GameObject* getObjectByName( const std::string& name ) const;
 
-  std::vector<GameObject*> getAllObjectsByTag(const int tag) const;
+  std::vector<GameObject*> getAllObjectsByTag( const int tag ) const;
 
-  GameObject* getObjectByTag(const int tag) const;
+  GameObject* getObjectByTag( const int tag ) const;
 
   // ===============================================
   // Scene Management
@@ -95,12 +96,17 @@ public:
 
   GameObject* getMainCamera() const;
 
+  void exit();
+
   void replaceScene( Scene* scene );
 
   void replaceSceneInNextFrame( Scene* scene );
 
+  bool isExitInNextFrame() const;
+
 private:
   void updateRunningScene();
+
   void doReplaceScene( Scene* scene );
 
   // ===============================================

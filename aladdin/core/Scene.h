@@ -140,6 +140,8 @@ public:
 
   GameObject* getMainCamera() const;
 
+  bool isInLock() const;
+
   /**
    * \brief Attach game object to scene, this will not change game object's parent, you should not call this method directly
    * \param gameObject Game object to attach

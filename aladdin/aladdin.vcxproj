@@ -172,6 +172,8 @@
     <ClInclude Include="2d\Animation.h" />
     <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
+    <ClInclude Include="2d\BitmapFont.h" />
+    <ClInclude Include="2d\BitmapText.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\CameraPrefab.h" />
     <ClInclude Include="2d\Graphics.h" />
@@ -253,6 +255,8 @@
     <ClCompile Include="2d\Animation.cpp" />
     <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
+    <ClCompile Include="2d\BitmapFont.cpp" />
+    <ClCompile Include="2d\BitmapText.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\CameraPrefab.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />

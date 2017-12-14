@@ -27,6 +27,7 @@ GameManager::GameManager() :
   _logger( "ala::GameManager" ),
   _visibleWidth( 0 ),
   _visibleHeight( 0 ),
+  _exitFunc( NULL ),
   _idCounter( 0 ),
   _runningScene( NULL ),
   _sceneToReplaceInNextFrame( NULL ),
@@ -142,11 +143,11 @@ GameObject* GameManager::getObjectByName( const std::string& name ) const {
 std::vector<GameObject*> GameManager::getAllObjectsByTag( const int tag ) const {
   std::vector<GameObject*> ret;
 
-  for (auto& pair : _attachedObjects) {
+  for ( auto& pair : _attachedObjects ) {
     auto object = pair.second;
-    if (object == NULL) continue;
-    if (object->getTag() == tag) {
-      ret.emplace_back(object);
+    if ( object == NULL ) continue;
+    if ( object->getTag() == tag ) {
+      ret.emplace_back( object );
     }
   }
 
@@ -154,10 +155,10 @@ std::vector<GameObject*> GameManager::getAllObjectsByTag( const int tag ) const 
 }
 
 GameObject* GameManager::getObjectByTag( const int tag ) const {
-  for (auto& pair : _attachedObjects) {
+  for ( auto& pair : _attachedObjects ) {
     const auto object = pair.second;
-    if (object == NULL) continue;
-    if (object->getTag() == tag) {
+    if ( object == NULL ) continue;
+    if ( object->getTag() == tag ) {
       return object;
     }
   }
@@ -176,11 +177,23 @@ GameObject* GameManager::getMainCamera() const {
   return getObjectByName( ALA_MAIN_CAMERA );
 }
 
+void GameManager::exit() {
+  if ( _exitFunc != NULL ) {
+    _exitFunc();
+  }
+}
+
 void GameManager::replaceScene( Scene* scene ) {
   if ( isReleasing() || isReleased() ) return;
   if ( scene == NULL ) return;
   if ( scene == _runningScene ) return;
-  doReplaceScene( scene );
+
+  if ( _runningScene != NULL && _runningScene->isInLock() ) {
+    replaceSceneInNextFrame( scene );
+  }
+  else {
+    doReplaceScene( scene );
+  }
 }
 
 void GameManager::replaceSceneInNextFrame( Scene* scene ) {

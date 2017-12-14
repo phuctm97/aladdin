@@ -38,6 +38,8 @@
 #include "2d/Animation.h"
 #include "2d/Animator.h"
 #include "2d/LineRenderer.h"
+#include "2d/BitmapFont.h"
+#include "2d/BitmapText.h"
 #include "input/InputInclude.h"
 #include "input/Input.h"
 #include "audio/AudioInclude.h"
