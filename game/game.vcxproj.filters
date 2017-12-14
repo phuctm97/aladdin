@@ -185,6 +185,18 @@
     <ClCompile Include="scripts\PlatformController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\FatGuardController.cpp" />
+    <ClCompile Include="scripts\ThinGuardController.cpp" />
+    <ClCompile Include="scripts\ThrowableAppleController.cpp" />
+    <ClCompile Include="scripts\StairGroupTwoController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StairGroupThreePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StairGroupThreeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -308,6 +320,18 @@
     </ClInclude>
     <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\PlatformController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\ThinGuardController.h" />
+    <ClInclude Include="scripts\ThrowableAppleController.h" />
+    <ClInclude Include="scripts\StairGroupTwoController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairGroupThreePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StairGroupThreeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>

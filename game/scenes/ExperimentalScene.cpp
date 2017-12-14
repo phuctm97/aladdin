@@ -90,137 +90,16 @@ void ExperimentalScene::onPreInitialize() {
 
 	const auto aladdin = gameManager->getPrefab("Aladdin")->instantiate("Aladdin");
 	//aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
-	aladdin->getTransform()->setPosition(Vec2(1335, 500));
+	aladdin->getTransform()->setPosition(Vec2(2200, 500));
 	
 
 #pragma region Stair
-#pragma region Group One
 
-	const auto stair_GOne_NoOne = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoOne->getTransform()->setPosition(Vec2(1015.5f, -46.0f));
-	stair_GOne_NoOne->getComponentT<Collider>()->setSize(Size(45.0f, 8.0f));
+	//const auto stairGroupOne = gameManager->getPrefab("StairGroupOne")->instantiate();
 
-	const auto stair_GOne_NoTwo = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoTwo->getTransform()->setPosition(Vec2(1055.5f, -36.0f));
-	stair_GOne_NoTwo->getComponentT<Collider>()->setSize(Size(42.0f, 7.0f));
+	const auto stairGroupTwo = gameManager->getPrefab("StairGroupTwo")->instantiate("StairGroupTwo");
 
-	const auto stair_GOne_NoThree = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoThree->getTransform()->setPosition(Vec2(1096.0f, -28.5f));
-	stair_GOne_NoThree->getComponentT<Collider>()->setSize(Size(42.0f, 6.0f));
-
-	const auto stair_GOne_NoFour = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoFour->getTransform()->setPosition(Vec2(1136.0f, -21.5f));
-	stair_GOne_NoFour->getComponentT<Collider>()->setSize(Size(45.0f, 7.0f));
-
-	const auto stair_GOne_NoFive = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoFive->getTransform()->setPosition(Vec2(1176.0f, -12.5f));
-	stair_GOne_NoFive->getComponentT<Collider>()->setSize(Size(43.0f, 6.0f));
-
-	const auto stair_GOne_NoSix = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoSix->getTransform()->setPosition(Vec2(1215.0f, -5.5f));
-	stair_GOne_NoSix->getComponentT<Collider>()->setSize(Size(43.0f, 7.0f));
-
-	const auto stair_GOne_NoSeven = gameManager->getPrefab("StairGroupOne")->instantiate();
-	stair_GOne_NoSeven->getTransform()->setPosition(Vec2(1286.0f, 2.5f));
-	stair_GOne_NoSeven->getComponentT<Collider>()->setSize(Size(106.0f, 7.0f));
-
-	/*stairSeven->setTag(ALADDIN_TAG);
-	new NodeController(stairSeven);*/
-#pragma endregion
-
-#pragma region Group Two
-
-	/*const auto stair_GTwo_NoOne = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoOne->getTransform()->setPosition(Vec2(2449.0f, -91.0f));
-	stair_GTwo_NoOne->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTwo = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTwo->getTransform()->setPosition(Vec2(2441.0f, -85.0f));
-	stair_GTwo_NoTwo->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoThree = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoThree->getTransform()->setPosition(Vec2(2415.5f, -81.0f));
-	stair_GTwo_NoThree->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoFour = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoFour->getTransform()->setPosition(Vec2(2413.0f, -77.0f));
-	stair_GTwo_NoFour->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoFive = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoFive->getTransform()->setPosition(Vec2(2392.0f, -73.0f));
-	stair_GTwo_NoFive->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoSix = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoSix->getTransform()->setPosition(Vec2(2388.0f, -69.0f));
-	stair_GTwo_NoSix->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoSeven = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoSeven->getTransform()->setPosition(Vec2(2359.0f, -66.0f));
-	stair_GTwo_NoSeven->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoEight = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoEight->getTransform()->setPosition(Vec2(2353.5f, -61.0f));
-	stair_GTwo_NoEight->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoNine = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoNine->getTransform()->setPosition(Vec2(2327.5f, -58.0f));
-	stair_GTwo_NoNine->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTen->getTransform()->setPosition(Vec2(2324.5f, -53.0f));
-	stair_GTwo_NoTen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoEleven = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoEleven->getTransform()->setPosition(Vec2(2296.0f, -50.5f));
-	stair_GTwo_NoEleven->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTwelve = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTwelve->getTransform()->setPosition(Vec2(2290.5f, -45.5f));
-	stair_GTwo_NoTwelve->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoThirteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoThirteen->getTransform()->setPosition(Vec2(2263.5f, -42.0f));
-	stair_GTwo_NoThirteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoFourteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoFourteen->getTransform()->setPosition(Vec2(2259.0f, -38.0f));
-	stair_GTwo_NoFourteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoFifteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoFifteen->getTransform()->setPosition(Vec2(2215.0f, -34.0f));
-	stair_GTwo_NoFifteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoSixteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoSixteen->getTransform()->setPosition(Vec2(2210.5f, -29.0f));
-	stair_GTwo_NoSixteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoSeventeen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoSeventeen->getTransform()->setPosition(Vec2(2183.5f, -26.0f));
-	stair_GTwo_NoSeventeen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoEighteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoEighteen->getTransform()->setPosition(Vec2(2179.5f, -21.5f));
-	stair_GTwo_NoEighteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoNineteen = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoNineteen->getTransform()->setPosition(Vec2(2152.0f, -18.5f));
-	stair_GTwo_NoNineteen->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTwenty = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTwenty->getTransform()->setPosition(Vec2(2147.5f, -13.0f));
-	stair_GTwo_NoTwenty->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTwentyOne = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTwentyOne->getTransform()->setPosition(Vec2(2119.0f, -10.0f));
-	stair_GTwo_NoTwentyOne->getComponentT<Collider>()->setSize(Size(26.0f, 3.0f));
-
-	const auto stair_GTwo_NoTwentyTwo = gameManager->getPrefab("StairGroupTwo")->instantiate();
-	stair_GTwo_NoTwentyTwo->getTransform()->setPosition(Vec2(2108.5f, -5.0f));
-	stair_GTwo_NoTwentyTwo->getComponentT<Collider>()->setSize(Size(45.0f, 3.0f));*/
-
-	/*stair_GTwo_NoOne->setTag(ALADDIN_TAG);
-	new NodeController(stair_GTwo_NoOne);*/
-#pragma endregion
+	const auto stairGroupThree = gameManager->getPrefab("StairGroupThree")->instantiate("StairGroupThree");
 
 #pragma endregion
 
@@ -288,19 +167,37 @@ void ExperimentalScene::onPreInitialize() {
 	static_cast<Collider*>(platform3->getComponent("Below"))->setOffset(Vec2(0, -2.75f));
 
 	
+	
+
+#pragma endregion
+
+#pragma region Dev support
 	/*const auto runningBlock = gameManager->getPrefab("HorizontalBar")->instantiate();
-	runningBlock->getTransform()->setPosition(Vec2(300 ,0));
+	runningBlock->getTransform()->setPosition(Vec2(2500 ,0));
 	runningBlock->getComponentT<Collider>()->setSize(Size(5, 5));
 	runningBlock->getComponentT<Collider>()->setTrigger(false);
 
 	runningBlock->setTag(ALADDIN_TAG);
 	new NodeController(runningBlock);*/
-
 #pragma endregion
-
 
 
 
 }
 
 void ExperimentalScene::onPreRelease() {}
+
+void ExperimentalScene::onPostInitialize()
+{
+	const auto stairGroupTwoCollider = GameManager::get()->getObjectByName("StairGroupTwo")->getAllComponents("Static");
+	for (auto collider: stairGroupTwoCollider)
+	{
+		collider->setActive(false);
+	}
+
+	const auto stairGroupThreeCollider = GameManager::get()->getObjectByName("StairGroupThree")->getAllComponentTs<Collider>();
+	for (auto collider: stairGroupThreeCollider)
+	{
+		collider->setActive(false);
+	}
+}

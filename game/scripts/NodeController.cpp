@@ -93,7 +93,7 @@ void NodeController::onUpdate(const float delta) {
 
 	if (input->getKeyDown(ALA_KEY_F4)) {
 		if (collider != NULL) {
-			_logger.info("Apple position: %.1f, %.1f", transform->getPositionX(), transform->getPositionY());
+			_logger.info("Position: Vec2(%.1ff, %.1ff), Size(%.1ff, %.1ff)", transform->getPositionX(), transform->getPositionY(), collider->getSize().getWidth(), collider->getSize().getHeight());
 		}
 	}
 

@@ -19,6 +19,7 @@
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/StairGroupOnePrefab.h"
 #include "../prefabs/StairGroupTwoPrefab.h"
+#include "../prefabs/StairGroupThreePrefab.h"
 #include "../prefabs/StaticMapBlockerPrefab.h"
 #include "../prefabs/ApplePrefab.h"
 #include "../prefabs/NodePrefab.h"
@@ -92,6 +93,7 @@ void MyResourceInitializer::doRun() {
 	new CharcoalBurnerPrefab();
 	new StairGroupOnePrefab();
 	new StairGroupTwoPrefab();
+	new StairGroupThreePrefab();
 	new StaticMapBlockerPrefab();
 	new ApplePrefab();
 	new HorizontalBarPrefab();
