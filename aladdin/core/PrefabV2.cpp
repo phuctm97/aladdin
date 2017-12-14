@@ -5,13 +5,13 @@ NAMESPACE_ALA
 {
 ALA_CLASS_SOURCE_1(PrefabV2, ala::Prefab)
 
-GameObject* PrefabV2::instantiate( const std::string& serializedArgs, const std::string& name,
-                                   const std::string& quadIndex ) const {
-  return instantiate( GameManager::get()->getRunningScene(), serializedArgs, name, quadIndex );
+GameObject* PrefabV2::instantiateWithArgs( const std::string& serializedArgs, const std::string& name,
+                                           const std::string& quadIndex ) const {
+  return instantiateWithArgs( GameManager::get()->getRunningScene(), serializedArgs, name, quadIndex );
 }
 
-GameObject* PrefabV2::instantiate( Scene* scene, const std::string& serializedArgs, const std::string& name,
-                                   const std::string& quadIndex ) const {
+GameObject* PrefabV2::instantiateWithArgs( Scene* scene, const std::string& serializedArgs, const std::string& name,
+                                           const std::string& quadIndex ) const {
   if ( isReleasing() || isReleased() ) return NULL;
 
   const auto object = new GameObject( scene, name, quadIndex );
@@ -19,6 +19,19 @@ GameObject* PrefabV2::instantiate( Scene* scene, const std::string& serializedAr
   doInstantiate( object, argsStream );
 
   return object;
+}
+
+GameObject* PrefabV2::instantiateWithArgs( GameObject* parentObject, const std::string& serializedArgs,
+                                           const std::string& name ) const {
+
+  if ( isReleasing() || isReleased() ) return NULL;
+
+  const auto object = new GameObject( parentObject, name );
+  std::istringstream argsStream( serializedArgs );
+  doInstantiate( object, argsStream );
+
+  return object;
+
 }
 
 void PrefabV2::doInstantiate( GameObject* object ) const {

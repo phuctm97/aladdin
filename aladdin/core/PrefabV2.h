@@ -10,12 +10,14 @@ public:
   PrefabV2( const std::string& name )
     : Prefab( name ) {}
 
-  GameObject* instantiate( const std::string& serializedArgs,
-                           const std::string& name = "", const std::string& quadIndex = "" ) const;
+  GameObject* instantiateWithArgs( const std::string& serializedArgs,
+                                   const std::string& name = "", const std::string& quadIndex = "" ) const;
 
-  GameObject* instantiate( Scene* scene, const std::string& serializedArgs,
-                           const std::string& name = "", const std::string& quadIndex = "" ) const;
+  GameObject* instantiateWithArgs( Scene* scene, const std::string& serializedArgs,
+                                   const std::string& name = "", const std::string& quadIndex = "" ) const;
 
+  GameObject* instantiateWithArgs( GameObject* parentObject, const std::string& serializedArgs,
+                                   const std::string& name = "" ) const;
 
 protected:
   void doInstantiate( GameObject* object ) const override;
