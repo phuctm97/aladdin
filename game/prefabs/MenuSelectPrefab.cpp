@@ -15,10 +15,11 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
 
-  new SpriteRenderer( object, "menu_select.png" );
+  new SpriteRenderer( object, "items.png" );
+  new Animator( object, "menu_select", "items.anm" );
   const auto menuSelectActionManager = new ActionManager( object );
-  const auto menuSelectTransform = object->getTransform();
   const auto menuSelectStateManager = new StateManager( object, "menu_1" );
+  const auto menuSelectTransform = object->getTransform();
 
   new State( menuSelectStateManager, "menu_1",
              [=] {

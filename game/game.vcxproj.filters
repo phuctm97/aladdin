@@ -132,9 +132,6 @@
     <ClCompile Include="prefabs\HubPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\ItemExplosionPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\MenuSelectPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -267,6 +264,9 @@
     <ClCompile Include="scripts\ThrowVaseController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\SmallFireworkPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -334,9 +334,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\HubPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ItemExplosionPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\MenuSelectPrefab.h">
@@ -471,6 +468,9 @@
     <ClInclude Include="scripts\ThrowVaseController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\SmallFireworkPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -500,13 +500,7 @@
     <Image Include="textures\miscellaneous\font_two.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
-    <Image Include="textures\miscellaneous\item_explosion.png">
-      <Filter>texures\miscellaneous</Filter>
-    </Image>
     <Image Include="textures\miscellaneous\items.png">
-      <Filter>texures\miscellaneous</Filter>
-    </Image>
-    <Image Include="textures\miscellaneous\menu_select.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
     <Image Include="textures\miscellaneous\title.png">
@@ -553,9 +547,6 @@
       <Filter>animations\miscellaneous</Filter>
     </None>
     <None Include="animations\miscellaneous\enemy_explosions.anm">
-      <Filter>animations\miscellaneous</Filter>
-    </None>
-    <None Include="animations\miscellaneous\item_explosion.anm">
       <Filter>animations\miscellaneous</Filter>
     </None>
     <None Include="animations\miscellaneous\items.anm">

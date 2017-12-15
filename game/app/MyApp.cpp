@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AgrabahMarketScene() );
+  startWithScene( new MenuScene() );
 }

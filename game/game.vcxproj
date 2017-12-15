@@ -177,7 +177,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\GuardTwoPrefab.cpp" />
     <ClCompile Include="prefabs\HandEnemyPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
-    <ClCompile Include="prefabs\ItemExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\SmallFireworkPrefab.cpp" />
     <ClCompile Include="prefabs\MenuSelectPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\PeddlerPrefab.cpp" />
@@ -252,7 +252,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\GuardTwoPrefab.h" />
     <ClInclude Include="prefabs\HandEnemyPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
-    <ClInclude Include="prefabs\ItemExplosionPrefab.h" />
+    <ClInclude Include="prefabs\SmallFireworkPrefab.h" />
     <ClInclude Include="prefabs\MenuSelectPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\PeddlerPrefab.h" />
@@ -313,8 +313,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\miscellaneous\font_one.png" />
     <Image Include="textures\miscellaneous\font_two.png" />
     <Image Include="textures\miscellaneous\items.png" />
-    <Image Include="textures\miscellaneous\item_explosion.png" />
-    <Image Include="textures\miscellaneous\menu_select.png" />
     <Image Include="textures\miscellaneous\title.png" />
     <Image Include="textures\nonplayable_characters\abu.png" />
     <Image Include="textures\nonplayable_characters\camel.png" />
@@ -331,7 +329,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <None Include="animations\miscellaneous\cutscenes.anm" />
     <None Include="animations\miscellaneous\enemy_explosions.anm" />
     <None Include="animations\miscellaneous\items.anm" />
-    <None Include="animations\miscellaneous\item_explosion.anm" />
     <None Include="animations\nonplayable_characters\abu.anm" />
     <None Include="animations\nonplayable_characters\camel.anm" />
     <None Include="animations\nonplayable_characters\peddler.anm" />

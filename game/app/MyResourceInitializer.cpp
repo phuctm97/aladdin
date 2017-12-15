@@ -12,6 +12,7 @@
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/EatableApplePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
+#include "../prefabs/SmallFireworkPrefab.h"
 #include "../prefabs/FlamePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
@@ -37,13 +38,11 @@ void MyResourceInitializer::doRun() {
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
-  new Sprite( "item_explosion.png", "textures/miscellaneous/item_explosion.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "title.png", "textures/miscellaneous/title.png" );
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
   new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
-  new Sprite( "menu_select.png", "textures/miscellaneous/menu_select.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
   new Sprite( "civilian_enemies.png", "textures/enemies/civilian_enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
@@ -62,7 +61,6 @@ void MyResourceInitializer::doRun() {
   // Animations
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "enemy_explosions.anm", "animations/miscellaneous/enemy_explosions.anm" );
-  new Animation( "item_explosion.anm", "animations/miscellaneous/item_explosion.anm" );
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
   new Animation( "items.anm", "animations/miscellaneous/items.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
@@ -86,6 +84,7 @@ void MyResourceInitializer::doRun() {
   new ThrowableApplePrefab();
   new EatableApplePrefab();
   new EnemyExplosionPrefab();
+  new SmallFireworkPrefab();
   new FlamePrefab();
   new CharcoalBurnerPrefab();
   new GuardOnePrefab();

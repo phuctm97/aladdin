@@ -7,6 +7,10 @@ USING_NAMESPACE_ALA;
 ALA_CLASS_SOURCE_1(EatableApplePrefab, ala::PrefabV2)
 
 void EatableApplePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
+
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
@@ -23,6 +27,9 @@ void EatableApplePrefab::doInstantiate( ala::GameObject* object, std::istringstr
 
   const auto collision = new CollisionTracker( object );
 
+  // helpers
+  const auto transform = object->getTransform();
+
   // collider renderers
   new ColliderRenderer( collider );
 
@@ -33,6 +40,7 @@ void EatableApplePrefab::doInstantiate( ala::GameObject* object, std::istringstr
   new State( stateManager, "static", NULL,
              [=]( float dt ) {
                if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
+                 smallFireworkPrefab->instantiate( transform->getPosition() );
                  object->release();
                }
              }, NULL );
