@@ -35,11 +35,11 @@ void HideGuardController::onUpdate(const float delta) {
 	else {
 		_couldAttackAladdin = false;
 	}
-	if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() < (
+	if (ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) < (
 		visibleWidth * 0.3)) {
 		_couldSeeAladdin = true;
 	}
-	else if (getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX() > (
+	else if (ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX()) > (
 		visibleWidth / 2)) {
 		_couldSeeAladdin = false;
 	}

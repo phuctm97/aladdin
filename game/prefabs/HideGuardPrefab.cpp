@@ -84,12 +84,6 @@ void HideGuardPrefab::doInstantiate(ala::GameObject* object) const
 	new StateTransition(stateManager, "hide_guard_stand_right", "hide_guard_run_right", [=] {
 		return controller->coundSeeAladdin() && !controller->isOnRightOfAladdin();
 	});
-	/*new StateTransition(stateManager, "hide_guard_run_left", "hide_guard_run_right", [=] {
-		return controller->coundSeeAladdin() && !controller->isOnRightOfAladdin();
-	});
-	new StateTransition(stateManager, "hide_guard_run_right", "hide_guard_run_left", [=] {
-		return controller->coundSeeAladdin() && controller->isOnRightOfAladdin();
-	});*/
 	new StateTransition(stateManager, "hide_guard_run_left", "hide_guard_attack_left", [=] {
 		return controller->couldAttackAladdin() && controller->isOnRightOfAladdin();
 	});

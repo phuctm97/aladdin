@@ -79,9 +79,9 @@ void ExperimentalScene::onPreInitialize() {
   nake_enemy->setLayer("Enemy");
   nake_enemy->getTransform()->setPosition(Vec2(500, -40));
 
-  /*const auto hide_enemy = gameManager->getPrefab("Hide Guard")->instantiate("Hide Guard");
+  const auto hide_enemy = gameManager->getPrefab("Hide Guard")->instantiate("Hide Guard");
   hide_enemy->setLayer("Enemy");
-  hide_enemy->getTransform()->setPosition(Vec2(200, -40));*/
+  hide_enemy->getTransform()->setPosition(Vec2(200, -40));
 }
 
 void ExperimentalScene::onPreRelease() {}
