@@ -12,7 +12,6 @@ private:
   bool _hit;
   bool _jumpOnCamel;
   bool _collidingWall;
-  bool _collidingRope;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -49,8 +48,6 @@ public:
 
   bool isCollidingWall() const;
 
-  bool isCollidingRope() const;
-
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
@@ -74,6 +71,8 @@ private:
   void onHit( const int damage = 1 );
 
   void onJumpOnCamel();
+
+  void startClimb();
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__

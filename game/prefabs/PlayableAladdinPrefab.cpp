@@ -948,8 +948,59 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                // animation effect
                {
                  animator->setAction( "climb" );
+                 animator->pause();
                }
-             }, NULL, NULL );
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+               }
+             },
+             [=]( float dt ) {
+               auto dir = 'C';
+               if ( input->getKey( ALA_KEY_UP_ARROW ) ) {
+                 dir = 'U';
+               }
+               else if ( input->getKey( ALA_KEY_DOWN_ARROW ) ) {
+                 dir = 'D';
+               }
+
+               // animation effect
+               {
+                 if ( dir == 'C' ) {
+                   animator->pause();
+                 }
+                 else {
+                   if ( dir == 'U' ) animator->setReverse( false );
+                   else if ( dir == 'D' ) animator->setReverse( true );
+                   animator->play();
+                 }
+               }
+
+               // move
+               {
+                 if ( dir == 'U' ) {
+                   body->setVelocity( Vec2( 0, 50 ) );
+                 }
+                 else if ( dir == 'D' ) {
+                   body->setVelocity( Vec2( 0, -50 ) );
+                 }
+                 else {
+                   body->setVelocity( Vec2( 0, 0 ) );
+                 }
+               }
+             },
+             [=] {
+               // animation effect 
+               {
+                 animator->setReverse(false);
+               }
+
+               // move
+               {
+                 body->setGravityScale( 1 );
+               }
+             } );
 
   new State( stateManager, "hit", [=] {
     // animation effect 

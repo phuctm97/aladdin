@@ -11,7 +11,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
   : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
     _hit( false ),
     _jumpOnCamel( false ),
-    _collidingWall( false ), _collidingRope( false ),
+    _collidingWall( false ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
@@ -78,10 +78,6 @@ bool PlayableAladdinController::isCollidingWall() const {
   return _collidingWall;
 }
 
-bool PlayableAladdinController::isCollidingRope() const {
-  return _collidingRope;
-}
-
 void PlayableAladdinController::throwApple( const char direction,
                                             const float offsetX, const float offsetY,
                                             const float impulseX, const float impulseY ) {
@@ -133,9 +129,6 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
   else if ( otherObject->getTag() == VASE_TAG ) {
     onHit();
   }
-  else if ( otherObject->getTag() == ROPE_TAG ) {
-    _collidingRope = true;
-  }
   else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
     if ( collision.getNormal() == Vec2( 0, 1 ) ) {
       onJumpOnCamel();
@@ -152,6 +145,11 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
   if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
     onHitCharcoalBurner();
   }
+  else if ( otherObject->getTag() == ROPE_TAG ) {
+    if ( _selfStateManager->getCurrentStateName() != "climb" ) {
+      startClimb();
+    }
+  }
 }
 
 void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {
@@ -160,9 +158,6 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
-  if ( otherObject->getTag() == ROPE_TAG ) {
-    _collidingRope = false;
-  }
 }
 
 void PlayableAladdinController::onInitialize() {
@@ -192,6 +187,12 @@ void PlayableAladdinController::onJumpOnCamel() {
   _jumpOnCamel = true;
 
   // TODO: refactor to state transition
-
   _selfStateManager->changeState( "jump" );
+}
+
+void PlayableAladdinController::startClimb() {
+
+
+  // TODO: refactor to state transition
+  _selfStateManager->changeState( "climb" );
 }
