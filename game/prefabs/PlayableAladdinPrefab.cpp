@@ -75,6 +75,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   object->setLayer( "Character" );
   controller->setLives( 3 );
   controller->setApples( 10 );
+  controller->setHealth( 9 );
 
   // states
   //    new State( stateManager, "null", NULL, NULL, NULL );

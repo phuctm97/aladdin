@@ -10,7 +10,8 @@ private:
   ala::BitmapText* _livesLabel;
   ala::BitmapText* _applesLabel;
   ala::BitmapText* _scoresLabel;
-  PlayableAladdinController *_aladdinController;
+  ala::Animator* _healthAnimator;
+  PlayableAladdinController* _aladdinController;
 
 public:
   HubController( ala::GameObject* gameObject, const std::string& name = "" );
@@ -20,6 +21,8 @@ public:
   void setApples( const int apples ) const;
 
   void setScores( const int scores ) const;
+
+  void setHealth( const int health ) const;
 
 protected:
   void onInitialize() override;

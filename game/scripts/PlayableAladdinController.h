@@ -53,7 +53,7 @@ protected:
 private:
   void onHitCharcoalBurner();
 
-  void onHit();
+  void onHit( const int damage = 1 );
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__

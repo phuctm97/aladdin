@@ -51,6 +51,12 @@ void HubPrefab::doInstantiate( ala::GameObject* object, std::istringstream& args
   scoresLableText->setCharacterSpacing( 2 );
   scoresLableText->setText( "9999" );
 
+  const auto health = new GameObject( object, "Hub Health" );
+  const auto healthSpriteRenderer = new SpriteRenderer( health, "items.png" );
+  const auto healthAnimator = new Animator( health, "health_bar_9", "items.anm" );
+  const auto healthTransform = health->getTransform();
+  healthTransform->setPosition( Vec2( -86, 95 ) );
+
   const auto cameraFollower = new CameraFollower( object );
 
   const auto controller = new HubController( object );

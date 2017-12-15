@@ -108,9 +108,18 @@ void PlayableAladdinController::onHitCharcoalBurner() {
   }
 }
 
-void PlayableAladdinController::onHit() {
+void PlayableAladdinController::onHit( const int damage ) {
   if ( _recovering ) return;
 
+  _health -= damage;
+
   setRecovering();
-  _selfStateManager->changeState( "hit" );
+
+  if ( _selfStateManager->getCurrentStateName() == "idle" ) {
+    const auto hitState = _selfStateManager->getState( "hit" );
+
+    if ( hitState != NULL ) {
+      _selfStateManager->changeState( hitState );
+    }
+  }
 }
