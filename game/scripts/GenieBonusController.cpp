@@ -4,9 +4,13 @@
 USING_NAMESPACE_ALA;
 
 GenieBonusController::GenieBonusController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name), _aladdinCollision(false) {}
+	: GameObjectComponent(gameObject, name), _aladdinCollision(false), _orient(true){}
 
 bool GenieBonusController::isCollisionAladdin() const { return _aladdinCollision; }
+
+bool GenieBonusController::getOrient() const { return _orient;  }
+
+void GenieBonusController::setOrient(bool orient) { _orient = orient; }
 
 void GenieBonusController::onUpdate(const float delta) {
 

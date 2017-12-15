@@ -32,7 +32,7 @@ void AbuBonusPrefab::doInstantiate(ala::GameObject* object) const {
 
 	// configurations
 	object->setTag(ENEMY_TAG);
-	object->setLayer("Background");
+	object->setLayer("Charactor");
 
 	// states
 	new State(stateManager, "normal",

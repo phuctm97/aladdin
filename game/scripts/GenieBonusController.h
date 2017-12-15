@@ -7,12 +7,15 @@ class GenieBonusController : public ala::GameObjectComponent
 {
 private:
 	bool _aladdinCollision;
+	bool _orient;
 protected:
 	void onUpdate(const float delta) override;
 
 public:
 	GenieBonusController(ala::GameObject* gameObject, const std::string& name = "");
 	bool isCollisionAladdin() const;
+	bool getOrient() const;
+	void setOrient(bool orient);
 	void explosionEffect() const ;
 };
 

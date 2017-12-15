@@ -67,7 +67,7 @@
   <Animation name="idle_genie" imagePath="items.png" interval="0.1" isLoop="false">
     <sprite x="335" y="45" w="37" h="49" oX="335" oY="45" oW="-247" oH="37" />
   </Animation>
-  <Animation name="wink" imagePath="items.png" interval="0.1" isLoop="false">
+  <Animation name="wink" imagePath="items.png" interval="0.15" isLoop="false">
     <sprite x="389" y="45" w="42" h="51" oX="389" oY="45" oW="-404" oH="149" />
     <sprite x="443" y="49" w="43" h="43" oX="443" oY="49" oW="-404" oH="149" />
     <sprite x="497" y="48" w="44" h="43" oX="497" oY="48" oW="-404" oH="149" />

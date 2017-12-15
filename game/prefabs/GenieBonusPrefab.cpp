@@ -33,7 +33,7 @@ void GenieBonusPrefab::doInstantiate(ala::GameObject* object) const {
 
 	// configurations
 	object->setTag(ENEMY_TAG);
-	object->setLayer("Background");
+	object->setLayer("Character");
 
 	// states
 	new State(stateManager, "normal",
@@ -50,6 +50,18 @@ void GenieBonusPrefab::doInstantiate(ala::GameObject* object) const {
 				timer->start(1.0f * (200 + rand() % 900) / 1000);
 			}
 		}
+		/*auto positionY = transform->getPositionY();
+		if (controller->getOrient()) {
+			transform->setPosition(transform->getPositionX(), positionY + 0.5);
+			if(transform->getPositionY() >= -8)
+			controller->setOrient(false);
+		}
+		else {
+			transform->setPosition(transform->getPositionX(), positionY - 0.5);
+			if (transform->getPositionY() <= -15)
+				controller->setOrient(true);
+		}*/
+		
 		
 	}, NULL);
 
