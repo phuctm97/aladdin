@@ -13,7 +13,6 @@ void StairGroupTwoController::onTriggerEnter(const ala::CollisionInfo & collisio
 	getCollisionObject(collision);
 	if (_other->getTag() != ALADDIN_TAG) return;
 
-	GameManager::get()->getObjectByName("StairGroupThree")->getComponent("Triggerer")->setActive(true);
 	if (collision.getNormal() == Vec2(1, 0))
 	{
 		_isStairActive = !_isStairActive;
@@ -21,6 +20,7 @@ void StairGroupTwoController::onTriggerEnter(const ala::CollisionInfo & collisio
 		for each (Collider* stair in obj)
 		{
 			stair->setActive(_isStairActive);
+			GameManager::get()->getObjectByName("StairGroupThree")->getComponent("Triggerer")->setActive(_isStairActive);
 		}
 	}
 	if (collision.getNormal() == Vec2(-1, 0))
