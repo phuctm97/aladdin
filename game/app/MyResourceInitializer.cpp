@@ -15,6 +15,8 @@
 #include "../prefabs/SmallFireworkPrefab.h"
 #include "../prefabs/FlamePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
+#include "../prefabs/FloatingSalivaPrefab.h"
+#include "../prefabs/CamelPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
 #include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
@@ -27,11 +29,14 @@ void MyResourceInitializer::doRun() {
 
   // Layers
   gameManager->addLayer( "Background" );
-  gameManager->addLayer( "Sub Background" );
-  gameManager->addLayer( "Character" );
-  gameManager->addLayer( "Sub Character" );
+  gameManager->addLayer( "Second Background" );
+  gameManager->addLayer( "Mass Character" );
+  gameManager->addLayer( "Supporting Character" );
+  gameManager->addLayer( "Main Character" );
   gameManager->addLayer( "Foreground" );
+  gameManager->addLayer( "Second Foreground" );
   gameManager->addLayer( "UI" );
+  gameManager->addLayer( "Debug" );
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
@@ -87,6 +92,8 @@ void MyResourceInitializer::doRun() {
   new SmallFireworkPrefab();
   new FlamePrefab();
   new CharcoalBurnerPrefab();
+  new FloatingSalivaPrefab();
+  new CamelPrefab();
   new GuardOnePrefab();
   new GuardTwoPrefab();
 

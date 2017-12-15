@@ -14,7 +14,9 @@ enum
   ROPE_TAG,
   HUB_TAG,
   APPLE_TAG,
-  ANIMAL_TAG
+  ANIMAL_TAG,
+  CAMEL_TAG,
+  SAVILA_TAG
 };
 
 #endif //!__GAME_DEFINE_H__

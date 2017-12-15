@@ -150,9 +150,6 @@
     <ClCompile Include="prefabs\RopePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\SalivaPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\SpendThesePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -243,9 +240,6 @@
     <ClCompile Include="scripts\RestartPointController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\SalivaController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\SpendTheseController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -265,6 +259,9 @@
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\SmallFireworkPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -352,9 +349,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\RopePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\SalivaPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SpendThesePrefab.h">
@@ -447,9 +441,6 @@
     <ClInclude Include="scripts\RestartPointController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\SalivaController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\SpendTheseController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -469,6 +460,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SmallFireworkPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FloatingSalivaPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

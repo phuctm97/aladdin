@@ -72,7 +72,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // configurations
   object->setTag( ALADDIN_TAG );
-  object->setLayer( "Character" );
+  object->setLayer( "Main Character" );
   controller->setLives( 3 );
   controller->setApples( 10 );
   controller->setHealth( 9 );
@@ -680,8 +680,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  else {
                    animator->setAction( "jump" );
                  }
-
-                 collisionTracker->reset();
                }
 
                // direction
@@ -696,7 +694,23 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
                // move
                {
-                 body->addImpulse( Vec2( 0, 3000000.0f ) );
+                 if ( controller->isJumpingOnCamel() ) {
+                   body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+                   body->addImpulse( Vec2( 0, 3000000.0f ) );
+                 }
+                 else {
+                   body->addImpulse( Vec2( 0, 3000000.0f ) );
+                 }
+               }
+
+               // ground collsion
+               {
+                 collisionTracker->reset();
+               }
+
+               // camel collision
+               {
+                 controller->resetJumpingOnCamel();
                }
              },
              [=]( float dt ) {

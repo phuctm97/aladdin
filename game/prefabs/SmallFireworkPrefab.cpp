@@ -13,7 +13,7 @@ void SmallFireworkPrefab::doInstantiate( ala::GameObject* object, std::istringst
   const auto stateManager = new StateManager( object, "static" );
 
   // configurations
-  object->setLayer( "UI" );
+  object->setLayer( "Foreground" );
 
   // states
   new State( stateManager, "static",

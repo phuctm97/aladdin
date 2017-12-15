@@ -1,63 +1,93 @@
 #include "CamelPrefab.h"
 #include "../scripts/CamelController.h"
 #include "../Define.h"
+#include "../scripts/DirectionController.h"
 
 USING_NAMESPACE_ALA;
 
-void CamelPrefab::doInstantiate(ala::GameObject* object) const {
-	// constants
-	const auto gameManager = GameManager::get();
+ALA_CLASS_SOURCE_1(CamelPrefab, ala::PrefabV2)
 
-	const auto density = 0.5f;
+void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const auto dir = nextChar( argsStream );
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "camel.png");
-	const auto animator = new Animator(object, "idle", "camel.anm");
+  // constants
+  const auto gameManager = GameManager::get();
 
-	// //For animationEditor
-	//const auto animationEditor = new AnimationEditor( object, "idle" );
-	//return;
-	// //For animationEditor
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "camel.png" );
 
-	const auto timer = new Timer(object);
-	//const auto body = new Rigidbody(object, PhysicsMaterial(density), ALA_BODY_TYPE_DYNAMIC, 1.5f);
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
+  const auto animator = new Animator( object, "idle", "camel.anm" );
 
-	//const auto colliderRenderer = new ColliderRenderer(collider);
-	const auto stateManager = new StateManager(object, "camel_idle");
-	const auto controller = new CamelController(object);
-	const auto transform = object->getTransform();
+  const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
-	// configurations
-	object->setTag(ENEMY_TAG);
-	object->setLayer("Background");
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 24, 15 ) );
+  collider->setTag( CAMEL_TAG );
+  collider->ignoreTag( CAMEL_TAG );
+  collider->ignoreTag( ENEMY_TAG );
+  collider->ignoreTag( SWORD_TAG );
+  collider->ignoreTag( APPLE_TAG );
 
-	// states
-	new State(stateManager, "camel_idle",
-		[=] {
-		animator->setAction("idle");
-	}, NULL, NULL);
+  const auto stateManager = new StateManager( object, "idle" );
 
-	new State(stateManager, "camel_puff",
-		[=] {
-		animator->setAction("puff");
-		timer->start(0.3);
-	}, [=](float dt) {
-		if (timer->isDone()) {
-			controller->puffSaliva(90.0f, -10.0f, 195.0f, 1000.0f);
-			timer->start(10.f);
-		}
-	}, NULL);
+  const auto direction = new DirectionController( object, true, 1 );
+  if ( dir == 'L' ) direction->setLeft();
+  else if ( dir == 'R' ) direction->setRight();
 
-	new StateTransition(stateManager, "camel_idle", "camel_puff", [=] {
-		return controller->isAladdinOnBack();
-	});
-	new StateTransition(stateManager, "camel_puff", "camel_idle", [=] {
-		return !animator->isPlaying();
-	});
+  const auto controller = new CamelController( object );
 
+  // helpers
+  const auto timer = new Timer( object );
 
+  const auto transform = object->getTransform();
+
+  // collider renderers
+  new ColliderRenderer( collider );
+
+  // configurations
+  object->setTag( CAMEL_TAG );
+  object->setLayer( "Mass Character" );
+
+  // states
+  new State( stateManager, "idle",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "idle" );
+               }
+
+               // aladdin collision
+               {
+                 controller->resetAladdinJumpingOn();
+               }
+             }, NULL, NULL );
+
+  new State( stateManager, "puff",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "puff" );
+               }
+
+               // puff
+               {
+                 timer->start( 0.3f );
+               }
+             }, [=]( float dt ) {
+               // puff
+               {
+                 if ( timer->isDone() ) {
+                   controller->puffSaliva( 90.0f, -10.0f );
+                   timer->start( 10.f );
+                 }
+               }
+             }, NULL );
+
+  new StateTransition( stateManager, "idle", "puff", [=] {
+    return controller->isAladdinJumpingOn();
+  } );
+
+  new StateTransition( stateManager, "puff", "idle", [=] {
+    return !animator->isPlaying();
+  } );
 }
-

@@ -5,7 +5,7 @@ USING_NAMESPACE_ALA;
 
 ALA_CLASS_SOURCE_1(AgrabahMarketGroundPrefab, ala::PrefabV2)
 
-void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream) const {
+void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto halfVisibleSize = Size( gameManager->getVisibleWidth() / 2, gameManager->getVisibleHeight() / 2 );
@@ -72,7 +72,7 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
 
   // configurations
   object->setTag( GROUND_TAG );
-  object->setLayer( "Sub Background" );
+  object->setLayer( "Debug" );
 
   transform->setPosition( Vec2( -halfVisibleSize.getWidth(),
                                 -halfVisibleSize.getHeight() ) );

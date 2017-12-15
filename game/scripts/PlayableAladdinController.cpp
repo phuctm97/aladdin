@@ -9,6 +9,7 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
+    _jumpingOnCamel( false ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
@@ -52,6 +53,14 @@ void PlayableAladdinController::setRecovering() {
   } ) );
 }
 
+void PlayableAladdinController::resetJumpingOnCamel() {
+  _jumpingOnCamel = false;
+}
+
+bool PlayableAladdinController::isJumpingOnCamel() const {
+  return _jumpingOnCamel;
+}
+
 void PlayableAladdinController::throwApple( const char direction,
                                             const float offsetX, const float offsetY,
                                             const float impulseX, const float impulseY ) {
@@ -78,6 +87,11 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
 
   if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
     onHit();
+  }
+  else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
+    if ( collision.getNormal() == Vec2( 0, 1 ) ) {
+      onJumpingOnCamel();
+    }
   }
 }
 
@@ -122,4 +136,9 @@ void PlayableAladdinController::onHit( const int damage ) {
       _selfStateManager->changeState( hitState );
     }
   }
+}
+
+void PlayableAladdinController::onJumpingOnCamel() {
+  _jumpingOnCamel = true;
+  _selfStateManager->changeState( "jump" );
 }

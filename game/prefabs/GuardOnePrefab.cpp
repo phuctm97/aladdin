@@ -56,7 +56,7 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   new ColliderRenderer( swordCollider );
 
   // configurations
-  object->setLayer( "Character" );
+  object->setLayer( "Supporting Character" );
   object->setTag( ENEMY_TAG );
 
   // states

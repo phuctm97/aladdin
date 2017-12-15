@@ -35,7 +35,7 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   // configurations
   object->setTag( CHARCOAL_BURNER_TAG );
-  object->setLayer( "Sub Background" );
+  object->setLayer( "Debug" );
 
   // states
   new State( stateManager, "nothing", NULL, NULL, NULL );

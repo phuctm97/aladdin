@@ -2,19 +2,32 @@
 #define __CAMEL_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "DirectionController.h"
 
-class CamelController : public ala::GameObjectComponent
-{
+ALA_CLASS_HEADER_1(CamelController, ala::GameObjectComponent)
 private:
-	bool _aladdinOnBack;
+  bool _aladdinJumpingOn;
+
+  ala::Collider* _selfCollider;
+  ala::Transform* _selfTransform;
+  DirectionController* _selfDirection;
+
+  ala::StateManager* _aladdinStateManager;
+  ala::PrefabV2* _floatingSavilaPrefab;
+
 protected:
-	void onUpdate(const float delta) override;
+  void onInitialize() override;
 
 public:
-	CamelController(ala::GameObject* gameObject, const std::string& name = "");
-	bool isAladdinOnBack() const;
-	void puffSaliva(float directX, float directY, float impulseX, float impulseY) const;
+  CamelController( ala::GameObject* gameObject, const std::string& name = "" );
+
+  void resetAladdinJumpingOn();
+
+  bool isAladdinJumpingOn() const;
+
+  void puffSaliva( float directX, float directY ) const;
+
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 };
 
 #endif //!__CAMEL_CONTROLLER_H__
-

@@ -14,32 +14,32 @@ void MenuScene::onPreInitialize() {
              ->setLayer( "Background" );
 
   gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "title.png 0" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPositionY( 59 );
 
   gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
                "font_one.png one.fnt AGRABAH MARKET\n T L 0.75", "Menu 1" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPosition( -51, 0 );
 
   gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
                "font_one.png one.fnt JAFAR QUARTERS\n T L 0.75", "Menu 2" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPosition( -51, -18 );
 
   gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
                "font_one.png one.fnt EXIT\n T L 0.75", "Menu 3" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPosition( -51, -36 );
 
   gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
                "font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES\n T C 0.75" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPosition( 0, -75 );
 
   gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
                "font_one.png one.fnt (C) 1993 THE WALT DISNEY COMPANY\n T C 0.75" )
-             ->setLayer( "Sub Background" )
+             ->setLayer( "Second Background" )
              ->getTransform()->setPosition( 0, -92 );
 
   gameManager->getPrefabV2( "Menu Select" )->instantiateWithArgs( "0 -18 -36" )

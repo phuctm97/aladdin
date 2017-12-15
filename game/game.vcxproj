@@ -184,7 +184,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
     <ClCompile Include="prefabs\RestartPointPrefab.cpp" />
     <ClCompile Include="prefabs\RopePrefab.cpp" />
-    <ClCompile Include="prefabs\SalivaPrefab.cpp" />
+    <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
     <ClCompile Include="prefabs\SpringPrefab.cpp" />
     <ClCompile Include="prefabs\SpritePrefab.cpp" />
@@ -215,7 +215,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\PeddlerController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\RestartPointController.cpp" />
-    <ClCompile Include="scripts\SalivaController.cpp" />
     <ClCompile Include="scripts\SpendTheseController.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
@@ -259,7 +258,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
     <ClInclude Include="prefabs\RestartPointPrefab.h" />
     <ClInclude Include="prefabs\RopePrefab.h" />
-    <ClInclude Include="prefabs\SalivaPrefab.h" />
+    <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
     <ClInclude Include="prefabs\SpringPrefab.h" />
     <ClInclude Include="prefabs\SpritePrefab.h" />
@@ -290,7 +289,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\PeddlerController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\RestartPointController.h" />
-    <ClInclude Include="scripts\SalivaController.h" />
     <ClInclude Include="scripts\SpendTheseController.h" />
     <ClInclude Include="scripts\SpringController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />

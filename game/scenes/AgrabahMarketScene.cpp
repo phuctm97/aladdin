@@ -27,7 +27,7 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "foreground.png 0", "Foreground" )
              ->setTag( FOREGROUND_TAG )
-             ->setLayer( "Foreground" )
+             ->setLayer( "Second Foreground" )
              ->getTransform()
              ->setPosition( Vec2( 2385.5f, 344 ) - Vec2( gameManager->getVisibleWidth() / 2,
                                                          gameManager->getVisibleHeight() / 2 ) );
@@ -38,6 +38,8 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Agrabah Market Stair 1" )->instantiateWithArgs( "", "Start 1" );
 
+  /* Charcoal Burners
+   
   gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
              ->getTransform()
              ->setPosition( Vec2( 360.5f, -50 ) );
@@ -58,15 +60,28 @@ void AgrabahMarketScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( Vec2( 2987, -82 ) );
 
+             */
+  gameManager->getPrefabV2( "Camel" )->instantiateWithArgs( "R" )
+             ->getTransform()
+             ->setPosition( Vec2( 1404.5, -57.5 ) );
+
+  /* Eatable Apples
+
   gameManager->getPrefabV2( "Eatable Apple" )->instantiateWithArgs( "", "Apple 1" )
              ->getTransform()
              ->setPosition( Vec2( 0, 10 ) );
 
+             */
+
+  /* Guards
+   
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
              ->getTransform()->setPositionY( -25 );
 
   gameManager->getPrefabV2( "Guard 2" )->instantiateWithArgs( "818 595 1010", "Guard 2" )
              ->getTransform()->setPositionY( -25 );
+
+             */
 
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

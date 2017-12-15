@@ -1,15 +1,14 @@
 #ifndef __CAMEL_PREFAB_H__
 #define __CAMEL_PREFAB_H__
 
-#include<aladdin.h>
+#include <aladdin.h>
 
-class CamelPrefab : ala::Prefab
-{
+ALA_CLASS_HEADER_1(CamelPrefab, ala::PrefabV2)
 public:
-	CamelPrefab() : Prefab("camel") {}
+  CamelPrefab() : PrefabV2( "Camel" ) {}
+
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif // !__CAMEL_PREFAB_H__
-

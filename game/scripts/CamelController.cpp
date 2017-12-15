@@ -3,38 +3,55 @@
 
 USING_NAMESPACE_ALA;
 
-CamelController::CamelController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name), _aladdinOnBack(false) {}
+ALA_CLASS_SOURCE_1(CamelController, ala::GameObjectComponent)
 
-bool CamelController::isAladdinOnBack() const { return _aladdinOnBack; }
+CamelController::CamelController( ala::GameObject* gameObject, const std::string& name )
+  : GameObjectComponent( gameObject, name ), _aladdinJumpingOn( false ), _selfCollider( NULL ),
+    _selfTransform( NULL ), _selfDirection( NULL ),
+    _aladdinStateManager( NULL ), _floatingSavilaPrefab( NULL ) {}
 
-void CamelController::onUpdate(const float delta) {
-	const auto aladdin = GameManager::get()->getObjectByName("Aladdin");
-	if (aladdin == NULL) return;
-
-	const auto visibleWidth = GameManager::get()->getVisibleWidth();
-	const auto distanceX = ABS(getGameObject()->getTransform()->getPosition().getX() - aladdin->getTransform()->getPosition().getX());
-	const auto distanceY = ABS(getGameObject()->getTransform()->getPosition().getY() - aladdin->getTransform()->getPosition().getY());
-	auto bodyAladdin = aladdin->getComponentT<Rigidbody>();
-	const auto velocityY = bodyAladdin->getVelocity().getY();
-	if (distanceX < 20 && distanceY < 20 && distanceY >10 && velocityY < 0) {
-		_aladdinOnBack = true;
-	}
-	else {
-		_aladdinOnBack = false;
-	}
+void CamelController::resetAladdinJumpingOn() {
+  _aladdinJumpingOn = false;
 }
 
-void CamelController::puffSaliva(const float directX, const float directY,
-	const float impulseX, const float impulseY) const {
-	const auto transform = getGameObject()->getTransform();
-	const auto collider = getGameObject()->getComponentT<Collider>();
+bool CamelController::isAladdinJumpingOn() const { return _aladdinJumpingOn; }
 
-	const auto saliva = GameManager::get()->getPrefab("saliva")->instantiate(
-		transform->getPosition() + Vec2(collider->getSize().getWidth() / 2 + directX,
-			collider->getSize().getHeight() / 2 + directY));
-	const auto vaseStateManager = saliva->getComponentT<StateManager>();
+void CamelController::onInitialize() {
+  const auto gameManager = GameManager::get();
 
-	/*const auto vaseBody = vase->getComponentT<Rigidbody>();
-	vaseBody->addImpulse(Vec2(impulseX, impulseY));*/
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin != NULL ) {
+    _aladdinStateManager = aladdin->getComponentT<StateManager>();
+  }
+
+  _selfTransform = getGameObject()->getTransform();
+
+  _selfCollider = getGameObject()->getComponentT<Collider>();
+
+  _selfDirection = getGameObject()->getComponentT<DirectionController>();
+
+  _floatingSavilaPrefab = gameManager->getPrefabV2( "Floating Saliva" );
+}
+
+void CamelController::puffSaliva( const float directX, const float directY ) const {
+  const auto coef = _selfDirection->isLeft() ? -1 : 1;
+
+  _floatingSavilaPrefab->instantiateWithArgs( _selfDirection->isLeft() ? "L" : "R" )
+                       ->getTransform()
+                       ->setPosition( _selfTransform->getPosition() +
+                         Vec2( coef * (_selfCollider->getSize().getWidth() / 2 + directX),
+                               _selfCollider->getSize().getHeight() / 2 + directY ) );
+}
+
+void CamelController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ALADDIN_TAG && otherCollider->getTag() == ALADDIN_TAG ) {
+    if ( collision.getNormal() == Vec2( 0, 1 ) ) {
+      _aladdinJumpingOn = true;
+    }
+  }
 }

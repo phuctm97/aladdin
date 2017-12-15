@@ -35,6 +35,7 @@ void EatableApplePrefab::doInstantiate( ala::GameObject* object, std::istringstr
 
   // configurations
   object->setTag( APPLE_TAG );
+  object->setLayer( "Foreground" );
 
   // states
   new State( stateManager, "static", NULL,

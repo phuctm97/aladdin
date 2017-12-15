@@ -27,5 +27,5 @@ void AgrabahMarketStairOnePrefab::doInstantiate( ala::GameObject* object, std::i
   }
 
   object->setTag( GROUND_TAG );
-  object->setLayer( "Sub Background" );
+  object->setLayer( "Debug" );
 }

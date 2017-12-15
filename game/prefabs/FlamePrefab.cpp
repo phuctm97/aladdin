@@ -21,5 +21,5 @@ void FlamePrefab::doInstantiate( ala::GameObject* object ) const {
              NULL );
 
   // configurations
-  object->setLayer( "Sub Background" );
+  object->setLayer( "Second Background" );
 }

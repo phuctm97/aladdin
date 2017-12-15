@@ -9,6 +9,7 @@ private:
   int _lives;
   int _apples;
   bool _recovering;
+  bool _jumpingOnCamel;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -35,6 +36,10 @@ public:
 
   void setRecovering();
 
+  void resetJumpingOnCamel();
+
+  bool isJumpingOnCamel() const;
+
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
@@ -54,6 +59,8 @@ private:
   void onHitCharcoalBurner();
 
   void onHit( const int damage = 1 );
+
+  void onJumpingOnCamel();
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
