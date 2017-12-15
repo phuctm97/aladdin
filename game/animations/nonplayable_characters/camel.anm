@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Animations>
   <Animation name="idle" imagePath="camel.png" interval="0" isLoop="false">
     <sprite x="15" y="11" w="62" h="43" offsetX="0" offsetY="-5" />
@@ -11,5 +12,15 @@
     <sprite x="751" y="4" w="134" h="54" offsetX="20.5" offsetY="0.5" />
     <sprite x="907" y="11" w="109" h="45" offsetX="15" offsetY="-4" />
     <sprite x="304" y="1" w="94" h="55" offsetX="3.5" offsetY="0.5" />
+  </Animation>
+  <Animation name="savila" imagePath="camel.png" interval="0.1" isLoop="true">
+    <sprite x="470" y="67" w="11" h="8" oX="470" oY="67" oW="-491" oH="111" />
+    <sprite x="486" y="67" w="7" h="7" oX="486" oY="67" oW="-491" oH="111" />
+    <sprite x="500" y="66" w="7" h="9" oX="500" oY="66" oW="-491" oH="111" />
+    <sprite x="513" y="68" w="9" h="6" oX="513" oY="68" oW="-491" oH="111" />
+    <sprite x="527" y="67" w="9" h="8" oX="527" oY="67" oW="-491" oH="111" />
+    <sprite x="541" y="66" w="9" h="9" oX="541" oY="66" oW="-491" oH="111" />
+    <sprite x="555" y="66" w="9" h="9" oX="555" oY="66" oW="-491" oH="111" />
+    <sprite x="569" y="66" w="9" h="9" oX="569" oY="66" oW="-491" oH="111" />
   </Animation>
 </Animations>

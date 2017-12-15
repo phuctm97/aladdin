@@ -17,9 +17,9 @@ void FloatingSalivaPrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto floatingVelocity = 150.0f;
 
   // components
-  const auto spriteRenderer = new SpriteRenderer( object, "saliva.png" );
+  const auto spriteRenderer = new SpriteRenderer( object, "camel.png" );
 
-  const auto animator = new Animator( object, "fly_straight", "saliva.anm" );
+  const auto animator = new Animator( object, "savila", "camel.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_DYNAMIC, 0.0f );
 
