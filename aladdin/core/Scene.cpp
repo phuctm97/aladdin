@@ -309,6 +309,10 @@ GameObject* Scene::getMainCamera() const {
   return NULL;
 }
 
+bool Scene::isInLock() const {
+  return _gameObjectInLock;
+}
+
 void Scene::addGameObject( GameObject* gameObject, const std::string& quadIndex ) {
   // check lock
   if ( _gameObjectInLock ) {

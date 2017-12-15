@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animations>
-  <Animation name="fire" imagePath="jafar.png" interval="0.1" isLoop="true">
+  <Animation name="fire" imagePath="jafar.png" interval="0.09" isLoop="false">
     <sprite x="14" y="193" w="23" h="46" offsetX="0" offsetY="0.5" />
     <sprite x="46" y="187" w="21" h="52" offsetX="-2" offsetY="3.5" />
     <sprite x="78" y="193" w="23" h="46" offsetX="-1" offsetY="0.5" />

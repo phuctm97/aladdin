@@ -29,7 +29,6 @@
     <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="430" oH="19" />
     <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="430" oH="19" />
   </Animation>
-
   <Animation name="extra_health" imagePath="items.png" interval="0.1" isLoop="true">
     <sprite x="343" y="171" w="18" h="23" oX="343" oY="171" oW="-292" oH="162" />
     <sprite x="366" y="173" w="16" h="22" oX="366" oY="173" oW="-292" oH="162" />
@@ -63,7 +62,6 @@
     <sprite x="570" y="207" w="21" h="25" offsetX="-1" offsetY="4" />
     <sprite x="596" y="213" w="18" h="19" offsetX="-0.5" offsetY="1" />
   </Animation>
-
   <Animation name="idle_genie" imagePath="items.png" interval="0.1" isLoop="false">
     <sprite x="335" y="45" w="37" h="49" oX="335" oY="45" oW="-247" oH="37" />
   </Animation>
@@ -72,8 +70,40 @@
     <sprite x="443" y="49" w="43" h="43" oX="443" oY="49" oW="-404" oH="149" />
     <sprite x="497" y="48" w="44" h="43" oX="497" oY="48" oW="-404" oH="149" />
   </Animation>
-
   <Animation name="idle_lamp" imagePath="items.png" width="664" height="471">
     <sprite x="369" y="15" w="31" h="15" oX="369" oY="15" oW="-331" oH="31" />
+  </Animation>
+  <Animation name="aladdin_head" imagePath="items.png" width="664" height="471">
+    <sprite x="340" y="140" w="21" h="23" />
+  </Animation>
+  <Animation name="apple" imagePath="items.png" width="664" height="471">
+    <sprite x="341" y="17" w="12" h="11" />
+  </Animation>
+  <Animation name="health_bar_9" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="14" y="473" w="112" h="39" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="health_bar_8" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="136" y="473" w="112" h="39" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="health_bar_7" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="260" y="473" w="112" h="39" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="health_bar_6" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="385" y="475" w="112" h="37" offsetX="0" offsetY="-1" />
+  </Animation>
+  <Animation name="health_bar_5" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="514" y="473" w="101" h="34" offsetX="-5" offsetY="-2.5" />
+  </Animation>
+  <Animation name="health_bar_4" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="13" y="522" w="108" h="38" offsetX="-1.5" offsetY="-0.5" />
+  </Animation>
+  <Animation name="health_bar_3" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="140" y="527" w="74" h="34" offsetX="-14.5" offsetY="-2.5" />
+  </Animation>
+  <Animation name="health_bar_2" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="260" y="532" w="66" h="23" offsetX="-18.5" offsetY="-3" />
+  </Animation>
+  <Animation name="health_bar_1" imagePath="items.png" interval="0" isLoop="false">
+    <sprite x="385" y="530" w="51" h="24" offsetX="-30" offsetY="-2.5" />
   </Animation>
 </Animations>

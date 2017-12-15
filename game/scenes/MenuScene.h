@@ -3,8 +3,7 @@
 
 #include <aladdin.h>
 
-class MenuScene : public ala::Scene
-{
+ALA_CLASS_HEADER_1( MenuScene, ala::Scene)
 protected:
   void onPreInitialize() override;
 };

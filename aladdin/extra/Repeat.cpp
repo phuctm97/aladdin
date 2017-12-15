@@ -9,16 +9,12 @@ Repeat::Repeat( Action* action, const int count ): _action( action ),
 
 void Repeat::onStart() {
   _eslapsedCount = 0;
+  _action->start( getActionManager() );
 }
 
 void Repeat::onUpdate( const float delta ) {
-  if ( !_action->isStarted() ) {
-    _action->start( getActionManager() );
-  }
-  else if ( _action->isDone() ) {
-    _eslapsedCount++;
-    if ( _eslapsedCount == _count ) {
-      _action->release();
+  if ( _action->isDone() ) {
+    if ( ++_eslapsedCount == _count ) {
       done();
     }
     else {
@@ -28,5 +24,9 @@ void Repeat::onUpdate( const float delta ) {
   else {
     _action->update( delta );
   }
+}
+
+void Repeat::onRelease() {
+  _action->release();
 }
 }
