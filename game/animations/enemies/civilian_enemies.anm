@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Animations>
-  <Animation name="throw" imagePath="civilian-enemies.png" interval="0.1" isLoop="false">
+  <Animation name="throw" imagePath="civilian_enemies.png" interval="0.1" isLoop="false">
     <sprite x="11" y="35" w="10" h="21" offsetX="0" offsetY="0" />
     <sprite x="42" y="32" w="16" h="24" offsetX="0" offsetY="-1.5" />
     <sprite x="73" y="29" w="22" h="31" offsetX="0" offsetY="0" />
@@ -12,7 +12,7 @@
     <sprite x="345" y="36" w="17" h="12" offsetX="-1.5" offsetY="5" />
     <sprite x="382" y="37" w="7" h="5" offsetX="-7" offsetY="3" />
   </Animation>
-  <Animation name="vase_fall" imagePath="civilian-enemies.png" interval="0.07" isLoop="true">
+  <Animation name="vase_fall" imagePath="civilian_enemies.png" interval="0.07" isLoop="true">
     <sprite x="15" y="97" w="27" h="20" offsetX="0" offsetY="0" />
     <sprite x="56" y="95" w="23" h="23" offsetX="0" offsetY="0" />
     <sprite x="90" y="95" w="25" h="21" offsetX="0" offsetY="0" />
@@ -20,7 +20,7 @@
     <sprite x="164" y="92" w="23" h="23" offsetX="0" offsetY="0" />
     <sprite x="204" y="94" w="20" h="24" offsetX="0" offsetY="0" />
   </Animation>
-  <Animation name="vase_break" imagePath="civilian-enemies.png" interval="0.1" isLoop="false">
+  <Animation name="vase_break" imagePath="civilian_enemies.png" interval="0.1" isLoop="false">
     <sprite x="235" y="100" w="36" h="14" offsetX="0" offsetY="0" />
     <sprite x="292" y="94" w="67" h="21" offsetX="0" offsetY="0" />
     <sprite x="376" y="94" w="75" h="25" offsetX="0" offsetY="0" />

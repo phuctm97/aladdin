@@ -191,7 +191,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
-    <ClCompile Include="prefabs\ThrowVasePrefab.cpp" />
+    <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
     <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
@@ -220,7 +220,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
     <ClCompile Include="scripts\ThrowableAppleController.cpp" />
     <ClCompile Include="scripts\ThrowableKnifeController.cpp" />
-    <ClCompile Include="scripts\ThrowVaseController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -265,7 +264,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
-    <ClInclude Include="prefabs\ThrowVasePrefab.h" />
+    <ClInclude Include="prefabs\FallingVasePrefab.h" />
     <ClInclude Include="scenes\AgrabahMarketScene.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scenes\MenuScene.h" />
@@ -294,7 +293,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
     <ClInclude Include="scripts\ThrowableAppleController.h" />
     <ClInclude Include="scripts\ThrowableKnifeController.h" />
-    <ClInclude Include="scripts\ThrowVaseController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />

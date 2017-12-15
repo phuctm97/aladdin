@@ -17,6 +17,8 @@
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/FloatingSalivaPrefab.h"
 #include "../prefabs/CamelPrefab.h"
+#include "../prefabs/FallingVasePrefab.h"
+#include "../prefabs/HandEnemyPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
 #include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
@@ -92,6 +94,8 @@ void MyResourceInitializer::doRun() {
   new CharcoalBurnerPrefab();
   new FloatingSalivaPrefab();
   new CamelPrefab();
+  new FallingVasePrefab();
+  new HandEnemyPrefab();
   new GuardOnePrefab();
   new GuardTwoPrefab();
 

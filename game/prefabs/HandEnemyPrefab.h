@@ -1,15 +1,14 @@
 #ifndef __HAND_ENEMY_PREFAB_H__
 #define __HAND_ENEMY_PREFAB_H__
 
-#include<aladdin.h>
+#include <aladdin.h>
 
-class HandEnemyPrefab : ala::Prefab
-{
+ALA_CLASS_HEADER_1(HandEnemyPrefab, ala::PrefabV2)
 public:
-	HandEnemyPrefab() : Prefab("Hand Enemy") {}
+  HandEnemyPrefab() : PrefabV2( "Hand Enemy" ) {}
+
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif // !__HAND_ENEMY_PREFAB_H__
-

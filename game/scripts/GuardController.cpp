@@ -12,7 +12,8 @@ GuardController::GuardController( ala::GameObject* gameObject, const std::string
   _tooFarDistance( GameManager::get()->getVisibleWidth() * 0.7f ),
   _initialX( 0 ),
   _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
-  _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ) {}
+  _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ),
+  _enemyExplosionPrefab( NULL ) {}
 
 void GuardController::onInitialize() {
   const auto gameManager = GameManager::get();

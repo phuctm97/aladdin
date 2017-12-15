@@ -2,25 +2,35 @@
 #define __HAND_ENEMY_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "DirectionController.h"
 
 class HandEnemyController : public ala::GameObjectComponent
 {
 private:
-	bool _nearAladdin;
+  bool _aladdinInZone;
 
-protected:
-	void onUpdate(const float delta) override;
+  ala::Transform* _selfTransform;
+  DirectionController* _selfDirection;
+  ala::Collider* _selfBodyCollider;
+
+  ala::PrefabV2* _enemyExplosionPrefab;
+  ala::PrefabV2* _fallingVasePrefab;
 
 public:
-	HandEnemyController(ala::GameObject* gameObject, const std::string& name = "");
+  HandEnemyController( ala::GameObject* gameObject, const std::string& name = "" );
 
+  bool isAladdinInZone() const;
 
-	bool isAladdinNear() const;
-	void throwVase(char direction, float directX, float directY, float impulseX, float impulseY) const;
+  void throwVase( const float directX, const float directY ) const;
 
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
+  void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
+  void onDie() const;
+
+protected:
+  void onInitialize() override;
 };
 
 #endif //!__HAND_ENEMY_CONTROLLER_H__
-

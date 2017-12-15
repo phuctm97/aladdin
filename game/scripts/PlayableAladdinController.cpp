@@ -88,6 +88,9 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
   if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
     onHit();
   }
+  if ( otherObject->getTag() == VASE_TAG ) {
+    onHit();
+  }
   else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
     if ( collision.getNormal() == Vec2( 0, 1 ) ) {
       onJumpingOnCamel();
