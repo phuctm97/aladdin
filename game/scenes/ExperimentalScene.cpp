@@ -150,8 +150,8 @@ void ExperimentalScene::onPreInitialize() {
   
 
 
-  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
-  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
+//  const auto charcoalBurnerOne = gameManager->getPrefab( "Charcoal Burner" )->instantiate();
+//  charcoalBurnerOne->getTransform()->setPosition( Vec2( 360.5f, -50 ) );
 
   // Extra health
   /*const auto extra_health_1 = gameManager->getPrefab("extra health")->instantiate();
