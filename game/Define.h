@@ -10,6 +10,8 @@ enum
   FOREGROUND_TAG,
   SWORD_TAG,
 	KNIFE_TAG,
+  CHARCOAL_BURNER_TAG,
+  HUB_TAG
 };
 
 #endif //!__GAME_DEFINE_H__

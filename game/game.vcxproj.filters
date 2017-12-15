@@ -55,6 +55,9 @@
     <Filter Include="animations\enemies">
       <UniqueIdentifier>{3208c9f3-ebb0-49d0-b7da-ce9e15980e91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\bosses">
+      <UniqueIdentifier>{ae6ce757-92a4-4d44-9fc5-97d83c1b9214}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -144,6 +147,21 @@
     <ClCompile Include="prefabs\NakeGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FirePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CharcoalBurnerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HubPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\HubController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -219,6 +237,21 @@
     <ClInclude Include="prefabs\StairPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\FirePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\CharcoalBurnerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CharcoalBurnerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HubPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\HubController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
     <ClInclude Include="scripts\HideGuardController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -251,10 +284,20 @@
     <Image Include="textures\enemies\guards2.png">
       <Filter>texures\enemies</Filter>
     </Image>
+    <Image Include="textures\enemies\civilian-enemies.png">
+      <Filter>texures\enemies</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\items.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\numbers.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
     <Text Include="log.txt" />
+    <Text Include="note.txt" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="animations\playable_characters\aladdin.anm">
@@ -270,6 +313,18 @@
     </None>
     <None Include="animations\enemies\guards.anm">
       <Filter>animations\enemies</Filter>
+    </None>
+    <None Include="animations\bosses\jafar.anm">
+      <Filter>animations\bosses</Filter>
+    </None>
+    <None Include="animations\enemies\civilian-enemies.anm">
+      <Filter>animations\enemies</Filter>
+    </None>
+    <None Include="animations\miscellaneous\items.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\numbers.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

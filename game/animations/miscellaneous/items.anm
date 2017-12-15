@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Animations>
+  <Animation name="aladdin_head" imagePath="items.png" width="664" height="471">
+    <sprite x="340" y="140" w="21" h="23" />
+  </Animation>
+  <Animation name="apple" imagePath="items.png" width="664" height="471">
+    <sprite x="341" y="17" w="12" h="11" />
+  </Animation>
+</Animations>

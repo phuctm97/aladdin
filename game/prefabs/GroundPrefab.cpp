@@ -106,6 +106,9 @@ void GroundPrefab::doInstantiate(ala::GameObject* object) const {
 #pragma endregion
 
 	// configurations
+  object->setTag( GROUND_TAG );
+  object->setLayer( "Background" );
+
 	transform->setPosition(Vec2(-halfVisibleSize.getWidth(),
 		-halfVisibleSize.getHeight()));
 

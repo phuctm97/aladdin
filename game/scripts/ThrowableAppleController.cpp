@@ -12,13 +12,13 @@ bool ThrowableAppleController::isCollidedWithGround() const {
 }
 
 void ThrowableAppleController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-  if ( collision.getColliderA()->getTag() == GROUND_TAG ||
-    collision.getColliderB()->getTag() == GROUND_TAG ) {
+  if ( collision.getColliderA()->getGameObject()->getTag() == GROUND_TAG ||
+    collision.getColliderB()->getGameObject()->getTag() == GROUND_TAG ) {
     _collidedWithGround = true;
   }
 
-  if (collision.getColliderA()->getTag() == ENEMY_TAG ||
-	  collision.getColliderB()->getTag() == ENEMY_TAG) {
+  if (collision.getColliderA()->getGameObject()->getTag() == ENEMY_TAG ||
+	  collision.getColliderB()->getGameObject()->getTag() == ENEMY_TAG) {
 	  _colliedWithEnemy = true;
   }
 }
