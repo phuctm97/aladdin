@@ -147,9 +147,6 @@
     <ClCompile Include="prefabs\RestartPointPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\RopePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\SpendThesePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -264,6 +261,9 @@
     <ClCompile Include="prefabs\WallPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\ClimbableRopePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -346,9 +346,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\RestartPointPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\RopePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SpendThesePrefab.h">
@@ -463,6 +460,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\WallPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ClimbableRopePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

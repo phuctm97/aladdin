@@ -183,7 +183,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\PeddlerPrefab.cpp" />
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
     <ClCompile Include="prefabs\RestartPointPrefab.cpp" />
-    <ClCompile Include="prefabs\RopePrefab.cpp" />
+    <ClCompile Include="prefabs\ClimbableRopePrefab.cpp" />
     <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
     <ClCompile Include="prefabs\SpringPrefab.cpp" />
@@ -257,7 +257,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\PeddlerPrefab.h" />
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
     <ClInclude Include="prefabs\RestartPointPrefab.h" />
-    <ClInclude Include="prefabs\RopePrefab.h" />
+    <ClInclude Include="prefabs\ClimbableRopePrefab.h" />
     <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
     <ClInclude Include="prefabs\SpringPrefab.h" />

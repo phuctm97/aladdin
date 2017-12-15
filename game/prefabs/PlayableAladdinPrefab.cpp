@@ -694,7 +694,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
                // move
                {
-                 if ( controller->isJumpingOnCamel() ) {
+                 if ( controller->isJumpOnCamel() ) {
                    body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                    body->addImpulse( Vec2( 0, 3000000.0f ) );
                  }
@@ -710,7 +710,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
                // camel collision
                {
-                 controller->resetJumpingOnCamel();
+                 controller->resetJumpOnCamel();
                }
              },
              [=]( float dt ) {
@@ -943,6 +943,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              }, NULL );
 
+  new State( stateManager, "climb",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "climb" );
+               }
+             }, NULL, NULL );
+
   new State( stateManager, "hit", [=] {
     // animation effect 
     {
@@ -952,6 +960,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     // move
     {
       body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+    }
+
+    // reset hit
+    {
+      controller->resetHit();
     }
   }, NULL, NULL );
 
@@ -1137,6 +1150,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "jump_throw", "idle", [=] {
     return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+  } );
+
+  new StateTransition( stateManager, "idle", "hit", [=] {
+    return controller->isHit();
   } );
 
   new StateTransition( stateManager, "hit", "idle", [=] {

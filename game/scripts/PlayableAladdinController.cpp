@@ -9,7 +9,9 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
-    _jumpingOnCamel( false ), _collidingWall( false ),
+    _hit( false ),
+    _jumpOnCamel( false ),
+    _collidingWall( false ), _collidingRope( false ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
@@ -49,20 +51,35 @@ void PlayableAladdinController::setRecovering() {
 
   _selfActionManager->play( new Sequence( {
     new Blink( 0.05f, 10 ),
-    new CallFunc( [this] { this->_recovering = false; } )
+    new CallFunc( [this] {
+      _recovering = false;
+      _hit = false;
+    } )
   } ) );
 }
 
-void PlayableAladdinController::resetJumpingOnCamel() {
-  _jumpingOnCamel = false;
+void PlayableAladdinController::resetJumpOnCamel() {
+  _jumpOnCamel = false;
 }
 
-bool PlayableAladdinController::isJumpingOnCamel() const {
-  return _jumpingOnCamel;
+bool PlayableAladdinController::isJumpOnCamel() const {
+  return _jumpOnCamel;
+}
+
+void PlayableAladdinController::resetHit() {
+  _hit = false;
+}
+
+bool PlayableAladdinController::isHit() const {
+  return _hit;
 }
 
 bool PlayableAladdinController::isCollidingWall() const {
   return _collidingWall;
+}
+
+bool PlayableAladdinController::isCollidingRope() const {
+  return _collidingRope;
 }
 
 void PlayableAladdinController::throwApple( const char direction,
@@ -116,9 +133,12 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
   else if ( otherObject->getTag() == VASE_TAG ) {
     onHit();
   }
+  else if ( otherObject->getTag() == ROPE_TAG ) {
+    _collidingRope = true;
+  }
   else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
     if ( collision.getNormal() == Vec2( 0, 1 ) ) {
-      onJumpingOnCamel();
+      onJumpOnCamel();
     }
   }
 }
@@ -134,7 +154,16 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
   }
 }
 
-void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {}
+void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == ROPE_TAG ) {
+    _collidingRope = false;
+  }
+}
 
 void PlayableAladdinController::onInitialize() {
   _selfTransform = getGameObject()->getTransform();
@@ -154,19 +183,15 @@ void PlayableAladdinController::onHit( const int damage ) {
   if ( _recovering ) return;
 
   _health -= damage;
+  _hit = true;
 
   setRecovering();
-
-  if ( _selfStateManager->getCurrentStateName() == "idle" ) {
-    const auto hitState = _selfStateManager->getState( "hit" );
-
-    if ( hitState != NULL ) {
-      _selfStateManager->changeState( hitState );
-    }
-  }
 }
 
-void PlayableAladdinController::onJumpingOnCamel() {
-  _jumpingOnCamel = true;
+void PlayableAladdinController::onJumpOnCamel() {
+  _jumpOnCamel = true;
+
+  // TODO: refactor to state transition
+
   _selfStateManager->changeState( "jump" );
 }

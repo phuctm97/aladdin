@@ -43,8 +43,13 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Wall" )->instantiateWithArgs( "29 68" )
              ->getTransform()->setPosition( Vec2( 1299, -47 ) );
 
+  /* Ropes */
 
-  /* Charcoal Burners
+  gameManager->getPrefabV2( "Climbable Rope" )->instantiateWithArgs( "200" )
+             ->getTransform()->setPosition( Vec2( 1930, 79 ) )->getGameObject();
+
+
+  /* Charcoal Burners  
    
   gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
              ->getTransform()
@@ -65,8 +70,8 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "110", "Charcoal Burner 4" )
              ->getTransform()
              ->setPosition( Vec2( 2987, -82 ) );
-
-             */
+            
+            */
 
   /* Camels
    
@@ -76,7 +81,7 @@ void AgrabahMarketScene::onPreInitialize() {
   
   */
 
-  /* Hand Enemies
+  /* Hand Enemies   
    
   gameManager->getPrefabV2( "Hand Enemy" )->instantiateWithArgs( "R 45 80 0 -80", "Hand Enemy 1" )
              ->getTransform()
@@ -86,7 +91,7 @@ void AgrabahMarketScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( Vec2( 1632.5f, 89.5f ) );
 
-  */
+             */
 
   /* Eatable Apples
 
