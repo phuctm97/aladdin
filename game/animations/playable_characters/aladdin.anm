@@ -296,4 +296,144 @@
     <sprite x="356" y="1377" w="41" h="61" offsetX="6" offsetY="-0.5" />
     <sprite x="406" y="1362" w="27" h="80" offsetX="1" offsetY="2" />
   </Animation>
+  <Animation name="push" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="7" y="1959" w="55" h="45" offsetX="0" offsetY="-4" />
+        <sprite x="75" y="1961" w="64" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="157" y="1961" w="69" h="44" offsetX="0" offsetY="-4.5" />
+        <sprite x="237" y="1962" w="76" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="327" y="1964" w="71" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="416" y="1965" w="65" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="495" y="1965" w="74" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="585" y="1966" w="80" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="681" y="1968" w="74" h="43" offsetX="0" offsetY="-5" />
+  </Animation>
+  <Animation name="push_loop" imagePath="aladdin.png" interval="0.1" isLoop="false">
+        <sprite x="75" y="1961" w="64" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="157" y="1961" w="69" h="44" offsetX="0" offsetY="-4.5" />
+        <sprite x="237" y="1962" w="76" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="327" y="1964" w="71" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="416" y="1965" w="65" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="495" y="1965" w="74" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="585" y="1966" w="80" h="43" offsetX="0" offsetY="-5" />
+        <sprite x="681" y="1968" w="74" h="43" offsetX="0" offsetY="-5" />
+  </Animation>
+  <Animation name="jump_rotate" imagePath="aladdin.png" interval="0.1" isLoop="false">
+    <sprite x="12" y="1154" w="48" h="53" oX="12" oY="1154" oW="1215" oH="403" />
+    <sprite x="76" y="1162" w="36" h="31" oX="76" oY="1162" oW="1215" oH="403" />
+    <sprite x="135" y="1160" w="34" h="33" oX="135" oY="1160" oW="1215" oH="403" />
+    <sprite x="190" y="1160" w="37" h="39" oX="190" oY="1160" oW="1215" oH="403" />
+    <sprite x="252" y="1165" w="37" h="30" oX="252" oY="1165" oW="1215" oH="403" />
+    <sprite x="306" y="1158" w="36" h="37" oX="306" oY="1158" oW="1215" oH="403" />
+    <sprite x="362" y="1161" w="38" h="34" oX="362" oY="1161" oW="1215" oH="403" />
+  </Animation>
+  <Animation name="rotate_loop" imagePath="aladdin.png" interval="0.1" isLoop="true">
+    <sprite x="76" y="1162" w="36" h="31" oX="76" oY="1162" oW="1123" oH="321" />
+    <sprite x="135" y="1160" w="34" h="33" oX="135" oY="1160" oW="1123" oH="321" />
+    <sprite x="190" y="1160" w="37" h="39" oX="190" oY="1160" oW="1123" oH="321" />
+    <sprite x="252" y="1165" w="37" h="30" oX="252" oY="1165" oW="1123" oH="321" />
+    <sprite x="306" y="1158" w="36" h="37" oX="306" oY="1158" oW="1123" oH="321" />
+    <sprite x="362" y="1161" w="38" h="34" oX="362" oY="1161" oW="1123" oH="321" />
+  </Animation>
+  <Animation name="jump_rotate_fall" imagePath="aladdin.png" interval="0.1" isLoop="false">
+    <sprite x="417" y="1156" w="42" h="41" oX="417" oY="1156" oW="781" oH="409" />
+    <sprite x="137" y="829" w="53" h="60" oX="137" oY="829" oW="781" oH="409" />
+    <sprite x="203" y="824" w="53" h="68" oX="203" oY="824" oW="781" oH="409" />
+    <sprite x="269" y="820" w="50" h="73" oX="269" oY="820" oW="781" oH="409" />
+    <sprite x="336" y="829" w="37" h="65" oX="336" oY="829" oW="781" oH="409" />
+    <sprite x="491" y="680" w="49" h="84" oX="491" oY="680" oW="781" oH="409" />
+  </Animation>
+  <Animation name="grounding" imagePath="aladdin.png" interval="0.05" isLoop="false">
+    <sprite x="15" y="901" w="53" h="82" offsetX="5" offsetY="17" />
+    <sprite x="87" y="911" w="53" h="64" offsetX="2" offsetY="8" />
+    <sprite x="145" y="942" w="66" h="36" offsetX="1.5" offsetY="-9" />
+    <sprite x="215" y="949" w="63" h="28" offsetX="-1" offsetY="-12" />
+    <sprite x="288" y="950" w="67" h="29" offsetX="2.5" offsetY="-11.5" />
+    <sprite x="366" y="948" w="75" h="33" offsetX="1" offsetY="-9.5" />
+    <sprite x="451" y="935" w="85" h="46" offsetX="0" offsetY="-4" />
+    <sprite x="549" y="928" w="85" h="54" offsetX="0" offsetY="-1" />
+    <sprite x="644" y="925" w="95" h="60" offsetX="0" offsetY="-1" />
+    <sprite x="748" y="925" w="95" h="60" offsetX="-1" offsetY="-1" />
+    <sprite x="853" y="926" w="101" h="59" offsetX="-1" offsetY="-1.5" />
+    <sprite x="968" y="928" w="101" h="49" offsetX="-1" offsetY="0.5" />
+  </Animation>
+
+  <Animation name="die" imagePath="aladdin.png" interval="0.1" isLoop="true">
+    <sprite x="282" y="2160" w="60" h="50" offsetX="0" offsetY="1" />
+    <sprite x="160" y="2224" w="44" h="57" offsetX="5.5" offsetY="4.5" />
+    <sprite x="213" y="2224" w="44" h="57" offsetX="2.5" offsetY="4.5" />
+    <sprite x="266" y="2231" w="36" h="49" offsetX="0.5" offsetY="0.5" />
+    <sprite x="312" y="2230" w="39" h="50" offsetX="1" offsetY="1" />
+    <sprite x="361" y="2230" w="34" h="50" offsetX="-0.5" offsetY="1" />
+    <sprite x="407" y="2230" w="35" h="50" offsetX="-1" offsetY="1" />
+    <sprite x="454" y="2232" w="38" h="48" offsetX="-0.5" offsetY="0" />
+    <sprite x="505" y="2227" w="43" h="55" offsetX="-5" offsetY="2.5" />
+    <sprite x="560" y="2228" w="40" h="52" offsetX="-5.5" offsetY="2" />
+    <sprite x="614" y="2232" w="38" h="49" offsetX="-2.5" offsetY="0.5" />
+    <sprite x="661" y="2232" w="39" h="50" offsetX="-1" offsetY="1" />
+    <sprite x="361" y="2230" w="34" h="50" offsetX="-2.5" offsetY="1" />
+    <sprite x="407" y="2230" w="35" h="50" offsetX="-2" offsetY="1" />
+    <sprite x="454" y="2232" w="38" h="48" offsetX="-0.5" offsetY="0" />
+    <sprite x="505" y="2227" w="43" h="55" offsetX="-5" offsetY="2.5" />
+    <sprite x="2" y="2335" w="36" h="50" offsetX="-0.5" offsetY="1.5" />
+    <sprite x="49" y="2329" w="36" h="56" offsetX="0.5" offsetY="4" />
+    <sprite x="97" y="2331" w="42" h="54" offsetX="2.5" offsetY="3" />
+    <sprite x="149" y="2333" w="59" h="52" offsetX="0" offsetY="2" />
+    <sprite x="223" y="2336" w="60" h="50" offsetX="-4.5" offsetY="1" />
+    <sprite x="296" y="2310" w="75" h="82" offsetX="0" offsetY="3" />
+    <sprite x="383" y="2309" w="76" h="84" offsetX="-0.5" offsetY="4" />
+    <sprite x="477" y="2309" w="73" h="84" offsetX="1" offsetY="4" />
+    <sprite x="567" y="2311" w="67" h="82" offsetX="-1" offsetY="3" />
+    <sprite x="654" y="2313" w="65" h="87" offsetX="-1" offsetY="-0.5" />
+    <sprite x="734" y="2321" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="811" y="2323" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="888" y="2323" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="970" y="2325" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+    <sprite x="1049" y="2325" w="65" h="73" offsetX="-1" offsetY="-1.5" />
+  </Animation>
+
+  <Animation name="revive" imagePath="aladdin.png" interval="0.04" isLoop="true">
+    <sprite x="2" y="2472" w="63" h="68" offsetX="3" offsetY="10.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="77" y="2475" w="53" h="65" offsetX="0" offsetY="9" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="77" y="2475" w="53" h="65" offsetX="0" offsetY="9" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="173" y="2503" w="22" h="37" offsetX="1.5" offsetY="-5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="173" y="2503" w="22" h="37" offsetX="1.5" offsetY="-5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="205" y="2495" w="24" h="45" offsetX="2.5" offsetY="0" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="205" y="2495" w="24" h="45" offsetX="2.5" offsetY="0" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="243" y="2483" w="26" h="57" offsetX="-1.5" offsetY="5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="243" y="2483" w="26" h="57" offsetX="-1.5" offsetY="5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="278" y="2474" w="37" h="66" offsetX="-1" offsetY="9.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="278" y="2474" w="37" h="66" offsetX="-1" offsetY="9.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="333" y="2460" w="36" h="80" offsetX="2.5" offsetY="16.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="333" y="2460" w="36" h="80" offsetX="2.5" offsetY="16.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="382" y="2460" w="41" h="83" offsetX="-1" offsetY="18" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="382" y="2460" w="41" h="83" offsetX="-1" offsetY="18" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="442" y="2454" w="52" h="86" offsetX="10.5" offsetY="19.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="442" y="2454" w="52" h="86" offsetX="10.5" offsetY="19.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="510" y="2441" w="42" h="99" offsetX="-5.5" offsetY="26" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="510" y="2441" w="42" h="99" offsetX="-5.5" offsetY="26" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="563" y="2426" w="49" h="114" offsetX="-15" offsetY="33.5" />
+    <sprite x="143" y="2508" w="19" h="32" offsetX="0" offsetY="-7.5" />
+    <sprite x="563" y="2426" w="49" h="114" offsetX="-15" offsetY="33.5" />
+    <sprite x="623" y="2407" w="44" h="133" offsetX="-11.5" offsetY="43" />
+    <sprite x="682" y="2400" w="39" h="140" offsetX="-10" offsetY="46.5" />
+  </Animation>
 </Animations>

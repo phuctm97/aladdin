@@ -157,6 +157,24 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
+    <ClCompile Include="prefabs\AbuPrefab.cpp" />
+    <ClCompile Include="prefabs\BigExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\CamelPrefab.cpp" />
+    <ClCompile Include="prefabs\ExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\ExtraHealthPrefab.cpp" />
+    <ClCompile Include="prefabs\GenieBonusPrefab.cpp" />
+    <ClCompile Include="prefabs\GenieLampPrefab.cpp" />
+    <ClCompile Include="prefabs\HandEnemyPrefab.cpp" />
+    <ClCompile Include="prefabs\ItemExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerPrefab.cpp" />
+    <ClCompile Include="prefabs\RestartPointPrefab.cpp" />
+    <ClCompile Include="prefabs\SalivaPrefab.cpp" />
+    <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
+    <ClCompile Include="prefabs\SpringPrefab.cpp" />
+    <ClCompile Include="prefabs\ThrowVasePrefab.cpp" />
+    <ClCompile Include="scripts\AbuBonusController.cpp" />
+    <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp" />
     <ClCompile Include="prefabs\EatableApplePrefab.cpp" />
     <ClCompile Include="prefabs\BitmapTextPrefab.cpp" />
@@ -187,6 +205,16 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\DebugCameraController.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
+    <ClCompile Include="scripts\ExtraHealthController.cpp" />
+    <ClCompile Include="scripts\GenieBonusController.cpp" />
+    <ClCompile Include="scripts\GenieLampController.cpp" />
+    <ClCompile Include="scripts\HandEnemyController.cpp" />
+    <ClCompile Include="scripts\PeddlerController.cpp" />
+    <ClCompile Include="scripts\RestartPointController.cpp" />
+    <ClCompile Include="scripts\SalivaController.cpp" />
+    <ClCompile Include="scripts\SpendTheseController.cpp" />
+    <ClCompile Include="scripts\SpringController.cpp" />
+    <ClCompile Include="scripts\ThrowVaseController.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
@@ -203,6 +231,24 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="app\MyApp.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AbuBonusPrefab.h" />
+    <ClInclude Include="prefabs\AbuPrefab.h" />
+    <ClInclude Include="prefabs\BigExplosionPrefab.h" />
+    <ClInclude Include="prefabs\CamelPrefab.h" />
+    <ClInclude Include="prefabs\ExplosionPrefab.h" />
+    <ClInclude Include="prefabs\ExtraHealthPrefab.h" />
+    <ClInclude Include="prefabs\GenieBonusPrefab.h" />
+    <ClInclude Include="prefabs\GenieLampPrefab.h" />
+    <ClInclude Include="prefabs\HandEnemyPrefab.h" />
+    <ClInclude Include="prefabs\ItemExplosionPrefab.h" />
+    <ClInclude Include="prefabs\PeddlerPrefab.h" />
+    <ClInclude Include="prefabs\RestartPointPrefab.h" />
+    <ClInclude Include="prefabs\SalivaPrefab.h" />
+    <ClInclude Include="prefabs\SpendThesePrefab.h" />
+    <ClInclude Include="prefabs\SpringPrefab.h" />
+    <ClInclude Include="prefabs\ThrowVasePrefab.h" />
+    <ClInclude Include="scripts\AbuBonusController.h" />
+    <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="prefabs\AdorableGuardPrefab.h" />
     <ClInclude Include="prefabs\EatableApplePrefab.h" />
     <ClInclude Include="prefabs\BitmapTextPrefab.h" />
@@ -230,6 +276,16 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\CameraFollower.h" />
     <ClInclude Include="scripts\CharcoalBurnerCollisionTracker.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\ExtraHealthController.h" />
+    <ClInclude Include="scripts\GenieBonusController.h" />
+    <ClInclude Include="scripts\GenieLampController.h" />
+    <ClInclude Include="scripts\HandEnemyController.h" />
+    <ClInclude Include="scripts\PeddlerController.h" />
+    <ClInclude Include="scripts\RestartPointController.h" />
+    <ClInclude Include="scripts\SalivaController.h" />
+    <ClInclude Include="scripts\SpendTheseController.h" />
+    <ClInclude Include="scripts\SpringController.h" />
+    <ClInclude Include="scripts\ThrowVaseController.h" />
     <ClInclude Include="scripts\CollisionTracker.h" />
     <ClInclude Include="scripts\DebugCameraController.h" />
     <ClInclude Include="scripts\DirectionController.h" />
@@ -258,6 +314,12 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\miscellaneous\menu_select.png" />
     <Image Include="textures\miscellaneous\numbers.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
+    <Image Include="textures\miscellaneous\item_explosion.png" />
+    <Image Include="textures\non_playable_characters\abu.png" />
+    <Image Include="textures\non_playable_characters\camel.png" />
+    <Image Include="textures\non_playable_characters\peddler.png" />
+    <Image Include="textures\non_playable_characters\saliva.png" />
+    <Image Include="textures\non_playable_characters\spring.png" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="animations\miscellaneous\apple.anm" />
@@ -265,13 +327,23 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm" />
-    <None Include="animations\enemies\civilian-enemies.anm" />
+    <None Include="animations\enemies\civilian-enemies.anm">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="animations\enemies\guards.anm">
       <SubType>Designer</SubType>
     </None>
     <None Include="animations\miscellaneous\cutscenes.anm" />
     <None Include="animations\miscellaneous\enemy_explosions.anm" />
     <None Include="animations\miscellaneous\items.anm" />
+    <None Include="animations\miscellaneous\item_explosion.anm" />
+    <None Include="animations\non_playable_characters\abu.anm" />
+    <None Include="animations\non_playable_characters\camel.anm" />
+    <None Include="animations\non_playable_characters\peddler.anm">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="animations\non_playable_characters\saliva.anm" />
+    <None Include="animations\non_playable_characters\spring.anm" />
     <None Include="animations\miscellaneous\numbers.anm" />
     <None Include="fonts\one.fnt" />
     <None Include="fonts\two.fnt" />

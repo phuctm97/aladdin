@@ -47,6 +47,14 @@ void MyResourceInitializer::doRun() {
   new Sprite( "guards.png", "textures/enemies/guards.png" );
   new Sprite( "civilian-enemies.png", "textures/enemies/civilian-enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
+  new Sprite("camel.png", "textures/non_playable_characters/camel.png");
+  new Sprite("saliva.png", "textures/non_playable_characters/saliva.png");
+  new Sprite("spring.png", "textures/non_playable_characters/spring.png");
+  new Sprite("peddler.png", "textures/non_playable_characters/peddler.png");
+  new Sprite("abu.png", "textures/non_playable_characters/abu.png");
+  new Sprite("items.png", "textures/miscellaneous/items.png");
+  new Sprite("enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png");
+  new Sprite("item_explosion.png", "textures/miscellaneous/item_explosion.png");
 
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
@@ -63,6 +71,12 @@ void MyResourceInitializer::doRun() {
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "civilian-enemies.anm", "animations/enemies/civilian-enemies.anm" );
+  new Animation("camel.anm", "animations/non_playable_characters/camel.anm");
+  new Animation("saliva.anm", "animations/non_playable_characters/saliva.anm");
+  new Animation("spring.anm", "animations/non_playable_characters/spring.anm");
+  new Animation("peddler.anm", "animations/non_playable_characters/peddler.anm");
+  new Animation("abu.anm", "animations/non_playable_characters/abu.anm");
+  new Animation("item_explosion.anm", "animations/miscellaneous/item_explosion.anm");
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
 
   // Prefabs
@@ -70,6 +84,7 @@ void MyResourceInitializer::doRun() {
   new BitmapTextPrefab();
 
   new MenuSelectPrefab();
+>>>>>>> develop_client_alpha
 
   new HubPrefab();
   new PlayableAladdinPrefab();
