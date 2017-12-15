@@ -9,7 +9,7 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
-    _jumpingOnCamel( false ),
+    _jumpingOnCamel( false ), _collidingWall( false ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
@@ -61,6 +61,10 @@ bool PlayableAladdinController::isJumpingOnCamel() const {
   return _jumpingOnCamel;
 }
 
+bool PlayableAladdinController::isCollidingWall() const {
+  return _collidingWall;
+}
+
 void PlayableAladdinController::throwApple( const char direction,
                                             const float offsetX, const float offsetY,
                                             const float impulseX, const float impulseY ) {
@@ -77,7 +81,28 @@ void PlayableAladdinController::throwApple( const char direction,
                                _selfBodyCollider->getSize().getHeight() / 2 + offsetY ) );
 }
 
-void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {}
+void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG
+    && collision.getNormal().getY() == 0 ) {
+    _collidingWall = true;
+  }
+}
+
+void PlayableAladdinController::onCollisionExit( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG ) {
+    _collidingWall = false;
+  }
+}
 
 void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collision ) {
   const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
@@ -88,7 +113,7 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
   if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
     onHit();
   }
-  if ( otherObject->getTag() == VASE_TAG ) {
+  else if ( otherObject->getTag() == VASE_TAG ) {
     onHit();
   }
   else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {

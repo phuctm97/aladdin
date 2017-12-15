@@ -38,6 +38,12 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Agrabah Market Stair 1" )->instantiateWithArgs( "", "Start 1" );
 
+  /* Walls */
+
+  gameManager->getPrefabV2( "Wall" )->instantiateWithArgs( "29 68" )
+             ->getTransform()->setPosition( Vec2( 1299, -47 ) );
+
+
   /* Charcoal Burners
    
   gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
@@ -70,6 +76,8 @@ void AgrabahMarketScene::onPreInitialize() {
   
   */
 
+  /* Hand Enemies
+   
   gameManager->getPrefabV2( "Hand Enemy" )->instantiateWithArgs( "R 45 80 0 -80", "Hand Enemy 1" )
              ->getTransform()
              ->setPosition( Vec2( 1680.0f, 57.5f ) );
@@ -77,6 +85,8 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Hand Enemy" )->instantiateWithArgs( "R 45 100 0 -102" )
              ->getTransform()
              ->setPosition( Vec2( 1632.5f, 89.5f ) );
+
+  */
 
   /* Eatable Apples
 
@@ -96,6 +106,7 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
-  aladdin->getTransform()->setPosition( Vec2( 1680.0f, -25 ) );
+  aladdin->getTransform()->setPosition( Vec2( 1500, -25 ) );
 }

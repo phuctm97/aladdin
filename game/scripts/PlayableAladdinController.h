@@ -10,6 +10,7 @@ private:
   int _apples;
   bool _recovering;
   bool _jumpingOnCamel;
+  bool _collidingWall;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -40,11 +41,15 @@ public:
 
   bool isJumpingOnCamel() const;
 
+  bool isCollidingWall() const;
+
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
+
+  void onCollisionExit( const ala::CollisionInfo& collision ) override;
 
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 

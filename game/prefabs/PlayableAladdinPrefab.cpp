@@ -919,6 +919,30 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              }, NULL );
 
+  new State( stateManager, "push",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "start_push" );
+               }
+             },
+             [=]( float ) {
+               // animation effect
+               {
+                 if ( !animator->isPlaying() ) {
+                   animator->setAction( "pushing" );
+                 }
+               }
+
+               // move
+               {
+                 if ( (input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isRight())
+                   || (input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isLeft()) ) {
+                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                 }
+               }
+             }, NULL );
+
   new State( stateManager, "hit", [=] {
     // animation effect 
     {
@@ -1117,5 +1141,13 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   new StateTransition( stateManager, "hit", "idle", [=] {
     return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "run", "push", [=] {
+    return controller->isCollidingWall();
+  } );
+
+  new StateTransition( stateManager, "push", "idle", [=] {
+    return !controller->isCollidingWall();
   } );
 }
