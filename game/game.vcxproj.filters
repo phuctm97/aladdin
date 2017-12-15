@@ -120,12 +120,6 @@
     <ClCompile Include="scripts\HubController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\ApplePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\AppleController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\DirectionController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -135,7 +129,6 @@
     <ClCompile Include="scenes\AgrabahMarketScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\FatGuardController.cpp" />
     <ClCompile Include="scripts\DebugCameraController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -151,9 +144,6 @@
     </ClCompile>
     <ClCompile Include="scripts\PlayableAladdinController.cpp">
       <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\StairOnePrefab.cpp">
-      <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\FlamePrefab.cpp">
       <Filter>prefabs</Filter>
@@ -184,6 +174,12 @@
     </ClCompile>
     <ClCompile Include="scripts\GuardController.cpp">
       <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EatableApplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairOnePrefab.cpp">
+      <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,12 +241,6 @@
     <ClInclude Include="scripts\HubController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\ApplePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\AppleController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\DirectionController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -260,7 +250,6 @@
     <ClInclude Include="scenes\AgrabahMarketScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\FatGuardController.h" />
     <ClInclude Include="scripts\DebugCameraController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -276,9 +265,6 @@
     </ClInclude>
     <ClInclude Include="scripts\PlayableAladdinController.h">
       <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\StairOnePrefab.h">
-      <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\FlamePrefab.h">
       <Filter>prefabs</Filter>
@@ -309,6 +295,12 @@
     </ClInclude>
     <ClInclude Include="scripts\GuardController.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EatableApplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairOnePrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

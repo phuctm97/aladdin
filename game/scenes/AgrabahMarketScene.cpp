@@ -36,6 +36,8 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Agrabah Market Ground" )->instantiateWithArgs( "", "Ground" );
 
+  gameManager->getPrefabV2( "Agrabah Market Stair 1" )->instantiateWithArgs( "", "Start 1" );
+
   gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
              ->getTransform()
              ->setPosition( Vec2( 360.5f, -50 ) );
@@ -56,7 +58,9 @@ void AgrabahMarketScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( Vec2( 2987, -82 ) );
 
-  gameManager->getPrefabV2( "Stair 1" )->instantiateWithArgs( "", "Start 1" );
+  gameManager->getPrefabV2( "Eatable Apple" )->instantiateWithArgs( "", "Apple 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 0, 10 ) );
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
              ->getTransform()->setPositionY( -25 );

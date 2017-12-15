@@ -1,11 +1,11 @@
-#include "StairOnePrefab.h"
+#include "AgrabahMarketStairOnePrefab.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(StairOnePrefab, ala::PrefabV2)
+ALA_CLASS_SOURCE_1(AgrabahMarketStairOnePrefab, ala::PrefabV2)
 
-void StairOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+void AgrabahMarketStairOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // components
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 

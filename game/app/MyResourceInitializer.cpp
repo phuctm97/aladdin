@@ -10,13 +10,14 @@
 #include "../prefabs/HubPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
+#include "../prefabs/EatableApplePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
+#include "../prefabs/FlamePrefab.h"
+#include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
 #include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
-#include "../prefabs/StairOnePrefab.h"
-#include "../prefabs/FlamePrefab.h"
-#include "../prefabs/CharcoalBurnerPrefab.h"
+#include "../prefabs/AgrabahMarketStairOnePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -73,14 +74,15 @@ void MyResourceInitializer::doRun() {
   new HubPrefab();
   new PlayableAladdinPrefab();
   new ThrowableApplePrefab();
+  new EatableApplePrefab();
   new EnemyExplosionPrefab();
+  new FlamePrefab();
+  new CharcoalBurnerPrefab();
   new GuardOnePrefab();
   new GuardTwoPrefab();
 
   new AgrabahMarketGroundPrefab();
-  new StairOnePrefab();
-  new FlamePrefab();
-  new CharcoalBurnerPrefab();
+  new AgrabahMarketStairOnePrefab();
 
   // Dev tools
   new NodePrefab();
