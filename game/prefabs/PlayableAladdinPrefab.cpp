@@ -79,8 +79,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   controller->setHealth( 9 );
 
   // states
-  //    new State( stateManager, "null", NULL, NULL, NULL );
-  //    new AnimationEditor( object, "jump_throw_apple" );
+  new State( stateManager, "null", NULL, NULL, NULL );
 
   new State( stateManager, "idle",
              [=] {
@@ -678,6 +677,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  if ( stateManager->getPreviousStateName() == "run" ) {
                    animator->setAction( "run_to_jump" );
                  }
+                 else if ( stateManager->getPreviousStateName() == "climb" ) {
+                   animator->setAction( "climb_to_jump" );
+                 }
                  else {
                    animator->setAction( "jump" );
                  }
@@ -702,6 +704,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  else {
                    body->addImpulse( Vec2( 0, 3000000.0f ) );
                  }
+               }
+
+               // climb collision
+               {
+                 controller->resetHoldingRope();
                }
 
                // ground collsion
@@ -750,6 +757,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                  else {
                    if ( animator->getActionName() == "run_to_jump" ) {
                      animator->setAction( "run_to_jump_fall" );
+                   }
+                   else if ( animator->getActionName() == "climb_to_jump" ) {
+                     animator->setAction( "climb_to_jump_fall" );
                    }
                    else {
                      animator->setAction( "fall" );
@@ -964,6 +974,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
                else if ( input->getKey( ALA_KEY_DOWN_ARROW ) ) {
                  dir = 'D';
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
                }
 
                // animation effect
@@ -1244,4 +1264,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   new StateTransition( stateManager, "climb", "fall", [=] {
     return !controller->isHoldingRope();
   } );
+
+  new StateTransition( stateManager, "climb", "jump", [=] {
+    return input->getKeyDown( ALA_KEY_D );
+  } );
+
 }

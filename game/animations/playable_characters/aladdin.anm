@@ -296,6 +296,19 @@
     <sprite x="356" y="1377" w="41" h="61" offsetX="6" offsetY="-0.5" />
     <sprite x="406" y="1362" w="27" h="80" offsetX="1" offsetY="2" />
   </Animation>
+  <Animation name="climb_to_jump" imagePath="aladdin.png" interval="0.1" isLoop="false">
+    <sprite x="10" y="1870" w="33" h="72" offsetX="0" offsetY="0" />
+    <sprite x="65" y="1873" w="24" h="76" offsetX="0.5" offsetY="-8" />
+    <sprite x="100" y="1874" w="35" h="70" offsetX="0" offsetY="-5" />
+  </Animation>
+  <Animation name="climb_to_jump_fall" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="144" y="1874" w="47" h="63" offsetX="-1" offsetY="-2.5" />
+    <sprite x="204" y="1875" w="58" h="53" offsetX="-1" offsetY="-0.5" />
+    <sprite x="281" y="1876" w="58" h="40" offsetX="0" offsetY="3" />
+    <sprite x="354" y="1869" w="51" h="53" offsetX="2" offsetY="5.5" />
+    <sprite x="422" y="1871" w="46" h="66" offsetX="0.5" offsetY="4.5" />
+    <sprite x="482" y="1866" w="44" h="74" offsetX="4.5" offsetY="4" />
+  </Animation>
   <Animation name="start_push" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="7" y="1959" w="55" h="45" offsetX="0" offsetY="-4" />
     <sprite x="75" y="1961" w="64" h="43" offsetX="-15" offsetY="-5" />

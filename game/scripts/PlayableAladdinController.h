@@ -18,6 +18,7 @@ private:
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
   ala::StateManager* _selfStateManager;
+  ala::Animator* _selfAnimator;
   ala::Collider* _selfBodyCollider;
   ala::PrefabV2* _throwableApplePrefab;
 
@@ -50,11 +51,13 @@ public:
 
   bool isPushingWall() const;
 
+  void resetHoldingRope();
+
   bool isHoldingRope() const;
 
-  bool hasReachedTopOfRope() const;
-
   ala::GameObject* getHodingRope() const;
+
+  bool hasReachedTopOfRope() const;
 
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,

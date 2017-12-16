@@ -15,7 +15,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _reachedTopOfRope( false ),
     _holdingRope( NULL ),
     _selfTransform( NULL ),
-    _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
+    _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
 
 void PlayableAladdinController::setLives( const int lives ) {
@@ -78,6 +78,11 @@ bool PlayableAladdinController::isHit() const {
 
 bool PlayableAladdinController::isPushingWall() const {
   return _pushingWall;
+}
+
+void PlayableAladdinController::resetHoldingRope() {
+  _holdingRope = NULL;
+  _reachedTopOfRope = false;
 }
 
 bool PlayableAladdinController::isHoldingRope() const {
@@ -148,10 +153,8 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
       onJumpOnCamel();
     }
   }
-  else if ( otherObject == _holdingRope ) {
-    if ( otherCollider->getName() == "T" ) {
-      _reachedTopOfRope = true;
-    }
+  else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
+    _reachedTopOfRope = true;
   }
 }
 
@@ -171,6 +174,9 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
         onCatchRope( otherObject );
       }
     }
+    else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
+      _reachedTopOfRope = true;
+    }
   }
 }
 
@@ -182,8 +188,7 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
 
   if ( otherObject == _holdingRope ) {
     if ( otherCollider->getName() == "M" ) {
-      _holdingRope = NULL;
-      _reachedTopOfRope = false;
+      resetHoldingRope();
     }
     else if ( otherCollider->getName() == "T" ) {
       _reachedTopOfRope = false;
@@ -195,6 +200,7 @@ void PlayableAladdinController::onInitialize() {
   _selfTransform = getGameObject()->getTransform();
   _selfActionManager = getGameObject()->getComponentT<ActionManager>();
   _selfStateManager = getGameObject()->getComponentT<StateManager>();
+  _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
   _throwableApplePrefab = GameManager::get()->getPrefabV2( "Throwable Apple" );
 }
@@ -222,11 +228,13 @@ void PlayableAladdinController::onJumpOnCamel() {
 }
 
 void PlayableAladdinController::onCatchRope( ala::GameObject* rope ) {
-  if ( _holdingRope == rope ) return;
+  if ( isHoldingRope() ||
+    _selfStateManager->getCurrentStateName() == "climb" ||
+    _selfAnimator->getActionName() == "climb_to_jump" )
+    return;
+
   _holdingRope = rope;
 
   // TODO: refactor to state transition
-  if ( _selfStateManager->getCurrentStateName() != "climb" ) {
-    _selfStateManager->changeState( "climb" );
-  }
+  _selfStateManager->changeState( "climb" );
 }
