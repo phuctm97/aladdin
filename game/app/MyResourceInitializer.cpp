@@ -23,6 +23,7 @@
 #include "../prefabs/GuardOnePrefab.h"
 #include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/GuardThreePrefab.h"
+#include "../prefabs/GuardFourPrefab.h"
 #include "../prefabs/WallPrefab.h"
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
@@ -106,6 +107,7 @@ void MyResourceInitializer::doRun() {
   new GuardOnePrefab();
   new GuardTwoPrefab();
   new GuardThreePrefab();
+  new GuardFourPrefab();
   new WallPrefab();
   new ClimbableRopePrefab();
 

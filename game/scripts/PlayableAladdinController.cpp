@@ -141,22 +141,28 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
                                ? collision.getColliderB()
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
+  const auto selfCollider = collision.getColliderA() == otherCollider
+                              ? collision.getColliderB()
+                              : collision.getColliderA();
 
-  if ( otherObject->getTag() == ENEMY_TAG &&
-    (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == KNIFE_TAG) ) {
-    onHit();
-  }
-  else if ( otherObject->getTag() == VASE_TAG ) {
-    onHit();
-  }
-  else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
-    if ( collision.getNormal() == Vec2( 0, 1 ) ) {
-      onJumpOnCamel();
+  if ( selfCollider->getTag() == ALADDIN_TAG ) {
+    if ( otherObject->getTag() == ENEMY_TAG &&
+      (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == KNIFE_TAG) ) {
+      onHit();
+    }
+    else if ( otherObject->getTag() == VASE_TAG ) {
+      onHit();
+    }
+    else if ( otherObject->getTag() == CAMEL_TAG && otherCollider->getTag() == CAMEL_TAG ) {
+      if ( collision.getNormal() == Vec2( 0, 1 ) ) {
+        onJumpOnCamel();
+      }
+    }
+    else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
+      _reachedTopOfRope = true;
     }
   }
-  else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
-    _reachedTopOfRope = true;
-  }
+  else if ( selfCollider->getTag() == SWORD_TAG ) { }
 }
 
 void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
@@ -165,18 +171,24 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
-  if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
-    onHitCharcoalBurner();
-  }
-  else if ( otherObject->getTag() == ROPE_TAG ) {
-    if ( !isHoldingRope() ) {
-      if ( otherCollider->getName() == "M"
-        && ABS(_selfTransform->getPositionX() - otherObject->getTransform()->getPositionX()) <= 5 ) {
-        onCatchRope( otherObject );
-      }
+  const auto selfCollider = collision.getColliderA() == otherCollider
+                              ? collision.getColliderB()
+                              : collision.getColliderA();
+
+  if ( selfCollider->getTag() == ALADDIN_TAG ) {
+    if ( otherObject->getTag() == CHARCOAL_BURNER_TAG ) {
+      onHitCharcoalBurner();
     }
-    else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
-      _reachedTopOfRope = true;
+    else if ( otherObject->getTag() == ROPE_TAG ) {
+      if ( !isHoldingRope() ) {
+        if ( otherCollider->getName() == "M"
+          && ABS(_selfTransform->getPositionX() - otherObject->getTransform()->getPositionX()) <= 5 ) {
+          onCatchRope( otherObject );
+        }
+      }
+      else if ( otherObject == _holdingRope && otherCollider->getName() == "T" ) {
+        _reachedTopOfRope = true;
+      }
     }
   }
 }
@@ -186,13 +198,18 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
                                ? collision.getColliderB()
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
+  const auto selfCollider = collision.getColliderA() == otherCollider
+                              ? collision.getColliderB()
+                              : collision.getColliderA();
 
-  if ( otherObject == _holdingRope ) {
-    if ( otherCollider->getName() == "M" ) {
-      resetHoldingRope();
-    }
-    else if ( otherCollider->getName() == "T" ) {
-      _reachedTopOfRope = false;
+  if ( selfCollider->getTag() == ALADDIN_TAG ) {
+    if ( otherObject == _holdingRope ) {
+      if ( otherCollider->getName() == "M" ) {
+        resetHoldingRope();
+      }
+      else if ( otherCollider->getName() == "T" ) {
+        _reachedTopOfRope = false;
+      }
     }
   }
 }

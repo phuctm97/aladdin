@@ -165,6 +165,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\BitmapTextPrefab.cpp" />
     <ClCompile Include="prefabs\CamelPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardFourPrefab.cpp" />
     <ClCompile Include="prefabs\GuardThreePrefab.cpp" />
     <ClCompile Include="prefabs\HideGuardPrefab.cpp" />
     <ClCompile Include="prefabs\NakeGuardPrefab.cpp" />
@@ -240,6 +241,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\BitmapTextPrefab.h" />
     <ClInclude Include="prefabs\CamelPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
+    <ClInclude Include="prefabs\GuardFourPrefab.h" />
     <ClInclude Include="prefabs\GuardThreePrefab.h" />
     <ClInclude Include="prefabs\HideGuardPrefab.h" />
     <ClInclude Include="prefabs\NakeGuardPrefab.h" />
