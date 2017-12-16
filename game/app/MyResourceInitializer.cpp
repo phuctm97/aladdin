@@ -26,6 +26,7 @@
 #include "../prefabs/EnemyExplosionPrefab.h"
 #include "../prefabs/HorizontalBarPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/PendalPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -98,6 +99,7 @@ void MyResourceInitializer::doRun() {
 	new ApplePrefab();
 	new HorizontalBarPrefab();
 	new PlatformPrefab();
+	new PendalPrefab();
 
 	// Dev tools
 	new NodePrefab();

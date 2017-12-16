@@ -197,6 +197,8 @@
     <ClCompile Include="scripts\StairGroupThreeController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\PendalPrefab.cpp" />
+    <ClCompile Include="scripts\PendalController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h">
@@ -334,6 +336,9 @@
     <ClInclude Include="scripts\StairGroupThreeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\PendalPrefab.h" />
+    <ClInclude Include="scripts\FatGuardController.h" />
+    <ClInclude Include="scripts\PendalController.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\playable_characters\aladdin.png">

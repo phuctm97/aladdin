@@ -59,9 +59,9 @@ void ExperimentalScene::onPreInitialize() {
 	ropeOne->getTransform()->setPosition(Vec2(1931, 86));
 	ropeOne->getComponentT<Collider>()->setSize(Size(5, 250));
 
-	const auto ropeTwo = gameManager->getPrefab("Rope")->instantiate("Rope 2");
+	/*const auto ropeTwo = gameManager->getPrefab("Rope")->instantiate("Rope 2");
 	ropeTwo->getTransform()->setPosition(Vec2(1387, 298));
-	ropeTwo->getComponentT<Collider>()->setSize(Size(5, 193));
+	ropeTwo->getComponentT<Collider>()->setSize(Size(5, 193));*/
 
 	const auto ropeThree = gameManager->getPrefab("Rope")->instantiate("Rope 3");
 	ropeThree->getTransform()->setPosition(Vec2(2539, 345));
@@ -89,8 +89,8 @@ void ExperimentalScene::onPreInitialize() {
     guardTwo->getComponentT<GuardController>()->set( 818, 620, 992 );
 
 	const auto aladdin = gameManager->getPrefab("Aladdin")->instantiate("Aladdin");
-	aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
-	//aladdin->getTransform()->setPosition(Vec2(2200, 500));
+	//aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+	aladdin->getTransform()->setPosition(Vec2(1586.5f, 600));
 	
 
 #pragma region Stair
@@ -168,6 +168,14 @@ void ExperimentalScene::onPreInitialize() {
 	
 
 #pragma endregion
+
+#pragma region Pendal
+	const auto pendal = gameManager->getPrefab("Pendal")->instantiate();
+	pendal->getComponentT<Collider>()->setOffset(Vec2(1486.5f, 128.0f));
+	//pendal->getTransform()->setPosition(Vec2(1486.5f, 128.0f));
+	pendal->getComponentT<Collider>()->setSize(Size(37.0f, 9.0f));
+#pragma endregion
+
 
 #pragma region Dev support
 	/*const auto runningBlock = gameManager->getPrefab("HorizontalBar")->instantiate();
