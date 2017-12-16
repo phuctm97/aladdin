@@ -44,7 +44,7 @@ void FloatingSalivaPrefab::doInstantiate( ala::GameObject* object, std::istrings
   new ColliderRenderer( collider );
 
   // configurations
-  object->setTag( ENEMY_TAG );
+  object->setTag( SAVILA_TAG );
   object->setLayer( "Foreground" );
 
   // states

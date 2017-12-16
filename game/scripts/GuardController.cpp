@@ -159,9 +159,13 @@ void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
                               ? collision.getColliderB()
                               : collision.getColliderA();
 
-  if ( otherObject->getTag() == ALADDIN_TAG &&
-    (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG) &&
-    selfCollider->getTag() == ENEMY_TAG ) {
-    onHit();
+  if ( selfCollider->getTag() == ENEMY_TAG ) {
+    if ( otherObject->getTag() == ALADDIN_TAG &&
+      (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG) ) {
+      onHit();
+    }
+    else if ( otherObject->getTag() == SAVILA_TAG ) {
+      onHit();
+    }
   }
 }
