@@ -17,7 +17,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ),
+    _holdingRope( NULL ), _holdingBar( NULL ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
@@ -95,6 +95,18 @@ bool PlayableAladdinController::isHoldingRope() const {
 
 bool PlayableAladdinController::hasReachedTopOfRope() const {
   return _reachedTopOfRope;
+}
+
+void PlayableAladdinController::resetHoldingBar() {
+  _holdingBar = NULL;
+}
+
+bool PlayableAladdinController::isHoldingBar() const {
+  return _holdingBar != NULL;
+}
+
+ala::GameObject* PlayableAladdinController::getHoldingBar() const {
+  return _holdingBar;
 }
 
 ala::GameObject* PlayableAladdinController::getHodingRope() const {
@@ -202,6 +214,13 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
         _reachedTopOfRope = true;
       }
     }
+    else if ( otherObject->getTag() == BAR_TAG ) {
+      if ( !isHoldingBar() ) {
+        if ( ABS(_selfTransform->getPositionY() - otherObject->getTransform()->getPositionY()) <= 5 ) {
+          onCatchBar( otherObject );
+        }
+      }
+    }
   }
 }
 
@@ -222,6 +241,9 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
       else if ( otherCollider->getName() == "T" ) {
         _reachedTopOfRope = false;
       }
+    }
+    else if ( otherObject == _holdingBar ) {
+      resetHoldingBar();
     }
   }
 }
@@ -283,4 +305,13 @@ void PlayableAladdinController::onCatchRope( ala::GameObject* rope ) {
 
   // TODO: refactor to state transition
   _selfStateManager->changeState( "climb" );
+}
+
+void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
+  if ( isHoldingBar() || _selfStateManager->getPreviousStateName() == "hold_bar_idle" ) return;
+
+  _holdingBar = bar;
+
+  // TODO: refactor to state transition
+  _selfStateManager->changeState( "hold_bar_idle" );
 }

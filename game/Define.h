@@ -14,6 +14,7 @@ enum
   KNIFE_TAG,
   VASE_TAG,
   ROPE_TAG,
+  BAR_TAG,
   HUB_TAG,
   APPLE_TAG,
   HEART_TAG,

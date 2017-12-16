@@ -458,4 +458,36 @@
     <sprite x="623" y="2407" w="44" h="133" offsetX="-11.5" offsetY="43" />
     <sprite x="682" y="2400" w="39" h="140" offsetX="-10" offsetY="46.5" />
   </Animation>
+  <Animation name="hold_bar_idle_0" imagePath="aladdin.png" interval="0" isLoop="false">
+    <sprite x="236" y="1562" w="37" h="87" offsetX="5" offsetY="2.5" />
+  </Animation>
+  <Animation name="hold_bar_idle_1" imagePath="aladdin.png" interval="0" isLoop="false">
+    <sprite x="7" y="1564" w="48" h="87" offsetX="0.5" offsetY="2" />
+  </Animation>
+  <Animation name="hold_bar_idle_0_1" imagePath="aladdin.png" interval="0.1" isLoop="false">
+    <sprite x="236" y="1562" w="37" h="87" offsetX="4" offsetY="0.5" />
+    <sprite x="181" y="1563" w="39" h="87" offsetX="2" offsetY="0.5" />
+    <sprite x="123" y="1564" w="40" h="87" offsetX="-0.5" offsetY="1" />
+    <sprite x="65" y="1564" w="46" h="86" offsetX="-0.5" offsetY="2" />
+    <sprite x="7" y="1564" w="48" h="87" offsetX="0.5" offsetY="2" />
+  </Animation>
+  <Animation name="hold_bar_idle_1_0" imagePath="aladdin.png" interval="0.1" isLoop="false">
+    <sprite x="7" y="1564" w="48" h="87" offsetX="0.5" offsetY="2" />
+    <sprite x="65" y="1564" w="46" h="86" offsetX="-0.5" offsetY="2" />
+    <sprite x="123" y="1564" w="40" h="87" offsetX="-0.5" offsetY="1" />
+    <sprite x="181" y="1563" w="39" h="87" offsetX="2" offsetY="0.5" />
+    <sprite x="236" y="1562" w="37" h="87" offsetX="4" offsetY="0.5" />
+  </Animation>
+  <Animation name="hold_bar_move" imagePath="aladdin.png" interval="0.1" isLoop="true">
+    <sprite x="10" y="1467" w="39" h="77" offsetX="0" offsetY="7.5" />
+    <sprite x="57" y="1469" w="53" h="71" offsetX="-8" offsetY="10.5" />
+    <sprite x="120" y="1470" w="51" h="76" offsetX="-1" offsetY="7" />
+    <sprite x="191" y="1470" w="43" h="79" offsetX="2" offsetY="4.5" />
+    <sprite x="258" y="1468" w="35" h="82" offsetX="2" offsetY="4" />
+    <sprite x="311" y="1468" w="42" h="82" offsetX="0" offsetY="4" />
+    <sprite x="366" y="1471" w="49" h="76" offsetX="-3" offsetY="7" />
+    <sprite x="430" y="1473" w="56" h="79" offsetX="-4.5" offsetY="4.5" />
+    <sprite x="517" y="1471" w="46" h="80" offsetX="3.5" offsetY="3" />
+    <sprite x="586" y="1473" w="33" h="75" offsetX="2" offsetY="6.5" />
+  </Animation>
 </Animations>

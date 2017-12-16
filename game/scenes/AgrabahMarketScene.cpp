@@ -52,6 +52,11 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+  /* Bars */
+  gameManager->getPrefabV2( "Holdable Bar" )->instantiateWithArgs( "260" )
+             ->getTransform()
+             ->setPosition( 128, 42 );
+
   /* Checkpoints 
   gameManager->getPrefabV2( "Check Point" )->instantiateWithArgs( "" )
              ->getTransform()

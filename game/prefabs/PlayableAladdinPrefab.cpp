@@ -21,6 +21,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
   const auto climbVelocity = 60.0f;
+  const auto holdBarMoveVelocity = 80.0f;
   const auto stopAcceleration = 4.0f;
   const auto throwImpulse = Vec2( 20000.0f, 1000.0f );
   const auto swordOffset1 = Vec2( 45, 10 );
@@ -63,7 +64,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   const auto direction = new DirectionController( object, true, 1 );
   direction->addReverseCase( [=] {
-    return animator->getActionName() == "climb_attack" || animator->getActionName() == "climb_throw";
+    return animator->getActionName().substr( 0, 8 ) == "hold_bar" ||
+      animator->getActionName() == "climb_attack" || animator->getActionName() == "climb_throw";
   } );
 
   const auto controller = new PlayableAladdinController( object );
@@ -91,7 +93,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   // states
   //  new State( stateManager, "null", NULL, NULL, NULL );
-  //    new AnimationEditor( object, "climb_throw" );
+  //  new AnimationEditor( object, "hold_bar_move" );
 
   new State( stateManager, "initial", [=] {
                if ( myAppData->getCurrentCheckpoint() == 0 ) {
@@ -1215,6 +1217,235 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                }
              } );
 
+  new State( stateManager, "hold_bar_idle",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "hold_bar_idle_0" );
+                 timer1->start( (rand() % 10 + 1) / 10.0f );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             },
+             [=]( float dt ) {
+               // animation effect
+               {
+                 if ( !animator->isPlaying() && timer1->isDone() ) {
+                   if ( animator->getActionName() == "hold_bar_idle_0" ) {
+                     animator->setAction( "hold_bar_idle_0_1" );
+                   }
+                   else if ( animator->getActionName() == "hold_bar_idle_0_1" ) {
+                     animator->setAction( "hold_bar_idle_1" );
+                     timer1->start( (rand() % 10 + 1) / 10.0f );
+                   }
+                   else if ( animator->getActionName() == "hold_bar_idle_1" ) {
+                     animator->setAction( "hold_bar_idle_1_0" );
+                   }
+                   else if ( animator->getActionName() == "hold_bar_idle_1_0" ) {
+                     animator->setAction( "hold_bar_idle_0" );
+                     timer1->start( (rand() % 10 + 1) / 10.0f );
+                   }
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // position
+               {
+                 transform->setPositionY( controller->getHoldingBar()->getTransform()->getPositionY() );
+               }
+             },
+             [=] {
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             } );
+
+  new State( stateManager, "hold_bar_move",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "hold_bar_move" );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+               }
+             },
+             [=]( float dt ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // position
+               {
+                 transform->setPositionY( controller->getHoldingBar()->getTransform()->getPositionY() );
+               }
+
+               // move
+               {
+                 body->setVelocity( Vec2( holdBarMoveVelocity, 0 ) );
+               }
+             },
+             [=] {
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             } );
+
+  new State( stateManager, "hold_bar_attack",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "climb_attack" );
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // sword
+               {
+                 swordCollider->setOffset( swordOffset7 );
+                 swordCollider->setSize( swordSize7 );
+                 swordCollider->setActive( false );
+                 timer3->start( 0.2f );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             },
+             [=]( float dt ) {
+               // sword
+               {
+                 if ( timer3->isDone() ) {
+                   if ( !swordCollider->isActive() ) {
+                     swordCollider->setActive( true );
+                     timer3->start( 5 );
+                   }
+                   else {
+                     swordCollider->setActive( false );
+                   }
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // position
+               {
+                 transform->setPositionY( controller->getHoldingBar()->getTransform()->getPositionY() );
+               }
+             },
+             [=] {
+               // sword
+               {
+                 swordCollider->setActive( false );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             } );
+
+  new State( stateManager, "hold_bar_throw",
+             [=] {
+               {
+                 animator->setAction( "climb_throw" );
+               }
+
+               // throw
+               {
+                 timer1->start( 0.2f );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             },
+             [=]( float dt ) {
+               // throw
+               {
+                 if ( timer1->isDone() ) {
+                   if ( direction->isRight() ) {
+                     controller->throwApple( 'R', 0, -collider->getSize().getHeight() * 0.55f,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
+                   else {
+                     controller->throwApple( 'L', 0, -collider->getSize().getHeight() * 0.55f,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
+
+                   timer1->start( 5.0f );
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // position
+               {
+                 transform->setPositionY( controller->getHoldingBar()->getTransform()->getPositionY() );
+               }
+             },
+             [=] {
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+             } );
+
   new State( stateManager, "hit", [=] {
     // animation effect 
     {
@@ -1458,5 +1689,39 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   new StateTransition( stateManager, "climb_throw", "climb", [=] {
     return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "hold_bar_idle", "hold_bar_move", [=] {
+    return ((direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW ))
+      || (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW )));
+  } );
+
+  new StateTransition( stateManager, "hold_bar_move", "hold_bar_idle", [=] {
+    return (direction->isRight() && !input->getKey( ALA_KEY_RIGHT_ARROW ))
+      || (direction->isLeft() && !input->getKey( ALA_KEY_LEFT_ARROW ));
+  } );
+
+  new StateTransition( stateManager, "hold_bar_idle", "hold_bar_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "hold_bar_attack", "hold_bar_idle", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "hold_bar_idle", "hold_bar_throw", [=] {
+    return input->getKeyDown( ALA_KEY_A ) && controller->getApples() > 0;;
+  } );
+
+  new StateTransition( stateManager, "hold_bar_throw", "hold_bar_idle", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "hold_bar_idle", "fall", [=] {
+    return !controller->isHoldingBar() || input->getKeyDown( ALA_KEY_D );
+  } );
+
+  new StateTransition( stateManager, "hold_bar_move", "fall", [=] {
+    return !controller->isHoldingBar();
   } );
 }
