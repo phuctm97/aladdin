@@ -57,7 +57,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto direction = new DirectionController( object, true, 1 );
   direction->addReverseCase( [=] {
-    return animator->getActionName() == "climb_attack";
+    return animator->getActionName() == "climb_attack" || animator->getActionName() == "climb_throw";
   } );
 
   const auto controller = new PlayableAladdinController( object );
@@ -85,7 +85,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // states
   new State( stateManager, "null", NULL, NULL, NULL );
-  //  new AnimationEditor( object, "climb_attack" );
+  //    new AnimationEditor( object, "climb_throw" );
 
   new State( stateManager, "idle",
              [=] {
@@ -1127,6 +1127,68 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              } );
 
+  new State( stateManager, "climb_throw",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "climb_throw" );
+               }
+
+               // throw
+               {
+                 timer1->start( 0.2f );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+               }
+             },
+             [=]( float ) {
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // throw
+               {
+                 if ( timer1->isDone() ) {
+                   if ( direction->isRight() ) {
+                     controller->throwApple( 'R', 0, -collider->getSize().getHeight() * 0.55f,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
+                   else {
+                     controller->throwApple( 'L', 0, -collider->getSize().getHeight() * 0.55f,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
+
+                   timer1->start( 5.0f );
+                 }
+               }
+
+               // move 
+               {
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+
+               // position
+               {
+                 transform->setPositionX( controller->getHodingRope()->getTransform()->getPositionX() );
+               }
+             },
+             [=] {
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+               }
+             } );
+
   new State( stateManager, "hit", [=] {
     // animation effect 
     {
@@ -1353,10 +1415,18 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "climb", "climb_attack", [=] {
-    return input->getKeyDown( ALA_KEY_S );
+    return input->getKeyDown( ALA_KEY_S ) && !animator->isPlaying();
   } );
 
   new StateTransition( stateManager, "climb_attack", "climb", [=] {
+    return !animator->isPlaying();
+  } );
+
+  new StateTransition( stateManager, "climb", "climb_throw", [=] {
+    return input->getKeyDown( ALA_KEY_A ) && !animator->isPlaying() && controller->getApples() > 0;
+  } );
+
+  new StateTransition( stateManager, "climb_throw", "climb", [=] {
     return !animator->isPlaying();
   } );
 }

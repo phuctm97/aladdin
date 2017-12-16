@@ -10,7 +10,7 @@ void ClimbableRopePrefab::doInstantiate( ala::GameObject* object, std::istringst
   const auto height = nextFloat( argsStream );
   const auto width = 3.0f;
   const auto topSize = 5.0f;
-  const auto topPadding = 30.0f;
+  const auto topPadding = 40.0f;
   const auto mainSize = height - topSize - topPadding;
 
   // components
