@@ -11,7 +11,9 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
   : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
     _hit( false ),
     _jumpOnCamel( false ),
-    _collidingWall( false ),
+    _pushingWall( false ),
+    _reachedTopOfRope( false ),
+    _holdingRope( NULL ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfBodyCollider( NULL ),
     _throwableApplePrefab( NULL ) {}
@@ -74,8 +76,20 @@ bool PlayableAladdinController::isHit() const {
   return _hit;
 }
 
-bool PlayableAladdinController::isCollidingWall() const {
-  return _collidingWall;
+bool PlayableAladdinController::isPushingWall() const {
+  return _pushingWall;
+}
+
+bool PlayableAladdinController::isHoldingRope() const {
+  return _holdingRope != NULL;
+}
+
+bool PlayableAladdinController::hasReachedTopOfRope() const {
+  return _reachedTopOfRope;
+}
+
+ala::GameObject* PlayableAladdinController::getHodingRope() const {
+  return _holdingRope;
 }
 
 void PlayableAladdinController::throwApple( const char direction,
@@ -102,7 +116,7 @@ void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& coll
 
   if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG
     && collision.getNormal().getY() == 0 ) {
-    _collidingWall = true;
+    _pushingWall = true;
   }
 }
 
@@ -113,7 +127,7 @@ void PlayableAladdinController::onCollisionExit( const ala::CollisionInfo& colli
   const auto otherObject = otherCollider->getGameObject();
 
   if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG ) {
-    _collidingWall = false;
+    _pushingWall = false;
   }
 }
 
@@ -134,6 +148,11 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
       onJumpOnCamel();
     }
   }
+  else if ( otherObject == _holdingRope ) {
+    if ( otherCollider->getName() == "T" ) {
+      _reachedTopOfRope = true;
+    }
+  }
 }
 
 void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
@@ -146,8 +165,11 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
     onHitCharcoalBurner();
   }
   else if ( otherObject->getTag() == ROPE_TAG ) {
-    if ( _selfStateManager->getCurrentStateName() != "climb" ) {
-      startClimb();
+    if ( !isHoldingRope() ) {
+      if ( otherCollider->getName() == "M"
+        && ABS(_selfTransform->getPositionX() - otherObject->getTransform()->getPositionX()) <= 5 ) {
+        onCatchRope( otherObject );
+      }
     }
   }
 }
@@ -158,6 +180,15 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
+  if ( otherObject == _holdingRope ) {
+    if ( otherCollider->getName() == "M" ) {
+      _holdingRope = NULL;
+      _reachedTopOfRope = false;
+    }
+    else if ( otherCollider->getName() == "T" ) {
+      _reachedTopOfRope = false;
+    }
+  }
 }
 
 void PlayableAladdinController::onInitialize() {
@@ -190,9 +221,12 @@ void PlayableAladdinController::onJumpOnCamel() {
   _selfStateManager->changeState( "jump" );
 }
 
-void PlayableAladdinController::startClimb() {
-
+void PlayableAladdinController::onCatchRope( ala::GameObject* rope ) {
+  if ( _holdingRope == rope ) return;
+  _holdingRope = rope;
 
   // TODO: refactor to state transition
-  _selfStateManager->changeState( "climb" );
+  if ( _selfStateManager->getCurrentStateName() != "climb" ) {
+    _selfStateManager->changeState( "climb" );
+  }
 }

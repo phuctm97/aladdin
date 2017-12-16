@@ -45,8 +45,8 @@ void AgrabahMarketScene::onPreInitialize() {
 
   /* Ropes */
 
-  gameManager->getPrefabV2( "Climbable Rope" )->instantiateWithArgs( "200" )
-             ->getTransform()->setPosition( Vec2( 1930, 79 ) )->getGameObject();
+  gameManager->getPrefabV2( "Climbable Rope" )->instantiateWithArgs( "260" )
+             ->getTransform()->setPosition( Vec2( 1930, 252 ) );
 
 
   /* Charcoal Burners  

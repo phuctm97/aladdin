@@ -14,6 +14,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto input = Input::get();
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
+  const auto climbVelocity = 60.0f;
   const auto stopAcceleration = 4.0f;
   const auto throwImpulse = Vec2( 20000.0f, 1000.0f );
   const auto swordOffset1 = Vec2( 45, 10 );
@@ -971,34 +972,55 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                    animator->pause();
                  }
                  else {
-                   if ( dir == 'U' ) animator->setReverse( false );
-                   else if ( dir == 'D' ) animator->setReverse( true );
-                   animator->play();
+                   if ( dir == 'U' ) {
+                     if ( !controller->hasReachedTopOfRope() ) {
+                       animator->setReverse( false );
+                       animator->play();
+                     }
+                     else {
+                       animator->pause();
+                     }
+                   }
+                   else if ( dir == 'D' ) {
+                     animator->setReverse( true );
+                     animator->play();
+                   }
                  }
                }
 
                // move
                {
                  if ( dir == 'U' ) {
-                   body->setVelocity( Vec2( 0, 50 ) );
+                   if ( !controller->hasReachedTopOfRope() ) {
+                     body->setVelocity( Vec2( 0, climbVelocity ) );
+                   }
+                   else {
+                     body->setVelocity( Vec2( 0, 0 ) );
+                   }
                  }
                  else if ( dir == 'D' ) {
-                   body->setVelocity( Vec2( 0, -50 ) );
+                   body->setVelocity( Vec2( 0, -climbVelocity ) );
                  }
                  else {
                    body->setVelocity( Vec2( 0, 0 ) );
                  }
                }
+
+               // position
+               {
+                 transform->setPositionX( controller->getHodingRope()->getTransform()->getPositionX() );
+               }
              },
              [=] {
                // animation effect 
                {
-                 animator->setReverse(false);
+                 animator->setReverse( false );
                }
 
                // move
                {
                  body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                }
              } );
 
@@ -1212,10 +1234,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   } );
 
   new StateTransition( stateManager, "run", "push", [=] {
-    return controller->isCollidingWall();
+    return controller->isPushingWall();
   } );
 
   new StateTransition( stateManager, "push", "idle", [=] {
-    return !controller->isCollidingWall();
+    return !controller->isPushingWall();
+  } );
+
+  new StateTransition( stateManager, "climb", "fall", [=] {
+    return !controller->isHoldingRope();
   } );
 }

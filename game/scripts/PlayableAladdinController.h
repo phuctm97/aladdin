@@ -11,7 +11,9 @@ private:
   bool _recovering;
   bool _hit;
   bool _jumpOnCamel;
-  bool _collidingWall;
+  bool _pushingWall;
+  bool _reachedTopOfRope;
+  ala::GameObject* _holdingRope;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -46,7 +48,13 @@ public:
 
   bool isHit() const;
 
-  bool isCollidingWall() const;
+  bool isPushingWall() const;
+
+  bool isHoldingRope() const;
+
+  bool hasReachedTopOfRope() const;
+
+  ala::GameObject* getHodingRope() const;
 
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
@@ -72,7 +80,7 @@ private:
 
   void onJumpOnCamel();
 
-  void startClimb();
+  void onCatchRope( ala::GameObject* rope );
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
