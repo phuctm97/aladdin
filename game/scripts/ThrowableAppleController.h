@@ -6,17 +6,14 @@
 class ThrowableAppleController : public ala::GameObjectComponent
 {
 private:
-  bool _collidedWithGround;
-  bool _colliedWithEnemy;
+	bool _collided;
 
 public:
-  ThrowableAppleController( ala::GameObject* gameObject, const std::string& name = "" );
+	ThrowableAppleController(ala::GameObject* gameObject, const std::string& name = "");
 
-  bool isCollidedWithGround() const;
+	bool isCollided() const;
 
-  bool isCollidedWithEnemy() const;
-
-  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
+	void onTriggerEnter(const ala::CollisionInfo& collision) override;
 };
 
 #endif //!__THROWABLE_APPLE_CONTROLLER_H__

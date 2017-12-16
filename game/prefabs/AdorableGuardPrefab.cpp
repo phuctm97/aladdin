@@ -1,7 +1,6 @@
 #include "AdorableGuardPrefab.h"
-#include "../scripts/FatGuardController.h"
-#include "../Define.h"
 #include "../scripts/AdorableGuardController.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 

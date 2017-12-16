@@ -3,52 +3,82 @@
 
 USING_NAMESPACE_ALA;
 
+ALA_CLASS_SOURCE_1(CameraController, ala::GameObjectComponent)
+
 CameraController::CameraController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _targetPosition( 0, 0 ), _movingSpeed( 7.0f ) {}
+  : GameObjectComponent( gameObject, name ), _targetPosition( 0, 0 ), _movingSpeed( 7.0f ),
+    _selfTransform( NULL ),
+    _aladdinTransform( NULL ), _aladdinStateManager( NULL ), _aladdinDirection( NULL ), _aladdinAnimator( NULL ),
+    _backgroundLeft( 0 ), _backgroundRight( 0 ),
+    _backgroundTop( 0 ), _backgroundBottom( 0 ) {}
+
+void CameraController::onInitialize() {
+  const auto gameManager = GameManager::get();
+
+  const auto halfVisibleWidth = gameManager->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
+
+  const auto background = gameManager->getObjectByTag( BACKGROUND_TAG );
+  if ( background != NULL ) {
+    const auto& backgroundPosition = background->getTransform()->getPosition();
+    const auto& backgroundFrameSize = background->getComponentT<SpriteRenderer>()
+                                                ->getFrameSize();
+
+    _backgroundLeft = backgroundPosition.getX() - backgroundFrameSize.getWidth() / 2;
+    _backgroundRight = backgroundPosition.getX() + backgroundFrameSize.getWidth() / 2;
+    _backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
+    _backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
+  }
+
+  _selfTransform = getGameObject()->getTransform();
+
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin != NULL ) {
+    _aladdinTransform = aladdin->getTransform();
+    _aladdinStateManager = aladdin->getComponentT<StateManager>();
+    _aladdinAnimator = aladdin->getComponentT<Animator>();
+    _aladdinDirection = aladdin->getComponentT<DirectionController>();
+
+    _selfTransform->setPosition( _aladdinTransform->getPosition() );
+
+    // guard camera in background bounding zone
+    if ( _selfTransform->getPositionX() - _backgroundLeft < halfVisibleWidth ) {
+      _selfTransform->setPositionX( _backgroundLeft + halfVisibleWidth );
+    }
+    else if ( _backgroundRight - _selfTransform->getPositionX() < halfVisibleWidth ) {
+      _selfTransform->setPositionX( _backgroundRight - halfVisibleWidth );
+    }
+    if ( _selfTransform->getPositionY() - _backgroundBottom < halfVisibleHeight ) {
+      _selfTransform->setPositionY( _backgroundBottom + halfVisibleHeight );
+    }
+    else if ( _backgroundTop - _selfTransform->getPositionY() < halfVisibleHeight ) {
+      _selfTransform->setPositionY( _backgroundTop - halfVisibleHeight );
+    }
+  }
+}
 
 void CameraController::onUpdate( const float delta ) {
-  auto transform = getGameObject()->getTransform();
+  const auto gameManager = GameManager::get();
+  const auto input = Input::get();
 
-  const auto halfVisibleWidth = GameManager::get()->getVisibleWidth() / 2;
-  const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
+  const auto halfVisibleWidth = gameManager->getVisibleWidth() / 2;
+  const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
 
-  const auto background = GameManager::get()->getObjectByTag( BACKGROUND_TAG );
-  if ( background == NULL ) return;
-
-  const auto& backgroundPosition = background->getTransform()->getPosition();
-  const auto& backgroundFrameSize = background->getComponentT<SpriteRenderer>()
-                                              ->getFrameSize();
-
-  const auto backgroundLeft = backgroundPosition.getX() - backgroundFrameSize.getWidth() / 2;
-  const auto backgroundRight = backgroundPosition.getX() + backgroundFrameSize.getWidth() / 2;
-  const auto backgroundTop = backgroundPosition.getY() + backgroundFrameSize.getHeight() / 2;
-  const auto backgroundBottom = backgroundPosition.getY() - backgroundFrameSize.getHeight() / 2;
-
-  const auto aladdin = GameManager::get()->getObjectByTag( ALADDIN_TAG );
-  if ( aladdin == NULL ) return;
-
-  const auto& aladdinPosition = aladdin->getTransform()->getPosition();
-  const auto& aladdinScale = aladdin->getTransform()->getScale();
+  const auto& aladdinPosition = _aladdinTransform->getPosition();
 
   // aladdin horizontal direction
-  if ( aladdinScale.getX() >= 0 ) {
+  if ( _aladdinDirection->isRight() ) {
     _targetPosition.setX( aladdinPosition.getX() + halfVisibleWidth * 0.25f );
   }
-  else {
+  else if ( _aladdinDirection->isLeft() ) {
     _targetPosition.setX( aladdinPosition.getX() - halfVisibleWidth * 0.25f );
   }
 
   // aladdin vertical direction
-  const auto aladdinStateManager = aladdin->getComponentT<StateManager>();
-  if ( aladdinStateManager != NULL &&
-    (aladdinStateManager->getCurrentStateName() == "face_up_left" ||
-      aladdinStateManager->getCurrentStateName() == "face_up_right" ||
-      aladdinStateManager->getCurrentStateName() == "attack_2_left" ||
-      aladdinStateManager->getCurrentStateName() == "attack_2_right" ||
-      (aladdinStateManager->getCurrentStateName() == "idle_left" &&
-        aladdinStateManager->getPreviousStateName() == "attack_2_left") ||
-      (aladdinStateManager->getCurrentStateName() == "idle_right" &&
-        aladdinStateManager->getPreviousStateName() == "attack_2_right")) ) {
+  if ( _aladdinStateManager != NULL &&
+    (_aladdinStateManager->getCurrentStateName() == "face_up" ||
+      _aladdinStateManager->getCurrentStateName() == "face_up_attack" ||
+      _aladdinStateManager->getCurrentStateName() == "face_up_throw") ) {
     _targetPosition.setY( aladdinPosition.getY() + halfVisibleHeight * 0.7f );
   }
   else {
@@ -56,28 +86,28 @@ void CameraController::onUpdate( const float delta ) {
   }
 
   // guard camera in background bounding zone
-  if ( _targetPosition.getX() - backgroundLeft < halfVisibleWidth ) {
-    _targetPosition.setX( backgroundLeft + halfVisibleWidth );
+  if ( _targetPosition.getX() - _backgroundLeft < halfVisibleWidth ) {
+    _targetPosition.setX( _backgroundLeft + halfVisibleWidth );
   }
-  else if ( backgroundRight - _targetPosition.getX() < halfVisibleWidth ) {
-    _targetPosition.setX( backgroundRight - halfVisibleWidth );
+  else if ( _backgroundRight - _targetPosition.getX() < halfVisibleWidth ) {
+    _targetPosition.setX( _backgroundRight - halfVisibleWidth );
   }
-  if ( _targetPosition.getY() - backgroundBottom < halfVisibleHeight ) {
-    _targetPosition.setY( backgroundBottom + halfVisibleHeight );
+  if ( _targetPosition.getY() - _backgroundBottom < halfVisibleHeight ) {
+    _targetPosition.setY( _backgroundBottom + halfVisibleHeight );
   }
-  else if ( backgroundTop - _targetPosition.getY() < halfVisibleHeight ) {
-    _targetPosition.setY( backgroundTop - halfVisibleHeight );
+  else if ( _backgroundTop - _targetPosition.getY() < halfVisibleHeight ) {
+    _targetPosition.setY( _backgroundTop - halfVisibleHeight );
   }
 
   // move camera toward target
-  const auto diff = _targetPosition - transform->getPosition();
+  const auto diff = _targetPosition - _selfTransform->getPosition();
   const auto diffLength = diff.getLength();
   if ( diffLength <= _movingSpeed ) {
-    transform->setPosition( _targetPosition );
+    _selfTransform->setPosition( _targetPosition );
   }
   else {
     const auto normalizedDiff = diff / diffLength;
-    transform->setPosition( transform->getPosition() + normalizedDiff * _movingSpeed );
+    _selfTransform->setPosition( _selfTransform->getPosition() + normalizedDiff * _movingSpeed );
   }
 }
 

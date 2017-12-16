@@ -13,6 +13,7 @@
 #include "core/GameObjectComponent.h"
 #include "core/GameResource.h"
 #include "core/Prefab.h"
+#include "core/PrefabV2.h"
 #include "core/ResourceInitializer.h"
 #include "core/MessageArgs.h"
 #include "core/Messenger.h"
@@ -38,6 +39,8 @@
 #include "2d/Animation.h"
 #include "2d/Animator.h"
 #include "2d/LineRenderer.h"
+#include "2d/BitmapFont.h"
+#include "2d/BitmapText.h"
 #include "input/InputInclude.h"
 #include "input/Input.h"
 #include "audio/AudioInclude.h"
@@ -64,5 +67,6 @@
 #include "extra/RotateBy.h"
 #include "extra/Sequence.h"
 #include "extra/Repeat.h"
+#include "extra/CallFunc.h"
 
 #endif //!__ALADDIN_H__

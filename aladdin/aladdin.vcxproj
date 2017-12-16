@@ -172,6 +172,8 @@
     <ClInclude Include="2d\Animation.h" />
     <ClInclude Include="2d\AnimationAction.h" />
     <ClInclude Include="2d\Animator.h" />
+    <ClInclude Include="2d\BitmapFont.h" />
+    <ClInclude Include="2d\BitmapText.h" />
     <ClInclude Include="2d\Camera.h" />
     <ClInclude Include="2d\CameraPrefab.h" />
     <ClInclude Include="2d\Graphics.h" />
@@ -198,6 +200,7 @@
     <ClInclude Include="core\GameObject.h" />
     <ClInclude Include="core\GameObjectComponent.h" />
     <ClInclude Include="core\GameResource.h" />
+    <ClInclude Include="core\PrefabV2.h" />
     <ClInclude Include="core\QuadNode.h" />
     <ClInclude Include="core\QuadTree.h" />
     <ClInclude Include="core\State.h" />
@@ -222,6 +225,7 @@
     <ClInclude Include="extra\ActionManager.h" />
     <ClInclude Include="extra\AnimationEditor.h" />
     <ClInclude Include="extra\Blink.h" />
+    <ClInclude Include="extra\CallFunc.h" />
     <ClInclude Include="extra\ExtraInclude.h" />
     <ClInclude Include="extra\ExtraMacros.h" />
     <ClInclude Include="extra\MoveBy.h" />
@@ -252,6 +256,8 @@
     <ClCompile Include="2d\Animation.cpp" />
     <ClCompile Include="2d\AnimationAction.cpp" />
     <ClCompile Include="2d\Animator.cpp" />
+    <ClCompile Include="2d\BitmapFont.cpp" />
+    <ClCompile Include="2d\BitmapText.cpp" />
     <ClCompile Include="2d\Camera.cpp" />
     <ClCompile Include="2d\CameraPrefab.cpp" />
     <ClCompile Include="2d\Graphics.cpp" />
@@ -273,6 +279,7 @@
     <ClCompile Include="core\GameObject.cpp" />
     <ClCompile Include="core\GameObjectComponent.cpp" />
     <ClCompile Include="core\GameResource.cpp" />
+    <ClCompile Include="core\PrefabV2.cpp" />
     <ClCompile Include="core\QuadNode.cpp" />
     <ClCompile Include="core\QuadTree.cpp" />
     <ClCompile Include="core\State.cpp" />
@@ -296,6 +303,7 @@
     <ClCompile Include="extra\ActionManager.cpp" />
     <ClCompile Include="extra\AnimationEditor.cpp" />
     <ClCompile Include="extra\Blink.cpp" />
+    <ClCompile Include="extra\CallFunc.cpp" />
     <ClCompile Include="extra\MoveBy.cpp" />
     <ClCompile Include="extra\RectRenderer.cpp" />
     <ClCompile Include="extra\Repeat.cpp" />

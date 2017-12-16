@@ -3,14 +3,14 @@
 
 #include <aladdin.h>
 
-class ThrowableApplePrefab : ala::Prefab
+class ThrowableApplePrefab : ala::PrefabV2
 {
 public:
   ThrowableApplePrefab()
-    : Prefab( "Throwable Apple" ) {}
+    : PrefabV2( "Throwable Apple" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 

@@ -58,6 +58,9 @@
     <Filter Include="animations\bosses">
       <UniqueIdentifier>{ae6ce757-92a4-4d44-9fc5-97d83c1b9214}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\nonplayable_characters">
+      <UniqueIdentifier>{4c846ba6-2bca-41b8-b020-aee26e918643}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -69,70 +72,70 @@
     <ClCompile Include="app\MyResourceInitializer.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AladdinPrefab.cpp">
+    <ClCompile Include="prefabs\AbuBonusPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\CameraController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="scenes\ExperimentalScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\AladdinController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\GroundPrefab.cpp">
+    <ClCompile Include="prefabs\AbuPrefab.cpp">
       <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\ThrowableAppleController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\NodePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\NodeController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="scenes\MenuScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\NormalTextPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\RopePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\ThinGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ThinGuardPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\BigTextPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\FatGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\FatGuardPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\AdorableGuardController.cpp">
-      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AdorableGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\ThrowableKnifeController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
+    <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairPrefab.cpp">
+    <ClCompile Include="prefabs\AgrabahMarketStairOnePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\BigExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\BitmapTextPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\CamelPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EatableApplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ExtraHealthPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FlamePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GenieBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GenieLampPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GuardOnePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GuardTwoPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HandEnemyPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HubPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\MenuSelectPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\NodePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\HideGuardController.cpp">
@@ -147,107 +150,287 @@
     <ClCompile Include="prefabs\NakeGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\FirePrefab.cpp">
+    <ClCompile Include="prefabs\PeddlerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp">
+    <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\RestartPointPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SpendThesePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SpringPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SpritePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ThrowableApplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\AgrabahMarketScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\ExperimentalScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\MenuScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\AbuBonusController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\AdorableGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CamelController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CameraController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CameraFollower.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CharcoalBurnerCollisionTracker.cpp">
+      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\CharcoalBurnerController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\HubPrefab.cpp">
-      <Filter>prefabs</Filter>
+    <ClCompile Include="scripts\CollisionTracker.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DebugCameraController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DirectionController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ExtraHealthController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GenieBonusController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GenieLampController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\GuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\HandEnemyController.cpp">
+      <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\HubController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\NodeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PeddlerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PlayableAladdinController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\RestartPointController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\SpendTheseController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\SpringController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StaticMapBlockerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThrowableAppleController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ThrowableKnifeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SmallFireworkPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FallingVasePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\WallPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\ClimbableRopePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Define.h" />
     <ClInclude Include="app\MyApp.h">
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="app\MyResourceInitializer.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\AladdinPrefab.h">
+    <ClInclude Include="prefabs\AbuBonusPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\CameraController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="scenes\ExperimentalScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\AladdinController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\GroundPrefab.h">
+    <ClInclude Include="prefabs\AbuPrefab.h">
       <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ThrowableApplePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\ThrowableAppleController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\NodePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\NodeController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="scenes\MenuScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\NormalTextPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\RopePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\ThinGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ThinGuardPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\BigTextPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="scripts\FatGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\FatGuardPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\AdorableGuardController.h">
-      <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AdorableGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\ThrowableKnifeController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
+    <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\StairPrefab.h">
+    <ClInclude Include="prefabs\AgrabahMarketStairOnePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\FirePrefab.h">
+    <ClInclude Include="prefabs\BigExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\BitmapTextPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\CamelPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\CharcoalBurnerController.h">
-      <Filter>scripts</Filter>
+    <ClInclude Include="prefabs\EatableApplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EnemyExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ExtraHealthPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FlamePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GenieBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GenieLampPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GuardOnePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GuardTwoPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HandEnemyPrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\HubPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\MenuSelectPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\NodePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PeddlerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PlayableAladdinPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\RestartPointPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SpendThesePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SpringPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SpritePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StaticMapBlockerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ThrowableApplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\AgrabahMarketScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\ExperimentalScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\MenuScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\AbuBonusController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\AdorableGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CamelController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CameraController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CameraFollower.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CharcoalBurnerCollisionTracker.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CharcoalBurnerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CollisionTracker.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DebugCameraController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DirectionController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ExtraHealthController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GenieBonusController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GenieLampController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\GuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\HandEnemyController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\HubController.h">
       <Filter>scripts</Filter>
@@ -264,34 +447,100 @@
     <ClInclude Include="prefabs\NakeGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\NodeController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PeddlerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PlayableAladdinController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\RestartPointController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\SpendTheseController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\SpringController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StaticMapBlockerController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThrowableAppleController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ThrowableKnifeController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SmallFireworkPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FloatingSalivaPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FallingVasePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\WallPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\ClimbableRopePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\playable_characters\aladdin.png">
-      <Filter>texures\playable_characters</Filter>
-    </Image>
     <Image Include="textures\backgrounds\scene_1_0.png">
       <Filter>texures\backgrounds</Filter>
     </Image>
     <Image Include="textures\backgrounds\scene_1_1.png">
       <Filter>texures\backgrounds</Filter>
     </Image>
-    <Image Include="textures\miscellaneous\cutscenes.png">
-      <Filter>texures\miscellaneous</Filter>
+    <Image Include="textures\bosses\jafar.png">
+      <Filter>texures\bosses</Filter>
     </Image>
-    <Image Include="textures\enemies\guards.png">
+    <Image Include="textures\enemies\civilian_enemies.png">
       <Filter>texures\enemies</Filter>
     </Image>
     <Image Include="textures\enemies\guards2.png">
       <Filter>texures\enemies</Filter>
     </Image>
-    <Image Include="textures\enemies\civilian-enemies.png">
+    <Image Include="textures\enemies\guards.png">
       <Filter>texures\enemies</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\cutscenes.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\enemy_explosions.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\font_one.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\font_two.png">
+      <Filter>texures\miscellaneous</Filter>
     </Image>
     <Image Include="textures\miscellaneous\items.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
-    <Image Include="textures\miscellaneous\numbers.png">
+    <Image Include="textures\miscellaneous\title.png">
       <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\nonplayable_characters\abu.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\nonplayable_characters\camel.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\nonplayable_characters\peddler.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\nonplayable_characters\spring.png">
+      <Filter>texures\nonplayable_characters</Filter>
+    </Image>
+    <Image Include="textures\playable_characters\aladdin.png">
+      <Filter>texures\playable_characters</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -300,38 +549,62 @@
     <Text Include="note.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="animations\playable_characters\aladdin.anm">
-      <Filter>animations\playable_characters</Filter>
-    </Xml>
     <Xml Include="animations\enemies\guards2.anm">
       <Filter>animations\enemies</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <None Include="animations\miscellaneous\cutscenes.anm">
-      <Filter>animations\miscellaneous</Filter>
+    <None Include="animations\bosses\jafar.anm">
+      <Filter>animations\bosses</Filter>
+    </None>
+    <None Include="animations\enemies\civilian_enemies.anm">
+      <Filter>animations\enemies</Filter>
     </None>
     <None Include="animations\enemies\guards.anm">
       <Filter>animations\enemies</Filter>
     </None>
-    <None Include="animations\bosses\jafar.anm">
-      <Filter>animations\bosses</Filter>
+    <None Include="animations\miscellaneous\apple.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
-    <None Include="animations\enemies\civilian-enemies.anm">
-      <Filter>animations\enemies</Filter>
+    <None Include="animations\miscellaneous\cutscenes.anm">
+      <Filter>animations\miscellaneous</Filter>
+    </None>
+    <None Include="animations\miscellaneous\enemy_explosions.anm">
+      <Filter>animations\miscellaneous</Filter>
     </None>
     <None Include="animations\miscellaneous\items.anm">
       <Filter>animations\miscellaneous</Filter>
     </None>
-    <None Include="animations\miscellaneous\numbers.anm">
-      <Filter>animations\miscellaneous</Filter>
+    <None Include="animations\nonplayable_characters\abu.anm">
+      <Filter>animations\nonplayable_characters</Filter>
+    </None>
+    <None Include="animations\nonplayable_characters\camel.anm">
+      <Filter>animations\nonplayable_characters</Filter>
+    </None>
+    <None Include="animations\nonplayable_characters\peddler.anm">
+      <Filter>animations\nonplayable_characters</Filter>
+    </None>
+    <None Include="animations\nonplayable_characters\spring.anm">
+      <Filter>animations\nonplayable_characters</Filter>
+    </None>
+    <None Include="animations\playable_characters\aladdin.anm">
+      <Filter>animations\playable_characters</Filter>
+    </None>
+    <None Include="fonts\one.fnt">
+      <Filter>fonts</Filter>
+    </None>
+    <None Include="fonts\two.fnt">
+      <Filter>fonts</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Font Include="fonts\aladdin.ttf">
+      <Filter>fonts</Filter>
+    </Font>
     <Font Include="fonts\arcade.ttf">
       <Filter>fonts</Filter>
     </Font>
-    <Font Include="fonts\aladdin.ttf">
+    <Font Include="fonts\crackman.ttf">
       <Filter>fonts</Filter>
     </Font>
   </ItemGroup>

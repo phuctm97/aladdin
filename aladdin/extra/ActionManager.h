@@ -19,6 +19,8 @@ public:
 
   void play( Action* action );
 
+  void stopAll();
+
 protected:
   void onUpdate( const float delta ) override;
 

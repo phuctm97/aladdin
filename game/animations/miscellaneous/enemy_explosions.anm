@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Animations>
+  <Animation name="explosion" imagePath="enemy_explosions.png" interval="0.05" isLoop="false">
+    <sprite x="296" y="46" w="5" h="5" oX="296" oY="46" oW="133" oH="619" />
+    <sprite x="312" y="32" w="18" h="19" oX="312" oY="32" oW="133" oH="619" />
+    <sprite x="344" y="25" w="25" h="26" oX="344" oY="25" oW="133" oH="619" />
+    <sprite x="384" y="23" w="29" h="28" oX="384" oY="23" oW="133" oH="619" />
+    <sprite x="424" y="9" w="42" h="42" oX="424" oY="9" oW="133" oH="619" />
+    <sprite x="480" y="15" w="36" h="36" oX="480" oY="15" oW="133" oH="619" />
+    <sprite x="528" y="9" w="41" h="42" oX="528" oY="9" oW="133" oH="619" />
+    <sprite x="584" y="9" w="40" h="42" oX="584" oY="9" oW="133" oH="619" />
+    <sprite x="8" y="67" w="42" h="40" oX="8" oY="67" oW="133" oH="619" />
+    <sprite x="64" y="67" w="41" h="40" oX="64" oY="67" oW="133" oH="619" />
+    <sprite x="120" y="69" w="42" h="38" oX="120" oY="69" oW="133" oH="619" />
+    <sprite x="176" y="71" w="42" h="36" oX="176" oY="71" oW="133" oH="619" />
+    <sprite x="232" y="71" w="41" h="36" oX="232" oY="71" oW="133" oH="619" />
+    <sprite x="288" y="64" w="42" h="43" oX="288" oY="64" oW="133" oH="619" />
+    <sprite x="344" y="73" w="40" h="34" oX="344" oY="73" oW="133" oH="619" />
+    <sprite x="392" y="84" w="40" h="23" oX="392" oY="84" oW="133" oH="619" />
+    <sprite x="440" y="84" w="38" h="23" oX="440" oY="84" oW="133" oH="619" />
+    <sprite x="488" y="88" w="25" h="19" oX="488" oY="88" oW="133" oH="619" />
+    <sprite x="528" y="89" w="19" h="18" oX="528" oY="89" oW="133" oH="619" />
+    <sprite x="566" y="84" w="9" h="22" oX="566" oY="84" oW="133" oH="619" />
+  </Animation>
+  <Animation name="big_explosion" imagePath="enemy_explosions.png" interval="0.05" isLoop="false">
+    <sprite x="8" y="180" w="25" h="23" oX="8" oY="180" oW="262" oH="673" />
+    <sprite x="48" y="155" w="59" h="48" oX="48" oY="155" oW="262" oH="673" />
+    <sprite x="120" y="118" w="80" h="85" oX="120" oY="118" oW="262" oH="673" />
+    <sprite x="208" y="123" w="82" h="80" oX="208" oY="123" oW="262" oH="673" />
+    <sprite x="304" y="124" w="81" h="79" oX="304" oY="124" oW="262" oH="673" />
+    <sprite x="400" y="128" w="82" h="75" oX="400" oY="128" oW="262" oH="673" />
+    <sprite x="496" y="131" w="82" h="72" oX="496" oY="131" oW="262" oH="673" />
+    <sprite x="8" y="214" w="79" h="69" oX="8" oY="214" oW="262" oH="673" />
+    <sprite x="96" y="217" w="81" h="66" oX="96" oY="217" oW="262" oH="673" />
+    <sprite x="192" y="222" w="82" h="61" oX="192" oY="222" oW="262" oH="673" />
+    <sprite x="288" y="231" w="80" h="52" oX="288" oY="231" oW="262" oH="673" />
+    <sprite x="376" y="236" w="76" h="47" oX="376" oY="236" oW="262" oH="673" />
+    <sprite x="464" y="243" w="52" h="40" oX="464" oY="243" oW="262" oH="673" />
+    <sprite x="528" y="244" w="41" h="38" oX="528" oY="244" oW="262" oH="673" />
+    <sprite x="584" y="251" w="43" h="32" oX="584" oY="251" oW="262" oH="673" />
+  </Animation>
+  <Animation name="1" imagePath="enemy_explosions.png" interval="0.08" isLoop="false">
+    <sprite x="35" y="330" w="15" h="11" offsetX="0" offsetY="0" />
+    <sprite x="79" y="311" w="51" h="33" offsetX="0.5" offsetY="6" />
+    <sprite x="141" y="310" w="54" h="34" offsetX="0.5" offsetY="6" />
+    <sprite x="200" y="308" w="57" h="37" offsetX="0" offsetY="5.5" />
+    <sprite x="261" y="308" w="60" h="37" offsetX="-1" offsetY="4.5" />
+    <sprite x="319" y="306" w="65" h="38" offsetX="-3" offsetY="5.5" />
+    <sprite x="399" y="320" w="30" h="25" offsetX="-2.5" offsetY="-0.5" />
+    <sprite x="464" y="320" w="28" h="25" offsetX="-0.5" offsetY="0" />
+    <sprite x="527" y="321" w="28" h="24" offsetX="0" offsetY="0" />
+    <sprite x="590" y="321" w="26" h="24" offsetX="0" offsetY="0" />
+  </Animation>
+</Animations>

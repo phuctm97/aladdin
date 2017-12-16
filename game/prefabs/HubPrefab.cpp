@@ -1,12 +1,13 @@
 #include "HubPrefab.h"
-#include "../scripts/HubController.h"
 #include "../Define.h"
+#include "../scripts/HubController.h"
+#include "../scripts/CameraFollower.h"
 
 USING_NAMESPACE_ALA;
 
-HubPrefab::HubPrefab(): Prefab( "Hub" ) {}
+ALA_CLASS_SOURCE_1(HubPrefab, ala::PrefabV2)
 
-void HubPrefab::doInstantiate( ala::GameObject* object ) const {
+void HubPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto visibleWidth = gameManager->getVisibleWidth();
@@ -21,49 +22,46 @@ void HubPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto aladdinHeadAnimator = new Animator( aladdinHead, "aladdin_head", "items.anm" );
   aladdinHeadTransform->setPosition( Vec2( -halfVisibleWidth + 20, -halfVisibleHeight + 20 ) );
 
-  const auto livesNumberOne = new GameObject( object, "Hub Lives 1" );
-  const auto livesNumberOneTransform = livesNumberOne->getTransform();
-  const auto livesNumberOneSpriteRenderer = new SpriteRenderer( livesNumberOne, "numbers.png" );
-  const auto livesNumberOneAnimator = new Animator( livesNumberOne, "0", "numbers.anm" );
-  livesNumberOneTransform->setPosition( Vec2(
-    aladdinHeadTransform->getPositionX() + aladdinHeadSpriteRenderer->getFrameSize().getWidth() / 2 + 13,
-    -halfVisibleHeight + 20 ) );
-
-  const auto livesNumberTwo = new GameObject( object, "Hub Lives 2" );
-  const auto livesNumberTwoTransform = livesNumberTwo->getTransform();
-  const auto livesNumberTwoSpriteRenderer = new SpriteRenderer( livesNumberTwo, "numbers.png" );
-  const auto livesNumberTwoAnimator = new Animator( livesNumberTwo, "0", "numbers.anm" );
-  livesNumberTwoTransform->setPosition( Vec2(
-    livesNumberOneTransform->getPositionX() + livesNumberOneSpriteRenderer->getFrameSize().getWidth() / 2 + 10,
-    -halfVisibleHeight + 20 ) );
+  const auto livesLabel = new GameObject( object, "Hub Lives" );
+  const auto livesLabelTransform = livesLabel->getTransform();
+  const auto livesLableText = new BitmapText( livesLabel, "font_two.png", "two.fnt" );
+  livesLabelTransform->setPosition( Vec2( aladdinHeadTransform->getPositionX() + 17, -halfVisibleHeight + 17 ) );
+  livesLableText->setTextAlignment( BitmapText::LEFT );
+  livesLableText->setText( "99" );
 
   const auto apples = new GameObject( object );
   const auto applesTransform = apples->getTransform();
   const auto applesSpriteRenderer = new SpriteRenderer( apples, "items.png" );
   const auto applesAnimator = new Animator( apples, "apple", "items.anm" );
+  applesTransform->setScale( 1.5f );
   applesTransform->setPosition( Vec2( halfVisibleWidth - 55, -halfVisibleHeight + 20 ) );
 
-  const auto applesNumberOne = new GameObject( object, "Hub Apples 1" );
-  const auto applesNumberOneTransform = applesNumberOne->getTransform();
-  const auto applesNumberOneSpriteRenderer = new SpriteRenderer( applesNumberOne, "numbers.png" );
-  const auto applesNumberOneAnimator = new Animator( applesNumberOne, "0", "numbers.anm" );
-  applesNumberOneTransform->setPosition( Vec2(
-    applesTransform->getPositionX() + applesSpriteRenderer->getFrameSize().getWidth() / 2 + 13,
-    -halfVisibleHeight + 20 ) );
+  const auto applesLabel = new GameObject( object, "Hub Apples" );
+  const auto applesLabelTransform = applesLabel->getTransform();
+  const auto applesLableText = new BitmapText( applesLabel, "font_two.png", "two.fnt" );
+  applesLabelTransform->setPosition( Vec2( applesTransform->getPositionX() + 13, -halfVisibleHeight + 18 ) );
+  applesLableText->setTextAlignment( BitmapText::LEFT );
+  applesLableText->setText( "99" );
 
-  const auto applesNumberTwo = new GameObject( object, "Hub Apples 2" );
-  const auto applesNumberTwoTransform = applesNumberTwo->getTransform();
-  const auto applesNumberTwoSpriteRenderer = new SpriteRenderer( applesNumberTwo, "numbers.png" );
-  const auto applesNumberTwoAnimator = new Animator( applesNumberTwo, "0", "numbers.anm" );
-  applesNumberTwoTransform->setPosition( Vec2(
-    applesNumberOneTransform->getPositionX() + applesNumberOneSpriteRenderer->getFrameSize().getWidth() / 2 + 10,
-    -halfVisibleHeight + 20 ) );
+  const auto scoresLabel = new GameObject( object, "Hub Scores" );
+  const auto scoresLabelTransform = scoresLabel->getTransform();
+  const auto scoresLableText = new BitmapText( scoresLabel, "font_one.png", "one.fnt" );
+  scoresLabelTransform->setPosition( Vec2( halfVisibleWidth - 15, halfVisibleHeight - 20 ) );
+  scoresLableText->setTextAlignment( BitmapText::RIGHT );
+  scoresLableText->setCharacterSpacing( 2 );
+  scoresLableText->setText( "9999" );
 
-  const auto controller = new HubController( object, "Controller" );
+  const auto health = new GameObject( object, "Hub Health" );
+  const auto healthSpriteRenderer = new SpriteRenderer( health, "items.png" );
+  const auto healthAnimator = new Animator( health, "health_bar_9", "items.anm" );
+  const auto healthTransform = health->getTransform();
+  healthTransform->setPosition( Vec2( -86, 95 ) );
+
+  const auto cameraFollower = new CameraFollower( object );
+
+  const auto controller = new HubController( object );
 
   // configurations
   object->setTag( HUB_TAG );
   object->setLayer( "UI" );
-  controller->setLives( 3 );
-  controller->setApples( 5 );
 }
