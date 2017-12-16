@@ -153,9 +153,6 @@
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\RestartPointPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\SpendThesePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -276,6 +273,12 @@
     <ClCompile Include="app\MyAppData.cpp">
       <Filter>app</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\CheckPointPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\CheckpointController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -352,9 +355,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\RestartPointPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SpendThesePrefab.h">
@@ -488,6 +488,12 @@
     </ClInclude>
     <ClInclude Include="app\MyAppData.h">
       <Filter>app</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\CheckPointPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\CheckpointController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

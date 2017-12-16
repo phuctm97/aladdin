@@ -3,13 +3,13 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(PlayableAladdinPrefab, ala::Prefab)
+ALA_CLASS_HEADER_1(PlayableAladdinPrefab, ala::PrefabV2)
 public:
   PlayableAladdinPrefab()
-    : Prefab( "Playable Aladdin" ) {}
+    : PrefabV2( "Playable Aladdin" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__ALADDIN_PLAYABLE_ALADDIN_PREFAB_H__

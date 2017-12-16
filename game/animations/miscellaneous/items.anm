@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Animations>
-  <Animation name="idle_0" imagePath="items.png" interval="0.1" isLoop="false">
+  <Animation name="checkpoint_off" imagePath="items.png" interval="0.1" isLoop="false">
     <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="450" oH="71" />
   </Animation>
-  <Animation name="idle_1" imagePath="items.png" interval="0.1" isLoop="false">
+  <Animation name="checkpoint_on" imagePath="items.png" interval="0.1" isLoop="false">
     <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="450" oH="71" />
     <sprite x="78" y="437" w="33" h="19" oX="78" oY="437" oW="450" oH="71" />
     <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="450" oH="71" />
-  </Animation>
-  <Animation name="idle_2" imagePath="items.png" interval="0.1" isLoop="false">
+    <sprite x="19" y="424" w="19" h="32" offsetY="20" />
+    <sprite x="19" y="424" w="19" h="32" offsetY="20" />
     <sprite x="49" y="428" w="23" h="28" oX="49" oY="428" oW="404" oH="276" />
     <sprite x="119" y="425" w="19" h="33" oX="119" oY="425" oW="404" oH="276" />
     <sprite x="145" y="425" w="22" h="33" oX="145" oY="425" oW="404" oH="276" />
@@ -24,10 +24,6 @@
     <sprite x="239" y="427" w="19" h="33" oX="239" oY="427" oW="404" oH="276" />
     <sprite x="270" y="428" w="23" h="32" oX="270" oY="428" oW="404" oH="276" />
     <sprite x="302" y="429" w="22" h="32" oX="302" oY="429" oW="404" oH="276" />
-  </Animation>
-  <Animation name="jump" imagePath="items.png" interval="0.1" isLoop="false">
-    <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="430" oH="19" />
-    <sprite x="19" y="424" w="19" h="32" oX="19" oY="424" oW="430" oH="19" />
   </Animation>
   <Animation name="extra_health" imagePath="items.png" interval="0.1" isLoop="true">
     <sprite x="343" y="171" w="18" h="23" oX="343" oY="171" oW="-292" oH="162" />

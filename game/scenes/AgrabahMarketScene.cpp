@@ -1,5 +1,6 @@
 #include "AgrabahMarketScene.h"
 #include "../Define.h"
+#include "../app/MyAppData.h"
 #include "../scripts/CameraController.h"
 #include "../scripts/DebugCameraController.h"
 #include "../scripts/NodeController.h"
@@ -11,6 +12,7 @@ ALA_CLASS_SOURCE_1(AgrabahMarketScene, ala::Scene)
 void AgrabahMarketScene::onPreInitialize() {
   // constants
   const auto gameManager = GameManager::get();
+  const auto startPosition = Vec2( -80, -25 );
 
   // configurations
   enablePhysics( Vec2( 0, -500.0f ) );
@@ -47,6 +49,13 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Climbable Rope" )->instantiateWithArgs( "260" )
              ->getTransform()->setPosition( Vec2( 1930, 252 ) );
+
+             */
+
+  /* Check Points 
+  gameManager->getPrefabV2( "Check Point" )->instantiateWithArgs( "" )
+             ->getTransform()
+             ->setPosition( Vec2( 2545, 73 ) );
 
              */
 
@@ -102,7 +111,7 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
-  /* Guards    
+  /* Guards                 
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
              ->getTransform()->setPositionY( -25 );
@@ -116,8 +125,8 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Guard 4" )->instantiateWithArgs( "1169", "Guard 4" )
              ->getTransform()->setPositionY( 10 );
 
+
              */
 
-  const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
-  aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+  gameManager->getPrefabV2( "Playable Aladdin" )->instantiateWithArgs( "-80 -25", "Aladdin" );
 }

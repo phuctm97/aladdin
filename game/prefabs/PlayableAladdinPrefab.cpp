@@ -8,9 +8,15 @@ USING_NAMESPACE_ALA;
 
 ALA_CLASS_SOURCE_1(PlayableAladdinPrefab, ala::Prefab)
 
-void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
+void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const auto startX = nextFloat( argsStream );
+  const auto startY = nextFloat( argsStream );
+
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+
   const auto input = Input::get();
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
@@ -49,7 +55,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   swordCollider->ignoreTag( ALADDIN_TAG );
   swordCollider->setActive( false );
 
-  const auto stateManager = new StateManager( object, "idle" );
+  const auto stateManager = new StateManager( object, "initial" );
 
   const auto actionManager = new ActionManager( object );
 
@@ -84,8 +90,28 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   controller->setHealth( 9 );
 
   // states
-  new State( stateManager, "null", NULL, NULL, NULL );
+  //  new State( stateManager, "null", NULL, NULL, NULL );
   //    new AnimationEditor( object, "climb_throw" );
+
+  new State( stateManager, "initial", [=] {
+               if ( myAppData->getCurrentCheckpoint() == 0 ) {
+                 transform->setPosition( startX, startY );
+               }
+               else {
+                 std::stringstream checkpointNameBuilder;
+                 checkpointNameBuilder << "Checkpoint " << myAppData->getCurrentCheckpoint();
+
+                 const auto checkpoint = gameManager->getObjectByName( checkpointNameBuilder.str() );
+                 transform->setPosition( checkpoint->getTransform()->getPositionX(),
+                                         checkpoint->getTransform()->getPositionY() );
+                 animator->setAction( "revive" );
+               }
+             }, NULL,
+             [=] {
+               if ( myAppData->getCurrentCheckpoint() != 0 ) {
+                 transform->setPositionY( transform->getPositionY() + 20 );
+               }
+             } );
 
   new State( stateManager, "idle",
              [=] {
@@ -1205,6 +1231,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
       controller->resetHit();
     }
   }, NULL, NULL );
+
+  new StateTransition( stateManager, "initial", "idle", [=] {
+    return !animator->isPlaying();
+  } );
 
   new StateTransition( stateManager, "idle", "attack", [=] {
     return input->getKeyDown( ALA_KEY_S );

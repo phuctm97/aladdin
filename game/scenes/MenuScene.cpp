@@ -12,8 +12,9 @@ void MenuScene::onPreInitialize() {
 
   // reset app data
   const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
-  myAppData->setAladdinLives( 3 );
   myAppData->setCurrentLevel( 1 );
+  myAppData->setCurrentCheckpoint( 0 );
+  myAppData->setAladdinLives( 3 );
   myAppData->setRetryTimes( 1 );
 
   // initial objects

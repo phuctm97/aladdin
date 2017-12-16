@@ -166,6 +166,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\BitmapTextPrefab.cpp" />
     <ClCompile Include="prefabs\CamelPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
+    <ClCompile Include="prefabs\CheckPointPrefab.cpp" />
     <ClCompile Include="prefabs\GuardFourPrefab.cpp" />
     <ClCompile Include="prefabs\GuardThreePrefab.cpp" />
     <ClCompile Include="prefabs\HideGuardPrefab.cpp" />
@@ -186,7 +187,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\NodePrefab.cpp" />
     <ClCompile Include="prefabs\PeddlerPrefab.cpp" />
     <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
-    <ClCompile Include="prefabs\RestartPointPrefab.cpp" />
     <ClCompile Include="prefabs\ClimbableRopePrefab.cpp" />
     <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
@@ -204,6 +204,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\AbuBonusController.cpp" />
     <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CheckpointController.cpp" />
     <ClCompile Include="scripts\HideGuardController.cpp" />
     <ClCompile Include="scripts\NakeGuardController.cpp" />
     <ClCompile Include="scripts\CameraFollower.cpp" />
@@ -244,6 +245,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\BitmapTextPrefab.h" />
     <ClInclude Include="prefabs\CamelPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
+    <ClInclude Include="prefabs\CheckPointPrefab.h" />
     <ClInclude Include="prefabs\GuardFourPrefab.h" />
     <ClInclude Include="prefabs\GuardThreePrefab.h" />
     <ClInclude Include="prefabs\HideGuardPrefab.h" />
@@ -264,7 +266,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\NodePrefab.h" />
     <ClInclude Include="prefabs\PeddlerPrefab.h" />
     <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
-    <ClInclude Include="prefabs\RestartPointPrefab.h" />
     <ClInclude Include="prefabs\ClimbableRopePrefab.h" />
     <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
@@ -282,6 +283,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\AbuBonusController.h" />
     <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
+    <ClInclude Include="scripts\CheckpointController.h" />
     <ClInclude Include="scripts\HideGuardController.h" />
     <ClInclude Include="scripts\NakeGuardController.h" />
     <ClInclude Include="scripts\CameraFollower.h" />
