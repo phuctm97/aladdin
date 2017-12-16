@@ -160,9 +160,11 @@ void Application::updatePhysics( const float delta ) {
   auto runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->updatePhysics( delta );
-  }
 
-  PhysicsManager::get()->update( delta );
+    runningScene->lockGameObjects();
+    PhysicsManager::get()->update( delta );
+    runningScene->unlockGameObjects();
+  }
 }
 
 void Application::updateGame( const float delta ) {
