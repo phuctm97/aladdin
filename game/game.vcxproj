@@ -156,6 +156,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   <ItemGroup>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
+    <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
     <ClCompile Include="prefabs\AbuPrefab.cpp" />
@@ -197,6 +198,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
     <ClCompile Include="prefabs\WallPrefab.cpp" />
     <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
+    <ClCompile Include="scenes\DeathScene.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\AbuBonusController.cpp" />
@@ -231,6 +233,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
+    <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="prefabs\AbuBonusPrefab.h" />
@@ -273,6 +276,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
     <ClInclude Include="prefabs\WallPrefab.h" />
     <ClInclude Include="scenes\AgrabahMarketScene.h" />
+    <ClInclude Include="scenes\DeathScene.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\AbuBonusController.h" />

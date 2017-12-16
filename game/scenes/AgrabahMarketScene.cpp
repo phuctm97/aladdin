@@ -72,7 +72,7 @@ void AgrabahMarketScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( Vec2( 2987, -82 ) );
             
-    */        
+    */
 
   /* Camels  
    
@@ -92,7 +92,7 @@ void AgrabahMarketScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( Vec2( 1632.5f, 89.5f ) );
 
-      */        
+      */
 
   /* Eatable Apples
 
@@ -102,8 +102,8 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
-  /* Guards 
-   
+  /* Guards    
+
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
              ->getTransform()->setPositionY( -25 );
 
@@ -112,11 +112,11 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Guard 3" )->instantiateWithArgs( "1559 1380 1699", "Guard 3" )
              ->getTransform()->setPositionY( -25 );
-             
+
   gameManager->getPrefabV2( "Guard 4" )->instantiateWithArgs( "1169", "Guard 4" )
              ->getTransform()->setPositionY( 10 );
-             
-  */
+
+             */
 
   const auto aladdin = gameManager->getPrefab( "Playable Aladdin" )->instantiate( "Aladdin" );
   aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );

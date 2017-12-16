@@ -1,6 +1,7 @@
 #include "PlayableAladdinController.h"
 #include "DirectionController.h"
 #include "../Define.h"
+#include "../scenes/DeathScene.h"
 
 USING_NAMESPACE_ALA;
 
@@ -16,7 +17,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _holdingRope( NULL ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
-    _throwableApplePrefab( NULL ) {}
+    _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
 
 void PlayableAladdinController::setLives( const int lives ) {
   _lives = lives;
@@ -215,12 +216,19 @@ void PlayableAladdinController::onTriggerExit( const ala::CollisionInfo& collisi
 }
 
 void PlayableAladdinController::onInitialize() {
+  const auto gameManager = GameManager::get();
+
   _selfTransform = getGameObject()->getTransform();
   _selfActionManager = getGameObject()->getComponentT<ActionManager>();
   _selfStateManager = getGameObject()->getComponentT<StateManager>();
   _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
-  _throwableApplePrefab = GameManager::get()->getPrefabV2( "Throwable Apple" );
+  _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
+  _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+
+  setLives( _myAppData->getAladdinLives() );
+  setApples( 3 );
+  setHealth( 9 );
 }
 
 void PlayableAladdinController::onHitCharcoalBurner() {
@@ -233,6 +241,15 @@ void PlayableAladdinController::onHit( const int damage ) {
   if ( _recovering ) return;
 
   _health -= damage;
+
+  if ( _health <= 0 ) {
+    _myAppData->setAladdinLives( _lives - 1 );
+
+    GameManager::get()->replaceScene( new DeathScene() );
+
+    return;
+  }
+
   _hit = true;
 
   setRecovering();

@@ -5,6 +5,7 @@
 #include "MyResourceInitializer.h"
 #include "../scenes/MenuScene.h"
 #include "../scenes/AgrabahMarketScene.h"
+#include "../scenes/DeathScene.h"
 
 USING_NAMESPACE_ALA;
 
@@ -25,5 +26,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AgrabahMarketScene() );
+  startWithScene( new MenuScene() );
 }

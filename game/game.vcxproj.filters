@@ -270,6 +270,12 @@
     <ClCompile Include="prefabs\GuardFourPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\DeathScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="app\MyAppData.cpp">
+      <Filter>app</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -476,6 +482,12 @@
     </ClInclude>
     <ClInclude Include="prefabs\GuardFourPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\DeathScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="app\MyAppData.h">
+      <Filter>app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

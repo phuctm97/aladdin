@@ -2,6 +2,7 @@
 #define __PLAYABLE_ALADDIN_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "../app/MyAppData.h"
 
 ALA_CLASS_HEADER_1( PlayableAladdinController, ala::GameObjectComponent)
 private:
@@ -21,6 +22,8 @@ private:
   ala::Animator* _selfAnimator;
   ala::Collider* _selfBodyCollider;
   ala::PrefabV2* _throwableApplePrefab;
+
+  MyAppData* _myAppData;
 
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );

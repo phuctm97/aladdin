@@ -28,11 +28,15 @@
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairOnePrefab.h"
+#include "MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
 void MyResourceInitializer::doRun() {
   auto gameManager = GameManager::get();
+
+  // Data
+  new MyAppData( 1, 3, 1 );
 
   // Layers
   gameManager->addLayer( "Background" );
@@ -56,7 +60,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
   new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
-  new Sprite( "guards2.png", "textures/enemies/guards2.png");
+  new Sprite( "guards2.png", "textures/enemies/guards2.png" );
   new Sprite( "civilian_enemies.png", "textures/enemies/civilian_enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
   new Sprite( "camel.png", "textures/nonplayable_characters/camel.png" );
@@ -77,7 +81,7 @@ void MyResourceInitializer::doRun() {
   new Animation( "items.anm", "animations/miscellaneous/items.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
-  new Animation("guards2.anm", "animations/enemies/guards2.anm");
+  new Animation( "guards2.anm", "animations/enemies/guards2.anm" );
   new Animation( "civilian_enemies.anm", "animations/enemies/civilian_enemies.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "camel.anm", "animations/nonplayable_characters/camel.anm" );

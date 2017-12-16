@@ -379,7 +379,7 @@
     <sprite x="968" y="928" w="101" h="49" offsetX="-1" offsetY="0.5" />
   </Animation>
 
-  <Animation name="die" imagePath="aladdin.png" interval="0.1" isLoop="true">
+  <Animation name="die" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="282" y="2160" w="60" h="50" offsetX="0" offsetY="1" />
     <sprite x="160" y="2224" w="44" h="57" offsetX="5.5" offsetY="4.5" />
     <sprite x="213" y="2224" w="44" h="57" offsetX="2.5" offsetY="4.5" />

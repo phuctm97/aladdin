@@ -1,5 +1,6 @@
 #include "MenuScene.h"
 #include "AgrabahMarketScene.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -8,6 +9,12 @@ ALA_CLASS_SOURCE_1(MenuScene, ala::Scene)
 void MenuScene::onPreInitialize() {
   // constants
   const auto gameManager = GameManager::get();
+
+  // reset app data
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  myAppData->setAladdinLives( 3 );
+  myAppData->setCurrentLevel( 1 );
+  myAppData->setRetryTimes( 1 );
 
   // initial objects
   gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "cutscenes.png 1 cutscenes.anm cutscene_1" )
