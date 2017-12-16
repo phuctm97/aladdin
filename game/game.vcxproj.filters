@@ -138,6 +138,18 @@
     <ClCompile Include="prefabs\NodePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\HideGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HideGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\NakeGuardController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\NakeGuardPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
     <ClCompile Include="prefabs\PeddlerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -423,6 +435,18 @@
     <ClInclude Include="scripts\HubController.h">
       <Filter>scripts</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\HideGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HideGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\NakeGuardController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\NakeGuardPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
     <ClInclude Include="scripts\NodeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -479,6 +503,9 @@
     <Image Include="textures\enemies\civilian_enemies.png">
       <Filter>texures\enemies</Filter>
     </Image>
+    <Image Include="textures\enemies\guards2.png">
+      <Filter>texures\enemies</Filter>
+    </Image>
     <Image Include="textures\enemies\guards.png">
       <Filter>texures\enemies</Filter>
     </Image>
@@ -520,6 +547,11 @@
     <Text Include="log.txt" />
     <Text Include="log.txt" />
     <Text Include="note.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="animations\enemies\guards2.anm">
+      <Filter>animations\enemies</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">
