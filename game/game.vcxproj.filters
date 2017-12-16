@@ -75,9 +75,6 @@
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AbuPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -103,9 +100,6 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\ExplosionPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ExtraHealthPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\FlamePrefab.cpp">
@@ -139,12 +133,6 @@
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\HideGuardPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\NakeGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\NakeGuardPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\PeddlerPrefab.cpp">
@@ -207,9 +195,6 @@
     <ClCompile Include="scripts\DirectionController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\ExtraHealthController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\GenieBonusController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -232,9 +217,6 @@
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\PlayableAladdinController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\RestartPointController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\SpendTheseController.cpp">
@@ -273,11 +255,14 @@
     <ClCompile Include="app\MyAppData.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\CheckPointPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\CheckpointController.cpp">
       <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\CheckpointPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EatableHeartPrefab.cpp">
+      <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +274,6 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AbuBonusPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\AbuPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
@@ -319,9 +301,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\ExplosionPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ExtraHealthPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\FlamePrefab.h">
@@ -411,9 +390,6 @@
     <ClInclude Include="scripts\DirectionController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\ExtraHealthController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\GenieBonusController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -435,12 +411,6 @@
     <ClInclude Include="prefabs\HideGuardPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\NakeGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\NakeGuardPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\NodeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -448,9 +418,6 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\PlayableAladdinController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\RestartPointController.h">
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\SpendTheseController.h">
@@ -489,11 +456,14 @@
     <ClInclude Include="app\MyAppData.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\CheckPointPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\CheckpointController.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\CheckpointPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EatableHeartPrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

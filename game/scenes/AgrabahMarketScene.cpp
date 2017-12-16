@@ -52,7 +52,7 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
-  /* Check Points 
+  /* Checkpoints 
   gameManager->getPrefabV2( "Check Point" )->instantiateWithArgs( "" )
              ->getTransform()
              ->setPosition( Vec2( 2545, 73 ) );
@@ -111,6 +111,14 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+  /* Eatable Hearts 
+
+  gameManager->getPrefabV2( "Eatable Heart" )->instantiateWithArgs( "", "Heart 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 0, 10 ) );
+
+             */
+
   /* Guards                 
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
@@ -124,7 +132,6 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Guard 4" )->instantiateWithArgs( "1169", "Guard 4" )
              ->getTransform()->setPositionY( 10 );
-
 
              */
 

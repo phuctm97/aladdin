@@ -6,6 +6,10 @@
 
 ALA_CLASS_HEADER_1( PlayableAladdinController, ala::GameObjectComponent)
 private:
+  int _maxHealth;
+  int _maxLives;
+  int _maxApples;
+
   int _health;
   int _lives;
   int _apples;

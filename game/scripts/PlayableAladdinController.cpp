@@ -9,7 +9,10 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ), _health( 0 ), _lives( 0 ), _apples( 0 ), _recovering( false ),
+  : GameObjectComponent( gameObject, name ),
+    _maxHealth( 9 ), _maxLives( 99 ), _maxApples( 99 ),
+    _health( 0 ), _lives( 0 ), _apples( 0 ),
+    _recovering( false ),
     _hit( false ),
     _jumpOnCamel( false ),
     _pushingWall( false ),
@@ -20,7 +23,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
 
 void PlayableAladdinController::setLives( const int lives ) {
-  _lives = lives;
+  _lives = MIN(lives, _maxLives);
 }
 
 int PlayableAladdinController::getLives() const {
@@ -28,7 +31,7 @@ int PlayableAladdinController::getLives() const {
 }
 
 void PlayableAladdinController::setApples( const int apples ) {
-  _apples = apples;
+  _apples = MIN(apples, _maxApples);
 }
 
 int PlayableAladdinController::getApples() const {
@@ -36,7 +39,7 @@ int PlayableAladdinController::getApples() const {
 }
 
 void PlayableAladdinController::setHealth( const int health ) {
-  _health = health;
+  _health = MIN( health, _maxHealth);
 }
 
 int PlayableAladdinController::getHealth() const {
@@ -164,6 +167,14 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
     }
   }
   else if ( selfCollider->getTag() == SWORD_TAG ) { }
+
+  if ( otherObject->getTag() == APPLE_TAG ) {
+    setApples( getApples() + 1 );
+  }
+  else if ( otherObject->getTag() == HEART_TAG ) {
+    setHealth( getHealth() + 1 );
+  }
+
 }
 
 void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collision ) {
@@ -240,7 +251,7 @@ void PlayableAladdinController::onHitCharcoalBurner() {
 void PlayableAladdinController::onHit( const int damage ) {
   if ( _recovering ) return;
 
-  _health -= damage;
+  setHealth( getHealth() - damage );
 
   if ( _health <= 0 ) {
     _myAppData->setAladdinLives( _lives - 1 );

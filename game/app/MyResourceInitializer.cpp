@@ -3,6 +3,7 @@
  */
 
 #include "MyResourceInitializer.h"
+#include "MyAppData.h"
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
@@ -11,6 +12,7 @@
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/EatableApplePrefab.h"
+#include "../prefabs/EatableHeartPrefab.h"
 #include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/CheckpointPrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
@@ -29,7 +31,6 @@
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairOnePrefab.h"
-#include "MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -101,6 +102,7 @@ void MyResourceInitializer::doRun() {
   new ThrowableApplePrefab();
   new ThrowableKnifePrefab();
   new EatableApplePrefab();
+  new EatableHeartPrefab();
   new CheckpointPrefab();
   new EnemyExplosionPrefab();
   new SmallFireworkPrefab();
