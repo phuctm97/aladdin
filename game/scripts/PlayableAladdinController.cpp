@@ -142,7 +142,8 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
-  if ( otherObject->getTag() == ENEMY_TAG && otherCollider->getTag() == SWORD_TAG ) {
+  if ( otherObject->getTag() == ENEMY_TAG &&
+    (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == KNIFE_TAG) ) {
     onHit();
   }
   else if ( otherObject->getTag() == VASE_TAG ) {

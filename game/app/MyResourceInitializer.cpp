@@ -11,6 +11,7 @@
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/EatableApplePrefab.h"
+#include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
 #include "../prefabs/SmallFireworkPrefab.h"
 #include "../prefabs/FlamePrefab.h"
@@ -21,6 +22,7 @@
 #include "../prefabs/HandEnemyPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
 #include "../prefabs/GuardTwoPrefab.h"
+#include "../prefabs/GuardThreePrefab.h"
 #include "../prefabs/WallPrefab.h"
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
@@ -91,6 +93,7 @@ void MyResourceInitializer::doRun() {
   new HubPrefab();
   new PlayableAladdinPrefab();
   new ThrowableApplePrefab();
+  new ThrowableKnifePrefab();
   new EatableApplePrefab();
   new EnemyExplosionPrefab();
   new SmallFireworkPrefab();
@@ -102,6 +105,7 @@ void MyResourceInitializer::doRun() {
   new HandEnemyPrefab();
   new GuardOnePrefab();
   new GuardTwoPrefab();
+  new GuardThreePrefab();
   new WallPrefab();
   new ClimbableRopePrefab();
 

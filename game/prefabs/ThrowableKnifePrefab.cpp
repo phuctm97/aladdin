@@ -1,62 +1,69 @@
 #include "ThrowableKnifePrefab.h"
-#include "../scripts/ThrowableKnifeController.h"
 #include "../Define.h"
+#include "../scripts/DirectionController.h"
+#include "../scripts/CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
-void ThrowableKnifePrefab::doInstantiate(ala::GameObject* object) const
-{
-	// constants
-	const auto gameManager = GameManager::get();
-	const auto input = Input::get();
+ALA_CLASS_SOURCE_1(ThrowableKnifePrefab, ala::PrefabV2)
 
-	const auto density = 3.0f;
-	const auto throwVelocity = 150.0f;
+void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const auto dir = nextChar( argsStream );
+  const auto impulseX = nextFloat( argsStream );
+  const auto impulseY = nextFloat( argsStream );
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "guards.png");
-	const auto animator = new Animator(object, "throwable_knife", "guards.anm");
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto input = Input::get();
 
-	const auto body = new Rigidbody(object, PhysicsMaterial(density), ALA_BODY_TYPE_DYNAMIC, 1.0f);
-	const auto collider = new Collider(object, true, Vec2(0, 0), Size(4, 5));
-	const auto stateManager = new StateManager(object, "throwable_knife_left");
+  const auto density = 1;
 
-	const auto controller = new ThrowableKnifeController(object, "controller");
-	const auto transform = object->getTransform();
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
-	// configurations
-	object->setLayer("Apple");
-	collider->setTag(KNIFE_TAG);
+  const auto animator = new Animator( object, "throwable_knife", "guards.anm" );
 
-	// states
-	new State(stateManager, "knife_destroy",
-		[=] {
-		body->setVelocity(Vec2(0, 0));
-		body->setGravityScale(0);
-	}, [=](float dt) {
-			object->release();
-	}
-	, NULL);
+  const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
-	new State(stateManager, "throwable_knife_left",
-		[=] {
-		animator->setAction("throwable_knife");
-		transform->setScaleX(-ABS(transform->getScale().getX()));
-	}, NULL, NULL);
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 7, 7 ) );
+  collider->setTag( KNIFE_TAG );
+  collider->ignoreTag( KNIFE_TAG );
+  collider->ignoreTag( CHARCOAL_BURNER_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
-	new State(stateManager, "throwable_knife_right",
-		[=] {
-		animator->setAction("throwable_knife");
-		transform->setScaleX(ABS(transform->getScale().getX()));
-	}, NULL, NULL);
+  const auto stateManager = new StateManager( object, "initial" );
 
+  const auto direction = new DirectionController( object );
+  if ( dir == 'L' ) direction->setLeft();
+  else if ( dir == 'R' ) direction->setRight();
 
-	new StateTransition(stateManager, "throwable_knife_left", "knife_destroy", [=] {
-		return controller->isCollidedWithGround() || controller->isColliedWithAladdin();
-	});
+  const auto collisionTracker = new CollisionTracker( object );
 
-	new StateTransition(stateManager, "throwable_knife_right", "knife_destroy", [=] {
-		return controller->isCollidedWithGround() || controller->isColliedWithAladdin();
-	});
+  // helpers
+  const auto transform = object->getTransform();
+
+  // collider renderers
+  new ColliderRenderer(collider);
+
+  // configurations
+  object->setLayer( "Foreground" );
+  object->setTag( ENEMY_TAG );
+
+  // states
+  new State( stateManager, "initial",
+             [=] {
+               // move
+               {
+                 body->addImpulse( Vec2( impulseX, impulseY ) );
+               }
+             },
+             [=]( float dt ) {
+               // destroy
+               {
+                 if ( collisionTracker->collided() ) {
+                   object->release();
+                 }
+               }
+             }, NULL );
 }
-
