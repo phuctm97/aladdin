@@ -2,6 +2,7 @@
 #define __CAMERA_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "DirectionController.h"
 
 ALA_CLASS_HEADER_1( CameraController, ala::GameObjectComponent)
 private:
@@ -11,6 +12,7 @@ private:
   ala::Transform* _selfTransform;
   ala::Transform* _aladdinTransform;
   ala::StateManager* _aladdinStateManager;
+  DirectionController* _aladdinDirection;
   ala::Animator* _aladdinAnimator;
 
   float _backgroundLeft;

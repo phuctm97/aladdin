@@ -29,6 +29,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto swordSize5 = Size( 25, 40 );
   const auto swordOffset6 = Vec2( 35, 25 );
   const auto swordSize6 = Size( 35, 45 );
+  const auto swordOffset7 = Vec2( 0, 5 );
+  const auto swordSize7 = Size( 65, 80 );
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
@@ -54,6 +56,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
   const auto collisionTracker = new CollisionTracker( object );
 
   const auto direction = new DirectionController( object, true, 1 );
+  direction->addReverseCase( [=] {
+    return animator->getActionName() == "climb_attack";
+  } );
 
   const auto controller = new PlayableAladdinController( object );
 
@@ -80,6 +85,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
 
   // states
   new State( stateManager, "null", NULL, NULL, NULL );
+  //  new AnimationEditor( object, "climb_attack" );
 
   new State( stateManager, "idle",
              [=] {
@@ -1044,6 +1050,83 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
                }
              } );
 
+  new State( stateManager, "climb_attack",
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "climb_attack" );
+               }
+
+               // direction
+               {
+                 if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // sword
+               {
+                 swordCollider->setOffset( swordOffset7 );
+                 swordCollider->setSize( swordSize7 );
+                 swordCollider->setActive( false );
+                 timer3->start( 0.2f );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 0 );
+               }
+             },
+             [=]( float dt ) {
+               // sword
+               {
+                 if ( timer3->isDone() ) {
+                   if ( !swordCollider->isActive() ) {
+                     swordCollider->setActive( true );
+                     timer3->start( 5 );
+                   }
+                   else {
+                     swordCollider->setActive( false );
+                   }
+                 }
+               }
+
+               // direction
+               {
+                 if ( input->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( input->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // move 
+               {
+                 body->setVelocity( Vec2( 0, 0 ) );
+               }
+
+               // position
+               {
+                 transform->setPositionX( controller->getHodingRope()->getTransform()->getPositionX() );
+               }
+             },
+             [=] {
+               // sword
+               {
+                 swordCollider->setActive( false );
+               }
+
+               // move
+               {
+                 body->setGravityScale( 1 );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+               }
+             } );
+
   new State( stateManager, "hit", [=] {
     // animation effect 
     {
@@ -1269,4 +1352,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object ) const {
     return input->getKeyDown( ALA_KEY_D );
   } );
 
+  new StateTransition( stateManager, "climb", "climb_attack", [=] {
+    return input->getKeyDown( ALA_KEY_S );
+  } );
+
+  new StateTransition( stateManager, "climb_attack", "climb", [=] {
+    return !animator->isPlaying();
+  } );
 }

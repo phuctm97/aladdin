@@ -24,12 +24,14 @@ void ClimbableRopePrefab::doInstantiate( ala::GameObject* object, std::istringst
   collider->ignoreTag( ROPE_TAG );
   collider->ignoreTag( ENEMY_TAG );
   collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( SWORD_TAG );
 
   const auto topOffset = -(topSize / 2);
   const auto colliderT = new Collider( object, true, Vec2( 0, topOffset ), Size( width, topSize ), 1, 0, "T" );
   colliderT->ignoreTag( ROPE_TAG );
   colliderT->ignoreTag( ENEMY_TAG );
   colliderT->ignoreTag( APPLE_TAG );
+  colliderT->ignoreTag( SWORD_TAG );
 
   // collider renderers
   new ColliderRenderer( collider );

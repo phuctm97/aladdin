@@ -8,7 +8,7 @@ ALA_CLASS_SOURCE_1(CameraController, ala::GameObjectComponent)
 CameraController::CameraController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _targetPosition( 0, 0 ), _movingSpeed( 7.0f ),
     _selfTransform( NULL ),
-    _aladdinTransform( NULL ), _aladdinStateManager( NULL ), _aladdinAnimator( NULL ),
+    _aladdinTransform( NULL ), _aladdinStateManager( NULL ), _aladdinDirection( NULL ), _aladdinAnimator( NULL ),
     _backgroundLeft( 0 ), _backgroundRight( 0 ),
     _backgroundTop( 0 ), _backgroundBottom( 0 ) {}
 
@@ -37,6 +37,7 @@ void CameraController::onInitialize() {
     _aladdinTransform = aladdin->getTransform();
     _aladdinStateManager = aladdin->getComponentT<StateManager>();
     _aladdinAnimator = aladdin->getComponentT<Animator>();
+    _aladdinDirection = aladdin->getComponentT<DirectionController>();
 
     _selfTransform->setPosition( _aladdinTransform->getPosition() );
 
@@ -64,13 +65,12 @@ void CameraController::onUpdate( const float delta ) {
   const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
 
   const auto& aladdinPosition = _aladdinTransform->getPosition();
-  const auto& aladdinScale = _aladdinTransform->getScale();
 
   // aladdin horizontal direction
-  if ( aladdinScale.getX() >= 0 ) {
+  if ( _aladdinDirection->isRight() ) {
     _targetPosition.setX( aladdinPosition.getX() + halfVisibleWidth * 0.25f );
   }
-  else {
+  else if ( _aladdinDirection->isLeft() ) {
     _targetPosition.setX( aladdinPosition.getX() - halfVisibleWidth * 0.25f );
   }
 

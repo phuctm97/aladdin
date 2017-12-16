@@ -309,6 +309,15 @@
     <sprite x="422" y="1871" w="46" h="66" offsetX="0.5" offsetY="4.5" />
     <sprite x="482" y="1866" w="44" h="74" offsetX="4.5" offsetY="4" />
   </Animation>
+  <Animation name="climb_attack" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="15" y="1769" w="47" h="86" offsetX="15" offsetY="3" />
+    <sprite x="81" y="1769" w="51" h="88" offsetX="16" offsetY="1" />
+    <sprite x="146" y="1760" w="60" h="101" offsetX="-14.5" offsetY="6.5" />
+    <sprite x="233" y="1773" w="66" h="89" offsetX="3.5" offsetY="0" />
+    <sprite x="327" y="1773" w="54" h="88" offsetX="11.5" offsetY="0" />
+    <sprite x="406" y="1775" w="68" h="88" offsetX="3.5" offsetY="0" />
+    <sprite x="499" y="1775" w="47" h="86" offsetX="15" offsetY="0" />
+  </Animation>
   <Animation name="start_push" imagePath="aladdin.png" interval="0.1" isLoop="false">
     <sprite x="7" y="1959" w="55" h="45" offsetX="0" offsetY="-4" />
     <sprite x="75" y="1961" w="64" h="43" offsetX="-15" offsetY="-5" />

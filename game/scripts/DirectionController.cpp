@@ -34,9 +34,20 @@ void DirectionController::turn() {
   setDirection( -_direction );
 }
 
+void DirectionController::addReverseCase( const std::function<bool()>& c ) {
+  _reverseCases.push_back( c );
+}
+
 void DirectionController::onUpdate( const float delta ) {
+  bool reverse = false;
+
+  for ( const auto& c : _reverseCases ) {
+    reverse = c();
+    if ( reverse ) break;
+  }
+
   const auto transform = getGameObject()->getTransform();
-  transform->setScaleX( _direction * ABS(transform->getScale().getX()) );
+  transform->setScaleX( (reverse ? -1 : 1) * _direction * ABS(transform->getScale().getX()) );
 
   auto coef = _direction;
   if ( !_positiveAsRight ) coef *= -1;
