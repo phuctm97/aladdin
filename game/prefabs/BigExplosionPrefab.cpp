@@ -1,37 +1,27 @@
 #include"BigExplosionPrefab.h"
-#include"../Define.h"
-
 
 USING_NAMESPACE_ALA;
 
-void BigExplosionPrefab::doInstantiate(ala::GameObject* object) const {
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "enemy_explosions.png");
-	const auto animator = new Animator(object, "big_explosion", "enemy_explosions.anm");
+ALA_CLASS_SOURCE_1(BigExplosionPrefab, ala::PrefabV2)
 
-	// //For animationEditor
-	//const auto animationEditor = new AnimationEditor( object, "abu_bonus" );
-	//return;
-	// //For animationEditor
+void BigExplosionPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "enemy_explosions.png" );
 
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
+  const auto animator = new Animator( object, "big_explosion", "enemy_explosions.anm" );
 
-	//const auto colliderRenderer = new ColliderRenderer(collider);
-	const auto stateManager = new StateManager(object, "explosion_effect");
-	const auto transform = object->getTransform();
+  const auto stateManager = new StateManager( object, "explode" );
 
-	// configurations
-	object->setTag(ENEMY_TAG);
-	object->setLayer("Background");
+  // states
+  new State( stateManager, "explode",
+             NULL,
+             [=]( float dt ) {
+               if ( !animator->isPlaying() ) {
+                 object->release();
+               }
+             },
+             NULL );
 
-	// states
-	new State(stateManager, "explosion_effect",
-		[=] {
-		animator->setAction("big_explosion");
-	}, [=](float dt) {
-		if (!animator->isPlaying())
-			object->release();
-	}, NULL);
+  // configurations
+  object->setLayer( "Foreground" );
 }

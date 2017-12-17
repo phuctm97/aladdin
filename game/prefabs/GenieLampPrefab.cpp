@@ -1,55 +1,65 @@
 #include"GenieLampPrefab.h"
-#include"../scripts/GenieLampController.h"
 #include"../Define.h"
-
+#include "../scripts/CollisionTracker.h"
+#include "../scripts/SceneInfoQuerier.h"
+#include "../scripts/GuardController.h"
 
 USING_NAMESPACE_ALA;
 
-void GenieLampPrefab::doInstantiate(ala::GameObject* object) const {
+ALA_CLASS_SOURCE_1(GenieLampPrefab, ala::PrefabV2)
+
+void GenieLampPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
+
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
+
+  const auto animator = new Animator( object, "idle_lamp", "items.anm" );
+
+  const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
+
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 24, 15 ) );
+  collider->setTag( LAMP_TAG );
+  collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( ENEMY_TAG );
+
+  const auto stateManager = new StateManager( object, "static" );
+
+  const auto collision = new CollisionTracker( object );
+
+  // helpers
+  const auto sceneInfo = new SceneInfoQuerier( object );
+
+  const auto transform = object->getTransform();
 
 
+  // collider renderes
+  new ColliderRenderer( collider );
 
-	const auto gameManager = GameManager::get();
+  // configurations
+  object->setTag( LAMP_TAG );
+  object->setLayer( "Foreground" );
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "items.png");
-	const auto animator = new Animator(object, "idle_lamp", "items.anm");
+  // states
+  new State( stateManager, "static", NULL,
+             [=]( float dt ) {
+               if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
+                 smallFireworkPrefab->instantiate( transform->getPosition() );
+                 object->release();
 
-
-	// //For animationEditor
-	//const auto animationEditor = new AnimationEditor( object, "abu_bonus" );
-	//return;
-	// //For animationEditor
-
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
-
-	const auto timer = new Timer(object);
-	//const auto colliderRenderer = new ColliderRenderer(collider);
-	const auto stateManager = new StateManager(object, "normal");
-	const auto controller = new GenieLampController(object);
-	const auto transform = object->getTransform();
-
-	// configurations
-	object->setTag(ENEMY_TAG);
-	object->setLayer("Character");
-
-	// states
-	new State(stateManager, "normal",
-		[=] {
-		animator->setAction("idle_lamp");
-	}, NULL, NULL);
-
-	new State(stateManager, "explosion",
-		[=] {
-		spriteRenderer->setVisible(false);
-		controller->explosionEffect();
-		object->release();
-	}, NULL, NULL);
-
-
-	new StateTransition(stateManager, "normal", "explosion", [=] {
-		return controller->isCollisionAladdin();
-	});
+                 // destroy enemy
+                 const auto& enemies = sceneInfo->getAllEnemiesInCamera();
+                 for ( const auto& enemy : enemies ) {
+                   const auto guardController = enemy->getComponentT<GuardController>();
+                   if ( guardController != NULL ) {
+                     guardController->onDie( 2 );
+                   }
+                   else {
+                     enemy->release();
+                   }
+                 }
+               }
+             }, NULL );
 }

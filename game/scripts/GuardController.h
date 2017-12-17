@@ -22,6 +22,7 @@ private:
   DirectionController* _selfDirection;
 
   ala::PrefabV2* _enemyExplosionPrefab;
+  ala::PrefabV2* _bigExplosionPrefab;
 
 public:
   GuardController( ala::GameObject* gameObject, const std::string& name = "" );
@@ -70,7 +71,7 @@ protected:
   void onInitialize() override;
 
 public:
-  void onDie() const;
+  void onDie( const int explosionType = 1 ) const;
 
   void onHit();
 

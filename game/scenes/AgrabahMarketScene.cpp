@@ -126,6 +126,7 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+
   /* Guards                 
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
@@ -142,7 +143,21 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Guard 5" )->instantiateWithArgs( "550 430 670", "Guard 5" )
              ->getTransform()->setPositionY( -25 );
+
              */
 
-  gameManager->getPrefabV2( "Playable Aladdin" )->instantiateWithArgs( "380 -25", "Aladdin" );
+  gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
+             ->getTransform()->setPositionY( -25 );
+
+  gameManager->getPrefabV2( "Guard 2" )->instantiateWithArgs( "818 595 1010", "Guard 2" )
+             ->getTransform()->setPositionY( -25 );
+
+  gameManager->getPrefabV2( "Guard 4" )->instantiateWithArgs( "1169", "Guard 4" )
+             ->getTransform()->setPositionY( 10 );
+
+  gameManager->getPrefabV2( "Genie Lamp" )->instantiateWithArgs( "", "Genie Lamp 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 600, 10 ) );
+
+  gameManager->getPrefabV2( "Playable Aladdin" )->instantiateWithArgs( "-80 -25", "Aladdin" );
 }

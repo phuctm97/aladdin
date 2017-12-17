@@ -13,7 +13,7 @@ GuardController::GuardController( ala::GameObject* gameObject, const std::string
   _initialX( 0 ),
   _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
   _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ),
-  _enemyExplosionPrefab( NULL ) {}
+  _enemyExplosionPrefab( NULL ), _bigExplosionPrefab( NULL ) {}
 
 void GuardController::onInitialize() {
   const auto gameManager = GameManager::get();
@@ -32,6 +32,8 @@ void GuardController::onInitialize() {
   }
 
   _enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion" );
+
+  _bigExplosionPrefab = gameManager->getPrefabV2( "Big Explosion" );
 }
 
 bool GuardController::isTooFarFromAladdin() const {
@@ -143,8 +145,18 @@ void GuardController::onHit() {
   }
 }
 
-void GuardController::onDie() const {
-  _enemyExplosionPrefab->instantiate( _selfTransform->getPosition() + Vec2( 0, 10 ) );
+void GuardController::onDie( const int explosionType ) const {
+  switch ( explosionType ) {
+  case 1:
+    _enemyExplosionPrefab->instantiate( _selfTransform->getPosition() );
+    break;
+  case 2:
+    _bigExplosionPrefab->instantiate( _selfTransform->getPosition() + Vec2( 0, 10 ) );
+    break;
+  default:
+    _enemyExplosionPrefab->instantiate( _selfTransform->getPosition() );
+    break;
+  }
 
   getGameObject()->release();
 }
