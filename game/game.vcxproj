@@ -197,7 +197,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
     <ClCompile Include="prefabs\SpringPrefab.cpp" />
     <ClCompile Include="prefabs\SpritePrefab.cpp" />
-    <ClCompile Include="prefabs\StaticMapBlockerPrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
@@ -221,13 +220,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
-    <ClCompile Include="scripts\StairGroupThreeController.cpp" />
-    <ClCompile Include="scripts\StairGroupTwoController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
     <ClCompile Include="scripts\StairsModeSwitcher.cpp" />
-    <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -278,7 +274,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
     <ClInclude Include="prefabs\SpringPrefab.h" />
     <ClInclude Include="prefabs\SpritePrefab.h" />
-    <ClInclude Include="prefabs\StaticMapBlockerPrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
@@ -302,13 +297,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
-    <ClInclude Include="scripts\StairGroupThreeController.h" />
-    <ClInclude Include="scripts\StairGroupTwoController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
     <ClInclude Include="scripts\SpringController.h" />
     <ClInclude Include="scripts\StairsModeSwitcher.h" />
-    <ClInclude Include="scripts\StaticMapBlockerController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />

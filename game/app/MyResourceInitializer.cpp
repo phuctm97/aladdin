@@ -27,6 +27,7 @@
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/FloatingSalivaPrefab.h"
 #include "../prefabs/CamelPrefab.h"
+#include "../prefabs/PeddlerPrefab.h"
 #include "../prefabs/FallingVasePrefab.h"
 #include "../prefabs/HandEnemyPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
@@ -38,7 +39,7 @@
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
-#include "../prefabs/PeddlerPrefab.h"
+#include "../prefabs/PlatformPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -124,6 +125,7 @@ void MyResourceInitializer::doRun() {
   new CharcoalBurnerPrefab();
   new FloatingSalivaPrefab();
   new CamelPrefab();
+  new PeddlerPrefab();
   new FallingVasePrefab();
   new HandEnemyPrefab();
   new GuardOnePrefab();
@@ -135,8 +137,8 @@ void MyResourceInitializer::doRun() {
   new ClimbableRopePrefab();
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
+  new PlatformPrefab();
 
-  new PeddlerPrefab();
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();

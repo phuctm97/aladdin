@@ -30,7 +30,7 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   // configurations
   object->setTag( SPRING_TAG );
-  object->setLayer( "Debug" );
+  object->setLayer( "Foreground" );
 
   // states
   new State( stateManager, "static",

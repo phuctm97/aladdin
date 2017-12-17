@@ -3,12 +3,12 @@
 
 #include <aladdin.h>
 
-class PlatformPrefab : public ala::Prefab {
+ALA_CLASS_HEADER_1(PlatformPrefab, ala::PrefabV2)
 public:
-	PlatformPrefab() : Prefab("Platform") {};
+  PlatformPrefab() : PrefabV2( "Platform" ) {};
 
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__PLATFORM_PREFAB_H__

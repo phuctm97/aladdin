@@ -3,28 +3,26 @@
 
 #include <aladdin.h>
 
-class PlatformController : ala::GameObjectComponent
-{
+ALA_CLASS_HEADER_1(PlatformController, ala::GameObjectComponent)
 private:
+  ala::GameObject* _other;
+  ala::Logger _logger;
+  bool _isChangePosition = false;
+  ala::Vec2 _oldPosition;
 
-	ala::GameObject* _other;
-	ala::Logger _logger;
-	bool _isChangePosition = false;
-	ala::Vec2 _oldPosition;
+  void getCollisionObject( const ala::CollisionInfo& collision );
 
-	void getCollisionObject(const ala::CollisionInfo& collision);
-	
 public:
-	PlatformController(ala::GameObject* gameObject, const string& name = "");
+  PlatformController( ala::GameObject* gameObject, const string& name = "" );
 
 protected:
+  void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
-	void onTriggerEnter(const ala::CollisionInfo& collision) override;
-	void onTriggerStay(const ala::CollisionInfo& collision) override;
-	void onTriggerExit(const ala::CollisionInfo& collision) override;
+  void onTriggerStay( const ala::CollisionInfo& collision ) override;
 
-	void onUpdate(const float delta) override;
+  void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
+  void onUpdate( const float delta ) override;
 };
 
 

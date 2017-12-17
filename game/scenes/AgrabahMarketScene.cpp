@@ -50,6 +50,10 @@ void AgrabahMarketScene::onPreInitialize() {
 
   */
 
+  /* Platforms */
+  gameManager->getPrefabV2( "Platform" )->instantiateWithArgs( "200" )
+             ->getTransform()->setPosition( Vec2( 0, 20 ) );
+
   /* Walls */
 
   gameManager->getPrefabV2( "Wall" )->instantiateWithArgs( "29 68" )
