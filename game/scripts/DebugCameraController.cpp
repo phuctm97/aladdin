@@ -6,13 +6,17 @@ ALA_CLASS_SOURCE_1(DebugCameraController, ala::GameObjectComponent)
 
 DebugCameraController::DebugCameraController( ala::GameObject* gameObject, ala::GameObject* target,
                                               const std::string& name )
-  : GameObjectComponent( gameObject, name ), _speed( 0.5f ), _logger( "DebugCameraController" ), _target( target ) {}
+  : GameObjectComponent( gameObject, name ),_releaseTarget(false), _speed( 0.5f ), _logger( "DebugCameraController" ), _target( target ) {}
 
 void DebugCameraController::onUpdate( const float delta ) {
   const auto input = Input::get();
   const auto transform = getGameObject()->getTransform();
+  
+  if (input->getKey(ALA_KEY_F7)) {
+	  _releaseTarget = !_releaseTarget;
+  }
 
-  if ( _target != NULL ) {
+  if ( _target != NULL && !_releaseTarget) {
     transform->setPosition( _target->getTransform()->getPosition() );
   }
   else {

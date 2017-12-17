@@ -95,6 +95,10 @@ void NodeController::onUpdate(const float delta) {
 		if (collider != NULL) {
 			_logger.info("Position: Vec2(%.1ff, %.1ff), Size(%.1ff, %.1ff)", transform->getPositionX(), transform->getPositionY(), collider->getSize().getWidth(), collider->getSize().getHeight());
 		}
+
+		if (rectRenderer != NULL) {
+			_logger.info("Position: Vec2(%.1ff, %.1ff), Size(%.1ff, %.1ff)", transform->getPositionX(), transform->getPositionY(), rectRenderer->getSize().getWidth(), rectRenderer->getSize().getHeight());
+		}
 	}
 
 	if (input->getKeyDown(ALA_KEY_F5)) {

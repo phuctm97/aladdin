@@ -158,8 +158,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsOnePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsSixPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\HorizontalBarPrefab.cpp" />
@@ -237,8 +239,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsOnePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsSixPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
     <ClInclude Include="prefabs\HorizontalBarPrefab.h" />
