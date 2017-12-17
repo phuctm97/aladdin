@@ -105,9 +105,6 @@
     <ClCompile Include="prefabs\FlamePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\GenieBonusPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\GenieLampPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -189,9 +186,6 @@
     <ClCompile Include="scripts\DirectionController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\GenieBonusController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\GuardController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -264,6 +258,9 @@
     <ClCompile Include="scripts\SceneInfoQuerier.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\GenieBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -304,9 +301,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\FlamePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\GenieBonusPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\GenieLampPrefab.h">
@@ -390,9 +384,6 @@
     <ClInclude Include="scripts\DirectionController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\GenieBonusController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\GuardController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -464,6 +455,9 @@
     </ClInclude>
     <ClInclude Include="scripts\SceneInfoQuerier.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\GenieBonusPrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,15 @@
 #ifndef __GENIE_BONUS_PREFAB_H__
 #define __GENIE_BONUS_PREFAB_H__
 
-#include<aladdin.h>
+#include <aladdin.h>
 
-class GenieBonusPrefab : ala::Prefab {
+ALA_CLASS_HEADER_1(GenieBonusPrefab, ala::PrefabV2)
 public:
-	GenieBonusPrefab() : Prefab("genie bonus") {}
+  GenieBonusPrefab()
+    : PrefabV2( "Genie Bonus" ) {}
+
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
-#endif // !__GENIE_BONUS_PREFAB_H__
+#endif //!__GENIE_BONUS_PREFAB_H__

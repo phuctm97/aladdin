@@ -1,79 +1,77 @@
-#include"GenieBonusPrefab.h"
-#include"../scripts/GenieBonusController.h"
-#include"../Define.h"
-
+#include "GenieBonusPrefab.h"
+#include "../Define.h"
+#include "../scripts/CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
-void GenieBonusPrefab::doInstantiate(ala::GameObject* object) const {
+ALA_CLASS_SOURCE_1(GenieBonusPrefab, ala::PrefabV2)
 
+void GenieBonusPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
+  const auto minDelay = 1000;
+  const auto maxDelay = 5000;
 
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
-	const auto gameManager = GameManager::get();
+  const auto animator = new Animator( object, "genie_bonus", "items.anm" );
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "items.png");
-	const auto animator = new Animator(object, "idle_genie", "items.anm");
+  const auto actionManager = new ActionManager( object );
 
+  const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
-	// //For animationEditor
-	//const auto animationEditor = new AnimationEditor( object, "abu_bonus" );
-	//return;
-	// //For animationEditor
+  const auto collider = new Collider( object, true, Vec2( 0, -5 ), Size( 25, 35 ), 1, 0 );
+  collider->setTag( BONUS_TAG );
+  collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
+  const auto stateManager = new StateManager( object, "static" );
 
-	const auto timer = new Timer(object);
-	//const auto colliderRenderer = new ColliderRenderer(collider);
-	const auto stateManager = new StateManager(object, "normal");
-	const auto controller = new GenieBonusController(object);
-	const auto transform = object->getTransform();
+  const auto collision = new CollisionTracker( object );
 
-	// configurations
-	object->setTag(ENEMY_TAG);
-	object->setLayer("Character");
+  // helpers
+  const auto timer = new Timer( object );
 
-	// states
-	new State(stateManager, "normal",
-		[=] {
-		animator->setAction("idle_genie");
-	}, [=](float dt) {
-		if (!animator->isPlaying() && timer->isDone()) {
-			const auto way = rand() % 4;
-			if (way == 0 && !animator->isPlaying()) {
-				animator->setAction("wink");
-			}
-			else {
-				animator->setAction("idle_genie");
-				timer->start(1.0f * (200 + rand() % 900) / 1000);
-			}
-		}
-		/*auto positionY = transform->getPositionY();
-		if (controller->getOrient()) {
-			transform->setPosition(transform->getPositionX(), positionY + 0.5);
-			if(transform->getPositionY() >= -8)
-			controller->setOrient(false);
-		}
-		else {
-			transform->setPosition(transform->getPositionX(), positionY - 0.5);
-			if (transform->getPositionY() <= -15)
-				controller->setOrient(true);
-		}*/
-		
-		
-	}, NULL);
+  const auto transform = object->getTransform();
 
-	new State(stateManager, "explosion",
-		[=] {
-		spriteRenderer->setVisible(false);
-		controller->explosionEffect();
-		object->release();
-	}, NULL, NULL);
+  // collider renderers
+  new ColliderRenderer( collider );
 
+  // configurations
+  object->setTag( BONUS_TAG );
+  object->setLayer( "Foreground" );
 
-	new StateTransition(stateManager, "normal", "explosion", [=] {
-		return controller->isCollisionAladdin();
-	});
+  // states
+  new State( stateManager, "static",
+             [=] {
+               // animation effect 
+               {
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 0, 6 ), 0.5f ),
+                     new MoveBy( Vec2( 0, -6 ), 0.5f )
+                   } )
+                 ) );
+               }
+             },
+             [=]( float dt ) {
+               // animation effect 
+               {
+                 if ( timer->isDone() ) {
+                   animator->playFromStart();
+                   timer->start( (rand() % (maxDelay - minDelay)) / 1000.0f );
+                 }
+               }
+
+               // collision
+               {
+                 if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
+                   smallFireworkPrefab->instantiate( transform->getPosition() );
+                   object->release();
+                 }
+               }
+             }, NULL );
 }

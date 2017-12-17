@@ -58,13 +58,11 @@
     <sprite x="570" y="207" w="21" h="25" offsetX="-1" offsetY="4" />
     <sprite x="596" y="213" w="18" h="19" offsetX="-0.5" offsetY="1" />
   </Animation>
-  <Animation name="idle_genie" imagePath="items.png" interval="0.1" isLoop="false">
+  <Animation name="genie_bonus" imagePath="items.png" interval="0.15" isLoop="false">
+    <sprite x="389" y="45" w="42" h="51" oX="389" oY="45" oW="-240" oH="195" />
+    <sprite x="443" y="49" w="43" h="43" oX="443" oY="49" oW="-240" oH="195" />
+    <sprite x="497" y="48" w="44" h="43" oX="497" oY="48" oW="-240" oH="195" />
     <sprite x="335" y="45" w="37" h="49" oX="335" oY="45" oW="-247" oH="37" />
-  </Animation>
-  <Animation name="wink" imagePath="items.png" interval="0.15" isLoop="false">
-    <sprite x="389" y="45" w="42" h="51" oX="389" oY="45" oW="-404" oH="149" />
-    <sprite x="443" y="49" w="43" h="43" oX="443" oY="49" oW="-404" oH="149" />
-    <sprite x="497" y="48" w="44" h="43" oX="497" oY="48" oW="-404" oH="149" />
   </Animation>
   <Animation name="idle_lamp" imagePath="items.png" width="664" height="471">
     <sprite x="369" y="15" w="31" h="15" oX="369" oY="15" oW="-331" oH="31" />

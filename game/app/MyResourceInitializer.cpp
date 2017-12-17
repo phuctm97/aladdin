@@ -14,6 +14,7 @@
 #include "../prefabs/EatableApplePrefab.h"
 #include "../prefabs/EatableHeartPrefab.h"
 #include "../prefabs/GenieLampPrefab.h"
+#include "../prefabs/GenieBonusPrefab.h"
 #include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/CheckpointPrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
@@ -106,6 +107,7 @@ void MyResourceInitializer::doRun() {
   new EatableApplePrefab();
   new EatableHeartPrefab();
   new GenieLampPrefab();
+  new GenieBonusPrefab();
   new CheckpointPrefab();
   new EnemyExplosionPrefab();
   new SmallFireworkPrefab();
