@@ -21,8 +21,8 @@ private:
   ala::StateManager* _selfStateManager;
   DirectionController* _selfDirection;
 
-  ala::PrefabV2* _enemyExplosionPrefab;
-  ala::PrefabV2* _bigExplosionPrefab;
+  ala::PrefabV2* _enemyExplosionOnePrefab;
+  ala::PrefabV2* _enemyExplosionTwoPrefab;
 
 public:
   GuardController( ala::GameObject* gameObject, const std::string& name = "" );

@@ -19,9 +19,10 @@
 #include "../prefabs/SpendThesePrefab.h"
 #include "../prefabs/AbuBonusPrefab.h"
 #include "../prefabs/CheckpointPrefab.h"
-#include "../prefabs/EnemyExplosionPrefab.h"
+#include "../prefabs/EnemyExplosionOnePrefab.h"
 #include "../prefabs/SmallFireworkPrefab.h"
 #include "../prefabs/BigExplosionPrefab.h"
+#include "../prefabs/EnemyExplosionTwoPrefab.h"
 #include "../prefabs/FlamePrefab.h"
 #include "../prefabs/CharcoalBurnerPrefab.h"
 #include "../prefabs/FloatingSalivaPrefab.h"
@@ -113,9 +114,10 @@ void MyResourceInitializer::doRun() {
   new SpendThesePrefab();
   new AbuBonusPrefab();
   new CheckpointPrefab();
-  new EnemyExplosionPrefab();
+  new EnemyExplosionOnePrefab();
   new SmallFireworkPrefab();
   new BigExplosionPrefab();
+  new EnemyExplosionTwoPrefab();
   new FlamePrefab();
   new CharcoalBurnerPrefab();
   new FloatingSalivaPrefab();

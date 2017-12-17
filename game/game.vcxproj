@@ -171,8 +171,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\GuardFourPrefab.cpp" />
     <ClCompile Include="prefabs\GuardThreePrefab.cpp" />
     <ClCompile Include="prefabs\EatableApplePrefab.cpp" />
-    <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp" />
-    <ClCompile Include="prefabs\ExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\EnemyExplosionOnePrefab.cpp" />
+    <ClCompile Include="prefabs\EnemyExplosionTwoPrefab.cpp" />
     <ClCompile Include="prefabs\EatableHeartPrefab.cpp" />
     <ClCompile Include="prefabs\FlamePrefab.cpp" />
     <ClCompile Include="prefabs\GenieLampPrefab.cpp" />
@@ -242,8 +242,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\GuardFourPrefab.h" />
     <ClInclude Include="prefabs\GuardThreePrefab.h" />
     <ClInclude Include="prefabs\EatableApplePrefab.h" />
-    <ClInclude Include="prefabs\EnemyExplosionPrefab.h" />
-    <ClInclude Include="prefabs\ExplosionPrefab.h" />
+    <ClInclude Include="prefabs\EnemyExplosionOnePrefab.h" />
+    <ClInclude Include="prefabs\EnemyExplosionTwoPrefab.h" />
     <ClInclude Include="prefabs\EatableHeartPrefab.h" />
     <ClInclude Include="prefabs\FlamePrefab.h" />
     <ClInclude Include="prefabs\GenieLampPrefab.h" />

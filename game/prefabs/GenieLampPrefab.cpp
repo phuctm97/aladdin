@@ -11,7 +11,7 @@ ALA_CLASS_SOURCE_1(GenieLampPrefab, ala::PrefabV2)
 void GenieLampPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
-  const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
+  const auto bigExplosionPrefab = gameManager->getPrefabV2( "Big Explosion" );
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
@@ -46,7 +46,7 @@ void GenieLampPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   new State( stateManager, "static", NULL,
              [=]( float dt ) {
                if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
-                 smallFireworkPrefab->instantiate( transform->getPosition() );
+                 bigExplosionPrefab->instantiate( transform->getPosition() + Vec2( 0, 10 ) );
                  object->release();
 
                  // destroy enemy

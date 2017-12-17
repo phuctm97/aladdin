@@ -96,12 +96,6 @@
     <ClCompile Include="prefabs\EatableApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\ExplosionPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\FlamePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -255,6 +249,12 @@
     <ClCompile Include="prefabs\GenieBonusPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\EnemyExplosionTwoPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\EnemyExplosionOnePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -286,12 +286,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\EatableApplePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\EnemyExplosionPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\ExplosionPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\FlamePrefab.h">
@@ -445,6 +439,12 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\GenieBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EnemyExplosionTwoPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\EnemyExplosionOnePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
