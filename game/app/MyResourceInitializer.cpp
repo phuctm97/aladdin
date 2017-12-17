@@ -76,7 +76,6 @@ void MyResourceInitializer::doRun() {
   new Sprite( "civilian_enemies.png", "textures/enemies/civilian_enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
   new Sprite( "camel.png", "textures/nonplayable_characters/camel.png" );
-  new Sprite( "spring.png", "textures/nonplayable_characters/spring.png" );
   new Sprite( "peddler.png", "textures/nonplayable_characters/peddler.png" );
   new Sprite( "abu.png", "textures/nonplayable_characters/abu.png" );
 
@@ -96,7 +95,6 @@ void MyResourceInitializer::doRun() {
   new Animation( "civilian_enemies.anm", "animations/enemies/civilian_enemies.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "camel.anm", "animations/nonplayable_characters/camel.anm" );
-  new Animation( "spring.anm", "animations/nonplayable_characters/spring.anm" );
   new Animation( "peddler.anm", "animations/nonplayable_characters/peddler.anm" );
   new Animation( "abu.anm", "animations/nonplayable_characters/abu.anm" );
 

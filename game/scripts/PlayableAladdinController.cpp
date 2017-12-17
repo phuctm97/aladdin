@@ -14,7 +14,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _health( 0 ), _lives( 0 ), _apples( 0 ),
     _recovering( false ),
     _hit( false ),
-    _jumpOnCamel( false ),
+    _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
     _holdingRope( NULL ), _holdingBar( NULL ),
@@ -70,6 +70,14 @@ void PlayableAladdinController::resetJumpOnCamel() {
 
 bool PlayableAladdinController::isJumpOnCamel() const {
   return _jumpOnCamel;
+}
+
+void PlayableAladdinController::resetJumpOnSpring() {
+  _jumpOnSpring = false;
+}
+
+bool PlayableAladdinController::isJumpOnSpring() const {
+  return _jumpOnSpring;
 }
 
 void PlayableAladdinController::resetHit() {
@@ -221,6 +229,11 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
         }
       }
     }
+    else if ( otherObject->getTag() == SPRING_TAG ) {
+      if ( _selfTransform->getPositionY() - otherObject->getTransform()->getPositionY() >= 10 ) {
+        onJumpOnSpring( otherObject );
+      }
+    }
   }
 }
 
@@ -290,6 +303,16 @@ void PlayableAladdinController::onHit( const int damage ) {
 
 void PlayableAladdinController::onJumpOnCamel() {
   _jumpOnCamel = true;
+
+  // TODO: refactor to state transition
+  _selfStateManager->changeState( "jump" );
+}
+
+void PlayableAladdinController::onJumpOnSpring( ala::GameObject* spring ) {
+  _jumpOnSpring = true;
+
+  // TODO: move to spring controller
+  spring->getComponentT<StateManager>()->changeState( "dynamic" );
 
   // TODO: refactor to state transition
   _selfStateManager->changeState( "jump" );

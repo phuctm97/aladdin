@@ -491,9 +491,6 @@
     <Image Include="textures\nonplayable_characters\peddler.png">
       <Filter>texures\nonplayable_characters</Filter>
     </Image>
-    <Image Include="textures\nonplayable_characters\spring.png">
-      <Filter>texures\nonplayable_characters</Filter>
-    </Image>
     <Image Include="textures\playable_characters\aladdin.png">
       <Filter>texures\playable_characters</Filter>
     </Image>
@@ -532,9 +529,6 @@
       <Filter>animations\nonplayable_characters</Filter>
     </None>
     <None Include="animations\nonplayable_characters\peddler.anm">
-      <Filter>animations\nonplayable_characters</Filter>
-    </None>
-    <None Include="animations\nonplayable_characters\spring.anm">
       <Filter>animations\nonplayable_characters</Filter>
     </None>
     <None Include="animations\playable_characters\aladdin.anm">

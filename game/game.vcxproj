@@ -309,7 +309,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\nonplayable_characters\abu.png" />
     <Image Include="textures\nonplayable_characters\camel.png" />
     <Image Include="textures\nonplayable_characters\peddler.png" />
-    <Image Include="textures\nonplayable_characters\spring.png" />
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
@@ -325,7 +324,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <None Include="animations\nonplayable_characters\abu.anm" />
     <None Include="animations\nonplayable_characters\camel.anm" />
     <None Include="animations\nonplayable_characters\peddler.anm" />
-    <None Include="animations\nonplayable_characters\spring.anm" />
     <None Include="animations\playable_characters\aladdin.anm" />
     <None Include="fonts\one.fnt" />
     <None Include="fonts\two.fnt" />

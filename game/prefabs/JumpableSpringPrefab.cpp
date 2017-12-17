@@ -1,6 +1,5 @@
 #include "JumpableSpringPrefab.h"
 #include "../Define.h"
-#include "../scripts/CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
@@ -10,7 +9,7 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
-  const auto animator = new Animator( object, "spring", "items.anm" );
+  const auto animator = new Animator( object, "spring_0", "items.anm" );
 
   const auto stateManager = new StateManager( object, "static" );
 
@@ -23,8 +22,6 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
   collider->ignoreTag( APPLE_TAG );
   collider->ignoreTag( SWORD_TAG );
 
-  const auto collisionTracker = new CollisionTracker( object );
-
   // helpers
   const auto transform = object->getTransform();
 
@@ -36,11 +33,15 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
   object->setLayer( "Debug" );
 
   // states
-  new State( stateManager, "static", NULL,
-             [=]( float dt ) {
-               if ( collisionTracker->collidedWithObjectTag( ALADDIN_TAG ) ) {
-                 collisionTracker->reset();
-                 animator->playFromStart();
-               }
-             }, NULL );
+  new State( stateManager, "static",
+             [=] { animator->setAction( "spring_0" ); },
+             NULL, NULL );
+
+  new State( stateManager, "dynamic",
+             [=] { animator->setAction( "spring" ); },
+             NULL, NULL );
+
+  new StateTransition( stateManager, "static", "dynamic", [=] {
+    return !animator->isPlaying();
+  } );
 }

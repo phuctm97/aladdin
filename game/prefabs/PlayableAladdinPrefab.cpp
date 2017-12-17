@@ -22,6 +22,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto runVelocity = 140.0f;
   const auto climbVelocity = 60.0f;
   const auto holdBarMoveVelocity = 80.0f;
+  const auto jumpImpulse = 3000000.0f;
+  const auto jumpOnCamelImpulse = 3000000.0f;
+  const auto jumpOnSpringImpulse = 3500000.0f;
   const auto stopAcceleration = 4.0f;
   const auto throwImpulse = Vec2( 20000.0f, 1000.0f );
   const auto swordOffset1 = Vec2( 45, 10 );
@@ -714,6 +717,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  else if ( stateManager->getPreviousStateName() == "climb" ) {
                    animator->setAction( "climb_to_jump" );
                  }
+                 else if ( controller->isJumpOnSpring() ) {
+                   animator->setAction( "jump_rotate" );
+                 }
                  else {
                    animator->setAction( "jump" );
                  }
@@ -733,10 +739,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( controller->isJumpOnCamel() ) {
                    body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
-                   body->addImpulse( Vec2( 0, 3000000.0f ) );
+                   body->addImpulse( Vec2( 0, jumpOnCamelImpulse ) );
+                 }
+                 else if ( controller->isJumpOnSpring() ) {
+                   body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+                   body->addImpulse( Vec2( 0, jumpOnSpringImpulse ) );
                  }
                  else {
-                   body->addImpulse( Vec2( 0, 3000000.0f ) );
+                   body->addImpulse( Vec2( 0, jumpImpulse ) );
                  }
                }
 
@@ -753,6 +763,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // camel collision
                {
                  controller->resetJumpOnCamel();
+               }
+
+               // spring collision
+               {
+                 controller->resetJumpOnSpring();
                }
              },
              [=]( float dt ) {
@@ -794,6 +809,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
                    else if ( animator->getActionName() == "climb_to_jump" ) {
                      animator->setAction( "climb_to_jump_fall" );
+                   }
+                   else if ( animator->getActionName() == "jump_rotate" ) {
+                     animator->setAction( "jump_rotate_fall" );
                    }
                    else {
                      animator->setAction( "fall" );

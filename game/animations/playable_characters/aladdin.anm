@@ -339,7 +339,7 @@
     <sprite x="585" y="1966" w="80" h="43" offsetX="-15" offsetY="-5" />
     <sprite x="681" y="1968" w="74" h="43" offsetX="-15" offsetY="-5" />
   </Animation>
-  <Animation name="jump_rotate" imagePath="aladdin.png" interval="0.1" isLoop="false">
+  <Animation name="jump_rotate" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="12" y="1154" w="48" h="53" oX="12" oY="1154" oW="1215" oH="403" />
     <sprite x="76" y="1162" w="36" h="31" oX="76" oY="1162" oW="1215" oH="403" />
     <sprite x="135" y="1160" w="34" h="33" oX="135" oY="1160" oW="1215" oH="403" />
@@ -356,7 +356,18 @@
     <sprite x="306" y="1158" w="36" h="37" oX="306" oY="1158" oW="1123" oH="321" />
     <sprite x="362" y="1161" w="38" h="34" oX="362" oY="1161" oW="1123" oH="321" />
   </Animation>
-  <Animation name="jump_rotate_fall" imagePath="aladdin.png" interval="0.1" isLoop="false">
+  <Animation name="jump_rotate_fall" imagePath="aladdin.png" interval="0.07" isLoop="false">
+    <sprite x="76" y="1162" w="36" h="31" oX="76" oY="1162" oW="1215" oH="403" />
+    <sprite x="135" y="1160" w="34" h="33" oX="135" oY="1160" oW="1215" oH="403" />
+    <sprite x="190" y="1160" w="37" h="39" oX="190" oY="1160" oW="1215" oH="403" />
+    <sprite x="252" y="1165" w="37" h="30" oX="252" oY="1165" oW="1215" oH="403" />
+    <sprite x="306" y="1158" w="36" h="37" oX="306" oY="1158" oW="1123" oH="321" />
+    <sprite x="362" y="1161" w="38" h="34" oX="362" oY="1161" oW="1123" oH="321" />
+    <sprite x="336" y="829" w="37" h="65" offsetX="0" offsetY="0" />
+    <sprite x="390" y="818" w="34" h="78" offsetX="0" offsetY="0" />
+    <sprite x="491" y="680" w="49" h="84" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="jump_rotate_fall_backup" imagePath="aladdin.png" interval="0.07" isLoop="false">
     <sprite x="417" y="1156" w="42" h="41" oX="417" oY="1156" oW="781" oH="409" />
     <sprite x="137" y="829" w="53" h="60" oX="137" oY="829" oW="781" oH="409" />
     <sprite x="203" y="824" w="53" h="68" oX="203" oY="824" oW="781" oH="409" />

@@ -16,6 +16,7 @@ private:
   bool _recovering;
   bool _hit;
   bool _jumpOnCamel;
+  bool _jumpOnSpring;
   bool _pushingWall;
   bool _reachedTopOfRope;
   ala::GameObject* _holdingRope;
@@ -52,6 +53,10 @@ public:
   void resetJumpOnCamel();
 
   bool isJumpOnCamel() const;
+
+  void resetJumpOnSpring();
+
+  bool isJumpOnSpring() const;
 
   void resetHit();
 
@@ -96,6 +101,8 @@ private:
   void onHit( const int damage = 1 );
 
   void onJumpOnCamel();
+
+  void onJumpOnSpring( ala::GameObject* spring );
 
   void onCatchRope( ala::GameObject* rope );
 
