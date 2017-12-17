@@ -38,7 +38,17 @@ void AgrabahMarketScene::onPreInitialize() {
 
   gameManager->getPrefabV2( "Agrabah Market Ground" )->instantiateWithArgs( "", "Ground" );
 
-  gameManager->getPrefabV2( "Agrabah Market Stair 1" )->instantiateWithArgs( "", "Start 1" );
+  /*
+   
+  gameManager->getPrefabV2( "Agrabah Market Stairs 1" )->instantiateWithArgs( "", "Stairs 1" );
+
+  gameManager->getPrefabV2( "Agrabah Market Stairs 2" )->instantiateWithArgs( "0", "Stairs 2" )
+             ->getTransform()->setPosition( -2000, 41 );
+
+  gameManager->getPrefabV2( "Agrabah Market Stairs 3" )->instantiateWithArgs( "0", "Stairs 3" )
+             ->getTransform()->setPosition( -2000, -44 );
+
+  */
 
   /* Walls */
 
@@ -59,11 +69,13 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
-  /* Springs */
+  /* Springs 
 
   gameManager->getPrefabV2( "Jumpable Spring" )->instantiateWithArgs( "" )
              ->getTransform()
              ->setPosition( 0, 42 );
+
+             */
 
   /* Checkpoints 
   gameManager->getPrefabV2( "Checkpoint" )->instantiateWithArgs( "" )

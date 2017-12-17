@@ -40,7 +40,9 @@
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PeddlerPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
-#include "../prefabs/AgrabahMarketStairOnePrefab.h"
+#include "../prefabs/AgrabahMarketStairsOnePrefab.h"
+#include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
+#include "../prefabs/AgrabahMarketStairsThreePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -136,7 +138,9 @@ void MyResourceInitializer::doRun() {
 
   new PeddlerPrefab();
   new AgrabahMarketGroundPrefab();
-  new AgrabahMarketStairOnePrefab();
+  new AgrabahMarketStairsOnePrefab();
+  new AgrabahMarketStairsTwoPrefab();
+  new AgrabahMarketStairsThreePrefab();
 
   // Dev tools
   new NodePrefab();

@@ -78,9 +78,6 @@
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AgrabahMarketStairOnePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\BigExplosionPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -222,9 +219,6 @@
     <ClCompile Include="scenes\DeathScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairGroupTwoPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\HorizontalBarPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -237,13 +231,10 @@
     <ClCompile Include="scripts\StairGroupTwoController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\StairGroupThreePrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\StairGroupThreeController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\PendalPrefab.cpp" >
+    <ClCompile Include="prefabs\PendalPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="scripts\PendalController.cpp">
@@ -282,6 +273,18 @@
     <ClCompile Include="prefabs\JumpableSpringPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsOnePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StairsModeSwitcher.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -295,9 +298,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\AgrabahMarketStairOnePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\BigExplosionPrefab.h">
@@ -441,9 +441,6 @@
     <ClInclude Include="scenes\DeathScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\StairGroupTwoPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\HorizontalBarPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -455,9 +452,6 @@
     </ClInclude>
     <ClInclude Include="scripts\StairGroupTwoController.h">
       <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\StairGroupThreePrefab.h">
-      <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="scripts\StairGroupThreeController.h">
       <Filter>scripts</Filter>
@@ -499,6 +493,18 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JumpableSpringPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsOnePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StairsModeSwitcher.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
