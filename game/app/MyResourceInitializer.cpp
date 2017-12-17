@@ -27,6 +27,7 @@
 #include "../prefabs/GuardTwoPrefab.h"
 #include "../prefabs/GuardThreePrefab.h"
 #include "../prefabs/GuardFourPrefab.h"
+#include "../prefabs/GuardFivePrefab.h"
 #include "../prefabs/WallPrefab.h"
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/HoldableBarPrefab.h"
@@ -63,7 +64,6 @@ void MyResourceInitializer::doRun() {
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
   new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
-  new Sprite( "guards2.png", "textures/enemies/guards2.png" );
   new Sprite( "civilian_enemies.png", "textures/enemies/civilian_enemies.png" );
   new Sprite( "jafar.png", "textures/bosses/jafar.png" );
   new Sprite( "camel.png", "textures/nonplayable_characters/camel.png" );
@@ -84,7 +84,6 @@ void MyResourceInitializer::doRun() {
   new Animation( "items.anm", "animations/miscellaneous/items.anm" );
   new Animation( "cutscenes.anm", "animations/miscellaneous/cutscenes.anm" );
   new Animation( "guards.anm", "animations/enemies/guards.anm" );
-  new Animation( "guards2.anm", "animations/enemies/guards2.anm" );
   new Animation( "civilian_enemies.anm", "animations/enemies/civilian_enemies.anm" );
   new Animation( "jafar.anm", "animations/bosses/jafar.anm" );
   new Animation( "camel.anm", "animations/nonplayable_characters/camel.anm" );
@@ -117,6 +116,7 @@ void MyResourceInitializer::doRun() {
   new GuardTwoPrefab();
   new GuardThreePrefab();
   new GuardFourPrefab();
+  new GuardFivePrefab();
   new WallPrefab();
   new ClimbableRopePrefab();
   new HoldableBarPrefab();

@@ -166,9 +166,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\CamelPrefab.cpp" />
     <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
     <ClCompile Include="prefabs\CheckpointPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardFivePrefab.cpp" />
     <ClCompile Include="prefabs\GuardFourPrefab.cpp" />
     <ClCompile Include="prefabs\GuardThreePrefab.cpp" />
-    <ClCompile Include="prefabs\HideGuardPrefab.cpp" />
     <ClCompile Include="prefabs\EatableApplePrefab.cpp" />
     <ClCompile Include="prefabs\EnemyExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\ExplosionPrefab.cpp" />
@@ -204,7 +204,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CheckpointController.cpp" />
-    <ClCompile Include="scripts\HideGuardController.cpp" />
     <ClCompile Include="scripts\CameraFollower.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerCollisionTracker.cpp" />
     <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
@@ -241,9 +240,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\CamelPrefab.h" />
     <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
     <ClInclude Include="prefabs\CheckpointPrefab.h" />
+    <ClInclude Include="prefabs\GuardFivePrefab.h" />
     <ClInclude Include="prefabs\GuardFourPrefab.h" />
     <ClInclude Include="prefabs\GuardThreePrefab.h" />
-    <ClInclude Include="prefabs\HideGuardPrefab.h" />
     <ClInclude Include="prefabs\EatableApplePrefab.h" />
     <ClInclude Include="prefabs\EnemyExplosionPrefab.h" />
     <ClInclude Include="prefabs\ExplosionPrefab.h" />
@@ -279,7 +278,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scripts\CheckpointController.h" />
-    <ClInclude Include="scripts\HideGuardController.h" />
     <ClInclude Include="scripts\CameraFollower.h" />
     <ClInclude Include="scripts\CharcoalBurnerCollisionTracker.h" />
     <ClInclude Include="scripts\CharcoalBurnerController.h" />
@@ -308,7 +306,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\bosses\jafar.png" />
     <Image Include="textures\enemies\civilian_enemies.png" />
     <Image Include="textures\enemies\guards.png" />
-    <Image Include="textures\enemies\guards2.png" />
     <Image Include="textures\miscellaneous\cutscenes.png" />
     <Image Include="textures\miscellaneous\enemy_explosions.png" />
     <Image Include="textures\miscellaneous\font_one.png" />
@@ -322,7 +319,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="animations\enemies\guards2.anm" />
     <None Include="animations\bosses\jafar.anm" />
     <None Include="animations\enemies\civilian_enemies.anm" />
     <None Include="animations\enemies\guards.anm">

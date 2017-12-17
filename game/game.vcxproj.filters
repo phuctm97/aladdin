@@ -129,12 +129,6 @@
     <ClCompile Include="prefabs\NodePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\HideGuardController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\HideGuardPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\PeddlerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -265,6 +259,9 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\HoldableBarPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\GuardFivePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -408,12 +405,6 @@
     <ClInclude Include="scripts\HubController.h">
       <Filter>scripts</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\HideGuardController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\HideGuardPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\NodeController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -471,6 +462,9 @@
     <ClInclude Include="prefabs\HoldableBarPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\GuardFivePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -483,9 +477,6 @@
       <Filter>texures\bosses</Filter>
     </Image>
     <Image Include="textures\enemies\civilian_enemies.png">
-      <Filter>texures\enemies</Filter>
-    </Image>
-    <Image Include="textures\enemies\guards2.png">
       <Filter>texures\enemies</Filter>
     </Image>
     <Image Include="textures\enemies\guards.png">
@@ -529,11 +520,6 @@
     <Text Include="log.txt" />
     <Text Include="log.txt" />
     <Text Include="note.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="animations\enemies\guards2.anm">
-      <Filter>animations\enemies</Filter>
-    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">

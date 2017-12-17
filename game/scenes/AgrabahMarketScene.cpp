@@ -52,13 +52,15 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
-  /* Bars */
+  /* Bars 
   gameManager->getPrefabV2( "Holdable Bar" )->instantiateWithArgs( "260" )
              ->getTransform()
              ->setPosition( 128, 42 );
 
+             */
+
   /* Checkpoints 
-  gameManager->getPrefabV2( "Check Point" )->instantiateWithArgs( "" )
+  gameManager->getPrefabV2( "Checkpoint" )->instantiateWithArgs( "" )
              ->getTransform()
              ->setPosition( Vec2( 2545, 73 ) );
 
@@ -138,7 +140,9 @@ void AgrabahMarketScene::onPreInitialize() {
   gameManager->getPrefabV2( "Guard 4" )->instantiateWithArgs( "1169", "Guard 4" )
              ->getTransform()->setPositionY( 10 );
 
+  gameManager->getPrefabV2( "Guard 5" )->instantiateWithArgs( "550 430 670", "Guard 5" )
+             ->getTransform()->setPositionY( -25 );
              */
 
-  gameManager->getPrefabV2( "Playable Aladdin" )->instantiateWithArgs( "-80 -25", "Aladdin" );
+  gameManager->getPrefabV2( "Playable Aladdin" )->instantiateWithArgs( "380 -25", "Aladdin" );
 }
