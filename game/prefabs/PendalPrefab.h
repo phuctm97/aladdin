@@ -3,18 +3,13 @@
 
 #include <aladdin.h>
 
-class PendalPrefab : public ala::Prefab
-{
-private:
-	ala::Logger _logger;
-	ala::Vec2 _resetPoint;
+ALA_CLASS_HEADER_1(PendalPrefab, ala::PrefabV2)
 public:
-	PendalPrefab() :Prefab("Pendal"),_logger("Pendal"){};
+  PendalPrefab() : PrefabV2( "Pendal" ) {}
 
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
-
 
 
 #endif //!__PENDAL_PREFAB_H__
