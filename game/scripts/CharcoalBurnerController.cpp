@@ -6,7 +6,7 @@ USING_NAMESPACE_ALA;
 CharcoalBurnerController::CharcoalBurnerController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _touchingAladdin( false ),
-    _firingMinX( 0 ), _firingMaxX( 0 ), _firingX( 0 ) {}
+    _firingMinX( 0 ), _firingMaxX( 0 ), _firingX( 0 ), _aladdinTransform( NULL ) {}
 
 void CharcoalBurnerController::onTriggerEnter( const ala::CollisionInfo& collision ) {
   const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
@@ -42,6 +42,12 @@ bool CharcoalBurnerController::isTouchingAladdin() const {
 }
 
 void CharcoalBurnerController::onInitialize() {
+  const auto gameManager = GameManager::get();
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin != NULL ) {
+    _aladdinTransform = aladdin->getTransform();
+  }
+
   const auto collider = getGameObject()->getComponentT<Collider>();
   if ( collider == NULL ) return;
 
@@ -58,9 +64,5 @@ void CharcoalBurnerController::onUpdate( const float delta ) {
 }
 
 void CharcoalBurnerController::updateFiringX() {
-  const auto gameManager = GameManager::get();
-  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
-  if ( aladdin != NULL ) {
-    _firingX = MAX(MIN(aladdin->getTransform()->getPositionX(), _firingMaxX), _firingMinX);
-  }
+  _firingX = MAX(MIN(_aladdinTransform->getPositionX(), _firingMaxX), _firingMinX);
 }

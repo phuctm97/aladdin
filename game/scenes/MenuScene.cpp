@@ -1,5 +1,6 @@
 #include "MenuScene.h"
 #include "AgrabahMarketScene.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -8,144 +9,47 @@ ALA_CLASS_SOURCE_1(MenuScene, ala::Scene)
 void MenuScene::onPreInitialize() {
   // constants
   const auto gameManager = GameManager::get();
-  const auto input = Input::get();
+
+  // reset app data
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  myAppData->setCurrentLevel( 1 );
+  myAppData->setCurrentCheckpoint( 0 );
+  myAppData->setAladdinLives( 3 );
+  myAppData->setRetryTimes( 1 );
 
   // initial objects
-  const auto background = new GameObject( this );
-  background->setLayer( "Background" );
-  new SpriteRenderer( background, "cutscenes.png" );
-  new Animator( background, "cutscene_1", "cutscenes.anm" );
+  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "cutscenes.png 1 cutscenes.anm cutscene_1" )
+             ->setLayer( "Background" );
 
-  const auto title = new GameObject( this );
-  background->setLayer( "Sub Background" );
-  new SpriteRenderer( title, "title.png" );
-  title->getTransform()->setPositionY( 59 );
+  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "title.png 0" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPositionY( 59 );
 
-  const auto agrabahMarket = new GameObject( this, "Menu 1" );
-  agrabahMarket->setLayer( "Sub Background" );
-  const auto agrabahMarketText = new BitmapText( agrabahMarket, "font_one.png", "one.fnt" );
-  agrabahMarketText->setText( "AGRABAH MARKET" );
-  agrabahMarketText->setCharacterAlignment( BitmapText::TOP );
-  agrabahMarketText->setTextAlignment( BitmapText::LEFT );
-  agrabahMarketText->setCharacterSpacing( 0.75f );
-  agrabahMarket->getTransform()->setPosition( -51, 0 );
+  gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
+               "font_one.png one.fnt AGRABAH MARKET\n T L 0.75", "Menu 1" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPosition( -51, 0 );
 
-  const auto jafarQuarters = new GameObject( this, "Menu 2" );
-  jafarQuarters->setLayer( "Sub Background" );
-  const auto jafarQuartersText = new BitmapText( jafarQuarters, "font_one.png", "one.fnt" );
-  jafarQuartersText->setText( "JAFAR QUARTERS" );
-  jafarQuartersText->setCharacterAlignment( BitmapText::TOP );
-  jafarQuartersText->setTextAlignment( BitmapText::LEFT );
-  jafarQuartersText->setCharacterSpacing( 0.75f );
-  jafarQuarters->getTransform()->setPosition( -51, -18 );
+  gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
+               "font_one.png one.fnt JAFAR QUARTERS\n T L 0.75", "Menu 2" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPosition( -51, -18 );
 
-  const auto exit = new GameObject( this, "Menu 3" );
-  exit->setLayer( "Sub Background" );
-  const auto exitText = new BitmapText( exit, "font_one.png", "one.fnt" );
-  exitText->setText( "EXIT" );
-  exitText->setCharacterAlignment( BitmapText::TOP );
-  exitText->setTextAlignment( BitmapText::LEFT );
-  exitText->setCharacterSpacing( 0.75f );
-  exit->getTransform()->setPosition( -51, -36 );
+  gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
+               "font_one.png one.fnt EXIT\n T L 0.75", "Menu 3" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPosition( -51, -36 );
 
-  const auto licenseOne = new GameObject( this );
-  licenseOne->setLayer( "Sub Background" );
-  const auto licenseOneText = new BitmapText( licenseOne, "font_one.png", "one.fnt" );
-  licenseOneText->setText( "(C) 1993 SEGA (C) 1993 VIRGIN GAMES" );
-  licenseOneText->setCharacterAlignment( BitmapText::TOP );
-  licenseOneText->setCharacterSpacing( 0.75f );
-  licenseOne->getTransform()->setPosition( 0, -75 );
+  gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
+               "font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES\n T C 0.75" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPosition( 0, -75 );
 
-  const auto licenseTwo = new GameObject( this );
-  licenseTwo->setLayer( "Sub Background" );
-  const auto licenseTwoText = new BitmapText( licenseTwo, "font_one.png", "one.fnt" );
-  licenseTwoText->setText( "(C) 1993 THE WALT DISNEY COMPANY" );
-  licenseTwoText->setCharacterAlignment( BitmapText::TOP );
-  licenseTwoText->setCharacterSpacing( 0.75f );
-  licenseTwo->getTransform()->setPosition( 0, -92 );
+  gameManager->getPrefabV2( "Bitmap Text" )->instantiateWithArgs(
+               "font_one.png one.fnt (C) 1993 THE WALT DISNEY COMPANY\n T C 0.75" )
+             ->setLayer( "Second Background" )
+             ->getTransform()->setPosition( 0, -92 );
 
-  const auto menuSelect = new GameObject( this );
-  menuSelect->setLayer( "UI" );
-  new SpriteRenderer( menuSelect, "menu_select.png" );
-  const auto menuSelectActionManager = new ActionManager( menuSelect );
-  const auto menuSelectTransform = menuSelect->getTransform();
-  const auto menuSelectStateManager = new StateManager( menuSelect, "menu_1" );
-
-  new State( menuSelectStateManager, "menu_1",
-             [=] {
-               menuSelectTransform->setPosition( -84, agrabahMarket->getTransform()->getPositionY() - 8 );
-
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
-             },
-             [=]( float dt ) {
-               if ( input->getKeyDown( ALA_KEY_A )
-                 || input->getKeyDown( ALA_KEY_S )
-                 || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AgrabahMarketScene() );
-               }
-             },
-             NULL );
-
-  new State( menuSelectStateManager, "menu_2",
-             [=] {
-               menuSelectTransform->setPosition( -84, jafarQuarters->getTransform()->getPositionY() - 8 );
-
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
-             },
-             [=]( float dt ) {
-               if ( input->getKeyDown( ALA_KEY_A )
-                 || input->getKeyDown( ALA_KEY_S )
-                 || input->getKeyDown( ALA_KEY_D ) ) {
-                 Logger( "MenuScene" ).info( "To Jafar's Quarters Scene" );
-               }
-             },
-             NULL );
-
-  new State( menuSelectStateManager, "menu_3",
-             [=] {
-               menuSelectTransform->setPosition( -84, exit->getTransform()->getPositionY() - 8 );
-
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
-             },
-             [=]( float dt ) {
-               if ( input->getKeyDown( ALA_KEY_A )
-                 || input->getKeyDown( ALA_KEY_S )
-                 || input->getKeyDown( ALA_KEY_D ) ) {
-                 GameManager::get()->exit();
-               }
-             }, NULL );
-
-  new StateTransition( menuSelectStateManager, "menu_1", "menu_2", [=] {
-    return input->getKeyDown( ALA_KEY_DOWN_ARROW );
-  } );
-
-  new StateTransition( menuSelectStateManager, "menu_2", "menu_3", [=] {
-    return input->getKeyDown( ALA_KEY_DOWN_ARROW );
-  } );
-
-  new StateTransition( menuSelectStateManager, "menu_2", "menu_1", [=] {
-    return input->getKeyDown( ALA_KEY_UP_ARROW );
-  } );
-
-  new StateTransition( menuSelectStateManager, "menu_3", "menu_2", [=] {
-    return input->getKeyDown( ALA_KEY_UP_ARROW );
-  } );
+  gameManager->getPrefabV2( "Menu Select" )->instantiateWithArgs( "0 -18 -36" )
+             ->setLayer( "UI" );
 }

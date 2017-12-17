@@ -40,22 +40,22 @@ Application::~Application() {
   }
 
   // memory debug
-  _logger.info( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
-  _logger.info( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
-  _logger.info( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
-  _logger.info( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
-  _logger.info( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
-  _logger.info( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
-  _logger.info( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
-  _logger.info( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
-  _logger.info( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
-  _logger.info( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
-  _logger.info( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
-  _logger.info( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
-  _logger.info( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
-  _logger.info( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
-  _logger.info( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
-  _logger.info( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
+  _logger.debug( "Total Resources Created: %ld", GameResource::TOTAL_RESOURCES_CREATED );
+  _logger.debug( "Total Resources Deleted: %ld", GameResource::TOTAL_RESOURCES_DELETED );
+  _logger.debug( "Total Resource Initializers Created: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_CREATED );
+  _logger.debug( "Total Resource Initializers Deleted: %ld", ResourceInitializer::TOTAL_RESOURCE_INITIALIZERS_DELETED );
+  _logger.debug( "Total Prefabs Created: %ld", Prefab::TOTAL_PREFABS_CREATED );
+  _logger.debug( "Total Prefabs Deleted: %ld", Prefab::TOTAL_PREFABS_DELETED );
+  _logger.debug( "Total Scenes Created: %ld", Scene::TOTAL_SCENES_CREATED );
+  _logger.debug( "Total Scenes Deleted: %ld", Scene::TOTAL_SCENES_DELETED );
+  _logger.debug( "Total Objects Created: %ld", GameObject::TOTAL_OBJECTS_CREATED );
+  _logger.debug( "Total Objects Deleted: %ld", GameObject::TOTAL_OBJECTS_DELETED );
+  _logger.debug( "Total Components Created: %ld", GameObjectComponent::TOTAL_COMPONENTS_CREATED );
+  _logger.debug( "Total Components Deleted: %ld", GameObjectComponent::TOTAL_COMPONENTS_DELETED );
+  _logger.debug( "Total Loggers Created: %ld", Logger::TOTAL_LOGGERS_CREATED );
+  _logger.debug( "Total Loggers Deleted: %ld", Logger::TOTAL_LOGGERS_DELETED + 1 );
+  _logger.debug( "Total Messengers Created: %ld", Messenger::TOTAL_MESSENGERS_CREATED );
+  _logger.debug( "Total Messengers Deleted: %ld", Messenger::TOTAL_MESSENGERS_DELETED );
 
   //average fps
   QueryPerformanceCounter( &_currentTimestamp );
@@ -160,9 +160,11 @@ void Application::updatePhysics( const float delta ) {
   auto runningScene = GameManager::get()->getRunningScene();
   if ( runningScene ) {
     runningScene->updatePhysics( delta );
-  }
 
-  PhysicsManager::get()->update( delta );
+    runningScene->lockGameObjects();
+    PhysicsManager::get()->update( delta );
+    runningScene->unlockGameObjects();
+  }
 }
 
 void Application::updateGame( const float delta ) {
@@ -314,6 +316,9 @@ void Application::releaseComponents() {
   }
 
   // game singleton components
+  auto physicsManager = PhysicsManager::get();
+  physicsManager->release();
+
   auto gameManager = GameManager::get();
   gameManager->release();
 
@@ -325,9 +330,6 @@ void Application::releaseComponents() {
 
   auto graphics = Graphics::get();
   graphics->release();
-
-  auto physicsManager = PhysicsManager::get();
-  physicsManager->release();
 }
 
 void Application::onBackgroundToForeground() { }
@@ -420,6 +422,8 @@ void Application::gameLoop() {
   LONGLONG interval = 0LL;
   LONGLONG waitMS = 0L;
 
+  const auto animationInterval = getAnimationInterval();
+
   // main loop
   while ( !_exiting ) {
     QueryPerformanceCounter( &_currentTimestamp );
@@ -428,23 +432,9 @@ void Application::gameLoop() {
     if ( interval >= _animationInterval.QuadPart ) {
       _lastTimestamp.QuadPart = _currentTimestamp.QuadPart;
       _delta = (float( interval )) / _freq.QuadPart;
-
-      //convert to ms
-      //_delta *= 1000.f;
-
-      _logger.debug( "dt: %f", _delta );
-
       _frameCount++;
-      //if (_frameCount % 10 == 0) {
-      //  auto x = float(_currentTimestamp.QuadPart - _startTimestamp.QuadPart);
-      //  auto y = x / _freq.QuadPart;
-      //  const int fps = static_cast<int>(roundf((1.0f * _frameCount) / y));
-      //  _logger.debug("FPS: %d", fps);
-      //}
-      processMessage();
 
-      // TODO: what if processMessage() delay a bit, _delta value will deviate from actual one, which decreases game responsiveness
-      // TODO: consider move inverval process right before main game update
+      processMessage();
 
       processGame();
     }
@@ -480,7 +470,7 @@ void Application::processMessage() {
   }
 }
 
-void Application::processGame() {
+void Application::processGame( const bool skipRender, const bool skipUpdate ) {
   // update input
   updateInput();
 
@@ -491,10 +481,20 @@ void Application::processGame() {
   updatePhysics( _delta );
 
   // update game
-  updateGame( _delta );
+  if ( skipUpdate ) {
+    _logger.debug( "Log rate is too high -> skip game update" );
+  }
+  else {
+    updateGame( _delta );
+  }
 
   // render graphics
-  renderGraphics();
+  if ( skipRender ) {
+    _logger.debug( "Log rate is high -> skip game render" );
+  }
+  else {
+    renderGraphics();
+  }
 }
 
 LRESULT Application::wndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam ) {

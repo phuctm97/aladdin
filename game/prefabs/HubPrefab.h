@@ -3,13 +3,12 @@
 
 #include <aladdin.h>
 
-class HubPrefab : public ala::Prefab
-{
+ALA_CLASS_HEADER_1(HubPrefab, ala::PrefabV2)
 public:
-  HubPrefab();
+  HubPrefab() : PrefabV2( "Hub" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__HUB_PREFAB_H__

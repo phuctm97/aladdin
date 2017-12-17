@@ -9,6 +9,8 @@ private:
   bool _touchingAladdin;
   float _firingMinX, _firingMaxX, _firingX;
 
+  ala::Transform* _aladdinTransform;
+
 public:
   CharcoalBurnerController( ala::GameObject* gameObject, const std::string& name = "" );
 
@@ -19,7 +21,7 @@ public:
   void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
   float getFiringX() const;
-  
+
   bool isTouchingAladdin() const;
 
 protected:

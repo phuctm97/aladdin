@@ -317,6 +317,12 @@ Prefab* GameManager::getPrefab( const std::string& name ) {
   return it->second;
 }
 
+PrefabV2* GameManager::getPrefabV2( const std::string& name ) {
+  const auto it = _registeredPrefabs.find( name );
+  if ( it == _registeredPrefabs.end() ) return NULL;
+  return static_cast<PrefabV2*>(it->second);
+}
+
 std::vector<Prefab*> GameManager::getAllPrefabs() {
   std::vector<Prefab*> ret;
 

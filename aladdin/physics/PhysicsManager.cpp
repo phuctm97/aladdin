@@ -217,7 +217,7 @@ void PhysicsManager::update( const float delta ) {
 
         //do not resolve if objects are seperating
         if ( velocityAlongNormal > 0 ) {
-          return;
+          continue;
         }
 
         const float restitution = MIN(rigidbodyA->getPhysicsMaterial().getRestitution(),

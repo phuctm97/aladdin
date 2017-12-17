@@ -3,15 +3,14 @@
 
 #include <aladdin.h>
 
-class CharcoalBurnerPrefab : ala::Prefab
+class CharcoalBurnerPrefab : ala::PrefabV2
 {
 public:
   CharcoalBurnerPrefab()
-    : Prefab( "Charcoal Burner" ) {}
-
+    : PrefabV2( "Charcoal Burner" ) {}
 
 protected:
-  void doInstantiate( ala::GameObject* object ) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif //!__CHARCOAL_BURNER_PREFAB_H__

@@ -3,16 +3,14 @@
 
 #include <aladdin.h>
 
-class ThrowableKnifePrefab : ala::Prefab
-{
+ALA_CLASS_HEADER_1(ThrowableKnifePrefab, ala::PrefabV2)
 public:
-	ThrowableKnifePrefab()
-		: Prefab("Throwable Knife") {}
+  ThrowableKnifePrefab()
+    : PrefabV2( "Throwable Knife" ) {}
 
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 
 #endif //!__THROWABLE_KNIFE_PREFAB_H__
-

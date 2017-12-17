@@ -274,6 +274,9 @@
     <ClInclude Include="2d\BitmapText.h">
       <Filter>2d</Filter>
     </ClInclude>
+    <ClInclude Include="core\PrefabV2.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -479,6 +482,9 @@
     </ClCompile>
     <ClCompile Include="2d\BitmapText.cpp">
       <Filter>2d</Filter>
+    </ClCompile>
+    <ClCompile Include="core\PrefabV2.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

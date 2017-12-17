@@ -13,6 +13,7 @@
 #include "core/GameObjectComponent.h"
 #include "core/GameResource.h"
 #include "core/Prefab.h"
+#include "core/PrefabV2.h"
 #include "core/ResourceInitializer.h"
 #include "core/MessageArgs.h"
 #include "core/Messenger.h"

@@ -7,6 +7,7 @@ ALA_CLASS_HEADER_1( DirectionController, ala::GameObjectComponent)
 private:
   bool _positiveAsRight;
   int _direction;
+  std::vector<std::function<bool()>> _reverseCases;
 
 public:
   DirectionController( ala::GameObject* gameObject, const bool positiveAsRight = true, const int direction = -1,
@@ -23,6 +24,8 @@ public:
   void setRight();
 
   void turn();
+
+  void addReverseCase( const std::function<bool()>& c );
 
 protected:
   void onUpdate( const float delta ) override;

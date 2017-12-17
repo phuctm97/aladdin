@@ -1,83 +1,164 @@
 #include "GuardController.h"
-#include "DirectionController.h"
 #include "../Define.h"
-
 
 USING_NAMESPACE_ALA;
 
 ALA_CLASS_SOURCE_1(GuardController, ala::GameObjectComponent)
 
-GuardController::GuardController( ala::GameObject* gameObject, const std::string& name )
-  : GameObjectComponent( gameObject, name ),
-    _initialX( 0 ), _minX( 0 ), _maxX( 0 ), _health( 2 ), _state( 0 ) {}
-
-bool GuardController::isIdling() const {
-  return _state == 0;
-}
-
-bool GuardController::isChasingAladdin() const {
-  return _state == 1;
-}
-
-bool GuardController::isAttacking() const {
-  return _state == 2;
-}
+GuardController::GuardController( ala::GameObject* gameObject, const std::string& name ):
+  GameObjectComponent( gameObject, name ),
+  _minDistanceCouldAttack( 40 ),
+  _maxDistanceCouldAttack( 70 ),
+  _tooFarDistance( GameManager::get()->getVisibleWidth() * 0.7f ),
+  _initialX( 0 ),
+  _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
+  _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ),
+  _enemyExplosionOnePrefab( NULL ), _enemyExplosionTwoPrefab( NULL ) {}
 
 void GuardController::onInitialize() {
-  const auto transform = getGameObject()->getTransform();
-  transform->setPosition( _initialX );
+  const auto gameManager = GameManager::get();
+
+  _selfTransform = getGameObject()->getTransform();
+
+  _selfTransform->setPositionX( _initialX );
+
+  _selfDirection = getGameObject()->getComponentT<DirectionController>();
+
+  _selfStateManager = getGameObject()->getComponentT<StateManager>();
+
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin != NULL ) {
+    _aladdinTransform = aladdin->getTransform();
+  }
+
+  _enemyExplosionOnePrefab = gameManager->getPrefabV2( "Enemy Explosion 1" );
+
+  _enemyExplosionTwoPrefab = gameManager->getPrefabV2( "Enemy Explosion 2" );
 }
 
-void GuardController::onUpdate( const float delta ) {
-  const auto gameManager = GameManager::get();
-  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
-  if ( aladdin == NULL ) return;
+bool GuardController::isTooFarFromAladdin() const {
+  const auto aladdinPosition = _aladdinTransform->getPosition();
+  const auto selfPosition = _selfTransform->getPosition();
+  return ABS(aladdinPosition.getX() - selfPosition.getX()) >= _tooFarDistance;
+}
 
-  const auto transform = getGameObject()->getTransform();
-  const auto direction = getGameObject()->getComponentT<DirectionController>();
-  const auto stateManager = getGameObject()->getComponentT<StateManager>();
+bool GuardController::isAbleToSeeAladdin() const {
+  const auto aladdinPositionX = _aladdinTransform->getPositionX();
+  const auto dist1 = ABS(aladdinPositionX - _leftBoundX);
+  const auto dist2 = ABS(aladdinPositionX - _rightBoundX);
 
-  const auto visibleWidth = GameManager::get()->getVisibleWidth();
-  const auto guardPosition = getGameObject()->getTransform()->getPosition();
-  const auto aladdinPosition = aladdin->getTransform()->getPosition();
-  const auto distanceToAladdin = ABS(guardPosition.getX() - aladdinPosition.getX());
+  return (aladdinPositionX >= _leftBoundX && aladdinPositionX <= _rightBoundX)
+    || dist1 <= _maxDistanceCouldAttack
+    || dist2 <= _maxDistanceCouldAttack;
+}
 
-  // keep in bound
-  if ( guardPosition.getX() < _minX ) {
-    transform->setPositionX( _minX );
+char GuardController::getDirectionToGoToAttackAladdin() const {
+  const auto aladdinPosition = _aladdinTransform->getPosition();
+  const auto selfPosition = _selfTransform->getPosition();
+
+  float options[] = {
+    aladdinPosition.getX() - _minDistanceCouldAttack,
+    aladdinPosition.getX() + _minDistanceCouldAttack,
+    aladdinPosition.getX() - _maxDistanceCouldAttack,
+    aladdinPosition.getX() + _maxDistanceCouldAttack
+  };
+
+  std::sort( options, options + 4, [=]( float a, float b ) {
+    if ( a < _leftBoundX || a > _rightBoundX ) return false;
+    if ( b < _leftBoundX || b > _rightBoundX ) return true;
+    return ABS(a - selfPosition.getX()) < ABS(b - selfPosition.getX());
+  } );
+
+  const auto bestOption = options[0];
+  if ( bestOption < selfPosition.getX() ) return 'L';
+  return 'R';
+}
+
+char GuardController::getDirectionToFaceToAladdin() const {
+  if ( _aladdinTransform->getPositionX() < _selfTransform->getPositionX() ) return 'L';
+  return 'R';
+}
+
+bool GuardController::isAbleToAttackAladdin() const {
+  const auto dist = ABS(_aladdinTransform->getPositionX() - _selfTransform->getPositionX());
+  return dist >= _minDistanceCouldAttack && dist <= _maxDistanceCouldAttack;
+}
+
+bool GuardController::isAbleToGoLeft() const {
+  return _selfTransform->getPositionX() > _leftBoundX;
+}
+
+bool GuardController::isAbleToGoRight() const {
+  return _selfTransform->getPositionX() < _rightBoundX;
+}
+
+void GuardController::keepInBound() const {
+  const auto selfTransform = _selfTransform;
+
+  if ( selfTransform->getPositionX() < _leftBoundX ) {
+    selfTransform->setPositionX( _leftBoundX );
   }
-  else if ( guardPosition.getX() > _maxX ) {
-    transform->setPositionX( _maxX );
+  if ( selfTransform->getPositionX() > _rightBoundX ) {
+    selfTransform->setPositionX( _rightBoundX );
+  }
+}
+
+float GuardController::getInitialX() const { return _initialX; }
+
+void GuardController::setInitialX( const float initialX ) { _initialX = initialX; }
+
+float GuardController::getLeftBoundX() const { return _leftBoundX; }
+
+void GuardController::setLeftBoundX( const float leftBoundX ) { _leftBoundX = leftBoundX; }
+
+float GuardController::getRightBoundX() const { return _rightBoundX; }
+
+void GuardController::setRightBoundX( const float rightBoundX ) { _rightBoundX = rightBoundX; }
+
+float GuardController::getMinDistanceCouldAttack() const { return _minDistanceCouldAttack; }
+
+void GuardController::setMinDistanceCouldAttack( const float minDistanceCouldAttack ) {
+  _minDistanceCouldAttack = minDistanceCouldAttack;
+}
+
+float GuardController::getMaxDistanceCouldAttack() const { return _maxDistanceCouldAttack; }
+
+void GuardController::setMaxDistanceCouldAttack( const float maxDistanceCouldAttack ) {
+  _maxDistanceCouldAttack = maxDistanceCouldAttack;
+}
+
+int GuardController::getHealth() const { return _health; }
+
+void GuardController::setHealth( const int health ) { _health = health; }
+
+void GuardController::onHit() {
+  if ( _selfStateManager->getCurrentStateName() == "hit" ) return;
+
+  const auto hitState = _selfStateManager->getState( "hit" );
+  if ( hitState != NULL ) {
+    _selfStateManager->changeState( hitState );
   }
 
-  // direction
-  const auto onRightOfAladdin = aladdinPosition.getX() < guardPosition.getX();
-  if ( onRightOfAladdin ) direction->setLeft();
-  else direction->setRight();
+  _health -= rand() % 2 + 1;
+  if ( _health <= 0 ) {
+    onDie();
+  }
+}
 
-  // attack
-  const auto couldAttackAladdin = distanceToAladdin < 70;
-  if ( couldAttackAladdin ) {
-    _state = 2;
-    return;
+void GuardController::onDie( const int explosionType ) const {
+  switch ( explosionType ) {
+  case 1:
+    _enemyExplosionOnePrefab->instantiate( _selfTransform->getPosition() );
+    break;
+  case 2:
+    _enemyExplosionTwoPrefab->instantiate( _selfTransform->getPosition() );
+    break;
+  default:
+    _enemyExplosionOnePrefab->instantiate( _selfTransform->getPosition() );
+    break;
   }
 
-  // chase
-  const auto couldSeeAladdin = distanceToAladdin < visibleWidth * 0.6f;
-
-  if ( couldSeeAladdin &&
-    ((guardPosition.getX() < _maxX && !onRightOfAladdin) ||
-      (guardPosition.getX() > _minX && onRightOfAladdin)) ) {
-    _state = 1;
-  }
-  else {
-    _state = 0;
-
-    const auto tooFarFromAladdin = distanceToAladdin > visibleWidth * 0.7f;
-    if ( tooFarFromAladdin ) {
-      transform->setPositionX( _initialX );
-    }
-  }
+  getGameObject()->release();
 }
 
 void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
@@ -86,48 +167,17 @@ void GuardController::onTriggerEnter( const ala::CollisionInfo& collision ) {
                                : collision.getColliderA();
   const auto otherObject = otherCollider->getGameObject();
 
-  if ( otherObject->getTag() == ALADDIN_TAG &&
-    (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG) ) {
-    onHit( rand() % 2 + 1 );
+  const auto selfCollider = collision.getColliderA() == otherCollider
+                              ? collision.getColliderB()
+                              : collision.getColliderA();
+
+  if ( selfCollider->getTag() == ENEMY_TAG ) {
+    if ( otherObject->getTag() == ALADDIN_TAG &&
+      (otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG) ) {
+      onHit();
+    }
+    else if ( otherObject->getTag() == SAVILA_TAG ) {
+      onHit();
+    }
   }
-}
-
-void GuardController::onHit( const int damage ) {
-  const auto stateManager = getGameObject()->getComponentT<StateManager>();
-  if ( stateManager->getCurrentStateName() == "hit" )
-    return;
-
-  if ( stateManager->getState( "hit" ) != NULL ) {
-    stateManager->changeState( "hit" );
-  }
-
-  _health -= damage;
-  if ( _health <= 0 ) {
-    const auto object = getGameObject();
-
-    GameManager::get()->getPrefab( "Enemy Explosion" )->instantiate( object->getTransform()->getPosition() );
-    object->release();
-  }
-}
-
-float GuardController::getInitialX() const {
-  return _initialX;
-}
-
-float GuardController::getMinX() const { return _minX; }
-
-float GuardController::getMaxX() const { return _maxX; }
-
-int GuardController::getHealth() const {
-  return _health;
-}
-
-void GuardController::set( const float initialX, const float minX, const float maxX ) {
-  _initialX = initialX;
-  _minX = minX;
-  _maxX = maxX;
-}
-
-void GuardController::setHealth( const int health ) {
-  _health = health;
 }

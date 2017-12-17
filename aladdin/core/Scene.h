@@ -166,12 +166,12 @@ public:
 
   bool isQuadTreeEnabled() const;
 
-private:
-  void updateQuadTreeVisibility() const;
-
   void lockGameObjects();
 
   void unlockGameObjects();
+
+private:
+  void updateQuadTreeVisibility() const;
 
   void updateAddAndRemoveGameObjects();
 
