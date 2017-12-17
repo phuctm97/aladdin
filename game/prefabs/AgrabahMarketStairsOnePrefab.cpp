@@ -9,13 +9,13 @@ void AgrabahMarketStairsOnePrefab::doInstantiate( ala::GameObject* object, std::
   // constants
 
   vector<Vec2> position{
-    Vec2( 1015.5f, -46.0f ),
-    Vec2( 1055.5f, -36.0f ),
-    Vec2( 1096.0f, -28.5f ),
-    Vec2( 1136.0f, -21.5f ),
-    Vec2( 1176.0f, -12.5f ),
-    Vec2( 1215.0f, -5.5f ),
-    Vec2( 1286.0f, 2.5f )
+    Vec2( 1015.5f - 1015.5f, -46.0f + 46.0f ),
+    Vec2( 1055.5f - 1015.5f, -36.0f + 46.0f),
+    Vec2( 1096.0f - 1015.5f, -28.5f + 46.0f),
+    Vec2( 1136.0f - 1015.5f, -21.5f + 46.0f),
+    Vec2( 1176.0f - 1015.5f, -12.5f + 46.0f),
+    Vec2( 1215.0f - 1015.5f, -5.5f + 46.0f),
+    Vec2( 1286.0f - 1015.5f, 2.5f + 46.0f)
   };
 
   vector<Size> size{

@@ -138,8 +138,6 @@ void NodeController::onUpdate(const float delta) {
 bool NodeController::onPreInitialize() {
 	_logger.info(
 		"NodeController used\n\t- I, J, K, L to move\n\t- [+], [-] to change width, along side with Left Shift to change height\n\t- F2, F3 to decrease and increase moving speed\n\t- F1 to print transform information.");
-
-
 	return true;
 }
 

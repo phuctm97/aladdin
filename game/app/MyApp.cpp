@@ -6,6 +6,7 @@
 #include "../scenes/MenuScene.h"
 #include "../scenes/DeathScene.h"
 #include "../scenes/AgrabahMarketScene.h"
+#include "../scenes/ExperimentalScene.h"
 
 USING_NAMESPACE_ALA;
 

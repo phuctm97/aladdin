@@ -44,6 +44,7 @@
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
 #include "../prefabs/AgrabahMarketStairsThreePrefab.h"
+#include "../prefabs/AgrabahMarketStairsFourPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -143,6 +144,7 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();
   new AgrabahMarketStairsThreePrefab();
+  new AgrabahMarketStairsFourPrefab();
 
   // Dev tools
   new NodePrefab();

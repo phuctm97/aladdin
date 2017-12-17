@@ -18,8 +18,6 @@ public:
 protected:
   void onTriggerEnter( const ala::CollisionInfo& collision ) override;
 
-  void onTriggerStay( const ala::CollisionInfo& collision ) override;
-
   void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
   void onUpdate( const float delta ) override;
