@@ -134,9 +134,21 @@ void AgrabahMarketScene::onPreInitialize() {
 
     */
 
+  /* Genie Bonuses 
+
   gameManager->getPrefabV2( "Genie Bonus" )->instantiateWithArgs( "", "Genie Bonus 1" )
              ->getTransform()
              ->setPosition( Vec2( 0, 10 ) );
+
+             */
+
+  /* Spend Theses 
+
+  gameManager->getPrefabV2( "Spend These" )->instantiateWithArgs( "", "Spend These 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 0, 10 ) );
+
+             */
 
   /* Guards
 
