@@ -59,6 +59,12 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+  /* Springs */
+
+  gameManager->getPrefabV2( "Jumpable Spring" )->instantiateWithArgs( "" )
+             ->getTransform()
+             ->setPosition( 0, 42 );
+
   /* Checkpoints 
   gameManager->getPrefabV2( "Checkpoint" )->instantiateWithArgs( "" )
              ->getTransform()

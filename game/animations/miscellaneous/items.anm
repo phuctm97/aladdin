@@ -116,4 +116,16 @@
   <Animation name="menu_select" imagePath="items.png" width="664" height="626">
     <sprite x="357" y="384" w="31" h="10" oX="357" oY="384" oW="47" oH="31" />
   </Animation>
+  <Animation name="spring" imagePath="items.png" interval="0.07" isLoop="false">
+    <sprite x="140" y="631" w="38" h="23" offsetX="0.5" offsetY="-5" />
+    <sprite x="180" y="624" w="32" h="22" offsetX="-2.5" offsetY="2" />
+    <sprite x="220" y="639" w="37" h="14" offsetX="-0.5" offsetY="-8.5" />
+    <sprite x="261" y="624" w="32" h="22" offsetX="-2" offsetY="2.5" />
+    <sprite x="301" y="639" w="38" h="14" offsetX="0" offsetY="-8.5" />
+    <sprite x="342" y="625" w="37" h="21" offsetX="0" offsetY="2" />
+    <sprite x="382" y="633" w="39" h="14" offsetX="0" offsetY="-2.5" />
+    <sprite x="422" y="626" w="38" h="20" offsetX="-1" offsetY="1.5" />
+    <sprite x="463" y="627" w="39" h="19" offsetX="0" offsetY="1" />
+    <sprite x="99" y="629" w="39" h="17" offsetX="0" offsetY="0" />
+  </Animation>
 </Animations>

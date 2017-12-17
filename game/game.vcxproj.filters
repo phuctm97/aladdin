@@ -252,6 +252,9 @@
     <ClCompile Include="prefabs\EnemyExplosionOnePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\JumpableSpringPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -439,6 +442,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\EnemyExplosionOnePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JumpableSpringPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
