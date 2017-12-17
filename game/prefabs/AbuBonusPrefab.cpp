@@ -1,54 +1,49 @@
 #include"AbuBonusPrefab.h"
-#include"../scripts/AbuBonusController.h"
 #include"../Define.h"
-
+#include "../scripts/CollisionTracker.h"
 
 USING_NAMESPACE_ALA;
 
-void AbuBonusPrefab::doInstantiate(ala::GameObject* object) const {
+ALA_CLASS_SOURCE_1(AbuBonusPrefab, ala::PrefabV2)
 
+void AbuBonusPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
 
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
-	const auto gameManager = GameManager::get();
+  const auto animator = new Animator( object, "abu_bonus", "items.anm" );
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "items.png");
-	const auto animator = new Animator(object, "abu_bonus", "items.anm");
+  const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
-	// //For animationEditor
-	//const auto animationEditor = new AnimationEditor( object, "abu_bonus" );
-	//return;
-	// //For animationEditor
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 10, 10 ), 1, 0 );
+  collider->setTag( ABU_BONUS_TAG );
+  collider->ignoreTag( APPLE_TAG );
+  collider->ignoreTag( ENEMY_TAG );
 
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(24, 15));
-	collider->setTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
+  const auto stateManager = new StateManager( object, "static" );
 
-	const auto timer = new Timer(object);
-	//const auto colliderRenderer = new ColliderRenderer(collider);
-	const auto stateManager = new StateManager(object, "normal");
-	const auto controller = new AbuBonusController(object);
-	const auto transform = object->getTransform();
+  const auto collision = new CollisionTracker( object );
 
-	// configurations
-	object->setTag(ENEMY_TAG);
-	object->setLayer("Charactor");
+  // helpers
+  const auto transform = object->getTransform();
 
-	// states
-	new State(stateManager, "normal",
-		[=] {
-		animator->setAction("abu_bonus");
-	}, NULL, NULL);
+  // collider renderers
+  new ColliderRenderer( collider );
 
-	new State(stateManager, "explosion",
-		[=] {
-		spriteRenderer->setVisible(false);
-		controller->explosionEffect();
-		object->release();
-	}, NULL, NULL);
+  // configurations
+  object->setTag( ABU_BONUS_TAG );
+  object->setLayer( "Foreground" );
 
+  // states
+  new State( stateManager, "static", NULL,
+             [=]( float dt ) {
+               if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
+                 smallFireworkPrefab->instantiate( transform->getPosition() );
+                 object->release();
+               }
+             }, NULL );
 
-	new StateTransition(stateManager, "normal", "explosion", [=] {
-		return controller->isCollisionAladdin();
-	});
 }

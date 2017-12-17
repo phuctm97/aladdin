@@ -11,12 +11,13 @@
 #include "../prefabs/HubPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
+#include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/EatableApplePrefab.h"
 #include "../prefabs/EatableHeartPrefab.h"
 #include "../prefabs/GenieLampPrefab.h"
 #include "../prefabs/GenieBonusPrefab.h"
 #include "../prefabs/SpendThesePrefab.h"
-#include "../prefabs/ThrowableKnifePrefab.h"
+#include "../prefabs/AbuBonusPrefab.h"
 #include "../prefabs/CheckpointPrefab.h"
 #include "../prefabs/EnemyExplosionPrefab.h"
 #include "../prefabs/SmallFireworkPrefab.h"
@@ -110,6 +111,7 @@ void MyResourceInitializer::doRun() {
   new GenieLampPrefab();
   new GenieBonusPrefab();
   new SpendThesePrefab();
+  new AbuBonusPrefab();
   new CheckpointPrefab();
   new EnemyExplosionPrefab();
   new SmallFireworkPrefab();

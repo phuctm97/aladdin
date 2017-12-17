@@ -159,9 +159,6 @@
     <ClCompile Include="scenes\MenuScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\AbuBonusController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\CamelController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -202,9 +199,6 @@
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\PlayableAladdinController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\SpendTheseController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
     <ClCompile Include="scripts\SpringController.cpp">
@@ -357,9 +351,6 @@
     <ClInclude Include="scenes\MenuScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\AbuBonusController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\CamelController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -400,9 +391,6 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\PlayableAladdinController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\SpendTheseController.h">
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\SpringController.h">

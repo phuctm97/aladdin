@@ -200,7 +200,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scenes\DeathScene.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
-    <ClCompile Include="scripts\AbuBonusController.cpp" />
     <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CheckpointController.cpp" />
@@ -217,7 +216,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\PeddlerController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
-    <ClCompile Include="scripts\SpendTheseController.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
     <ClCompile Include="scripts\StaticMapBlockerController.cpp" />
   </ItemGroup>
@@ -273,7 +271,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scenes\DeathScene.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
     <ClInclude Include="scenes\MenuScene.h" />
-    <ClInclude Include="scripts\AbuBonusController.h" />
     <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scripts\CheckpointController.h" />
@@ -290,7 +287,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\PeddlerController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
-    <ClInclude Include="scripts\SpendTheseController.h" />
     <ClInclude Include="scripts\SpringController.h" />
     <ClInclude Include="scripts\StaticMapBlockerController.h" />
   </ItemGroup>

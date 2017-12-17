@@ -150,6 +150,14 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+  /* Abu Bonus 
+
+  gameManager->getPrefabV2( "Abu Bonus" )->instantiateWithArgs( "", "Abu Bonus 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 0, 10 ) );
+
+             */
+
   /* Guards
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
