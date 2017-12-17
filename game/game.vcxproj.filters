@@ -189,9 +189,6 @@
     <ClCompile Include="scripts\NodeController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\PeddlerController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\PlayableAladdinController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -379,9 +376,6 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\NodeController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\PeddlerController.h">
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="scripts\PlayableAladdinController.h">

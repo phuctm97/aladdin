@@ -158,6 +158,14 @@ void AgrabahMarketScene::onPreInitialize() {
 
              */
 
+  /* Peddlers 
+
+  gameManager->getPrefabV2( "Peddler" )->instantiateWithArgs( "", "Peddler 1" )
+             ->getTransform()
+             ->setPosition( Vec2( 0, 10 ) );
+
+             */
+
   /* Guards
 
   gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )

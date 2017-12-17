@@ -1,15 +1,14 @@
 #ifndef __PEDDLER_PREFAB_H__
 #define __PEDDLER_PREFAB_H__
 
-#include<aladdin.h>
+#include <aladdin.h>
 
-class PeddlerPrefab : ala::Prefab
-{
+ALA_CLASS_HEADER_1(PeddlerPrefab, ala::PrefabV2)
 public:
-	PeddlerPrefab() : Prefab("peddler") {}
+  PeddlerPrefab() : PrefabV2( "Peddler" ) {}
+
 protected:
-	void doInstantiate(ala::GameObject* object) const override;
+  void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif // !__PEDDLER_PREFAB_H__
-

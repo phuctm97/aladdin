@@ -213,7 +213,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
-    <ClCompile Include="scripts\PeddlerController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
@@ -284,7 +283,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
-    <ClInclude Include="scripts\PeddlerController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
     <ClInclude Include="scripts\SpringController.h" />
