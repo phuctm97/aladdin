@@ -6,6 +6,7 @@
 #include "../scripts/CameraController.h"
 #include "../scripts/GuardController.h"
 #include "../scripts/NodeController.h"
+#include "../prefabs/PendalPrefab.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
@@ -89,8 +90,8 @@ void ExperimentalScene::onPreInitialize() {
     guardTwo->getComponentT<GuardController>()->set( 818, 620, 992 );
 
 	const auto aladdin = gameManager->getPrefab("Aladdin")->instantiate("Aladdin");
-	//aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
-	aladdin->getTransform()->setPosition(Vec2(1586.5f, 600));
+	aladdin->getTransform()->setPosition( Vec2( -80, -25 ) );
+	//aladdin->getTransform()->setPosition(Vec2(4190.5f, 200));
 	
 
 #pragma region Stair
@@ -143,7 +144,7 @@ void ExperimentalScene::onPreInitialize() {
 
 #pragma region Platform
 
-	const auto platform1 = gameManager->getPrefab("Platform")->instantiate();
+	/*const auto platform1 = gameManager->getPrefab("Platform")->instantiate();
 	platform1->getTransform()->setPosition(Vec2(1735.0f, 128.0f));
 	static_cast<Collider*>(platform1->getComponent("Upon"))->setSize(Size(295.0f, 4.5f));
 	static_cast<Collider*>(platform1->getComponent("Below"))->setSize(Size(295.0f, 4.5f));
@@ -164,16 +165,86 @@ void ExperimentalScene::onPreInitialize() {
 	static_cast<Collider*>(platform3->getComponent("Upon"))->setOffset(Vec2(0, 2.25f));
 	static_cast<Collider*>(platform3->getComponent("Below"))->setOffset(Vec2(0, -2.75f));
 
+	const auto platform4 = gameManager->getPrefab("Platform")->instantiate();
+	platform4->getTransform()->setPosition(Vec2(1768.50f, 289.00f));
+	static_cast<Collider*>(platform4->getComponent("Upon"))->setSize(Size(682.00f, 5.50f));
+	static_cast<Collider*>(platform4->getComponent("Below"))->setSize(Size(682.00f, 5.50f));
+	static_cast<Collider*>(platform4->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform4->getComponent("Below"))->setOffset(Vec2(0, -3.50f));
 	
-	
+	const auto platform5 = gameManager->getPrefab("Platform")->instantiate();
+	platform5->getTransform()->setPosition(Vec2(2427.50f, 400.00f));
+	static_cast<Collider*>(platform5->getComponent("Upon"))->setSize(Size(129.00f, 5.00f));
+	static_cast<Collider*>(platform5->getComponent("Below"))->setSize(Size(129.00f, 5.00f));
+	static_cast<Collider*>(platform5->getComponent("Upon"))->setOffset(Vec2(0, 2.50f));
+	static_cast<Collider*>(platform5->getComponent("Below"))->setOffset(Vec2(0, -3.25f));
 
+	const auto platform6 = gameManager->getPrefab("Platform")->instantiate();
+	platform6->getTransform()->setPosition(Vec2(2786.00f, 141.50f));
+	static_cast<Collider*>(platform6->getComponent("Upon"))->setSize(Size(275.00f, 5.00f));
+	static_cast<Collider*>(platform6->getComponent("Below"))->setSize(Size(275.00f, 5.00f));
+	static_cast<Collider*>(platform6->getComponent("Upon"))->setOffset(Vec2(0, 2.50f));
+	static_cast<Collider*>(platform6->getComponent("Below"))->setOffset(Vec2(0, -3.25f));
+	
+	const auto platform7 = gameManager->getPrefab("Platform")->instantiate();
+	platform7->getTransform()->setPosition(Vec2(3276.00f, 81.50f));
+	static_cast<Collider*>(platform7->getComponent("Upon"))->setSize(Size(762.00f, 5.00f));
+	static_cast<Collider*>(platform7->getComponent("Below"))->setSize(Size(762.00f, 5.00f));
+	static_cast<Collider*>(platform7->getComponent("Upon"))->setOffset(Vec2(0, 2.50f));
+	static_cast<Collider*>(platform7->getComponent("Below"))->setOffset(Vec2(0, -3.25f));
+
+	const auto platform8 = gameManager->getPrefab("Platform")->instantiate();
+	platform8->getTransform()->setPosition(Vec2(2631.00f, 0.50f));
+	static_cast<Collider*>(platform8->getComponent("Upon"))->setSize(Size(106.00f, 5.50f));
+	static_cast<Collider*>(platform8->getComponent("Below"))->setSize(Size(106.00f, 5.50f));
+	static_cast<Collider*>(platform8->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform8->getComponent("Below"))->setOffset(Vec2(0, -3.50f));
+
+	const auto platform9 = gameManager->getPrefab("Platform")->instantiate();
+	platform9->getTransform()->setPosition(Vec2(2554.50f, 161.00f));
+	static_cast<Collider*>(platform9->getComponent("Upon"))->setSize(Size(192.00f, 5.50f));
+	static_cast<Collider*>(platform9->getComponent("Below"))->setSize(Size(192.00f, 5.50f));
+	static_cast<Collider*>(platform9->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform9->getComponent("Below"))->setOffset(Vec2(0, -3.50f));
+
+	const auto platform10 = gameManager->getPrefab("Platform")->instantiate();
+	platform10->getTransform()->setPosition(Vec2(2837.00f, 272.50f));
+	static_cast<Collider*>(platform10->getComponent("Upon"))->setSize(Size(409.00f, 5.50f));
+	static_cast<Collider*>(platform10->getComponent("Below"))->setSize(Size(409.00f, 5.50f));
+	static_cast<Collider*>(platform10->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform10->getComponent("Below"))->setOffset(Vec2(0, -3.50f));
+
+	const auto platform11 = gameManager->getPrefab("Platform")->instantiate();
+	platform11->getTransform()->setPosition(Vec2(2625.00f, 400.00f));
+	static_cast<Collider*>(platform11->getComponent("Upon"))->setSize(Size(86.00f, 5.50f));
+	static_cast<Collider*>(platform11->getComponent("Below"))->setSize(Size(86.00f, 5.50f));
+	static_cast<Collider*>(platform11->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform11->getComponent("Below"))->setOffset(Vec2(0, -3.50f));
+
+	const auto platform12 = gameManager->getPrefab("Platform")->instantiate();
+	platform12->getTransform()->setPosition(Vec2(2906.50f, 399.50f));
+	static_cast<Collider*>(platform12->getComponent("Upon"))->setSize(Size(193.00f, 6.50f));
+	static_cast<Collider*>(platform12->getComponent("Below"))->setSize(Size(193.00f, 6.50f));
+	static_cast<Collider*>(platform12->getComponent("Upon"))->setOffset(Vec2(0, 3.25f));
+	static_cast<Collider*>(platform12->getComponent("Below"))->setOffset(Vec2(0, -4.00f));
+
+	const auto platform13 = gameManager->getPrefab("Platform")->instantiate();
+	platform13->getTransform()->setPosition(Vec2(4190.50f, 97.00f));
+	static_cast<Collider*>(platform13->getComponent("Upon"))->setSize(Size(90.00f, 5.50f));
+	static_cast<Collider*>(platform13->getComponent("Below"))->setSize(Size(90.00f, 5.50f));
+	static_cast<Collider*>(platform13->getComponent("Upon"))->setOffset(Vec2(0, 2.75f));
+	static_cast<Collider*>(platform13->getComponent("Below"))->setOffset(Vec2(0, -3.50f));*/
 #pragma endregion
 
 #pragma region Pendal
-	const auto pendal = gameManager->getPrefab("Pendal")->instantiate();
-	pendal->getComponentT<Collider>()->setOffset(Vec2(1486.5f, 128.0f));
-	//pendal->getTransform()->setPosition(Vec2(1486.5f, 128.0f));
-	pendal->getComponentT<Collider>()->setSize(Size(37.0f, 9.0f));
+	const auto pendal1 = gameManager->getPrefab("Pendal")->instantiate();
+	pendal1->getTransform()->setPosition(Vec2(1486.5f, 128.0f));
+
+	const auto pendal2 = gameManager->getPrefab("Pendal")->instantiate();
+	pendal2->getTransform()->setPosition(Vec2(4068.5f, 103.0f));
+
+	const auto pendal3 = gameManager->getPrefab("Pendal")->instantiate();
+	pendal3->getTransform()->setPosition(Vec2(3973.5f, 106.0f));
 #pragma endregion
 
 
