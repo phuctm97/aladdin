@@ -16,6 +16,8 @@ protected:
 
   void onPreRelease() override;
 
+  void onPostInitialize() override;
+
 private:
   ala::Logger _logger;
 };

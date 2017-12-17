@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -158,6 +158,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\HorizontalBarPrefab.cpp" />
+    <ClCompile Include="prefabs\PendalPrefab.cpp" />
+    <ClCompile Include="prefabs\PlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\StairGroupThreePrefab.cpp" />
+    <ClCompile Include="prefabs\StairGroupTwoPrefab.cpp" />
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairOnePrefab.cpp" />
@@ -214,6 +219,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
+    <ClCompile Include="scripts\PendalController.cpp" />
+    <ClCompile Include="scripts\PlatformController.cpp" />
+    <ClCompile Include="scripts\StairGroupThreeController.cpp" />
+    <ClCompile Include="scripts\StairGroupTwoController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
@@ -229,6 +238,11 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\HorizontalBarPrefab.h" />
+    <ClInclude Include="prefabs\PendalPrefab.h" />
+    <ClInclude Include="prefabs\PlatformPrefab.h" />
+    <ClInclude Include="prefabs\StairGroupThreePrefab.h" />
+    <ClInclude Include="prefabs\StairGroupTwoPrefab.h" />
     <ClInclude Include="prefabs\AbuBonusPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairOnePrefab.h" />
@@ -285,6 +299,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\HubController.h" />
     <ClInclude Include="scripts\NodeController.h" />
+    <ClInclude Include="scripts\PendalController.h" />
+    <ClInclude Include="scripts\PlatformController.h" />
+    <ClInclude Include="scripts\StairGroupThreeController.h" />
+    <ClInclude Include="scripts\StairGroupTwoController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
     <ClInclude Include="scripts\SpringController.h" />

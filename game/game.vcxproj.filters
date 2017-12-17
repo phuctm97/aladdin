@@ -222,6 +222,33 @@
     <ClCompile Include="scenes\DeathScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\StairGroupTwoPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\HorizontalBarPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PlatformPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PlatformController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StairGroupTwoController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StairGroupThreePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StairGroupThreeController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PendalPrefab.cpp" >
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PendalController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
     <ClCompile Include="app\MyAppData.cpp">
       <Filter>app</Filter>
     </ClCompile>
@@ -413,6 +440,33 @@
     </ClInclude>
     <ClInclude Include="scenes\DeathScene.h">
       <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairGroupTwoPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\HorizontalBarPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PlatformPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PlatformController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StairGroupTwoController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StairGroupThreePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StairGroupThreeController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PendalPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PendalController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="app\MyAppData.h">
       <Filter>app</Filter>

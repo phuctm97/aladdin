@@ -18,6 +18,10 @@ enum
   SPRING_TAG,
   HUB_TAG,
   APPLE_TAG,
+<<<<<<< HEAD
+  HORIZONTALBAR_TAG,
+  PLATFORM_TAG
+=======
   HEART_TAG,
   LAMP_TAG,
   BONUS_TAG,
@@ -26,6 +30,7 @@ enum
   ANIMAL_TAG,
   CAMEL_TAG,
   SAVILA_TAG
+>>>>>>> develop_client_alpha
 };
 
 #endif //!__GAME_DEFINE_H__

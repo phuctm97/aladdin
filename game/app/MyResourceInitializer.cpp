@@ -38,7 +38,6 @@
 #include "../prefabs/ClimbableRopePrefab.h"
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
-
 #include "../prefabs/PeddlerPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairOnePrefab.h"
