@@ -61,7 +61,7 @@
     <Filter Include="animations\nonplayable_characters">
       <UniqueIdentifier>{4c846ba6-2bca-41b8-b020-aee26e918643}</UniqueIdentifier>
     </Filter>
-    <Filter Include="scenes\models">
+    <Filter Include="scenes\resources">
       <UniqueIdentifier>{8f643593-a790-4fd6-8410-f12be76982cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -144,12 +144,6 @@
     <ClCompile Include="scenes\AgrabahMarketScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\ExperimentalScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="scenes\MenuScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\CamelController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -213,9 +207,6 @@
     <ClCompile Include="prefabs\GuardFourPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\DeathScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\PlatformPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -273,9 +264,6 @@
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\JafarQuarterScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -290,6 +278,15 @@
     </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketStairsSixPrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\AutoLoadScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scenes\DebugScene.cpp">
+      <Filter>scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -369,12 +366,6 @@
     <ClInclude Include="scenes\AgrabahMarketScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\ExperimentalScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="scenes\MenuScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\CamelController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -438,9 +429,6 @@
     <ClInclude Include="prefabs\GuardFourPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\DeathScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\PlatformPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -498,9 +486,6 @@
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\JafarQuarterScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -515,6 +500,15 @@
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketStairsSixPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\AutoLoadScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\DeathSceneControllerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scenes\DebugScene.h">
+      <Filter>scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -616,10 +610,16 @@
       <Filter>fonts</Filter>
     </None>
     <None Include="scenes\agrabah_market.scene">
-      <Filter>scenes\models</Filter>
+      <Filter>scenes\resources</Filter>
     </None>
     <None Include="scenes\jafar_quarter.scene">
-      <Filter>scenes\models</Filter>
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\death.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\menu.scene">
+      <Filter>scenes\resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

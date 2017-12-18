@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Scene>
+  <object>
+    <prefab version="2" name="Sprite" args="aladdin.png 1 aladdin.anm die" />
+    <transform position="-32 0" />
+  </object>
+  <object>
+    <prefab version="2" name="Sprite" args="abu.png 1 abu.anm fan" />
+    <transform position="50 -40" />
+  </object>
+  <object>
+    <prefab version="2" name="Death Scene Controller" args="" />
+  </object>
+</Scene>

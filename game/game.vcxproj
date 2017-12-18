@@ -168,6 +168,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketStairsSixPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
+    <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
     <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp" />
     <ClCompile Include="prefabs\PendalPrefab.cpp" />
     <ClCompile Include="prefabs\PlatformPrefab.cpp" />
@@ -209,10 +210,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
     <ClCompile Include="prefabs\WallPrefab.cpp" />
     <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
-    <ClCompile Include="scenes\DeathScene.cpp" />
-    <ClCompile Include="scenes\ExperimentalScene.cpp" />
-    <ClCompile Include="scenes\JafarQuarterScene.cpp" />
-    <ClCompile Include="scenes\MenuScene.cpp" />
+    <ClCompile Include="scenes\AutoLoadScene.cpp" />
+    <ClCompile Include="scenes\DebugScene.cpp" />
     <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
     <ClCompile Include="scripts\CheckpointController.cpp" />
@@ -250,6 +249,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\AgrabahMarketStairsSixPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
+    <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
     <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h" />
     <ClInclude Include="prefabs\PendalPrefab.h" />
     <ClInclude Include="prefabs\PlatformPrefab.h" />
@@ -291,10 +291,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
     <ClInclude Include="prefabs\WallPrefab.h" />
     <ClInclude Include="scenes\AgrabahMarketScene.h" />
-    <ClInclude Include="scenes\DeathScene.h" />
-    <ClInclude Include="scenes\ExperimentalScene.h" />
-    <ClInclude Include="scenes\JafarQuarterScene.h" />
-    <ClInclude Include="scenes\MenuScene.h" />
+    <ClInclude Include="scenes\AutoLoadScene.h" />
+    <ClInclude Include="scenes\DebugScene.h" />
     <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
     <ClInclude Include="scripts\CheckpointController.h" />
@@ -356,7 +354,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <None Include="fonts\one.fnt" />
     <None Include="fonts\two.fnt" />
     <None Include="scenes\agrabah_market.scene" />
+    <None Include="scenes\death.scene" />
     <None Include="scenes\jafar_quarter.scene" />
+    <None Include="scenes\menu.scene" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

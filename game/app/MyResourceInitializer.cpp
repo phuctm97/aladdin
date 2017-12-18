@@ -40,6 +40,7 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -69,6 +70,9 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Debug" );
 
   // Scenes
+  new SceneConfiguration( "menu.scene", "scenes/menu.scene" );
+  new SceneConfiguration( "death.scene", "scenes/death.scene" );
+  new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
   new SceneConfiguration( "jafar_quarter.scene", "scenes/jafar_quarter.scene" );
 
   // Textures
@@ -146,6 +150,8 @@ void MyResourceInitializer::doRun() {
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
   new PlatformPrefab();
+
+  new DeathSceneControllerPrefab();
 
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();

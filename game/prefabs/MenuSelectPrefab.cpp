@@ -1,5 +1,6 @@
 #include "MenuSelectPrefab.h"
-#include "../scenes/AgrabahMarketScene.h"
+#include "../scenes/AutoLoadScene.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -14,19 +15,35 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 
-  new SpriteRenderer( object, "items.png" );
-  new Animator( object, "menu_select", "items.anm" );
-  const auto menuSelectActionManager = new ActionManager( object );
-  const auto menuSelectStateManager = new StateManager( object, "menu_1" );
-  const auto menuSelectTransform = object->getTransform();
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
-  new State( menuSelectStateManager, "menu_1",
+  const auto animator = new Animator( object, "menu_select", "items.anm" );
+
+  const auto actionManager = new ActionManager( object );
+
+  const auto stateManager = new StateManager( object, "initial" );
+
+  // helpers
+  const auto transform = object->getTransform();
+
+  new State( stateManager, "initial",
              [=] {
-               menuSelectTransform->setPosition( -84, menuOneY - 8 );
+               // reset app data
+               myAppData->setCurrentLevel( 1 );
+               myAppData->setCurrentCheckpoint( 0 );
+               myAppData->setAladdinLives( 3 );
+               myAppData->setRetryTimes( 1 );
+             }, NULL, NULL );
 
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
+  new State( stateManager, "menu_1",
+             [=] {
+               transform->setPosition( -84, menuOneY - 8 );
+
+               actionManager->stopAll();
+               actionManager->play( new Repeat(
                  new Sequence( {
                    new MoveBy( Vec2( 10, 0 ), 0.175f ),
                    new MoveBy( Vec2( -10, 0 ), 0.175f ),
@@ -37,17 +54,17 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AgrabahMarketScene() );
+                 gameManager->replaceScene( new AutoLoadScene( "agrabah_market.scene", true ) );
                }
              },
              NULL );
 
-  new State( menuSelectStateManager, "menu_2",
+  new State( stateManager, "menu_2",
              [=] {
-               menuSelectTransform->setPosition( -84, menuTwoY - 8 );
+               transform->setPosition( -84, menuTwoY - 8 );
 
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
+               actionManager->stopAll();
+               actionManager->play( new Repeat(
                  new Sequence( {
                    new MoveBy( Vec2( 10, 0 ), 0.175f ),
                    new MoveBy( Vec2( -10, 0 ), 0.175f ),
@@ -58,17 +75,17 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 Logger( "MenuScene" ).info( "To Jafar's Quarters Scene" );
+                 gameManager->replaceScene( new AutoLoadScene( "jafar_quarter.scene", true ) );
                }
              },
              NULL );
 
-  new State( menuSelectStateManager, "menu_3",
+  new State( stateManager, "menu_3",
              [=] {
-               menuSelectTransform->setPosition( -84, menuThreeY - 8 );
+               transform->setPosition( -84, menuThreeY - 8 );
 
-               menuSelectActionManager->stopAll();
-               menuSelectActionManager->play( new Repeat(
+               actionManager->stopAll();
+               actionManager->play( new Repeat(
                  new Sequence( {
                    new MoveBy( Vec2( 10, 0 ), 0.175f ),
                    new MoveBy( Vec2( -10, 0 ), 0.175f ),
@@ -83,19 +100,23 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                }
              }, NULL );
 
-  new StateTransition( menuSelectStateManager, "menu_1", "menu_2", [=] {
+  new StateTransition( stateManager, "initial", "menu_1", [=] {
+    return true;
+  } );
+
+  new StateTransition( stateManager, "menu_1", "menu_2", [=] {
     return input->getKeyDown( ALA_KEY_DOWN_ARROW );
   } );
 
-  new StateTransition( menuSelectStateManager, "menu_2", "menu_3", [=] {
+  new StateTransition( stateManager, "menu_2", "menu_3", [=] {
     return input->getKeyDown( ALA_KEY_DOWN_ARROW );
   } );
 
-  new StateTransition( menuSelectStateManager, "menu_2", "menu_1", [=] {
+  new StateTransition( stateManager, "menu_2", "menu_1", [=] {
     return input->getKeyDown( ALA_KEY_UP_ARROW );
   } );
 
-  new StateTransition( menuSelectStateManager, "menu_3", "menu_2", [=] {
+  new StateTransition( stateManager, "menu_3", "menu_2", [=] {
     return input->getKeyDown( ALA_KEY_UP_ARROW );
   } );
 }

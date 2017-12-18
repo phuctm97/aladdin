@@ -1,7 +1,7 @@
 #include "PlayableAladdinController.h"
 #include "DirectionController.h"
 #include "../Define.h"
-#include "../scenes/DeathScene.h"
+#include "../scenes/AutoLoadScene.h"
 
 USING_NAMESPACE_ALA;
 
@@ -291,7 +291,7 @@ void PlayableAladdinController::onHit( const int damage ) {
   if ( _health <= 0 ) {
     _myAppData->setAladdinLives( _lives - 1 );
 
-    GameManager::get()->replaceScene( new DeathScene() );
+    GameManager::get()->replaceScene( new AutoLoadScene( "death.scene", false ) );
 
     return;
   }
