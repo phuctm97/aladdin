@@ -44,6 +44,7 @@
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
 #include "../prefabs/AgrabahMarketStairsThreePrefab.h"
+#include "../prefabs/JafarQuarterGroundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -67,6 +68,7 @@ void MyResourceInitializer::doRun() {
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
+  new Sprite( "jafar_quarter_background.png", "textures/backgrounds/scene_2_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
@@ -143,6 +145,8 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();
   new AgrabahMarketStairsThreePrefab();
+
+  new JafarQuarterGroundPrefab();
 
   // Dev tools
   new NodePrefab();

@@ -6,7 +6,7 @@ ALA_CLASS_SOURCE_1(DebugCameraController, ala::GameObjectComponent)
 
 DebugCameraController::DebugCameraController( ala::GameObject* gameObject, ala::GameObject* target,
                                               const std::string& name )
-  : GameObjectComponent( gameObject, name ), _speed( 0.5f ), _logger( "DebugCameraController" ), _target( target ) {}
+  : GameObjectComponent( gameObject, name ), _speed( 2 ), _logger( "DebugCameraController" ), _target( target ) {}
 
 void DebugCameraController::onUpdate( const float delta ) {
   const auto input = Input::get();

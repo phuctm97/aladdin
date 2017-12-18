@@ -162,6 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\HorizontalBarPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp" />
     <ClCompile Include="prefabs\PendalPrefab.cpp" />
     <ClCompile Include="prefabs\PlatformPrefab.cpp" />
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
@@ -204,6 +205,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
     <ClCompile Include="scenes\DeathScene.cpp" />
     <ClCompile Include="scenes\ExperimentalScene.cpp" />
+    <ClCompile Include="scenes\JafarQuarterScene.cpp" />
     <ClCompile Include="scenes\MenuScene.cpp" />
     <ClCompile Include="scripts\CamelController.cpp" />
     <ClCompile Include="scripts\CameraController.cpp" />
@@ -239,6 +241,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
     <ClInclude Include="prefabs\HorizontalBarPrefab.h" />
+    <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h" />
     <ClInclude Include="prefabs\PendalPrefab.h" />
     <ClInclude Include="prefabs\PlatformPrefab.h" />
     <ClInclude Include="prefabs\AbuBonusPrefab.h" />
@@ -281,6 +284,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
     <ClInclude Include="scenes\AgrabahMarketScene.h" />
     <ClInclude Include="scenes\DeathScene.h" />
     <ClInclude Include="scenes\ExperimentalScene.h" />
+    <ClInclude Include="scenes\JafarQuarterScene.h" />
     <ClInclude Include="scenes\MenuScene.h" />
     <ClInclude Include="scripts\CamelController.h" />
     <ClInclude Include="scripts\CameraController.h" />
@@ -309,6 +313,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"</Command>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\backgrounds\scene_2_0.png" />
+    <Image Include="textures\backgrounds\scene_2_1.png" />
     <Image Include="textures\bosses\jafar.png" />
     <Image Include="textures\enemies\civilian_enemies.png" />
     <Image Include="textures\enemies\guards.png" />

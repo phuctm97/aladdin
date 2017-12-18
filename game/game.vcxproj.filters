@@ -273,6 +273,12 @@
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="scenes\JafarQuarterScene.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -483,6 +489,12 @@
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scenes\JafarQuarterScene.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -529,6 +541,12 @@
     </Image>
     <Image Include="textures\playable_characters\aladdin.png">
       <Filter>texures\playable_characters</Filter>
+    </Image>
+    <Image Include="textures\backgrounds\scene_2_0.png">
+      <Filter>texures\backgrounds</Filter>
+    </Image>
+    <Image Include="textures\backgrounds\scene_2_1.png">
+      <Filter>texures\backgrounds</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
