@@ -3,7 +3,9 @@
 USING_NAMESPACE_ALA;
 
 NodeController::NodeController(ala::GameObject* gameObject, const std::string& name)
-	: GameObjectComponent(gameObject, name), _logger("NodeController"), _speed(1) { }
+	: GameObjectComponent(gameObject, name), _logger("NodeController"), _speed(1) {
+	_appleCount = -1;
+}
 
 void NodeController::onUpdate(const float delta) {
 	const auto input = Input::get();
@@ -70,24 +72,22 @@ void NodeController::onUpdate(const float delta) {
 		}
 	}
 
-	if (input->getKeyDown(ALA_KEY_F3)) {
+	if (input->getKeyDown(ALA_KEY_F2)) {
 		_speed += 0.5f;
 		_logger.info("Moving speed = %f\n", _speed);
 	}
 
-	if (input->getKeyDown(ALA_KEY_F2)) {
+	if (input->getKeyDown(ALA_KEY_F1)) {
 		_speed -= 0.5f;
 		_logger.info("Moving speed = %f\n", _speed);
 	}
 
-	if (input->getKeyDown(ALA_KEY_F1)) {
-		_logger.info("X: %f; Y: %f \n", transform->getPositionX(), transform->getPositionY());
+	if (input->getKeyDown(ALA_KEY_F3)) {
 		if (rectRenderer != NULL) {
-			_logger.info("Rect Size (%f , %f) \n", rectRenderer->getSize().getWidth(), rectRenderer->getSize().getHeight());
-		}
-
-		if (collider != NULL) {
-			_logger.info("Collider Size (%f , %f) \n", collider->getSize().getWidth(), collider->getSize().getHeight());
+			//if (_rectObject != NULL) _rectObject->release();
+			//_rectObject = new GameObject(GameManager::get()->getRunningScene());
+			new RectRenderer(new GameObject(GameManager::get()->getRunningScene(), "S"+std::to_string(_appleCount)) , rectRenderer->getOffset(), rectRenderer->getSize(), Color(0, 255, 255), "");
+			GameManager::get()->getObjectByName("S"+ std::to_string(_appleCount))->getTransform()->setPosition(transform->getPosition());
 		}
 	}
 
@@ -102,40 +102,27 @@ void NodeController::onUpdate(const float delta) {
 	}
 
 	if (input->getKeyDown(ALA_KEY_F5)) {
-		if (collider != NULL) {
-			_logger.info(
-				//StairNoob//"\n->getTransform()->setPosition(Vec2(%.0f,%.0f));\n((Collider*)->getComponent(\"first\"))->setSize(Size(%.0f, %.0f));\n((Collider*)->getComponent(\"first\"))->setOffset(Vec2(%.0f, %.0f));\n((Collider*)->getComponent(\"second\"))->setSize(Size(%.0f, %.0f));\n((Collider*)->getComponent(\"second\"))->setOffset(Vec2(%.0f, %.0f)); ",
-				"\n->getTransform()->setPosition(Vec2(%.1ff, %.1ff));\n->getComponentT<Collider>()->setSize(Size(%.1ff, %.1ff));",
-				transform->getPositionX(),
-				transform->getPositionY(),
-				collider->getSize().getWidth(),
-				collider->getSize().getHeight());
+		if (rectRenderer != NULL) {
+			_appleCount++;
+			_appleX[_appleCount] = transform->getPositionX();
+			_appleY[_appleCount] = transform->getPositionY();
+			new RectRenderer(new GameObject(GameManager::get()->getRunningScene(), "S" + std::to_string(_appleCount)), rectRenderer->getOffset(), rectRenderer->getSize(), Color(0, 255, 255), "");
+			GameManager::get()->getObjectByName("S" + std::to_string(_appleCount))->getTransform()->setPosition(transform->getPosition());
 		}
 	}
 
 	if (input->getKeyDown(ALA_KEY_F6)) {
-			if (collider != NULL) {
-				if (_rectObject != NULL) _rectObject->release();
-				_rectObject = new GameObject(GameManager::get()->getRunningScene());
-				new RectRenderer(_rectObject, collider->getOffset(), collider->getSize(), Color(0, 255, 255), "");
-				_rectObject->getTransform()->setPosition(transform->getPosition());
-				_logger.info(
-					//StairNoob//"\n->getTransform()->setPosition(Vec2(%.0f,%.0f));\n((Collider*)->getComponent(\"first\"))->setSize(Size(%.0f, %.0f));\n((Collider*)->getComponent(\"first\"))->setOffset(Vec2(%.0f, %.0f));\n((Collider*)->getComponent(\"second\"))->setSize(Size(%.0f, %.0f));\n((Collider*)->getComponent(\"second\"))->setOffset(Vec2(%.0f, %.0f)); ",
-					//Stair??//"\n->getTransform()->setPosition(Vec2(%.1ff, %.1ff));\n->getComponentT<Collider>()->setSize(Size(%.1ff, %.1ff));",
-					//Stair Group 2 //"\nconst auto = gameManager->getPrefab(\"StairGroupTwo\")->instantiate();\n->getTransform()->setPosition(Vec2(%.1ff, %.1ff));\n->getComponentT<Collider>()->setSize(Size(%.1ff, %.1ff)); ",
-					//Somthing//"\nconst auto = gameManager->getPrefab(\"\")->instantiate();\n->getTransform()->setPosition(Vec2(%.1ff, %.1ff));\n->getComponentT<Collider>()->setSize(Size(%.1ff, %.1ff)); ",
-					"\nconst auto = gameManager->getPrefab(\"Platform\")->instantiate();\n->getTransform()->setPosition(Vec2(%.2ff, %.2ff));\nstatic_cast<Collider*>(->getComponent(\"Upon\"))->setSize(Size(%.2ff, %.2ff));\nstatic_cast<Collider*>(->getComponent(\"Below\"))->setSize(Size(%.2ff, %.2ff));\nstatic_cast<Collider*>(->getComponent(\"Upon\"))->setOffset(Vec2(0, %.2ff));\nstatic_cast<Collider*>(->getComponent(\"Below\"))->setOffset(Vec2(0, -%.2ff));",
-					transform->getPositionX(),
-					transform->getPositionY(),
-					collider->getSize().getWidth(),
-					collider->getSize().getHeight() / 2,
-					collider->getSize().getWidth(),
-					collider->getSize().getHeight() / 2,
-					collider->getSize().getHeight() / 4,
-					collider->getSize().getHeight() / 4 + 0.75f	);
-			}
-		
+		string s = "";
+		for (int i = 0; i <= _appleCount; i++) {
+			s += std::to_string((int)_appleX[i]) + ", ";
+		}
+		_logger.info("%s", s.c_str());
 
+		s = "";
+		for (int i = 0; i <= _appleCount; i++) {
+			s += std::to_string((int)_appleY[i]) + ", ";
+		}
+		_logger.info("%s", s.c_str());
 	}
 }
 
