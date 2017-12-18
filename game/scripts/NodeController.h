@@ -10,6 +10,9 @@ private:
 	ala::Logger _logger;
 	float _speed;
 	ala::GameObject* _rectObject;
+	int _appleCount;
+	float _appleX[100];
+	float _appleY[100];
 
 public: 
 	NodeController(ala::GameObject*  gameObject, const std::string& name = "");

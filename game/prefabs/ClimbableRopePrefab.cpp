@@ -8,9 +8,9 @@ ALA_CLASS_SOURCE_1(ClimbableRopePrefab, ala::PrefabV2)
 void ClimbableRopePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // args
   const auto height = nextFloat( argsStream );
-  const auto width = 3.0f;
+  const auto width = 4.0f;
   const auto topSize = 5.0f;
-  const auto topPadding = 40.0f;
+  const auto topPadding = 35.0f;
   const auto mainSize = height - topSize - topPadding;
 
   // components

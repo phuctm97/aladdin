@@ -40,7 +40,7 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
 
 
   // fourth ground
-  const auto fourthGroundSize = Size( 1952, 30 );
+  const auto fourthGroundSize = Size( 1975, 30 );
   const auto fourthGroundOffset = Vec2(
     thirdGroundOffset.getX() + thirdGroundSize.getWidth() / 2 + fourthGroundSize.getWidth() / 2,
     fourthGroundSize.getHeight() / 2 );

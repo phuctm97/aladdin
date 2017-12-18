@@ -279,6 +279,18 @@
     <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DoubleStairsModeSwitcher.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketStairsSixPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -493,6 +505,18 @@
       <Filter>scenes</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DoubleStairsModeSwitcher.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketStairsSixPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
