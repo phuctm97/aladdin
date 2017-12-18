@@ -16,6 +16,7 @@
 
 NAMESPACE_ALA
 {
+class SceneConfiguration;
 class Sprite;
 
 ALA_CLASS_HEADER_1(GameManager, ala::Releasable)
@@ -103,7 +104,9 @@ public:
 
   void replaceSceneInNextFrame( Scene* scene );
 
-  bool isExitInNextFrame() const;
+  void loadScene( const std::string& configurationName, ala::Scene* scene = NULL );
+
+  void loadScene( SceneConfiguration* configuration, ala::Scene* scene = NULL );
 
 private:
   void updateRunningScene();
@@ -142,7 +145,7 @@ public:
 
   Prefab* getPrefab( const std::string& name );
 
-  PrefabV2* getPrefabV2(const std::string& name);
+  PrefabV2* getPrefabV2( const std::string& name );
 
   std::vector<Prefab*> getAllPrefabs();
 

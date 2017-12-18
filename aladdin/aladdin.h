@@ -28,6 +28,7 @@
 #include "core/Transform.h"
 #include "core/State.h"
 #include "core/StateManager.h"
+#include "core/SceneConfiguration.h"
 #include "2d/2dInclude.h"
 #include "2d/Size.h"
 #include "2d/Rect.h"

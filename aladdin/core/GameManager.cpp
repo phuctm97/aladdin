@@ -3,6 +3,7 @@
 */
 
 #include "GameManager.h"
+#include "SceneConfiguration.h"
 #include "../2d/2dMacros.h"
 #include "../2d/Sprite.h"
 
@@ -201,6 +202,62 @@ void GameManager::replaceSceneInNextFrame( Scene* scene ) {
   if ( scene == NULL ) return;
   if ( scene == _runningScene ) return;
   _sceneToReplaceInNextFrame = scene;
+}
+
+void GameManager::loadScene( const std::string& configurationName, ala::Scene* scene ) {
+  const auto configuration = static_cast<SceneConfiguration*>(getResource( configurationName ));
+  loadScene( configuration, scene );
+}
+
+void GameManager::loadScene( SceneConfiguration* configuration, ala::Scene* scene ) {
+  const auto sceneToLoad = scene != NULL ? scene : getRunningScene();
+
+  if ( configuration->isPhysicsEnabled() ) {
+    sceneToLoad->enablePhysics( configuration->getPhysicsGravity() );
+  }
+
+  const auto& objectConfigurations = configuration->getObjectConfigurations();
+  for ( const auto& objectConfiguration : objectConfigurations ) {
+    ala::GameObject* object = NULL;
+
+    if ( objectConfiguration.prefabVersion > 0 ) {
+      switch ( objectConfiguration.prefabVersion ) {
+      case 1:
+        object = getPrefab( objectConfiguration.prefabName )
+          ->instantiate( objectConfiguration.name, objectConfiguration.quadIndex );
+        break;
+      case 2:
+        object = getPrefabV2( objectConfiguration.prefabName )
+          ->instantiateWithArgs( objectConfiguration.prefabArgs,
+                                 objectConfiguration.name, objectConfiguration.quadIndex );
+        break;
+      default:
+        object = getPrefab( objectConfiguration.prefabName )
+          ->instantiate( objectConfiguration.name, objectConfiguration.quadIndex );
+        break;
+      }
+    }
+    else {
+      object = new GameObject( sceneToLoad, objectConfiguration.name, objectConfiguration.quadIndex );
+    }
+
+    if ( !objectConfiguration.layer.empty() ) {
+      object->setLayer( objectConfiguration.layer );
+    }
+    if ( objectConfiguration.tag >= 0 ) {
+      object->setTag( objectConfiguration.tag );
+    }
+
+    if ( objectConfiguration.applyTransformPosition ) {
+      object->getTransform()->setPosition( objectConfiguration.transformPosition );
+    }
+    if ( objectConfiguration.applyTransformScale ) {
+      object->getTransform()->setScale( objectConfiguration.transformScale );
+    }
+    if ( objectConfiguration.applyTransformRotation ) {
+      object->getTransform()->setRotation( objectConfiguration.transformRotation );
+    }
+  }
 }
 
 void GameManager::updateRunningScene() {

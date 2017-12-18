@@ -17,7 +17,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
 
-  const auto density = 1;
+  const auto density = 1.0f;
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );

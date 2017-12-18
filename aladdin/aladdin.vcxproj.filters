@@ -277,6 +277,9 @@
     <ClInclude Include="core\PrefabV2.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="core\SceneConfiguration.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\ClassMeta.cpp">
@@ -484,6 +487,9 @@
       <Filter>2d</Filter>
     </ClCompile>
     <ClCompile Include="core\PrefabV2.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\SceneConfiguration.cpp">
       <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>

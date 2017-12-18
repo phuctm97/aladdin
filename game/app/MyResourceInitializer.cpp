@@ -68,6 +68,9 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "UI" );
   gameManager->addLayer( "Debug" );
 
+  // Scenes
+  new SceneConfiguration( "jafar_quarter.scene", "scenes/jafar_quarter.scene" );
+
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );

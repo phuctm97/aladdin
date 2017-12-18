@@ -27,7 +27,7 @@ void Animator::onUpdate( const float delta ) {
       --_frameIndex;
     }
 
-    if ( _frameIndex >= _currentAction->getFrames().size() || _frameIndex < 0 ) {
+    if ( _frameIndex >= static_cast<int>(_currentAction->getFrames().size()) || _frameIndex < 0 ) {
       if ( !_currentAction->isLoop() ) {
         _isPlaying = false;
       }
@@ -140,7 +140,7 @@ void Animator::playNext() {
     --_frameIndex;
   }
 
-  if (_frameIndex >= _currentAction->getFrames().size() ||_frameIndex < 0) {
+  if (_frameIndex >= static_cast<int>(_currentAction->getFrames().size()) ||_frameIndex < 0) {
     playFromStart();
   }
   else {

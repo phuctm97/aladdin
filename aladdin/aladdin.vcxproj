@@ -203,6 +203,7 @@
     <ClInclude Include="core\PrefabV2.h" />
     <ClInclude Include="core\QuadNode.h" />
     <ClInclude Include="core\QuadTree.h" />
+    <ClInclude Include="core\SceneConfiguration.h" />
     <ClInclude Include="core\State.h" />
     <ClInclude Include="core\Mat4.h" />
     <ClInclude Include="core\MessageArgs.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="core\PrefabV2.cpp" />
     <ClCompile Include="core\QuadNode.cpp" />
     <ClCompile Include="core\QuadTree.cpp" />
+    <ClCompile Include="core\SceneConfiguration.cpp" />
     <ClCompile Include="core\State.cpp" />
     <ClCompile Include="core\Mat4.cpp" />
     <ClCompile Include="core\MessageArgs.cpp" />
