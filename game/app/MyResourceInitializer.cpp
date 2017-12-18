@@ -72,6 +72,7 @@ void MyResourceInitializer::doRun() {
   // Scenes
   new SceneConfiguration( "menu.scene", "scenes/menu.scene" );
   new SceneConfiguration( "death.scene", "scenes/death.scene" );
+  new SceneConfiguration( "retry.scene", "scenes/retry.scene" );
   new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
   new SceneConfiguration( "jafar_quarter.scene", "scenes/jafar_quarter.scene" );
 

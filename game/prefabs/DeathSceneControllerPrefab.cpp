@@ -37,9 +37,7 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
                  }
                  else if ( myAppData->getRetryTimes() > 0 ) {
                    myAppData->setRetryTimes( myAppData->getRetryTimes() - 1 );
-
-                   // TODO: replace with RetryScene
-                   gameManager->replaceScene( new AutoLoadScene( "menu.scene", false ) );
+                   gameManager->replaceScene( new AutoLoadScene( "retry.scene", false ) );
                  }
                  else {
                    gameManager->replaceScene( new AutoLoadScene( "menu.scene", false ) );
