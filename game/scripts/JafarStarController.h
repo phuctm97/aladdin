@@ -9,7 +9,11 @@ private:
 
   ala::Vec2 _targetPosition;
 
+  ala::Transform* _jafarTransform;
+
   ala::Transform* _aladdinTransform;
+
+  ala::Rigidbody* _aladdinBody;
 
   ala::Transform* _selfTransform;
 

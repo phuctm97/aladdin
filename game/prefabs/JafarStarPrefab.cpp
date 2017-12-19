@@ -1,4 +1,5 @@
 #include "JafarStarPrefab.h"
+#include "../Define.h"
 #include "../scripts/JafarStarController.h"
 
 USING_NAMESPACE_ALA;
@@ -30,4 +31,5 @@ void JafarStarPrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   // configurations
   object->setLayer( "Foreground" );
+  object->setTag( STAR_TAG );
 }

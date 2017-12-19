@@ -34,4 +34,5 @@ void WallPrefab::doInstantiate( ala::GameObject* object, std::istringstream& arg
 
   // configurations
   object->setTag( WALL_TAG );
+  object->setLayer( "Debug" );
 }

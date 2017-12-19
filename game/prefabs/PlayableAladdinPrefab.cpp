@@ -83,9 +83,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto timer3 = new Timer( object );
 
   // collider renderers
-  new ColliderRenderer( collider );
-
-  new ColliderRenderer( swordCollider );
+  //  new ColliderRenderer( collider );
+  //  new ColliderRenderer( swordCollider );
 
   // configurations
   object->setTag( ALADDIN_TAG );

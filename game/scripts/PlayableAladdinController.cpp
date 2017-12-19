@@ -20,6 +20,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _holdingRope( NULL ), _holdingBar( NULL ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
+    _selfBody( NULL ),
     _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
 
 void PlayableAladdinController::setLives( const int lives ) {
@@ -234,6 +235,9 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
         onJumpOnSpring( otherObject );
       }
     }
+    else if ( otherObject->getTag() == BOSS_TAG ) {
+      onHit();
+    }
   }
 }
 
@@ -269,6 +273,7 @@ void PlayableAladdinController::onInitialize() {
   _selfStateManager = getGameObject()->getComponentT<StateManager>();
   _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
+  _selfBody = getGameObject()->getComponentT<Rigidbody>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 

@@ -12,6 +12,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto gameManager = GameManager::get();
   const auto firePrefab = gameManager->getPrefabV2( "Jafar Fire" );
   const auto starPrefab = gameManager->getPrefabV2( "Jafar Star" );
+  const auto explosionPrefab = gameManager->getPrefabV2( "Big Explosion" );
 
   const auto minIdle1Delay = 300;
   const auto maxIdle1Delay = 1000;
@@ -81,6 +82,13 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                  }
                  else {
                    animator->setAction( "jafar_1_idle" );
+                 }
+
+                 if ( stateManager->getPreviousStateName() == "idle_2" ||
+                   stateManager->getPreviousStateName() == "attack_2" ) {
+                   transform->setPositionY( transform->getPositionY() + 10 );
+                   explosionPrefab->instantiateWithArgs( "" )
+                                  ->getTransform()->setPosition( transform->getPosition() );
                  }
                }
 
@@ -163,6 +171,13 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                // animation effect
                {
                  animator->setAction( "jafar_2_idle" );
+
+                 if ( stateManager->getPreviousStateName() == "idle_1" ||
+                   stateManager->getPreviousStateName() == "attack_1" ) {
+                   transform->setPositionY( transform->getPositionY() - 10 );
+                   explosionPrefab->instantiateWithArgs( "" )
+                                  ->getTransform()->setPosition( transform->getPosition() );
+                 }
                }
 
                // transition
@@ -248,12 +263,11 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
     return !animator->isPlaying();
   } );
 
-  // TODO: debug
   new StateTransition( stateManager, "idle_1", "idle_2", [=] {
-    return Input::get()->getKeyDown( ALA_KEY_SPACE );
+    return controller->getMode() == 2;
   } );
 
-  new StateTransition( stateManager, "idle_2", "idle_1", [=] {
-    return Input::get()->getKeyDown( ALA_KEY_SPACE );
+  new StateTransition( stateManager, "attack_1", "idle_2", [=] {
+    return controller->getMode() == 2;
   } );
 }

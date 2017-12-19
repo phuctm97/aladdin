@@ -27,6 +27,7 @@ private:
   ala::StateManager* _selfStateManager;
   ala::Animator* _selfAnimator;
   ala::Collider* _selfBodyCollider;
+  ala::Rigidbody* _selfBody;
   ala::PrefabV2* _throwableApplePrefab;
 
   MyAppData* _myAppData;
@@ -110,3 +111,4 @@ private:
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
+

@@ -29,7 +29,8 @@ enum
   CAMEL_TAG,
   SAVILA_TAG,
   BOSS_TAG,
-  FIRE_TAG
+  FIRE_TAG,
+  STAR_TAG
 };
 
 #endif //!__GAME_DEFINE_H__

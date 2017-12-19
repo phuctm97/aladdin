@@ -9,7 +9,9 @@ JafarStarController::JafarStarController( ala::GameObject* gameObject, const flo
                                           const std::string& name )
   : GameObjectComponent( gameObject, name ),
     _movingSpeed( movingSpeed ),
-    _aladdinTransform( NULL ), _selfTransform( NULL ), _explosionPrefab( NULL ) {}
+    _aladdinTransform( NULL ), _aladdinBody( NULL ),
+    _selfTransform( NULL ),
+    _explosionPrefab( NULL ) {}
 
 const ala::Vec2& JafarStarController::getTargetPosition() const {
   return _targetPosition;
@@ -22,6 +24,10 @@ void JafarStarController::onTriggerEnter( const ala::CollisionInfo& collision ) 
   const auto otherObject = otherCollider->getGameObject();
 
   if ( otherObject->getTag() == ALADDIN_TAG ) {
+    if ( otherCollider->getTag() == ALADDIN_TAG ) {
+      // pull aladdin back to jafar position
+    }
+
     explode();
   }
 }
@@ -34,7 +40,15 @@ void JafarStarController::onInitialize() {
   const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
   if ( aladdin != NULL ) {
     _aladdinTransform = aladdin->getTransform();
+
+    _aladdinBody = aladdin->getComponentT<Rigidbody>();
+
     _targetPosition = _aladdinTransform->getPosition();
+  }
+
+  const auto jafar = gameManager->getObjectByTag( BOSS_TAG );
+  if ( jafar != NULL ) {
+    _jafarTransform = jafar->getTransform();
   }
 
   _explosionPrefab = gameManager->getPrefabV2( "Jafar Star Explosion" );
