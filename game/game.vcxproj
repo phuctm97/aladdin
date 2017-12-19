@@ -169,6 +169,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPrefab.cpp" />
     <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp" />
     <ClCompile Include="prefabs\PendalPrefab.cpp" />
     <ClCompile Include="prefabs\PlatformPrefab.cpp" />
@@ -250,6 +251,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
     <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\JafarPrefab.h" />
     <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h" />
     <ClInclude Include="prefabs\PendalPrefab.h" />
     <ClInclude Include="prefabs\PlatformPrefab.h" />
