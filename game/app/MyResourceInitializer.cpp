@@ -49,6 +49,9 @@
 #include "../prefabs/AgrabahMarketStairsFivePrefab.h"
 #include "../prefabs/AgrabahMarketStairsSixPrefab.h"
 #include "../prefabs/JafarQuarterGroundPrefab.h"
+#include "../prefabs/JafarPrefab.h"
+#include "../prefabs/JafarFootFirePrefab.h"
+#include "../prefabs/JafarFirePrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -74,6 +77,9 @@ void MyResourceInitializer::doRun() {
   new SceneConfiguration( "death.scene", "scenes/death.scene" );
   new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
   new SceneConfiguration( "jafar_quarter.scene", "scenes/jafar_quarter.scene" );
+
+  //Audio
+  new AudioClip("Jafar Snake.wav", "audio/Jafar Snake.wav");
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
@@ -162,6 +168,9 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsSixPrefab();
 
   new JafarQuarterGroundPrefab();
+  new JafarPrefab();
+  new JafarFootFirePrefab();
+  new JafarFirePrefab();
 
   // Dev tools
   new NodePrefab();

@@ -21,4 +21,20 @@
   <object name="Aladdin" quadIndex="">
     <prefab version="2" name="Playable Aladdin" args="-80 0" />
   </object>
+  <object name="Jafar" quadIndex="" layer="Debug">
+    <prefab version="2" name="Jafar" />
+    <transform position="179 -14.5" />
+  </object>
+  <object name="Jafar foot fire" quadIndex="" layer="Debug">
+    <prefab version="2" name="Jafar foot fire" />
+    <transform position="182 -20.5" />
+  </object>
+  <object name="Jafar foot fire" quadIndex="" layer="Debug">
+    <prefab version="2" name="Jafar foot fire" />
+    <transform position="198 -20.5" />
+  </object>
+  <object name="Jafar foot fire" quadIndex="" layer="Debug">
+    <prefab version="2" name="Jafar foot fire" />
+    <transform position="170 -20.5" />
+  </object>
 </Scene>

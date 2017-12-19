@@ -27,7 +27,8 @@ enum
   ABU_BONUS_TAG,
   ANIMAL_TAG,
   CAMEL_TAG,
-  SAVILA_TAG
+  SAVILA_TAG,
+	BOSS_TAG
 };
 
 #endif //!__GAME_DEFINE_H__
