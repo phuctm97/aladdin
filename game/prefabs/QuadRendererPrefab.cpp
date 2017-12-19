@@ -20,21 +20,21 @@ void QuadRendererPrefab::doInstantiate( ala::GameObject* object, std::istringstr
   auto nodeOffsetX = 0.0f;
   auto nodeOffsetY = 0.0f;
 
-  auto w = nodeWidth;
-  auto h = nodeHeight;
-  for ( int i = 0; i < nodeLevel; i++, w /= 2, h /= 2 ) {
+  auto w = quadTree->getUnitWidth();
+  auto h = quadTree->getUnitHeight();
+  for ( int i = nodeLevel - 1; i >= 0; --i, w *= 2, h *= 2 ) {
     const auto c = index[i];
     switch ( c ) {
     case '0': break;
     case '1':
-      nodeOffsetX += nodeWidth;
+      nodeOffsetX += w;
       break;
     case '2':
-      nodeOffsetY += nodeHeight;
+      nodeOffsetY += h;
       break;
     case '3':
-      nodeOffsetX += nodeWidth;
-      nodeOffsetY += nodeHeight;
+      nodeOffsetX += w;
+      nodeOffsetY += h;
       break;
     default: break;
     }
