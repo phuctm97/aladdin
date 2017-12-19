@@ -19,7 +19,7 @@ void JafarPalaceGroundPrefab::doInstantiate( ala::GameObject* object, std::istri
   const auto collider = new Collider( object, false, Vec2( 0, -72 ), Size( 634, 50 ) );
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // configurations
   object->setTag( GROUND_TAG );

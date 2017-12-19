@@ -238,6 +238,9 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
     else if ( otherObject->getTag() == BOSS_TAG ) {
       onHit();
     }
+    else if ( otherObject->getTag() == FIRE_TAG ) {
+      onHit();
+    }
   }
 }
 

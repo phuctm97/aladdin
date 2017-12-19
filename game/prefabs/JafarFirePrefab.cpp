@@ -23,10 +23,14 @@ void JafarFirePrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   const auto body = new Rigidbody( object, PhysicsMaterial( 1, 0 ), ALA_BODY_TYPE_DYNAMIC, 1 );
 
-  const auto collider = new Collider( object, false, Vec2( 0, -7 ), Size( 40, 35 ) );
-  collider->setTag( FIRE_TAG );
-  collider->ignoreTag( ALADDIN_TAG );
-  collider->ignoreTag( BOSS_TAG );
+  const auto groundCollider = new Collider( object, false, Vec2( 5, -12 ), Size( 30, 25 ) );
+  groundCollider->setTag( FIRE_TAG );
+  groundCollider->ignoreTag( ALADDIN_TAG );
+  groundCollider->ignoreTag( BOSS_TAG );
+
+  const auto aladdinCollider = new Collider( object, true, Vec2( 5, -12 ), Size( 30, 25 ) );
+  aladdinCollider->setTag( FIRE_TAG );
+  aladdinCollider->ignoreTag( BOSS_TAG );
 
   const auto stateManager = new StateManager( object, "default" );
 
@@ -40,9 +44,10 @@ void JafarFirePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto transform = object->getTransform();
 
   // collider renderer
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( aladdinCollider );
 
   // configurations
+  object->setTag( FIRE_TAG );
   object->setLayer( "Foreground" );
 
   // states
