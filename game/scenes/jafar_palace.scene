@@ -2,6 +2,7 @@
 
 <Scene>
   <physics gravity="0 -500" />
+  <quad level="2" minX="-160" minY="-115" width="692" height="375" />
   <object name="Background" layer="Background" tag="4">
     <prefab version="2" name="Sprite" args="jafar_palace_background.png 0" />
     <transform position="186 72.5" />

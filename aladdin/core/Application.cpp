@@ -471,29 +471,72 @@ void Application::processMessage() {
 }
 
 void Application::processGame( const bool skipRender, const bool skipUpdate ) {
-  // update input
-  updateInput();
+  const auto checkPerformance = _frameCount % 600 == 0;
 
-  // do locked tasks
-  resolveLockedTasks();
+  if ( checkPerformance && Logger::getLogLevel() == ALA_LOG_DEBUG ) {
+    // debug performance
+    time_t c;
 
-  // update physics
-  updatePhysics( _delta );
+    // update input
+    c = clock();
+    updateInput();
+    _logger.debug( "Update-Input cost: %ld", clock() - c );
 
-  // update game
-  if ( skipUpdate ) {
-    _logger.debug( "Log rate is too high -> skip game update" );
+    // do locked tasks
+    c = clock();
+    resolveLockedTasks();
+    _logger.debug( "Resolved-Locked-Tasks cost: %ld", clock() - c );
+
+    // update physics
+    c = clock();
+    updatePhysics( _delta );
+    _logger.debug( "Update-Physics cost: %ld", clock() - c );
+
+    // update game
+    if ( skipUpdate ) {
+      _logger.debug( "Log rate is too high -> skip game update" );
+    }
+    else {
+      c = clock();
+      updateGame( _delta );
+      _logger.debug( "Update-Game cost: %ld", clock() - c );
+    }
+
+    // render graphics
+    if ( skipRender ) {
+      _logger.debug( "Log rate is high -> skip game render" );
+    }
+    else {
+      c = clock();
+      renderGraphics();
+      _logger.debug( "Render-Graphics cost: %ld", clock() - c );
+    }
   }
   else {
-    updateGame( _delta );
-  }
+    // update input
+    updateInput();
 
-  // render graphics
-  if ( skipRender ) {
-    _logger.debug( "Log rate is high -> skip game render" );
-  }
-  else {
-    renderGraphics();
+    // do locked tasks
+    resolveLockedTasks();
+
+    // update physics
+    updatePhysics( _delta );
+
+    // update game
+    if ( skipUpdate ) {
+      _logger.debug( "Log rate is too high -> skip game update" );
+    }
+    else {
+      updateGame( _delta );
+    }
+
+    // render graphics
+    if ( skipRender ) {
+      _logger.debug( "Log rate is high -> skip game render" );
+    }
+    else {
+      renderGraphics();
+    }
   }
 }
 

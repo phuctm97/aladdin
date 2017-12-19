@@ -125,6 +125,22 @@ QuadNode* QuadTree::getNode( const std::string& index ) const {
   return _tree.at( index );
 }
 
+float QuadTree::getSpaceMinX() const {
+  return _spaceMinX;
+}
+
+float QuadTree::getSpaceMinY() const {
+  return _spaceMinY;
+}
+
+float QuadTree::getUnitWidth() const {
+  return _unitWidth;
+}
+
+float QuadTree::getUnitHeight() const {
+  return _unitHeight;
+}
+
 char QuadTree::toQuadIndex( const int x, const int y ) const {
   if ( x == 0 ) {
     if ( y == 0 ) return '0';

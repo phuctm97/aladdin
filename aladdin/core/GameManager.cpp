@@ -212,6 +212,12 @@ void GameManager::loadScene( SceneConfiguration* configuration, ala::Scene* scen
     sceneToLoad->enablePhysics( configuration->getPhysicsGravity() );
   }
 
+  if ( configuration->isQuadTreeEnabled() ) {
+    sceneToLoad->enableQuadTree( configuration->getSpaceMinX(), configuration->getSpaceMinY(),
+                                 configuration->getSpaceWidth(), configuration->getSpaceHeight(),
+                                 configuration->getQuadTreeLevel() );
+  }
+
   const auto& objectConfigurations = configuration->getObjectConfigurations();
   for ( const auto& objectConfiguration : objectConfigurations ) {
     ala::GameObject* object = NULL;

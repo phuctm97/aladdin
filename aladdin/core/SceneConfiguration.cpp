@@ -17,6 +17,20 @@ const Vec2& SceneConfiguration::getPhysicsGravity() const {
   return _physicsGravity;
 }
 
+bool SceneConfiguration::isQuadTreeEnabled() const { return _quadTreeEnabled; }
+
+float SceneConfiguration::getSpaceMinX() const { return _spaceMinX; }
+
+float SceneConfiguration::getSpaceMinY() const { return _spaceMinY; }
+
+float SceneConfiguration::getSpaceWidth() const { return _spaceWidth; }
+
+float SceneConfiguration::getSpaceHeight() const { return _spaceHeight; }
+
+int SceneConfiguration::getQuadTreeLevel() const {
+  return _quadTreeLevel;
+}
+
 void SceneConfiguration::onLoad() {
   pugi::xml_document document;
   pugi::xml_parse_result result = document.load_file( _sourceFile.c_str() );
@@ -46,6 +60,19 @@ void SceneConfiguration::onLoad() {
   }
   else {
     _physicsEnabled = false;
+  }
+
+  const auto& quadNode = sceneNode.child( "quad" );
+  if ( !quadNode.empty() ) {
+    _quadTreeLevel = quadNode.attribute( "level" ).as_int( 3 );
+    _spaceMinX = quadNode.attribute( "minX" ).as_float( 0 );
+    _spaceMinY = quadNode.attribute( "minY" ).as_float( 0 );
+    _spaceWidth = quadNode.attribute( "width" ).as_float( 0 );
+    _spaceHeight = quadNode.attribute( "height" ).as_float( 0 );
+    _quadTreeEnabled = true;
+  }
+  else {
+    _quadTreeEnabled = false;
   }
 
   const auto& objectNodes = sceneNode.children( "object" );

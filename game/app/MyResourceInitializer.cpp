@@ -5,6 +5,7 @@
 #include "MyResourceInitializer.h"
 #include "MyAppData.h"
 #include "../prefabs/NodePrefab.h"
+#include "../prefabs/QuadRendererPrefab.h"
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
@@ -174,4 +175,5 @@ void MyResourceInitializer::doRun() {
 
   // Dev tools
   new NodePrefab();
+  new QuadRendererPrefab();
 }

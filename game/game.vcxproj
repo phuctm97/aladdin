@@ -199,6 +199,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\HoldableBarPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\JumpableSpringPrefab.cpp" />
+    <ClCompile Include="prefabs\QuadRendererPrefab.cpp" />
     <ClCompile Include="prefabs\SmallFireworkPrefab.cpp" />
     <ClCompile Include="prefabs\MenuSelectPrefab.cpp" />
     <ClCompile Include="prefabs\NodePrefab.cpp" />
@@ -286,6 +287,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\HoldableBarPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\JumpableSpringPrefab.h" />
+    <ClInclude Include="prefabs\QuadRendererPrefab.h" />
     <ClInclude Include="prefabs\SmallFireworkPrefab.h" />
     <ClInclude Include="prefabs\MenuSelectPrefab.h" />
     <ClInclude Include="prefabs\NodePrefab.h" />
