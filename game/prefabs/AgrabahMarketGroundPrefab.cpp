@@ -17,7 +17,7 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
 #pragma region ground
 
   // first ground
-  const auto firstGroundSize = Size( 1475 - 5 - 20, 63 );
+  const auto firstGroundSize = Size( 1475 - 5 + 20 - 20, 63 );
   const auto firstGroundOffset = Vec2( firstGroundSize.getWidth() / 2 - 5 - 10, firstGroundSize.getHeight() / 2 );
   const auto firstGroundCollider = new Collider( object, false, firstGroundOffset, firstGroundSize );
   firstGroundCollider->setTag( GROUND_TAG );
