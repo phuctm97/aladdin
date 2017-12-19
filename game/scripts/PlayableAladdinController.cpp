@@ -17,11 +17,19 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ), _holdingBar( NULL ),
+    _holdingRope( NULL ), _holdingBar( NULL ), _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ),
     _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
+
+float PlayableAladdinController::getMovingVelocityX() const {
+  return _movingVelocityX;
+}
+
+void PlayableAladdinController::setMovingVelocityX( const float v ) {
+  _movingVelocityX = v;
+}
 
 void PlayableAladdinController::setLives( const int lives ) {
   _lives = MIN(lives, _maxLives);

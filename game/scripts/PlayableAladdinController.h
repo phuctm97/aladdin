@@ -22,6 +22,8 @@ private:
   ala::GameObject* _holdingRope;
   ala::GameObject* _holdingBar;
 
+  float _movingVelocityX;
+
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
   ala::StateManager* _selfStateManager;
@@ -34,6 +36,10 @@ private:
 
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );
+
+  float getMovingVelocityX() const;
+
+  void setMovingVelocityX( const float v );
 
   void setLives( const int lives );
 
@@ -111,4 +117,3 @@ private:
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
-

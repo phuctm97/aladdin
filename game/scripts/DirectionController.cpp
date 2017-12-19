@@ -6,9 +6,17 @@ ALA_CLASS_SOURCE_1(DirectionController, ala::GameObjectComponent)
 
 DirectionController::DirectionController( ala::GameObject* gameObject, const bool positiveAsRight, const int direction,
                                           const std::string& name )
-  : GameObjectComponent( gameObject, name ),
+  : GameObjectComponent( gameObject, name ), _applyPhysics( true ),
     _positiveAsRight( positiveAsRight ),
-    _direction( direction < 0 ? -1 : 1 ) {}
+    _direction( direction < 0 ? -1 : 1 ), _selfBody( NULL ) {}
+
+void DirectionController::setApplyPhysics( const bool v ) {
+  _applyPhysics = v;
+}
+
+bool DirectionController::isApplyPhysics() const {
+  return _applyPhysics;
+}
 
 bool DirectionController::isLeft() const {
   return _positiveAsRight ? _direction < 0 : _direction > 0;
@@ -38,6 +46,10 @@ void DirectionController::addReverseCase( const std::function<bool()>& c ) {
   _reverseCases.push_back( c );
 }
 
+void DirectionController::onInitialize() {
+  _selfBody = getGameObject()->getComponentT<Rigidbody>();
+}
+
 void DirectionController::onUpdate( const float delta ) {
   bool reverse = false;
 
@@ -49,11 +61,12 @@ void DirectionController::onUpdate( const float delta ) {
   const auto transform = getGameObject()->getTransform();
   transform->setScaleX( (reverse ? -1 : 1) * _direction * ABS(transform->getScale().getX()) );
 
-  auto coef = _direction;
-  if ( !_positiveAsRight ) coef *= -1;
+  if ( _applyPhysics ) {
+    if ( _selfBody != NULL ) {
+      auto coef = _direction;
+      if ( !_positiveAsRight ) coef *= -1;
 
-  const auto body = getGameObject()->getComponentT<Rigidbody>();
-  if ( body != NULL ) {
-    body->setVelocity( Vec2( coef * ABS(body->getVelocity().getX()), body->getVelocity().getY() ) );
+      _selfBody->setVelocity( Vec2( coef * ABS(_selfBody->getVelocity().getX()), _selfBody->getVelocity().getY() ) );
+    }
   }
 }
