@@ -20,6 +20,12 @@ ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 Scene::Scene(): _toReleaseInNextFrame( false ),
                 _gameObjectInLock( false ),
                 _quadTree( NULL ),
+                _camera( NULL ),
+                _cameraTransform( NULL ),
+                _visibleWidth( 0 ),
+                _visibleHeight( 0 ),
+                _halfVisibleWidth( 0 ),
+                _halfVisibleHeight( 0 ),
                 _physicsEnabled( false ),
                 _gravityAcceleration( 0, -100.0f ) {
   // check initial state
@@ -46,7 +52,13 @@ void Scene::initialize() {
   ALA_ASSERT((!isInitializing()) && (!isInitialized()));
 
   // required framework objects
-  ala::GameManager::get()->getPrefab( ALA_MAIN_CAMERA )->instantiate( ALA_MAIN_CAMERA );
+  const auto gameManager = GameManager::get();
+  _camera = gameManager->getPrefab( ALA_MAIN_CAMERA )->instantiate( ALA_MAIN_CAMERA );
+  _cameraTransform = _camera->getTransform();
+  _visibleWidth = gameManager->getVisibleWidth();
+  _visibleHeight = gameManager->getVisibleHeight();
+  _halfVisibleWidth = _visibleWidth / 2;
+  _halfVisibleHeight = _visibleHeight / 2;
 
   onPreInitialize();
 
@@ -302,11 +314,7 @@ GameObject* Scene::getGameObject( const long id ) const {
 }
 
 GameObject* Scene::getMainCamera() const {
-  for ( const auto it : _gameObjects ) {
-    const auto object = it.second;
-    if ( object->getName() == ALA_MAIN_CAMERA ) return object;
-  }
-  return NULL;
+  return _camera;
 }
 
 bool Scene::isInLock() const {
@@ -354,9 +362,9 @@ QuadTree* Scene::getQuadTree() const {
 }
 
 void Scene::enableQuadTree( const float spaceMinX, const float spaceMinY,
-                            const float spaceMaxX, const float spaceMaxY,
+                            const float spaceWidth, const float spaceHeight,
                             const int level ) {
-  _quadTree = new QuadTree( spaceMinX, spaceMinY, spaceMaxX, spaceMaxY, level );
+  _quadTree = new QuadTree( spaceMinX, spaceMinY, spaceWidth, spaceHeight, level );
 }
 
 bool Scene::isQuadTreeEnabled() const {
@@ -364,17 +372,14 @@ bool Scene::isQuadTreeEnabled() const {
 }
 
 void Scene::updateQuadTreeVisibility() const {
-  const auto camera = getMainCamera();
-  const auto cameraPosition = camera->getTransform()->getPosition();
-  const auto halfVisibleWidth = GameManager::get()->getVisibleWidth() / 2;
-  const auto halfVisibleHeight = GameManager::get()->getVisibleHeight() / 2;
+  const auto cameraPosition = _cameraTransform->getPosition();
 
   // TODO: calculate with camera scale
 
-  const auto cameraMinX = cameraPosition.getX() - halfVisibleWidth;
-  const auto cameraMinY = cameraPosition.getY() - halfVisibleHeight;
-  const auto cameraMaxX = cameraPosition.getX() + halfVisibleWidth;
-  const auto cameraMaxY = cameraPosition.getY() + halfVisibleHeight;
+  const auto cameraMinX = cameraPosition.getX() - _halfVisibleWidth;
+  const auto cameraMinY = cameraPosition.getY() - _halfVisibleHeight;
+  const auto cameraMaxX = cameraPosition.getX() + _halfVisibleWidth;
+  const auto cameraMaxY = cameraPosition.getY() + _halfVisibleHeight;
 
   _quadTree->updateVisibility( cameraMinX, cameraMinY, cameraMaxX, cameraMaxY );
 }
@@ -402,7 +407,7 @@ void Scene::updateAddAndRemoveGameObjects() {
 void Scene::doAddGameObject( GameObject* gameObject, const std::string& quadIndex ) {
   _gameObjects.emplace( gameObject->getId(), gameObject );
 
-  if ( quadIndex.empty() ) {
+  if ( !isQuadTreeEnabled() || quadIndex.empty() ) {
     _dynamicGameObjects.emplace( gameObject->getId(), gameObject );
   }
   else {
@@ -415,10 +420,12 @@ void Scene::doRemoveGameObject( const long id ) {
   const auto gameObjectIt = _gameObjects.find( id );
   if ( gameObjectIt == _gameObjects.cend() ) return;
 
-  const auto gameObjectToQuadNodeIt = _gameObjectToQuadNode.find( id );
-  if ( gameObjectToQuadNodeIt != _gameObjectToQuadNode.cend() ) {
-    _quadTree->getNode( gameObjectToQuadNodeIt->second )->removeGameObject( gameObjectIt->second );
-    _gameObjectToQuadNode.erase( gameObjectToQuadNodeIt );
+  if ( isQuadTreeEnabled() ) {
+    const auto gameObjectToQuadNodeIt = _gameObjectToQuadNode.find( id );
+    if ( gameObjectToQuadNodeIt != _gameObjectToQuadNode.cend() ) {
+      _quadTree->getNode( gameObjectToQuadNodeIt->second )->removeGameObject( gameObjectIt->second );
+      _gameObjectToQuadNode.erase( gameObjectToQuadNodeIt );
+    }
   }
 
   _gameObjects.erase( id );

@@ -32,7 +32,7 @@ std::vector<ala::GameObject*> SceneInfoQuerier::getAllEnemiesInCamera() const {
 void SceneInfoQuerier::onInitialize() {
   const auto gameManager = GameManager::get();
 
-  const auto camera = gameManager->getMainCamera();
+  const auto camera = gameManager->getRunningScene()->getMainCamera();
 
   _cameraTransform = camera->getTransform();
 }

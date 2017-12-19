@@ -174,10 +174,6 @@ Scene* GameManager::getRunningScene() const {
   return _runningScene;
 }
 
-GameObject* GameManager::getMainCamera() const {
-  return getObjectByName( ALA_MAIN_CAMERA );
-}
-
 void GameManager::exit() {
   if ( _exitFunc != NULL ) {
     _exitFunc();

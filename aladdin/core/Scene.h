@@ -20,6 +20,12 @@ ALA_CLASS_HEADER_2(Scene, ala::Initializable, ala::Releasable)
   // ================================================
 private:
   bool _toReleaseInNextFrame;
+  ala::GameObject* _camera;
+  ala::Transform* _cameraTransform;
+  float _visibleWidth;
+  float _visibleHeight;
+  float _halfVisibleWidth;
+  float _halfVisibleHeight;
 
 public:
   /**
@@ -159,7 +165,7 @@ public:
   void removeGameObjectInNextFrame( GameObject* gameObject );
 
   void enableQuadTree( const float spaceMinX, const float spaceMinY,
-                       const float spaceMaxX, const float spaceMaxY,
+                       const float spaceWidth, const float spaceHeight,
                        const int level = 3 );
 
   QuadTree* getQuadTree() const;

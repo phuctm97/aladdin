@@ -96,8 +96,6 @@ private:
 public:
   Scene* getRunningScene() const;
 
-  GameObject* getMainCamera() const;
-
   void exit();
 
   void replaceScene( Scene* scene );
