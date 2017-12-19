@@ -15,6 +15,16 @@
     <sprite x="110" y="190" w="26" h="49" offsetX="-2.5" offsetY="2" />
     <sprite x="150" y="194" w="34" h="45" offsetX="-3.5" offsetY="0" />
   </Animation>
+  <Animation name="jafar_fire" imagePath="jafar.png" interval="0.08" isLoop="true">
+    <sprite x="8" y="286" w="74" h="49" offsetX="0" offsetY="0" />
+    <sprite x="96" y="288" w="78" h="47" offsetX="1" offsetY="-1" />
+    <sprite x="184" y="294" w="98" h="41" offsetX="7" offsetY="-4" />
+    <sprite x="296" y="295" w="89" h="40" offsetX="12" offsetY="-4.5" />
+    <sprite x="400" y="305" w="76" h="30" offsetX="6.5" offsetY="-9.5" />
+    <sprite x="488" y="305" w="72" h="30" offsetX="3.5" offsetY="-9.5" />
+    <sprite x="568" y="293" w="63" h="42" offsetX="-4" offsetY="-3" />
+    <sprite x="645" y="285" w="63" h="50" offsetX="-5" offsetY="1.5" />
+  </Animation>
   <Animation name="jafar_1_idle" imagePath="jafar.png" width="863" height="348">
     <sprite x="8" y="9" w="63" h="70" oX="8" oY="9" oW="67" oH="63" />
   </Animation>

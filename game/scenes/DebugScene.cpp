@@ -21,5 +21,17 @@ void DebugScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( 186, 72.5 );
 
+  gameManager->getPrefabV2( "Jafar Quarter Ground" )->instantiateWithArgs( "" )
+             ->getTransform()
+             ->setPosition( 186, 0 );
+
+  gameManager->getPrefabV2( "Wall" )->instantiateWithArgs( "23 351" )
+             ->getTransform()
+             ->setPosition( -145, 78 );
+
+  gameManager->getPrefabV2( "Wall" )->instantiateWithArgs( "23 351" )
+             ->getTransform()
+             ->setPosition( 517, 78 );
+
   gameManager->getPrefabV2( "Jafar" )->instantiateWithArgs( "" );
 }

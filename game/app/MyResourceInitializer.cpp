@@ -49,6 +49,7 @@
 #include "../prefabs/AgrabahMarketStairsFivePrefab.h"
 #include "../prefabs/AgrabahMarketStairsSixPrefab.h"
 #include "../prefabs/JafarPrefab.h"
+#include "../prefabs/JafarFirePrefab.h"
 #include "../prefabs/JafarQuarterGroundPrefab.h"
 
 USING_NAMESPACE_ALA;
@@ -164,6 +165,7 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsSixPrefab();
 
   new JafarPrefab();
+  new JafarFirePrefab();
   new JafarQuarterGroundPrefab();
 
   // Dev tools

@@ -291,6 +291,9 @@
     <ClCompile Include="prefabs\JafarPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\JafarFirePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -514,6 +517,9 @@
       <Filter>scenes</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarFirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

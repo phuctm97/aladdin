@@ -1,4 +1,6 @@
 #include "JafarPrefab.h"
+#include "../Define.h"
+#include "../scripts/DirectionController.h"
 
 USING_NAMESPACE_ALA;
 
@@ -7,6 +9,8 @@ ALA_CLASS_SOURCE_1(JafarPrefab, ala::PrefabV2)
 void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
+  const auto firePrefab = gameManager->getPrefabV2( "Jafar Fire" );
+
   const auto minIdle1Delay = 300;
   const auto maxIdle1Delay = 1000;
   const auto minIdle2Delay = 300;
@@ -29,8 +33,12 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 60, 70 ), 1, 0 );
+  collider->setTag( BOSS_TAG );
+  collider->ignoreTag( FIRE_TAG );
 
   const auto stateManager = new StateManager( object, "idle_1" );
+
+  const auto direction = new DirectionController( object );
 
   std::vector<SpriteRenderer*> fireSprites;
   for ( const auto firePos : firePositions ) {
@@ -54,6 +62,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   colliderRenderer->setZOrder( 3 );
 
   // configurations
+  object->setTag( BOSS_TAG );
   object->setLayer( "Supporting Character" );
 
   // states
@@ -84,7 +93,18 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  for ( const auto fireSprite : fireSprites ) fireSprite->setVisible( false );
                }
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               // direction  
+               {
+                 if ( Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+             }, NULL );
 
   new State( stateManager, "attack_1",
              [=] {
@@ -97,7 +117,18 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  timer->start( (rand() % (maxAttackDelay - minAttackDelay) + minAttackDelay) / 1000.0f );
                }
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               // direction  
+               {
+                 if ( Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+             }, NULL );
 
   // states
   new State( stateManager, "idle_2",
@@ -122,7 +153,18 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  for ( const auto fireSprite : fireSprites ) fireSprite->setVisible( true );
                }
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               // direction  
+               {
+                 if ( Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+             }, NULL );
 
   new State( stateManager, "attack_2",
              [=] {
@@ -130,7 +172,38 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_2_attack" );
                }
-             }, NULL, NULL );
+
+               // throw
+               {
+                 timer->start( 0.24f );
+               }
+             },
+             [=]( float dt ) {
+               // direction  
+               {
+                 if ( Input::get()->getKeyDown( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
+                   direction->setLeft();
+                 }
+                 else if ( Input::get()->getKeyDown( ALA_KEY_RIGHT_ARROW ) && direction->isLeft() ) {
+                   direction->setRight();
+                 }
+               }
+
+               // throw
+               {
+                 if ( timer->isDone() ) {
+                   if ( direction->isLeft() ) {
+                     firePrefab->instantiateWithArgs( "L" )
+                               ->getTransform()->setPosition( transform->getPosition() + Vec2( -15, -15 ) );
+                   }
+                   else {
+                     firePrefab->instantiateWithArgs( "R" )
+                               ->getTransform()->setPosition( transform->getPosition() + Vec2( 15, -15 ) );
+                   }
+                   timer->start( 1000 );
+                 }
+               }
+             }, NULL );
 
   new StateTransition( stateManager, "idle_1", "attack_1", [=] {
     return timer->isDone() && !animator->isPlaying();
