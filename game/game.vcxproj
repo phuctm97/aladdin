@@ -229,6 +229,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
+    <ClCompile Include="scripts\JafarController.cpp" />
+    <ClCompile Include="scripts\JafarStarController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
@@ -314,6 +316,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\HubController.h" />
+    <ClInclude Include="scripts\JafarController.h" />
+    <ClInclude Include="scripts\JafarStarController.h" />
     <ClInclude Include="scripts\NodeController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
