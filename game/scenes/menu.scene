@@ -13,7 +13,7 @@
     <transform position="-51 0" />
   </object>
   <object name="Menu 2" layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt JAFAR QUARTERS&#10; T L 0.75" />
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt JAFAR PALACE&#10; T L 0.75" />
     <transform position="-51 -18" />
   </object>
   <object name="Menu 3" layer="Second Background">

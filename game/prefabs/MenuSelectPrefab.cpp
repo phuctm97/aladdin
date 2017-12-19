@@ -75,7 +75,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AutoLoadScene( "jafar_quarter.scene", true ) );
+                 gameManager->replaceScene( new AutoLoadScene( "jafar_palace.scene", true ) );
                }
              },
              NULL );

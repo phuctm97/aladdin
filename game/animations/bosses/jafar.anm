@@ -63,4 +63,14 @@
     <sprite x="160" y="104" w="66" h="71" offsetX="3.5" offsetY="0.5" />
     <sprite x="240" y="104" w="70" h="71" offsetX="-0.5" offsetY="0" />
   </Animation>
+  <Animation name="star" imagePath="jafar.png" interval="0.1" isLoop="true">
+    <sprite x="198" y="226" w="27" h="13" offsetX="0" offsetY="0" />
+    <sprite x="238" y="224" w="23" h="15" offsetX="0" offsetY="0" />
+    <sprite x="270" y="225" w="25" h="14" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="star_explosion" imagePath="jafar.png" interval="0.08" isLoop="false">
+    <sprite x="310" y="227" w="13" h="12" offsetX="0" offsetY="0" />
+    <sprite x="334" y="226" w="34" h="13" offsetX="6" offsetY="2" />
+    <sprite x="382" y="219" w="14" h="20" offsetX="-0.5" offsetY="-1" />
+  </Animation>
 </Animations>

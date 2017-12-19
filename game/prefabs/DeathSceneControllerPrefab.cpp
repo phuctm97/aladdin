@@ -28,7 +28,7 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
                      gameManager->replaceScene( new AutoLoadScene( "agrabah_market.scene", true ) );
                      break;
                    case 2:
-                     gameManager->replaceScene( new AutoLoadScene( "jafar_quarter.scene", true ) );
+                     gameManager->replaceScene( new AutoLoadScene( "jafar_palace.scene", true ) );
                      break;
                    default:
                      gameManager->replaceScene( new AutoLoadScene( "menu.scene", false ) );

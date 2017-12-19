@@ -50,7 +50,9 @@
 #include "../prefabs/AgrabahMarketStairsSixPrefab.h"
 #include "../prefabs/JafarPrefab.h"
 #include "../prefabs/JafarFirePrefab.h"
-#include "../prefabs/JafarQuarterGroundPrefab.h"
+#include "../prefabs/JafarStarPrefab.h"
+#include "../prefabs/JafarStarExplosionPrefab.h"
+#include "../prefabs/JafarPalaceGroundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -76,12 +78,12 @@ void MyResourceInitializer::doRun() {
   new SceneConfiguration( "death.scene", "scenes/death.scene" );
   new SceneConfiguration( "retry.scene", "scenes/retry.scene" );
   new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
-  new SceneConfiguration( "jafar_quarter.scene", "scenes/jafar_quarter.scene" );
+  new SceneConfiguration( "jafar_palace.scene", "scenes/jafar_palace.scene" );
 
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
-  new Sprite( "jafar_quarter_background.png", "textures/backgrounds/scene_2_1.png" );
+  new Sprite( "jafar_palace_background.png", "textures/backgrounds/scene_2_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
@@ -166,7 +168,9 @@ void MyResourceInitializer::doRun() {
 
   new JafarPrefab();
   new JafarFirePrefab();
-  new JafarQuarterGroundPrefab();
+  new JafarStarPrefab();
+  new JafarStarExplosionPrefab();
+  new JafarPalaceGroundPrefab();
 
   // Dev tools
   new NodePrefab();

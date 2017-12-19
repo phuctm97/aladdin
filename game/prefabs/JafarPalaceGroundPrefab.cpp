@@ -1,11 +1,11 @@
-#include "JafarQuarterGroundPrefab.h"
+#include "JafarPalaceGroundPrefab.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(JafarQuarterGroundPrefab, ala::PrefabV2)
+ALA_CLASS_SOURCE_1(JafarPalaceGroundPrefab, ala::PrefabV2)
 
-void JafarQuarterGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+void JafarPalaceGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
   const auto visibleWidth = gameManager->getVisibleWidth();

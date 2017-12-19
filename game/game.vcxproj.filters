@@ -264,9 +264,6 @@
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -292,6 +289,15 @@
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\JafarFirePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarStarPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
   </ItemGroup>
@@ -492,9 +498,6 @@
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -520,6 +523,15 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarFirePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarStarPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarStarExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
@@ -624,9 +636,6 @@
     <None Include="scenes\agrabah_market.scene">
       <Filter>scenes\resources</Filter>
     </None>
-    <None Include="scenes\jafar_quarter.scene">
-      <Filter>scenes\resources</Filter>
-    </None>
     <None Include="scenes\death.scene">
       <Filter>scenes\resources</Filter>
     </None>
@@ -634,6 +643,9 @@
       <Filter>scenes\resources</Filter>
     </None>
     <None Include="scenes\retry.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\jafar_palace.scene">
       <Filter>scenes\resources</Filter>
     </None>
   </ItemGroup>

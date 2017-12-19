@@ -3,11 +3,11 @@
 <Scene>
   <physics gravity="0 -500" />
   <object name="Background" layer="Background" tag="4" quadIndex="">
-    <prefab version="2" name="Sprite" args="jafar_quarter_background.png 0" />
+    <prefab version="2" name="Sprite" args="jafar_palace_background.png 0" />
     <transform position="186 72.5" />
   </object>
   <object name="Ground" quadIndex="">
-    <prefab version="2" name="Jafar Quarter Ground" args="" />
+    <prefab version="2" name="Jafar Palace Ground" args="" />
     <transform position="186 0" />
   </object>
   <object name="Left Wall" quadIndex="">
@@ -19,6 +19,6 @@
     <transform position="517 78" />
   </object>
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="-80 0" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -20" />
   </object>
 </Scene>

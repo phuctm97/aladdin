@@ -15,13 +15,13 @@ void DebugScene::onPreInitialize() {
   //  enableQuadTree( -160, -115, 4771, 688, 3 );
 
   // objects
-  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "jafar_quarter_background.png 0", "Background" )
+  gameManager->getPrefabV2( "Sprite" )->instantiateWithArgs( "jafar_palace_background.png 0", "Background" )
              ->setTag( BACKGROUND_TAG )
              ->setLayer( "Background" )
              ->getTransform()
              ->setPosition( 186, 72.5 );
 
-  gameManager->getPrefabV2( "Jafar Quarter Ground" )->instantiateWithArgs( "" )
+  gameManager->getPrefabV2( "Jafar Palace Ground" )->instantiateWithArgs( "" )
              ->getTransform()
              ->setPosition( 186, 0 );
 
@@ -33,5 +33,7 @@ void DebugScene::onPreInitialize() {
              ->getTransform()
              ->setPosition( 517, 78 );
 
-  gameManager->getPrefabV2( "Jafar" )->instantiateWithArgs( "" );
+  //  gameManager->getPrefabV2( "Jafar" )->instantiateWithArgs( "" );
+  gameManager->getPrefabV2( "Jafar Star" )->instantiateWithArgs( "" );
+
 }
