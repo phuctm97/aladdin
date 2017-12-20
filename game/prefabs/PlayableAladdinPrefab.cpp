@@ -64,8 +64,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   const auto actionManager = new ActionManager( object );
 
-  const auto collisionTracker = new CollisionTracker( object );
-
   const auto direction = new DirectionController( object, true, 1 );
   direction->addReverseCase( [=] {
     return animator->getActionName().substr( 0, 8 ) == "hold_bar" ||
@@ -86,6 +84,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   // collider renderers
   //  new ColliderRenderer( collider );
   //  new ColliderRenderer( swordCollider );
+
+  // flags
+  collider->setFlags( EMPTY_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ALADDIN_FLAG );
 
   // configurations
   object->setTag( ALADDIN_TAG );
@@ -772,9 +774,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  controller->resetHoldingRope();
                }
 
-               // ground collsion
+               // standable collsion
                {
-                 collisionTracker->reset();
+                 controller->resetCollidedWithStandable();
                }
 
                // camel collision
@@ -837,8 +839,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                      animator->setAction( "fall" );
                    }
                  }
+               }
 
-                 collisionTracker->reset();
+               // standable collision
+               {
+                 controller->resetCollidedWithStandable();
                }
 
                // direction
@@ -1682,6 +1687,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
     return body->getVelocity().getY() < -10;
   } );
 
+  new StateTransition( stateManager, "idle", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  } );
+
+  new StateTransition( stateManager, "run", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  } );
+
   new StateTransition( stateManager, "jump_attack", "fall", [=] {
     return body->getVelocity().getY() < -10 && !animator->isPlaying();
   } );
@@ -1699,19 +1712,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   } );
 
   new StateTransition( stateManager, "fall", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump_attack", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump_throw", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "idle", "hit", [=] {

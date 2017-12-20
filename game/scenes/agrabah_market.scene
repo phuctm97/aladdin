@@ -16,8 +16,12 @@
     <prefab version="2" name="Agrabah Market Ground" args="" />
     <transform position="-160 -115" />
   </object>
+  <object name="Stairs 1" quadIndex="">
+    <prefab version="2" name="Agrabah Market Stairs 1" args="" />
+    <transform position="1015.5 -46" />
+  </object>
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
+    <prefab version="2" name="Playable Aladdin" args="1000 -25" />
   </object>
   <!--  <object>-->
   <!--    <prefab version="2" name="Quad Renderer" args="000" />-->

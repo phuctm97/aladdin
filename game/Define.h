@@ -33,4 +33,14 @@ enum
   STAR_TAG
 };
 
+enum
+{
+  COLLIDE_ALADDIN_FLAG = 1 << 0,
+  COLLIDE_ENEMY_FLAG = 1 << 1,
+  COLLIDE_FREE_OBJECT_FLAG = 1 << 2,
+  STATIC_FLAG = 1 << 3,
+  STANDABLE_FLAG = 1 << 4,
+  EMPTY_FLAG = 1 << 31
+};
+
 #endif //!__GAME_DEFINE_H__

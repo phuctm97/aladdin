@@ -13,7 +13,7 @@ Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& of
     _size( size ),
     _isTrigger( isTrigger ), _massScale( massScale ),
     _ignoreIfHasAnyFlags( 0 ),
-    _ignoreIfNotHasAnyFlags( 0xffffffff ),
+    _ignoreIfNotHasAnyFlags( ~0 ),
     _physicsLayer( physicsLayer ) {}
 
 Rect Collider::getBoundingRect() const {

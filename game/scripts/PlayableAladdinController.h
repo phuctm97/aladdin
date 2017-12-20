@@ -21,6 +21,7 @@ private:
   bool _reachedTopOfRope;
   ala::GameObject* _holdingRope;
   ala::GameObject* _holdingBar;
+  bool _collidedWithStandable;
 
   float _movingVelocityX;
 
@@ -84,6 +85,10 @@ public:
   bool isHoldingBar() const;
 
   ala::GameObject* getHoldingBar() const;
+
+  void resetCollidedWithStandable();
+
+  bool isCollidedWithStandable() const;
 
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,

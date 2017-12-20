@@ -17,7 +17,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ), _holdingBar( NULL ), _movingVelocityX( 0 ),
+    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ),
@@ -126,6 +126,14 @@ ala::GameObject* PlayableAladdinController::getHoldingBar() const {
   return _holdingBar;
 }
 
+void PlayableAladdinController::resetCollidedWithStandable() {
+  _collidedWithStandable = false;
+}
+
+bool PlayableAladdinController::isCollidedWithStandable() const {
+  return _collidedWithStandable;
+}
+
 ala::GameObject* PlayableAladdinController::getHodingRope() const {
   return _holdingRope;
 }
@@ -155,6 +163,12 @@ void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& coll
   if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG
     && collision.getNormal().getY() == 0 ) {
     _pushingWall = true;
+  }
+  else if ( otherCollider->hasFlag( STANDABLE_FLAG ) ) {
+    const auto colliderPosY = otherObject->getTransform()->getPositionY() + otherCollider->getOffset().getY();
+    if ( colliderPosY < _selfTransform->getPositionY() ) {
+      _collidedWithStandable = true;
+    }
   }
 }
 
