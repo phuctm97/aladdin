@@ -38,6 +38,9 @@ void PlatformPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   uponCollider->setFlags( COLLIDE_ALADDIN_FLAG | STANDABLE_FLAG | COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
   hostileCollider->setFlags( COLLIDE_ENEMY_FLAG | STANDABLE_FLAG | COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
   belowCollider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  uponCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  hostileCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  belowCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setTag( GROUND_TAG );
