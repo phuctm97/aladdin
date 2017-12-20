@@ -11,7 +11,6 @@
     <prefab version="2" name="Sprite" args="agrabah_market_foreground.png 0" />
     <transform position="2225.5 229" />
   </object>
-  <!--OK-->
   <object name="Ground" quadIndex="">
     <prefab version="2" name="Agrabah Market Ground" args="" />
     <transform position="-160 -115" />
@@ -20,8 +19,12 @@
     <prefab version="2" name="Agrabah Market Stairs 1" args="" />
     <transform position="1015.5 -46" />
   </object>
+  <object name="Platform 1" quadIndex="">
+    <prefab version="2" name="Platform" args="295" />
+    <transform position="100 50" />
+  </object>
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="1000 -25" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
   <!--  <object>-->
   <!--    <prefab version="2" name="Quad Renderer" args="000" />-->
