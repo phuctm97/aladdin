@@ -57,6 +57,6 @@ void SceneFadeOutTransitionPrefab::doInstantiate( ala::GameObject* object, std::
              NULL );
 
   // configurations
-  object->setLayer( "UI" );
+  object->setLayer( "Overlay" );
   rectRenderer->setZOrder( 90 );
 }

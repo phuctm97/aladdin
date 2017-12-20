@@ -74,6 +74,7 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Foreground" );
   gameManager->addLayer( "Second Foreground" );
   gameManager->addLayer( "UI" );
+  gameManager->addLayer( "Overlay" );
   gameManager->addLayer( "Debug" );
 
   // Scenes
