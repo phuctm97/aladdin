@@ -43,6 +43,10 @@ void FloatingSalivaPrefab::doInstantiate( ala::GameObject* object, std::istrings
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ENEMY_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
+
   // configurations
   object->setTag( SAVILA_TAG );
   object->setLayer( "Foreground" );

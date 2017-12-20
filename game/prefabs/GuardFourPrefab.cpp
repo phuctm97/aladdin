@@ -54,6 +54,10 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+
   // configurations
   object->setLayer( "Supporting Character" );
   object->setTag( ENEMY_TAG );

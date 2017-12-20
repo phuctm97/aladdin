@@ -86,8 +86,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   //  new ColliderRenderer( swordCollider );
 
   // flags
-  collider->setFlags( EMPTY_FLAG );
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
   collider->ignoreIfNotHasAnyFlags( COLLIDE_ALADDIN_FLAG );
+  swordCollider->setFlags( COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setTag( ALADDIN_TAG );

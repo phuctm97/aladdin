@@ -40,6 +40,9 @@ void PeddlerPrefab::doInstantiate( ala::GameObject* object, std::istringstream& 
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setLayer( "Mass Character" );

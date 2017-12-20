@@ -43,8 +43,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto transform = object->getTransform();
 
   // flags
-  const auto appleFlags = COLLIDE_ENEMY_FLAG;
-  collider->setFlags( appleFlags );
+  collider->setFlags( COLLIDE_ENEMY_FLAG );
   collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations

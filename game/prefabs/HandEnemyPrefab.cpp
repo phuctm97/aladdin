@@ -53,6 +53,13 @@ void HandEnemyPrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   new ColliderRenderer( zoneCollider );
 
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+  zoneCollider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  zoneCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( ENEMY_TAG );
   object->setLayer( "Mass Character" );
