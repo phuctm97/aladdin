@@ -25,16 +25,13 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
              [=]( float dt ) {
                if ( timer->isDone() ) {
                  if ( myAppData->getAladdinLives() > 0 ) {
-                   switch ( myAppData->getCurrentLevel() ) {
-                   case 1:
-                     sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 agrabah_market.scene\n1" );
-                     break;
-                   case 2:
-                     sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 jafar_palace.scene\n1" );
-                     break;
-                   default:
+                   if ( myAppData->getCurrentLevel() <= myAppData->getNumberOfLevels() ) {
+                     std::stringstream args;
+                     args << 0.5 << ' ' << myAppData->getSceneName( myAppData->getCurrentLevel() ) << '\n' << 1;
+                     sceneFadeOutTransitionPrefab->instantiateWithArgs( args.str() );
+                   }
+                   else {
                      sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 menu.scene\n0" );
-                     break;
                    }
                  }
                  else if ( myAppData->getRetryTimes() > 0 ) {

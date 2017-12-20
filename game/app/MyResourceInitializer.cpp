@@ -9,8 +9,10 @@
 #include "../prefabs/FadeInEffectPrefab.h"
 #include "../prefabs/SceneFadeOutTransitionPrefab.h"
 #include "../prefabs/SpritePrefab.h"
-#include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
+#include "../prefabs/MenuSelectPrefab.h"
+#include "../prefabs/DeathSceneControllerPrefab.h"
+#include "../prefabs/AladdinAndAbuPrefab.h"
 #include "../prefabs/HubPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
@@ -43,7 +45,6 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
-#include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -56,6 +57,7 @@
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
+#include "../prefabs/LevelCompleteSceneControllerPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -63,7 +65,7 @@ void MyResourceInitializer::doRun() {
   auto gameManager = GameManager::get();
 
   // Data
-  new MyAppData( 1, 3, 1 );
+  new MyAppData( 2, 1, 3, 1, { "agrabah_market.scene", "jafar_palace.scene" } );
 
   // Layers
   gameManager->addLayer( "Background" );
@@ -80,6 +82,7 @@ void MyResourceInitializer::doRun() {
   // Scenes
   new SceneConfiguration( "test.scene", "scenes/test.scene" );
   new SceneConfiguration( "menu.scene", "scenes/menu.scene" );
+  new SceneConfiguration( "level_complete.scene", "scenes/level_complete.scene" );
   new SceneConfiguration( "death.scene", "scenes/death.scene" );
   new SceneConfiguration( "retry.scene", "scenes/retry.scene" );
   new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
@@ -94,6 +97,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "title.png", "textures/miscellaneous/title.png" );
+  new Sprite( "victory.png", "textures/miscellaneous/victory.png" );
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
   new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
@@ -130,6 +134,11 @@ void MyResourceInitializer::doRun() {
 
   new MenuSelectPrefab();
 
+  new DeathSceneControllerPrefab();
+
+  new AladdinAndAbuPrefab();
+  new LevelCompleteSceneControllerPrefab();
+
   new HubPrefab();
   new PlayableAladdinPrefab();
   new ThrowableApplePrefab();
@@ -162,8 +171,6 @@ void MyResourceInitializer::doRun() {
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
   new PlatformPrefab();
-
-  new DeathSceneControllerPrefab();
 
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();

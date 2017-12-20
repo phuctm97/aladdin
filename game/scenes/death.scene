@@ -18,6 +18,6 @@
 
   <!--EFFECT-->
   <object>
-    <prefab version="2" name="Fade In Effect" args="0.2" />
+    <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 </Scene>
