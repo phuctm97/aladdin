@@ -16,12 +16,6 @@
     <Filter Include="scripts">
       <UniqueIdentifier>{8abd1086-4f7e-4275-9697-a2646390a106}</UniqueIdentifier>
     </Filter>
-    <Filter Include="audio">
-      <UniqueIdentifier>{d11a369c-7d56-49de-bff0-ee23c4387ba1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="audio\sfx">
-      <UniqueIdentifier>{0fa2c2a0-8353-43a0-a406-bfa0aca9b011}</UniqueIdentifier>
-    </Filter>
     <Filter Include="animations">
       <UniqueIdentifier>{6f2110f8-5cca-4925-a665-f5a8eb1bcb0e}</UniqueIdentifier>
     </Filter>
@@ -63,6 +57,9 @@
     </Filter>
     <Filter Include="scenes\resources">
       <UniqueIdentifier>{8f643593-a790-4fd6-8410-f12be76982cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{5089b2e6-cb7b-4665-8f56-f23b2b6c4833}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -658,6 +655,9 @@
     <Text Include="prefabs\FadeInEffectPrefab.h">
       <Filter>prefabs</Filter>
     </Text>
+    <Text Include="audio\readme.txt">
+      <Filter>audio</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">
@@ -731,5 +731,259 @@
     <Font Include="fonts\crackman.ttf">
       <Filter>fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\Aaah.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Abu Uh-Oh.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Abu Waving.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Aladdin Hurt.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Aladdin Oof.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Aladdin Push.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Apple Collect.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Apple Slice.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Apple Splat.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Balloon Pop.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Body Crunch.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Bones Tinkle.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Boxing Bell.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Camel Spit.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Canopy Bounce.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Cash Register (FM Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Cash Register (Sample Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Cash Register.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Clay Pot.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Cloud Poof.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Coming Out.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Continue Point.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Earthquake.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Eeeh.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Extra Health.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Fire From Coal.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Flagpole.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Flamingo Hey 2.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Flamingo Hey!.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Flute Pickup.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Gazeem Hit 1.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Gazeem Hit 2.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Gem Collect.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Genie Fumes.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Geyser.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Guard Beckon.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Guard Hit 1.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Guard Hit 2.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Guard%27s Pants.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Head Bop.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\High Sword.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Honk.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Honky Thing.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Iago Squawk.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Iiee.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Jafar Laugh.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Jafar Snake.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Jafar Tractor.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Low Sword.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Menu Change.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Menu Select.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Object Throw.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Oooh.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Outta Apples.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Peddler Shop (FM Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Peddler Shop (Sample Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Peddler Shop.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Ping.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Pole Slide.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Rock Bounce (FM Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Rock Bounce (Sample Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Rock Bounce.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Rope Appear.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Rope Launch.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Scarab Pickup.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Scarab Wow.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Skeleton (PSG Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Skeleton (Sample Only).wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Skeleton.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Splash.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Spring Doing 1.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Spring Doing 2.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Start Gun.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Stone Rumble.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Stones Crumble.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Stopping.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Sword Ching.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Sword Spinning.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Tip Toe.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Wall Hit 2.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Wall Spikes.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Win a Bonus.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Wow!.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Yeah.wav">
+      <Filter>audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

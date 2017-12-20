@@ -109,6 +109,10 @@ void MyResourceInitializer::doRun() {
   new Sprite( "peddler.png", "textures/nonplayable_characters/peddler.png" );
   new Sprite( "abu.png", "textures/nonplayable_characters/abu.png" );
 
+  //audio
+  new AudioClip("Menu Change.wav","audio/Menu Change.wav");
+  new AudioClip("A Whole New World.wav","audio/A Whole New World.wav");
+
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
   new Font( "arcade.ttf", "arcade.ttf", "fonts" );
