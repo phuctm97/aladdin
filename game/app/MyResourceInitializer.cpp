@@ -75,6 +75,7 @@ void MyResourceInitializer::doRun() {
   gameManager->addLayer( "Debug" );
 
   // Scenes
+  new SceneConfiguration( "test.scene", "scenes/test.scene" );
   new SceneConfiguration( "menu.scene", "scenes/menu.scene" );
   new SceneConfiguration( "death.scene", "scenes/death.scene" );
   new SceneConfiguration( "retry.scene", "scenes/retry.scene" );

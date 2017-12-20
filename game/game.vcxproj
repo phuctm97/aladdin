@@ -372,6 +372,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <None Include="scenes\jafar_palace.scene" />
     <None Include="scenes\menu.scene" />
     <None Include="scenes\retry.scene" />
+    <None Include="scenes\test.scene" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf" />

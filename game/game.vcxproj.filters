@@ -666,6 +666,9 @@
     <None Include="scenes\jafar_palace.scene">
       <Filter>scenes\resources</Filter>
     </None>
+    <None Include="scenes\test.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf">
