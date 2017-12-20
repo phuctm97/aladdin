@@ -318,6 +318,9 @@
     <ClCompile Include="scripts\FadeInEffect.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -566,6 +569,9 @@
     </ClInclude>
     <ClInclude Include="scripts\FadeInEffect.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

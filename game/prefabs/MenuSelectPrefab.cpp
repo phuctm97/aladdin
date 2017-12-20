@@ -16,6 +16,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
   const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
@@ -54,7 +55,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AutoLoadScene( "agrabah_market.scene", true ) );
+                 sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 agrabah_market.scene\n1" );
                }
              },
              NULL );
@@ -75,7 +76,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AutoLoadScene( "jafar_palace.scene", true ) );
+                 sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 jafar_palace.scene\n1" );
                }
              },
              NULL );
