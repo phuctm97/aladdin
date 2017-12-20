@@ -34,6 +34,7 @@ private:
   ala::PrefabV2* _throwableApplePrefab;
 
   MyAppData* _myAppData;
+  ala::PrefabV2* _sceneFadeOutTransitionPrefab;
 
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );

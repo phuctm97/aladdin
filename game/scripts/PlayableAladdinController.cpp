@@ -21,7 +21,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ),
-    _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
+    _throwableApplePrefab( NULL ), _myAppData( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
 
 float PlayableAladdinController::getMovingVelocityX() const {
   return _movingVelocityX;
@@ -301,6 +301,7 @@ void PlayableAladdinController::onInitialize() {
   _selfBody = getGameObject()->getComponentT<Rigidbody>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
   setApples( 3 );
@@ -321,7 +322,7 @@ void PlayableAladdinController::onHit( const int damage ) {
   if ( _health <= 0 ) {
     _myAppData->setAladdinLives( _lives - 1 );
 
-    GameManager::get()->replaceScene( new AutoLoadScene( "death.scene", false ) );
+    _sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 death.scene\n0" );
 
     return;
   }
