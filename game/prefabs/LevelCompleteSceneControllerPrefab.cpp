@@ -13,6 +13,8 @@ void LevelCompleteSceneControllerPrefab::doInstantiate( ala::GameObject* object,
   const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 
   const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
+  //audio
+  const auto LvCompleteSound = new AudioSource(object, "Level Complete.wav");
 
   // components
   const auto timer = new Timer( object );
@@ -21,7 +23,7 @@ void LevelCompleteSceneControllerPrefab::doInstantiate( ala::GameObject* object,
 
   // states
   new State( stateManager, "default",
-             [=] { timer->start( 5.7f ); },
+             [=] { timer->start( 5.7f ); LvCompleteSound->play(); },
              [=]( float dt ) {
                if ( timer->isDone() ) {
                  if ( myAppData->getCurrentLevel() < myAppData->getNumberOfLevels() ) {

@@ -451,6 +451,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Low Sword.wav" />
     <Media Include="audio\Menu Change.wav" />
     <Media Include="audio\Menu Select.wav" />
+    <Media Include="audio\Retry.wav" />
     <Media Include="audio\Object Throw.wav" />
     <Media Include="audio\Oooh.wav" />
     <Media Include="audio\Outta Apples.wav" />

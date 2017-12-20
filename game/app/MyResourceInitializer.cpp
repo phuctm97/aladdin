@@ -112,7 +112,12 @@ void MyResourceInitializer::doRun() {
   //audio
   new AudioClip("Menu Change.wav","audio/Menu Change.wav");
   new AudioClip("A Whole New World.wav","audio/A Whole New World.wav");
-
+  new AudioClip("Background Agrabahmarket.wav","audio/Background Agrabahmarket.wav");
+  new AudioClip("NameLevel Agrabahmarket.wav","audio/NameLevel Agrabahmarket.wav");
+  new AudioClip("Level Complete.wav","audio/Level Complete.wav");
+  new AudioClip("Retry.wav","audio/Retry.wav");
+	
+  
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
   new Font( "arcade.ttf", "arcade.ttf", "fonts" );

@@ -14,6 +14,9 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
+  //audio
+  const auto SceneSound = new AudioSource(object, "NameLevel Agrabahmarket.wav");
+
   // components
   const auto timer = new Timer( object );
 
@@ -21,7 +24,12 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   // states
   new State( stateManager, "default",
-             [=] { timer->start( 5.0f ); },
+             [=] { timer->start( 5.0f ); 
+                  //audio
+             {
+               SceneSound->play();
+             }
+             },
              NULL, NULL );
 
   new State( stateManager, "left",
