@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AutoLoadScene( "level_complete.scene", false ) );
+  startWithScene( new AutoLoadScene( "retry.scene", false ) );
 }

@@ -327,6 +327,9 @@
     <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -585,6 +588,9 @@
     <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -639,6 +645,9 @@
       <Filter>texures\backgrounds</Filter>
     </Image>
     <Image Include="textures\miscellaneous\victory.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\retry.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>

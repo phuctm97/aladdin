@@ -13,6 +13,8 @@
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/AladdinAndAbuPrefab.h"
+#include "../prefabs/LevelCompleteSceneControllerPrefab.h"
+#include "../prefabs/RetrySceneControllerPrefab.h"
 #include "../prefabs/HubPrefab.h"
 #include "../prefabs/PlayableAladdinPrefab.h"
 #include "../prefabs/ThrowableApplePrefab.h"
@@ -57,7 +59,6 @@
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
-#include "../prefabs/LevelCompleteSceneControllerPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -98,6 +99,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "cutscenes.png", "textures/miscellaneous/cutscenes.png" );
   new Sprite( "title.png", "textures/miscellaneous/title.png" );
   new Sprite( "victory.png", "textures/miscellaneous/victory.png" );
+  new Sprite( "retry.png", "textures/miscellaneous/retry.png" );
   new Sprite( "font_one.png", "textures/miscellaneous/font_one.png" );
   new Sprite( "font_two.png", "textures/miscellaneous/font_two.png" );
   new Sprite( "guards.png", "textures/enemies/guards.png" );
@@ -138,6 +140,7 @@ void MyResourceInitializer::doRun() {
 
   new AladdinAndAbuPrefab();
   new LevelCompleteSceneControllerPrefab();
+  new RetrySceneControllerPrefab();
 
   new HubPrefab();
   new PlayableAladdinPrefab();

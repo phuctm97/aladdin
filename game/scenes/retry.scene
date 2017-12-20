@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Scene>
+  <physics gravity="0 -500" />
+
+  <!--  BACKGROUND & FOREGROUND-->
   <object layer="Background">
-    <prefab version="2" name="Sprite" args="cutscenes.png 1 cutscenes.anm cutscene_1" />
+    <prefab version="2" name="Sprite" args="retry.png 0" />
+    <transform position="0 27" scale="1.1 1.1" />
   </object>
-  <object layer="Second Background">
-    <prefab version="2" name="Sprite" args="title.png 0" />
-    <transform position="0 59" />
+  <object name="Aladdin And Abu" layer="Main Character">
+    <prefab version="2" name="Aladdin And Abu" args="R 0" />
+    <transform position="-17 -55" />
   </object>
-  <object name="Menu 1" layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt AGRABAH MARKET&#10; T L 0.75" />
-    <transform position="-51 0" />
+
+  <!--CONTROLLER-->
+  <object>
+    <prefab version="2" name="Retry Scene Controller" args="" />
   </object>
-  <object name="Menu 2" layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt JAFAR QUARTERS&#10; T L 0.75" />
-    <transform position="-51 -18" />
-  </object>
-  <object name="Menu 3" layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt EXIT&#10; T L 0.75" />
-    <transform position="-51 -36" />
-  </object>
-  <object layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
-    <transform position="0 -75" />
-  </object>
-  <object layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 THE WALT DISNEY COMPANY&#10; T C 0.75" />
-    <transform position="0 -92" />
-  </object>
-  <object layer="UI">
-    <prefab version="2" name="Menu Select" args="0 -18 -36" />
+
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 </Scene>

@@ -203,6 +203,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\JumpableSpringPrefab.cpp" />
     <ClCompile Include="prefabs\QuadRendererPrefab.cpp" />
+    <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp" />
     <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp" />
     <ClCompile Include="prefabs\SmallFireworkPrefab.cpp" />
     <ClCompile Include="prefabs\MenuSelectPrefab.cpp" />
@@ -296,6 +297,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\JumpableSpringPrefab.h" />
     <ClInclude Include="prefabs\QuadRendererPrefab.h" />
+    <ClInclude Include="prefabs\RetrySceneControllerPrefab.h" />
     <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h" />
     <ClInclude Include="prefabs\SmallFireworkPrefab.h" />
     <ClInclude Include="prefabs\MenuSelectPrefab.h" />
@@ -357,6 +359,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Image Include="textures\miscellaneous\font_one.png" />
     <Image Include="textures\miscellaneous\font_two.png" />
     <Image Include="textures\miscellaneous\items.png" />
+    <Image Include="textures\miscellaneous\retry.png" />
     <Image Include="textures\miscellaneous\title.png" />
     <Image Include="textures\miscellaneous\victory.png" />
     <Image Include="textures\nonplayable_characters\abu.png" />
