@@ -19,9 +19,9 @@
     <prefab version="2" name="Agrabah Market Stairs 1" args="" />
     <transform position="1015.5 -46" />
   </object>
-  <object name="Wall 1" quadIndex="">
-    <prefab version="2" name="Wall" args="29 68" />
-    <transform position="100 0" />
+  <object name="Climbable Rope 1" quadIndex="">
+    <prefab version="2" name="Climbable Rope" args="280" />
+    <transform position="100 300" />
   </object>
   <object name="Aladdin" quadIndex="">
     <prefab version="2" name="Playable Aladdin" args="-80 -25" />
