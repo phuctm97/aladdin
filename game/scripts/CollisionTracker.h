@@ -5,6 +5,8 @@
 
 ALA_CLASS_HEADER_1(CollisionTracker, ala::GameObjectComponent)
 private:
+  long _collidedObjectFlags;
+  long _collidedColliderFlags;
   std::unordered_set<int> _collidedObjects;
   std::unordered_set<int> _collidedObjectTags;
   std::unordered_set<int> _collidedColliderTags;
@@ -25,6 +27,18 @@ public:
   bool collidedWithColliderTag( const int tag ) const;
 
   bool collided() const;
+
+  bool collidedWithObjectFlag( const long flag ) const;
+
+  bool collidedWithObjectFlags( const long flags ) const;
+
+  bool collidedWithColliderFlag( const long flag ) const;
+
+  bool collidedWithColliderFlags( const long flags ) const;
+
+  long getCollidedObjectFlags() const;
+
+  long getCollidedColliderFlags() const;
 };
 
 #endif //!__COLLISION_TRACKER_H__
