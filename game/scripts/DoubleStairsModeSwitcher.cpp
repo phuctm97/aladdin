@@ -27,7 +27,7 @@ void DoubleStairsModeSwitcher::onTriggerEnter(const ala::CollisionInfo& collisio
 		
 		if (selfCollider->getName() == "B")
 		{
-			if (collision.getNormal().getX() < 0)
+			if (collision.getNormal().getX() > 0)
 			{
 				if (_stairsStateManager->getCurrentStateName() == "OffOff" ) 
 				{
@@ -40,7 +40,7 @@ void DoubleStairsModeSwitcher::onTriggerEnter(const ala::CollisionInfo& collisio
 					return;
 				}
 			}
-			if (collision.getNormal().getX() > 0)
+			if (collision.getNormal().getX() < 0)
 			{
 				if (_stairsStateManager->getCurrentStateName() == "OnOn")
 				{
@@ -54,7 +54,7 @@ void DoubleStairsModeSwitcher::onTriggerEnter(const ala::CollisionInfo& collisio
 
 		if (selfCollider->getName() == "U")
 		{
-			if (collision.getNormal().getX() > 0)
+			if (collision.getNormal().getX() < 0)
 			{
 				if (_stairsStateManager->getCurrentStateName() == "OnOn")
 				{

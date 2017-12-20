@@ -47,7 +47,10 @@ void AgrabahMarketStairsOnePrefab::doInstantiate( ala::GameObject* object, std::
     COLLIDE_FREE_OBJECT_FLAG |
     STANDABLE_FLAG |
     STATIC_FLAG;
-  for ( const auto collider : colliders ) collider->setFlags( stairFlags );
+  for ( const auto collider : colliders ) {
+    collider->setFlags( stairFlags );
+    collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  }
 
   // configurations
   object->setTag( GROUND_TAG );
