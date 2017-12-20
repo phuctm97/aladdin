@@ -64,6 +64,9 @@
     <Filter Include="scenes\resources">
       <UniqueIdentifier>{8f643593-a790-4fd6-8410-f12be76982cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\backgrounds">
+      <UniqueIdentifier>{86cc25ef-bec1-42aa-8deb-85422351ed57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -330,6 +333,12 @@
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ParallaxController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -591,6 +600,12 @@
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ParallaxController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -649,6 +664,9 @@
     </Image>
     <Image Include="textures\miscellaneous\retry.png">
       <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\backgrounds\scene_1_2.png">
+      <Filter>texures\backgrounds</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -719,6 +737,9 @@
     </None>
     <None Include="scenes\level_complete.scene">
       <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="animations\backgrounds\scene_1_2.anm">
+      <Filter>animations\backgrounds</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
