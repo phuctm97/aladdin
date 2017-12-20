@@ -6,6 +6,7 @@
 #include "MyAppData.h"
 #include "../prefabs/NodePrefab.h"
 #include "../prefabs/QuadRendererPrefab.h"
+#include "../prefabs/FadeInEffectPrefab.h"
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
@@ -122,6 +123,7 @@ void MyResourceInitializer::doRun() {
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
+  new FadeInEffectPrefab();
 
   new MenuSelectPrefab();
 

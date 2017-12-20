@@ -309,6 +309,15 @@
     <ClCompile Include="prefabs\QuadRendererPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FadeInEffectPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FadeOutEffect.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FadeInEffect.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -552,6 +561,12 @@
     <ClInclude Include="prefabs\QuadRendererPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="scripts\FadeOutEffect.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FadeInEffect.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -610,6 +625,9 @@
     <Text Include="log.txt" />
     <Text Include="log.txt" />
     <Text Include="note.txt" />
+    <Text Include="prefabs\FadeInEffectPrefab.h">
+      <Filter>prefabs</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">

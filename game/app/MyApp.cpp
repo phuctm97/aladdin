@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AutoLoadScene( "test.scene", true ) );
+  startWithScene( new AutoLoadScene( "menu.scene", false ) );
 }

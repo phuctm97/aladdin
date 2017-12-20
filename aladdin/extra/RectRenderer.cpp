@@ -8,7 +8,7 @@ RectRenderer::RectRenderer( ala::GameObject* gameObject,
                             const ala::Vec2& offset, const ala::Size& size, const Color& color,
                             const std::string& name )
   : GameObjectComponent( gameObject, name ), _sprite( NULL ),
-    _offset( offset ), _size( size ),
+    _offset( offset ), _size( size ), _alpha( 255 ),
     _zOrder( 0 ) {
   _sprite = GameManager::get()->getEmptySprite( color );
 }
@@ -25,6 +25,14 @@ const ala::Size& RectRenderer::getSize() const { return _size; }
 
 void RectRenderer::setSize( const ala::Size& size ) { _size = size; }
 
+float RectRenderer::getOpacity() const {
+  return _alpha / 255.0f;
+}
+
+void RectRenderer::setOpacity( float opacity ) {
+  _alpha = MIN(255, MAX(0, (int)(opacity*255)));
+}
+
 void RectRenderer::onRender() {
   const auto transform = getGameObject()->getTransform();
   const auto worldZOrder = calculateWorldZOrder();
@@ -36,7 +44,7 @@ void RectRenderer::onRender() {
   transform->setScale( Vec2( _size.getWidth() * transform->getScale().getX(),
                              _size.getHeight() * transform->getScale().getY() ) );
   Graphics::get()->drawSprite( _sprite,
-                               Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), Color( 255, 255, 255 ),
+                               Vec2( 0.5f, 0.5f ), transform->getLocalToWorldMatrix(), Color( 255, 255, 255, _alpha ),
                                Rect( Vec2( 0, 0 ), _sprite->getContentSize() ), worldZOrder );
   transform->setPosition( oldPosition );
   transform->setScale( oldScale );

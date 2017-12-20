@@ -29,4 +29,7 @@
   <!--  <object>-->
   <!--    <prefab version="2" name="Quad Renderer" args="000" />-->
   <!--  </object>-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
 </Scene>

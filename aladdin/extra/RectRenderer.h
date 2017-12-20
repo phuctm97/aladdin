@@ -10,6 +10,7 @@ private:
   ala::Sprite* _sprite;
   ala::Vec2 _offset;
   ala::Size _size;
+  int _alpha;
   int _zOrder;
 
 public:
@@ -28,6 +29,10 @@ public:
   const ala::Size& getSize() const;
 
   void setSize( const ala::Size& size );
+
+  float getOpacity() const;
+
+  void setOpacity( float opacity );
 
 protected:
   void onRender() override;

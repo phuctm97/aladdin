@@ -169,6 +169,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\FadeInEffectPrefab.cpp" />
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
@@ -227,6 +228,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\DebugCameraController.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\DoubleStairsModeSwitcher.cpp" />
+    <ClCompile Include="scripts\FadeInEffect.cpp" />
+    <ClCompile Include="scripts\FadeOutEffect.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
     <ClCompile Include="scripts\HandEnemyController.cpp" />
     <ClCompile Include="scripts\HubController.cpp" />
@@ -315,6 +318,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\DebugCameraController.h" />
     <ClInclude Include="scripts\DirectionController.h" />
     <ClInclude Include="scripts\DoubleStairsModeSwitcher.h" />
+    <ClInclude Include="scripts\FadeInEffect.h" />
+    <ClInclude Include="scripts\FadeOutEffect.h" />
     <ClInclude Include="scripts\GuardController.h" />
     <ClInclude Include="scripts\HandEnemyController.h" />
     <ClInclude Include="scripts\HubController.h" />
@@ -331,6 +336,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
   <ItemGroup>
     <Text Include="log.txt" />
     <Text Include="note.txt" />
+    <Text Include="prefabs\FadeInEffectPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
@@ -370,7 +376,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <None Include="scenes\agrabah_market.scene" />
     <None Include="scenes\death.scene" />
     <None Include="scenes\jafar_palace.scene" />
-    <None Include="scenes\menu.scene" />
+    <None Include="scenes\menu.scene">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="scenes\retry.scene" />
     <None Include="scenes\test.scene" />
   </ItemGroup>
