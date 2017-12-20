@@ -12,6 +12,8 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 
+  const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
+
   // components
   const auto timer = new Timer( object );
 
@@ -25,22 +27,23 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
                  if ( myAppData->getAladdinLives() > 0 ) {
                    switch ( myAppData->getCurrentLevel() ) {
                    case 1:
-                     gameManager->replaceScene( new AutoLoadScene( "agrabah_market.scene", true ) );
+                     sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 agrabah_market.scene\n1" );
                      break;
                    case 2:
-                     gameManager->replaceScene( new AutoLoadScene( "jafar_palace.scene", true ) );
+                     sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 jafar_palace.scene\n1" );
                      break;
                    default:
-                     gameManager->replaceScene( new AutoLoadScene( "menu.scene", false ) );
+                     sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 menu.scene\n0" );
                      break;
                    }
                  }
                  else if ( myAppData->getRetryTimes() > 0 ) {
                    myAppData->setRetryTimes( myAppData->getRetryTimes() - 1 );
-                   gameManager->replaceScene( new AutoLoadScene( "retry.scene", false ) );
+
+                   sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 retry.scene\n0" );
                  }
                  else {
-                   gameManager->replaceScene( new AutoLoadScene( "menu.scene", false ) );
+                   sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 menu.scene\n0" );
                  }
 
                  timer->start( 1000.0f );
