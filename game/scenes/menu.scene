@@ -21,7 +21,8 @@
     <transform position="-51 -36" />
   </object>
   <object layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
+    <prefab version="2" name="Bitmap Text"
+            args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
     <transform position="0 -75" />
   </object>
   <object layer="Second Background">
@@ -30,5 +31,8 @@
   </object>
   <object layer="UI">
     <prefab version="2" name="Menu Select" args="0 -18 -36" />
+  </object>
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 </Scene>
