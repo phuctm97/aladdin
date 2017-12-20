@@ -12,6 +12,8 @@ Collider::Collider( GameObject* gameObject, const bool isTrigger, const Vec2& of
     _offset( offset ),
     _size( size ),
     _isTrigger( isTrigger ), _massScale( massScale ),
+    _ignoreIfHasAnyFlags( 0 ),
+    _ignoreIfNotHasAnyFlags( 0xffffffff ),
     _physicsLayer( physicsLayer ) {}
 
 Rect Collider::getBoundingRect() const {
@@ -75,6 +77,11 @@ const std::unordered_set<int>& Collider::getIgnoredTags() const {
 }
 
 bool Collider::isIgnoredBy( Collider* other ) const {
+  const auto otherColliderFlag = other->getFlags();
+
+  if ( (otherColliderFlag & _ignoreIfHasAnyFlags) != 0 ) return true;
+  if ( (otherColliderFlag & _ignoreIfNotHasAnyFlags) == 0 ) return true;
+
   return _ignoredTags.count( other->getTag() ) > 0;
 }
 
@@ -92,5 +99,13 @@ bool Collider::isTrigger() const {
 
 float Collider::getMassScale() const {
   return _massScale;
+}
+
+void Collider::ignoreIfHasAnyFlags( const long flags ) {
+  _ignoreIfHasAnyFlags = flags;
+}
+
+void Collider::ignoreIfNotHasAnyFlags( const long flags ) {
+  _ignoreIfNotHasAnyFlags = flags;
 }
 }

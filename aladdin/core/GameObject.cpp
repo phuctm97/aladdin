@@ -14,6 +14,7 @@ GameObject::GameObject( Scene* parentScene, const std::string& name, const std::
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _tag( -1 ),
+    _flags( 0 ),
     _parentScene( parentScene ),
     _active( false ),
     _selfInitialize( true ),
@@ -43,6 +44,7 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _tag( -1 ),
+    _flags( 0 ),
     _parentScene( NULL ),
     _active( false ),
     _selfInitialize( true ),
@@ -123,6 +125,22 @@ GameObject* GameObject::setTag( const int tag ) {
 
 int GameObject::getTag() const {
   return _tag;
+}
+
+void GameObject::setFlags( const long v ) {
+  _flags = v;
+}
+
+void GameObject::addFlag( const long v ) {
+  _flags |= v;
+}
+
+int GameObject::getFlags() const {
+  return _flags;
+}
+
+bool GameObject::hasFlag( const long v ) const {
+  return (_flags & v) != 0;
 }
 
 // ===========================================================
