@@ -321,6 +321,12 @@
     <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AladdinAndAbuPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -573,6 +579,12 @@
     <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\AladdinAndAbuPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -625,6 +637,9 @@
     </Image>
     <Image Include="textures\backgrounds\scene_2_1.png">
       <Filter>texures\backgrounds</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\victory.png">
+      <Filter>texures\miscellaneous</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -691,6 +706,9 @@
       <Filter>scenes\resources</Filter>
     </None>
     <None Include="scenes\test.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\level_complete.scene">
       <Filter>scenes\resources</Filter>
     </None>
   </ItemGroup>
