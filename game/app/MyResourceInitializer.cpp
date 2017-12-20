@@ -82,8 +82,8 @@ void MyResourceInitializer::doRun() {
   new SceneConfiguration( "jafar_palace.scene", "scenes/jafar_palace.scene" );
 
   // Textures
-  new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
-  new Sprite( "foreground.png", "textures/backgrounds/scene_1_1.png" );
+  new Sprite( "agrabah_market_background.png", "textures/backgrounds/scene_1_0.png" );
+  new Sprite( "agrabah_market_foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "jafar_palace_background.png", "textures/backgrounds/scene_2_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );

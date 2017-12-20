@@ -2,23 +2,24 @@
 
 <Scene>
   <physics gravity="0 -500" />
+  <quad level="3" minX="-160" minY="-115" width="4771" height="688" />
   <object name="Background" layer="Background" tag="4" quadIndex="">
-    <prefab version="2" name="Sprite" args="jafar_quarter_background.png 0" />
-    <transform position="186 72.5" />
+    <prefab version="2" name="Sprite" args="agrabah_market_background.png 0" />
+    <transform position="2225.5 229" />
   </object>
+  <object name="Foreground" layer="Second Foreground" tag="5" quadIndex="">
+    <prefab version="2" name="Sprite" args="agrabah_market_foreground.png 0" />
+    <transform position="2225.5 229" />
+  </object>
+  <!--OK-->
   <object name="Ground" quadIndex="">
-    <prefab version="2" name="Jafar Quarter Ground" args="" />
-    <transform position="186 0" />
-  </object>
-  <object name="Left Wall" quadIndex="">
-    <prefab version="2" name="Wall" args="23 351" />
-    <transform position="-145 78" />
-  </object>
-  <object name="Right Wall" quadIndex="">
-    <prefab version="2" name="Wall" args="23 351" />
-    <transform position="517 78" />
+    <prefab version="2" name="Agrabah Market Ground" args="" />
+    <transform position="-160 -115" />
   </object>
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="-80 0" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
+  <!--  <object>-->
+  <!--    <prefab version="2" name="Quad Renderer" args="000" />-->
+  <!--  </object>-->
 </Scene>
