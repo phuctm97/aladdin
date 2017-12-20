@@ -16,6 +16,8 @@ void SceneFadeOutTransitionPrefab::doInstantiate( ala::GameObject* object, std::
   // constants
   const auto gameManager = GameManager::get();
 
+  const auto physicsManager = PhysicsManager::get();
+
   const auto camera = gameManager->getRunningScene()->getMainCamera();
 
   const auto visibleSize = Size( gameManager->getVisibleWidth(), gameManager->getVisibleHeight() );
@@ -40,12 +42,15 @@ void SceneFadeOutTransitionPrefab::doInstantiate( ala::GameObject* object, std::
                    o->setActive( false );
                  }
                }
+               physicsManager->setActice( false );
 
                rectRenderer->setOpacity( 0 );
                fadeIn->start( duration );
              },
              [=]( float dt ) {
                if ( !fadeIn->isRunning() ) {
+                 physicsManager->setActice( true );
+
                  gameManager->replaceScene( new AutoLoadScene( scene, useCameraController ) );
                }
              },
