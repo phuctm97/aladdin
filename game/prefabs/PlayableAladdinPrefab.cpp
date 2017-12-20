@@ -45,6 +45,15 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
 
+  //audio
+  const auto HighSwordSound = new AudioSource(object, "High Sword.wav");
+  const auto ThrowSound = new AudioSource(object, "Object Throw.wav");
+  const auto PushSound = new AudioSource(object, "Aladdin Push.wav");
+  const auto HurtSound = new AudioSource(object, "Aladdin Hurt.wav");
+  const auto LowSwordSound = new AudioSource(object, "Low Sword.wav");
+  const auto JumpRotateSound = new AudioSource(object, "Flagpole.wav");
+
+
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
@@ -81,6 +90,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto timer2 = new Timer( object );
 
   const auto timer3 = new Timer( object );
+
+  const auto timer4 = new Timer(object);
 
   // collider renderers
   new ColliderRenderer( collider );
@@ -241,8 +252,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // animation effect
                {
                  animator->setAction( "attack_1" );
+				 
                }
-
+			   //audio
+			   {
+				   HighSwordSound->play();
+			   }
                // sword
                {
                  swordCollider->setOffset( swordOffset1 );
@@ -277,6 +292,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // animation effect
                {
                  animator->setAction( "attack_3" );
+               }
+				//audio
+               {
+				   ThrowSound->play();
                }
 
                // throw
@@ -383,6 +402,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.25f );
+					 HighSwordSound->play();
                    }
                    else {
                      swordCollider->setActive( false );
@@ -421,6 +441,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "attack_3" );
                }
+			   //audio
+			   {
+				   ThrowSound->play();
+			   }
 
                // throw
                {
@@ -502,6 +526,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "sit_attack_1" );
                }
+				//audio
+               {
+				   LowSwordSound->play();
+               }
 
                // direction
                {
@@ -558,6 +586,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "sit_attack_2" );
                }
+			   //audio
+			   {
+				   ThrowSound->play();
+			   }
 
                // throw
                {
@@ -652,6 +684,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "run_attack" );
                }
+			   //audio
+               {
+				   HighSwordSound->play();
+               }
 
                // direction
                {
@@ -718,7 +754,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    animator->setAction( "climb_to_jump" );
                  }
                  else if ( controller->isJumpOnSpring() ) {
-                   animator->setAction( "jump_rotate" );
+					 //audio
+					 {
+						 JumpRotateSound->play();
+					 }
+                    animator->setAction( "jump_rotate" );
                  }
                  else {
                    animator->setAction( "jump" );
@@ -860,7 +900,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "jump_attack" );
                }
-
+			   //audio
+			   {
+				   HighSwordSound->play();
+			   }
                // direction
                {
                  if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
@@ -928,6 +971,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "jump_throw_apple" );
                }
+			   //audio
+			   {
+				   ThrowSound->play();
+			   }
 
                // direction
                {
@@ -987,6 +1034,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // animation effect
                {
                  animator->setAction( "start_push" );
+               }
+			   //audio
+               {
+				   PushSound->play();
                }
              },
              [=]( float ) {
@@ -1102,6 +1153,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "climb_attack" );
                }
+			   //audio
+			   {
+				   HighSwordSound->play();
+			   }
 
                // direction
                {
@@ -1179,7 +1234,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "climb_throw" );
                }
-
+			   //audio
+			   {
+				   ThrowSound->play();
+			   }
                // throw
                {
                  timer1->start( 0.2f );
@@ -1340,7 +1398,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "climb_attack" );
                }
-
+			   //audio
+			   {
+				   HighSwordSound->play();
+			   }
                // direction
                {
                  if ( input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isRight() ) {
@@ -1412,6 +1473,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "climb_throw" );
                }
+			   //audio
+			   {
+				   ThrowSound->play();
+			   }
 
                // throw
                {
@@ -1469,6 +1534,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
     {
       animator->setAction( "hit" );
     }
+	//audio
+	{
+		HurtSound->play(); 
+	}
 
     // move
     {

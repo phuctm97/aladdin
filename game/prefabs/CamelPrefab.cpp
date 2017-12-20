@@ -13,7 +13,8 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
 
   // constants
   const auto gameManager = GameManager::get();
-
+  //audio
+  const auto SplitSound = new AudioSource(object, "Camel Spit.wav");
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "camel.png" );
 
@@ -67,6 +68,10 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                // animation effect
                {
                  animator->setAction( "puff" );
+               }
+				//audio
+               {
+				   SplitSound->play();
                }
 
                // puff
