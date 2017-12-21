@@ -72,7 +72,7 @@ void HandEnemyController::onInitialize() {
 
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
 
-  _enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion" );
+  _enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion 1" );
 
   _fallingVasePrefab = gameManager->getPrefabV2( "Falling Vase" );
 }

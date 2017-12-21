@@ -13,7 +13,7 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
 
   // constants
   const auto gameManager = GameManager::get();
-  const auto enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion" );
+  const auto enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion 1" );
 
   const auto density = 0.5f;
   const auto fallVelocity = 21.0f;
