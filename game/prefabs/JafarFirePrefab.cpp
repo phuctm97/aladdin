@@ -1,70 +1,68 @@
 #include "JafarFirePrefab.h"
-#include "../Define.h"
 #include "../scripts/DirectionController.h"
-#include "../scripts/NodeController.h"
 #include "../scripts/CollisionTracker.h"
+#include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
 ALA_CLASS_SOURCE_1(JafarFirePrefab, ala::PrefabV2)
 
-void JafarFirePrefab::doInstantiate(ala::GameObject* object, std::istringstream& argsStream) const
-{
-	const auto dir = nextChar(argsStream);
-	const auto impulseX = 280;
-	const auto impulseY = 0;
+void JafarFirePrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+  // args
+  const char dir = nextChar( argsStream );
 
-	// constants
-	const auto gameManager = GameManager::get();
+  // constants
+  const auto gameManager = GameManager::get();
 
-	const auto density = 5.0f;
+  const auto moveVelocity = 80.0f;
 
-	// components
-	const auto spriteRenderer = new SpriteRenderer(object, "jafar.png");
+  // components
+  const auto spriteRenderer = new SpriteRenderer( object, "jafar.png" );
 
-	const auto animator = new Animator(object, "fire_attack", "jafar.anm");
+  const auto animator = new Animator( object, "jafar_fire", "jafar.anm" );
 
-	//new AnimationEditor(object, "fire_attack");
-	//return;
-	const auto body = new Rigidbody(object, PhysicsMaterial(density), ALA_BODY_TYPE_DYNAMIC, 1.0f);
+  const auto body = new Rigidbody( object, PhysicsMaterial( 1, 0 ), ALA_BODY_TYPE_DYNAMIC, 1 );
 
-	const auto collider = new Collider(object, false, Vec2(0, 0), Size(40, 50));
-	collider->setTag(BOSS_TAG);
-	collider->ignoreTag(BOSS_TAG);
-	collider->ignoreTag(ENEMY_TAG);
-	collider->ignoreTag(ALADDIN_TAG);
+  const auto groundCollider = new Collider( object, false, Vec2( 5, -12 ), Size( 30, 25 ) );
+  groundCollider->setTag( FIRE_TAG );
+  groundCollider->ignoreTag( ALADDIN_TAG );
+  groundCollider->ignoreTag( BOSS_TAG );
 
-	//new ColliderRenderer(collider);
+  const auto aladdinCollider = new Collider( object, true, Vec2( 5, -12 ), Size( 30, 25 ) );
+  aladdinCollider->setTag( FIRE_TAG );
+  aladdinCollider->ignoreTag( BOSS_TAG );
 
-	const auto stateManager = new StateManager(object, "initial");
+  const auto stateManager = new StateManager( object, "default" );
 
-	const auto direction = new DirectionController(object);
-	if (dir == 'L') direction->setLeft();
-	else if (dir == 'R') direction->setRight();
+  const auto direction = new DirectionController( object, true );
+  if ( dir == 'L' ) direction->setLeft();
+  else if ( dir == 'R' ) direction->setRight();
 
-	const auto transform = object->getTransform();
+  const auto collisionTracker = new CollisionTracker( object );
 
+  // helpers
+  const auto transform = object->getTransform();
 
-	// configurations
-	object->setLayer("Supporting Character");
-	object->setTag(ENEMY_TAG);
-	const auto collisionTracker = new CollisionTracker(object);
+  // collider renderer
+  //  new ColliderRenderer( aladdinCollider );
 
-	new State(stateManager, "null", NULL, NULL, NULL);
+  // configurations
+  object->setTag( FIRE_TAG );
+  object->setLayer( "Foreground" );
 
-	//stages
-	new State(stateManager, "initial",
-		[=] {
-		// animation effect
-			{
-				animator->setAction("fire_attack");
-				body->setVelocity(Vec2(impulseX, impulseY));
-				collisionTracker->reset();
-			}
-			
-	}, [=](float dt) {
-		if (collisionTracker->collidedWithObjectTag(WALL_TAG)) {
-			object->release();
-		}
-		}, NULL);
+  // states
+  new State( stateManager, "default", NULL,
+             [=]( float dt ) {
+               // move
+               {
+                 body->setVelocity( Vec2( moveVelocity, body->getVelocity().getY() ) );
+               }
+
+               // destroy 
+               {
+                 if ( collisionTracker->collidedWithObjectTag( WALL_TAG ) ) {
+                   object->release();
+                 }
+               }
+             }, NULL );
 }

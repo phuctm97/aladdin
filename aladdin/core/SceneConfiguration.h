@@ -31,17 +31,38 @@ private:
   bool _physicsEnabled;
   Vec2 _physicsGravity;
 
+  bool _quadTreeEnabled;
+  int _quadTreeLevel;
+  float _spaceMinX;
+  float _spaceMinY;
+  float _spaceWidth;
+  float _spaceHeight;
+
   std::vector<SceneObjectConfiguration> _objectConfigurations;
 
 public:
   SceneConfiguration( const std::string& name, const std::string& sourceFile, Scene* sceneScope = NULL )
-    : GameResource( name, sceneScope ), _sourceFile( sourceFile ), _physicsEnabled( false ) {}
+    : GameResource( name, sceneScope ), _sourceFile( sourceFile ), _physicsEnabled( false ),
+      _quadTreeEnabled( false ), _quadTreeLevel( 3 ), _spaceMinX( 0 ), _spaceMinY( 0 ), _spaceWidth( 0 ),
+      _spaceHeight( 0 ) {}
 
   const std::vector<SceneObjectConfiguration>& getObjectConfigurations() const;
 
   bool isPhysicsEnabled() const;
 
   const Vec2& getPhysicsGravity() const;
+
+  bool isQuadTreeEnabled() const;
+
+  float getSpaceMinX() const;
+
+  float getSpaceMinY() const;
+
+  float getSpaceWidth() const;
+
+  float getSpaceHeight() const;
+
+  int getQuadTreeLevel() const;
 
 protected:
   void onLoad() override;

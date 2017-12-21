@@ -59,7 +59,10 @@
       <UniqueIdentifier>{8f643593-a790-4fd6-8410-f12be76982cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="audio">
-      <UniqueIdentifier>{8259342b-537a-4c6f-893d-1230a8d72fb3}</UniqueIdentifier>
+      <UniqueIdentifier>{5089b2e6-cb7b-4665-8f56-f23b2b6c4833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animations\backgrounds">
+      <UniqueIdentifier>{86cc25ef-bec1-42aa-8deb-85422351ed57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -261,9 +264,6 @@
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\JafarQuarterGroundPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -285,17 +285,56 @@
     <ClCompile Include="scenes\DebugScene.cpp">
       <Filter>scenes</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\JafarController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\JafarPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="prefabs\JafarFootFirePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\JafarFirePrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarStarPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\JafarController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\JafarStarController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\QuadRendererPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FadeInEffectPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FadeOutEffect.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\FadeInEffect.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AladdinAndAbuPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ParallaxController.cpp">
+      <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,9 +534,6 @@
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\JafarQuarterGroundPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -519,17 +555,56 @@
     <ClInclude Include="scenes\DebugScene.h">
       <Filter>scenes</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\JafarController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\JafarPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\JafarFootFirePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarFirePrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarStarPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarStarExplosionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\JafarController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\JafarStarController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\QuadRendererPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FadeInEffectPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FadeOutEffect.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\FadeInEffect.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AladdinAndAbuPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ParallaxController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,9 +659,17 @@
     <Image Include="textures\backgrounds\scene_2_1.png">
       <Filter>texures\backgrounds</Filter>
     </Image>
+    <Image Include="textures\miscellaneous\victory.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\miscellaneous\retry.png">
+      <Filter>texures\miscellaneous</Filter>
+    </Image>
+    <Image Include="textures\backgrounds\scene_1_2.png">
+      <Filter>texures\backgrounds</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="log.txt" />
     <Text Include="log.txt" />
     <Text Include="note.txt" />
     <Text Include="audio\readme.txt">
@@ -636,14 +719,26 @@
     <None Include="scenes\agrabah_market.scene">
       <Filter>scenes\resources</Filter>
     </None>
-    <None Include="scenes\jafar_quarter.scene">
-      <Filter>scenes\resources</Filter>
-    </None>
     <None Include="scenes\death.scene">
       <Filter>scenes\resources</Filter>
     </None>
     <None Include="scenes\menu.scene">
       <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\retry.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\jafar_palace.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\test.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="scenes\level_complete.scene">
+      <Filter>scenes\resources</Filter>
+    </None>
+    <None Include="animations\backgrounds\scene_1_2.anm">
+      <Filter>animations\backgrounds</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -658,6 +753,9 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
+    <Media Include="audio\A Whole New World.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Aaah.wav">
       <Filter>audio</Filter>
     </Media>
@@ -683,6 +781,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Apple Splat.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Background Agrabahmarket.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Balloon Pop.wav">
@@ -802,6 +903,9 @@
     <Media Include="audio\Jafar Tractor.wav">
       <Filter>audio</Filter>
     </Media>
+    <Media Include="audio\Level Complete.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Low Sword.wav">
       <Filter>audio</Filter>
     </Media>
@@ -833,6 +937,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Pole Slide.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Retry.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Rock Bounce (FM Only).wav">
@@ -908,6 +1015,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Yeah.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\NameLevel Agrabahmarket.wav">
       <Filter>audio</Filter>
     </Media>
   </ItemGroup>

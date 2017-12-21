@@ -21,6 +21,7 @@ ALA_CLASS_HEADER_2(GameObjectComponent, ala::Initializable, ala::Releasable)
 private:
   std::string _name;
   int _tag;
+  long _flags;
   GameObject* _gameObject;
   bool _active;
   bool _selfInitialize;
@@ -53,6 +54,14 @@ public:
   bool isSelfInitialize() const;
 
   void setSelfInitialize( const bool val );
+
+  void setFlags(const long v);
+
+  void addFlag(const long v);
+
+  int getFlags() const;
+
+  bool hasFlag(const long v) const;
 
   // ==================================================
   // Events

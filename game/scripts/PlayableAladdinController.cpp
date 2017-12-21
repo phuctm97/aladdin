@@ -17,10 +17,19 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ), _holdingBar( NULL ),
+    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
-    _throwableApplePrefab( NULL ), _myAppData( NULL ) {}
+    _selfBody( NULL ),
+    _throwableApplePrefab( NULL ), _myAppData( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
+
+float PlayableAladdinController::getMovingVelocityX() const {
+  return _movingVelocityX;
+}
+
+void PlayableAladdinController::setMovingVelocityX( const float v ) {
+  _movingVelocityX = v;
+}
 
 void PlayableAladdinController::setLives( const int lives ) {
   _lives = MIN(lives, _maxLives);
@@ -117,6 +126,14 @@ ala::GameObject* PlayableAladdinController::getHoldingBar() const {
   return _holdingBar;
 }
 
+void PlayableAladdinController::resetCollidedWithStandable() {
+  _collidedWithStandable = false;
+}
+
+bool PlayableAladdinController::isCollidedWithStandable() const {
+  return _collidedWithStandable;
+}
+
 ala::GameObject* PlayableAladdinController::getHodingRope() const {
   return _holdingRope;
 }
@@ -146,6 +163,12 @@ void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& coll
   if ( otherObject->getTag() == WALL_TAG && otherCollider->getTag() == WALL_TAG
     && collision.getNormal().getY() == 0 ) {
     _pushingWall = true;
+  }
+  else if ( otherCollider->hasFlag( STANDABLE_FLAG ) ) {
+    const auto colliderPosY = otherObject->getTransform()->getPositionY() + otherCollider->getOffset().getY();
+    if ( colliderPosY < _selfTransform->getPositionY() ) {
+      _collidedWithStandable = true;
+    }
   }
 }
 
@@ -234,6 +257,12 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
         onJumpOnSpring( otherObject );
       }
     }
+    else if ( otherObject->getTag() == BOSS_TAG ) {
+      onHit();
+    }
+    else if ( otherObject->getTag() == FIRE_TAG ) {
+      onHit();
+    }
   }
 }
 
@@ -269,8 +298,10 @@ void PlayableAladdinController::onInitialize() {
   _selfStateManager = getGameObject()->getComponentT<StateManager>();
   _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
+  _selfBody = getGameObject()->getComponentT<Rigidbody>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
   setApples( 3 );
@@ -291,7 +322,7 @@ void PlayableAladdinController::onHit( const int damage ) {
   if ( _health <= 0 ) {
     _myAppData->setAladdinLives( _lives - 1 );
 
-    GameManager::get()->replaceScene( new AutoLoadScene( "death.scene", false ) );
+    _sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 death.scene\n0" );
 
     return;
   }
@@ -331,7 +362,7 @@ void PlayableAladdinController::onCatchRope( ala::GameObject* rope ) {
 }
 
 void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
-  if ( isHoldingBar() || _selfStateManager->getPreviousStateName() == "hold_bar_idle" ) return;
+  if ( isHoldingRope() || isHoldingBar() || _selfStateManager->getPreviousStateName() == "hold_bar_idle" ) return;
 
   _holdingBar = bar;
 

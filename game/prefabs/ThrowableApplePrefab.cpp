@@ -14,7 +14,6 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
-
   const auto density = 2.5f;
 
   // components
@@ -44,6 +43,10 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   // helpers
   const auto transform = object->getTransform();
+
+  // flags
+  collider->setFlags( COLLIDE_ENEMY_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setLayer( "Foreground" );
@@ -80,6 +83,11 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
                {
                  body->setVelocity( Vec2( 0, 0 ) );
                  body->setGravityScale( 0 );
+               }
+
+               // collider
+               {
+                 collider->setActive( false );
                }
              },
              [=]( float dt ) {

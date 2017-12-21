@@ -2,33 +2,40 @@
 #define __ALADDIN_CORE_QUAD_TREE_H__
 
 #include "QuadNode.h"
+#include "Logger.h"
 
 NAMESPACE_ALA
 {
 ALA_CLASS_HEADER_0(QuadTree)
 private:
+
+  // for space partitioning and calculating
   float _spaceMinX;
   float _spaceMinY;
-  float _spaceMaxX;
-  float _spaceMaxY;
+  float _unitWidth;
+  float _unitHeight;
   int _level;
-  float _minNodeWidth;
-  float _minNodeHeight;
+
+  // main tree
   std::map<std::string, QuadNode*> _tree;
+
+  // for index mapping and fast calculating tree index from position (mat index)
+  int _matSize;
+  std::string** _indexMat;
   std::vector<QuadNode*> _visibleNodes;
+
+  // for debug logging
+  Logger _logger;
+  std::set<std::string> _oldVisibleIndices;
 
 public:
   QuadTree( const float spaceMinX, const float spaceMinY,
-            const float spaceMaxX, const float spaceMaxY,
+            const float spaceWidth, const float spaceHeight,
             const int level = 3 );
 
   virtual ~QuadTree();
 
   int getLevel() const;
-
-  float getMinQuadNodeWidth() const;
-
-  float getMinQuadNodeHeight() const;
 
   void updateVisibility( const float minVisibleX, const float minVisibleY,
                          const float maxVisibleX, const float maxVisibleY );
@@ -37,9 +44,16 @@ public:
 
   QuadNode* getNode( const std::string& index ) const;
 
+  float getSpaceMinX() const;
+
+  float getSpaceMinY() const;
+
+  float getUnitWidth() const;
+
+  float getUnitHeight() const;
+
 private:
-  std::string toTreeIndex( const float x,
-                           const float y ) const;
+  char toQuadIndex( const int x, const int y ) const;
 };
 }
 

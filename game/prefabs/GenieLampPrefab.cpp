@@ -38,6 +38,10 @@ void GenieLampPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   // collider renderes
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( LAMP_TAG );
   object->setLayer( "Foreground" );

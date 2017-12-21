@@ -45,6 +45,10 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( CAMEL_TAG );
   object->setLayer( "Mass Character" );

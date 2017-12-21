@@ -6,35 +6,40 @@ USING_NAMESPACE_ALA;
 ALA_CLASS_SOURCE_1(PlatformController, ala::GameObjectComponent)
 
 PlatformController::PlatformController( ala::GameObject* gameObject, const string& name )
-  : GameObjectComponent( gameObject, name ), _other( NULL ), _logger( "PlatformController" ) { }
+  : GameObjectComponent( gameObject, name ), _other( NULL ), _logger( "PlatformController" ),
+    _uponCollider( NULL ) { }
 
 void PlatformController::onTriggerEnter( const ala::CollisionInfo& collision ) {
-  getCollisionObject( collision );
-  
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  _other = otherObject;
+
   if ( collision.getNormal() == Vec2( 0, 1 ) ) {
 
     _oldPosition = _other->getTransform()->getPosition();
 
     float height = getGameObject()->getTransform()->getPositionY() +
-      static_cast<Collider*>(getGameObject()->getComponent( "Upon" ))->getSize().getHeight() +
-      static_cast<Collider*>(getGameObject()->getComponent( "Upon" ))->getOffset().getY() +
-      _other->getComponentT<Collider>()->getSize().getHeight() / 2 +
-      _other->getComponentT<Collider>()->getOffset().getY() / 2 + 1;
+      _uponCollider->getSize().getHeight() +
+      _uponCollider->getOffset().getY() +
+      otherCollider->getSize().getHeight() / 2 +
+      otherCollider->getOffset().getY() / 2 + 1;
 
     _oldPosition.setY( height );
     return;
   }
 
   if ( _other->getTag() == ALADDIN_TAG ) {
-    const auto alaStateManager = _other->getComponentT<StateManager>();
-    getGameObject()->getComponent( "Upon" )->setActive( false );
+    _uponCollider->setActive( false );
   }
 
 
 }
 
 void PlatformController::onTriggerExit( const ala::CollisionInfo& collision ) {
-  getGameObject()->getComponent( "Upon" )->setActive( true );
+  _uponCollider->setActive( true );
 }
 
 
@@ -44,9 +49,6 @@ void PlatformController::onUpdate( const float delta ) {
   }
 }
 
-
-void PlatformController::getCollisionObject( const ala::CollisionInfo& collision ) {
-  _other = collision.getColliderA()->getGameObject() == getGameObject()
-             ? collision.getColliderB()->getGameObject()
-             : collision.getColliderA()->getGameObject();
+void PlatformController::onInitialize() {
+  _uponCollider = static_cast<Collider*>(getGameObject()->getComponent( "Upon" ));
 }

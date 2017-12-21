@@ -20,6 +20,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto input = Input::get();
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
+  const auto inAirVelocity = 140.0f;
   const auto climbVelocity = 60.0f;
   const auto holdBarMoveVelocity = 80.0f;
   const auto jumpImpulse = 3000000.0f;
@@ -45,16 +46,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
 
-  //audio
-  const auto HighSwordSound = new AudioSource(object, "High Sword.wav");
-  const auto ThrowSound = new AudioSource(object, "Object Throw.wav");
-  const auto PushSound = new AudioSource(object, "Aladdin Push.wav");
-  const auto HurtSound = new AudioSource(object, "Aladdin Hurt.wav");
-  const auto LowSwordSound = new AudioSource(object, "Low Sword.wav");
-  const auto JumpRotateSound = new AudioSource(object, "Flagpole.wav");
-
-
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
+
+  const auto highSwordAudio = new AudioSource(object, "High Sword.wav");
+  
+  const auto throwAudio = new AudioSource(object, "Object Throw.wav");
+  
+  const auto pushAudio = new AudioSource(object, "Aladdin Push.wav");
+  
+  const auto hurtAudio = new AudioSource(object, "Aladdin Hurt.wav");
+  
+  const auto lowSwordAudio = new AudioSource(object, "Low Sword.wav");
+  
+  const auto jumpRotateAudio = new AudioSource(object, "Flagpole.wav");
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -71,8 +75,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto stateManager = new StateManager( object, "initial" );
 
   const auto actionManager = new ActionManager( object );
-
-  const auto collisionTracker = new CollisionTracker( object );
 
   const auto direction = new DirectionController( object, true, 1 );
   direction->addReverseCase( [=] {
@@ -94,9 +96,13 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto timer4 = new Timer(object);
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
+  //  new ColliderRenderer( swordCollider );
 
-  new ColliderRenderer( swordCollider );
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ALADDIN_FLAG );
+  swordCollider->setFlags( COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setTag( ALADDIN_TAG );
@@ -106,26 +112,42 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   controller->setHealth( 9 );
 
   // states
-  //  new State( stateManager, "null", NULL, NULL, NULL );
-  //  new AnimationEditor( object, "hold_bar_move" );
 
-  new State( stateManager, "initial", [=] {
-               if ( myAppData->getCurrentCheckpoint() == 0 ) {
-                 transform->setPosition( startX, startY );
+  new State( stateManager, "initial",
+             [=] {
+               // animation effect
+               {
+                 if ( myAppData->getCurrentCheckpoint() == 0 ) {
+                   transform->setPosition( startX, startY );
+                 }
+                 else {
+                   std::stringstream checkpointNameBuilder;
+                   checkpointNameBuilder << "Checkpoint " << myAppData->getCurrentCheckpoint();
+
+                   const auto checkpoint = gameManager->getObjectByName( checkpointNameBuilder.str() );
+                   transform->setPosition( checkpoint->getTransform()->getPositionX(),
+                                           checkpoint->getTransform()->getPositionY() );
+                   animator->setAction( "revive" );
+                 }
                }
-               else {
-                 std::stringstream checkpointNameBuilder;
-                 checkpointNameBuilder << "Checkpoint " << myAppData->getCurrentCheckpoint();
 
-                 const auto checkpoint = gameManager->getObjectByName( checkpointNameBuilder.str() );
-                 transform->setPosition( checkpoint->getTransform()->getPositionX(),
-                                         checkpoint->getTransform()->getPositionY() );
-                 animator->setAction( "revive" );
+               // sword
+               {
+                 swordCollider->setActive( false );
+               }
+
+               // move
+               {
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                 controller->setMovingVelocityX( 0 );
                }
              }, NULL,
              [=] {
-               if ( myAppData->getCurrentCheckpoint() != 0 ) {
-                 transform->setPositionY( transform->getPositionY() + 20 );
+               // animation effect
+               {
+                 if ( myAppData->getCurrentCheckpoint() != 0 ) {
+                   transform->setPositionY( transform->getPositionY() + 20 );
+                 }
                }
              } );
 
@@ -172,11 +194,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-               }
-
-               // sword
-               {
-                 swordCollider->setActive( false );
+                 controller->setMovingVelocityX( 0 );
                }
              },
              [=]( float dt ) {
@@ -254,10 +272,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  animator->setAction( "attack_1" );
 				 
                }
-			   //audio
+
+			   // audio
 			   {
-				   HighSwordSound->play();
+				 highSwordAudio->play();
 			   }
+
                // sword
                {
                  swordCollider->setOffset( swordOffset1 );
@@ -293,9 +313,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "attack_3" );
                }
-				//audio
+			   
+			   // audio
                {
-				   ThrowSound->play();
+				 throwAudio->play();
                }
 
                // throw
@@ -526,9 +547,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "sit_attack_1" );
                }
-				//audio
+			
+			   // audio
                {
-				   LowSwordSound->play();
+				 lowSwordAudio->play();
                }
 
                // direction
@@ -608,17 +630,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                }
 
                // throw
-               if ( timer1->isDone() ) {
-                 if ( direction->isRight() ) {
-                   controller->throwApple( 'R', 0, -collider->getSize().getHeight() / 4,
-                                           throwImpulse.getX(), throwImpulse.getY() );
-                 }
-                 else {
-                   controller->throwApple( 'L', 0, -collider->getSize().getHeight() / 4,
-                                           throwImpulse.getX(), throwImpulse.getY() );
-                 }
+               {
+                 if ( timer1->isDone() ) {
+                   if ( direction->isRight() ) {
+                     controller->throwApple( 'R', 0, -collider->getSize().getHeight() / 4,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
+                   else {
+                     controller->throwApple( 'L', 0, -collider->getSize().getHeight() / 4,
+                                             throwImpulse.getX(), throwImpulse.getY() );
+                   }
 
-                 timer1->start( 5.0f );
+                   timer1->start( 5.0f );
+                 }
                }
              }, NULL );
 
@@ -651,6 +675,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                 controller->setMovingVelocityX( runVelocity );
                }
              },NULL );
 
@@ -675,6 +700,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  }
 
                  body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
+                 controller->setMovingVelocityX( newVelocity );
                }
              }, NULL );
 
@@ -711,6 +737,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                 controller->setMovingVelocityX( runVelocity );
                }
 
                // direction
@@ -754,10 +781,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    animator->setAction( "climb_to_jump" );
                  }
                  else if ( controller->isJumpOnSpring() ) {
-					 //audio
-					 {
-						 JumpRotateSound->play();
-					 }
+					// audio
+					{
+					  jumpRotateAudio->play();
+					}
+
                     animator->setAction( "jump_rotate" );
                  }
                  else {
@@ -795,9 +823,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  controller->resetHoldingRope();
                }
 
-               // ground collsion
+               // standable collsion
                {
-                 collisionTracker->reset();
+                 controller->resetCollidedWithStandable();
                }
 
                // camel collision
@@ -824,12 +852,15 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
-                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
-
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
+                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( inAirVelocity );
+                 }
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
                    body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( 0 );
+                 }
                }
              }, NULL );
 
@@ -857,8 +888,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                      animator->setAction( "fall" );
                    }
                  }
+               }
 
-                 collisionTracker->reset();
+               // standable collision
+               {
+                 controller->resetCollidedWithStandable();
                }
 
                // direction
@@ -885,12 +919,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
-                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
+                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( inAirVelocity );
+                 }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
                    body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( 0 );
+                 }
                }
              }, NULL );
 
@@ -936,12 +974,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
-                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
+                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( inAirVelocity );
+                 }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
                    body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( 0 );
+                 }
                }
 
                // sword
@@ -1005,12 +1047,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) )
-                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                   || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
+                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( inAirVelocity );
+                 }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
-                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) )
+                   || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
                    body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( 0 );
+                 }
                }
 
                // throw
@@ -1035,9 +1081,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "start_push" );
                }
-			   //audio
+
+			   // audio
                {
-				   PushSound->play();
+				 pushAudio->play();
                }
              },
              [=]( float ) {
@@ -1053,6 +1100,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  if ( (input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isRight())
                    || (input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isLeft()) ) {
                    body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
+                   controller->setMovingVelocityX( runVelocity );
                  }
                }
              }, NULL );
@@ -1127,6 +1175,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                  else {
                    body->setVelocity( Vec2( 0, 0 ) );
                  }
+                 controller->setMovingVelocityX( 0 );
                }
 
                // position
@@ -1208,6 +1257,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move 
                {
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
 
                // position
@@ -1278,6 +1328,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move 
                {
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
 
                // position
@@ -1305,6 +1356,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 0 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              },
              [=]( float dt ) {
@@ -1348,6 +1400,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 1 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              } );
 
@@ -1424,6 +1477,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 0 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              },
              [=]( float dt ) {
@@ -1465,11 +1519,13 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 1 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              } );
 
   new State( stateManager, "hold_bar_throw",
              [=] {
+               // animation effect
                {
                  animator->setAction( "climb_throw" );
                }
@@ -1487,6 +1543,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 0 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              },
              [=]( float dt ) {
@@ -1526,29 +1583,33 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  body->setGravityScale( 1 );
                  body->setVelocity( Vec2( 0, 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              } );
 
-  new State( stateManager, "hit", [=] {
-    // animation effect 
-    {
-      animator->setAction( "hit" );
-    }
-	//audio
-	{
-		HurtSound->play(); 
-	}
+  new State( stateManager, "hit",
+             [=] {
+               // animation effect 
+               {
+                 animator->setAction( "hit" );
+               }
 
-    // move
-    {
-      body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
-    }
+               // audio
+			   {
+		         hurtAudio->play(); 
+	           }
 
-    // reset hit
-    {
-      controller->resetHit();
-    }
-  }, NULL, NULL );
+               // move
+               {
+                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                 controller->setMovingVelocityX( 0 );
+               }
+
+               // reset hit
+               {
+                 controller->resetHit();
+               }
+             }, NULL, NULL );
 
   new StateTransition( stateManager, "initial", "idle", [=] {
     return !animator->isPlaying();
@@ -1706,6 +1767,15 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
     return body->getVelocity().getY() < -10;
   } );
 
+  new StateTransition( stateManager, "idle", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  } );
+
+  // TODO: fix for falling
+  //  new StateTransition( stateManager, "run", "fall", [=] {
+  //    return body->getVelocity().getY() < -10;
+  //  } );
+
   new StateTransition( stateManager, "jump_attack", "fall", [=] {
     return body->getVelocity().getY() < -10 && !animator->isPlaying();
   } );
@@ -1723,19 +1793,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   } );
 
   new StateTransition( stateManager, "fall", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump_attack", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "jump_throw", "idle", [=] {
-    return collisionTracker->collidedWithObjectTag( GROUND_TAG );
+    return controller->isCollidedWithStandable();
   } );
 
   new StateTransition( stateManager, "idle", "hit", [=] {

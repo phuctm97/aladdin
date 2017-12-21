@@ -2,72 +2,59 @@
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
+
 ALA_CLASS_SOURCE_1(JafarController, ala::GameObjectComponent)
 
-JafarController::JafarController(ala::GameObject* gameObject, const std::string& name) :
-	GameObjectComponent(gameObject, name),
-	_aladdinTransform(NULL), _selfTransform(NULL), _selfStateManager(NULL), _selfDirection(NULL) {}
+JafarController::JafarController( ala::GameObject* gameObject, const std::string& name )
+  : GameObjectComponent( gameObject, name ), _mode( 1 ), _health( 100.0f ), _aladdinTransform( NULL ),
+    _selfTransform( NULL ) {}
 
-void JafarController::onInitialize()
-{
-	const auto gameManager = GameManager::get();
-
-	_selfTransform = getGameObject()->getTransform();
-
-	_selfDirection = getGameObject()->getComponentT<DirectionController>();
-
-	_selfStateManager = getGameObject()->getComponentT<StateManager>();
-
-	const auto aladdin = gameManager->getObjectByTag(ALADDIN_TAG);
-	if (aladdin != NULL) {
-		_aladdinTransform = aladdin->getTransform();
-	}
+char JafarController::getDirectionToFaceAladdin() const {
+  if ( _aladdinTransform->getPositionX() < _selfTransform->getPositionX() ) return 'L';
+  return 'R';
 }
 
-char JafarController::getDirectionToFaceToAladdin() const
-{
-	if (_aladdinTransform->getPositionX() < _selfTransform->getPositionX()) return 'L';
-		return 'R';
+float JafarController::getHealth() const {
+  return _health;
 }
 
-void JafarController::onTriggerEnter(const ala::CollisionInfo& collision)
-{
-	const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
-		? collision.getColliderB()
-		: collision.getColliderA();
-	const auto otherObject = otherCollider->getGameObject();
-
-	const auto selfCollider = collision.getColliderA() == otherCollider
-		? collision.getColliderB()
-		: collision.getColliderA();
-	if (selfCollider->getTag() == ENEMY_TAG) {
-		if (otherObject->getTag() == ALADDIN_TAG &&
-			(otherCollider->getTag() == SWORD_TAG || otherCollider->getTag() == APPLE_TAG)) {
-			onHit();
-		}
-		else if (otherObject->getTag() == SAVILA_TAG) {
-			onHit();
-		}
-	}
+int JafarController::getMode() const {
+  return _mode;
 }
+
+void JafarController::onTriggerEnter( const ala::CollisionInfo& collision ) {
+  const auto otherCollider = collision.getColliderA()->getGameObject() == getGameObject()
+                               ? collision.getColliderB()
+                               : collision.getColliderA();
+  const auto otherObject = otherCollider->getGameObject();
+
+  const auto selfCollider = collision.getColliderA() == otherCollider
+                              ? collision.getColliderB()
+                              : collision.getColliderA();
+
+  if ( otherObject->getTag() == ALADDIN_TAG ) {
+    if ( otherCollider->getTag() == APPLE_TAG || otherCollider->getTag() == SWORD_TAG ) {
+      onHit();
+    }
+  }
+}
+
+void JafarController::onInitialize() {
+  const auto gameManager = GameManager::get();
+
+  _selfTransform = getGameObject()->getTransform();
+
+  const auto aladdin = gameManager->getObjectByTag( ALADDIN_TAG );
+  if ( aladdin != NULL ) {
+    _aladdinTransform = aladdin->getTransform();
+  }
+
+}
+
 void JafarController::onHit() {
-	if (_selfStateManager->getCurrentStateName() == "hit") return;
+  _health -= 10;
 
-	const auto hitState = _selfStateManager->getState("hit");
-	if (hitState != NULL) {
-		_selfStateManager->changeState(hitState);
-	}
-
-	_health -= rand() % 2 + 1;
-	if (_health <= 0) {
-		//onDie();
-	}
+  if ( _health <= 60 && _mode != 2 ) {
+    _mode = 2;
+  }
 }
-
-int JafarController::getHealth() const { return _health; }
-
-void JafarController::setHealth(const int health) { _health = health; }
-
-
-
-

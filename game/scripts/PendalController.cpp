@@ -3,10 +3,10 @@
 USING_NAMESPACE_ALA;
 
 PendalController::PendalController(ala::GameObject * object, const string & name)
-	:GameObjectComponent(object, name), _logger("PendalController"), _resetPoint(Vec2()) {
-	_camera = GameManager::get()->getMainCamera();
-	_visibleWidth = GameManager::get()->getVisibleWidth();
-	_visibleHeight = GameManager::get()->getVisibleHeight();
+  : GameObjectComponent( object, name ), _other( NULL ), _logger( "PendalController" ), _resetPoint( Vec2() ) {
+  _camera = GameManager::get()->getRunningScene()->getMainCamera();
+  _visibleWidth = GameManager::get()->getVisibleWidth();
+  _visibleHeight = GameManager::get()->getVisibleHeight();
 }
 
 
