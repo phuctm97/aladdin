@@ -302,6 +302,7 @@ void PlayableAladdinController::onInitialize() {
   _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
   _selfBody = getGameObject()->getComponentT<Rigidbody>();
+  _selfDirection = getGameObject()->getComponentT<DirectionController>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
@@ -311,6 +312,16 @@ void PlayableAladdinController::onInitialize() {
   //  setHealth( 9 );
   setApples( 90 );
   setHealth( 90 );
+}
+
+void PlayableAladdinController::onUpdate( const float dt ) {
+  // recalculate moving x
+  if ( _selfDirection->isLeft() ) {
+    _selfBody->setVelocity( Vec2( -_movingVelocityX, _selfBody->getVelocity().getY() ) );
+  }
+  else {
+    _selfBody->setVelocity( Vec2( _movingVelocityX, _selfBody->getVelocity().getY() ) );
+  }
 }
 
 void PlayableAladdinController::onHitCharcoalBurner() {

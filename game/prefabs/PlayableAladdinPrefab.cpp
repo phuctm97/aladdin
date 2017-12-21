@@ -75,6 +75,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto actionManager = new ActionManager( object );
 
   const auto direction = new DirectionController( object, true, 1 );
+  direction->setApplyPhysics( false );
   direction->addReverseCase( [=] {
     return animator->getActionName().substr( 0, 8 ) == "hold_bar" ||
       animator->getActionName() == "climb_attack" || animator->getActionName() == "climb_throw";
@@ -136,7 +137,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move
                {
-                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( 0 );
                }
              }, NULL,
@@ -191,7 +191,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move
                {
-                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( 0 );
                }
              },
@@ -677,7 +676,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move
                {
-                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( runVelocity );
                }
              },NULL );
@@ -702,7 +700,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( newVelocity < 0 ) newVelocity = 0;
                  }
 
-                 body->setVelocity( Vec2( newVelocity, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( newVelocity );
                }
              }, NULL );
@@ -735,7 +732,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
              [=]( float dt ) {
                // move
                {
-                 body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( runVelocity );
                }
 
@@ -853,12 +849,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( inAirVelocity );
                  }
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( 0 );
                  }
                }
@@ -920,13 +914,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( inAirVelocity );
                  }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( 0 );
                  }
                }
@@ -972,13 +964,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( inAirVelocity );
                  }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( 0 );
                  }
                }
@@ -1046,13 +1036,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( (direction->isLeft() && input->getKey( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKey( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( inAirVelocity, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( inAirVelocity );
                  }
 
                  if ( (direction->isLeft() && input->getKeyUp( ALA_KEY_LEFT_ARROW ))
                    || (direction->isRight() && input->getKeyUp( ALA_KEY_RIGHT_ARROW )) ) {
-                   body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( 0 );
                  }
                }
@@ -1111,8 +1099,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( (input->getKey( ALA_KEY_RIGHT_ARROW ) && direction->isRight())
                    || (input->getKey( ALA_KEY_LEFT_ARROW ) && direction->isLeft()) ) {
-                   body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );
                    controller->setMovingVelocityX( runVelocity );
+                 }
+                 else {
+                   controller->setMovingVelocityX( 0 );
                  }
                }
              }, NULL );
@@ -1175,18 +1165,19 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( dir == 'U' ) {
                    if ( !controller->hasReachedTopOfRope() ) {
-                     body->setVelocity( Vec2( 0, climbVelocity ) );
+                     body->setVelocity( Vec2( body->getVelocity().getX(), climbVelocity ) );
                    }
                    else {
-                     body->setVelocity( Vec2( 0, 0 ) );
+                     body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                    }
                  }
                  else if ( dir == 'D' ) {
-                   body->setVelocity( Vec2( 0, -climbVelocity ) );
+                   body->setVelocity( Vec2( body->getVelocity().getX(), -climbVelocity ) );
                  }
                  else {
-                   body->setVelocity( Vec2( 0, 0 ) );
+                   body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  }
+
                  controller->setMovingVelocityX( 0 );
                }
 
@@ -1269,7 +1260,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move 
                {
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
 
@@ -1342,7 +1333,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move 
                {
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
 
@@ -1370,7 +1361,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 0 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              },
@@ -1414,7 +1405,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 1 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              } );
@@ -1449,14 +1440,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move
                {
-                 body->setVelocity( Vec2( holdBarMoveVelocity, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+                 controller->setMovingVelocityX( holdBarMoveVelocity );
                }
              },
              [=] {
                // move
                {
                  body->setGravityScale( 1 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
+                 controller->setMovingVelocityX( 0 );
                }
              } );
 
@@ -1488,7 +1481,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 0 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              },
@@ -1535,7 +1528,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 1 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              } );
@@ -1555,7 +1548,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 0 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              },
@@ -1600,7 +1593,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // move
                {
                  body->setGravityScale( 1 );
-                 body->setVelocity( Vec2( 0, 0 ) );
+                 body->setVelocity( Vec2( body->getVelocity().getX(), 0 ) );
                  controller->setMovingVelocityX( 0 );
                }
              } );
@@ -1619,7 +1612,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
                // move
                {
-                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
+                 //                 body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
                  controller->setMovingVelocityX( 0 );
                }
 
