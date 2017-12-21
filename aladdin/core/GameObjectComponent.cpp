@@ -36,7 +36,7 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
 GameObjectComponent::~GameObjectComponent() {
   if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
   TOTAL_COMPONENTS_DELETED++;
@@ -170,7 +170,7 @@ void GameObjectComponent::resolveLockedTasks() {
 
 void GameObjectComponent::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
   if ( !onPreRelease() ) return;
 
@@ -191,7 +191,7 @@ void GameObjectComponent::release() {
 
 void GameObjectComponent::releaseInNextFrame() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 
