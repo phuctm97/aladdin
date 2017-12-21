@@ -37,6 +37,12 @@ void ClimbableRopePrefab::doInstantiate( ala::GameObject* object, std::istringst
   new ColliderRenderer( collider );
   new ColliderRenderer( colliderT );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  colliderT->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  colliderT->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setLayer( "Debug" );
   object->setTag( ROPE_TAG );

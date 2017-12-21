@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Scene>
+  <!--BACKGROUND & FOREGROUND-->
   <object layer="Background">
     <prefab version="2" name="Sprite" args="cutscenes.png 1 cutscenes.anm cutscene_1" />
   </object>
@@ -8,6 +9,8 @@
     <prefab version="2" name="Sprite" args="title.png 0" />
     <transform position="0 59" />
   </object>
+
+  <!--MENUS-->
   <object name="Menu 1" layer="Second Background">
     <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt AGRABAH MARKET&#10; T L 0.75" />
     <transform position="-51 0" />
@@ -20,15 +23,25 @@
     <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt EXIT&#10; T L 0.75" />
     <transform position="-51 -36" />
   </object>
+  
+  <!--LICENSE TEXT-->
   <object layer="Second Background">
-    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
+    <prefab version="2" name="Bitmap Text"
+            args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
     <transform position="0 -75" />
   </object>
   <object layer="Second Background">
     <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 THE WALT DISNEY COMPANY&#10; T C 0.75" />
     <transform position="0 -92" />
   </object>
+  
+  <!--CONTROLLER-->
   <object layer="UI">
     <prefab version="2" name="Menu Select" args="0 -18 -36" />
+  </object>
+  
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 </Scene>

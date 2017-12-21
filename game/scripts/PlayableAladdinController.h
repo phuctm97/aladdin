@@ -21,6 +21,9 @@ private:
   bool _reachedTopOfRope;
   ala::GameObject* _holdingRope;
   ala::GameObject* _holdingBar;
+  bool _collidedWithStandable;
+
+  float _movingVelocityX;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -31,9 +34,14 @@ private:
   ala::PrefabV2* _throwableApplePrefab;
 
   MyAppData* _myAppData;
+  ala::PrefabV2* _sceneFadeOutTransitionPrefab;
 
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );
+
+  float getMovingVelocityX() const;
+
+  void setMovingVelocityX( const float v );
 
   void setLives( const int lives );
 
@@ -79,6 +87,10 @@ public:
 
   ala::GameObject* getHoldingBar() const;
 
+  void resetCollidedWithStandable();
+
+  bool isCollidedWithStandable() const;
+
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
@@ -111,4 +123,3 @@ private:
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
-

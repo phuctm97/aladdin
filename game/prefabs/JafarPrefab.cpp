@@ -65,8 +65,8 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto transform = object->getTransform();
 
   // collider renderers
-  const auto colliderRenderer = new ColliderRenderer( collider );
-  colliderRenderer->setZOrder( 3 );
+  //  const auto colliderRenderer = new ColliderRenderer( collider );
+  //  colliderRenderer->setZOrder( 3 );
 
   // configurations
   object->setTag( BOSS_TAG );

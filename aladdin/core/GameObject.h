@@ -22,6 +22,7 @@ private:
   long _id;
   std::string _name;
   int _tag;
+  long _flags;
   Scene* _parentScene;
   std::string _layer;
   bool _active;
@@ -62,6 +63,14 @@ public:
   GameObject* setTag( const int tag );
 
   int getTag() const;
+
+  void setFlags( const long v );
+
+  void addFlag( const long v );
+
+  int getFlags() const;
+
+  bool hasFlag( const long v ) const;
 
   // =========================================================
   // Events

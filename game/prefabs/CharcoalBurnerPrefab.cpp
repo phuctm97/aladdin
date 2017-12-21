@@ -33,6 +33,11 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  const auto burnerFlags = COLLIDE_ENEMY_FLAG | COLLIDE_ALADDIN_FLAG | STATIC_FLAG;
+  collider->setFlags( burnerFlags );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( CHARCOAL_BURNER_TAG );
   object->setLayer( "Debug" );

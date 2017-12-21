@@ -32,6 +32,10 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setLayer( "Mass Character" );
 

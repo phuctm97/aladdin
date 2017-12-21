@@ -67,7 +67,8 @@ bool PhysicsManager::getCollisionInfo( Collider* colliderA, Collider* colliderB,
 }
 
 PhysicsManager::PhysicsManager():
-  _logger( "ala::PhysicsManager" ) {
+  _logger( "ala::PhysicsManager" ),
+  _active( true ) {
   ALA_ASSERT((!isReleased()) && (!isReleasing()));
   _logger.info( "Created" );
 }
@@ -85,8 +86,16 @@ PhysicsManager* PhysicsManager::get() {
   return __instance;
 }
 
+bool PhysicsManager::isActive() const {
+  return _active;
+}
+
+void PhysicsManager::setActice( const bool v ) {
+  _active = v;
+}
+
 void PhysicsManager::update( const float delta ) {
-  if ( isReleasing() || isReleased() ) return;
+  if ( isReleasing() || isReleased() || !isActive() ) return;
 
   //update transform position
   for ( auto rigidbody : _rigidbodies ) {

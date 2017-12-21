@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Scene>
+  <physics gravity="0 -500" />
+
+  <!--  BACKGROUND & FOREGROUND-->
+  <object layer="Background">
+    <prefab version="2" name="Sprite" args="victory.png 0" />
+    <transform position="0 15" />
+  </object>
+  <object layer="Main Character">
+    <prefab version="2" name="Aladdin And Abu" args="L 70" />
+    <transform position="200 -55" />
+  </object>
+
+  <!--CONTROLLER-->
+  <object>
+    <prefab version="2" name="Level Complete Scene Controller" args="" />
+  </object>
+
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
+</Scene>

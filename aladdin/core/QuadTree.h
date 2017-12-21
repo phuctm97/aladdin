@@ -44,6 +44,14 @@ public:
 
   QuadNode* getNode( const std::string& index ) const;
 
+  float getSpaceMinX() const;
+
+  float getSpaceMinY() const;
+
+  float getUnitWidth() const;
+
+  float getUnitHeight() const;
+
 private:
   char toQuadIndex( const int x, const int y ) const;
 };

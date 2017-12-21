@@ -31,6 +31,10 @@ void EatableHeartPrefab::doInstantiate( ala::GameObject* object, std::istringstr
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( HEART_TAG );
   object->setLayer( "Foreground" );

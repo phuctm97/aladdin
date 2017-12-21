@@ -55,6 +55,11 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   new ColliderRenderer( collider );
   new ColliderRenderer( swordCollider );
 
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+  swordCollider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG );
+
   // configurations
   object->setLayer( "Supporting Character" );
   object->setTag( ENEMY_TAG );

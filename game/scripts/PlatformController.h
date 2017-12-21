@@ -10,7 +10,8 @@ private:
   bool _isChangePosition = false;
   ala::Vec2 _oldPosition;
 
-  void getCollisionObject( const ala::CollisionInfo& collision );
+  ala::Collider* _uponCollider;
+
 
 public:
   PlatformController( ala::GameObject* gameObject, const string& name = "" );
@@ -21,6 +22,8 @@ protected:
   void onTriggerExit( const ala::CollisionInfo& collision ) override;
 
   void onUpdate( const float delta ) override;
+
+  void onInitialize() override;
 };
 
 
