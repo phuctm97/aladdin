@@ -1787,6 +1787,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
     return body->getVelocity().getY() < -10;
   } );
 
+  new StateTransition(stateManager, "stop", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  });
+
   // TODO: fix for falling
   //  new StateTransition( stateManager, "run", "fall", [=] {
   //    return body->getVelocity().getY() < -10;
