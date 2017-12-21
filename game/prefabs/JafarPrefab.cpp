@@ -68,6 +68,10 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   //  const auto colliderRenderer = new ColliderRenderer( collider );
   //  colliderRenderer->setZOrder( 3 );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( BOSS_TAG );
   object->setLayer( "Supporting Character" );

@@ -21,6 +21,12 @@ void JafarPalaceGroundPrefab::doInstantiate( ala::GameObject* object, std::istri
   // collider renderers
   //  new ColliderRenderer( collider );
 
+  // flags
+  const auto groundFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG | STANDABLE_FLAG |
+    STATIC_FLAG;
+  collider->setFlags( groundFlags );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( GROUND_TAG );
   object->setLayer( "Debug" );
