@@ -19,13 +19,13 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto maxIdleDelay = 2000;
   const auto swordOffset = Vec2( 20, 5 );
   const auto swordSize = Size( 40, 20 );
-  //audio
-  const auto FootSound = new AudioSource(object, "Tip Toe.wav");
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "civilian_enemies.png" );
 
   const auto animator = new Animator( object, "hide_guard_idle_0", "civilian_enemies.anm" );
+
+  const auto footAudio = new AudioSource( object, "Tip Toe.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -51,8 +51,8 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   controller->setMaxDistanceCouldAttack( 50 );
 
   // helpers
-  const auto timer = new Timer( object );
-  const auto timer1 = new Timer(object);
+  const auto timer1 = new Timer( object );
+  const auto timer2 = new Timer( object );
 
   const auto transform = object->getTransform();
 
@@ -75,7 +75,7 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                // animation effect
                {
                  animator->setAction( "hide_guard_idle_0" );
-                 timer->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
+                 timer1->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
                }
 
                // move
@@ -91,20 +91,20 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
              [=]( float dt ) {
                // animation effect
                {
-                 if ( !animator->isPlaying() && timer->isDone() ) {
+                 if ( !animator->isPlaying() && timer1->isDone() ) {
                    if ( animator->getActionName() == "hide_guard_idle_0" ) {
                      animator->setAction( "hide_guard_idle_0_1" );
                    }
                    else if ( animator->getActionName() == "hide_guard_idle_0_1" ) {
                      animator->setAction( "hide_guard_idle_1" );
-                     timer->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
+                     timer1->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
                    }
                    else if ( animator->getActionName() == "hide_guard_idle_1" ) {
                      animator->setAction( "hide_guard_idle_1_0" );
                    }
                    else if ( animator->getActionName() == "hide_guard_idle_1_0" ) {
                      animator->setAction( "hide_guard_idle_0" );
-                     timer->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
+                     timer1->start( (rand() % (maxIdleDelay - minIdleDelay) + minIdleDelay) / 1000.0f );
                    }
                  }
                }
@@ -133,7 +133,7 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
                // sword
                {
-                 timer->start( 0.36f );
+                 timer1->start( 0.36f );
                }
              },
              [=]( float dt ) {
@@ -146,14 +146,14 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
                // sword 
                {
-                 if ( timer->isDone() ) {
+                 if ( timer1->isDone() ) {
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
-                     timer->start( 0.14f );
+                     timer1->start( 0.14f );
                    }
                    else {
                      swordCollider->setActive( false );
-                     timer->start( 5 );
+                     timer1->start( 5 );
                    }
                  }
                }
@@ -171,21 +171,24 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  animator->setAction( "hide_guard_run" );
                }
-			   timer1->start(0.2f);
+               timer2->start( 0.2f );
              },
              [=]( float dt ) {
-				//aniation effect
-				 {
-					 if(!animator->isPlaying())
-					 {
-						 animator->setAction("hide_guard_run");
-					 }
-					 if(timer1->isDone())
-					 {
-						 FootSound->play();
-						 timer1->start(1.0f);
-					 }
-				 }
+               //aniation effect
+               {
+                 if ( !animator->isPlaying() ) {
+                   animator->setAction( "hide_guard_run" );
+                 }
+               }
+
+               // audio
+               {
+                 if ( timer2->isDone() ) {
+                   footAudio->play();
+                   timer2->start( 1.0f );
+                 }
+               }
+
                // move
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );

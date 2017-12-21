@@ -14,11 +14,6 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto leftBoundX = nextFloat( argsStream );
   const auto rightBoundX = nextFloat( argsStream );
 
-  //audio
-  const auto HighSwordSound = new AudioSource(object, "High Sword.wav");
-  const auto CommonSound = new AudioSource(object, "Guard Beckon.wav");
-  const auto HitSound = new AudioSource(object, "Guard Hit 1.wav");
-
   // constants
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
@@ -34,6 +29,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
   const auto animator = new Animator( object, "fat_guard_idle", "guards.anm" );
+
+  const auto highSwordAudio = new AudioSource( object, "High Sword.wav" );
+
+  const auto commonAudio = new AudioSource( object, "Guard Beckon.wav" );
+
+  const auto hitAudio = new AudioSource( object, "Guard Hit 1.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -115,10 +116,11 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                // animation effect
                {
                  animator->setAction( "fat_guard_provoke" );
-				//audio
-                 {
-					 CommonSound->play();
-                 }
+               }
+
+               //audio
+               {
+                 commonAudio->play();
                }
              }, NULL, NULL );
 
@@ -133,10 +135,13 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                  }
                  else {
                    animator->setAction( "fat_guard_attack_2" );
-				  //audio
-                   {
-					   HighSwordSound->play();
-                   }
+                 }
+               }
+
+               //audio
+               {
+                 if ( r >= 2 ) {
+                   highSwordAudio->play();
                  }
                }
 
@@ -233,10 +238,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                {
                  animator->setAction( "fat_guard_hit" );
                }
-			   //audio
+
+               // audio
                {
-				   HitSound->play();
+                 hitAudio->play();
                }
+
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );

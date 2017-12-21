@@ -13,7 +13,7 @@ GuardController::GuardController( ala::GameObject* gameObject, const std::string
   _initialX( 0 ),
   _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
   _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ),
-  _enemyExplosionOnePrefab( NULL ), _enemyExplosionTwoPrefab( NULL ){}
+  _enemyExplosionOnePrefab( NULL ), _enemyExplosionTwoPrefab( NULL ) {}
 
 void GuardController::onInitialize() {
   const auto gameManager = GameManager::get();

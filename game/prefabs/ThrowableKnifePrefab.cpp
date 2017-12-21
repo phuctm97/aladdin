@@ -24,6 +24,8 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   const auto animator = new Animator( object, "throwable_knife", "guards.anm" );
 
+  const auto swordChingAudio = new AudioSource( object, "Sword Ching.wav" );
+
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
   const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 7, 7 ) );
@@ -39,9 +41,6 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   else if ( dir == 'R' ) direction->setRight();
 
   const auto collisionTracker = new CollisionTracker( object );
-
-  //audio
-  const auto SwordWallSound = new AudioSource(object, "Sword Ching.wav");
 
   // helpers
   const auto transform = object->getTransform();
@@ -65,23 +64,29 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
                  body->addImpulse( Vec2( impulseX, impulseY ) );
                }
              },
-            NULL, NULL );
-	new State( stateManager, "explode", 
-			[=] {
-				//audio
-				{
-					SwordWallSound->play();
-				}
+             NULL, NULL );
 
-	}, [=](float dt) {
-		// release
-		{
-			if (!animator->isPlaying()) {
-				object->release();
-			}
-		}
-	}, NULL);
-	new StateTransition(stateManager, "initial", "explode", [=] {
-		return collisionTracker->collided();
-	});
+  new State( stateManager, "explode",
+             [=] {
+               // collision
+               {
+                 collider->setActive( false );
+               }
+
+               // audio
+               {
+                 swordChingAudio->play();
+               }
+
+             }, [=]( float dt ) {
+               // release
+               {
+                 if ( !animator->isPlaying() ) {
+                   object->release();
+                 }
+               }
+             }, NULL );
+  new StateTransition( stateManager, "initial", "explode", [=] {
+    return collisionTracker->collided();
+  } );
 }

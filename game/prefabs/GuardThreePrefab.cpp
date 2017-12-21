@@ -13,9 +13,6 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto leftBoundX = nextFloat( argsStream );
   const auto rightBoundX = nextFloat( argsStream );
 
-	//audio
-  const auto HitSound = new AudioSource(object, "Guard's Pants.wav");
-
   // constants
   const auto gameManager = GameManager::get();
   const auto throwableKnifePrefab = gameManager->getPrefabV2( "Throwable Knife" );
@@ -31,6 +28,8 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
   const auto animator = new Animator( object, "adorable_guard_idle", "guards.anm" );
+
+  const auto hitAudio = new AudioSource( object, "Guard's Pants.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -175,9 +174,10 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                {
                  animator->setAction( "adorable_guard_hit" );
                }
-				//audio
+
+               // audio
                {
-				   HitSound->play();
+                 hitAudio->play();
                }
 
                // move

@@ -141,9 +141,6 @@
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="scenes\AgrabahMarketScene.cpp">
-      <Filter>scenes</Filter>
-    </ClCompile>
     <ClCompile Include="scripts\CamelController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
@@ -411,9 +408,6 @@
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="scenes\AgrabahMarketScene.h">
-      <Filter>scenes</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\CamelController.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -579,9 +573,6 @@
     <ClInclude Include="prefabs\QuadRendererPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\FadeInEffectPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="scripts\FadeOutEffect.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -675,6 +666,7 @@
     <Text Include="audio\readme.txt">
       <Filter>audio</Filter>
     </Text>
+    <Text Include="prefabs\FadeInEffectPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">

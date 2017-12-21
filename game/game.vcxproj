@@ -220,7 +220,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
     <ClCompile Include="prefabs\WallPrefab.cpp" />
-    <ClCompile Include="scenes\AgrabahMarketScene.cpp" />
     <ClCompile Include="scenes\AutoLoadScene.cpp" />
     <ClCompile Include="scenes\DebugScene.cpp" />
     <ClCompile Include="scripts\CamelController.cpp" />
@@ -316,7 +315,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
     <ClInclude Include="prefabs\WallPrefab.h" />
-    <ClInclude Include="scenes\AgrabahMarketScene.h" />
     <ClInclude Include="scenes\AutoLoadScene.h" />
     <ClInclude Include="scenes\DebugScene.h" />
     <ClInclude Include="scripts\CamelController.h" />
