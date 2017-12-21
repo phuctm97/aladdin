@@ -7,6 +7,8 @@ ALA_CLASS_SOURCE_1(EnemyExplosionTwoPrefab, ala::PrefabV2)
 void EnemyExplosionTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "enemy_explosions.png" );
+  //audio
+  const auto GenieDeathSound = new AudioSource(object, "Genie Fumes.wav");
 
   const auto animator = new Animator( object, "explosion", "enemy_explosions.anm" );
 
@@ -14,7 +16,10 @@ void EnemyExplosionTwoPrefab::doInstantiate( ala::GameObject* object, std::istri
 
   // states
   new State( stateManager, "explode",
-             NULL,
+	  [=] {
+		//audio
+	  GenieDeathSound->play();
+	  },
              [=]( float dt ) {
                if ( !animator->isPlaying() ) {
                  object->release();

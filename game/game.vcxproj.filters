@@ -579,6 +579,9 @@
     <ClInclude Include="prefabs\QuadRendererPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\FadeInEffectPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
     <ClInclude Include="scripts\FadeOutEffect.h">
       <Filter>scripts</Filter>
     </ClInclude>
@@ -668,11 +671,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
-    <Text Include="log.txt" />
     <Text Include="note.txt" />
-    <Text Include="prefabs\FadeInEffectPrefab.h">
-      <Filter>prefabs</Filter>
-    </Text>
     <Text Include="audio\readme.txt">
       <Filter>audio</Filter>
     </Text>

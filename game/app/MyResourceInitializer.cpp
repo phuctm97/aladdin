@@ -91,6 +91,29 @@ void MyResourceInitializer::doRun() {
   new SceneConfiguration( "agrabah_market.scene", "scenes/agrabah_market.scene" );
   new SceneConfiguration( "jafar_palace.scene", "scenes/jafar_palace.scene" );
 
+  //Audio
+  new AudioClip("Jafar Snake.wav", "audio/Jafar Snake.wav");
+  new AudioClip("High Sword.wav", "audio/High Sword.wav");
+  new AudioClip("Object Throw.wav", "audio/Object Throw.wav");
+  new AudioClip("Apple Collect.wav", "audio/Apple Collect.wav");
+  new AudioClip("Aladdin Push.wav", "audio/Aladdin Push.wav");
+  new AudioClip("Apple Splat.wav", "audio/Apple Splat.wav");
+  new AudioClip("Aladdin Hurt.wav", "audio/Aladdin Hurt.wav");
+  new AudioClip("Low Sword.wav", "audio/Low Sword.wav");
+  new AudioClip("Guard Beckon.wav", "audio/Guard Beckon.wav");
+  new AudioClip("Sword Ching.wav", "audio/Sword Ching.wav");
+  new AudioClip("Cloud Poof.wav", "audio/Cloud Poof.wav");
+  new AudioClip("Genie Fumes.wav", "audio/Genie Fumes.wav");
+  new AudioClip("Guard Hit 1.wav", "audio/Guard Hit 1.wav");
+  new AudioClip("Guard Hit 2.wav", "audio/Guard Hit 2.wav");
+  new AudioClip("Guard's Pants.wav", "audio/Guard's Pants.wav");
+  new AudioClip("Camel Spit.wav", "audio/Camel Spit.wav");
+  new AudioClip("Continue Point.wav", "audio/Continue Point.wav");
+  new AudioClip("Fire From Coal.wav", "audio/Fire From Coal.wav");
+  new AudioClip("Tip Toe.wav", "audio/Tip Toe.wav");
+  new AudioClip("Flagpole.wav", "audio/Flagpole.wav");
+  
+  
   // Textures
   new Sprite( "agrabah_market_background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "agrabah_market_foreground.png", "textures/backgrounds/scene_1_1.png" );

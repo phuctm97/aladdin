@@ -19,6 +19,8 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto maxIdleDelay = 2000;
   const auto swordOffset = Vec2( 20, 5 );
   const auto swordSize = Size( 40, 20 );
+  //audio
+  const auto FootSound = new AudioSource(object, "Tip Toe.wav");
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "civilian_enemies.png" );
@@ -50,6 +52,7 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   // helpers
   const auto timer = new Timer( object );
+  const auto timer1 = new Timer(object);
 
   const auto transform = object->getTransform();
 
@@ -168,8 +171,21 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  animator->setAction( "hide_guard_run" );
                }
+			   timer1->start(0.2f);
              },
              [=]( float dt ) {
+				//aniation effect
+				 {
+					 if(!animator->isPlaying())
+					 {
+						 animator->setAction("hide_guard_run");
+					 }
+					 if(timer1->isDone())
+					 {
+						 FootSound->play();
+						 timer1->start(1.0f);
+					 }
+				 }
                // move
                {
                  body->setVelocity( Vec2( runVelocity, body->getVelocity().getY() ) );

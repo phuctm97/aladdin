@@ -12,6 +12,8 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   // constants
   const auto gameManager = GameManager::get();
+  //audio
+  const auto OnSound = new AudioSource(object, "Continue Point.wav");
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
@@ -48,6 +50,10 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   new State( stateManager, "on",
              [=] {
                animator->setAction( "checkpoint_on" );
+			   //audio
+               {
+				   OnSound->play();
+               }
              }, NULL, NULL );
 
   new StateTransition( stateManager, "off", "on", [=] {

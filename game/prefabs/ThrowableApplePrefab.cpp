@@ -18,6 +18,8 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
+  //audio
+  const auto apple_explode_sound = new AudioSource(object, "Apple Splat.wav");
 
   const auto animator = new Animator( object, "apple", "aladdin.anm" );
 
@@ -72,6 +74,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
                // animation effect
                {
                  animator->setAction( "apple_explode" );
+				 apple_explode_sound->play();
                  actionManager->stopAll();
                  transform->setRotation( 0 );
                }

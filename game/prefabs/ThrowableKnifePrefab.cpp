@@ -40,6 +40,9 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   const auto collisionTracker = new CollisionTracker( object );
 
+  //audio
+  const auto SwordWallSound = new AudioSource(object, "Sword Ching.wav");
+
   // helpers
   const auto transform = object->getTransform();
 
@@ -62,12 +65,23 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
                  body->addImpulse( Vec2( impulseX, impulseY ) );
                }
              },
-             [=]( float dt ) {
-               // destroy
-               {
-                 if ( collisionTracker->collided() ) {
-                   object->release();
-                 }
-               }
-             }, NULL );
+            NULL, NULL );
+	new State( stateManager, "explode", 
+			[=] {
+				//audio
+				{
+					SwordWallSound->play();
+				}
+
+	}, [=](float dt) {
+		// release
+		{
+			if (!animator->isPlaying()) {
+				object->release();
+			}
+		}
+	}, NULL);
+	new StateTransition(stateManager, "initial", "explode", [=] {
+		return collisionTracker->collided();
+	});
 }

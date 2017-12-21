@@ -187,30 +187,30 @@ void AgrabahMarketScene::onPreInitialize() {
 		->setPosition(Vec2(3346.0f, 108.5f));*/
 	
 	/* Charcoal Burners */
-	/*gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
-			->getTransform()
-			->setPosition( Vec2( 360.5f, -50 ) );
+	//gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 1" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 360.5f, -50 ) );
 
-	gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 2" )
-			->getTransform()
-			->setPosition( Vec2( 730.5f, -50 ) );
+	//gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 2" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 730.5f, -50 ) );
 
-	gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 3" )
-			->getTransform()
-			->setPosition( Vec2( 906.5f, -50 ) );
+	//gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 3" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 906.5f, -50 ) );
 
-	gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 4" )
-			->getTransform()
-			->setPosition( Vec2( 1915.5f, -79 ) );
+	//gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "90", "Charcoal Burner 4" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 1915.5f, -79 ) );
 
-	gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "110", "Charcoal Burner 4" )
-			->getTransform()
-			->setPosition( Vec2( 2987, -82 ) );*/
+	//gameManager->getPrefabV2( "Charcoal Burner" )->instantiateWithArgs( "110", "Charcoal Burner 4" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 2987, -82 ) );
 
 	/* Camels */
-	/*gameManager->getPrefabV2( "Camel" )->instantiateWithArgs( "R" )
-			->getTransform()
-			->setPosition( Vec2( 1404.5, -57.5 ) );*/
+	//gameManager->getPrefabV2( "Camel" )->instantiateWithArgs( "R" )
+	//		->getTransform()
+	//		->setPosition( Vec2( 1404.5, -57.5 ) );
 
 	/* Hand Enemies ? ? :D ? ?*/
 	/*gameManager->getPrefabV2( "Hand Enemy" )->instantiateWithArgs( "R 45 80 0 -80", "Hand Enemy 1" )
@@ -223,15 +223,15 @@ void AgrabahMarketScene::onPreInitialize() {
 	*/
 
 	/* Eatable Apples */
-	//float appleX[] = { //325.5f, 355.0f, 388.0f, 691.5f, 723.0f, 755.5f, 869.5f, 901.5f, 932.0f,1363.0f, 1396.5f, 1409.0f, 1490.5f, 1526.0f, 1559.0f, 1589.0f, 1619.5f, 1839, 1845, 1869, 1978, 2006, 2011,
-	//	//1607, 1402, 1338, 1338, 1346, 1361, 1616, 1654, 1690, 1824, 1858, 1900, 2132, 2164, 2190, 2190, 2190, 2190, 2190
-	//	//2100, 2115, 2131, 2257, 2373, 2272,2727, 2727, 2727, 2947, 2983, 3018, 3181, 3244, 3211, 3348, 3414, 3381, 3682, 3744, 3713, 3936, 3999, 3968, 4489, 4396, 4347, 4290,
+	//float appleX[] = { 325.5f, 355.0f, 388.0f, 691.5f, 723.0f, 755.5f, 869.5f, 901.5f, 932.0f,1363.0f, 1396.5f, 1409.0f, 1490.5f, 1526.0f, 1559.0f, 1589.0f, 1619.5f, 1839, 1845, 1869, 1978, 2006, 2011,
+	//	1607, 1402, 1338, 1338, 1346, 1361, 1616, 1654, 1690, 1824, 1858, 1900, 2132, 2164, 2190, 2190, 2190, 2190, 2190,
+	//	2100, 2115, 2131, 2257, 2373, 2272,2727, 2727, 2727, 2947, 2983, 3018, 3181, 3244, 3211, 3348, 3414, 3381, 3682, 3744, 3713, 3936, 3999, 3968, 4489, 4396, 4347, 4290,
 	//	4050, 3944, 3782, 3746, 3700, 3370, 3334, 3298, 3254, 3212, 3170, 2776, 2738, 2700, 2488, 2704, 2720, 2740, 3146, 3162, 3194, 3458, 4136, 4164, 4164, 4192 };
-	//float appleY[] = { //27.5f, 43.0f, 27.5f, 25.5f, 44.5f, 25.5f, 27.0f, 45.0f, 27.0f, 90.5f, 75.0f, 41.0f, 14.5f, 29.5f, 14.5f, 29.5f, 14.5f, 24, 60, 95, 95, 56, 24,
-	//	//206, 181, 255, 296, 333, 362,380, 392, 380, 378, 402, 378, 378, 376, 340, 284, 232, 184, 142
-	//	//51, 70, 51, -4, -26, 85,82, 35, -15, -9, 9, -10, -10, -10, 8, -9, -9, 9, -9, -8, 10, -5, -5, 9, 165, 221, 240, 221
+	//float appleY[] = { 27.5f, 43.0f, 27.5f, 25.5f, 44.5f, 25.5f, 27.0f, 45.0f, 27.0f, 90.5f, 75.0f, 41.0f, 14.5f, 29.5f, 14.5f, 29.5f, 14.5f, 24, 60, 95, 95, 56, 24,
+	//	206, 181, 255, 296, 333, 362,380, 392, 380, 378, 402, 378, 378, 376, 340, 284, 232, 184, 142,
+	//	51, 70, 51, -4, -26, 85,82, 35, -15, -9, 9, -10, -10, -10, 8, -9, -9, 9, -9, -8, 10, -5, -5, 9, 165, 221, 240, 221,
 	//	155, 137, 201, 191, 157, 167, 185, 167, 167, 193, 167, 229, 247, 231, 365, 337, 359, 337, 459, 491, 505, 395, 543, 563, 525, 541 };
-	
+	//
 	////for (size_t i = 0; i<sizeof(appleX); i++)
 	//for (int i = 0; i<28; i++)
 	//{
@@ -328,7 +328,27 @@ void AgrabahMarketScene::onPreInitialize() {
 	/*gameManager->getPrefabV2( "Peddler" )->instantiateWithArgs( "", "Peddler 1" )
 		->getTransform()
 		->setPosition(Vec2(3790.5f, 386.5f));*/
-
+	gameManager->getPrefabV2("Guard 3")->instantiateWithArgs("1559 1380 1699", "Guard 3")
+	->getTransform()->setPositionY(-25);
+	gameManager->getPrefabV2("Guard 1")->instantiateWithArgs("200 100 500", "Guard 1")
+		->getTransform()->setPositionY(-25);
+	gameManager->getPrefabV2("Genie Lamp")->instantiateWithArgs("200 100 500", "Guard 1")
+		->getTransform()->setPosition(0, 10);
+	gameManager->getPrefabV2("Checkpoint")->instantiateWithArgs("")
+		->getTransform()
+		->setPosition(50,20);
+	gameManager->getPrefabV2("Guard 4")->instantiateWithArgs("1169", "Guard 4")
+		->getTransform()->setPosition(400, 20);
+	gameManager->getPrefabV2("Charcoal Burner")->instantiateWithArgs("90", "Charcoal Burner 1")
+				->getTransform()
+				->setPosition( Vec2( 360.5f, -50 ) );
+	gameManager->getPrefabV2("Guard 5")->instantiateWithArgs("2697 2660 2922", "Guard 5")
+		->getTransform()->setPosition(400, 20);
+	gameManager->getPrefabV2("Genie Bonus")->instantiateWithArgs("", "Genie Bonus 1")
+		->getTransform()
+		->setPosition(400, 20);
+	gameManager->getPrefabV2("Jumpable Spring")->instantiateWithArgs("")
+		->getTransform()->setPosition(60,20);
 	/* Guards */
 	/*gameManager->getPrefabV2( "Guard 1" )->instantiateWithArgs( "550 430 670", "Guard 1" )
 	   ->getTransform()->setPositionY( -25 );

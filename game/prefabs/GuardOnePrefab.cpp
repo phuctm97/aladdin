@@ -12,6 +12,8 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto initialX = nextFloat( argsStream );
   const auto leftBoundX = nextFloat( argsStream );
   const auto rightBoundX = nextFloat( argsStream );
+  //audio
+  const auto HitSound = new AudioSource(object, "Guard Hit 2.wav");
 
   // constants
   const auto density = 5.0f;
@@ -171,7 +173,10 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                {
                  animator->setAction( "thin_guard_hit" );
                }
-
+			   //audio
+               {
+				   HitSound->play();
+               }
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
