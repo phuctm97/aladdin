@@ -89,10 +89,10 @@ void AgrabahMarketStairsFourPrefab::doInstantiate( ala::GameObject* object, std:
   const auto switcher = new DoubleStairsModeSwitcher( object );
 
   // collider renderers
-  for ( auto collider : stairBelowColliders ) new ColliderRenderer( collider );
-  for ( auto collider : stairUponColliders ) new ColliderRenderer( collider );
-  new ColliderRenderer( firstSwitchCollider );
-  new ColliderRenderer( secondSwitchCollider );
+//  for ( auto collider : stairBelowColliders ) new ColliderRenderer( collider );
+//  for ( auto collider : stairUponColliders ) new ColliderRenderer( collider );
+//  new ColliderRenderer( firstSwitchCollider );
+//  new ColliderRenderer( secondSwitchCollider );
 
   // flags
   const auto stairFlags = COLLIDE_ALADDIN_FLAG |

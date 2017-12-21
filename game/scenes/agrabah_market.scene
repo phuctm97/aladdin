@@ -259,10 +259,10 @@
   </object>
 
   <!-- CAMELS -->
-  <!--  <object name="" quadIndex="010">-->
-  <!--    <prefab version="2" name="Camel" args="R" />-->
-  <!--    <transform position="1404.5 -57.5" />-->
-  <!--  </object>-->
+  <object name="" quadIndex="010">
+    <prefab version="2" name="Camel" args="R" />
+    <transform position="1404.5 -57.5" />
+  </object>
 
   <!-- HAND ENEMIES -->
   <!--  <object name="" quadIndex="031">-->
@@ -895,7 +895,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="2300 -25" />
+    <prefab version="2" name="Playable Aladdin" args="1800 -25" />
   </object>
 
   <!--EFFECT-->

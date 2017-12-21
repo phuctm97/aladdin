@@ -16,7 +16,7 @@ void FinishEntrancePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto collider = new Collider( object, true, Vec2(), Size( width, height ) );
 
   // collider renderers
-  new ColliderRenderer( collider );
+//  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
