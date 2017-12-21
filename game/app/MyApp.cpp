@@ -25,5 +25,5 @@ void MyApp::onPreInitialize() {
 
 void MyApp::onPostInitialize() {
   // starter scene
-  startWithScene( new AutoLoadScene("jafar_quarter.scene",true) );
+  startWithScene( new AutoLoadScene("death.scene",false) );
 }

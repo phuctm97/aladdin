@@ -12,4 +12,7 @@
   <object>
     <prefab version="2" name="Death Scene Controller" args="" />
   </object>
+  <object>
+    <prefab version="2" name="Death scene sound" args="" />
+  </object>
 </Scene>

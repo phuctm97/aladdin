@@ -169,6 +169,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarFootFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
@@ -254,6 +255,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
     <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\DeathSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarFirePrefab.h" />
     <ClInclude Include="prefabs\JafarFootFirePrefab.h" />
     <ClInclude Include="prefabs\JafarPrefab.h" />
@@ -363,7 +365,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <None Include="fonts\one.fnt" />
     <None Include="fonts\two.fnt" />
     <None Include="scenes\agrabah_market.scene" />
-    <None Include="scenes\death.scene" />
+    <None Include="scenes\death.scene">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="scenes\jafar_quarter.scene" />
     <None Include="scenes\menu.scene" />
   </ItemGroup>

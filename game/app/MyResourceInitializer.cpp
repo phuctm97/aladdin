@@ -52,6 +52,7 @@
 #include "../prefabs/JafarPrefab.h"
 #include "../prefabs/JafarFootFirePrefab.h"
 #include "../prefabs/JafarFirePrefab.h"
+#include "../prefabs/DeathSceneSoundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -100,7 +101,8 @@ void MyResourceInitializer::doRun() {
   new AudioClip("Tip Toe.wav", "audio/Tip Toe.wav");
   new AudioClip("Flagpole.wav", "audio/Flagpole.wav");
   new AudioClip("BossTune.wav","audio/BossTune.wav");
-  
+  new AudioClip("Abu Waving.wav","audio/Abu Waving.wav");
+  new AudioClip("Boxing Bell.wav","audio/Boxing Bell.wav");
   
   // Textures
   new Sprite( "background.png", "textures/backgrounds/scene_1_0.png" );
@@ -192,6 +194,7 @@ void MyResourceInitializer::doRun() {
   new JafarPrefab();
   new JafarFootFirePrefab();
   new JafarFirePrefab();
+	new DeathSceneSoundPrefab();
 
   // Dev tools
   new NodePrefab();

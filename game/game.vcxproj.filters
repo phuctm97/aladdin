@@ -297,6 +297,9 @@
     <ClCompile Include="prefabs\JafarFirePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -529,6 +532,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarFirePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\DeathSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
