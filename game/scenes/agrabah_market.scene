@@ -786,22 +786,22 @@
   <!--  </object>-->
 
   <!-- ENEMIES -->
-  <!--  <object name="" quadIndex="00">-->
-  <!--    <prefab version="2" name="Guard 1" args="550 430 670" />-->
-  <!--    <transform position="550 -25" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="00">-->
-  <!--    <prefab version="2" name="Guard 2" args="818 595 1010" />-->
-  <!--    <transform position="818 -25" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="010">-->
-  <!--    <prefab version="2" name="Guard 3" args="1559 1380 1699" />-->
-  <!--    <transform position="1559 -25" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="012">-->
-  <!--    <prefab version="2" name="Guard 4" args="1169" />-->
-  <!--    <transform position="1169 20" />-->
-  <!--  </object>-->
+  <object name="" quadIndex="00">
+    <prefab version="2" name="Guard 1" args="550 430 670" />
+    <transform position="550 -25" />
+  </object>
+  <object name="" quadIndex="00">
+    <prefab version="2" name="Guard 2" args="818 595 1010" />
+    <transform position="818 -25" />
+  </object>
+  <object name="" quadIndex="010">
+    <prefab version="2" name="Guard 3" args="1559 1380 1699" />
+    <transform position="1559 -25" />
+  </object>
+  <object name="" quadIndex="012">
+    <prefab version="2" name="Guard 4" args="1169" />
+    <transform position="1169 20" />
+  </object>
   <!--  <object name="" quadIndex="033">-->
   <!--    <prefab version="2" name="Guard 3" args="1660 1597 1875" />-->
   <!--    <transform position="1660 163" />-->
@@ -895,7 +895,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="1800 -25" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
 
   <!--EFFECT-->

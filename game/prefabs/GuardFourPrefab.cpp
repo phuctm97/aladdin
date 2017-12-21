@@ -42,8 +42,8 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   controller->setInitialX( initialX );
   controller->setLeftBoundX( initialX );
   controller->setRightBoundX( initialX );
-  controller->setMinDistanceCouldAttack( 5 );
-  controller->setMaxDistanceCouldAttack( 160 );
+  controller->setMinDistanceXCouldAttack( 5 );
+  controller->setMaxDistanceXCouldAttack( 160 );
 
   // helpers
   const auto timer1 = new Timer( object );

@@ -47,6 +47,8 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   controller->setInitialX( initialX );
   controller->setLeftBoundX( leftBoundX );
   controller->setRightBoundX( rightBoundX );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceYCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );
@@ -186,13 +188,13 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return controller->isAbleToSeeAladdin() && !controller->isAbleToAttackAladdin() &&
+    return controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
     ((direction->isRight() && controller->isAbleToGoRight()) ||
       (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return controller->isAbleToAttackAladdin() ||
+    return controller->isInBestPositionToAttackAladdin() ||
       (direction->isLeft() && !controller->isAbleToGoLeft()) ||
       (direction->isRight() && !controller->isAbleToGoRight());
   } );

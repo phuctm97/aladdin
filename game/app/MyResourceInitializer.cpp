@@ -10,6 +10,7 @@
 #include "../prefabs/SceneFadeOutTransitionPrefab.h"
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
+#include "../prefabs/AudioPlayerPrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/AladdinAndAbuPrefab.h"
@@ -166,6 +167,7 @@ void MyResourceInitializer::doRun() {
   new BitmapTextPrefab();
   new FadeInEffectPrefab();
   new SceneFadeOutTransitionPrefab();
+  new AudioPlayerPrefab();
 
   new MenuSelectPrefab();
 

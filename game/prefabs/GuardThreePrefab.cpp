@@ -46,8 +46,10 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   controller->setInitialX( initialX );
   controller->setLeftBoundX( leftBoundX );
   controller->setRightBoundX( rightBoundX );
-  controller->setMinDistanceCouldAttack( 40 );
-  controller->setMaxDistanceCouldAttack( 150 );
+  controller->setMinDistanceXCouldAttack( 40 );
+  controller->setMaxDistanceXCouldAttack( 150 );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceXCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );

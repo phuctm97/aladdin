@@ -16,6 +16,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto audioPlayerPrefab = gameManager->getPrefabV2( "Audio Player" );
 
   const auto density = 1.0f;
 
@@ -23,8 +24,6 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
   const auto animator = new Animator( object, "throwable_knife", "guards.anm" );
-
-  const auto swordChingAudio = new AudioSource( object, "Sword Ching.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -64,29 +63,15 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
                  body->addImpulse( Vec2( impulseX, impulseY ) );
                }
              },
-             NULL, NULL );
-
-  new State( stateManager, "explode",
-             [=] {
-               // collision
-               {
-                 collider->setActive( false );
-               }
-
-               // audio
-               {
-                 swordChingAudio->play();
-               }
-
-             }, [=]( float dt ) {
-               // release
-               {
-                 if ( !animator->isPlaying() ) {
-                   object->release();
+             [=]( float dt ) {
+               if ( collisionTracker->collided() ) {
+                 // audio
+                 {
+                   audioPlayerPrefab->instantiateWithArgs( "Sword Ching.wav" );
                  }
+
+                 // release
+                 object->release();
                }
              }, NULL );
-  new StateTransition( stateManager, "initial", "explode", [=] {
-    return collisionTracker->collided();
-  } );
 }

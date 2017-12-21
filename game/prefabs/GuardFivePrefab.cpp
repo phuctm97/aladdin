@@ -47,8 +47,8 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   controller->setInitialX( initialX );
   controller->setLeftBoundX( leftBoundX );
   controller->setRightBoundX( rightBoundX );
-  controller->setMinDistanceCouldAttack( 5 );
-  controller->setMaxDistanceCouldAttack( 50 );
+  controller->setMinDistanceXCouldAttack( 5 );
+  controller->setMaxDistanceXCouldAttack( 50 );
 
   // helpers
   const auto timer1 = new Timer( object );

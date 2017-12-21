@@ -6,8 +6,10 @@
 
 ALA_CLASS_HEADER_1(GuardController, ala::GameObjectComponent)
 private:
-  float _minDistanceCouldAttack;
-  float _maxDistanceCouldAttack;
+  float _minDistanceXCouldAttack;
+  float _maxDistanceXCouldAttack;
+  float _minDistanceYCouldAttack;
+  float _maxDistanceYCouldAttack;
   float _tooFarDistance;
 
   float _initialX;
@@ -37,6 +39,8 @@ public:
 
   bool isAbleToAttackAladdin() const;
 
+  bool isInBestPositionToAttackAladdin() const;
+
   bool isAbleToGoLeft() const;
 
   bool isAbleToGoRight() const;
@@ -55,13 +59,21 @@ public:
 
   void setRightBoundX( const float rightBoundX );
 
-  float getMinDistanceCouldAttack() const;
+  float getMinDistanceXCouldAttack() const;
 
-  void setMinDistanceCouldAttack( const float minDistanceCouldAttack );
+  void setMinDistanceXCouldAttack( const float minDistanceCouldAttack );
 
-  float getMaxDistanceCouldAttack() const;
+  float getMaxDistanceXCouldAttack() const;
 
-  void setMaxDistanceCouldAttack( const float maxDistanceCouldAttack );
+  void setMaxDistanceXCouldAttack( const float maxDistanceCouldAttack );
+
+  float getMinDistanceYCouldAttack() const;
+
+  void setMinDistanceYCouldAttack( const float minDistanceYCouldAttack );
+
+  float getMaxDistanceYCouldAttack() const;
+
+  void setMaxDistanceYCouldAttack( const float maxDistanceYCouldAttack );
 
   int getHealth() const;
 

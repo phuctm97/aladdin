@@ -162,6 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
@@ -258,6 +259,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
     <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
@@ -388,7 +390,9 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <None Include="animations\playable_characters\aladdin.anm" />
     <None Include="fonts\one.fnt" />
     <None Include="fonts\two.fnt" />
-    <None Include="scenes\agrabah_market.scene" />
+    <None Include="scenes\agrabah_market.scene">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="scenes\death.scene" />
     <None Include="scenes\jafar_palace.scene" />
     <None Include="scenes\level_complete.scene" />
