@@ -53,6 +53,7 @@
 #include "../prefabs/JafarFootFirePrefab.h"
 #include "../prefabs/JafarFirePrefab.h"
 #include "../prefabs/DeathSceneSoundPrefab.h"
+#include "../prefabs/JafarSceneSoundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -195,6 +196,7 @@ void MyResourceInitializer::doRun() {
   new JafarFootFirePrefab();
   new JafarFirePrefab();
 	new DeathSceneSoundPrefab();
+	new JafarSceneSoundPrefab();
 
   // Dev tools
   new NodePrefab();

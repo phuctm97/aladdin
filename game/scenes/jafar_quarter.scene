@@ -37,4 +37,7 @@
     <prefab version="2" name="Jafar foot fire" />
     <transform position="170 -20.5" />
   </object>
+  <object>
+    <prefab version="2" name="Jafar scene sound" args="" />
+  </object>
 </Scene>
