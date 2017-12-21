@@ -406,6 +406,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Font Include="fonts\crackman.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="audio\A Whole New World.wav" />
     <Media Include="audio\Aaah.wav" />
     <Media Include="audio\Abu Uh-Oh.wav" />
     <Media Include="audio\Abu Waving.wav" />
@@ -415,6 +416,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Apple Collect.wav" />
     <Media Include="audio\Apple Slice.wav" />
     <Media Include="audio\Apple Splat.wav" />
+    <Media Include="audio\Background Agrabahmarket.wav" />
     <Media Include="audio\Balloon Pop.wav" />
     <Media Include="audio\Body Crunch.wav" />
     <Media Include="audio\Bones Tinkle.wav" />
@@ -454,10 +456,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Jafar Laugh.wav" />
     <Media Include="audio\Jafar Snake.wav" />
     <Media Include="audio\Jafar Tractor.wav" />
+    <Media Include="audio\Level Complete.wav" />
     <Media Include="audio\Low Sword.wav" />
     <Media Include="audio\Menu Change.wav" />
     <Media Include="audio\Menu Select.wav" />
-    <Media Include="audio\Retry.wav" />
     <Media Include="audio\Object Throw.wav" />
     <Media Include="audio\Oooh.wav" />
     <Media Include="audio\Outta Apples.wav" />
@@ -466,6 +468,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Peddler Shop.wav" />
     <Media Include="audio\Ping.wav" />
     <Media Include="audio\Pole Slide.wav" />
+    <Media Include="audio\Retry.wav" />
     <Media Include="audio\Rock Bounce (FM Only).wav" />
     <Media Include="audio\Rock Bounce (Sample Only).wav" />
     <Media Include="audio\Rock Bounce.wav" />

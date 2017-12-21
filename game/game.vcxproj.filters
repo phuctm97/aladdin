@@ -754,6 +754,9 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
+    <Media Include="audio\A Whole New World.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Aaah.wav">
       <Filter>audio</Filter>
     </Media>
@@ -779,6 +782,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Apple Splat.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Background Agrabahmarket.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Balloon Pop.wav">
@@ -898,6 +904,9 @@
     <Media Include="audio\Jafar Tractor.wav">
       <Filter>audio</Filter>
     </Media>
+    <Media Include="audio\Level Complete.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Low Sword.wav">
       <Filter>audio</Filter>
     </Media>
@@ -929,6 +938,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Pole Slide.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Retry.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Rock Bounce (FM Only).wav">
@@ -1004,9 +1016,6 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Yeah.wav">
-      <Filter>audio</Filter>
-    </Media>
-    <Media Include="audio\Retry.wav">
       <Filter>audio</Filter>
     </Media>
   </ItemGroup>
