@@ -46,6 +46,13 @@ void JafarFirePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   // collider renderer
   //  new ColliderRenderer( aladdinCollider );
 
+  // flags
+  groundCollider->setFlags( EMPTY_FLAG );
+  groundCollider->ignoreIfNotHasAnyFlags( STANDABLE_FLAG );
+
+  aladdinCollider->setFlags( COLLIDE_ALADDIN_FLAG );
+  aladdinCollider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
+
   // configurations
   object->setTag( FIRE_TAG );
   object->setLayer( "Foreground" );
