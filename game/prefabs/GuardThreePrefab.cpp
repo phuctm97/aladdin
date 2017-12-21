@@ -49,7 +49,7 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   controller->setMinDistanceXCouldAttack( 40 );
   controller->setMaxDistanceXCouldAttack( 150 );
   controller->setMinDistanceYCouldAttack( 0 );
-  controller->setMaxDistanceXCouldAttack( 50 );
+  controller->setMaxDistanceYCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );
@@ -189,13 +189,13 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
              }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return controller->isAbleToSeeAladdin() && !controller->isAbleToAttackAladdin() &&
+    return controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
     ((direction->isRight() && controller->isAbleToGoRight()) ||
       (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return controller->isAbleToAttackAladdin() ||
+    return controller->isInBestPositionToAttackAladdin() ||
       (direction->isLeft() && !controller->isAbleToGoLeft()) ||
       (direction->isRight() && !controller->isAbleToGoRight());
   } );
