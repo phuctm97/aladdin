@@ -24,7 +24,7 @@ void PendalPrefab::doInstantiate( ala::GameObject* object, std::istringstream& a
 
   const auto timer = new Timer( object );
 
-  const auto flags = COLLIDE_ALADDIN_FLAG | STANDABLE_FLAG;
+  const auto flags = COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG | STANDABLE_FLAG;
   mainCollider->setFlags( flags );
 
   // collider renderers
@@ -32,7 +32,6 @@ void PendalPrefab::doInstantiate( ala::GameObject* object, std::istringstream& a
 
   // configurations
   object->setLayer( "Foreground" );
-  object->setTag( GROUND_TAG );
 
   // states
   new State( stateManager, "idle",

@@ -802,90 +802,90 @@
     <prefab version="2" name="Guard 4" args="1169" />
     <transform position="1169 20" />
   </object>
-  <!--  <object name="" quadIndex="033">-->
-  <!--    <prefab version="2" name="Guard 3" args="1660 1597 1875" />-->
-  <!--    <transform position="1660 163" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="21">-->
-  <!--    <prefab version="2" name="Guard 2" args="1567 1550 1800" />-->
-  <!--    <transform position="1567 336" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="21">-->
-  <!--    <prefab version="2" name="Guard 3" args="2050 1437 2102" />-->
-  <!--    <transform position="2050 336" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="">-->
-  <!--    <prefab version="2" name="Guard 4" args="2370" />-->
-  <!--    <transform position="2370 81" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="102">-->
-  <!--    <prefab version="2" name="Guard 3" args="2657 2577 2680" />-->
-  <!--    <transform position="2657 43" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="101">-->
-  <!--    <prefab version="2" name="Guard 2" args="3080 2662 4170" />-->
-  <!--    <transform position="3080 -40" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="101">-->
-  <!--    <prefab version="2" name="Guard 3" args="3305 2662 4170" />-->
-  <!--    <transform position="3305 -40" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="111">-->
-  <!--    <prefab version="2" name="Guard 2" args="4137 2662 4170" />-->
-  <!--    <transform position="4137 -40" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="111">-->
-  <!--    <prefab version="2" name="Guard 3" args="4498 4315 4607" />-->
-  <!--    <transform position="4498 -6" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="110">-->
-  <!--    <prefab version="2" name="Guard 2" args="3507 2662 4170" />-->
-  <!--    <transform position="3507 -40" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="131">-->
-  <!--    <prefab version="2" name="Guard 4" args="4190 " />-->
-  <!--    <transform position="4190 150" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="130">-->
-  <!--    <prefab version="2" name="Guard 3" args="3740 3685 3800" />-->
-  <!--    <transform position="3740 160" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="130">-->
-  <!--    <prefab version="2" name="Guard 2" args="3630 2902 3660" />-->
-  <!--    <transform position="3630 123" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="121">-->
-  <!--    <prefab version="2" name="Guard 3" args="2992 3685 3800" />-->
-  <!--    <transform position="2992 160" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="123">-->
-  <!--    <prefab version="2" name="Guard 3" args="2832 2660 2922" />-->
-  <!--    <transform position="2832 191" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="122">-->
-  <!--    <prefab version="2" name="Guard 5" args="2697 2660 2922" />-->
-  <!--    <transform position="2697 191" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="320">-->
-  <!--    <prefab version="2" name="Guard 4" args="2378" />-->
-  <!--    <transform position="2378 443" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="321">-->
-  <!--    <prefab version="2" name="Guard 4" args="2952" />-->
-  <!--    <transform position="2952 466" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="301">-->
-  <!--    <prefab version="2" name="Guard 2" args="2915 2662 3030" />-->
-  <!--    <transform position="2915 319" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="301">-->
-  <!--    <prefab version="2" name="Guard 3" args="3135 3037 3385" />-->
-  <!--    <transform position="3135 500" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="313">-->
-  <!--    <prefab version="2" name="Guard 2" args="4357 4192 4535" />-->
-  <!--    <transform position="4357 400" />-->
-  <!--  </object>-->
+  <object name="" quadIndex="033">
+    <prefab version="2" name="Guard 3" args="1660 1597 1875" />
+    <transform position="1660 163" />
+  </object>
+  <object name="" quadIndex="21">
+    <prefab version="2" name="Guard 2" args="1567 1550 1800" />
+    <transform position="1567 336" />
+  </object>
+  <object name="" quadIndex="21">
+    <prefab version="2" name="Guard 3" args="2050 1437 2102" />
+    <transform position="2050 336" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Guard 4" args="2370" />
+    <transform position="2370 81" />
+  </object>
+  <object name="" quadIndex="102">
+    <prefab version="2" name="Guard 3" args="2657 2577 2680" />
+    <transform position="2657 43" />
+  </object>
+  <object name="" quadIndex="101">
+    <prefab version="2" name="Guard 2" args="3080 2662 4170" />
+    <transform position="3080 -40" />
+  </object>
+  <object name="" quadIndex="101">
+    <prefab version="2" name="Guard 3" args="3305 2662 4170" />
+    <transform position="3305 -40" />
+  </object>
+  <object name="" quadIndex="111">
+    <prefab version="2" name="Guard 2" args="4137 2662 4170" />
+    <transform position="4137 -40" />
+  </object>
+  <object name="" quadIndex="111">
+    <prefab version="2" name="Guard 3" args="4498 4315 4607" />
+    <transform position="4498 -6" />
+  </object>
+  <object name="" quadIndex="110">
+    <prefab version="2" name="Guard 2" args="3507 2662 4170" />
+    <transform position="3507 -40" />
+  </object>
+  <object name="" quadIndex="131">
+    <prefab version="2" name="Guard 4" args="4190 " />
+    <transform position="4190 150" />
+  </object>
+  <object name="" quadIndex="130">
+    <prefab version="2" name="Guard 3" args="3740 3685 3800" />
+    <transform position="3740 160" />
+  </object>
+  <object name="" quadIndex="130">
+    <prefab version="2" name="Guard 2" args="3630 2902 3660" />
+    <transform position="3630 123" />
+  </object>
+  <object name="" quadIndex="121">
+    <prefab version="2" name="Guard 3" args="2992 3685 3800" />
+    <transform position="2992 160" />
+  </object>
+  <object name="" quadIndex="123">
+    <prefab version="2" name="Guard 3" args="2832 2660 2922" />
+    <transform position="2832 191" />
+  </object>
+  <object name="" quadIndex="122">
+    <prefab version="2" name="Guard 5" args="2697 2660 2922" />
+    <transform position="2697 191" />
+  </object>
+  <object name="" quadIndex="320">
+    <prefab version="2" name="Guard 4" args="2378" />
+    <transform position="2378 443" />
+  </object>
+  <object name="" quadIndex="321">
+    <prefab version="2" name="Guard 4" args="2952" />
+    <transform position="2952 466" />
+  </object>
+  <object name="" quadIndex="301">
+    <prefab version="2" name="Guard 2" args="2915 2662 3030" />
+    <transform position="2915 319" />
+  </object>
+  <object name="" quadIndex="301">
+    <prefab version="2" name="Guard 3" args="3135 3037 3385" />
+    <transform position="3135 500" />
+  </object>
+  <object name="" quadIndex="313">
+    <prefab version="2" name="Guard 2" args="4357 4192 4535" />
+    <transform position="4357 400" />
+  </object>
 
   <!--FINISH ENTRANCE-->
   <object name="Finish Entrance">

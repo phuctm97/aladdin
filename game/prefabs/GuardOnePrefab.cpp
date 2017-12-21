@@ -56,8 +56,8 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
-  new ColliderRenderer( swordCollider );
+  //  new ColliderRenderer( collider );
+  //  new ColliderRenderer( swordCollider );
 
   // flags
   collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );

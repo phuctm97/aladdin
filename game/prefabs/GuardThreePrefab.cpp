@@ -57,7 +57,7 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );

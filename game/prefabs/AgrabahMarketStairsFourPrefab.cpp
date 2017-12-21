@@ -84,7 +84,7 @@ void AgrabahMarketStairsFourPrefab::doInstantiate( ala::GameObject* object, std:
   const auto secondSwitchCollider = new Collider( object, true, Vec2( 2090.0f - 2152.5f - 292.5f, 33.0f + 87.5f ),
                                                   Size( 11.0f, 73.0f ), 1, 0, "U" );
 
-  const auto stateManager = new StateManager( object, "OffOff" );
+  const auto stateManager = new StateManager( object, "OnOff" );
 
   const auto switcher = new DoubleStairsModeSwitcher( object );
 
