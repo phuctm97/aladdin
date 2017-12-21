@@ -47,6 +47,7 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/AgrabahMarketParallaxPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -92,6 +93,7 @@ void MyResourceInitializer::doRun() {
   // Textures
   new Sprite( "agrabah_market_background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "agrabah_market_foreground.png", "textures/backgrounds/scene_1_1.png" );
+  new Sprite( "agrabah_market_parallax.png", "textures/backgrounds/scene_1_2.png" );
   new Sprite( "jafar_palace_background.png", "textures/backgrounds/scene_2_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
@@ -116,6 +118,7 @@ void MyResourceInitializer::doRun() {
   new BitmapFont( "two.fnt", "fonts/two.fnt" );
 
   // Animations
+  new Animation( "agrabah_market_parallax.anm", "animations/backgrounds/scene_1_2.anm" );
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "enemy_explosions.anm", "animations/miscellaneous/enemy_explosions.anm" );
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
@@ -175,6 +178,7 @@ void MyResourceInitializer::doRun() {
   new JumpableSpringPrefab();
   new PlatformPrefab();
 
+  new AgrabahMarketParallaxPrefab();
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();
