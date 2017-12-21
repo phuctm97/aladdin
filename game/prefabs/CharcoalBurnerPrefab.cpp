@@ -13,6 +13,8 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto flamePrefab = gameManager->getPrefab( "Flame" );
 
   // components
+  const auto coalAudio = new AudioSource( object, "Fire From Coal.wav" );
+
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC, 0 );
 
   const auto collider = new Collider( object, true, Vec2(), Size( width, 4 ) );
@@ -43,7 +45,8 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
   object->setLayer( "Debug" );
 
   // states
-  new State( stateManager, "nothing", NULL, NULL, NULL );
+  new State( stateManager, "nothing",
+             NULL, NULL, NULL );
 
   new State( stateManager, "fire",
              [=] {
@@ -55,8 +58,13 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
                  flamePrefab->instantiate( firePosition );
                  timer->start( 0.4f );
                }
-             },
-             NULL );
+               // audio
+               {
+                 if ( !coalAudio->isPlaying() ) {
+                   coalAudio->play();
+                 }
+               }
+             }, NULL );
 
   new StateTransition( stateManager, "nothing", "fire", [=] {
     return controller->isTouchingAladdin();

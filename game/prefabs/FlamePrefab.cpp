@@ -8,18 +8,11 @@ void FlamePrefab::doInstantiate( ala::GameObject* object ) const {
 
   const auto animator = new Animator( object, "fire", "jafar.anm" );
 
-  const auto coalAudio = new AudioSource( object, "Fire From Coal.wav" );
-
   const auto stateManager = new StateManager( object, "fire" );
 
   // states
   new State( stateManager, "fire",
-             [=] {
-               // audio
-               {
-                 coalAudio->play();
-               }
-             },
+             NULL,
              [=]( float dt ) {
                if ( !animator->isPlaying() ) {
                  object->release();

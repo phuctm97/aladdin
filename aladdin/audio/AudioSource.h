@@ -40,6 +40,8 @@ public:
 
   bool isLoop() const;
 
+  bool isPlaying() const;
+
 protected:
   void onInitialize() override;
 
