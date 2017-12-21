@@ -29,6 +29,8 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   const auto animator = new Animator( object, "adorable_guard_idle", "guards.anm" );
 
+  const auto hitAudio = new AudioSource( object, "Guard's Pants.wav" );
+
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ) );
@@ -44,8 +46,10 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   controller->setInitialX( initialX );
   controller->setLeftBoundX( leftBoundX );
   controller->setRightBoundX( rightBoundX );
-  controller->setMinDistanceCouldAttack( 40 );
-  controller->setMaxDistanceCouldAttack( 150 );
+  controller->setMinDistanceXCouldAttack( 40 );
+  controller->setMaxDistanceXCouldAttack( 150 );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceYCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );
@@ -53,7 +57,7 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
@@ -173,6 +177,11 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                  animator->setAction( "adorable_guard_hit" );
                }
 
+               // audio
+               {
+                 hitAudio->play();
+               }
+
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
@@ -180,13 +189,13 @@ void GuardThreePrefab::doInstantiate( ala::GameObject* object, std::istringstrea
              }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return controller->isAbleToSeeAladdin() && !controller->isAbleToAttackAladdin() &&
+    return controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
     ((direction->isRight() && controller->isAbleToGoRight()) ||
       (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return controller->isAbleToAttackAladdin() ||
+    return controller->isInBestPositionToAttackAladdin() ||
       (direction->isLeft() && !controller->isAbleToGoLeft()) ||
       (direction->isRight() && !controller->isAbleToGoRight());
   } );

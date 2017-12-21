@@ -10,6 +10,8 @@ void SmallFireworkPrefab::doInstantiate( ala::GameObject* object, std::istringst
 
   const auto animator = new Animator( object, "small_firework", "items.anm" );
 
+  const auto eatAppleAudio = new AudioSource( object, "Apple Collect.wav" );
+
   const auto stateManager = new StateManager( object, "static" );
 
   // configurations
@@ -17,7 +19,12 @@ void SmallFireworkPrefab::doInstantiate( ala::GameObject* object, std::istringst
 
   // states
   new State( stateManager, "static",
-             NULL,
+             [=] {
+               // audio
+               {
+                 eatAppleAudio->play();
+               }
+             },
              [=]( float dt ) {
                if ( !animator->isPlaying() )
                  object->release();

@@ -61,6 +61,9 @@
     <Filter Include="audio">
       <UniqueIdentifier>{5089b2e6-cb7b-4665-8f56-f23b2b6c4833}</UniqueIdentifier>
     </Filter>
+    <Filter Include="animations\backgrounds">
+      <UniqueIdentifier>{86cc25ef-bec1-42aa-8deb-85422351ed57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp">
@@ -126,9 +129,6 @@
     <ClCompile Include="prefabs\SpendThesePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\SpringPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\SpritePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -137,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp">
       <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scenes\AgrabahMarketScene.cpp">
-      <Filter>scenes</Filter>
     </ClCompile>
     <ClCompile Include="scripts\CamelController.cpp">
       <Filter>scripts</Filter>
@@ -327,6 +324,18 @@
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\ParallaxController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\FinishEntrancePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AudioPlayerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -390,9 +399,6 @@
     <ClInclude Include="prefabs\SpendThesePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\SpringPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\SpritePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -401,9 +407,6 @@
     </ClInclude>
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h">
       <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scenes\AgrabahMarketScene.h">
-      <Filter>scenes</Filter>
     </ClInclude>
     <ClInclude Include="scripts\CamelController.h">
       <Filter>scripts</Filter>
@@ -588,6 +591,18 @@
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\ParallaxController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FinishEntrancePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AudioPlayerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png">
@@ -647,17 +662,17 @@
     <Image Include="textures\miscellaneous\retry.png">
       <Filter>texures\miscellaneous</Filter>
     </Image>
+    <Image Include="textures\backgrounds\scene_1_2.png">
+      <Filter>texures\backgrounds</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="log.txt" />
-    <Text Include="log.txt" />
     <Text Include="note.txt" />
-    <Text Include="prefabs\FadeInEffectPrefab.h">
-      <Filter>prefabs</Filter>
-    </Text>
     <Text Include="audio\readme.txt">
       <Filter>audio</Filter>
     </Text>
+    <Text Include="prefabs\FadeInEffectPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">
@@ -720,6 +735,9 @@
     <None Include="scenes\level_complete.scene">
       <Filter>scenes\resources</Filter>
     </None>
+    <None Include="animations\backgrounds\scene_1_2.anm">
+      <Filter>animations\backgrounds</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\aladdin.ttf">
@@ -733,6 +751,9 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
+    <Media Include="audio\A Whole New World.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Aaah.wav">
       <Filter>audio</Filter>
     </Media>
@@ -758,6 +779,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Apple Splat.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Background Agrabahmarket.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Balloon Pop.wav">
@@ -877,6 +901,9 @@
     <Media Include="audio\Jafar Tractor.wav">
       <Filter>audio</Filter>
     </Media>
+    <Media Include="audio\Level Complete.wav">
+      <Filter>audio</Filter>
+    </Media>
     <Media Include="audio\Low Sword.wav">
       <Filter>audio</Filter>
     </Media>
@@ -908,6 +935,9 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Pole Slide.wav">
+      <Filter>audio</Filter>
+    </Media>
+    <Media Include="audio\Retry.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Rock Bounce (FM Only).wav">
@@ -985,7 +1015,7 @@
     <Media Include="audio\Yeah.wav">
       <Filter>audio</Filter>
     </Media>
-    <Media Include="audio\Retry.wav">
+    <Media Include="audio\NameLevel Agrabahmarket.wav">
       <Filter>audio</Filter>
     </Media>
   </ItemGroup>

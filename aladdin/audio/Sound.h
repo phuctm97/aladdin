@@ -32,6 +32,8 @@ public:
 
   void setCSound( CSound* cSound );
 
+  bool isPlaying() const;
+
 private:
   void initCSound();
 

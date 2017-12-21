@@ -27,6 +27,10 @@ bool AudioSource::isLoop() const {
   return _loop;
 }
 
+bool AudioSource::isPlaying() const {
+  return _sound->isPlaying();
+}
+
 void AudioSource::onInitialize() {
   _sound->initialize();
 }

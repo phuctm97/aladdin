@@ -5,7 +5,6 @@
 
 ALA_CLASS_HEADER_1(DoubleStairsModeSwitcher, ala::GameObjectComponent)
 private:
-	char _turnSide;
 	ala::StateManager* _stairsStateManager;
 
 public:

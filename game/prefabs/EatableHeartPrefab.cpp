@@ -29,7 +29,7 @@ void EatableHeartPrefab::doInstantiate( ala::GameObject* object, std::istringstr
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );

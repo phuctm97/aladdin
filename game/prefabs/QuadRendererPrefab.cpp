@@ -14,7 +14,7 @@ void QuadRendererPrefab::doInstantiate( ala::GameObject* object, std::istringstr
   const auto quadTree = gameManager->getRunningScene()->getQuadTree();
 
   // offset
-  const int nodeLevel = index.size();
+  const int nodeLevel = static_cast<int>(index.size());
   const auto nodeWidth = quadTree->getUnitWidth() * powf( 2, 1.0f * quadTree->getLevel() - nodeLevel );
   const auto nodeHeight = quadTree->getUnitHeight() * powf( 2, 1.0f * quadTree->getLevel() - nodeLevel );
   auto nodeOffsetX = 0.0f;

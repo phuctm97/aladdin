@@ -10,11 +10,18 @@ void EnemyExplosionTwoPrefab::doInstantiate( ala::GameObject* object, std::istri
 
   const auto animator = new Animator( object, "explosion", "enemy_explosions.anm" );
 
+  const auto genieDeathAudio = new AudioSource( object, "Genie Fumes.wav" );
+
   const auto stateManager = new StateManager( object, "explode" );
 
   // states
   new State( stateManager, "explode",
-             NULL,
+             [=] {
+               // audio 
+               {
+                 genieDeathAudio->play();
+               }
+             },
              [=]( float dt ) {
                if ( !animator->isPlaying() ) {
                  object->release();

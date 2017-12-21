@@ -44,6 +44,10 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
   // collider renderers
   new ColliderRenderer( collider );
 
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
+
   // configurations
   object->setTag( VASE_TAG );
   object->setLayer( "Mass Character" );

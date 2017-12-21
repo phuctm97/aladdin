@@ -16,6 +16,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto audioPlayerPrefab = gameManager->getPrefabV2( "Audio Player" );
 
   const auto density = 1.0f;
 
@@ -44,7 +45,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_ALADDIN_FLAG );
@@ -63,11 +64,14 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
                }
              },
              [=]( float dt ) {
-               // destroy
-               {
-                 if ( collisionTracker->collided() ) {
-                   object->release();
+               if ( collisionTracker->collided() ) {
+                 // audio
+                 {
+                   audioPlayerPrefab->instantiateWithArgs( "Sword Ching.wav" );
                  }
+
+                 // release
+                 object->release();
                }
              }, NULL );
 }

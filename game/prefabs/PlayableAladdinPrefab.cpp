@@ -48,6 +48,16 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   const auto animator = new Animator( object, "idle_1", "aladdin.anm" );
 
+  const auto highSwordAudio = new AudioSource( object, "High Sword.wav" );
+
+  const auto throwAudio = new AudioSource( object, "Object Throw.wav" );
+
+  const auto pushAudio = new AudioSource( object, "Aladdin Push.wav" );
+
+  const auto hurtAudio = new AudioSource( object, "Aladdin Hurt.wav" );
+
+  const auto lowSwordAudio = new AudioSource( object, "Low Sword.wav" );
+
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ), 1, 0, "Body" );
@@ -80,6 +90,8 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   const auto timer2 = new Timer( object );
 
   const auto timer3 = new Timer( object );
+
+  const auto timer4 = new Timer( object );
 
   // collider renderers
   //  new ColliderRenderer( collider );
@@ -273,6 +285,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.2f );
+
+                     // audio
+                     {
+                       highSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -321,6 +338,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
 
                    timer1->start( 5.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
              }, NULL );
@@ -398,6 +420,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.25f );
+
+                     // audio 
+                     {
+                       highSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -464,6 +491,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
 
                    timer1->start( 5.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
              }, NULL );
@@ -543,6 +575,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.2f );
+
+                     // audio
+                     {
+                       lowSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -603,6 +640,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
 
                    timer1->start( 5.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
              }, NULL );
@@ -713,6 +755,12 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.2f );
+
+                     // audio
+                     {
+                       highSwordAudio->play();
+                     }
+
                    }
                    else {
                      swordCollider->setActive( false );
@@ -941,6 +989,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 0.2f );
+
+                     // audio
+                     {
+                       highSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -1016,6 +1069,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                                              throwImpulse.getY() );
                    }
                    timer2->start( 2.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
              }, NULL );
@@ -1026,12 +1084,26 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  animator->setAction( "start_push" );
                }
+
+               // audio
+               {
+                 pushAudio->play();
+                 timer4->start( 1.0f );
+               }
              },
              [=]( float ) {
                // animation effect
                {
                  if ( !animator->isPlaying() ) {
                    animator->setAction( "pushing" );
+                 }
+               }
+
+               // audio
+               {
+                 if ( timer4->isDone() ) {
+                   pushAudio->play();
+                   timer4->start( 1.0f );
                  }
                }
 
@@ -1173,6 +1245,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 5 );
+
+                     // audio
+                     {
+                       highSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -1255,6 +1332,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
 
                    timer1->start( 5.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
 
@@ -1417,6 +1499,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    if ( !swordCollider->isActive() ) {
                      swordCollider->setActive( true );
                      timer3->start( 5 );
+
+                     // audio
+                     {
+                       highSwordAudio->play();
+                     }
                    }
                    else {
                      swordCollider->setActive( false );
@@ -1486,6 +1573,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    }
 
                    timer1->start( 5.0f );
+
+                   // audio
+                   {
+                     throwAudio->play();
+                   }
                  }
                }
 
@@ -1518,6 +1610,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // animation effect 
                {
                  animator->setAction( "hit" );
+               }
+
+               // audio
+               {
+                 hurtAudio->play();
                }
 
                // move
@@ -1689,6 +1786,10 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
   } );
 
   new StateTransition( stateManager, "idle", "fall", [=] {
+    return body->getVelocity().getY() < -10;
+  } );
+
+  new StateTransition( stateManager, "stop", "fall", [=] {
     return body->getVelocity().getY() < -10;
   } );
 

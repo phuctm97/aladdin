@@ -11,9 +11,6 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto menuOneY = nextFloat( argsStream );
   const auto menuTwoY = nextFloat( argsStream );
   const auto menuThreeY = nextFloat( argsStream );
-	//audio
-  const auto MenuChangeSound = new AudioSource(object,"Menu Change.wav");
-  const auto SceneMusic = new AudioSource(object,"A Whole New World.wav");
 
   // constants
   const auto gameManager = GameManager::get();
@@ -26,6 +23,10 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   const auto animator = new Animator( object, "menu_select", "items.anm" );
 
+  const auto menuChangeAudio = new AudioSource( object, "Menu Change.wav" );
+
+  const auto sceneAudio = new AudioSource( object, "A Whole New World.wav" );
+
   const auto actionManager = new ActionManager( object );
 
   const auto stateManager = new StateManager( object, "initial" );
@@ -36,28 +37,40 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   new State( stateManager, "initial",
              [=] {
                // reset app data
-               myAppData->setCurrentLevel( 1 );
-               myAppData->setCurrentCheckpoint( 0 );
-               myAppData->setAladdinLives( 3 );
-               myAppData->setRetryTimes( 1 );
-               SceneMusic->play();
+               {
+                 myAppData->setCurrentLevel( 1 );
+                 myAppData->setCurrentCheckpoint( 0 );
+                 myAppData->setAladdinLives( 3 );
+                 myAppData->setRetryTimes( 1 );
+               }
+
+               // audio
+               {
+                 sceneAudio->play();
+               }
              }, NULL, NULL );
 
   new State( stateManager, "menu_1",
              [=] {
-               transform->setPosition( -84, menuOneY - 8 );
-				 //audio
+               // animation effect
                {
-	               MenuChangeSound->play();
+                 transform->setPosition( -84, menuOneY - 8 );
+
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
                }
 
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )
@@ -70,18 +83,25 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   new State( stateManager, "menu_2",
              [=] {
-               transform->setPosition( -84, menuTwoY - 8 );
-				 //audio
+               // animation effect
                {
-	               MenuChangeSound->play();
+                 transform->setPosition( -84, menuTwoY - 8 );
+
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
                }
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )
@@ -94,18 +114,25 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   new State( stateManager, "menu_3",
              [=] {
-               transform->setPosition( -84, menuThreeY - 8 );
-			   //audio
+               // animation effect
                {
-	               MenuChangeSound->play();
+                 transform->setPosition( -84, menuThreeY - 8 );
+
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
                }
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )

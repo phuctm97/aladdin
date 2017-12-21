@@ -25,6 +25,8 @@ void DeathSceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
              [=]( float dt ) {
                if ( timer->isDone() ) {
                  if ( myAppData->getAladdinLives() > 0 ) {
+                   myAppData->setAladdinLives( myAppData->getAladdinLives() - 1 );
+
                    if ( myAppData->getCurrentLevel() <= myAppData->getNumberOfLevels() ) {
                      std::stringstream args;
                      args << 0.5 << ' ' << myAppData->getSceneName( myAppData->getCurrentLevel() ) << '\n' << 1;

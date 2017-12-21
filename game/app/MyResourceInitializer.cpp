@@ -10,6 +10,7 @@
 #include "../prefabs/SceneFadeOutTransitionPrefab.h"
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
+#include "../prefabs/AudioPlayerPrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/AladdinAndAbuPrefab.h"
@@ -47,6 +48,9 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/PendalPrefab.h"
+#include "../prefabs/FinishEntrancePrefab.h"
+#include "../prefabs/AgrabahMarketParallaxPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -92,6 +96,7 @@ void MyResourceInitializer::doRun() {
   // Textures
   new Sprite( "agrabah_market_background.png", "textures/backgrounds/scene_1_0.png" );
   new Sprite( "agrabah_market_foreground.png", "textures/backgrounds/scene_1_1.png" );
+  new Sprite( "agrabah_market_parallax.png", "textures/backgrounds/scene_1_2.png" );
   new Sprite( "jafar_palace_background.png", "textures/backgrounds/scene_2_1.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
@@ -109,15 +114,6 @@ void MyResourceInitializer::doRun() {
   new Sprite( "peddler.png", "textures/nonplayable_characters/peddler.png" );
   new Sprite( "abu.png", "textures/nonplayable_characters/abu.png" );
 
-  //audio
-  new AudioClip("Menu Change.wav","audio/Menu Change.wav");
-  new AudioClip("A Whole New World.wav","audio/A Whole New World.wav");
-  new AudioClip("Background Agrabahmarket.wav","audio/Background Agrabahmarket.wav");
-  new AudioClip("NameLevel Agrabahmarket.wav","audio/NameLevel Agrabahmarket.wav");
-  new AudioClip("Level Complete.wav","audio/Level Complete.wav");
-  new AudioClip("Retry.wav","audio/Retry.wav");
-	
-  
   // Fonts
   new Font( "aladdin.ttf", "aladdin.ttf", "fonts" );
   new Font( "arcade.ttf", "arcade.ttf", "fonts" );
@@ -125,6 +121,7 @@ void MyResourceInitializer::doRun() {
   new BitmapFont( "two.fnt", "fonts/two.fnt" );
 
   // Animations
+  new Animation( "agrabah_market_parallax.anm", "animations/backgrounds/scene_1_2.anm" );
   new Animation( "aladdin.anm", "animations/playable_characters/aladdin.anm" );
   new Animation( "enemy_explosions.anm", "animations/miscellaneous/enemy_explosions.anm" );
   new Animation( "apple.anm", "animations/miscellaneous/apple.anm" );
@@ -137,11 +134,40 @@ void MyResourceInitializer::doRun() {
   new Animation( "peddler.anm", "animations/nonplayable_characters/peddler.anm" );
   new Animation( "abu.anm", "animations/nonplayable_characters/abu.anm" );
 
+  // Audio
+  new AudioClip( "Menu Change.wav", "audio/Menu Change.wav" );
+  new AudioClip( "A Whole New World.wav", "audio/A Whole New World.wav" );
+  new AudioClip( "Background Agrabahmarket.wav", "audio/Background Agrabahmarket.wav" );
+  new AudioClip( "NameLevel Agrabahmarket.wav", "audio/NameLevel Agrabahmarket.wav" );
+  new AudioClip( "Level Complete.wav", "audio/Level Complete.wav" );
+  new AudioClip( "Retry.wav", "audio/Retry.wav" );
+  new AudioClip( "Jafar Snake.wav", "audio/Jafar Snake.wav" );
+  new AudioClip( "High Sword.wav", "audio/High Sword.wav" );
+  new AudioClip( "Object Throw.wav", "audio/Object Throw.wav" );
+  new AudioClip( "Apple Collect.wav", "audio/Apple Collect.wav" );
+  new AudioClip( "Aladdin Push.wav", "audio/Aladdin Push.wav" );
+  new AudioClip( "Apple Splat.wav", "audio/Apple Splat.wav" );
+  new AudioClip( "Aladdin Hurt.wav", "audio/Aladdin Hurt.wav" );
+  new AudioClip( "Low Sword.wav", "audio/Low Sword.wav" );
+  new AudioClip( "Guard Beckon.wav", "audio/Guard Beckon.wav" );
+  new AudioClip( "Sword Ching.wav", "audio/Sword Ching.wav" );
+  new AudioClip( "Cloud Poof.wav", "audio/Cloud Poof.wav" );
+  new AudioClip( "Genie Fumes.wav", "audio/Genie Fumes.wav" );
+  new AudioClip( "Guard Hit 1.wav", "audio/Guard Hit 1.wav" );
+  new AudioClip( "Guard Hit 2.wav", "audio/Guard Hit 2.wav" );
+  new AudioClip( "Guard's Pants.wav", "audio/Guard's Pants.wav" );
+  new AudioClip( "Camel Spit.wav", "audio/Camel Spit.wav" );
+  new AudioClip( "Continue Point.wav", "audio/Continue Point.wav" );
+  new AudioClip( "Fire From Coal.wav", "audio/Fire From Coal.wav" );
+  new AudioClip( "Tip Toe.wav", "audio/Tip Toe.wav" );
+  new AudioClip( "Flagpole.wav", "audio/Flagpole.wav" );
+
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
   new FadeInEffectPrefab();
   new SceneFadeOutTransitionPrefab();
+  new AudioPlayerPrefab();
 
   new MenuSelectPrefab();
 
@@ -183,7 +209,10 @@ void MyResourceInitializer::doRun() {
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
   new PlatformPrefab();
-
+  new PendalPrefab();
+  new FinishEntrancePrefab();
+  
+  new AgrabahMarketParallaxPrefab();
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();

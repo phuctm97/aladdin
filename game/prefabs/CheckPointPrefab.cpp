@@ -18,6 +18,8 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   const auto animator = new Animator( object, "checkpoint_off", "items.anm" );
 
+  const auto onAudio = new AudioSource( object, "Continue Point.wav" );
+
   const auto stateManager = new StateManager( object, "off" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
@@ -30,7 +32,7 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
@@ -47,7 +49,15 @@ void CheckpointPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
   new State( stateManager, "on",
              [=] {
-               animator->setAction( "checkpoint_on" );
+               // animation effect
+               {
+                 animator->setAction( "checkpoint_on" );
+               }
+
+               // audio
+               {
+                 onAudio->play();
+               }
              }, NULL, NULL );
 
   new StateTransition( stateManager, "off", "on", [=] {

@@ -7,8 +7,10 @@ ALA_CLASS_SOURCE_1(GuardController, ala::GameObjectComponent)
 
 GuardController::GuardController( ala::GameObject* gameObject, const std::string& name ):
   GameObjectComponent( gameObject, name ),
-  _minDistanceCouldAttack( 40 ),
-  _maxDistanceCouldAttack( 70 ),
+  _minDistanceXCouldAttack( 40 ),
+  _maxDistanceXCouldAttack( 70 ),
+  _minDistanceYCouldAttack( 0 ),
+  _maxDistanceYCouldAttack( 0 ),
   _tooFarDistance( GameManager::get()->getVisibleWidth() * 0.7f ),
   _initialX( 0 ),
   _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
@@ -43,13 +45,16 @@ bool GuardController::isTooFarFromAladdin() const {
 }
 
 bool GuardController::isAbleToSeeAladdin() const {
+  const auto distY = ABS(_aladdinTransform->getPositionY() - _selfTransform->getPositionY());
+  if ( distY > _maxDistanceYCouldAttack ) return false;
+
   const auto aladdinPositionX = _aladdinTransform->getPositionX();
   const auto dist1 = ABS(aladdinPositionX - _leftBoundX);
   const auto dist2 = ABS(aladdinPositionX - _rightBoundX);
 
   return (aladdinPositionX >= _leftBoundX && aladdinPositionX <= _rightBoundX)
-    || dist1 <= _maxDistanceCouldAttack
-    || dist2 <= _maxDistanceCouldAttack;
+    || dist1 <= _maxDistanceXCouldAttack
+    || dist2 <= _maxDistanceXCouldAttack;
 }
 
 char GuardController::getDirectionToGoToAttackAladdin() const {
@@ -57,10 +62,10 @@ char GuardController::getDirectionToGoToAttackAladdin() const {
   const auto selfPosition = _selfTransform->getPosition();
 
   float options[] = {
-    aladdinPosition.getX() - _minDistanceCouldAttack,
-    aladdinPosition.getX() + _minDistanceCouldAttack,
-    aladdinPosition.getX() - _maxDistanceCouldAttack,
-    aladdinPosition.getX() + _maxDistanceCouldAttack
+    aladdinPosition.getX() - _minDistanceXCouldAttack,
+    aladdinPosition.getX() + _minDistanceXCouldAttack,
+    aladdinPosition.getX() - _maxDistanceXCouldAttack,
+    aladdinPosition.getX() + _maxDistanceXCouldAttack
   };
 
   std::sort( options, options + 4, [=]( float a, float b ) {
@@ -80,8 +85,17 @@ char GuardController::getDirectionToFaceToAladdin() const {
 }
 
 bool GuardController::isAbleToAttackAladdin() const {
-  const auto dist = ABS(_aladdinTransform->getPositionX() - _selfTransform->getPositionX());
-  return dist >= _minDistanceCouldAttack && dist <= _maxDistanceCouldAttack;
+  const auto disX = ABS(_aladdinTransform->getPositionX() - _selfTransform->getPositionX());
+  const auto disY = ABS(_aladdinTransform->getPositionY() - _selfTransform->getPositionY());
+
+  return disX >= _minDistanceXCouldAttack && disX <= _maxDistanceXCouldAttack &&
+    disY >= _minDistanceYCouldAttack && disY <= _maxDistanceYCouldAttack;
+}
+
+bool GuardController::isInBestPositionToAttackAladdin() const {
+  const auto disX = ABS(_aladdinTransform->getPositionX() - _selfTransform->getPositionX());
+
+  return disX >= _minDistanceXCouldAttack && disX <= _maxDistanceXCouldAttack;
 }
 
 bool GuardController::isAbleToGoLeft() const {
@@ -115,16 +129,28 @@ float GuardController::getRightBoundX() const { return _rightBoundX; }
 
 void GuardController::setRightBoundX( const float rightBoundX ) { _rightBoundX = rightBoundX; }
 
-float GuardController::getMinDistanceCouldAttack() const { return _minDistanceCouldAttack; }
+float GuardController::getMinDistanceXCouldAttack() const { return _minDistanceXCouldAttack; }
 
-void GuardController::setMinDistanceCouldAttack( const float minDistanceCouldAttack ) {
-  _minDistanceCouldAttack = minDistanceCouldAttack;
+void GuardController::setMinDistanceXCouldAttack( const float minDistanceCouldAttack ) {
+  _minDistanceXCouldAttack = minDistanceCouldAttack;
 }
 
-float GuardController::getMaxDistanceCouldAttack() const { return _maxDistanceCouldAttack; }
+float GuardController::getMaxDistanceXCouldAttack() const { return _maxDistanceXCouldAttack; }
 
-void GuardController::setMaxDistanceCouldAttack( const float maxDistanceCouldAttack ) {
-  _maxDistanceCouldAttack = maxDistanceCouldAttack;
+void GuardController::setMaxDistanceXCouldAttack( const float maxDistanceCouldAttack ) {
+  _maxDistanceXCouldAttack = maxDistanceCouldAttack;
+}
+
+float GuardController::getMinDistanceYCouldAttack() const { return _minDistanceYCouldAttack; }
+
+void GuardController::setMinDistanceYCouldAttack( const float minDistanceYCouldAttack ) {
+  _minDistanceYCouldAttack = minDistanceYCouldAttack;
+}
+
+float GuardController::getMaxDistanceYCouldAttack() const { return _maxDistanceYCouldAttack; }
+
+void GuardController::setMaxDistanceYCouldAttack( const float maxDistanceYCouldAttack ) {
+  _maxDistanceYCouldAttack = maxDistanceYCouldAttack;
 }
 
 int GuardController::getHealth() const { return _health; }

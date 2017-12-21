@@ -37,7 +37,7 @@ void AgrabahMarketStairsFivePrefab::doInstantiate( ala::GameObject* object, std:
   }
 
   // collider renderers
-  for ( const auto collider : colliders ) new ColliderRenderer( collider );
+//  for ( const auto collider : colliders ) new ColliderRenderer( collider );
 
   // flags
   const auto stairFlags = COLLIDE_ALADDIN_FLAG |
