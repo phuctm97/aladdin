@@ -10,7 +10,7 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _maxHealth( 9 ), _maxLives( 99 ), _maxApples( 99 ),
+    _maxHealth( 99 ), _maxLives( 99 ), _maxApples( 99 ),
     _health( 0 ), _lives( 0 ), _apples( 0 ),
     _recovering( false ),
     _hit( false ),
@@ -307,8 +307,10 @@ void PlayableAladdinController::onInitialize() {
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
-  setApples( 10 );
-  setHealth( 9 );
+  //  setApples( 3 );
+  //  setHealth( 9 );
+  setApples( 90 );
+  setHealth( 90 );
 }
 
 void PlayableAladdinController::onHitCharcoalBurner() {

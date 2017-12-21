@@ -45,6 +45,9 @@ bool GuardController::isTooFarFromAladdin() const {
 }
 
 bool GuardController::isAbleToSeeAladdin() const {
+  const auto distY = ABS(_aladdinTransform->getPositionY() - _selfTransform->getPositionY());
+  if ( distY > _maxDistanceYCouldAttack ) return false;
+
   const auto aladdinPositionX = _aladdinTransform->getPositionX();
   const auto dist1 = ABS(aladdinPositionX - _leftBoundX);
   const auto dist2 = ABS(aladdinPositionX - _rightBoundX);
