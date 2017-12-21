@@ -205,7 +205,7 @@
   </object>
   <object name="" quadIndex="331">
     <prefab version="2" name="Holdable Bar" args="192" />
-    <transform position="4391.0 487.0" />
+    <transform position="4391.0 447.0" />
   </object>
 
   <!-- SPRINGS -->
@@ -890,7 +890,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="4200 -25" />
+    <prefab version="2" name="Playable Aladdin" args="4000 400" />
   </object>
 
   <!--EFFECT-->
