@@ -34,6 +34,12 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
                {
                  sceneAudio->play();
                }
+
+               // reset my app data
+               {
+                 myAppData->setAladdinLives( 3 );
+                 myAppData->setCurrentCheckpoint( 0 );
+               }
              },
              NULL, NULL );
 

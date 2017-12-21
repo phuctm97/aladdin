@@ -223,40 +223,40 @@
   </object>
 
   <!-- CHECK POINTS -->
-  <!--  <object name="" quadIndex="120">-->
-  <!--    <prefab version="2" name="Checkpoint" args="" />-->
-  <!--    <transform position="2545 73" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="312">-->
-  <!--    <prefab version="2" name="Checkpoint" args="" />-->
-  <!--    <transform position="3519.5 379.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="121">-->
-  <!--    <prefab version="2" name="Checkpoint" args="" />-->
-  <!--    <transform position="3346.0 108.5" />-->
-  <!--  </object>-->
+  <object name="Checkpoint 1" quadIndex="120">
+    <prefab version="2" name="Checkpoint" args="1" />
+    <transform position="2545 73" />
+  </object>
+  <object name="Checkpoint 2" quadIndex="312">
+    <prefab version="2" name="Checkpoint" args="2" />
+    <transform position="3519.5 379.0" />
+  </object>
+  <object name="Checkpoint 3" quadIndex="121">
+    <prefab version="2" name="Checkpoint" args="3" />
+    <transform position="3346.0 108.5" />
+  </object>
 
   <!-- CHARCOAL BURNERS -->
-  <!--  <object name="Charcoal Burner 1" quadIndex="000">-->
-  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
-  <!--    <transform position="378.5 -50" />-->
-  <!--  </object>-->
-  <!--  <object name="Charcoal Burner 2" quadIndex="001">-->
-  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
-  <!--    <transform position="748.5 -50" />-->
-  <!--  </object>-->
-  <!--  <object name="Charcoal Burner 3" quadIndex="001">-->
-  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
-  <!--    <transform position="906.5 -50" />-->
-  <!--  </object>-->
-  <!--  <object name="Charcoal Burner 4" quadIndex="011">-->
-  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
-  <!--    <transform position="1915.5 -79" />-->
-  <!--  </object>-->
-  <!--  <object name="Charcoal Burner 5" quadIndex="101">-->
-  <!--    <prefab version="2" name="Charcoal Burner" args="110" />-->
-  <!--    <transform position="2987 -82" />-->
-  <!--  </object>-->
+  <object name="Charcoal Burner 1" quadIndex="000">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="358.5 -50" />
+  </object>
+  <object name="Charcoal Burner 2" quadIndex="001">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="728.5 -50" />
+  </object>
+  <object name="Charcoal Burner 3" quadIndex="001">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="906.5 -50" />
+  </object>
+  <object name="Charcoal Burner 4" quadIndex="011">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="1915.5 -79" />
+  </object>
+  <object name="Charcoal Burner 5" quadIndex="101">
+    <prefab version="2" name="Charcoal Burner" args="110" />
+    <transform position="2987 -82" />
+  </object>
 
   <!-- CAMELS -->
   <!--  <object name="" quadIndex="010">-->
@@ -887,10 +887,15 @@
   <!--    <transform position="4357 400" />-->
   <!--  </object>-->
 
+  <!--FINISH ENTRANCE-->
+  <object name="Finish Entrance">
+    <prefab version="2" name="Finish Entrance" args="25 50" />
+    <transform position="4570 390" />
+  </object>
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="4000 400" />
+    <prefab version="2" name="Playable Aladdin" args="2300 -25" />
   </object>
 
   <!--EFFECT-->

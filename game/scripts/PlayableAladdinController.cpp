@@ -323,8 +323,6 @@ void PlayableAladdinController::onHit( const int damage ) {
   setHealth( getHealth() - damage );
 
   if ( _health <= 0 ) {
-    _myAppData->setAladdinLives( _lives - 1 );
-
     _sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 death.scene\n0" );
 
     return;
