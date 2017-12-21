@@ -362,7 +362,7 @@ void PlayableAladdinController::onCatchRope( ala::GameObject* rope ) {
 }
 
 void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
-  if ( isHoldingBar() || _selfStateManager->getPreviousStateName() == "hold_bar_idle" ) return;
+  if ( isHoldingRope() || isHoldingBar() || _selfStateManager->getPreviousStateName() == "hold_bar_idle" ) return;
 
   _holdingBar = bar;
 
