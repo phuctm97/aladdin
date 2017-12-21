@@ -14,31 +14,39 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
-  //audio
-  const auto SceneSound = new AudioSource(object, "NameLevel Agrabahmarket.wav");
 
   // components
+  const auto sceneAudio = new AudioSource( object, "NameLevel Agrabahmarket.wav" );
+
   const auto timer = new Timer( object );
 
   const auto stateManager = new StateManager( object, "default" );
 
   // states
   new State( stateManager, "default",
-             [=] { timer->start( 5.0f ); 
-                  //audio
-             {
-               SceneSound->play();
-             }
+             [=] {
+               // animation effect
+               {
+                 timer->start( 5.0f );
+               }
+
+               // audio
+               {
+                 sceneAudio->play();
+               }
              },
              NULL, NULL );
 
   new State( stateManager, "left",
              [=] {
-               const auto aladdinAndAbu = gameManager->getObjectByName( "Aladdin And Abu" );
-               aladdinAndAbu->getComponentT<Rigidbody>()->setVelocity( Vec2( 70, 0 ) );
-               aladdinAndAbu->getComponentT<DirectionController>()->setLeft();
-               aladdinAndAbu->getTransform()->setPositionX( 17 );
-               timer->start( 2.9f );
+               // animation effect
+               {
+                 const auto aladdinAndAbu = gameManager->getObjectByName( "Aladdin And Abu" );
+                 aladdinAndAbu->getComponentT<Rigidbody>()->setVelocity( Vec2( 70, 0 ) );
+                 aladdinAndAbu->getComponentT<DirectionController>()->setLeft();
+                 aladdinAndAbu->getTransform()->setPositionX( 17 );
+                 timer->start( 2.9f );
+               }
              },
              [=]( float dt ) {
                if ( timer->isDone() ) {
@@ -49,10 +57,13 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   new State( stateManager, "right",
              [=] {
-               const auto aladdinAndAbu = gameManager->getObjectByName( "Aladdin And Abu" );
-               aladdinAndAbu->getComponentT<Rigidbody>()->setVelocity( Vec2( 70, 0 ) );
-               aladdinAndAbu->getComponentT<DirectionController>()->setRight();
-               timer->start( 2.9f );
+               // animation effect
+               {
+                 const auto aladdinAndAbu = gameManager->getObjectByName( "Aladdin And Abu" );
+                 aladdinAndAbu->getComponentT<Rigidbody>()->setVelocity( Vec2( 70, 0 ) );
+                 aladdinAndAbu->getComponentT<DirectionController>()->setRight();
+                 timer->start( 2.9f );
+               }
              },
              [=]( float dt ) {
                if ( timer->isDone() ) {
