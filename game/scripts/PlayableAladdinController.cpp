@@ -313,8 +313,10 @@ void PlayableAladdinController::onInitialize() {
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
-  //  setApples( 3 );
-  //  setHealth( 9 );
+  setApples( _myAppData->getAladdinApples() );
+  setHealth( 9 );
+
+  // debug
   setApples( 90 );
   setHealth( 90 );
 }
@@ -409,5 +411,6 @@ void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
 }
 
 void PlayableAladdinController::onEnterFinishEntrance() const {
+  _myAppData->setAladdinApples( getApples() );
   _sceneFadeOutTransitionPrefab->instantiateWithArgs( "1 level_complete.scene\n0" );
 }

@@ -42,7 +42,7 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags( COLLIDE_ALADDIN_FLAG );

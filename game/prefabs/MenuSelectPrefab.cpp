@@ -41,6 +41,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                  myAppData->setCurrentLevel( 1 );
                  myAppData->setCurrentCheckpoint( 0 );
                  myAppData->setAladdinLives( 3 );
+                 myAppData->setAladdinApples( 5 );
                  myAppData->setRetryTimes( 1 );
                }
 

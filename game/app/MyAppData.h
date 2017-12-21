@@ -9,6 +9,7 @@ private:
   int _currentLevel;
   int _currentCheckpoint;
   int _aladdinLives;
+  int _aladdinApples;
   int _retryTimes;
   std::vector<std::string> _levelScenes;
 
@@ -16,7 +17,7 @@ public:
   MyAppData( const int numberOfLevels, const int currentLevel, const int aladdinLives, const int retryTimes,
              const std::vector<std::string>& levelScenes )
     : GameResource( "My App Data" ), _numberOfLevels( numberOfLevels ),
-      _currentLevel( currentLevel ), _currentCheckpoint( 0 ), _aladdinLives( aladdinLives ),
+      _currentLevel( currentLevel ), _currentCheckpoint( 0 ), _aladdinLives( aladdinLives ), _aladdinApples( 3 ),
       _retryTimes( retryTimes ),
       _levelScenes( levelScenes ) {}
 
@@ -25,6 +26,10 @@ public:
   int getAladdinLives() const;
 
   void setAladdinLives( const int aladdinLives );
+
+  int getAladdinApples() const;
+
+  void setAladdinApples( const int apples );
 
   int getCurrentLevel() const;
 
