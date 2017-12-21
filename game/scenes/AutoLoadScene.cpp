@@ -11,12 +11,10 @@ void AutoLoadScene::onPreInitialize() {
   const auto gameManager = GameManager::get();
 
   // configurations
-  /*if ( _useCameraController ) {
+  if ( _useCameraController ) {
     new CameraController( getMainCamera() );
-  }*/
+  }
 
   // scene loader
   gameManager->loadScene( _sceneName );
-
-  new DebugCameraController(getMainCamera(), gameManager->getObjectByName("Node"));
 }
