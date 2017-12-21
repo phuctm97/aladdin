@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Scene>
+  <!--CONFIGURATIONS-->
   <physics gravity="0 -500" />
   <!--<quad level="3" minX="-160" minY="-115" width="4771" height="688" />-->
+
+  <!--BACKGROUND & FOREGROUND-->
   <object name="Background" layer="Background" tag="4" quadIndex="">
     <prefab version="2" name="Sprite" args="agrabah_market_background.png 0" />
     <transform position="2225.5 229" />
@@ -14,6 +17,11 @@
   <object name="Ground" quadIndex="">
     <prefab version="2" name="Agrabah Market Ground" args="" />
     <transform position="-160 -115" />
+  </object>
+
+  <!--HUB-->
+  <object name="Hub" quadIndex="">
+    <prefab version="2" name="Hub" args="" />
   </object>
 
   <!-- STAIRS -->
@@ -35,18 +43,18 @@
   </object>
 
   <!-- PENDAL -->
-  <object name="" quadIndex="030">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="1486.5 126.0" />
-  </object>
-  <object name="" quadIndex="131">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="4061.5 86.5" />
-  </object>
-  <object name="" quadIndex="130">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="3970.0 111.5" />
-  </object>
+  <!--  <object name="" quadIndex="030">-->
+  <!--    <prefab version="2" name="Pendal" args="" />-->
+  <!--    <transform position="1486.5 126.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="131">-->
+  <!--    <prefab version="2" name="Pendal" args="" />-->
+  <!--    <transform position="4061.5 86.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="130">-->
+  <!--    <prefab version="2" name="Pendal" args="" />-->
+  <!--    <transform position="3970.0 111.5" />-->
+  <!--  </object>-->
 
   <!-- PLATFORMS -->
   <object name="" quadIndex="031">
@@ -129,7 +137,7 @@
   <!-- WALLS -->
   <object name="" quadIndex="">
     <prefab version="2" name="Wall" args="29 68" />
-    <transform position="1309 -47" />
+    <transform position="1299 -47" />
   </object>
   <object name="" quadIndex="">
     <prefab version="2" name="Wall" args="20 387" />
@@ -215,676 +223,678 @@
   </object>
 
   <!-- CHECK POINTS -->
-  <object name="" quadIndex="120">
-    <prefab version="2" name="Checkpoint" args="" />
-    <transform position="2545 73" />
-  </object>
-  <object name="" quadIndex="312">
-    <prefab version="2" name="Checkpoint" args="" />
-    <transform position="3519.5 379.0" />
-  </object>
-  <object name="" quadIndex="121">
-    <prefab version="2" name="Checkpoint" args="" />
-    <transform position="3346.0 108.5" />
-  </object>
+  <!--  <object name="" quadIndex="120">-->
+  <!--    <prefab version="2" name="Checkpoint" args="" />-->
+  <!--    <transform position="2545 73" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="312">-->
+  <!--    <prefab version="2" name="Checkpoint" args="" />-->
+  <!--    <transform position="3519.5 379.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="121">-->
+  <!--    <prefab version="2" name="Checkpoint" args="" />-->
+  <!--    <transform position="3346.0 108.5" />-->
+  <!--  </object>-->
 
   <!-- CHARCOAL BURNERS -->
-  <object name="Charcoal Burner 1" quadIndex="000">
-    <prefab version="2" name="Charcoal Burner" args="90" />
-    <transform position="378.5 -50" />
-  </object>
-  <object name="Charcoal Burner 2" quadIndex="001">
-    <prefab version="2" name="Charcoal Burner" args="90" />
-    <transform position="748.5 -50" />
-  </object>
-  <object name="Charcoal Burner 3" quadIndex="001">
-    <prefab version="2" name="Charcoal Burner" args="90" />
-    <transform position="906.5 -50" />
-  </object>
-  <object name="Charcoal Burner 4" quadIndex="011">
-    <prefab version="2" name="Charcoal Burner" args="90" />
-    <transform position="1915.5 -79" />
-  </object>
-  <object name="Charcoal Burner 5" quadIndex="101">
-    <prefab version="2" name="Charcoal Burner" args="110" />
-    <transform position="2987 -82" />
-  </object>
+  <!--  <object name="Charcoal Burner 1" quadIndex="000">-->
+  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
+  <!--    <transform position="378.5 -50" />-->
+  <!--  </object>-->
+  <!--  <object name="Charcoal Burner 2" quadIndex="001">-->
+  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
+  <!--    <transform position="748.5 -50" />-->
+  <!--  </object>-->
+  <!--  <object name="Charcoal Burner 3" quadIndex="001">-->
+  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
+  <!--    <transform position="906.5 -50" />-->
+  <!--  </object>-->
+  <!--  <object name="Charcoal Burner 4" quadIndex="011">-->
+  <!--    <prefab version="2" name="Charcoal Burner" args="90" />-->
+  <!--    <transform position="1915.5 -79" />-->
+  <!--  </object>-->
+  <!--  <object name="Charcoal Burner 5" quadIndex="101">-->
+  <!--    <prefab version="2" name="Charcoal Burner" args="110" />-->
+  <!--    <transform position="2987 -82" />-->
+  <!--  </object>-->
 
   <!-- CAMELS -->
-  <object name="" quadIndex="010">
-    <prefab version="2" name="Camel" args="R" />
-    <transform position="1404.5 -57.5" />
-  </object>
+  <!--  <object name="" quadIndex="010">-->
+  <!--    <prefab version="2" name="Camel" args="R" />-->
+  <!--    <transform position="1404.5 -57.5" />-->
+  <!--  </object>-->
 
   <!-- HAND ENEMIES -->
-  <object name="" quadIndex="031">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1634.5 88.5" />
-  </object>
-  <object name="" quadIndex="031">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1681.5 56.0" />
-  </object>
-  <object name="" quadIndex="211">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1794.5 233.0" />
-  </object>
-  <object name="" quadIndex="211">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1682.0 233.0" />
-  </object>
-  <object name="" quadIndex="230">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1586.5 407.0" />
-  </object>
-  <object name="" quadIndex="231">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1794.5 407.0" />
-  </object>
-  <object name="" quadIndex="231">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="1954.5 407.0" />
-  </object>
-  <object name="" quadIndex="122">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="2354.0 215.5" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="3618.0 23.5" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="3794.0 23.5" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="3858.0 55.5" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Hand Enemy" args="" />
-    <transform position="3155.0 199.5" />
-  </object>
+  <!--  <object name="" quadIndex="031">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1634.5 88.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="031">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1681.5 56.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="211">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1794.5 233.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="211">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1682.0 233.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="230">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1586.5 407.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="231">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1794.5 407.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="231">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="1954.5 407.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="122">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="2354.0 215.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="3618.0 23.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="3794.0 23.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="3858.0 55.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
+  <!--    <transform position="3155.0 199.5" />-->
+  <!--  </object>-->
 
   <!-- EATABLE APPLES -->
-  <object name="" quadIndex="002">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="325 27" />
-  </object>
-  <object name="" quadIndex="002">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="355 43" />
-  </object>
-  <object name="" quadIndex="002">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="388 27" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="691 25" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="723 44" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="755 25" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="869 27" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="901 45" />
-  </object>
-  <object name="" quadIndex="003">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="932 27" />
-  </object>
-  <object name="" quadIndex="030">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1363 90" />
-  </object>
-  <object name="" quadIndex="030">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1396 75" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1409 41" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1490 14" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1526 29" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1559 14" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1589 29" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1619 14" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1839 24" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1845 60" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1869 95" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1978 95" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2006 56" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2011 24" />
-  </object>
-  <object name="" quadIndex="032">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1607 206" />
-  </object>
-  <object name="" quadIndex="032">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1402 181" />
-  </object>
-  <object name="" quadIndex="210">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1338 255" />
-  </object>
-  <object name="" quadIndex="210">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1338 296" />
-  </object>
-  <object name="" quadIndex="212">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1346 333" />
-  </object>
-  <object name="" quadIndex="212">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1361 362" />
-  </object>
-  <object name="" quadIndex="212">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1616 380" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1654 392" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1690 380" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1824 378" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1858 402" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="1900 378" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2132 378" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2164 376" />
-  </object>
-  <object name="" quadIndex="213">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2190 340" />
-  </object>
-  <object name="" quadIndex="211">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2190 284" />
-  </object>
-  <object name="" quadIndex="211">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2190 232" />
-  </object>
-  <object name="" quadIndex="033">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2190 184" />
-  </object>
-  <object name="" quadIndex="033">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2190 142" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2100 51" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2115 70" />
-  </object>
-  <object name="" quadIndex="013">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2131 51" />
-  </object>
-  <object name="" quadIndex="102">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2257 -4" />
-  </object>
-  <object name="" quadIndex="10">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2373 -26" />
-  </object>
-  <object name="" quadIndex="120">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2272 85" />
-  </object>
-  <object name="" quadIndex="120">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2727 82" />
-  </object>
-  <object name="" quadIndex="102">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2727 35" />
-  </object>
-  <object name="" quadIndex="102">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2727 -15" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2947 -9" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2983 9" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3018 -10" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3181 -10" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3244 -10" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3211 8" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3348 -9" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3414 -9" />
-  </object>
-  <object name="" quadIndex="103">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3381 9" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3682 -9" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3744 -8" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3713 10" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3936 -5" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3999 -5" />
-  </object>
-  <object name="" quadIndex="112">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3968 9" />
-  </object>
-  <object name="" quadIndex="133">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4489 165" />
-  </object>
-  <object name="" quadIndex="133">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4396 221" />
-  </object>
-  <object name="" quadIndex="133">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4347 240" />
-  </object>
-  <object name="" quadIndex="133">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4290 221" />
-  </object>
-  <object name="" quadIndex="133">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4050 155" />
-  </object>
-  <object name="" quadIndex="130">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3944 137" />
-  </object>
-  <object name="" quadIndex="132">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3782 201" />
-  </object>
-  <object name="" quadIndex="132">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3746 191" />
-  </object>
-  <object name="" quadIndex="132">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3700 157" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3370 167" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3334 185" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3298 167" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3254 167" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3212 193" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3170 167" />
-  </object>
-  <object name="" quadIndex="300">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2776 229" />
-  </object>
-  <object name="" quadIndex="300">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2738 247" />
-  </object>
-  <object name="" quadIndex="300">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2700 231" />
-  </object>
-  <object name="" quadIndex="302">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2488 365" />
-  </object>
-  <object name="" quadIndex="302">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2704 337" />
-  </object>
-  <object name="" quadIndex="302">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2720 359" />
-  </object>
-  <object name="" quadIndex="302">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="2740 337" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3146 459" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3162 491" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3194 505" />
-  </object>
-  <object name="" quadIndex="312">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="3458 395" />
-  </object>
-  <object name="" quadIndex="331">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4136 543" />
-  </object>
-  <object name="" quadIndex="331">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4164 563" />
-  </object>
-  <object name="" quadIndex="331">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4164 525" />
-  </object>
-  <object name="" quadIndex="331">
-    <prefab version="2" name="Eatable Apple" args="" />
-    <transform position="4192 541" />
-  </object>
+  <!--  <object name="" quadIndex="002">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="325 27" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="002">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="355 43" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="002">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="388 27" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="691 25" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="723 44" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="755 25" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="869 27" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="901 45" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="003">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="932 27" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="030">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1363 90" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="030">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1396 75" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1409 41" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1490 14" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1526 29" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1559 14" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1589 29" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1619 14" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1839 24" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1845 60" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1869 95" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1978 95" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2006 56" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2011 24" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="032">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1607 206" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="032">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1402 181" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="210">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1338 255" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="210">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1338 296" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="212">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1346 333" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="212">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1361 362" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="212">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1616 380" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1654 392" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1690 380" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1824 378" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1858 402" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="1900 378" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2132 378" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2164 376" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="213">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2190 340" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="211">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2190 284" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="211">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2190 232" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="033">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2190 184" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="033">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2190 142" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2100 51" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2115 70" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="013">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2131 51" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="102">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2257 -4" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="10">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2373 -26" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="120">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2272 85" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="120">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2727 82" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="102">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2727 35" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="102">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2727 -15" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2947 -9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2983 9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3018 -10" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3181 -10" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3244 -10" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3211 8" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3348 -9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3414 -9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="103">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3381 9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3682 -9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3744 -8" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3713 10" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3936 -5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3999 -5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="112">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3968 9" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="133">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4489 165" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="133">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4396 221" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="133">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4347 240" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="133">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4290 221" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="133">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4050 155" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="130">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3944 137" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="132">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3782 201" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="132">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3746 191" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="132">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3700 157" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3370 167" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3334 185" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3298 167" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3254 167" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3212 193" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3170 167" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="300">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2776 229" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="300">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2738 247" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="300">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2700 231" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="302">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2488 365" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="302">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2704 337" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="302">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2720 359" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="302">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="2740 337" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3146 459" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3162 491" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3194 505" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="312">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="3458 395" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="331">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4136 543" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="331">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4164 563" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="331">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4164 525" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="331">-->
+  <!--    <prefab version="2" name="Eatable Apple" args="" />-->
+  <!--    <transform position="4192 541" />-->
+  <!--  </object>-->
 
   <!-- EATABLE HEARTS -->
-  <object name="" quadIndex="100">
-    <prefab version="2" name="Eatable Heart" args="" />
-    <transform position="2232 -68.5" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Eatable Heart" args="" />
-    <transform position="3077 186" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Eatable Heart" args="" />
-    <transform position="2875 504" />
-  </object>
+  <!--  <object name="" quadIndex="100">-->
+  <!--    <prefab version="2" name="Eatable Heart" args="" />-->
+  <!--    <transform position="2232 -68.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Eatable Heart" args="" />-->
+  <!--    <transform position="3077 186" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Eatable Heart" args="" />-->
+  <!--    <transform position="2875 504" />-->
+  <!--  </object>-->
 
   <!-- GENIE LAMPS -->
-  <object name="" quadIndex="031">
-    <prefab version="2" name="Genie Lamp" args="" />
-    <transform position="1849.5 142" />
-  </object>
-  <object name="" quadIndex="102">
-    <prefab version="2" name="Genie Lamp" args="" />
-    <transform position="2309.5 47" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Genie Lamp" args="" />
-    <transform position="2899.5 159.5" />
-  </object>
+  <!--  <object name="" quadIndex="031">-->
+  <!--    <prefab version="2" name="Genie Lamp" args="" />-->
+  <!--    <transform position="1849.5 142" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="102">-->
+  <!--    <prefab version="2" name="Genie Lamp" args="" />-->
+  <!--    <transform position="2309.5 47" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Genie Lamp" args="" />-->
+  <!--    <transform position="2899.5 159.5" />-->
+  <!--  </object>-->
 
 
   <!-- GENIE BONUSES -->
-  <object name="" quadIndex="03">
-    <prefab version="2" name="Genie Bonus" args="" />
-    <transform position="1474.5 172" />
-  </object>
-  <object name="" quadIndex="011">
-    <prefab version="2" name="Genie Bonus" args="" />
-    <transform position="2094.5 -41.0" />
-  </object>
-  <object name="" quadIndex="132">
-    <prefab version="2" name="Genie Bonus" args="" />
-    <transform position="3992 184" />
-  </object>
-  <object name="" quadIndex="320">
-    <prefab version="2" name="Genie Bonus" args="" />
-    <transform position="2375.5 494" />
-  </object>
-  <object name="" quadIndex="303">
-    <prefab version="2" name="Genie Bonus" args="" />
-    <transform position="2961.5 359" />
-  </object>
+  <!--  <object name="" quadIndex="03">-->
+  <!--    <prefab version="2" name="Genie Bonus" args="" />-->
+  <!--    <transform position="1474.5 172" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="011">-->
+  <!--    <prefab version="2" name="Genie Bonus" args="" />-->
+  <!--    <transform position="2094.5 -41.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="132">-->
+  <!--    <prefab version="2" name="Genie Bonus" args="" />-->
+  <!--    <transform position="3992 184" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="320">-->
+  <!--    <prefab version="2" name="Genie Bonus" args="" />-->
+  <!--    <transform position="2375.5 494" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="303">-->
+  <!--    <prefab version="2" name="Genie Bonus" args="" />-->
+  <!--    <transform position="2961.5 359" />-->
+  <!--  </object>-->
 
   <!-- SPEND THESES -->
-  <object name="" quadIndex="011">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2182.5 -71.0" />
-  </object>
-  <object name="" quadIndex="100">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2497.5 -53.5" />
-  </object>
-  <object name="" quadIndex="100">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2552 -53.5" />
-  </object>
-  <object name="" quadIndex="302">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2488.5 329" />
-  </object>
-  <object name="" quadIndex="300">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2488.5 300" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2849.5 480" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2879.5 461" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Spend These" args="" />
-    <transform position="2908.5 480" />
-  </object>
+  <!--  <object name="" quadIndex="011">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2182.5 -71.0" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="100">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2497.5 -53.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="100">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2552 -53.5" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="302">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2488.5 329" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="300">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2488.5 300" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2849.5 480" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2879.5 461" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Spend These" args="" />-->
+  <!--    <transform position="2908.5 480" />-->
+  <!--  </object>-->
 
   <!-- ENEMIES -->
-  <object name="" quadIndex="00">
-    <prefab version="2" name="Guard 1" args="550 430 670" />
-    <transform position="550 -25" />
-  </object>
-  <object name="" quadIndex="00">
-    <prefab version="2" name="Guard 2" args="818 595 1010" />
-    <transform position="818 -25" />
-  </object>
-  <object name="" quadIndex="010">
-    <prefab version="2" name="Guard 3" args="1559 1380 1699" />
-    <transform position="1559 -25" />
-  </object>
-  <object name="" quadIndex="012">
-    <prefab version="2" name="Guard 4" args="1169" />
-    <transform position="1169 20" />
-  </object>
-  <object name="" quadIndex="033">
-    <prefab version="2" name="Guard 3" args="1660 1597 1875" />
-    <transform position="1660 163" />
-  </object>
-  <object name="" quadIndex="21">
-    <prefab version="2" name="Guard 2" args="1567 1550 1800" />
-    <transform position="1567 336" />
-  </object>
-  <object name="" quadIndex="21">
-    <prefab version="2" name="Guard 3" args="2050 1437 2102" />
-    <transform position="2050 336" />
-  </object>
-  <object name="" quadIndex="">
-    <prefab version="2" name="Guard 4" args="2370" />
-    <transform position="2370 81" />
-  </object>
-  <object name="" quadIndex="102">
-    <prefab version="2" name="Guard 3" args="2657 2577 2680" />
-    <transform position="2657 43" />
-  </object>
-  <object name="" quadIndex="101">
-    <prefab version="2" name="Guard 2" args="3080 2662 4170" />
-    <transform position="3080 -40" />
-  </object>
-  <object name="" quadIndex="101">
-    <prefab version="2" name="Guard 3" args="3305 2662 4170" />
-    <transform position="3305 -40" />
-  </object>
-  <object name="" quadIndex="111">
-    <prefab version="2" name="Guard 2" args="4137 2662 4170" />
-    <transform position="4137 -40" />
-  </object>
-  <object name="" quadIndex="111">
-    <prefab version="2" name="Guard 3" args="4498 4315 4607" />
-    <transform position="4498 -6" />
-  </object>
-  <object name="" quadIndex="110">
-    <prefab version="2" name="Guard 2" args="3507 2662 4170" />
-    <transform position="3507 -40" />
-  </object>
-  <object name="" quadIndex="131">
-    <prefab version="2" name="Guard 4" args="4190 " />
-    <transform position="4190 150" />
-  </object>
-  <object name="" quadIndex="130">
-    <prefab version="2" name="Guard 3" args="3740 3685 3800" />
-    <transform position="3740 160" />
-  </object>
-  <object name="" quadIndex="130">
-    <prefab version="2" name="Guard 2" args="3630 2902 3660" />
-    <transform position="3630 123" />
-  </object>
-  <object name="" quadIndex="121">
-    <prefab version="2" name="Guard 3" args="2992 3685 3800" />
-    <transform position="2992 160" />
-  </object>
-  <object name="" quadIndex="123">
-    <prefab version="2" name="Guard 3" args="2832 2660 2922" />
-    <transform position="2832 191" />
-  </object>
-  <object name="" quadIndex="122">
-    <prefab version="2" name="Guard 5" args="2697 2660 2922" />
-    <transform position="2697 191" />
-  </object>
-  <object name="" quadIndex="320">
-    <prefab version="2" name="Guard 4" args="2378" />
-    <transform position="2378 443" />
-  </object>
-  <object name="" quadIndex="321">
-    <prefab version="2" name="Guard 4" args="2952" />
-    <transform position="2952 466" />
-  </object>
-  <object name="" quadIndex="301">
-    <prefab version="2" name="Guard 2" args="2915 2662 3030" />
-    <transform position="2915 319" />
-  </object>
-  <object name="" quadIndex="301">
-    <prefab version="2" name="Guard 3" args="3135 3037 3385" />
-    <transform position="3135 500" />
-  </object>
-  <object name="" quadIndex="313">
-    <prefab version="2" name="Guard 2" args="4357 4192 4535" />
-    <transform position="4357 400" />
-  </object>
+  <!--  <object name="" quadIndex="00">-->
+  <!--    <prefab version="2" name="Guard 1" args="550 430 670" />-->
+  <!--    <transform position="550 -25" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="00">-->
+  <!--    <prefab version="2" name="Guard 2" args="818 595 1010" />-->
+  <!--    <transform position="818 -25" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="010">-->
+  <!--    <prefab version="2" name="Guard 3" args="1559 1380 1699" />-->
+  <!--    <transform position="1559 -25" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="012">-->
+  <!--    <prefab version="2" name="Guard 4" args="1169" />-->
+  <!--    <transform position="1169 20" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="033">-->
+  <!--    <prefab version="2" name="Guard 3" args="1660 1597 1875" />-->
+  <!--    <transform position="1660 163" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="21">-->
+  <!--    <prefab version="2" name="Guard 2" args="1567 1550 1800" />-->
+  <!--    <transform position="1567 336" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="21">-->
+  <!--    <prefab version="2" name="Guard 3" args="2050 1437 2102" />-->
+  <!--    <transform position="2050 336" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="">-->
+  <!--    <prefab version="2" name="Guard 4" args="2370" />-->
+  <!--    <transform position="2370 81" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="102">-->
+  <!--    <prefab version="2" name="Guard 3" args="2657 2577 2680" />-->
+  <!--    <transform position="2657 43" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="101">-->
+  <!--    <prefab version="2" name="Guard 2" args="3080 2662 4170" />-->
+  <!--    <transform position="3080 -40" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="101">-->
+  <!--    <prefab version="2" name="Guard 3" args="3305 2662 4170" />-->
+  <!--    <transform position="3305 -40" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="111">-->
+  <!--    <prefab version="2" name="Guard 2" args="4137 2662 4170" />-->
+  <!--    <transform position="4137 -40" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="111">-->
+  <!--    <prefab version="2" name="Guard 3" args="4498 4315 4607" />-->
+  <!--    <transform position="4498 -6" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="110">-->
+  <!--    <prefab version="2" name="Guard 2" args="3507 2662 4170" />-->
+  <!--    <transform position="3507 -40" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="131">-->
+  <!--    <prefab version="2" name="Guard 4" args="4190 " />-->
+  <!--    <transform position="4190 150" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="130">-->
+  <!--    <prefab version="2" name="Guard 3" args="3740 3685 3800" />-->
+  <!--    <transform position="3740 160" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="130">-->
+  <!--    <prefab version="2" name="Guard 2" args="3630 2902 3660" />-->
+  <!--    <transform position="3630 123" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="121">-->
+  <!--    <prefab version="2" name="Guard 3" args="2992 3685 3800" />-->
+  <!--    <transform position="2992 160" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="123">-->
+  <!--    <prefab version="2" name="Guard 3" args="2832 2660 2922" />-->
+  <!--    <transform position="2832 191" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="122">-->
+  <!--    <prefab version="2" name="Guard 5" args="2697 2660 2922" />-->
+  <!--    <transform position="2697 191" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="320">-->
+  <!--    <prefab version="2" name="Guard 4" args="2378" />-->
+  <!--    <transform position="2378 443" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="321">-->
+  <!--    <prefab version="2" name="Guard 4" args="2952" />-->
+  <!--    <transform position="2952 466" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="301">-->
+  <!--    <prefab version="2" name="Guard 2" args="2915 2662 3030" />-->
+  <!--    <transform position="2915 319" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="301">-->
+  <!--    <prefab version="2" name="Guard 3" args="3135 3037 3385" />-->
+  <!--    <transform position="3135 500" />-->
+  <!--  </object>-->
+  <!--  <object name="" quadIndex="313">-->
+  <!--    <prefab version="2" name="Guard 2" args="4357 4192 4535" />-->
+  <!--    <transform position="4357 400" />-->
+  <!--  </object>-->
 
 
+  <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="1586 150" />
+    <prefab version="2" name="Playable Aladdin" args="200 -25" />
   </object>
 
-  <!--<object>
-    <prefab version="2" name="Quad Renderer" args="331" />
-  </object>-->
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
 </Scene>
