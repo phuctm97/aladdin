@@ -3,6 +3,11 @@
 <Scene>
   <physics gravity="0 -500" />
   <quad level="3" minX="-160" minY="-115" width="4771" height="688" />
+
+  <!--BACKGROUND & FOREGROUND-->
+  <object name="Parallax" quadIndex="">
+    <prefab version="2" name="Agrabah Market Parallax" args="" />
+  </object>
   <object name="Background" layer="Background" tag="4" quadIndex="">
     <prefab version="2" name="Sprite" args="agrabah_market_background.png 0" />
     <transform position="2225.5 229" />
@@ -11,22 +16,139 @@
     <prefab version="2" name="Sprite" args="agrabah_market_foreground.png 0" />
     <transform position="2225.5 229" />
   </object>
+
+  <!--HUB-->
+  <object name="Hub">
+    <prefab version="2" name="Hub" args="" />
+  </object>
+
+  <!--GROUND-->
   <object name="Ground" quadIndex="">
     <prefab version="2" name="Agrabah Market Ground" args="" />
     <transform position="-160 -115" />
   </object>
-  <object name="Stairs 1" quadIndex="">
+
+  <!--STAIRS-->
+  <object name="Stair 1" quadIndex="">
     <prefab version="2" name="Agrabah Market Stairs 1" args="" />
-    <transform position="1015.5 -46" />
+    <transform position="1015.5 -46.0" />
   </object>
-  <object name="Holdable Bar 1" quadIndex="">
-    <prefab version="2" name="Holdable Bar" args="412" />
-    <transform position="100 50" />
+
+  <!--WALLS-->
+  <object name="" quadIndex="">
+    <prefab version="2" name="Wall" args="29 68" />
+    <transform position="1309 -47" />
   </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Wall" args="20 387" />
+    <transform position="1305.5 317.0" />
+  </object>
+
+  <!--CHARCOAL BURNERS-->
+  <object name="Charcoal Burner 1" quadIndex="">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="358.5 -50" />
+  </object>
+  <object name="Charcoal Burner 2" quadIndex="">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="728.5 -50" />
+  </object>
+  <object name="Charcoal Burner 3" quadIndex="">
+    <prefab version="2" name="Charcoal Burner" args="90" />
+    <transform position="906.5 -50" />
+  </object>
+
+  <!--CAMELS-->
+  <object name="" quadIndex="">
+    <prefab version="2" name="Camel" args="R" />
+    <transform position="1404.5 -57.5" />
+  </object>
+
+  <!--GUARDS-->
+  <object name="Guard 1" quadIndex="">
+    <prefab version="2" name="Guard 1" args="550 430 670" />
+    <transform position="0 -25" />
+  </object>
+  <object name="Guard 2" quadIndex="">
+    <prefab version="2" name="Guard 2" args="818 595 1010" />
+    <transform position="0 -25" />
+  </object>
+  <object name="Guard 3" quadIndex="">
+    <prefab version="2" name="Guard 3" args="1559 1380 1699" />
+    <transform position="0 -25" />
+  </object>
+  <object name="Guard 4" quadIndex="">
+    <prefab version="2" name="Guard 4" args="1169" />
+    <transform position="0 10" />
+  </object>
+
+  <!--EATABLE APPLES-->
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="325 27" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="355 43" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="388 27" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="691 25" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="723 44" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="755 25" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="869 27" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="901 45" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="932 27" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="1363 90" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="1396 75" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="1409 41" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Eatable Apple" args="" />
+    <transform position="1490 14" />
+  </object>
+
+  <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
     <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
-  <!--  <object>-->
-  <!--    <prefab version="2" name="Quad Renderer" args="000" />-->
-  <!--  </object>-->
+
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
+
+  <!--DEV
+  <object>
+    <prefab version="2" name="Quad Renderer" args="000" />
+  </object>
+  -->
 </Scene>

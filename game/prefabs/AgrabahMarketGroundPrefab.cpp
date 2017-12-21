@@ -72,7 +72,8 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
   const auto transform = object->getTransform();
 
   // flags
-  const auto groundFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG | STANDABLE_FLAG | STATIC_FLAG;
+  const auto groundFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG | STANDABLE_FLAG |
+    STATIC_FLAG;
   const auto blockerFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | STATIC_FLAG;
   firstGroundCollider->setFlags( groundFlags );
   secondGroundCollider->setFlags( groundFlags );
@@ -93,10 +94,10 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
   object->setLayer( "Debug" );
 
   // collider renderers
-  new ColliderRenderer( firstGroundCollider );
-  new ColliderRenderer( secondGroundCollider );
-  new ColliderRenderer( thirdGroundCollider );
-  new ColliderRenderer( fourthGroundCollider );
-  new ColliderRenderer( mapStartBlocker );
-  new ColliderRenderer( mapEndBlocker );
+  //  new ColliderRenderer( firstGroundCollider );
+  //  new ColliderRenderer( secondGroundCollider );
+  //  new ColliderRenderer( thirdGroundCollider );
+  //  new ColliderRenderer( fourthGroundCollider );
+  //  new ColliderRenderer( mapStartBlocker );
+  //  new ColliderRenderer( mapEndBlocker );
 }

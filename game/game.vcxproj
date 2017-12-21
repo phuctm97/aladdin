@@ -162,6 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsOnePrefab.cpp" />
@@ -240,6 +241,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\JafarController.cpp" />
     <ClCompile Include="scripts\JafarStarController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
+    <ClCompile Include="scripts\ParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
@@ -257,6 +259,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsOnePrefab.h" />
@@ -334,6 +337,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\JafarController.h" />
     <ClInclude Include="scripts\JafarStarController.h" />
     <ClInclude Include="scripts\NodeController.h" />
+    <ClInclude Include="scripts\ParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
@@ -350,6 +354,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
   <ItemGroup>
     <Image Include="textures\backgrounds\scene_1_0.png" />
     <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\backgrounds\scene_1_2.png" />
     <Image Include="textures\backgrounds\scene_2_0.png" />
     <Image Include="textures\backgrounds\scene_2_1.png" />
     <Image Include="textures\bosses\jafar.png" />
@@ -369,6 +374,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Image Include="textures\playable_characters\aladdin.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="animations\backgrounds\scene_1_2.anm" />
     <None Include="animations\bosses\jafar.anm" />
     <None Include="animations\enemies\civilian_enemies.anm" />
     <None Include="animations\enemies\guards.anm">
