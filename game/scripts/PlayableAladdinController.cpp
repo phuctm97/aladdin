@@ -20,7 +20,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
-    _selfBody( NULL ),
+    _selfBody( NULL ), _selfDirection( NULL ),
     _throwableApplePrefab( NULL ), _myAppData( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
 
 float PlayableAladdinController::getMovingVelocityX() const {
@@ -152,6 +152,10 @@ void PlayableAladdinController::throwApple( const char direction,
                        ->setPosition( _selfTransform->getPosition() +
                          Vec2( _selfBodyCollider->getSize().getWidth() / 2 + offsetX,
                                _selfBodyCollider->getSize().getHeight() / 2 + offsetY ) );
+}
+
+void PlayableAladdinController::addDampVelocity( float v, float duration ) {
+  _dampVelocities.push_back( std::make_pair( duration, v ) );
 }
 
 void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
@@ -316,11 +320,23 @@ void PlayableAladdinController::onInitialize() {
 
 void PlayableAladdinController::onUpdate( const float dt ) {
   // recalculate moving x
+  float dampVelocity = 0.0f;
+
+  std::vector<size_t> removeIts;
+  for ( auto it = _dampVelocities.begin(); it != _dampVelocities.end(); ++it ) {
+    it->first -= dt;
+    dampVelocity += it->second * dt;
+
+    if ( it->first <= 0 ) removeIts.push_back( std::distance( _dampVelocities.begin(), it ) );
+  }
+  for ( const auto i : removeIts ) _dampVelocities.erase( _dampVelocities.begin() + i );
+
+  // update body velocity
   if ( _selfDirection->isLeft() ) {
-    _selfBody->setVelocity( Vec2( -_movingVelocityX, _selfBody->getVelocity().getY() ) );
+    _selfBody->setVelocity( Vec2( -_movingVelocityX + dampVelocity, _selfBody->getVelocity().getY() ) );
   }
   else {
-    _selfBody->setVelocity( Vec2( _movingVelocityX, _selfBody->getVelocity().getY() ) );
+    _selfBody->setVelocity( Vec2( _movingVelocityX + dampVelocity, _selfBody->getVelocity().getY() ) );
   }
 }
 

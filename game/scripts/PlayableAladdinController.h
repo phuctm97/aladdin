@@ -25,6 +25,7 @@ private:
   bool _collidedWithStandable;
 
   float _movingVelocityX;
+  std::vector<std::pair<float, float>> _dampVelocities;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -96,6 +97,8 @@ public:
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
+
+  void addDampVelocity( float v, float duration );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 

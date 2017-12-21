@@ -193,6 +193,11 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  controller->setMovingVelocityX( 0 );
                }
+
+               // hit
+               {
+                 controller->resetHit();
+               }
              },
              [=]( float dt ) {
                // animation effect

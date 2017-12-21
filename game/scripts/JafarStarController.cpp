@@ -8,8 +8,8 @@ ALA_CLASS_SOURCE_1(JafarStarController, ala::GameObjectComponent)
 JafarStarController::JafarStarController( ala::GameObject* gameObject, const float movingSpeed,
                                           const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _movingSpeed( movingSpeed ),
-    _aladdinTransform( NULL ), _aladdinBody( NULL ),
+    _movingSpeed( movingSpeed ), _jafarTransform( NULL ),
+    _aladdinTransform( NULL ), _aladdinBody( NULL ), _aladdinController( NULL ),
     _selfTransform( NULL ),
     _explosionPrefab( NULL ) {}
 
@@ -25,7 +25,12 @@ void JafarStarController::onTriggerEnter( const ala::CollisionInfo& collision ) 
 
   if ( otherObject->getTag() == ALADDIN_TAG ) {
     if ( otherCollider->getTag() == ALADDIN_TAG ) {
-      // pull aladdin back to jafar position
+      if ( _aladdinTransform->getPositionX() < _jafarTransform->getPositionX() ) {
+        _aladdinController->addDampVelocity( 6000, 0.5f );
+      }
+      else {
+        _aladdinController->addDampVelocity( -6000, 0.5f );
+      }
     }
 
     explode();
@@ -42,6 +47,8 @@ void JafarStarController::onInitialize() {
     _aladdinTransform = aladdin->getTransform();
 
     _aladdinBody = aladdin->getComponentT<Rigidbody>();
+
+    _aladdinController = aladdin->getComponentT<PlayableAladdinController>();
 
     _targetPosition = _aladdinTransform->getPosition();
   }
