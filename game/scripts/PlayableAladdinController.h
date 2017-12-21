@@ -3,6 +3,7 @@
 
 #include <aladdin.h>
 #include "../app/MyAppData.h"
+#include "DirectionController.h"
 
 ALA_CLASS_HEADER_1( PlayableAladdinController, ala::GameObjectComponent)
 private:
@@ -23,7 +24,9 @@ private:
   ala::GameObject* _holdingBar;
   bool _collidedWithStandable;
 
+  float _maxMovingVelocityX;
   float _movingVelocityX;
+  std::vector<std::pair<float, float>> _dampVelocities;
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -31,6 +34,7 @@ private:
   ala::Animator* _selfAnimator;
   ala::Collider* _selfBodyCollider;
   ala::Rigidbody* _selfBody;
+  DirectionController* _selfDirection;
   ala::PrefabV2* _throwableApplePrefab;
 
   MyAppData* _myAppData;
@@ -95,6 +99,8 @@ public:
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
 
+  void addDampVelocity( float v, float duration );
+
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 
   void onCollisionExit( const ala::CollisionInfo& collision ) override;
@@ -107,6 +113,8 @@ public:
 
 protected:
   void onInitialize() override;
+
+  void onUpdate( const float dt ) override;
 
 private:
   void onHitCharcoalBurner();

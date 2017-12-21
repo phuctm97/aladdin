@@ -31,15 +31,15 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto stateManager = new StateManager( object, "initial" );
+  const auto actionManager = new ActionManager(object);
 
-  const auto actionManager = new ActionManager( object );
+  const auto collisionTracker = new CollisionTracker(object);
+
+  const auto stateManager = new StateManager( object, "initial" );
 
   const auto direction = new DirectionController( object );
   if ( dir == 'L' ) direction->setLeft();
   else if ( dir == 'R' ) direction->setRight();
-
-  const auto collisionTracker = new CollisionTracker( object );
 
   // helpers
   const auto transform = object->getTransform();

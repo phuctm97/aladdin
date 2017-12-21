@@ -17,10 +17,11 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _movingVelocityX( 0 ),
+    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _maxMovingVelocityX( 200.0f ),
+    _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
-    _selfBody( NULL ),
+    _selfBody( NULL ), _selfDirection( NULL ),
     _throwableApplePrefab( NULL ), _myAppData( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
 
 float PlayableAladdinController::getMovingVelocityX() const {
@@ -152,6 +153,10 @@ void PlayableAladdinController::throwApple( const char direction,
                        ->setPosition( _selfTransform->getPosition() +
                          Vec2( _selfBodyCollider->getSize().getWidth() / 2 + offsetX,
                                _selfBodyCollider->getSize().getHeight() / 2 + offsetY ) );
+}
+
+void PlayableAladdinController::addDampVelocity( float v, float duration ) {
+  _dampVelocities.push_back( std::make_pair( duration, v ) );
 }
 
 void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
@@ -302,15 +307,47 @@ void PlayableAladdinController::onInitialize() {
   _selfAnimator = getGameObject()->getComponentT<Animator>();
   _selfBodyCollider = static_cast<Collider*>(getGameObject()->getComponent( "Body" ));
   _selfBody = getGameObject()->getComponentT<Rigidbody>();
+  _selfDirection = getGameObject()->getComponentT<DirectionController>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
-  //  setApples( 3 );
-  //  setHealth( 9 );
+  setApples( _myAppData->getAladdinApples() );
+  setHealth( 9 );
+
+  // debug
   setApples( 90 );
   setHealth( 90 );
+}
+
+void PlayableAladdinController::onUpdate( const float dt ) {
+  // recalculate moving x
+  float dampVelocity = 0.0f;
+
+  std::vector<size_t> removeIts;
+  for ( auto it = _dampVelocities.begin(); it != _dampVelocities.end(); ++it ) {
+    it->first -= dt;
+    dampVelocity += it->second * dt;
+
+    if ( it->first <= 0 ) removeIts.push_back( std::distance( _dampVelocities.begin(), it ) );
+  }
+  for ( const auto i : removeIts ) _dampVelocities.erase( _dampVelocities.begin() + i );
+
+  // update body velocity
+  float v = 0.0f;
+
+  if ( _selfDirection->isLeft() ) {
+    v = -_movingVelocityX + dampVelocity;
+  }
+  else {
+    v = _movingVelocityX + dampVelocity;
+  }
+
+  if ( v < -_maxMovingVelocityX ) v = -_maxMovingVelocityX;
+  else if ( v > _maxMovingVelocityX ) v = _maxMovingVelocityX;
+
+  _selfBody->setVelocity( Vec2( v, _selfBody->getVelocity().getY() ) );
 }
 
 void PlayableAladdinController::onHitCharcoalBurner() {
@@ -374,5 +411,6 @@ void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
 }
 
 void PlayableAladdinController::onEnterFinishEntrance() const {
+  _myAppData->setAladdinApples( getApples() );
   _sceneFadeOutTransitionPrefab->instantiateWithArgs( "1 level_complete.scene\n0" );
 }

@@ -12,6 +12,14 @@ int MyAppData::getAladdinLives() const { return _aladdinLives; }
 
 void MyAppData::setAladdinLives( const int aladdinLives ) { _aladdinLives = aladdinLives; }
 
+int MyAppData::getAladdinApples() const {
+  return _aladdinApples;
+}
+
+void MyAppData::setAladdinApples( const int apples ) {
+  _aladdinApples = apples;
+}
+
 int MyAppData::getCurrentLevel() const { return _currentLevel; }
 
 void MyAppData::setCurrentLevel( const int currentLevel ) { _currentLevel = currentLevel; }

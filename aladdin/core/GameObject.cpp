@@ -71,7 +71,7 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
 GameObject::~GameObject() {
   if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
   // for debug memory allocation
@@ -284,7 +284,7 @@ void GameObject::release() {
   }
 
   // make sure object is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   setToReleasing();
 
@@ -314,7 +314,7 @@ void GameObject::release() {
 
 void GameObject::releaseInNextFrame() {
   // make sure object is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 

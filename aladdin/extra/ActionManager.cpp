@@ -23,6 +23,10 @@ void ActionManager::stopAll() {
   for ( const auto action : actions ) {
     action->release();
   }
+
+  for ( const auto action : actions ) {
+    removeAction( action );
+  }
 }
 
 void ActionManager::onUpdate( const float delta ) {
