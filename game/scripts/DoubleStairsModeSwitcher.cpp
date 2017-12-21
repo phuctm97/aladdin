@@ -56,6 +56,10 @@ void DoubleStairsModeSwitcher::onTriggerEnter( const ala::CollisionInfo& collisi
       }
     }
 
+	if (selfCollider->getName() == "S") {
+		_stairsStateManager->changeState("OnOn");
+		return;
+	}
   }
 }
 

@@ -336,6 +336,12 @@
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\StaticPlatform.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StandablePlatformPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -601,6 +607,12 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AudioPlayerPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StaticPlatform.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StandablePlatformPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
