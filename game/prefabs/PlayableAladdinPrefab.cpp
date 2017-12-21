@@ -1095,6 +1095,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                // audio
                {
                  pushAudio->play();
+                 timer4->start( 1.0f );
                }
              },
              [=]( float ) {
@@ -1102,6 +1103,14 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                {
                  if ( !animator->isPlaying() ) {
                    animator->setAction( "pushing" );
+                 }
+               }
+
+               // audio
+               {
+                 if ( timer4->isDone() ) {
+                   pushAudio->play();
+                   timer4->start( 1.0f );
                  }
                }
 
@@ -1787,9 +1796,9 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
     return body->getVelocity().getY() < -10;
   } );
 
-  new StateTransition(stateManager, "stop", "fall", [=] {
+  new StateTransition( stateManager, "stop", "fall", [=] {
     return body->getVelocity().getY() < -10;
-  });
+  } );
 
   // TODO: fix for falling
   //  new StateTransition( stateManager, "run", "fall", [=] {
