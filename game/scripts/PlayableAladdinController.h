@@ -24,6 +24,7 @@ private:
   ala::GameObject* _holdingBar;
   bool _collidedWithStandable;
 
+  float _maxMovingVelocityX;
   float _movingVelocityX;
   std::vector<std::pair<float, float>> _dampVelocities;
 

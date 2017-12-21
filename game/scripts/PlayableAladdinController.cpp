@@ -17,7 +17,8 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _jumpOnCamel( false ), _jumpOnSpring( false ),
     _pushingWall( false ),
     _reachedTopOfRope( false ),
-    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _movingVelocityX( 0 ),
+    _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _maxMovingVelocityX( 200.0f ),
+    _movingVelocityX( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ), _selfDirection( NULL ),
@@ -332,12 +333,19 @@ void PlayableAladdinController::onUpdate( const float dt ) {
   for ( const auto i : removeIts ) _dampVelocities.erase( _dampVelocities.begin() + i );
 
   // update body velocity
+  float v = 0.0f;
+
   if ( _selfDirection->isLeft() ) {
-    _selfBody->setVelocity( Vec2( -_movingVelocityX + dampVelocity, _selfBody->getVelocity().getY() ) );
+    v = -_movingVelocityX + dampVelocity;
   }
   else {
-    _selfBody->setVelocity( Vec2( _movingVelocityX + dampVelocity, _selfBody->getVelocity().getY() ) );
+    v = _movingVelocityX + dampVelocity;
   }
+
+  if ( v < -_maxMovingVelocityX ) v = -_maxMovingVelocityX;
+  else if ( v > _maxMovingVelocityX ) v = _maxMovingVelocityX;
+
+  _selfBody->setVelocity( Vec2( v, _selfBody->getVelocity().getY() ) );
 }
 
 void PlayableAladdinController::onHitCharcoalBurner() {
