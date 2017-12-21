@@ -30,7 +30,8 @@ enum
   SAVILA_TAG,
   BOSS_TAG,
   FIRE_TAG,
-  STAR_TAG
+  STAR_TAG,
+  FINISH_ENTRANCE_TAG
 };
 
 enum

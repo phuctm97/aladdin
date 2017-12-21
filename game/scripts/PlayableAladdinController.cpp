@@ -263,6 +263,9 @@ void PlayableAladdinController::onTriggerStay( const ala::CollisionInfo& collisi
     else if ( otherObject->getTag() == FIRE_TAG ) {
       onHit();
     }
+    else if ( otherObject->getTag() == FINISH_ENTRANCE_TAG ) {
+      onEnterFinishEntrance();
+    }
   }
 }
 
@@ -304,7 +307,7 @@ void PlayableAladdinController::onInitialize() {
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   setLives( _myAppData->getAladdinLives() );
-  setApples( 3 );
+  setApples( 10 );
   setHealth( 9 );
 }
 
@@ -368,4 +371,8 @@ void PlayableAladdinController::onCatchBar( ala::GameObject* bar ) {
 
   // TODO: refactor to state transition
   _selfStateManager->changeState( "hold_bar_idle" );
+}
+
+void PlayableAladdinController::onEnterFinishEntrance() const {
+  _sceneFadeOutTransitionPrefab->instantiateWithArgs( "1 level_complete.scene\n0" );
 }

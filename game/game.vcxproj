@@ -162,6 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp" />
@@ -214,7 +215,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\ClimbableRopePrefab.cpp" />
     <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
-    <ClCompile Include="prefabs\SpringPrefab.cpp" />
     <ClCompile Include="prefabs\SpritePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
@@ -258,6 +258,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h" />
@@ -309,7 +310,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\ClimbableRopePrefab.h" />
     <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
-    <ClInclude Include="prefabs\SpringPrefab.h" />
     <ClInclude Include="prefabs\SpritePrefab.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />

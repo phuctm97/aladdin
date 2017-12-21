@@ -129,9 +129,6 @@
     <ClCompile Include="prefabs\SpendThesePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\SpringPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\SpritePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -333,6 +330,9 @@
     <ClCompile Include="scripts\ParallaxController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FinishEntrancePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -394,9 +394,6 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SpendThesePrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="prefabs\SpringPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\SpritePrefab.h">
@@ -596,6 +593,9 @@
     </ClInclude>
     <ClInclude Include="scripts\ParallaxController.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FinishEntrancePrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

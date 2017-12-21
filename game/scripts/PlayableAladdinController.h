@@ -120,6 +120,8 @@ private:
   void onCatchRope( ala::GameObject* rope );
 
   void onCatchBar( ala::GameObject* bar );
+
+  void onEnterFinishEntrance() const;
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__
