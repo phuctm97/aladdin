@@ -11,6 +11,8 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   const auto animator = new Animator( object, "spring_0", "items.anm" );
 
+  const auto springAudio = new AudioSource( object, "Flagpole.wav" );
+
   const auto stateManager = new StateManager( object, "static" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
@@ -42,10 +44,20 @@ void JumpableSpringPrefab::doInstantiate( ala::GameObject* object, std::istrings
              NULL, NULL );
 
   new State( stateManager, "dynamic",
-             [=] { animator->setAction( "spring" ); },
+             [=] {
+               // animation effect
+               {
+                 animator->setAction( "spring" );
+               }
+
+               // audio
+               {
+                 springAudio->play();
+               }
+             },
              NULL, NULL );
 
-  new StateTransition( stateManager, "static", "dynamic", [=] {
+  new StateTransition( stateManager, "dynamic", "static", [=] {
     return !animator->isPlaying();
   } );
 }

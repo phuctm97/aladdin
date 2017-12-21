@@ -58,8 +58,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
 
   const auto lowSwordAudio = new AudioSource( object, "Low Sword.wav" );
 
-  const auto jumpRotateAudio = new AudioSource( object, "Flagpole.wav" );
-
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
   const auto collider = new Collider( object, false, Vec2( 0, 0 ), Size( 40, 50 ), 1, 0, "Body" );
@@ -788,11 +786,6 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
                    animator->setAction( "climb_to_jump" );
                  }
                  else if ( controller->isJumpOnSpring() ) {
-                   // audio
-                   {
-                     jumpRotateAudio->play();
-                   }
-
                    animator->setAction( "jump_rotate" );
                  }
                  else {

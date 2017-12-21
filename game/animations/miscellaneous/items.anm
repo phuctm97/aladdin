@@ -117,7 +117,8 @@
     <sprite x="357" y="384" w="31" h="10" oX="357" oY="384" oW="47" oH="31" />
   </Animation>
   <Animation name="spring_0" imagePath="items.png">
-    <sprite x="140" y="631" w="38" h="23" offsetX="0.5" offsetY="-5" />
+    <sprite x="99" y="629" w="39" h="17" offsetX="0" offsetY="0" />
+<!--    <sprite x="140" y="631" w="38" h="23" offsetX="0.5" offsetY="-5" />-->
   </Animation>
   <Animation name="spring" imagePath="items.png" interval="0.07" isLoop="false">
     <sprite x="140" y="631" w="38" h="23" offsetX="0.5" offsetY="-5" />
@@ -130,5 +131,11 @@
     <sprite x="422" y="626" w="38" h="20" offsetX="-1" offsetY="1.5" />
     <sprite x="463" y="627" w="39" h="19" offsetX="0" offsetY="1" />
     <sprite x="99" y="629" w="39" h="17" offsetX="0" offsetY="0" />
+  </Animation>
+  <Animation name="pendal_idle" imagePath="items.png">
+    <sprite x="562" y="346" w="32" h="13" oX="562" oY="346" oW="-174" oH="44" />
+  </Animation>
+  <Animation name="pendal_broken" imagePath="items.png">
+    <sprite x="563" y="362" w="41" h="13" oX="563" oY="362" oW="-174" oH="44" />
   </Animation>
 </Animations>
