@@ -13,6 +13,7 @@
 #include "../prefabs/AudioPlayerPrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
+#include "../prefabs/DeathSceneSoundPrefab.h"
 #include "../prefabs/AladdinAndAbuPrefab.h"
 #include "../prefabs/LevelCompleteSceneControllerPrefab.h"
 #include "../prefabs/RetrySceneControllerPrefab.h"
@@ -64,6 +65,7 @@
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
+#include "../prefabs/JafarSceneSoundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -162,6 +164,9 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Fire From Coal.wav", "audio/Fire From Coal.wav" );
   new AudioClip( "Tip Toe.wav", "audio/Tip Toe.wav" );
   new AudioClip( "Flagpole.wav", "audio/Flagpole.wav" );
+  new AudioClip( "BossTune.wav","audio/BossTune.wav" );
+  new AudioClip( "Abu Waving.wav","audio/Abu Waving.wav" );
+  new AudioClip( "Boxing Bell.wav","audio/Boxing Bell.wav" );
 
   // Prefabs
   new SpritePrefab();
@@ -225,9 +230,14 @@ void MyResourceInitializer::doRun() {
 
   new JafarPrefab();
   new JafarFirePrefab();
+<<<<<<< HEAD
+	new DeathSceneSoundPrefab();
+	new JafarSceneSoundPrefab();
+=======
   new JafarStarPrefab();
   new JafarStarExplosionPrefab();
   new JafarPalaceGroundPrefab();
+>>>>>>> develop_client_alpha
 
   // Dev tools
   new NodePrefab();
