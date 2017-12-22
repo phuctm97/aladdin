@@ -37,6 +37,7 @@ private:
   ala::Rigidbody* _selfBody;
   DirectionController* _selfDirection;
   ala::PrefabV2* _throwableApplePrefab;
+  ala::PrefabV2* _throwableKnifePrefab;
 
   MyAppData* _myAppData;
   ala::PrefabV2* _sceneFadeOutTransitionPrefab;

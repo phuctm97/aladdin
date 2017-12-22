@@ -375,6 +375,9 @@
     <ClCompile Include="scripts\SingleLayerParallaxController.cpp">
       <Filter>scripts</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\AgainstThrowableKnifePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -680,6 +683,9 @@
     </ClInclude>
     <ClInclude Include="scripts\SingleLayerParallaxController.h">
       <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgainstThrowableKnifePrefab.h">
+      <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

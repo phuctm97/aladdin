@@ -216,7 +216,18 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
       _reachedTopOfRope = true;
     }
   }
-  else if ( selfCollider->getTag() == SWORD_TAG ) { }
+  else if ( selfCollider->getTag() == SWORD_TAG ) {
+    if ( otherCollider->getTag() == KNIFE_TAG && otherObject->getTag() == ENEMY_TAG ) {
+      if ( _selfDirection->isRight() ) {
+        _throwableKnifePrefab->instantiateWithArgs( "R 6000 14000" )
+                             ->getTransform()->setPosition( otherObject->getTransform()->getPosition() );
+      }
+      else {
+        _throwableKnifePrefab->instantiateWithArgs( "L 6000 14000" )
+                             ->getTransform()->setPosition( otherObject->getTransform()->getPosition() );
+      }
+    }
+  }
 
   if ( otherObject->getTag() == APPLE_TAG ) {
     setApples( getApples() + 1 );
@@ -311,6 +322,7 @@ void PlayableAladdinController::onInitialize() {
   _selfBody = getGameObject()->getComponentT<Rigidbody>();
   _selfDirection = getGameObject()->getComponentT<DirectionController>();
   _throwableApplePrefab = gameManager->getPrefabV2( "Throwable Apple" );
+  _throwableKnifePrefab = gameManager->getPrefabV2( "Against Throwable Knife" );
   _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 

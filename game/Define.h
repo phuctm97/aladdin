@@ -41,6 +41,7 @@ enum
   COLLIDE_FREE_OBJECT_FLAG = 1 << 2,
   STATIC_FLAG = 1 << 3,
   STANDABLE_FLAG = 1 << 4,
+  BELONGS_TO_ALADDIN = 1 << 5,
   EMPTY_FLAG = 1 << 31
 };
 

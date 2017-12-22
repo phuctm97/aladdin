@@ -928,7 +928,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
+    <prefab version="2" name="Playable Aladdin" args="-80 0" />
   </object>
 
   <!--EFFECT-->

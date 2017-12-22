@@ -31,9 +31,9 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto actionManager = new ActionManager(object);
+  const auto actionManager = new ActionManager( object );
 
-  const auto collisionTracker = new CollisionTracker(object);
+  const auto collisionTracker = new CollisionTracker( object );
 
   const auto stateManager = new StateManager( object, "initial" );
 
@@ -45,8 +45,9 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto transform = object->getTransform();
 
   // flags
-  collider->setFlags( COLLIDE_ENEMY_FLAG );
+  collider->setFlags( BELONGS_TO_ALADDIN | COLLIDE_ENEMY_FLAG );
   collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfHasAnyFlags( BELONGS_TO_ALADDIN );
 
   // configurations
   object->setLayer( "Foreground" );

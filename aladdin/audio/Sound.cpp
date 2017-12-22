@@ -9,12 +9,12 @@ Sound::Sound( const std::string& sourceFile ) : _sourceFile( sourceFile ), _cSou
 
 Sound::~Sound() {
   if ( isInitialized() ) {
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 }
 
 void Sound::initialize() {
-  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
+  //  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
   setToInitializing();
 
@@ -24,7 +24,7 @@ void Sound::initialize() {
 }
 
 void Sound::release() {
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
   setToReleasing();
 
