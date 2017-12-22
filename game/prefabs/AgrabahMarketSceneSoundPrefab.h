@@ -3,9 +3,9 @@
 
 #include <aladdin.h>
 
-ALA_CLASS_HEADER_1(AgrabahMarketSceneSound, ala::PrefabV2)
+ALA_CLASS_HEADER_1(AgrabahMarketSceneSoundPrefab, ala::PrefabV2)
 public:
-	AgrabahMarketSceneSound() : PrefabV2("Agrabah scene sound") {}
+	AgrabahMarketSceneSoundPrefab() : PrefabV2("Agrabah scene sound") {}
 
 protected:
 	void doInstantiate(ala::GameObject* object, std::istringstream& argsStream) const override;

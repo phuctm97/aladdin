@@ -162,7 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
-    <ClCompile Include="prefabs\AgrabahMarketSceneSound.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp" />
@@ -260,7 +260,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="prefabs\AgrabahMarketSceneSound.h" />
+    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
     <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h" />
