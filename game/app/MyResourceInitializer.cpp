@@ -162,7 +162,12 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Tip Toe.wav", "audio/Tip Toe.wav" );
   new AudioClip( "Flagpole.wav", "audio/Flagpole.wav" );
   new AudioClip( "Clay Pot.wav", "audio/Clay Pot.wav" );
-
+  new AudioClip( "Aaah.wav", "audio/Aaah.wav" );
+  new AudioClip( "Eeeh.wav", "audio/Eeeh.wav" );
+  new AudioClip( "Oooh.wav", "audio/Oooh.wav" );
+  new AudioClip( "Wow!.wav", "audio/Wow!.wav" );
+	
+	
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
