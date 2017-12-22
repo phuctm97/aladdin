@@ -6,6 +6,9 @@
   <!--<quad level="3" minX="-160" minY="-115" width="4771" height="688" />-->
 
   <!--BACKGROUND & FOREGROUND-->
+  <object>
+    <prefab version="2" name="Agrabah Market Parallax" args=""/>
+  </object>
   <object name="Background" layer="Background" tag="4" quadIndex="">
     <prefab version="2" name="Sprite" args="agrabah_market_background.png 0" />
     <transform position="2225.5 229" />

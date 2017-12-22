@@ -15,21 +15,23 @@ void AgrabahMarketParallaxPrefab::doInstantiate( ala::GameObject* object, std::i
   const auto animator = new Animator( object, "1", "agrabah_market_parallax.anm" );
 
   const auto parallax = new ParallaxController( object );
-  parallax->setOffset( Vec2( 0, -68 ) );
+  parallax->setOffset( Vec2( 0, -80 ) );
 
-  float layerOffsets[] = { 43, 62, 73, 84, 103, 130, 157, 176 };
+  float layerOffsets[] = { 46.5f, 67.5f, 80.0f, 92.0f, 112.5f, 142.0f, 171.0f, 191.0f };
   const int numberOfLayers = sizeof(layerOffsets) / sizeof(float);
 
-  for ( auto i = 0; i < numberOfLayers; i++ ) {
-    const auto layer = new GameObject( object );
-
+  for ( auto i = 0; i < numberOfLayers; ++i ) {
     std::stringstream stringBuilder;
     stringBuilder << i + 2;
 
-    new SpriteRenderer( layer, "agrabah_market_parallax.png" );
-    new Animator( layer, stringBuilder.str(), "agrabah_market_parallax.anm" );
-    layer->getTransform()->setPosition( Vec2( 0, layerOffsets[i] ) );
-    layer->setLayer( "Background" );
+    for ( auto k = 0; k < 2; ++k ) {
+      const auto layer = new GameObject( object );
+      const auto layerSpriteRenderer = new SpriteRenderer( layer, "agrabah_market_parallax.png" );
+      const auto layerAnimator = new Animator( layer, stringBuilder.str(), "agrabah_market_parallax.anm" );
+      layer->getTransform()
+           ->setPosition( Vec2( -k * layerSpriteRenderer->getFrameSize().getWidth(), layerOffsets[i] ) );
+      layer->setLayer( "Background" );
+    }
   }
 
   object->setLayer( "Background" );
