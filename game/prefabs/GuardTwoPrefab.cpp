@@ -24,11 +24,6 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   const auto swordOffset2 = Vec2( -45, 20 );
   const auto swordSize2 = Size( 50, 45 );
-	//audio
-	const auto AhhSound = new AudioSource(object, "Aaah.wav");
-	const auto EhhSound = new AudioSource(object, "Eeeh.wav");
-	const auto OhhSound = new AudioSource(object, "Oooh.wav");
-	
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
@@ -40,6 +35,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto commonAudio = new AudioSource( object, "Guard Beckon.wav" );
 
   const auto hitAudio = new AudioSource( object, "Guard Hit 1.wav" );
+
+  const auto ahhAudio = new AudioSource( object, "Aaah.wav" );
+
+  const auto ehhAudio = new AudioSource( object, "Eeeh.wav" );
+
+  const auto ohhAudio = new AudioSource( object, "Oooh.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -228,27 +229,29 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                {
                  animator->setAction( "fat_guard_run_one_leg" );
                }
-				 timer1->start(0.1);
+               // audio
+               {
+                 timer1->start( 0.1f );
+               }
              },
              [=]( float dt ) {
                // move
                {
                  body->setVelocity( Vec2( runOneLegVelocity, body->getVelocity().getY() ) );
                }
-				//audio
+
+               // audio
                {
-	               if(timer1->isDone())
-	               {
-		               const auto r = rand() % 3;
-					   if(r == 1)
-						   AhhSound->play();
-					   else if(r==2)
-					   {
-					   		EhhSound->play();
-					   }
-					   else OhhSound->play();
-					   timer1->start(0.3);
-	               }
+                 if ( timer1->isDone() ) {
+                   const auto r = rand() % 3;
+                   if ( r == 1 )
+                     ahhAudio->play();
+                   else if ( r == 2 ) {
+                     ehhAudio->play();
+                   }
+                   else ohhAudio->play();
+                   timer1->start( 0.3f );
+                 }
                }
 
                // bound 

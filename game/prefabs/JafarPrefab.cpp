@@ -29,16 +29,16 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const std::vector<float> firePositions = { -8, -8 + 18 * 1, -8 + 18 * 2 };
   const std::vector<Vec2> burnerPositions = { Vec2( -79, 11 ), Vec2( 97, 11 ), Vec2( 275, 11 ), Vec2( 451, 11 ) };
 
-  //audio
-  const auto Attack_1_Sound = new AudioSource(object, "Jafar Laugh.wav");
-  const auto Attack_2_Sound = new AudioSource(object, "Jafar Snake.wav");
-
   // components
 
   const auto spriteRenderer = new SpriteRenderer( object, "jafar.png" );
   spriteRenderer->setZOrder( 1 );
 
   const auto animator = new Animator( object, "jafar_1_attack", "jafar.anm" );
+
+  const auto attackOneAudio = new AudioSource( object, "Jafar Laugh.wav" );
+
+  const auto attackTwoAudio = new AudioSource( object, "Jafar Snake.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
@@ -136,10 +136,10 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_1_attack" );
                }
-			   //audio
-			   {
-				   Attack_1_Sound->play();
-			   }
+               // audio
+               {
+                 attackOneAudio->play();
+               }
 
                // transition
                {
@@ -232,9 +232,9 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_2_attack" );
                }
-				 //audio
+               // audio
                {
-				   Attack_2_Sound->play();
+                 attackTwoAudio->play();
                }
 
                // throw

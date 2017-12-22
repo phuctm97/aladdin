@@ -10,13 +10,12 @@ void GenieBonusPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   // constants
   const auto gameManager = GameManager::get();
   const auto smallFireworkPrefab = gameManager->getPrefabV2( "Small Firework" );
+  const auto audioPlayerPrefab = gameManager->getPrefabV2( "Audio Player" );
   const auto minDelay = 1000;
   const auto maxDelay = 5000;
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
-	  //audio
-	const auto EatenSound = new AudioSource(object, "Wow!.wav");
 
   const auto animator = new Animator( object, "genie_bonus", "items.anm" );
 
@@ -76,7 +75,7 @@ void GenieBonusPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                {
                  if ( collision->collidedWithObjectTag( ALADDIN_TAG ) ) {
                    smallFireworkPrefab->instantiate( transform->getPosition() );
-					EatenSound->play();
+                   audioPlayerPrefab->instantiateWithArgs( "Wow!.wav" );
                    object->release();
                  }
                }

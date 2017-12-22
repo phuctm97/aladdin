@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Scene>
-  <!--SCENESOUND-->
-  <object>
-    <prefab version="2" name="Agrabah scene sound" args="" />
-  </object>
   <!--CONFIGURATIONS-->
   <physics gravity="0 -500" />
   <!--<quad level="3" minX="-160" minY="-115" width="4771" height="688" />-->
+
+  <!--AUDIO-->
+  <object>
+    <prefab version="2" name="Agrabah Market Scene Sound" args="" />
+  </object>
 
   <!--BACKGROUND & FOREGROUND-->
   <object>

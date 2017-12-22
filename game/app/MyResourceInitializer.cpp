@@ -71,8 +71,7 @@
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
-#include "../prefabs/JafarSceneSoundPrefab.h"
->>>>>>> develop_client_alpha
+#include "../prefabs/JafarPalaceSceneSoundPrefab.h"
 
 USING_NAMESPACE_ALA;
 
@@ -254,7 +253,7 @@ void MyResourceInitializer::doRun() {
   new JafarStarPrefab();
   new JafarStarExplosionPrefab();
   new JafarPalaceGroundPrefab();
-  new JafarSceneSoundPrefab();
+  new JafarPalaceSceneSoundPrefab();
 
   // Dev tools
   new NodePrefab();

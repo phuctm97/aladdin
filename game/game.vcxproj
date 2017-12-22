@@ -179,7 +179,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\FadeInEffectPrefab.cpp" />
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
-    <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPalaceSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarPrefab.cpp" />
@@ -286,7 +286,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\DeathSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarFirePrefab.h" />
     <ClInclude Include="prefabs\JafarPrefab.h" />
-    <ClInclude Include="prefabs\JafarSceneSoundPrefab.h" />
+    <ClInclude Include="prefabs\JafarPalaceSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h" />
     <ClInclude Include="prefabs\JafarStarExplosionPrefab.h" />
     <ClInclude Include="prefabs\JafarStarPrefab.h" />
@@ -444,6 +444,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Balloon Pop.wav" />
     <Media Include="audio\Body Crunch.wav" />
     <Media Include="audio\Bones Tinkle.wav" />
+    <Media Include="audio\BossTune.wav" />
     <Media Include="audio\Boxing Bell.wav" />
     <Media Include="audio\Camel Spit.wav" />
     <Media Include="audio\Canopy Bounce.wav" />
