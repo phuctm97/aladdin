@@ -128,6 +128,7 @@ void PhysicsManager::update( const float delta ) {
         const auto gameObjectA = colliderA->getGameObject();
         const auto gameObjectB = colliderB->getGameObject();
         if ( gameObjectA == gameObjectB ) continue;
+        if ( !gameObjectA->isInitialized() || !gameObjectB->isInitialized() ) continue;
 
         auto rigidbodyA = gameObjectA->getComponentT<Rigidbody>();
         auto rigidbodyB = gameObjectB->getComponentT<Rigidbody>();

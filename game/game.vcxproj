@@ -178,6 +178,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\FadeInEffectPrefab.cpp" />
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPalaceParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
@@ -251,6 +252,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\JafarController.cpp" />
     <ClCompile Include="scripts\JafarStarController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
+    <ClCompile Include="scripts\SingleLayerParallaxController.cpp" />
     <ClCompile Include="scripts\StaticParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
@@ -285,6 +287,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
     <ClInclude Include="prefabs\DeathSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarFirePrefab.h" />
+    <ClInclude Include="prefabs\JafarPalaceParallaxPrefab.h" />
     <ClInclude Include="prefabs\JafarPrefab.h" />
     <ClInclude Include="prefabs\JafarPalaceSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h" />
@@ -358,6 +361,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\JafarController.h" />
     <ClInclude Include="scripts\JafarStarController.h" />
     <ClInclude Include="scripts\NodeController.h" />
+    <ClInclude Include="scripts\SingleLayerParallaxController.h" />
     <ClInclude Include="scripts\StaticParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />

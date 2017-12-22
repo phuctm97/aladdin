@@ -369,6 +369,12 @@
     <ClCompile Include="prefabs\JafarPalaceSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\JafarPalaceParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\SingleLayerParallaxController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -668,6 +674,12 @@
     </ClInclude>
     <ClInclude Include="prefabs\JafarPalaceSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarPalaceParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\SingleLayerParallaxController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

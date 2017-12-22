@@ -8,13 +8,13 @@
   <object>
     <prefab version="2" name="Jafar Palace Scene Sound" args="" />
   </object>
-
+  <object>
+    <prefab version="2" name="Jafar Palace Parallax" args="" />
+    <transform position="186 72.5" />
+  </object>
   <object name="Background" layer="Background" tag="4">
     <prefab version="2" name="Sprite" args="jafar_palace_background.png 0" />
     <transform position="186 72.5" />
-  </object>
-  <object>
-    <prefab version="2" name="Jafar Scene Sound" />
   </object>
   <object name="Hub">
     <prefab version="2" name="Hub" args="" />
@@ -52,6 +52,6 @@
     <transform position="186 7" />
   </object>
   <object name="Aladdin">
-    <prefab version="2" name="Playable Aladdin" args="-80 -20" />
+    <prefab version="2" name="Playable Aladdin" args="-80 10" />
   </object>
 </Scene>

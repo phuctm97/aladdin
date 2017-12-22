@@ -136,14 +136,15 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_1_attack" );
                }
-               // audio
-               {
-                 attackOneAudio->play();
-               }
 
                // transition
                {
                  timer1->start( (rand() % (maxAttackDelay - minAttackDelay) + minAttackDelay) / 1000.0f );
+               }
+
+               // audio
+               {
+                 attackOneAudio->play();
                }
 
                // attack
@@ -232,10 +233,6 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_2_attack" );
                }
-               // audio
-               {
-                 attackTwoAudio->play();
-               }
 
                // throw
                {
@@ -264,6 +261,12 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                      firePrefab->instantiateWithArgs( "R" )
                                ->getTransform()->setPosition( transform->getPosition() + Vec2( 15, -15 ) );
                    }
+
+                   // audio
+                   {
+                     attackTwoAudio->play();
+                   }
+
                    timer1->start( 1000 );
                  }
                }

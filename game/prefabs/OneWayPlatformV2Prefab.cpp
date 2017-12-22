@@ -22,7 +22,7 @@ void OneWayPlatformV2Prefab::doInstantiate( ala::GameObject* object, std::istrin
   const auto stateManager = new StateManager( object, "off" );
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // states
   new State( stateManager, "off", [=] {

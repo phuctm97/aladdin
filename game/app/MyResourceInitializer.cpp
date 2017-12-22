@@ -70,6 +70,7 @@
 #include "../prefabs/JafarFirePrefab.h"
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
+#include "../prefabs/JafarPalaceParallaxPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
 #include "../prefabs/JafarPalaceSceneSoundPrefab.h"
 
@@ -108,6 +109,7 @@ void MyResourceInitializer::doRun() {
   new Sprite( "agrabah_market_foreground.png", "textures/backgrounds/scene_1_1.png" );
   new Sprite( "agrabah_market_parallax.png", "textures/backgrounds/scene_1_2.png" );
   new Sprite( "jafar_palace_background.png", "textures/backgrounds/scene_2_1.png" );
+  new Sprite( "jafar_palace_parallax.png", "textures/backgrounds/scene_2_0.png" );
   new Sprite( "aladdin.png", "textures/playable_characters/aladdin.png" );
   new Sprite( "enemy_explosions.png", "textures/miscellaneous/enemy_explosions.png" );
   new Sprite( "items.png", "textures/miscellaneous/items.png" );
@@ -180,7 +182,7 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "BossTune.wav", "audio/BossTune.wav" );
   new AudioClip( "Abu Waving.wav", "audio/Abu Waving.wav" );
   new AudioClip( "Boxing Bell.wav", "audio/Boxing Bell.wav" );
-  
+
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
@@ -252,6 +254,7 @@ void MyResourceInitializer::doRun() {
   new JafarFirePrefab();
   new JafarStarPrefab();
   new JafarStarExplosionPrefab();
+  new JafarPalaceParallaxPrefab();
   new JafarPalaceGroundPrefab();
   new JafarPalaceSceneSoundPrefab();
 

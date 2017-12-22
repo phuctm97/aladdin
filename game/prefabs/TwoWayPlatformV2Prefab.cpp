@@ -17,7 +17,7 @@ void TwoWayPlatformV2Prefab::doInstantiate( ala::GameObject* object, std::istrin
   collider->ignoreTag( PLATFORM_TAG );
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
   // flags
   collider->setFlags(
