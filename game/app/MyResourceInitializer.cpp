@@ -63,6 +63,7 @@
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
+#include "../prefabs/AgrabahMarketSceneSound.h"
 
 USING_NAMESPACE_ALA;
 
@@ -226,6 +227,7 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsFourPrefab();
   new AgrabahMarketStairsFivePrefab();
   new AgrabahMarketStairsSixPrefab();
+  new AgrabahMarketSceneSound();
 
   new JafarPrefab();
   new JafarFirePrefab();

@@ -1,0 +1,14 @@
+#ifndef __AGRAB_SCENE_SOUND_PREFAB_H__
+#define __AGRAB_SCENE_SOUND_PREFAB_H__
+
+#include <aladdin.h>
+
+ALA_CLASS_HEADER_1(AgrabahMarketSceneSound, ala::PrefabV2)
+public:
+	AgrabahMarketSceneSound() : PrefabV2("Agrabah scene sound") {}
+
+protected:
+	void doInstantiate(ala::GameObject* object, std::istringstream& argsStream) const override;
+};
+
+#endif // !__AGRAB_SCENE_SOUND_PREFAB_H__
