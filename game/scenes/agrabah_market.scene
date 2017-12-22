@@ -928,8 +928,8 @@
     <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 
-  <object name="Node" quadIndex="">
+  <!--<object name="Node" quadIndex="">
     <prefab version="1" name="Node" args="" />
     <transform position="2992 160" />
-  </object>
+  </object>-->
 </Scene>
