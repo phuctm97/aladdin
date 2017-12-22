@@ -49,6 +49,7 @@
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
 #include "../prefabs/PendalPrefab.h"
+#include "../prefabs/PendalV2Prefab.h"
 #include "../prefabs/FinishEntrancePrefab.h"
 #include "../prefabs/AgrabahMarketParallaxPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
@@ -210,6 +211,7 @@ void MyResourceInitializer::doRun() {
   new JumpableSpringPrefab();
   new PlatformPrefab();
   new PendalPrefab();
+  new PendalV2Prefab();
   new FinishEntrancePrefab();
   
   new AgrabahMarketParallaxPrefab();
