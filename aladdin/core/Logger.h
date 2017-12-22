@@ -25,6 +25,8 @@ private:
 public:
   static void setLogLevel( int level );
 
+  static int getLogLevel();
+
   Logger( const std::string& className );
 
   virtual ~Logger();

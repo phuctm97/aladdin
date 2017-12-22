@@ -174,10 +174,6 @@ Scene* GameManager::getRunningScene() const {
   return _runningScene;
 }
 
-GameObject* GameManager::getMainCamera() const {
-  return getObjectByName( ALA_MAIN_CAMERA );
-}
-
 void GameManager::exit() {
   if ( _exitFunc != NULL ) {
     _exitFunc();
@@ -214,6 +210,12 @@ void GameManager::loadScene( SceneConfiguration* configuration, ala::Scene* scen
 
   if ( configuration->isPhysicsEnabled() ) {
     sceneToLoad->enablePhysics( configuration->getPhysicsGravity() );
+  }
+
+  if ( configuration->isQuadTreeEnabled() ) {
+    sceneToLoad->enableQuadTree( configuration->getSpaceMinX(), configuration->getSpaceMinY(),
+                                 configuration->getSpaceWidth(), configuration->getSpaceHeight(),
+                                 configuration->getQuadTreeLevel() );
   }
 
   const auto& objectConfigurations = configuration->getObjectConfigurations();

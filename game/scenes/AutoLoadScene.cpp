@@ -1,5 +1,6 @@
 #include "AutoLoadScene.h"
 #include "../scripts/CameraController.h"
+#include "../scripts/DebugCameraController.h"
 
 USING_NAMESPACE_ALA;
 

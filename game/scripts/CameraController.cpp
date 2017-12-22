@@ -10,7 +10,7 @@ CameraController::CameraController( ala::GameObject* gameObject, const std::stri
     _selfTransform( NULL ),
     _aladdinTransform( NULL ), _aladdinStateManager( NULL ), _aladdinDirection( NULL ), _aladdinAnimator( NULL ),
     _backgroundLeft( 0 ), _backgroundRight( 0 ),
-    _backgroundTop( 0 ), _backgroundBottom( 0 ) {}
+    _backgroundTop( 0 ), _backgroundBottom( 0 ), _firstSet( false ) {}
 
 void CameraController::onInitialize() {
   const auto gameManager = GameManager::get();
@@ -58,6 +58,8 @@ void CameraController::onInitialize() {
 }
 
 void CameraController::onUpdate( const float delta ) {
+  if ( _aladdinTransform == NULL ) return;
+
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
 
@@ -65,6 +67,27 @@ void CameraController::onUpdate( const float delta ) {
   const auto halfVisibleHeight = gameManager->getVisibleHeight() / 2;
 
   const auto& aladdinPosition = _aladdinTransform->getPosition();
+
+  if ( !_firstSet ) {
+    _firstSet = true;
+    _selfTransform->setPosition( aladdinPosition );
+
+    // guard camera in background bounding zone
+    if ( _selfTransform->getPositionX() - _backgroundLeft < halfVisibleWidth ) {
+      _selfTransform->setPositionX( _backgroundLeft + halfVisibleWidth );
+    }
+    else if ( _backgroundRight - _selfTransform->getPositionX() < halfVisibleWidth ) {
+      _selfTransform->setPositionX( _backgroundRight - halfVisibleWidth );
+    }
+    if ( _selfTransform->getPositionY() - _backgroundBottom < halfVisibleHeight ) {
+      _selfTransform->setPositionY( _backgroundBottom + halfVisibleHeight );
+    }
+    else if ( _backgroundTop - _selfTransform->getPositionY() < halfVisibleHeight ) {
+      _selfTransform->setPositionY( _backgroundTop - halfVisibleHeight );
+    }
+
+    return;
+  }
 
   // aladdin horizontal direction
   if ( _aladdinDirection->isRight() ) {

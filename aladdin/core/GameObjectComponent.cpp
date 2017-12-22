@@ -16,6 +16,7 @@ ALA_CLASS_SOURCE_2(ala::GameObjectComponent, ala::Initializable, ala::Releasable
 GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::string& name )
   : _name( name ),
     _tag( -1 ),
+    _flags( 0 ),
     _gameObject( gameObject ),
     _active( false ),
     _selfInitialize( true ),
@@ -35,7 +36,7 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
 GameObjectComponent::~GameObjectComponent() {
   if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
   TOTAL_COMPONENTS_DELETED++;
@@ -74,6 +75,22 @@ bool GameObjectComponent::isSelfInitialize() const {
 
 void GameObjectComponent::setSelfInitialize( const bool val ) {
   _selfInitialize = val;
+}
+
+void GameObjectComponent::setFlags( const long v ) {
+  _flags = v;
+}
+
+void GameObjectComponent::addFlag( const long v ) {
+  _flags |= v;
+}
+
+int GameObjectComponent::getFlags() const {
+  return _flags;
+}
+
+bool GameObjectComponent::hasFlag( const long v ) const {
+  return (_flags & v) != 0;
 }
 
 // =================================================
@@ -153,7 +170,7 @@ void GameObjectComponent::resolveLockedTasks() {
 
 void GameObjectComponent::release() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
 
   if ( !onPreRelease() ) return;
 
@@ -174,7 +191,7 @@ void GameObjectComponent::release() {
 
 void GameObjectComponent::releaseInNextFrame() {
   // make sure object is initialized and not released
-  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT((isInitialized()) && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 

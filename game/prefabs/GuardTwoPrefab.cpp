@@ -14,11 +14,6 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto leftBoundX = nextFloat( argsStream );
   const auto rightBoundX = nextFloat( argsStream );
 
-  //audio
-  const auto HighSwordSound = new AudioSource(object, "High Sword.wav");
-  const auto CommonSound = new AudioSource(object, "Guard Beckon.wav");
-  const auto HitSound = new AudioSource(object, "Guard Hit 1.wav");
-
   // constants
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
@@ -34,6 +29,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
   const auto animator = new Animator( object, "fat_guard_idle", "guards.anm" );
+
+  const auto highSwordAudio = new AudioSource( object, "High Sword.wav" );
+
+  const auto commonAudio = new AudioSource( object, "Guard Beckon.wav" );
+
+  const auto hitAudio = new AudioSource( object, "Guard Hit 1.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -53,10 +54,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   const auto charcoalBurnerCollison = new CharcoalBurnerCollisionTracker( object );
 
-  const auto ai = new GuardController( object );
-  ai->setInitialX( initialX );
-  ai->setLeftBoundX( leftBoundX );
-  ai->setRightBoundX( rightBoundX );
+  const auto controller = new GuardController( object );
+  controller->setInitialX( initialX );
+  controller->setLeftBoundX( leftBoundX );
+  controller->setRightBoundX( rightBoundX );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceYCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );
@@ -64,8 +67,13 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
-  new ColliderRenderer( swordCollider );
+  //  new ColliderRenderer( collider );
+  //  new ColliderRenderer( swordCollider );
+
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+  swordCollider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setLayer( "Supporting Character" );
@@ -92,14 +100,14 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              [=]( float dt ) {
                // reset
                {
-                 if ( ai->isTooFarFromAladdin() ) {
-                   transform->setPositionX( ai->getInitialX() );
+                 if ( controller->isTooFarFromAladdin() ) {
+                   transform->setPositionX( controller->getInitialX() );
                  }
                }
 
                // direction
                {
-                 int directionToFace = ai->getDirectionToFaceToAladdin();
+                 int directionToFace = controller->getDirectionToFaceToAladdin();
                  if ( directionToFace == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToFace == 'R' && direction->isLeft() ) direction->setRight();
                }
@@ -110,10 +118,11 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                // animation effect
                {
                  animator->setAction( "fat_guard_provoke" );
-				//audio
-                 {
-					 CommonSound->play();
-                 }
+               }
+
+               //audio
+               {
+                 commonAudio->play();
                }
              }, NULL, NULL );
 
@@ -128,10 +137,13 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                  }
                  else {
                    animator->setAction( "fat_guard_attack_2" );
-				  //audio
-                   {
-					   HighSwordSound->play();
-                   }
+                 }
+               }
+
+               //audio
+               {
+                 if ( r >= 2 ) {
+                   highSwordAudio->play();
                  }
                }
 
@@ -151,7 +163,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              [=]( float dt ) {
                // direction
                {
-                 int directionToFace = ai->getDirectionToFaceToAladdin();
+                 int directionToFace = controller->getDirectionToFaceToAladdin();
                  if ( directionToFace == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToFace == 'R' && direction->isLeft() ) direction->setRight();
                }
@@ -192,14 +204,14 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
                // direction
                {
-                 char directionToGo = ai->getDirectionToGoToAttackAladdin();
+                 char directionToGo = controller->getDirectionToGoToAttackAladdin();
                  if ( directionToGo == 'L' && direction->isRight() ) direction->setLeft();
                  else if ( directionToGo == 'R' && direction->isLeft() ) direction->setRight();
                }
 
                // bound 
                {
-                 ai->keepInBound();
+                 controller->keepInBound();
                }
              }, NULL );
 
@@ -218,7 +230,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
                // bound 
                {
-                 ai->keepInBound();
+                 controller->keepInBound();
                }
              }, NULL );
 
@@ -228,10 +240,12 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                {
                  animator->setAction( "fat_guard_hit" );
                }
-			   //audio
+
+               // audio
                {
-				   HitSound->play();
+                 hitAudio->play();
                }
+
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
@@ -241,15 +255,15 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   new StateTransition( stateManager, "idle", "provoke", [=] {
     const auto r = rand() % 5;
-    return r < 2 && ai->isAbleToSeeAladdin() && !ai->isAbleToAttackAladdin() &&
-    ((direction->isRight() && ai->isAbleToGoRight()) ||
-      (direction->isLeft() && ai->isAbleToGoLeft()));
+    return r < 2 && controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
+    ((direction->isRight() && controller->isAbleToGoRight()) ||
+      (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return ai->isAbleToSeeAladdin() && !ai->isAbleToAttackAladdin() &&
-    ((direction->isRight() && ai->isAbleToGoRight()) ||
-      (direction->isLeft() && ai->isAbleToGoLeft()));
+    return controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
+    ((direction->isRight() && controller->isAbleToGoRight()) ||
+      (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "provoke", "run", [=] {
@@ -257,9 +271,9 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return ai->isAbleToAttackAladdin() ||
-      (direction->isLeft() && !ai->isAbleToGoLeft()) ||
-      (direction->isRight() && !ai->isAbleToGoRight());
+    return controller->isInBestPositionToAttackAladdin() ||
+      (direction->isLeft() && !controller->isAbleToGoLeft()) ||
+      (direction->isRight() && !controller->isAbleToGoRight());
   } );
 
   new StateTransition( stateManager, "run", "run_one_leg", [=] {
@@ -271,7 +285,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   } );
 
   new StateTransition( stateManager, "idle", "attack", [=] {
-    return ai->isAbleToAttackAladdin();
+    return controller->isAbleToAttackAladdin();
   } );
 
   new StateTransition( stateManager, "attack", "idle", [=] {

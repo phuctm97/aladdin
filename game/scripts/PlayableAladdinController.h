@@ -3,6 +3,7 @@
 
 #include <aladdin.h>
 #include "../app/MyAppData.h"
+#include "DirectionController.h"
 
 ALA_CLASS_HEADER_1( PlayableAladdinController, ala::GameObjectComponent)
 private:
@@ -21,18 +22,31 @@ private:
   bool _reachedTopOfRope;
   ala::GameObject* _holdingRope;
   ala::GameObject* _holdingBar;
+  bool _collidedWithStandable;
+
+  float _maxMovingVelocityX;
+  float _movingVelocityX;
+  int _dampVelocitiesSize;
+  std::pair<float, float> _dampVelocities[100];
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
   ala::StateManager* _selfStateManager;
   ala::Animator* _selfAnimator;
   ala::Collider* _selfBodyCollider;
+  ala::Rigidbody* _selfBody;
+  DirectionController* _selfDirection;
   ala::PrefabV2* _throwableApplePrefab;
 
   MyAppData* _myAppData;
+  ala::PrefabV2* _sceneFadeOutTransitionPrefab;
 
 public:
   PlayableAladdinController( ala::GameObject* gameObject, const std::string& name = "" );
+
+  float getMovingVelocityX() const;
+
+  void setMovingVelocityX( const float v );
 
   void setLives( const int lives );
 
@@ -78,9 +92,15 @@ public:
 
   ala::GameObject* getHoldingBar() const;
 
+  void resetCollidedWithStandable();
+
+  bool isCollidedWithStandable() const;
+
   void throwApple( const char direction,
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
+
+  void addDampVelocity( const float v, const float duration );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 
@@ -95,6 +115,8 @@ public:
 protected:
   void onInitialize() override;
 
+  void onUpdate( const float dt ) override;
+
 private:
   void onHitCharcoalBurner();
 
@@ -107,6 +129,8 @@ private:
   void onCatchRope( ala::GameObject* rope );
 
   void onCatchBar( ala::GameObject* bar );
+
+  void onEnterFinishEntrance() const;
 };
 
 #endif //!__PLAYABLE_ALADDIN_CONTROLLER_H__

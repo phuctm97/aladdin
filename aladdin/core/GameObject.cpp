@@ -14,6 +14,7 @@ GameObject::GameObject( Scene* parentScene, const std::string& name, const std::
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _tag( -1 ),
+    _flags( 0 ),
     _parentScene( parentScene ),
     _active( false ),
     _selfInitialize( true ),
@@ -43,6 +44,7 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
   : _id( GameManager::get()->newId() ),
     _name( name ),
     _tag( -1 ),
+    _flags( 0 ),
     _parentScene( NULL ),
     _active( false ),
     _selfInitialize( true ),
@@ -69,7 +71,7 @@ GameObject::GameObject( GameObject* parentObject, const std::string& name )
 GameObject::~GameObject() {
   if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
   // for debug memory allocation
@@ -123,6 +125,22 @@ GameObject* GameObject::setTag( const int tag ) {
 
 int GameObject::getTag() const {
   return _tag;
+}
+
+void GameObject::setFlags( const long v ) {
+  _flags = v;
+}
+
+void GameObject::addFlag( const long v ) {
+  _flags |= v;
+}
+
+int GameObject::getFlags() const {
+  return _flags;
+}
+
+bool GameObject::hasFlag( const long v ) const {
+  return (_flags & v) != 0;
 }
 
 // ===========================================================
@@ -266,7 +284,7 @@ void GameObject::release() {
   }
 
   // make sure object is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   setToReleasing();
 
@@ -296,7 +314,7 @@ void GameObject::release() {
 
 void GameObject::releaseInNextFrame() {
   // make sure object is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 

@@ -29,9 +29,18 @@ void WallPrefab::doInstantiate( ala::GameObject* object, std::istringstream& arg
 
   // collider renderers
   new ColliderRenderer( collider );
-  new ColliderRenderer( colliderL );
-  new ColliderRenderer( colliderR );
+  //  new ColliderRenderer( colliderL );
+  //  new ColliderRenderer( colliderR );
+
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
+  colliderL->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  colliderR->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  colliderL->ignoreIfHasAnyFlags( STATIC_FLAG );
+  colliderR->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setTag( WALL_TAG );
+  object->setLayer( "Debug" );
 }

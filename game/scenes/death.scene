@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Scene>
+  <!--ANIMATIONS-->
   <object>
     <prefab version="2" name="Sprite" args="aladdin.png 1 aladdin.anm die" />
     <transform position="-32 0" />
@@ -9,10 +10,14 @@
     <prefab version="2" name="Sprite" args="abu.png 1 abu.anm fan" />
     <transform position="50 -40" />
   </object>
+  
+  <!--CONTROLLER-->
   <object>
     <prefab version="2" name="Death Scene Controller" args="" />
   </object>
+
+  <!--EFFECT-->
   <object>
-    <prefab version="2" name="Death scene sound" args="" />
+    <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
 </Scene>

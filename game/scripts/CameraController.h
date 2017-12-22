@@ -20,6 +20,8 @@ private:
   float _backgroundTop;
   float _backgroundBottom;
 
+  bool _firstSet;
+
 public:
   CameraController( ala::GameObject* gameObject, const std::string& name = "" );
 

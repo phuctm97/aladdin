@@ -12,8 +12,6 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto initialX = nextFloat( argsStream );
   const auto leftBoundX = nextFloat( argsStream );
   const auto rightBoundX = nextFloat( argsStream );
-  //audio
-  const auto HitSound = new AudioSource(object, "Guard Hit 2.wav");
 
   // constants
   const auto density = 5.0f;
@@ -26,6 +24,8 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
 
   const auto animator = new Animator( object, "thin_guard_idle", "guards.anm" );
+
+  const auto hitAudio = new AudioSource( object, "Guard Hit 2.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -47,6 +47,8 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   controller->setInitialX( initialX );
   controller->setLeftBoundX( leftBoundX );
   controller->setRightBoundX( rightBoundX );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceYCouldAttack( 50 );
 
   // helpers
   const auto timer = new Timer( object );
@@ -54,8 +56,13 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
-  new ColliderRenderer( swordCollider );
+  //  new ColliderRenderer( collider );
+  //  new ColliderRenderer( swordCollider );
+
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+  swordCollider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setLayer( "Supporting Character" );
@@ -168,10 +175,12 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                {
                  animator->setAction( "thin_guard_hit" );
                }
-			   //audio
+
+               // audio
                {
-				   HitSound->play();
+                 hitAudio->play();
                }
+
                // move
                {
                  body->setVelocity( Vec2( 0, body->getVelocity().getY() ) );
@@ -179,13 +188,13 @@ void GuardOnePrefab::doInstantiate( ala::GameObject* object, std::istringstream&
              }, NULL, NULL );
 
   new StateTransition( stateManager, "idle", "run", [=] {
-    return controller->isAbleToSeeAladdin() && !controller->isAbleToAttackAladdin() &&
+    return controller->isAbleToSeeAladdin() && !controller->isInBestPositionToAttackAladdin() &&
     ((direction->isRight() && controller->isAbleToGoRight()) ||
       (direction->isLeft() && controller->isAbleToGoLeft()));
   } );
 
   new StateTransition( stateManager, "run", "idle", [=] {
-    return controller->isAbleToAttackAladdin() ||
+    return controller->isInBestPositionToAttackAladdin() ||
       (direction->isLeft() && !controller->isAbleToGoLeft()) ||
       (direction->isRight() && !controller->isAbleToGoRight());
   } );

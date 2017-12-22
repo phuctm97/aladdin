@@ -16,11 +16,16 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
   const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+  const auto sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "items.png" );
 
   const auto animator = new Animator( object, "menu_select", "items.anm" );
+
+  const auto menuChangeAudio = new AudioSource( object, "Menu Change.wav" );
+
+  const auto sceneAudio = new AudioSource( object, "A Whole New World.wav" );
 
   const auto actionManager = new ActionManager( object );
 
@@ -32,65 +37,105 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
   new State( stateManager, "initial",
              [=] {
                // reset app data
-               myAppData->setCurrentLevel( 1 );
-               myAppData->setCurrentCheckpoint( 0 );
-               myAppData->setAladdinLives( 3 );
-               myAppData->setRetryTimes( 1 );
+               {
+                 myAppData->setCurrentLevel( 1 );
+                 myAppData->setCurrentCheckpoint( 0 );
+                 myAppData->setAladdinLives( 3 );
+                 myAppData->setAladdinApples( 5 );
+                 myAppData->setRetryTimes( 1 );
+               }
+
+               // audio
+               {
+                 sceneAudio->play();
+               }
              }, NULL, NULL );
 
   new State( stateManager, "menu_1",
              [=] {
-               transform->setPosition( -84, menuOneY - 8 );
+               // animation effect
+               {
+                 transform->setPosition( -84, menuOneY - 8 );
 
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
+               }
+
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AutoLoadScene( "agrabah_market.scene", true ) );
+                 myAppData->setCurrentLevel( 1 );
+                 sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 agrabah_market.scene\n1" );
                }
              },
              NULL );
 
   new State( stateManager, "menu_2",
              [=] {
-               transform->setPosition( -84, menuTwoY - 8 );
+               // animation effect
+               {
+                 transform->setPosition( -84, menuTwoY - 8 );
 
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
+               }
+
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
-                 gameManager->replaceScene( new AutoLoadScene( "jafar_quarter.scene", true ) );
+                 myAppData->setCurrentLevel( 2 );
+                 sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 jafar_palace.scene\n1" );
                }
              },
              NULL );
 
   new State( stateManager, "menu_3",
              [=] {
-               transform->setPosition( -84, menuThreeY - 8 );
+               // animation effect
+               {
+                 transform->setPosition( -84, menuThreeY - 8 );
 
-               actionManager->stopAll();
-               actionManager->play( new Repeat(
-                 new Sequence( {
-                   new MoveBy( Vec2( 10, 0 ), 0.175f ),
-                   new MoveBy( Vec2( -10, 0 ), 0.175f ),
-                 } )
-               ) );
+                 actionManager->stopAll();
+                 actionManager->play( new Repeat(
+                   new Sequence( {
+                     new MoveBy( Vec2( 10, 0 ), 0.175f ),
+                     new MoveBy( Vec2( -10, 0 ), 0.175f ),
+                   } )
+                 ) );
+               }
+
+               // audio
+               {
+                 if ( stateManager->getPreviousStateName() != "initial" ) {
+                   menuChangeAudio->play();
+                 }
+               }
              },
              [=]( float dt ) {
                if ( input->getKeyDown( ALA_KEY_A )

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Scene>
+  <physics gravity="0 -500" />
+  <quad level="2" minX="-160" minY="-115" width="692" height="375" />
+  <object name="Background" layer="Background" tag="4">
+    <prefab version="2" name="Sprite" args="jafar_palace_background.png 0" />
+    <transform position="186 72.5" />
+  </object>
+  <object name="Hub">
+    <prefab version="2" name="Hub" args="" />
+  </object>
+  <object name="Ground">
+    <prefab version="2" name="Jafar Palace Ground" args="" />
+    <transform position="186 0" />
+  </object>
+  <object name="Left Wall">
+    <prefab version="2" name="Wall" args="23 351" />
+    <transform position="-145 78" />
+  </object>
+  <object name="Right Wall">
+    <prefab version="2" name="Wall" args="23 351" />
+    <transform position="517 78" />
+  </object>
+  <object name="Platform" quadIndex="">
+    <prefab version="2" name="Platform" args="85" />
+    <transform position="-79 10" />
+  </object>
+  <object name="Platform" quadIndex="">
+    <prefab version="2" name="Platform" args="85" />
+    <transform position="97 10" />
+  </object>
+  <object name="Platform" quadIndex="">
+    <prefab version="2" name="Platform" args="85" />
+    <transform position="275 10" />
+  </object>
+  <object name="Platform" quadIndex="">
+    <prefab version="2" name="Platform" args="85" />
+    <transform position="451 10" />
+  </object>
+  <object name="Jafar">
+    <prefab version="2" name="Jafar" args="" />
+    <transform position="186 7" />
+  </object>
+  <object name="Aladdin">
+    <prefab version="2" name="Playable Aladdin" args="-80 -20" />
+  </object>
+</Scene>

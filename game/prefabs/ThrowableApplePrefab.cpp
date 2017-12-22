@@ -14,15 +14,14 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
-
   const auto density = 2.5f;
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "aladdin.png" );
-  //audio
-  const auto apple_explode_sound = new AudioSource(object, "Apple Splat.wav");
 
   const auto animator = new Animator( object, "apple", "aladdin.anm" );
+
+  const auto appleExplodeAudio = new AudioSource( object, "Apple Splat.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
@@ -32,18 +31,22 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   collider->ignoreTag( CHARCOAL_BURNER_TAG );
   collider->ignoreTag( ALADDIN_TAG );
 
-  const auto stateManager = new StateManager( object, "initial" );
+  const auto actionManager = new ActionManager(object);
 
-  const auto actionManager = new ActionManager( object );
+  const auto collisionTracker = new CollisionTracker(object);
+
+  const auto stateManager = new StateManager( object, "initial" );
 
   const auto direction = new DirectionController( object );
   if ( dir == 'L' ) direction->setLeft();
   else if ( dir == 'R' ) direction->setRight();
 
-  const auto collisionTracker = new CollisionTracker( object );
-
   // helpers
   const auto transform = object->getTransform();
+
+  // flags
+  collider->setFlags( COLLIDE_ENEMY_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
   object->setLayer( "Foreground" );
@@ -71,15 +74,24 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
                // animation effect
                {
                  animator->setAction( "apple_explode" );
-				 apple_explode_sound->play();
                  actionManager->stopAll();
                  transform->setRotation( 0 );
+               }
+
+               // audio
+               {
+                 appleExplodeAudio->play();
                }
 
                // move
                {
                  body->setVelocity( Vec2( 0, 0 ) );
                  body->setGravityScale( 0 );
+               }
+
+               // collider
+               {
+                 collider->setActive( false );
                }
              },
              [=]( float dt ) {

@@ -13,12 +13,13 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
 
   // constants
   const auto gameManager = GameManager::get();
-  //audio
-  const auto SplitSound = new AudioSource(object, "Camel Spit.wav");
+
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "camel.png" );
 
   const auto animator = new Animator( object, "idle", "camel.anm" );
+
+  const auto splitAudio = new AudioSource( object, "Camel Spit.wav" );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
 
@@ -43,7 +44,11 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
+
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setTag( CAMEL_TAG );
@@ -69,9 +74,10 @@ void CamelPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "puff" );
                }
-				//audio
+
+               // audio
                {
-				   SplitSound->play();
+                 splitAudio->play();
                }
 
                // puff

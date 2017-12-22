@@ -52,6 +52,11 @@ void Sound::setCSound( CSound* cSound ) {
   _cSound = cSound;
 }
 
+bool Sound::isPlaying() const {
+  if ( _cSound->IsSoundPlaying() == TRUE ) return true;
+  return false;
+}
+
 void Sound::initCSound() {
   ala::Audio::get()->load( this );
 }

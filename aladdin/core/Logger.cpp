@@ -15,6 +15,10 @@ void Logger::setLogLevel( int level ) {
   __logLevel = level;
 }
 
+int Logger::getLogLevel() {
+  return __logLevel;
+}
+
 Logger::Logger( const std::string& className ) : _className( className ) {
   _buffer = new char[LOGGER_BUFFER];
   TOTAL_LOGGERS_CREATED++;

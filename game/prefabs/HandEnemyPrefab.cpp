@@ -49,9 +49,16 @@ void HandEnemyPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
 
-  new ColliderRenderer( zoneCollider );
+  //  new ColliderRenderer( zoneCollider );
+
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
+  zoneCollider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  zoneCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setTag( ENEMY_TAG );

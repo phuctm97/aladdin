@@ -66,7 +66,7 @@
     <sprite x="60" y="366" w="38" h="31" offsetX="0" offsetY="-2.5" />
     <sprite x="18" y="360" w="35" h="38" offsetX="0" offsetY="-4.5" />
   </Animation>
-  <Animation name="hide_guard_run" imagePath="civilian_enemies.png" interval="0.18" isLoop="false">
+  <Animation name="hide_guard_run" imagePath="civilian_enemies.png" interval="0.18" isLoop="true">
     <sprite x="20" y="428" w="52" h="45" offsetX="2.5" offsetY="-1.5" />
     <sprite x="79" y="423" w="43" h="45" offsetX="0" offsetY="-1.5" />
     <sprite x="126" y="417" w="42" h="50" offsetX="0.5" offsetY="1" />

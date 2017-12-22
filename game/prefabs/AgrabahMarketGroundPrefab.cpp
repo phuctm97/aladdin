@@ -8,20 +8,19 @@ ALA_CLASS_SOURCE_1(AgrabahMarketGroundPrefab, ala::PrefabV2)
 void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
+
   const auto halfVisibleSize = Size( gameManager->getVisibleWidth() / 2, gameManager->getVisibleHeight() / 2 );
 
   // components
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC );
-  const auto transform = object->getTransform();
 
 #pragma region ground
 
   // first ground
-  const auto firstGroundSize = Size( 1475 - 5 - 20, 63 );
+  const auto firstGroundSize = Size( 1475 - 5 + 20 - 20, 63 );
   const auto firstGroundOffset = Vec2( firstGroundSize.getWidth() / 2 - 5 - 10, firstGroundSize.getHeight() / 2 );
   const auto firstGroundCollider = new Collider( object, false, firstGroundOffset, firstGroundSize );
   firstGroundCollider->setTag( GROUND_TAG );
-
 
   // second ground
   const auto secondGroundSize = Size( 768, 33 );
@@ -37,7 +36,6 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
     thirdGroundSize.getHeight() / 2 );
   const auto thirdGroundCollider = new Collider( object, false, thirdGroundOffset, thirdGroundSize );
   thirdGroundCollider->setTag( GROUND_TAG );
-
 
   // fourth ground
   const auto fourthGroundSize = Size( 1975, 30 );
@@ -70,18 +68,36 @@ void AgrabahMarketGroundPrefab::doInstantiate( ala::GameObject* object, std::ist
 
 #pragma endregion
 
+  // helpers
+  const auto transform = object->getTransform();
+
+  // flags
+  const auto groundFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG | STANDABLE_FLAG |
+    STATIC_FLAG;
+  const auto blockerFlags = COLLIDE_ALADDIN_FLAG | COLLIDE_ENEMY_FLAG | STATIC_FLAG;
+  firstGroundCollider->setFlags( groundFlags );
+  secondGroundCollider->setFlags( groundFlags );
+  thirdGroundCollider->setFlags( groundFlags );
+  fourthGroundCollider->setFlags( groundFlags );
+  mapStartBlocker->setFlags( blockerFlags );
+  mapEndBlocker->setFlags( blockerFlags );
+
+  firstGroundCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  secondGroundCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  thirdGroundCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  fourthGroundCollider->ignoreIfHasAnyFlags( STATIC_FLAG );
+  mapStartBlocker->ignoreIfHasAnyFlags( STATIC_FLAG );
+  mapEndBlocker->ignoreIfHasAnyFlags( STATIC_FLAG );
+
   // configurations
   object->setTag( GROUND_TAG );
   object->setLayer( "Debug" );
 
-  transform->setPosition( Vec2( -halfVisibleSize.getWidth(),
-                                -halfVisibleSize.getHeight() ) );
-
   // collider renderers
-  new ColliderRenderer( firstGroundCollider );
-  new ColliderRenderer( secondGroundCollider );
-  new ColliderRenderer( thirdGroundCollider );
-  new ColliderRenderer( fourthGroundCollider );
-  new ColliderRenderer( mapStartBlocker );
-  new ColliderRenderer( mapEndBlocker );
+  //  new ColliderRenderer( firstGroundCollider );
+  //  new ColliderRenderer( secondGroundCollider );
+  //  new ColliderRenderer( thirdGroundCollider );
+  //  new ColliderRenderer( fourthGroundCollider );
+  //  new ColliderRenderer( mapStartBlocker );
+  //  new ColliderRenderer( mapEndBlocker );
 }

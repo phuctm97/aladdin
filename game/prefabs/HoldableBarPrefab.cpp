@@ -24,7 +24,11 @@ void HoldableBarPrefab::doInstantiate( ala::GameObject* object, std::istringstre
   collider->ignoreTag( SWORD_TAG );
 
   // collider renderers
-  new ColliderRenderer( collider );
+//  new ColliderRenderer( collider );
+
+  // flags
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | STATIC_FLAG );
+  collider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations
   object->setLayer( "Debug" );

@@ -9,7 +9,7 @@ CameraFollower::CameraFollower( ala::GameObject* gameObject, const std::string& 
 
 void CameraFollower::onRender() {
   const auto gameManager = GameManager::get();
-  const auto camera = gameManager->getMainCamera();
+  const auto camera = gameManager->getRunningScene()->getMainCamera();
   const auto cameraPosition = camera == NULL ? Vec2() : camera->getTransform()->getPosition();
   getGameObject()->getTransform()->setPosition( cameraPosition );
 }

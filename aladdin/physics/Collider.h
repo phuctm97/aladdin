@@ -12,7 +12,10 @@ private:
 
 	bool _isTrigger;
   float _massScale;
+
   std::unordered_set<int> _ignoredTags;
+  long _ignoreIfHasAnyFlags;
+  long _ignoreIfNotHasAnyFlags;
 
 	int _physicsLayer;
 public:
@@ -41,6 +44,8 @@ public:
   const std::unordered_set<int>& getIgnoredTags() const;
   bool isIgnoredBy(Collider* other) const;
   float getMassScale() const;
+  void ignoreIfHasAnyFlags(const long flags);
+  void ignoreIfNotHasAnyFlags(const long flags);
 };
 
 }

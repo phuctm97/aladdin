@@ -42,8 +42,10 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   controller->setInitialX( initialX );
   controller->setLeftBoundX( initialX );
   controller->setRightBoundX( initialX );
-  controller->setMinDistanceCouldAttack( 5 );
-  controller->setMaxDistanceCouldAttack( 160 );
+  controller->setMinDistanceXCouldAttack( 5 );
+  controller->setMaxDistanceXCouldAttack( 160 );
+  controller->setMinDistanceYCouldAttack( 0 );
+  controller->setMaxDistanceYCouldAttack( 130 );
 
   // helpers
   const auto timer1 = new Timer( object );
@@ -52,7 +54,11 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto transform = object->getTransform();
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
+
+  // flags
+  collider->setFlags( COLLIDE_FREE_OBJECT_FLAG );
+  collider->ignoreIfNotHasAnyFlags( COLLIDE_ENEMY_FLAG );
 
   // configurations
   object->setLayer( "Supporting Character" );
