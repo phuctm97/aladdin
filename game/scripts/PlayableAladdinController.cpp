@@ -22,7 +22,8 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ), _selfDirection( NULL ),
-    _throwableApplePrefab( NULL ), _myAppData( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
+    _throwableApplePrefab( NULL ), _throwableKnifePrefab( NULL ), _myAppData( NULL ),
+    _sceneFadeOutTransitionPrefab( NULL ) {}
 
 float PlayableAladdinController::getMovingVelocityX() const {
   return _movingVelocityX;
@@ -173,6 +174,7 @@ void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& coll
   }
   else if ( otherCollider->hasFlag( STANDABLE_FLAG ) ) {
     const auto colliderPosY = otherObject->getTransform()->getPositionY() + otherCollider->getOffset().getY();
+
     if ( colliderPosY < _selfTransform->getPositionY() ) {
       _collidedWithStandable = true;
     }
