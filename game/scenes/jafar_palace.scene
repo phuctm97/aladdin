@@ -52,6 +52,6 @@
     <transform position="186 7" />
   </object>
   <object name="Aladdin">
-    <prefab version="2" name="Playable Aladdin" args="-80 10" />
+    <prefab version="2" name="Playable Aladdin" args="-80 80" />
   </object>
 </Scene>

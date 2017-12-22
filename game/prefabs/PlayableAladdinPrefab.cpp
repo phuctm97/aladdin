@@ -81,7 +81,7 @@ void PlayableAladdinPrefab::doInstantiate( ala::GameObject* object, std::istring
       animator->getActionName() == "climb_attack" || animator->getActionName() == "climb_throw";
   } );
 
-  const auto controller = new PlayableAladdinController( object );
+  const auto controller = new PlayableAladdinController( object, "Controller" );
 
   // helpers
   const auto transform = object->getTransform();

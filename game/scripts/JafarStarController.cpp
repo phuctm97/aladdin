@@ -25,12 +25,14 @@ void JafarStarController::onTriggerEnter( const ala::CollisionInfo& collision ) 
 
   if ( otherObject->getTag() == ALADDIN_TAG ) {
     if ( otherCollider->getTag() == ALADDIN_TAG ) {
-      if ( _aladdinTransform->getPositionX() < _jafarTransform->getPositionX() ) {
-        _aladdinController->addDampVelocity( 6000, 0.5f );
-      }
-      else {
-        _aladdinController->addDampVelocity( -6000, 0.5f );
-      }
+		if (_aladdinController != NULL) {
+			if (_aladdinTransform->getPositionX() < _jafarTransform->getPositionX()) {
+				_aladdinController->addDampVelocity(6000, 0.5f);
+			}
+			else {
+				_aladdinController->addDampVelocity(-6000, 0.5f);
+			}
+		}
     }
 
     explode();
@@ -48,7 +50,7 @@ void JafarStarController::onInitialize() {
 
     _aladdinBody = aladdin->getComponentT<Rigidbody>();
 
-    _aladdinController = aladdin->getComponentT<PlayableAladdinController>();
+    _aladdinController = (PlayableAladdinController*)aladdin->getComponent("Controller");
 
     _targetPosition = _aladdinTransform->getPosition();
   }
