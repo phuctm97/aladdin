@@ -325,14 +325,14 @@ void PlayableAladdinController::onUpdate( const float dt ) {
   // recalculate moving x
   float dampVelocity = 0.0f;
 
-  std::vector<size_t> removeIts;
+  std::vector<std::pair<float, float>> dup;
   for ( auto it = _dampVelocities.begin(); it != _dampVelocities.end(); ++it ) {
     it->first -= dt;
     dampVelocity += it->second * dt;
 
-    if ( it->first <= 0 ) removeIts.push_back( std::distance( _dampVelocities.begin(), it ) );
+    if ( it->first > 0 ) dup.push_back( *it );
   }
-  for ( const auto i : removeIts ) _dampVelocities.erase( _dampVelocities.begin() + i );
+  _dampVelocities = dup;
 
   // update body velocity
   float v = 0.0f;
