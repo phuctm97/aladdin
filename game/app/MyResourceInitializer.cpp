@@ -161,6 +161,7 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Fire From Coal.wav", "audio/Fire From Coal.wav" );
   new AudioClip( "Tip Toe.wav", "audio/Tip Toe.wav" );
   new AudioClip( "Flagpole.wav", "audio/Flagpole.wav" );
+  new AudioClip( "Clay Pot.wav", "audio/Clay Pot.wav" );
 
   // Prefabs
   new SpritePrefab();

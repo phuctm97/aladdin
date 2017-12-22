@@ -17,6 +17,8 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
 
   const auto density = 0.5f;
   const auto fallVelocity = 21.0f;
+	  //audio
+	const auto PotSound = new AudioSource(object, "Clay Pot.wav");
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "civilian_enemies.png" );
@@ -80,6 +82,10 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
                {
                  animator->setAction( "vase_break" );
                }
+			   //audio
+				{
+					PotSound->play(); 
+				}
 
                // move
                {
