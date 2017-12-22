@@ -27,7 +27,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto bodyOffset2 = Vec2( 15, 0 );
   const auto bodySize2 = Size( 60, 70 );
   const std::vector<float> firePositions = { -8, -8 + 18 * 1, -8 + 18 * 2 };
-  const std::vector<Vec2> burnerPositions = { Vec2( -79, 13 ), Vec2( 97, 13 ), Vec2( 275, 13 ), Vec2( 451, 13 ) };
+  const std::vector<Vec2> burnerPositions = { Vec2( -79, 11 ), Vec2( 97, 11 ), Vec2( 275, 11 ), Vec2( 451, 11 ) };
 
   // components
 

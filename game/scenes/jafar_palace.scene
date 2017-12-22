@@ -26,20 +26,20 @@
     <transform position="517 78" />
   </object>
   <object name="Platform" quadIndex="">
-    <prefab version="2" name="Platform" args="85" />
-    <transform position="-79 10" />
+    <prefab version="2" name="One Way Platform V2" args="85" />
+    <transform position="-79 8" />
   </object>
   <object name="Platform" quadIndex="">
-    <prefab version="2" name="Platform" args="85" />
-    <transform position="97 10" />
+    <prefab version="2" name="One Way Platform V2" args="85" />
+    <transform position="97 8" />
   </object>
   <object name="Platform" quadIndex="">
-    <prefab version="2" name="Platform" args="85" />
-    <transform position="275 10" />
+    <prefab version="2" name="One Way Platform V2" args="85" />
+    <transform position="275 8" />
   </object>
   <object name="Platform" quadIndex="">
-    <prefab version="2" name="Platform" args="85" />
-    <transform position="451 10" />
+    <prefab version="2" name="One Way Platform V2" args="85" />
+    <transform position="451 8" />
   </object>
   <object name="Jafar">
     <prefab version="2" name="Jafar" args="" />

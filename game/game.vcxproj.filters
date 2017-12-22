@@ -345,6 +345,15 @@
     <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\OneWayPlatformV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\TwoWayPlatformV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -619,6 +628,15 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarSceneSoundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\OneWayPlatformV2Prefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\OneWayPlatformV2Controller.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\TwoWayPlatformV2Prefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

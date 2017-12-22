@@ -208,6 +208,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\HoldableBarPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\JumpableSpringPrefab.cpp" />
+    <ClCompile Include="prefabs\OneWayPlatformV2Prefab.cpp" />
     <ClCompile Include="prefabs\QuadRendererPrefab.cpp" />
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp" />
     <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp" />
@@ -223,6 +224,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
+    <ClCompile Include="prefabs\TwoWayPlatformV2Prefab.cpp" />
     <ClCompile Include="prefabs\WallPrefab.cpp" />
     <ClCompile Include="scenes\AutoLoadScene.cpp" />
     <ClCompile Include="scenes\DebugScene.cpp" />
@@ -247,6 +249,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\ParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
+    <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
@@ -307,6 +310,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\HoldableBarPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\JumpableSpringPrefab.h" />
+    <ClInclude Include="prefabs\OneWayPlatformV2Prefab.h" />
     <ClInclude Include="prefabs\QuadRendererPrefab.h" />
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h" />
     <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h" />
@@ -322,6 +326,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
+    <ClInclude Include="prefabs\TwoWayPlatformV2Prefab.h" />
     <ClInclude Include="prefabs\WallPrefab.h" />
     <ClInclude Include="scenes\AutoLoadScene.h" />
     <ClInclude Include="scenes\DebugScene.h" />
@@ -346,6 +351,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\ParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
+    <ClInclude Include="scripts\OneWayPlatformV2Controller.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
     <ClInclude Include="scripts\SpringController.h" />
