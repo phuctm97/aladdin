@@ -7,7 +7,7 @@ ALA_CLASS_SOURCE_1(JafarController, ala::GameObjectComponent)
 
 JafarController::JafarController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _mode( 1 ), _health( 100.0f ), _aladdinTransform( NULL ),
-    _selfTransform( NULL ) {}
+    _selfTransform( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
 
 char JafarController::getDirectionToFaceAladdin() const {
   if ( _aladdinTransform->getPositionX() < _selfTransform->getPositionX() ) return 'L';
