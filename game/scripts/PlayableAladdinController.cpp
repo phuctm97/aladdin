@@ -319,8 +319,8 @@ void PlayableAladdinController::onInitialize() {
   setHealth( 9 );
 
   // debug
-  setApples( 90 );
-//  setHealth( 90 );
+  //  setApples( 90 );
+  //  setHealth( 90 );
 }
 
 void PlayableAladdinController::onUpdate( const float dt ) {

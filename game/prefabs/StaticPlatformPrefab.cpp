@@ -1,11 +1,11 @@
-#include "StandablePlatformPrefab.h"
+#include "StaticPlatformPrefab.h"
 #include "../Define.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(StandablePlatformPrefab, ala::PrefabV2)
+ALA_CLASS_SOURCE_1(StaticPlatformPrefab, ala::PrefabV2)
 
-void StandablePlatformPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+void StaticPlatformPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // args
   const auto width = nextFloat( argsStream );
   const auto height = nextFloat( argsStream );
@@ -19,7 +19,7 @@ void StandablePlatformPrefab::doInstantiate( ala::GameObject* object, std::istri
   //  new ColliderRenderer( collider );
 
   // flags
-  collider->setFlags( STANDABLE_FLAG | COLLIDE_ALADDIN_FLAG | STATIC_FLAG | COLLIDE_FREE_OBJECT_FLAG );
+  collider->setFlags( COLLIDE_ENEMY_FLAG | STATIC_FLAG | COLLIDE_FREE_OBJECT_FLAG );
   collider->ignoreIfHasAnyFlags( STATIC_FLAG );
 
   // configurations

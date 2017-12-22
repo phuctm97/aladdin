@@ -49,7 +49,7 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
-#include "../prefabs/StaticPlatform.h"
+#include "../prefabs/StaticPlatformPrefab.h"
 #include "../prefabs/StandablePlatformPrefab.h"
 #include "../prefabs/OneWayPlatformV2Prefab.h"
 #include "../prefabs/TwoWayPlatformV2Prefab.h"
