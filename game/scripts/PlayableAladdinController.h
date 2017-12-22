@@ -26,7 +26,8 @@ private:
 
   float _maxMovingVelocityX;
   float _movingVelocityX;
-  std::vector<std::pair<float, float>> _dampVelocities;
+  int _dampVelocitiesSize;
+  std::pair<float, float> _dampVelocities[100];
 
   ala::Transform* _selfTransform;
   ala::ActionManager* _selfActionManager;
@@ -99,7 +100,7 @@ public:
                    const float offsetX, const float offsetY,
                    const float impulseX, const float impulseY );
 
-  void addDampVelocity( float v, float duration );
+  void addDampVelocity( const float v, const float duration );
 
   void onCollisionEnter( const ala::CollisionInfo& collision ) override;
 

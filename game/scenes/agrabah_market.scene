@@ -44,16 +44,13 @@
 
   <!-- PENDAL -->
   <object name="" quadIndex="030">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="1486.5 126.0" />
+    <prefab version="2" name="Pendal V2" args="1486.5 126" />
   </object>
   <object name="" quadIndex="131">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="4061.5 86.5" />
+    <prefab version="2" name="Pendal V2" args="4061.5 86.5" />
   </object>
   <object name="" quadIndex="130">
-    <prefab version="2" name="Pendal" args="" />
-    <transform position="3970.0 111.5" />
+    <prefab version="2" name="Pendal V2" args="3970.0 111.5" />
   </object>
   
   <!-- STATIC PLATFORMS -->
@@ -920,7 +917,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="2500 -25" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
 
   <!--EFFECT-->

@@ -173,14 +173,17 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
     <ClCompile Include="prefabs\AladdinAndAbuPrefab.cpp" />
     <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\FadeInEffectPrefab.cpp" />
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarPrefab.cpp" />
     <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp" />
     <ClCompile Include="prefabs\PendalPrefab.cpp" />
+    <ClCompile Include="prefabs\PendalV2Prefab.cpp" />
     <ClCompile Include="prefabs\PlatformPrefab.cpp" />
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp" />
@@ -205,6 +208,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\HoldableBarPrefab.cpp" />
     <ClCompile Include="prefabs\HubPrefab.cpp" />
     <ClCompile Include="prefabs\JumpableSpringPrefab.cpp" />
+    <ClCompile Include="prefabs\OneWayPlatformV2Prefab.cpp" />
     <ClCompile Include="prefabs\QuadRendererPrefab.cpp" />
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp" />
     <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp" />
@@ -222,6 +226,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
+    <ClCompile Include="prefabs\TwoWayPlatformV2Prefab.cpp" />
     <ClCompile Include="prefabs\WallPrefab.cpp" />
     <ClCompile Include="scenes\AutoLoadScene.cpp" />
     <ClCompile Include="scenes\DebugScene.cpp" />
@@ -246,6 +251,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\ParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
+    <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp" />
     <ClCompile Include="scripts\PlayableAladdinController.cpp" />
     <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
     <ClCompile Include="scripts\SpringController.cpp" />
@@ -272,13 +278,16 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
     <ClInclude Include="prefabs\AladdinAndAbuPrefab.h" />
     <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\DeathSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarFirePrefab.h" />
     <ClInclude Include="prefabs\JafarPrefab.h" />
+    <ClInclude Include="prefabs\JafarSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h" />
     <ClInclude Include="prefabs\JafarStarExplosionPrefab.h" />
     <ClInclude Include="prefabs\JafarStarPrefab.h" />
     <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h" />
     <ClInclude Include="prefabs\PendalPrefab.h" />
+    <ClInclude Include="prefabs\PendalV2Prefab.h" />
     <ClInclude Include="prefabs\PlatformPrefab.h" />
     <ClInclude Include="prefabs\AbuBonusPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h" />
@@ -303,6 +312,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\HoldableBarPrefab.h" />
     <ClInclude Include="prefabs\HubPrefab.h" />
     <ClInclude Include="prefabs\JumpableSpringPrefab.h" />
+    <ClInclude Include="prefabs\OneWayPlatformV2Prefab.h" />
     <ClInclude Include="prefabs\QuadRendererPrefab.h" />
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h" />
     <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h" />
@@ -320,6 +330,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
+    <ClInclude Include="prefabs\TwoWayPlatformV2Prefab.h" />
     <ClInclude Include="prefabs\WallPrefab.h" />
     <ClInclude Include="scenes\AutoLoadScene.h" />
     <ClInclude Include="scenes\DebugScene.h" />
@@ -344,6 +355,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\ParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
+    <ClInclude Include="scripts\OneWayPlatformV2Controller.h" />
     <ClInclude Include="scripts\PlayableAladdinController.h" />
     <ClInclude Include="scripts\SceneInfoQuerier.h" />
     <ClInclude Include="scripts\SpringController.h" />
@@ -426,6 +438,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Balloon Pop.wav" />
     <Media Include="audio\Body Crunch.wav" />
     <Media Include="audio\Bones Tinkle.wav" />
+    <Media Include="audio\BossTune.wav" />
     <Media Include="audio\Boxing Bell.wav" />
     <Media Include="audio\Camel Spit.wav" />
     <Media Include="audio\Canopy Bounce.wav" />
