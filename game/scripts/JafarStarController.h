@@ -2,6 +2,7 @@
 #define __JAFAR_STAR_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "PlayableAladdinController.h"
 
 ALA_CLASS_HEADER_1(JafarStarController, ala::GameObjectComponent)
 private:
@@ -14,6 +15,8 @@ private:
   ala::Transform* _aladdinTransform;
 
   ala::Rigidbody* _aladdinBody;
+
+  PlayableAladdinController* _aladdinController;
 
   ala::Transform* _selfTransform;
 

@@ -13,6 +13,8 @@ private:
 
   ala::Transform* _selfTransform;
 
+  ala::PrefabV2* _sceneFadeOutTransitionPrefab;
+
 public:
   JafarController( ala::GameObject* gameObject, const std::string& name = "" );
 

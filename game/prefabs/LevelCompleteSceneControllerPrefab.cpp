@@ -38,6 +38,7 @@ void LevelCompleteSceneControllerPrefab::doInstantiate( ala::GameObject* object,
                if ( timer->isDone() ) {
                  if ( myAppData->getCurrentLevel() < myAppData->getNumberOfLevels() ) {
                    myAppData->setCurrentLevel( myAppData->getCurrentLevel() + 1 );
+                   myAppData->setCurrentCheckpoint( 0 );
 
                    std::stringstream args;
                    args << 0.5 << ' ' << myAppData->getSceneName( myAppData->getCurrentLevel() ) << '\n' << 1;

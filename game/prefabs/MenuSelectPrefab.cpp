@@ -41,6 +41,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                  myAppData->setCurrentLevel( 1 );
                  myAppData->setCurrentCheckpoint( 0 );
                  myAppData->setAladdinLives( 3 );
+                 myAppData->setAladdinApples( 5 );
                  myAppData->setRetryTimes( 1 );
                }
 
@@ -76,6 +77,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
+                 myAppData->setCurrentLevel( 1 );
                  sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 agrabah_market.scene\n1" );
                }
              },
@@ -107,6 +109,7 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                if ( input->getKeyDown( ALA_KEY_A )
                  || input->getKeyDown( ALA_KEY_S )
                  || input->getKeyDown( ALA_KEY_D ) ) {
+                 myAppData->setCurrentLevel( 2 );
                  sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 jafar_palace.scene\n1" );
                }
              },

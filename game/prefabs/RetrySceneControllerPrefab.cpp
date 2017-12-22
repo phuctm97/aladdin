@@ -38,6 +38,7 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
                // reset my app data
                {
                  myAppData->setAladdinLives( 3 );
+                 myAppData->setAladdinApples( 5 );
                  myAppData->setCurrentCheckpoint( 0 );
                }
              },

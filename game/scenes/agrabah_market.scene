@@ -265,54 +265,54 @@
   </object>
 
   <!-- HAND ENEMIES -->
-  <!--  <object name="" quadIndex="031">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1634.5 88.5" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="031">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1681.5 56.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="211">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1794.5 233.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="211">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1682.0 233.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="230">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1586.5 407.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="231">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1794.5 407.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="231">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="1954.5 407.0" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="122">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="2354.0 215.5" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="112">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="3618.0 23.5" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="112">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="3794.0 23.5" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="112">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="3858.0 55.5" />-->
-  <!--  </object>-->
-  <!--  <object name="" quadIndex="123">-->
-  <!--    <prefab version="2" name="Hand Enemy" args="" />-->
-  <!--    <transform position="3155.0 199.5" />-->
-  <!--  </object>-->
+  <object name="" quadIndex="031">
+    <prefab version="2" name="Hand Enemy" args="R 85 187 26 -80" />
+    <transform position="1634.5 88.5" />
+  </object>
+  <object name="" quadIndex="031">
+    <prefab version="2" name="Hand Enemy" args="R 83.0 170 27 -59" />
+    <transform position="1681.5 56.0" />
+  </object>
+  <object name="" quadIndex="211">
+    <prefab version="2" name="Hand Enemy" args="R 76 133 7 -44" />
+    <transform position="1794.5 233.0" />
+  </object>
+  <object name="" quadIndex="211">
+    <prefab version="2" name="Hand Enemy" args="R 78 121 14 -44" />
+    <transform position="1682.0 233.0" />
+  </object>
+  <object name="" quadIndex="230">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="1586.5 407.0" />
+  </object>
+  <object name="" quadIndex="231">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="1794.5 407.0" />
+  </object>
+  <object name="" quadIndex="231">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="1954.5 407.0" />
+  </object>
+  <object name="" quadIndex="122">
+    <prefab version="2" name="Hand Enemy" args="R 87 180 6 -76" />
+    <transform position="2354.0 215.5" />
+  </object>
+  <object name="" quadIndex="112">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="3618.0 23.5" />
+  </object>
+  <object name="" quadIndex="112">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="3794.0 23.5" />
+  </object>
+  <object name="" quadIndex="112">
+    <prefab version="2" name="Hand Enemy" args="R 77 160 8 -73" />
+    <transform position="3858.0 55.5" />
+  </object>
+  <object name="" quadIndex="123">
+    <prefab version="2" name="Hand Enemy" args="R 77 120 8 -53" />
+    <transform position="3155.0 199.5" />
+  </object>
 
   <!-- EATABLE APPLES -->
   <object name="" quadIndex="002">

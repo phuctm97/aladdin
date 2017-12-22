@@ -49,6 +49,7 @@ void JafarController::onInitialize() {
     _aladdinTransform = aladdin->getTransform();
   }
 
+  _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
 }
 
 void JafarController::onHit() {
@@ -56,5 +57,9 @@ void JafarController::onHit() {
 
   if ( _health <= 60 && _mode != 2 ) {
     _mode = 2;
+  }
+
+  if ( _health < 0 ) {
+    _sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 level_complete.scene\n0" );
   }
 }

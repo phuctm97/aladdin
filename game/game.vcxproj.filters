@@ -672,7 +672,9 @@
     <Text Include="audio\readme.txt">
       <Filter>audio</Filter>
     </Text>
-    <Text Include="prefabs\FadeInEffectPrefab.h" />
+    <Text Include="prefabs\FadeInEffectPrefab.h">
+      <Filter>prefabs</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="animations\bosses\jafar.anm">

@@ -37,7 +37,7 @@ Scene::Scene(): _toReleaseInNextFrame( false ),
 Scene::~Scene() {
   if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
   TOTAL_SCENES_DELETED++;
@@ -211,7 +211,7 @@ void Scene::release() {
   }
 
   // make sure scene is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
   onPreRelease();
 
@@ -242,7 +242,7 @@ void Scene::release() {
 
 void Scene::releaseInNextFrame() {
   // make sure scene is initialized and not released
-  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
   _toReleaseInNextFrame = true;
 }
 
