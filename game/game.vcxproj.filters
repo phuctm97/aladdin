@@ -378,6 +378,9 @@
     <ClCompile Include="prefabs\AgainstThrowableKnifePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\FallingHalfOfApplePrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -685,6 +688,9 @@
       <Filter>scripts</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgainstThrowableKnifePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\FallingHalfOfApplePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

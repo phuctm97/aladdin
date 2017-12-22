@@ -22,6 +22,7 @@
 #include "../prefabs/ThrowableApplePrefab.h"
 #include "../prefabs/ThrowableKnifePrefab.h"
 #include "../prefabs/AgainstThrowableKnifePrefab.h"
+#include "../prefabs/FallingHalfOfApplePrefab.h"
 #include "../prefabs/EatableApplePrefab.h"
 #include "../prefabs/EatableHeartPrefab.h"
 #include "../prefabs/GenieLampPrefab.h"
@@ -205,6 +206,7 @@ void MyResourceInitializer::doRun() {
   new ThrowableApplePrefab();
   new ThrowableKnifePrefab();
   new AgainstThrowableKnifePrefab();
+  new FallingHalfOfApplePrefab();
   new EatableApplePrefab();
   new EatableHeartPrefab();
   new GenieLampPrefab();

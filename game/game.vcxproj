@@ -166,6 +166,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
+    <ClCompile Include="prefabs\FallingHalfOfApplePrefab.cpp" />
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketGroundParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
@@ -277,6 +278,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h" />
     <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
+    <ClInclude Include="prefabs\FallingHalfOfApplePrefab.h" />
     <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketGroundParallaxPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />

@@ -14,6 +14,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto fallingHalfOfApplePrefab = gameManager->getPrefabV2( "Falling Half Of Apple" );
   const auto density = 2.5f;
 
   // components
@@ -45,7 +46,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto transform = object->getTransform();
 
   // flags
-  collider->setFlags( BELONGS_TO_ALADDIN | COLLIDE_ENEMY_FLAG );
+  collider->setFlags( BELONGS_TO_ALADDIN | COLLIDE_ENEMY_FLAG | COLLIDE_FREE_OBJECT_FLAG );
   collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
   collider->ignoreIfHasAnyFlags( BELONGS_TO_ALADDIN );
 
@@ -68,7 +69,17 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
                {
                  body->addImpulse( Vec2( impulseX, impulseY ) );
                }
-             }, NULL, NULL );
+             },
+             [=]( float dt ) {
+               if ( collisionTracker->collidedWithObjectTag( ENEMY_TAG ) && collisionTracker->collidedWithColliderTag(
+                 KNIFE_TAG ) ) {
+                 fallingHalfOfApplePrefab->instantiateWithArgs( "R 1000 4000" )
+                                         ->getTransform()->setPosition( transform->getPosition() );
+                 fallingHalfOfApplePrefab->instantiateWithArgs( "L 1000 4000" )
+                                         ->getTransform()->setPosition( transform->getPosition() );
+                 object->release();
+               }
+             }, NULL );
 
   new State( stateManager, "explode",
              [=] {
@@ -105,6 +116,6 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
              }, NULL );
 
   new StateTransition( stateManager, "initial", "explode", [=] {
-    return collisionTracker->collided();
+    return collisionTracker->collided() && !collisionTracker->collidedWithColliderTag( KNIFE_TAG );
   } );
 }

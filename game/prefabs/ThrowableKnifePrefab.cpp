@@ -27,7 +27,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
-  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 7, 7 ) );
+  const auto collider = new Collider( object, true, Vec2( 0, 0 ), Size( 10, 10 ), 0.49f );
   collider->setTag( KNIFE_TAG );
   collider->ignoreTag( KNIFE_TAG );
   collider->ignoreTag( CHARCOAL_BURNER_TAG );
@@ -48,7 +48,7 @@ void ThrowableKnifePrefab::doInstantiate( ala::GameObject* object, std::istrings
   //  new ColliderRenderer( collider );
 
   // flags
-  collider->setFlags( COLLIDE_ALADDIN_FLAG );
+  collider->setFlags( COLLIDE_ALADDIN_FLAG | COLLIDE_FREE_OBJECT_FLAG );
   collider->ignoreIfNotHasAnyFlags( COLLIDE_FREE_OBJECT_FLAG );
 
   // configurations
