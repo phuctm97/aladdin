@@ -29,6 +29,10 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const std::vector<float> firePositions = { -8, -8 + 18 * 1, -8 + 18 * 2 };
   const std::vector<Vec2> burnerPositions = { Vec2( -79, 11 ), Vec2( 97, 11 ), Vec2( 275, 11 ), Vec2( 451, 11 ) };
 
+  //audio
+  const auto Attack_1_Sound = new AudioSource(object, "Jafar Laugh.wav");
+  const auto Attack_2_Sound = new AudioSource(object, "Jafar Snake.wav");
+
   // components
 
   const auto spriteRenderer = new SpriteRenderer( object, "jafar.png" );
@@ -132,6 +136,10 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  animator->setAction( "jafar_1_attack" );
                }
+			   //audio
+			   {
+				   Attack_1_Sound->play();
+			   }
 
                // transition
                {
@@ -153,7 +161,6 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                    direction->setRight();
                  }
                }
-
                // attack
                {
                  if ( timer2->isDone() ) {
@@ -224,6 +231,10 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                // animation effect
                {
                  animator->setAction( "jafar_2_attack" );
+               }
+				 //audio
+               {
+				   Attack_2_Sound->play();
                }
 
                // throw

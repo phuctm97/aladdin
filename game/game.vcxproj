@@ -162,6 +162,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
@@ -269,6 +270,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h" />
     <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
     <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
@@ -442,7 +444,6 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <Media Include="audio\Balloon Pop.wav" />
     <Media Include="audio\Body Crunch.wav" />
     <Media Include="audio\Bones Tinkle.wav" />
-    <Media Include="audio\BossTune.wav" />
     <Media Include="audio\Boxing Bell.wav" />
     <Media Include="audio\Camel Spit.wav" />
     <Media Include="audio\Canopy Bounce.wav" />

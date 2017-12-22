@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="app">
@@ -76,6 +76,9 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
@@ -376,6 +379,9 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AbuBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
@@ -1075,9 +1081,6 @@
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\Yeah.wav">
-      <Filter>audio</Filter>
-    </Media>
-    <Media Include="audio\BossTune.wav">
       <Filter>audio</Filter>
     </Media>
     <Media Include="audio\NameLevel Agrabahmarket.wav">

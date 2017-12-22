@@ -65,12 +65,14 @@
 #include "../prefabs/AgrabahMarketStairsFourPrefab.h"
 #include "../prefabs/AgrabahMarketStairsFivePrefab.h"
 #include "../prefabs/AgrabahMarketStairsSixPrefab.h"
+#include "../prefabs/AgrabahMarketSceneSoundPrefab.h"
 #include "../prefabs/JafarPrefab.h"
 #include "../prefabs/JafarFirePrefab.h"
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
 #include "../prefabs/JafarSceneSoundPrefab.h"
+>>>>>>> develop_client_alpha
 
 USING_NAMESPACE_ALA;
 
@@ -170,10 +172,16 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Fire From Coal.wav", "audio/Fire From Coal.wav" );
   new AudioClip( "Tip Toe.wav", "audio/Tip Toe.wav" );
   new AudioClip( "Flagpole.wav", "audio/Flagpole.wav" );
+  new AudioClip( "Clay Pot.wav", "audio/Clay Pot.wav" );
+  new AudioClip( "Aaah.wav", "audio/Aaah.wav" );
+  new AudioClip( "Eeeh.wav", "audio/Eeeh.wav" );
+  new AudioClip( "Oooh.wav", "audio/Oooh.wav" );
+  new AudioClip( "Wow!.wav", "audio/Wow!.wav" );
+  new AudioClip( "Jafar Laugh.wav", "audio/Jafar Laugh.wav" );
   new AudioClip( "BossTune.wav", "audio/BossTune.wav" );
   new AudioClip( "Abu Waving.wav", "audio/Abu Waving.wav" );
   new AudioClip( "Boxing Bell.wav", "audio/Boxing Bell.wav" );
-
+  
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
@@ -239,6 +247,7 @@ void MyResourceInitializer::doRun() {
   new AgrabahMarketStairsFourPrefab();
   new AgrabahMarketStairsFivePrefab();
   new AgrabahMarketStairsSixPrefab();
+  new AgrabahMarketSceneSoundPrefab();
 
   new JafarPrefab();
   new JafarFirePrefab();
