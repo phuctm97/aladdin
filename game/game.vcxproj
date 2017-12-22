@@ -178,6 +178,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
     <ClCompile Include="prefabs\JafarPrefab.cpp" />
     <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarPrefab.cpp" />
     <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp" />
@@ -275,6 +276,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\JafarFirePrefab.h" />
     <ClInclude Include="prefabs\JafarPrefab.h" />
     <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h" />
+    <ClInclude Include="prefabs\JafarSceneSoundPrefab.h" />
     <ClInclude Include="prefabs\JafarStarExplosionPrefab.h" />
     <ClInclude Include="prefabs\JafarStarPrefab.h" />
     <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h" />

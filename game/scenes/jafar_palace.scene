@@ -18,6 +18,10 @@
     <prefab version="2" name="Wall" args="23 351" />
     <transform position="-145 78" />
   </object>
+  <!--SCENESOUND-->
+  <object>
+    <prefab version="2" name="Jafar scene sound" args="" />
+  </object>
   <object name="Right Wall">
     <prefab version="2" name="Wall" args="23 351" />
     <transform position="517 78" />

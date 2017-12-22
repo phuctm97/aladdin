@@ -64,6 +64,8 @@
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
 #include "../prefabs/AgrabahMarketSceneSoundPrefab.h"
+#include "../prefabs/JafarSceneSoundPrefab.h"
+
 
 USING_NAMESPACE_ALA;
 
@@ -167,8 +169,10 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Eeeh.wav", "audio/Eeeh.wav" );
   new AudioClip( "Oooh.wav", "audio/Oooh.wav" );
   new AudioClip( "Wow!.wav", "audio/Wow!.wav" );
-	
-	
+  new AudioClip("BossTune.wav", "audio/BossTune.wav");
+  new AudioClip("Jafar Laugh.wav", "audio/Jafar Laugh.wav");
+
+  
   // Prefabs
   new SpritePrefab();
   new BitmapTextPrefab();
@@ -234,6 +238,7 @@ void MyResourceInitializer::doRun() {
   new JafarStarPrefab();
   new JafarStarExplosionPrefab();
   new JafarPalaceGroundPrefab();
+  new JafarSceneSoundPrefab();
 
   // Dev tools
   new NodePrefab();

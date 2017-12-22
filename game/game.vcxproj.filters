@@ -339,6 +339,9 @@
     <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -607,6 +610,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\JafarSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>
