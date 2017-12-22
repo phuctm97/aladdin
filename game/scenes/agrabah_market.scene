@@ -52,7 +52,19 @@
   <object name="" quadIndex="130">
     <prefab version="2" name="Pendal V2" args="3970.0 111.5" />
   </object>
-
+  
+  <!-- STATIC PLATFORMS -->
+  <object name="" quadIndex="">
+    <prefab version="2" name="Static Platform" args="33.0 3.0" />
+    <transform position="2371.5 44.5" />
+  </object>
+  
+  <!-- STANDABLE PLATFORM -->
+  <object name="" quadIndex="">
+    <prefab version="2" name="Standable Platform" args="62.0 6.0" />
+    <transform position="4166.5 512" />
+  </object>
+  
   <!-- PLATFORMS -->
   <object name="" quadIndex="031">
     <prefab version="2" name="Platform" args="295" />
@@ -87,7 +99,7 @@
     <transform position="2631.00 4.50" />
   </object>
   <object name="" quadIndex="122">
-    <prefab version="2" name="Platform" args="192" />
+    <prefab version="2" name="Platform" args="206" />
     <transform position="2554.50 164.00" />
   </object>
   <object name="" quadIndex="30">
@@ -130,6 +142,11 @@
     <prefab version="2" name="Platform" args="73" />
     <transform position="4486.5 65" />
   </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Platform" args="152" />
+    <transform position="2511 50" />
+  </object>
+
 
   <!-- WALLS -->
   <object name="" quadIndex="">
@@ -165,18 +182,26 @@
     <transform position="3016.5 474.5" />
   </object>
   <object name="" quadIndex="">
-    <prefab version="2" name="Wall" args="44 206" />
+    <prefab version="2" name="Wall" args="44 232" />
     <transform position="3422.0 334.0" />
   </object>
   <object name="" quadIndex="">
-    <prefab version="2" name="Wall" args="61 175" />
-    <transform position="4165.5 428.0" />
+    <prefab version="2" name="Wall" args="61 169" />
+    <transform position="4165.5 424.0" />
   </object>
   <object name="" quadIndex="">
     <prefab version="2" name="Wall" args="39 90" />
-    <transform position="2639 -50" />
+    <transform position="2639 -40" />
   </object>
-
+  <object name="" quadIndex="">
+    <prefab version="2" name="Wall" args="12 25" />
+    <transform position="2648.5 152" />
+  </object>
+  <object name="" quadIndex="">
+    <prefab version="2" name="Wall" args="16 38" />
+    <transform position="3026 252.5" />
+  </object>
+  
   <!-- CLIMBABLE ROPES -->
   <object name="" quadIndex="0">
     <prefab version="2" name="Climbable Rope" args="280" />
@@ -808,7 +833,7 @@
     <transform position="1567 336" />
   </object>
   <object name="" quadIndex="21">
-    <prefab version="2" name="Guard 3" args="2050 1437 2102" />
+    <prefab version="2" name="Guard 3" args="2050 1900 2102" />
     <transform position="2050 336" />
   </object>
   <object name="" quadIndex="">
@@ -820,15 +845,15 @@
     <transform position="2657 43" />
   </object>
   <object name="" quadIndex="101">
-    <prefab version="2" name="Guard 2" args="3080 2662 4170" />
+    <prefab version="2" name="Guard 2" args="3080 2880 4170" />
     <transform position="3080 -40" />
   </object>
   <object name="" quadIndex="101">
-    <prefab version="2" name="Guard 3" args="3305 2662 4170" />
+    <prefab version="2" name="Guard 3" args="3305 3155 3800" />
     <transform position="3305 -40" />
   </object>
   <object name="" quadIndex="111">
-    <prefab version="2" name="Guard 2" args="4137 2662 4170" />
+    <prefab version="2" name="Guard 2" args="4137 3937 4170" />
     <transform position="4137 -40" />
   </object>
   <object name="" quadIndex="111">
@@ -836,7 +861,7 @@
     <transform position="4498 -6" />
   </object>
   <object name="" quadIndex="110">
-    <prefab version="2" name="Guard 2" args="3507 2662 4170" />
+    <prefab version="2" name="Guard 2" args="3507 3307 4170" />
     <transform position="3507 -40" />
   </object>
   <object name="" quadIndex="131">
@@ -852,7 +877,7 @@
     <transform position="3630 123" />
   </object>
   <object name="" quadIndex="121">
-    <prefab version="2" name="Guard 3" args="2992 3685 3800" />
+    <prefab version="2" name="Guard 3" args="2992 2942 3088" />
     <transform position="2992 160" />
   </object>
   <object name="" quadIndex="123">
@@ -892,11 +917,16 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="1400 -25" />
+    <prefab version="2" name="Playable Aladdin" args="-80 -25" />
   </object>
 
   <!--EFFECT-->
   <object>
     <prefab version="2" name="Fade In Effect" args="0.3" />
   </object>
+
+  <!--<object name="Node" quadIndex="">
+    <prefab version="1" name="Node" args="" />
+    <transform position="2992 160" />
+  </object>-->
 </Scene>

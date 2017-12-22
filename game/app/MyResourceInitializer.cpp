@@ -49,6 +49,8 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/StaticPlatform.h"
+#include "../prefabs/StandablePlatformPrefab.h"
 #include "../prefabs/OneWayPlatformV2Prefab.h"
 #include "../prefabs/TwoWayPlatformV2Prefab.h"
 #include "../prefabs/PendalPrefab.h"
@@ -218,6 +220,8 @@ void MyResourceInitializer::doRun() {
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
   new PlatformPrefab();
+  new StaticPlatformPrefab();
+  new StandablePlatformPrefab();
   new OneWayPlatformV2Prefab();
   new TwoWayPlatformV2Prefab();
   new PendalPrefab();

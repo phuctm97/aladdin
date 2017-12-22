@@ -221,6 +221,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
     <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
     <ClCompile Include="prefabs\SpritePrefab.cpp" />
+    <ClCompile Include="prefabs\StandablePlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\StaticPlatform.cpp" />
     <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
     <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
     <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
@@ -323,6 +325,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
     <ClInclude Include="prefabs\SpendThesePrefab.h" />
     <ClInclude Include="prefabs\SpritePrefab.h" />
+    <ClInclude Include="prefabs\StandablePlatformPrefab.h" />
+    <ClInclude Include="prefabs\StaticPlatform.h" />
     <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
     <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
     <ClInclude Include="prefabs\FallingVasePrefab.h" />
