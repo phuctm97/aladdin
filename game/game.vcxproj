@@ -162,9 +162,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="app\MyApp.cpp" />
     <ClCompile Include="app\MyAppData.cpp" />
     <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
-    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketGroundParallaxPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp" />
     <ClCompile Include="prefabs\AgrabahMarketStairsOnePrefab.cpp" />
@@ -240,6 +241,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\DebugCameraController.cpp" />
     <ClCompile Include="scripts\DirectionController.cpp" />
     <ClCompile Include="scripts\DoubleStairsModeSwitcher.cpp" />
+    <ClCompile Include="scripts\DynamicParallaxController.cpp" />
     <ClCompile Include="scripts\FadeInEffect.cpp" />
     <ClCompile Include="scripts\FadeOutEffect.cpp" />
     <ClCompile Include="scripts\GuardController.cpp" />
@@ -248,7 +250,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\JafarController.cpp" />
     <ClCompile Include="scripts\JafarStarController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
-    <ClCompile Include="scripts\ParallaxController.cpp" />
+    <ClCompile Include="scripts\StaticParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
     <ClCompile Include="scripts\PlatformController.cpp" />
     <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp" />
@@ -267,9 +269,10 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="app\MyAppData.h" />
     <ClInclude Include="app\MyResourceInitializer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h" />
     <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
     <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
-    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketGroundParallaxPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h" />
     <ClInclude Include="prefabs\AgrabahMarketStairsOnePrefab.h" />
@@ -344,6 +347,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\DebugCameraController.h" />
     <ClInclude Include="scripts\DirectionController.h" />
     <ClInclude Include="scripts\DoubleStairsModeSwitcher.h" />
+    <ClInclude Include="scripts\DynamicParallaxController.h" />
     <ClInclude Include="scripts\FadeInEffect.h" />
     <ClInclude Include="scripts\FadeOutEffect.h" />
     <ClInclude Include="scripts\GuardController.h" />
@@ -352,7 +356,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\JafarController.h" />
     <ClInclude Include="scripts\JafarStarController.h" />
     <ClInclude Include="scripts\NodeController.h" />
-    <ClInclude Include="scripts\ParallaxController.h" />
+    <ClInclude Include="scripts\StaticParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
     <ClInclude Include="scripts\PlatformController.h" />
     <ClInclude Include="scripts\OneWayPlatformV2Controller.h" />

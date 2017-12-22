@@ -7,7 +7,10 @@
 
   <!--BACKGROUND & FOREGROUND-->
   <object>
-    <prefab version="2" name="Agrabah Market Parallax" args=""/>
+    <prefab version="2" name="Agrabah Market Ground Parallax" args="" />
+  </object>
+  <object>
+    <prefab version="2" name="Agrabah Market Sky Parallax" args="" />
   </object>
   <object name="Background" layer="Background" tag="4" quadIndex="">
     <prefab version="2" name="Sprite" args="agrabah_market_background.png 0" />
@@ -55,19 +58,19 @@
   <object name="" quadIndex="130">
     <prefab version="2" name="Pendal V2" args="3970.0 111.5" />
   </object>
-  
+
   <!-- STATIC PLATFORMS -->
   <object name="" quadIndex="">
     <prefab version="2" name="Static Platform" args="33.0 3.0" />
     <transform position="2371.5 44.5" />
   </object>
-  
+
   <!-- STANDABLE PLATFORM -->
   <object name="" quadIndex="">
     <prefab version="2" name="Standable Platform" args="62.0 6.0" />
     <transform position="4166.5 512" />
   </object>
-  
+
   <!-- PLATFORMS -->
   <object name="" quadIndex="031">
     <prefab version="2" name="Platform" args="295" />
@@ -204,7 +207,7 @@
     <prefab version="2" name="Wall" args="16 38" />
     <transform position="3026 252.5" />
   </object>
-  
+
   <!-- CLIMBABLE ROPES -->
   <object name="" quadIndex="0">
     <prefab version="2" name="Climbable Rope" args="280" />

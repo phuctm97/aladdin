@@ -324,12 +324,6 @@
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\ParallaxController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
@@ -359,6 +353,18 @@
     </ClCompile>
     <ClCompile Include="prefabs\StaticPlatformPrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StaticParallaxController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketGroundParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DynamicParallaxController.cpp">
+      <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -615,12 +621,6 @@
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\ParallaxController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\FinishEntrancePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
@@ -650,6 +650,18 @@
     </ClInclude>
     <ClInclude Include="prefabs\StaticPlatformPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StaticParallaxController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketGroundParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DynamicParallaxController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
-#include "AgrabahMarketParallaxPrefab.h"
-#include "../scripts/ParallaxController.h"
+#include "AgrabahMarketGroundParallaxPrefab.h"
+#include "../scripts/StaticParallaxController.h"
 
 USING_NAMESPACE_ALA;
 
-ALA_CLASS_SOURCE_1(AgrabahMarketParallaxPrefab, ala::PrefabV2)
+ALA_CLASS_SOURCE_1(AgrabahMarketGroundParallaxPrefab, ala::PrefabV2)
 
-void AgrabahMarketParallaxPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
+void AgrabahMarketGroundParallaxPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
 
@@ -14,10 +14,12 @@ void AgrabahMarketParallaxPrefab::doInstantiate( ala::GameObject* object, std::i
 
   const auto animator = new Animator( object, "1", "agrabah_market_parallax.anm" );
 
-  const auto parallax = new ParallaxController( object );
+  const auto parallax = new StaticParallaxController( object );
   parallax->setOffset( Vec2( 0, -80 ) );
+  parallax->setCoef( 0.07f );
 
-  float layerOffsets[] = { 46.5f, 67.5f, 80.0f, 92.0f, 112.5f, 142.0f, 171.0f, 191.0f };
+  //  float layerOffsets[] = { 46.5f, 67.5f, 80.0f, 92.0f, 112.5f, 142.0f, 171.0f, 191.0f };
+  float layerOffsets[] = { 46.5f, 67.5f, 80.0f, 92.0f };
   const int numberOfLayers = sizeof(layerOffsets) / sizeof(float);
 
   for ( auto i = 0; i < numberOfLayers; ++i ) {
@@ -30,9 +32,9 @@ void AgrabahMarketParallaxPrefab::doInstantiate( ala::GameObject* object, std::i
       const auto layerAnimator = new Animator( layer, stringBuilder.str(), "agrabah_market_parallax.anm" );
       layer->getTransform()
            ->setPosition( Vec2( -k * layerSpriteRenderer->getFrameSize().getWidth(), layerOffsets[i] ) );
-      layer->setLayer( "Background" );
+      layer->setLayer( "Parallax" );
     }
   }
 
-  object->setLayer( "Background" );
+  object->setLayer( "Parallax" );
 }
