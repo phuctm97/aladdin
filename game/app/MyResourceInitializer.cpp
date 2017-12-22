@@ -178,6 +178,7 @@ void MyResourceInitializer::doRun() {
   new MenuSelectPrefab();
 
   new DeathSceneControllerPrefab();
+  new DeathSceneSoundPrefab();
 
   new AladdinAndAbuPrefab();
   new LevelCompleteSceneControllerPrefab();
@@ -230,14 +231,10 @@ void MyResourceInitializer::doRun() {
 
   new JafarPrefab();
   new JafarFirePrefab();
-<<<<<<< HEAD
-	new DeathSceneSoundPrefab();
-	new JafarSceneSoundPrefab();
-=======
   new JafarStarPrefab();
   new JafarStarExplosionPrefab();
   new JafarPalaceGroundPrefab();
->>>>>>> develop_client_alpha
+  new JafarSceneSoundPrefab();
 
   // Dev tools
   new NodePrefab();

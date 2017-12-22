@@ -5,7 +5,7 @@
 
 ALA_CLASS_HEADER_1(DeathSceneSoundPrefab, ala::PrefabV2)
 public:
-  DeathSceneSoundPrefab() : PrefabV2( "Death scene sound" ) {}
+  DeathSceneSoundPrefab() : PrefabV2( "Death Scene Sound" ) {}
 
 protected:
   void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;

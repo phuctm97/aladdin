@@ -5,12 +5,10 @@
 
 ALA_CLASS_HEADER_1(JafarSceneSoundPrefab, ala::PrefabV2)
 public:
-  JafarSceneSoundPrefab() : PrefabV2( "Jafar scene sound" ) {}
+  JafarSceneSoundPrefab() : PrefabV2( "Jafar Scene Sound" ) {}
 
 protected:
   void doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const override;
 };
 
 #endif // !__JAFAR_SCENE_SOUND_PREFAB_H__
-
-

@@ -7,6 +7,9 @@
     <prefab version="2" name="Sprite" args="jafar_palace_background.png 0" />
     <transform position="186 72.5" />
   </object>
+  <object>
+    <prefab version="2" name="Jafar Scene Sound" />
+  </object>
   <object name="Hub">
     <prefab version="2" name="Hub" args="" />
   </object>
