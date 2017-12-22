@@ -28,7 +28,7 @@ void WallPrefab::doInstantiate( ala::GameObject* object, std::istringstream& arg
   colliderR->ignoreTag( GROUND_TAG );
 
   // collider renderers
-  new ColliderRenderer( collider );
+  //  new ColliderRenderer( collider );
   //  new ColliderRenderer( colliderL );
   //  new ColliderRenderer( colliderR );
 

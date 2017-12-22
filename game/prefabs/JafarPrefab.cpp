@@ -13,6 +13,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto firePrefab = gameManager->getPrefabV2( "Jafar Fire" );
   const auto starPrefab = gameManager->getPrefabV2( "Jafar Star" );
   const auto explosionPrefab = gameManager->getPrefabV2( "Big Explosion" );
+  const auto charcoalBurnerPrefab = gameManager->getPrefabV2( "Charcoal Burner" );
 
   const auto minIdle1Delay = 300;
   const auto maxIdle1Delay = 1000;
@@ -25,7 +26,8 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto bodySize1 = Size( 35, 70 );
   const auto bodyOffset2 = Vec2( 15, 0 );
   const auto bodySize2 = Size( 60, 70 );
-  std::vector<float> firePositions = { -8, -8 + 18 * 1, -8 + 18 * 2 };
+  const std::vector<float> firePositions = { -8, -8 + 18 * 1, -8 + 18 * 2 };
+  const std::vector<Vec2> burnerPositions = { Vec2( -79, 11 ), Vec2( 97, 11 ), Vec2( 275, 11 ), Vec2( 451, 11 ) };
 
   //audio
   const auto Attack_1_Sound = new AudioSource(object, "Jafar Laugh.wav");
@@ -188,6 +190,11 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                    transform->setPositionY( transform->getPositionY() - 10 );
                    explosionPrefab->instantiateWithArgs( "" )
                                   ->getTransform()->setPosition( transform->getPosition() );
+
+                   for ( const auto pos : burnerPositions ) {
+                     charcoalBurnerPrefab->instantiateWithArgs( "85" )
+                                         ->getTransform()->setPosition( pos );
+                   }
                  }
                }
 

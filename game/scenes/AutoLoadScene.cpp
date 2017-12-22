@@ -17,4 +17,5 @@ void AutoLoadScene::onPreInitialize() {
 
   // scene loader
   gameManager->loadScene( _sceneName );
+  //new DebugCameraController(getMainCamera(), gameManager->getObjectByName("Node"));
 }

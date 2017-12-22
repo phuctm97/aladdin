@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="app">
@@ -76,6 +76,9 @@
       <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AbuBonusPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp">
@@ -324,23 +327,47 @@
     <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AgrabahMarketParallaxPrefab.cpp">
-      <Filter>prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="scripts\ParallaxController.cpp">
-      <Filter>scripts</Filter>
-    </ClCompile>
     <ClCompile Include="prefabs\FinishEntrancePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\AudioPlayerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp">
+    <ClCompile Include="prefabs\StandablePlatformPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PendalV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
     <ClCompile Include="prefabs\JafarSceneSoundPrefab.cpp">
       <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\OneWayPlatformV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\TwoWayPlatformV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\StaticPlatformPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\StaticParallaxController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketGroundParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\DynamicParallaxController.cpp">
+      <Filter>scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +379,9 @@
       <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AbuBonusPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h">
@@ -597,23 +627,47 @@
     <ClInclude Include="prefabs\RetrySceneControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\AgrabahMarketParallaxPrefab.h">
-      <Filter>prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="scripts\ParallaxController.h">
-      <Filter>scripts</Filter>
-    </ClInclude>
     <ClInclude Include="prefabs\FinishEntrancePrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\AudioPlayerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h">
+    <ClInclude Include="prefabs\StandablePlatformPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PendalV2Prefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\DeathSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\JafarSceneSoundPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\OneWayPlatformV2Prefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\OneWayPlatformV2Controller.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\TwoWayPlatformV2Prefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\StaticPlatformPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\StaticParallaxController.h">
+      <Filter>scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketGroundParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\DynamicParallaxController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

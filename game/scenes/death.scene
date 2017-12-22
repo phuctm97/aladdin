@@ -10,10 +10,15 @@
     <prefab version="2" name="Sprite" args="abu.png 1 abu.anm fan" />
     <transform position="50 -40" />
   </object>
-  
+
   <!--CONTROLLER-->
   <object>
     <prefab version="2" name="Death Scene Controller" args="" />
+  </object>
+
+  <!--AUDIO-->
+  <object>
+    <prefab version="2" name="Death Scene Sound" args="" />
   </object>
 
   <!--EFFECT-->

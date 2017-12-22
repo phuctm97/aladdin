@@ -18,7 +18,7 @@ PlayableAladdinController( ala::GameObject* gameObject, const std::string& name 
     _pushingWall( false ),
     _reachedTopOfRope( false ),
     _holdingRope( NULL ), _holdingBar( NULL ), _collidedWithStandable( false ), _maxMovingVelocityX( 200.0f ),
-    _movingVelocityX( 0 ),
+    _movingVelocityX( 0 ), _dampVelocitiesSize( 0 ),
     _selfTransform( NULL ),
     _selfActionManager( NULL ), _selfStateManager( NULL ), _selfAnimator( NULL ), _selfBodyCollider( NULL ),
     _selfBody( NULL ), _selfDirection( NULL ),
@@ -155,8 +155,10 @@ void PlayableAladdinController::throwApple( const char direction,
                                _selfBodyCollider->getSize().getHeight() / 2 + offsetY ) );
 }
 
-void PlayableAladdinController::addDampVelocity( float v, float duration ) {
-  _dampVelocities.push_back( std::make_pair( duration, v ) );
+void PlayableAladdinController::addDampVelocity( const float v, const float duration ) {
+  if ( _dampVelocitiesSize < 100 ) {
+    _dampVelocities[_dampVelocitiesSize++] = std::make_pair( duration, v );
+  }
 }
 
 void PlayableAladdinController::onCollisionEnter( const ala::CollisionInfo& collision ) {
@@ -317,22 +319,26 @@ void PlayableAladdinController::onInitialize() {
   setHealth( 9 );
 
   // debug
-  setApples( 90 );
-  setHealth( 90 );
+  //  setApples( 90 );
+  //  setHealth( 90 );
 }
 
 void PlayableAladdinController::onUpdate( const float dt ) {
   // recalculate moving x
   float dampVelocity = 0.0f;
 
-  std::vector<size_t> removeIts;
-  for ( auto it = _dampVelocities.begin(); it != _dampVelocities.end(); ++it ) {
-    it->first -= dt;
-    dampVelocity += it->second * dt;
+  for ( auto i = 0; i < _dampVelocitiesSize; ++i ) {
+    _dampVelocities[i].first -= dt;
+    dampVelocity += _dampVelocities[i].second;
 
-    if ( it->first <= 0 ) removeIts.push_back( std::distance( _dampVelocities.begin(), it ) );
+    if ( _dampVelocities[i].first <= 0 ) {
+      for ( auto j = i; j < _dampVelocitiesSize - 1; ++j ) {
+        _dampVelocities[j] = _dampVelocities[j + 1];
+      }
+      --_dampVelocitiesSize;
+      --i;
+    }
   }
-  for ( const auto i : removeIts ) _dampVelocities.erase( _dampVelocities.begin() + i );
 
   // update body velocity
   float v = 0.0f;

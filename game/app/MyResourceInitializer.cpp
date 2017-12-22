@@ -13,6 +13,7 @@
 #include "../prefabs/AudioPlayerPrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
+#include "../prefabs/DeathSceneSoundPrefab.h"
 #include "../prefabs/AladdinAndAbuPrefab.h"
 #include "../prefabs/LevelCompleteSceneControllerPrefab.h"
 #include "../prefabs/RetrySceneControllerPrefab.h"
@@ -48,9 +49,15 @@
 #include "../prefabs/HoldableBarPrefab.h"
 #include "../prefabs/JumpableSpringPrefab.h"
 #include "../prefabs/PlatformPrefab.h"
+#include "../prefabs/StaticPlatformPrefab.h"
+#include "../prefabs/StandablePlatformPrefab.h"
+#include "../prefabs/OneWayPlatformV2Prefab.h"
+#include "../prefabs/TwoWayPlatformV2Prefab.h"
 #include "../prefabs/PendalPrefab.h"
+#include "../prefabs/PendalV2Prefab.h"
 #include "../prefabs/FinishEntrancePrefab.h"
-#include "../prefabs/AgrabahMarketParallaxPrefab.h"
+#include "../prefabs/AgrabahMarketGroundParallaxPrefab.h"
+#include "../prefabs/AgrabahMarketSkyParallaxPrefab.h"
 #include "../prefabs/AgrabahMarketGroundPrefab.h"
 #include "../prefabs/AgrabahMarketStairsOnePrefab.h"
 #include "../prefabs/AgrabahMarketStairsTwoPrefab.h"
@@ -58,14 +65,14 @@
 #include "../prefabs/AgrabahMarketStairsFourPrefab.h"
 #include "../prefabs/AgrabahMarketStairsFivePrefab.h"
 #include "../prefabs/AgrabahMarketStairsSixPrefab.h"
+#include "../prefabs/AgrabahMarketSceneSoundPrefab.h"
 #include "../prefabs/JafarPrefab.h"
 #include "../prefabs/JafarFirePrefab.h"
 #include "../prefabs/JafarStarPrefab.h"
 #include "../prefabs/JafarStarExplosionPrefab.h"
 #include "../prefabs/JafarPalaceGroundPrefab.h"
-#include "../prefabs/AgrabahMarketSceneSoundPrefab.h"
 #include "../prefabs/JafarSceneSoundPrefab.h"
-
+>>>>>>> develop_client_alpha
 
 USING_NAMESPACE_ALA;
 
@@ -76,6 +83,7 @@ void MyResourceInitializer::doRun() {
   new MyAppData( 2, 1, 3, 1, { "agrabah_market.scene", "jafar_palace.scene" } );
 
   // Layers
+  gameManager->addLayer( "Parallax" );
   gameManager->addLayer( "Background" );
   gameManager->addLayer( "Second Background" );
   gameManager->addLayer( "Mass Character" );
@@ -169,9 +177,10 @@ void MyResourceInitializer::doRun() {
   new AudioClip( "Eeeh.wav", "audio/Eeeh.wav" );
   new AudioClip( "Oooh.wav", "audio/Oooh.wav" );
   new AudioClip( "Wow!.wav", "audio/Wow!.wav" );
-  new AudioClip("BossTune.wav", "audio/BossTune.wav");
-  new AudioClip("Jafar Laugh.wav", "audio/Jafar Laugh.wav");
-
+  new AudioClip( "Jafar Laugh.wav", "audio/Jafar Laugh.wav" );
+  new AudioClip( "BossTune.wav", "audio/BossTune.wav" );
+  new AudioClip( "Abu Waving.wav", "audio/Abu Waving.wav" );
+  new AudioClip( "Boxing Bell.wav", "audio/Boxing Bell.wav" );
   
   // Prefabs
   new SpritePrefab();
@@ -183,6 +192,7 @@ void MyResourceInitializer::doRun() {
   new MenuSelectPrefab();
 
   new DeathSceneControllerPrefab();
+  new DeathSceneSoundPrefab();
 
   new AladdinAndAbuPrefab();
   new LevelCompleteSceneControllerPrefab();
@@ -220,10 +230,16 @@ void MyResourceInitializer::doRun() {
   new HoldableBarPrefab();
   new JumpableSpringPrefab();
   new PlatformPrefab();
+  new StaticPlatformPrefab();
+  new StandablePlatformPrefab();
+  new OneWayPlatformV2Prefab();
+  new TwoWayPlatformV2Prefab();
   new PendalPrefab();
+  new PendalV2Prefab();
   new FinishEntrancePrefab();
-  
-  new AgrabahMarketParallaxPrefab();
+
+  new AgrabahMarketGroundParallaxPrefab();
+  new AgrabahMarketSkyParallaxPrefab();
   new AgrabahMarketGroundPrefab();
   new AgrabahMarketStairsOnePrefab();
   new AgrabahMarketStairsTwoPrefab();

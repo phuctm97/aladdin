@@ -31,8 +31,8 @@ void PlatformPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto controller = new PlatformController( object );
 
   // collider renderers
-  new ColliderRenderer( uponCollider );
-  new ColliderRenderer( belowCollider );
+  //  new ColliderRenderer( uponCollider );
+  //  new ColliderRenderer( belowCollider );
 
   // flags
   uponCollider->setFlags( COLLIDE_ALADDIN_FLAG | STANDABLE_FLAG | COLLIDE_FREE_OBJECT_FLAG | STATIC_FLAG );
