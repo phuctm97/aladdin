@@ -37,6 +37,18 @@ std::string MyAppData::getSceneName( const int level ) {
   return _levelScenes[level - 1];
 }
 
+bool MyAppData::isSfxOn() const { return _sfxOn; }
+
+void MyAppData::setSfxOn( const bool sfxOn ) { _sfxOn = sfxOn; }
+
+bool MyAppData::isMusicOn() const { return _musicOn; }
+
+void MyAppData::setMusicOn( const bool musicOn ) { _musicOn = musicOn; }
+
+int MyAppData::getDifficulty() const { return _difficulty; }
+
+void MyAppData::setDifficulty( const int difficulty ) { _difficulty = difficulty; }
+
 void MyAppData::onLoad() {}
 
 void MyAppData::onRelease() {}
