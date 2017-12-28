@@ -13,7 +13,7 @@ GuardController::GuardController( ala::GameObject* gameObject, const std::string
   _maxDistanceYCouldAttack( 0 ),
   _tooFarDistance( GameManager::get()->getVisibleWidth() * 0.7f ),
   _initialX( 0 ),
-  _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ),
+  _leftBoundX( 0 ), _rightBoundX( 0 ), _health( 2 ), _hitable( true ),
   _aladdinTransform( NULL ), _selfTransform( NULL ), _selfStateManager( NULL ), _selfDirection( NULL ),
   _enemyExplosionOnePrefab( NULL ), _enemyExplosionTwoPrefab( NULL ) {}
 
@@ -157,7 +157,16 @@ int GuardController::getHealth() const { return _health; }
 
 void GuardController::setHealth( const int health ) { _health = health; }
 
+bool GuardController::isHitable() const {
+  return _hitable;
+}
+
+void GuardController::setHitable( const bool v ) {
+  _hitable = v;
+}
+
 void GuardController::onHit() {
+  if ( !_hitable ) return;
   if ( _selfStateManager->getCurrentStateName() == "hit" ) return;
 
   const auto hitState = _selfStateManager->getState( "hit" );

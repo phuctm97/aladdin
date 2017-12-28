@@ -17,6 +17,7 @@ private:
   float _rightBoundX;
 
   int _health;
+  bool _hitable;
 
   ala::Transform* _aladdinTransform;
   ala::Transform* _selfTransform;
@@ -78,6 +79,10 @@ public:
   int getHealth() const;
 
   void setHealth( const int health );
+
+  bool isHitable() const;
+
+  void setHitable( const bool v );
 
 protected:
   void onInitialize() override;
