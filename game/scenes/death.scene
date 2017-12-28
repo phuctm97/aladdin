@@ -20,6 +20,9 @@
   <object>
     <prefab version="2" name="Death Scene Sound" args="" />
   </object>
+  <object>
+    <prefab version="2" name="Sfx Controller" args="" />
+  </object>
 
   <!--EFFECT-->
   <object>

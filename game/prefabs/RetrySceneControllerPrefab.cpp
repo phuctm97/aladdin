@@ -17,6 +17,7 @@ void RetrySceneControllerPrefab::doInstantiate( ala::GameObject* object, std::is
 
   // components
   const auto sceneAudio = new AudioSource( object, "NameLevel Agrabahmarket.wav" );
+  sceneAudio->setActive( myAppData->isMusicOn() );
 
   const auto timer = new Timer( object );
 

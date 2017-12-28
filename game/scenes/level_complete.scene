@@ -3,7 +3,12 @@
 <Scene>
   <physics gravity="0 -500" />
 
-  <!--  BACKGROUND & FOREGROUND-->
+  <!--AUDIO-->
+  <object>
+    <prefab version="2" name="Sfx Controller" args="" />
+  </object>
+  
+  <!--BACKGROUND & FOREGROUND-->
   <object layer="Background">
     <prefab version="2" name="Sprite" args="victory.png 0" />
     <transform position="0 15" />

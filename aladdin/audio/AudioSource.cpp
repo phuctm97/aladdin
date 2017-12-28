@@ -31,6 +31,13 @@ bool AudioSource::isPlaying() const {
   return _sound->isPlaying();
 }
 
+void AudioSource::setActive( const bool val ) {
+  GameObjectComponent::setActive( val );
+  if ( !isActive() ) {
+    stop();
+  }
+}
+
 void AudioSource::onInitialize() {
   _sound->initialize();
 }
@@ -53,12 +60,14 @@ void AudioSource::stop() {
 }
 
 void AudioSource::play() {
+  if ( !isActive() ) return;
   if ( _audioClip ) {
     Audio::get()->play( _sound, _loop );
   }
 }
 
 void AudioSource::playOneShot() {
+  if ( !isActive() ) return;
   if ( _audioClip ) {
     Audio::get()->play( _sound, false );
   }

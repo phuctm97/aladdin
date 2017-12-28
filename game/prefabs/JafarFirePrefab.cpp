@@ -2,6 +2,7 @@
 #include "../scripts/DirectionController.h"
 #include "../scripts/CollisionTracker.h"
 #include "../Define.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,6 +14,7 @@ void JafarFirePrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource("My App Data"));
 
   const auto moveVelocity = 80.0f;
 

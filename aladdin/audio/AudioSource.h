@@ -42,6 +42,8 @@ public:
 
   bool isPlaying() const;
 
+  void setActive( const bool val ) override;
+
 protected:
   void onInitialize() override;
 

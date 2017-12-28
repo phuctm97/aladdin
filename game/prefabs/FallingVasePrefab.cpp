@@ -2,6 +2,7 @@
 #include "../Define.h"
 #include "../scripts/CollisionTracker.h"
 #include "../scripts/DirectionController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,6 +14,7 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
 
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto enemyExplosionPrefab = gameManager->getPrefabV2( "Enemy Explosion 1" );
 
   const auto density = 0.5f;
@@ -24,6 +26,7 @@ void FallingVasePrefab::doInstantiate( ala::GameObject* object, std::istringstre
   const auto animator = new Animator( object, "vase_fall", "civilian_enemies.anm" );
 
   const auto potAudio = new AudioSource( object, "Clay Pot.wav" );
+  potAudio->setActive( myAppData->isSfxOn() );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.5f );
 

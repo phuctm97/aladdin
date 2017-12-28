@@ -60,7 +60,39 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
 
                // audio
                {
-                 sceneAudio->play();
+                 menuChangeAudio->setActive( myAppData->isSfxOn() );
+                 sceneAudio->setActive( myAppData->isMusicOn() );
+
+                 if ( myAppData->isMusicOn() ) {
+                   sceneAudio->play();
+                 }
+               }
+
+               // reset menu
+               {
+                 if ( myAppData->isSfxOn() ) {
+                   sfxMenu->setText( "ON" );
+                 }
+                 else {
+                   sfxMenu->setText( "OFF" );
+                 }
+
+                 if ( myAppData->isMusicOn() ) {
+                   musicMenu->setText( "ON" );
+                 }
+                 else {
+                   musicMenu->setText( "OFF" );
+                 }
+
+                 switch ( myAppData->getDifficulty() ) {
+                 case 0: difficultyMenu->setText( "EASY" );
+                   break;
+                 case 1: difficultyMenu->setText( "NORMAL" );
+                   break;
+                 case 2: difficultyMenu->setText( "HARD" );
+                   break;
+                 default: break;
+                 }
                }
              }, NULL, NULL );
 
@@ -226,7 +258,11 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                  if ( input->getKeyDown( ALA_KEY_A ) || input->getKeyDown( ALA_KEY_S ) || input->getKeyDown( ALA_KEY_D )
                  ) {
                    myAppData->setSfxOn( !myAppData->isSfxOn() );
-                   menuChangeAudio->play();
+
+                   menuChangeAudio->setActive( myAppData->isSfxOn() );
+                   if ( myAppData->isSfxOn() ) {
+                     menuChangeAudio->play();
+                   }
                  }
                }
 
@@ -270,7 +306,11 @@ void MenuSelectPrefab::doInstantiate( ala::GameObject* object, std::istringstrea
                  if ( input->getKeyDown( ALA_KEY_A ) || input->getKeyDown( ALA_KEY_S ) || input->getKeyDown( ALA_KEY_D )
                  ) {
                    myAppData->setMusicOn( !myAppData->isMusicOn() );
-                   menuChangeAudio->play();
+
+                   sceneAudio->setActive( myAppData->isMusicOn() );
+                   if ( myAppData->isMusicOn() && !sceneAudio->isPlaying() ) {
+                     sceneAudio->play();
+                   }
                  }
                }
 

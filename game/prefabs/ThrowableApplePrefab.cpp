@@ -2,6 +2,7 @@
 #include "../scripts/CollisionTracker.h"
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -14,6 +15,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   // constants
   const auto gameManager = GameManager::get();
   const auto input = Input::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto fallingHalfOfApplePrefab = gameManager->getPrefabV2( "Falling Half Of Apple" );
   const auto density = 2.5f;
 
@@ -23,6 +25,7 @@ void ThrowableApplePrefab::doInstantiate( ala::GameObject* object, std::istrings
   const auto animator = new Animator( object, "apple", "aladdin.anm" );
 
   const auto appleExplodeAudio = new AudioSource( object, "Apple Splat.wav" );
+  appleExplodeAudio->setActive( myAppData->isSfxOn() );
 
   const auto body = new Rigidbody( object, PhysicsMaterial( density ), ALA_BODY_TYPE_DYNAMIC, 1.0f );
 
