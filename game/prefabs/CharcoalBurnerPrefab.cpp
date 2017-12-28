@@ -1,6 +1,7 @@
 #include "CharcoalBurnerPrefab.h"
 #include "../Define.h"
 #include "../scripts/CharcoalBurnerController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -10,10 +11,12 @@ void CharcoalBurnerPrefab::doInstantiate( ala::GameObject* object, std::istrings
 
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto flamePrefab = gameManager->getPrefab( "Flame" );
 
   // components
   const auto coalAudio = new AudioSource( object, "Fire From Coal.wav" );
+  coalAudio->setActive( myAppData->isSfxOn() );
 
   const auto body = new Rigidbody( object, PhysicsMaterial(), ALA_BODY_TYPE_STATIC, 0 );
 

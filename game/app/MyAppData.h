@@ -12,6 +12,9 @@ private:
   int _aladdinApples;
   int _retryTimes;
   std::vector<std::string> _levelScenes;
+  bool _sfxOn;
+  bool _musicOn;
+  int _difficulty;
 
 public:
   MyAppData( const int numberOfLevels, const int currentLevel, const int aladdinLives, const int retryTimes,
@@ -19,7 +22,7 @@ public:
     : GameResource( "My App Data" ), _numberOfLevels( numberOfLevels ),
       _currentLevel( currentLevel ), _currentCheckpoint( 0 ), _aladdinLives( aladdinLives ), _aladdinApples( 3 ),
       _retryTimes( retryTimes ),
-      _levelScenes( levelScenes ) {}
+      _levelScenes( levelScenes ), _sfxOn( true ), _musicOn( true ), _difficulty( 2 ) {}
 
   int getNumberOfLevels() const;
 
@@ -44,6 +47,18 @@ public:
   void setCurrentCheckpoint( const int currentCheckPoint );
 
   std::string getSceneName( const int level );
+
+  bool isSfxOn() const;
+
+  void setSfxOn( const bool sfxOn );
+
+  bool isMusicOn() const;
+
+  void setMusicOn( const bool musicOn );
+
+  int getDifficulty() const;
+
+  void setDifficulty( const int difficulty );
 
 protected:
   void onLoad() override;

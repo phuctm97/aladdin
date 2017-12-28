@@ -381,6 +381,9 @@
     <ClCompile Include="prefabs\FallingHalfOfApplePrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\SfxControllerPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -691,6 +694,9 @@
       <Filter>prefabs</Filter>
     </ClInclude>
     <ClInclude Include="prefabs\FallingHalfOfApplePrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\SfxControllerPrefab.h">
       <Filter>prefabs</Filter>
     </ClInclude>
   </ItemGroup>

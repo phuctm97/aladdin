@@ -11,6 +11,7 @@
 #include "../prefabs/SpritePrefab.h"
 #include "../prefabs/BitmapTextPrefab.h"
 #include "../prefabs/AudioPlayerPrefab.h"
+#include "../prefabs/SfxControllerPrefab.h"
 #include "../prefabs/MenuSelectPrefab.h"
 #include "../prefabs/DeathSceneControllerPrefab.h"
 #include "../prefabs/DeathSceneSoundPrefab.h"
@@ -191,6 +192,7 @@ void MyResourceInitializer::doRun() {
   new FadeInEffectPrefab();
   new SceneFadeOutTransitionPrefab();
   new AudioPlayerPrefab();
+  new SfxControllerPrefab();
 
   new MenuSelectPrefab();
 

@@ -49,19 +49,19 @@ public:
 
   bool isActive() const;
 
-  void setActive( const bool val );
+  virtual void setActive( const bool val );
 
   bool isSelfInitialize() const;
 
   void setSelfInitialize( const bool val );
 
-  void setFlags(const long v);
+  void setFlags( const long v );
 
-  void addFlag(const long v);
+  void addFlag( const long v );
 
   int getFlags() const;
 
-  bool hasFlag(const long v) const;
+  bool hasFlag( const long v ) const;
 
   // ==================================================
   // Events

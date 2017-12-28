@@ -18,7 +18,7 @@ GameObjectComponent::GameObjectComponent( GameObject* gameObject, const std::str
     _tag( -1 ),
     _flags( 0 ),
     _gameObject( gameObject ),
-    _active( false ),
+    _active( true ),
     _selfInitialize( true ),
     _toReleaseInNextFrame( false ) {
   // check initial state
@@ -112,7 +112,7 @@ void GameObjectComponent::initialize() {
   setToInitialized();
 
   // activate
-  setActive( true );
+  //  setActive( true );
 }
 
 void GameObjectComponent::onInitialize() {}

@@ -9,6 +9,10 @@
     <prefab version="2" name="Jafar Palace Scene Sound" args="" />
   </object>
   <object>
+    <prefab version="2" name="Sfx Controller" args="" />
+  </object>
+
+  <object>
     <prefab version="2" name="Jafar Palace Parallax" args="" />
     <transform position="186 72.5" />
   </object>

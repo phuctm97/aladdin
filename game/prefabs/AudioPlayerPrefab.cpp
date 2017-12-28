@@ -1,4 +1,5 @@
 #include "AudioPlayerPrefab.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -8,8 +9,13 @@ void AudioPlayerPrefab::doInstantiate( ala::GameObject* object, std::istringstre
   // args
   const auto audioName = nextLine( argsStream );
 
+  // constants
+  const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+
   // components
   const auto audio = new AudioSource( object, audioName );
+  audio->setActive( myAppData->isSfxOn() );
 
   const auto stateManager = new StateManager( object, "default" );
 

@@ -9,6 +9,9 @@
   <object>
     <prefab version="2" name="Agrabah Market Scene Sound" args="" />
   </object>
+  <object>
+    <prefab version="2" name="Sfx Controller" args="" />
+  </object>
 
   <!--BACKGROUND & FOREGROUND-->
   <object>
