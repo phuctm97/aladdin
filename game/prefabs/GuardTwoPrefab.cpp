@@ -3,6 +3,7 @@
 #include "../scripts/DirectionController.h"
 #include "../scripts/CharcoalBurnerCollisionTracker.h"
 #include "../scripts/GuardController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -15,6 +16,9 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   const auto rightBoundX = nextFloat( argsStream );
 
   // constants
+  const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
+
   const auto density = 5.0f;
   const auto runVelocity = 140.0f;
   const auto runOneLegVelocity = 60.0f;
@@ -24,6 +28,14 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
 
   const auto swordOffset2 = Vec2( -45, 20 );
   const auto swordSize2 = Size( 50, 45 );
+  auto attackDelay = 0.0f;
+  switch ( myAppData->getDifficulty() ) {
+  case 0: attackDelay = 2.0f;
+    break;
+  case 1: attackDelay = 1.0f;
+    break;
+  default: break;
+  }
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "guards.png" );
@@ -70,6 +82,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   // helpers
   const auto timer = new Timer( object );
   const auto timer1 = new Timer( object );
+  const auto attackTimer = new Timer( object );
 
   const auto transform = object->getTransform();
 
@@ -166,6 +179,11 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
                    swordCollider->setOffset( swordOffset2 );
                    swordCollider->setSize( swordSize2 );
                  }
+               }
+
+               // ai
+               {
+                 attackTimer->start( attackDelay );
                }
              },
              [=]( float dt ) {
@@ -311,7 +329,7 @@ void GuardTwoPrefab::doInstantiate( ala::GameObject* object, std::istringstream&
   } );
 
   new StateTransition( stateManager, "idle", "attack", [=] {
-    return controller->isAbleToAttackAladdin();
+    return controller->isAbleToAttackAladdin() && attackTimer->isDone();;
   } );
 
   new StateTransition( stateManager, "attack", "idle", [=] {

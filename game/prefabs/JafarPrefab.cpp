@@ -10,6 +10,7 @@ ALA_CLASS_SOURCE_1(JafarPrefab, ala::PrefabV2)
 void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& argsStream ) const {
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto firePrefab = gameManager->getPrefabV2( "Jafar Fire" );
   const auto starPrefab = gameManager->getPrefabV2( "Jafar Star" );
   const auto explosionPrefab = gameManager->getPrefabV2( "Big Explosion" );
@@ -21,6 +22,15 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   const auto maxIdle2Delay = 1300;
   const auto minAttackDelay = 1000;
   const auto maxAttackDelay = 2300;
+  auto attack2Delay = 0;
+  switch ( myAppData->getDifficulty() ) {
+  case 0: attack2Delay = 2.0f;
+    break;
+  case 1: attack2Delay = 1.0f;
+    break;
+  default: break;
+  }
+
   const auto releaseStarDelay = 0.3f;
   const auto bodyOffset1 = Vec2( 0, 0 );
   const auto bodySize1 = Size( 35, 70 );
@@ -67,6 +77,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   // helpers
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
+  const auto attackTimer = new Timer( object );
 
   const auto transform = object->getTransform();
 
@@ -238,6 +249,11 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
                {
                  timer1->start( 0.24f );
                }
+
+               // ai
+               {
+                 attackTimer->start( attack2Delay );
+               }
              },
              [=]( float dt ) {
                // direction  
@@ -281,7 +297,7 @@ void JafarPrefab::doInstantiate( ala::GameObject* object, std::istringstream& ar
   } );
 
   new StateTransition( stateManager, "idle_2", "attack_2", [=] {
-    return timer1->isDone();
+    return timer1->isDone() && attackTimer->isDone();
   } );
 
   new StateTransition( stateManager, "attack_2", "idle_2", [=] {

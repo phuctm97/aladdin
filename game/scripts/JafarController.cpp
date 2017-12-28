@@ -7,7 +7,7 @@ ALA_CLASS_SOURCE_1(JafarController, ala::GameObjectComponent)
 
 JafarController::JafarController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ), _mode( 1 ), _health( 100.0f ), _aladdinTransform( NULL ),
-    _selfTransform( NULL ), _sceneFadeOutTransitionPrefab( NULL ) {}
+    _selfTransform( NULL ), _sceneFadeOutTransitionPrefab( NULL ), _myAppData( NULL ) {}
 
 char JafarController::getDirectionToFaceAladdin() const {
   if ( _aladdinTransform->getPositionX() < _selfTransform->getPositionX() ) return 'L';
@@ -50,10 +50,23 @@ void JafarController::onInitialize() {
   }
 
   _sceneFadeOutTransitionPrefab = gameManager->getPrefabV2( "Scene Fade Out Transition" );
+
+  _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 }
 
 void JafarController::onHit() {
-  _health -= 10;
+  switch ( _myAppData->getDifficulty() ) {
+  case 0:
+    _health -= 20;
+    break;
+  case 1:
+    _health -= 10;
+    break;
+  case 2:
+    _health -= 6.7f;
+    break;
+  default: break;
+  }
 
   if ( _health <= 60 && _mode != 2 ) {
     _mode = 2;

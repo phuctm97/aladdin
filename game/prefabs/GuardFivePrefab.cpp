@@ -1,6 +1,7 @@
 #include "GuardFivePrefab.h"
 #include "../Define.h"
 #include "../scripts/GuardController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,12 +14,22 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   const auto rightBoundX = nextFloat( argsStream );
 
   // constants
+  const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto density = 5.0f;
   const auto runVelocity = 20.0f;
   const auto minIdleDelay = 300;
   const auto maxIdleDelay = 2000;
   const auto swordOffset = Vec2( 20, 5 );
   const auto swordSize = Size( 40, 20 );
+  auto attackDelay = 0.0f;
+  switch ( myAppData->getDifficulty() ) {
+  case 0: attackDelay = 2.0f;
+    break;
+  case 1: attackDelay = 1.0f;
+    break;
+  default: break;
+  }
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "civilian_enemies.png" );
@@ -55,6 +66,7 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   // helpers
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
+  const auto attackTimer = new Timer( object );
 
   const auto transform = object->getTransform();
 
@@ -146,6 +158,11 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                // hit 
                {
                  controller->setHitable( true );
+               }
+
+               // ai
+               {
+                 attackTimer->start( attackDelay );
                }
              },
              [=]( float dt ) {
@@ -241,7 +258,7 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
   } );
 
   new StateTransition( stateManager, "idle", "attack", [=] {
-    return controller->isAbleToAttackAladdin();
+    return controller->isAbleToAttackAladdin() && attackTimer->isDone();;
   } );
 
   new StateTransition( stateManager, "attack", "idle", [=] {

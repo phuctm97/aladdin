@@ -350,6 +350,12 @@ void PlayableAladdinController::onInitialize() {
 }
 
 void PlayableAladdinController::onUpdate( const float dt ) {
+  // allow exit
+  if ( Input::get()->getKeyDown( ALA_KEY_ESCAPE ) ) {
+    _sceneFadeOutTransitionPrefab->instantiateWithArgs( "0.5 menu.scene\n0" );
+    return;
+  }
+
   // recalculate moving x
   float dampVelocity = 0.0f;
 
