@@ -11,7 +11,7 @@ JafarStarController::JafarStarController( ala::GameObject* gameObject, const flo
     _movingSpeed( movingSpeed ), _jafarTransform( NULL ),
     _aladdinTransform( NULL ), _aladdinBody( NULL ), _aladdinController( NULL ),
     _selfTransform( NULL ),
-    _explosionPrefab( NULL ) {}
+    _explosionPrefab( NULL ), _myAppData( NULL ) {}
 
 const ala::Vec2& JafarStarController::getTargetPosition() const {
   return _targetPosition;
@@ -25,14 +25,32 @@ void JafarStarController::onTriggerEnter( const ala::CollisionInfo& collision ) 
 
   if ( otherObject->getTag() == ALADDIN_TAG ) {
     if ( otherCollider->getTag() == ALADDIN_TAG ) {
-		if (_aladdinController != NULL) {
-			if (_aladdinTransform->getPositionX() < _jafarTransform->getPositionX()) {
-				_aladdinController->addDampVelocity(6000, 0.5f);
-			}
-			else {
-				_aladdinController->addDampVelocity(-6000, 0.5f);
-			}
-		}
+      if ( _aladdinController != NULL ) {
+        auto force = 6000.0f;
+        auto delay = 0.5f;
+        switch ( _myAppData->getDifficulty() ) {
+        case 0:
+          force = 2000.0f;
+          delay = 0.2f;
+          break;
+        case 1:
+          force = 4000.0f;
+          delay = 0.35f;
+          break;
+        case 2:
+          force = 6000.0f;
+          delay = 0.5f;
+          break;
+        default: break;
+        }
+
+        if ( _aladdinTransform->getPositionX() < _jafarTransform->getPositionX() ) {
+          _aladdinController->addDampVelocity( force, delay );
+        }
+        else {
+          _aladdinController->addDampVelocity( -force, delay );
+        }
+      }
     }
 
     explode();
@@ -50,7 +68,7 @@ void JafarStarController::onInitialize() {
 
     _aladdinBody = aladdin->getComponentT<Rigidbody>();
 
-    _aladdinController = (PlayableAladdinController*)aladdin->getComponent("Controller");
+    _aladdinController = static_cast<PlayableAladdinController*>(aladdin->getComponent( "Controller" ));
 
     _targetPosition = _aladdinTransform->getPosition();
   }
@@ -61,6 +79,8 @@ void JafarStarController::onInitialize() {
   }
 
   _explosionPrefab = gameManager->getPrefabV2( "Jafar Star Explosion" );
+
+  _myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
 }
 
 void JafarStarController::onUpdate( const float delta ) {

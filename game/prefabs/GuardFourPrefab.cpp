@@ -2,6 +2,7 @@
 #include "../Define.h"
 #include "../scripts/DirectionController.h"
 #include "../scripts/GuardController.h"
+#include "../app/MyAppData.h"
 
 USING_NAMESPACE_ALA;
 
@@ -13,6 +14,7 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   // constants
   const auto gameManager = GameManager::get();
+  const auto myAppData = static_cast<MyAppData*>(gameManager->getResource( "My App Data" ));
   const auto throwableKnifePrefab = gameManager->getPrefabV2( "Throwable Knife" );
 
   const auto density = 5.0f;
@@ -21,6 +23,14 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
 
   const auto swordOffset = Vec2( -50, 5 );
   const auto swordSize = Size( 50, 32 );
+  auto attackDelay = 0.0f;
+  switch ( myAppData->getDifficulty() ) {
+  case 0: attackDelay = 2.0f;
+    break;
+  case 1: attackDelay = 1.0f;
+    break;
+  default: break;
+  }
 
   // components
   const auto spriteRenderer = new SpriteRenderer( object, "civilian_enemies.png" );
@@ -50,6 +60,7 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
   // helpers
   const auto timer1 = new Timer( object );
   const auto timer2 = new Timer( object );
+  const auto attackTimer = new Timer( object );
 
   const auto transform = object->getTransform();
 
@@ -111,6 +122,11 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  timer1->start( 0.15f );
                }
+
+               // ai
+               {
+                 attackTimer->start( attackDelay );
+               }
              },
              [=]( float dt ) {
                // direction
@@ -153,7 +169,7 @@ void GuardFourPrefab::doInstantiate( ala::GameObject* object, std::istringstream
              }, NULL );
 
   new StateTransition( stateManager, "idle", "throw", [=] {
-    return controller->isAbleToAttackAladdin() && timer2->isDone();
+    return controller->isAbleToAttackAladdin() && timer2->isDone() && attackTimer->isDone();;
   } );
 
   new StateTransition( stateManager, "throw", "idle", [=] {

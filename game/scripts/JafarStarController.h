@@ -22,6 +22,8 @@ private:
 
   ala::PrefabV2* _explosionPrefab;
 
+  MyAppData* _myAppData;
+
 public:
   JafarStarController( ala::GameObject* gameObject, const float movingSpeed = 7.0f, const std::string& name = "" );
 

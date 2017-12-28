@@ -2,6 +2,7 @@
 #define __JAFAR_CONTROLLER_H__
 
 #include <aladdin.h>
+#include "../app/MyAppData.h"
 
 ALA_CLASS_HEADER_1(JafarController, ala::GameObjectComponent)
 private:
@@ -14,6 +15,8 @@ private:
   ala::Transform* _selfTransform;
 
   ala::PrefabV2* _sceneFadeOutTransitionPrefab;
+
+  MyAppData* _myAppData;
 
 public:
   JafarController( ala::GameObject* gameObject, const std::string& name = "" );
