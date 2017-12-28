@@ -89,6 +89,11 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  swordCollider->setActive( false );
                }
+
+               // hit 
+               {
+                 controller->setHitable( false );
+               }
              },
              [=]( float dt ) {
                // animation effect
@@ -137,6 +142,11 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  timer1->start( 0.36f );
                }
+
+               // hit 
+               {
+                 controller->setHitable( true );
+               }
              },
              [=]( float dt ) {
                // direction
@@ -173,7 +183,16 @@ void GuardFivePrefab::doInstantiate( ala::GameObject* object, std::istringstream
                {
                  animator->setAction( "hide_guard_run" );
                }
-               timer2->start( 0.2f );
+
+               // audio
+               {
+                 timer2->start( 0.2f );
+               }
+
+               // hit 
+               {
+                 controller->setHitable( true );
+               }
              },
              [=]( float dt ) {
                //aniation effect
