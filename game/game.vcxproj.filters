@@ -384,6 +384,15 @@
     <ClCompile Include="prefabs\SfxControllerPrefab.cpp">
       <Filter>prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="prefabs\PeddlerV2Prefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="prefabs\PeddlerTextPrefab.cpp">
+      <Filter>prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\PeddlerController.cpp">
+      <Filter>scripts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
@@ -698,6 +707,15 @@
     </ClInclude>
     <ClInclude Include="prefabs\SfxControllerPrefab.h">
       <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PeddlerV2Prefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="prefabs\PeddlerTextPrefab.h">
+      <Filter>prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\PeddlerController.h">
+      <Filter>scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

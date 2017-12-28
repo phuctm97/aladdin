@@ -40,6 +40,8 @@
 #include "../prefabs/FloatingSalivaPrefab.h"
 #include "../prefabs/CamelPrefab.h"
 #include "../prefabs/PeddlerPrefab.h"
+#include "../prefabs/PeddlerV2Prefab.h"
+#include "../prefabs/PeddlerTextPrefab.h"
 #include "../prefabs/FallingVasePrefab.h"
 #include "../prefabs/HandEnemyPrefab.h"
 #include "../prefabs/GuardOnePrefab.h"
@@ -225,6 +227,8 @@ void MyResourceInitializer::doRun() {
   new FloatingSalivaPrefab();
   new CamelPrefab();
   new PeddlerPrefab();
+  new PeddlerV2Prefab();
+  new PeddlerTextPrefab();
   new FallingVasePrefab();
   new HandEnemyPrefab();
   new GuardOnePrefab();

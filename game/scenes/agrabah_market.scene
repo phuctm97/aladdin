@@ -821,6 +821,12 @@
     <transform position="2908.5 480" />
   </object>
 
+  <!-- PEDDLER-->
+  <object name="Peddler" quadIndex="">
+    <prefab version="2" name="Peddler V2" args="" />
+    <transform position="3781.5 387" />
+  </object>
+
   <!-- ENEMIES -->
   <object name="" quadIndex="00">
     <prefab version="2" name="Guard 1" args="550 430 670" />
@@ -931,7 +937,7 @@
 
   <!--ALADDIN-->
   <object name="Aladdin" quadIndex="">
-    <prefab version="2" name="Playable Aladdin" args="-80 0" />
+    <prefab version="2" name="Playable Aladdin" args="3900 400" />
   </object>
 
   <!--EFFECT-->
