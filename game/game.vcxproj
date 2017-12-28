@@ -187,6 +187,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp" />
     <ClCompile Include="prefabs\JafarStarPrefab.cpp" />
     <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerTextPrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerV2Prefab.cpp" />
     <ClCompile Include="prefabs\PendalPrefab.cpp" />
     <ClCompile Include="prefabs\PendalV2Prefab.cpp" />
     <ClCompile Include="prefabs\PlatformPrefab.cpp" />
@@ -255,6 +257,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClCompile Include="scripts\JafarController.cpp" />
     <ClCompile Include="scripts\JafarStarController.cpp" />
     <ClCompile Include="scripts\NodeController.cpp" />
+    <ClCompile Include="scripts\PeddlerController.cpp" />
     <ClCompile Include="scripts\SingleLayerParallaxController.cpp" />
     <ClCompile Include="scripts\StaticParallaxController.cpp" />
     <ClCompile Include="scripts\PendalController.cpp" />
@@ -299,6 +302,8 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="prefabs\JafarStarExplosionPrefab.h" />
     <ClInclude Include="prefabs\JafarStarPrefab.h" />
     <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\PeddlerTextPrefab.h" />
+    <ClInclude Include="prefabs\PeddlerV2Prefab.h" />
     <ClInclude Include="prefabs\PendalPrefab.h" />
     <ClInclude Include="prefabs\PendalV2Prefab.h" />
     <ClInclude Include="prefabs\PlatformPrefab.h" />
@@ -367,6 +372,7 @@ xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Comman
     <ClInclude Include="scripts\JafarController.h" />
     <ClInclude Include="scripts\JafarStarController.h" />
     <ClInclude Include="scripts\NodeController.h" />
+    <ClInclude Include="scripts\PeddlerController.h" />
     <ClInclude Include="scripts\SingleLayerParallaxController.h" />
     <ClInclude Include="scripts\StaticParallaxController.h" />
     <ClInclude Include="scripts\PendalController.h" />
