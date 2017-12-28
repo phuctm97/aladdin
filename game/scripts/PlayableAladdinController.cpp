@@ -10,8 +10,8 @@ ALA_CLASS_SOURCE_1(PlayableAladdinController, ala::GameObjectComponent)
 PlayableAladdinController::
 PlayableAladdinController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _maxHealth( 99 ), _maxLives( 99 ), _maxApples( 99 ),
-    _health( 0 ), _lives( 0 ), _apples( 0 ),
+    _maxHealth( 99 ), _maxLives( 99 ), _maxApples( 99 ), _maxGems( 99 ),
+    _health( 0 ), _lives( 0 ), _apples( 0 ), _gems( 0 ),
     _recovering( false ),
     _hit( false ),
     _jumpOnCamel( false ), _jumpOnSpring( false ),
@@ -47,6 +47,14 @@ void PlayableAladdinController::setApples( const int apples ) {
 
 int PlayableAladdinController::getApples() const {
   return _apples;
+}
+
+int PlayableAladdinController::getGems() const {
+  return _gems;
+}
+
+void PlayableAladdinController::setGems( const int gems ) {
+  _gems = MIN( gems, _maxGems);
 }
 
 void PlayableAladdinController::setHealth( const int health ) {
@@ -237,6 +245,9 @@ void PlayableAladdinController::onTriggerEnter( const ala::CollisionInfo& collis
   else if ( otherObject->getTag() == HEART_TAG ) {
     setHealth( getHealth() + 1 );
   }
+  else if ( otherObject->getTag() == SPEND_TAG ) {
+    setGems( getGems() + 1 );
+  }
 
 }
 
@@ -330,6 +341,7 @@ void PlayableAladdinController::onInitialize() {
 
   setLives( _myAppData->getAladdinLives() );
   setApples( _myAppData->getAladdinApples() );
+  setGems( 0 );
   setHealth( 9 );
 
   // debug

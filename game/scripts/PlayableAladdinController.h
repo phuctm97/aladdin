@@ -10,10 +10,12 @@ private:
   int _maxHealth;
   int _maxLives;
   int _maxApples;
+  int _maxGems;
 
   int _health;
   int _lives;
   int _apples;
+  int _gems;
   bool _recovering;
   bool _hit;
   bool _jumpOnCamel;
@@ -56,6 +58,10 @@ public:
   void setApples( const int apples );
 
   int getApples() const;
+
+  int getGems() const;
+
+  void setGems( const int gems );
 
   void setHealth( const int health );
 
