@@ -10,6 +10,7 @@ private:
   ala::BitmapText* _livesLabel;
   ala::BitmapText* _applesLabel;
   ala::BitmapText* _scoresLabel;
+  ala::BitmapText* _gemsLabel;
   ala::Animator* _healthAnimator;
   PlayableAladdinController* _aladdinController;
 
@@ -23,6 +24,9 @@ public:
   void setScores( const int scores ) const;
 
   void setHealth( const int health ) const;
+
+  void setGems( const int gems ) const;
+
 
 protected:
   void onInitialize() override;

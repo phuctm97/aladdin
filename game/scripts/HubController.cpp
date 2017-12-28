@@ -5,7 +5,7 @@ USING_NAMESPACE_ALA;
 
 HubController::HubController( ala::GameObject* gameObject, const std::string& name )
   : GameObjectComponent( gameObject, name ),
-    _livesLabel( NULL ), _applesLabel( NULL ), _scoresLabel( NULL ), _healthAnimator( NULL ),
+    _livesLabel( NULL ), _applesLabel( NULL ), _scoresLabel( NULL ), _gemsLabel( NULL ), _healthAnimator( NULL ),
     _aladdinController( NULL ) {}
 
 void HubController::setLives( const int lives ) const {
@@ -47,6 +47,13 @@ void HubController::setHealth( const int health ) const {
   _healthAnimator->setAction( action );
 }
 
+void HubController::setGems( const int gems ) const {
+  std::stringstream stringBuilder;
+  stringBuilder << gems;
+
+  _gemsLabel->setText( stringBuilder.str() );
+}
+
 void HubController::onInitialize() {
   const auto gameManager = GameManager::get();
   const auto livesHub = gameManager->getObjectByName( "Hub Lives" );
@@ -54,6 +61,9 @@ void HubController::onInitialize() {
 
   const auto applesHub = gameManager->getObjectByName( "Hub Apples" );
   _applesLabel = applesHub->getComponentT<BitmapText>();
+
+  const auto gemsHub = gameManager->getObjectByName( "Hub Gems" );
+  _gemsLabel = gemsHub->getComponentT<BitmapText>();
 
   const auto scoresHub = gameManager->getObjectByName( "Hub Scores" );
   _scoresLabel = applesHub->getComponentT<BitmapText>();
@@ -71,4 +81,5 @@ void HubController::onUpdate( const float delta ) {
   setLives( _aladdinController->getLives() );
   setApples( _aladdinController->getApples() );
   setHealth( _aladdinController->getHealth() );
+  setGems( _aladdinController->getGems() );
 }

@@ -43,6 +43,20 @@ void HubPrefab::doInstantiate( ala::GameObject* object, std::istringstream& args
   applesLableText->setTextAlignment( BitmapText::LEFT );
   applesLableText->setText( "99" );
 
+  const auto gems = new GameObject( object );
+  const auto gemsTransform = gems->getTransform();
+  const auto gemsSpriteRenderer = new SpriteRenderer( gems, "items.png" );
+  const auto gemsAnimator = new Animator( gems, "gems", "items.anm" );
+  gemsTransform->setScale( 0.9f );
+  gemsTransform->setPosition( Vec2( halfVisibleWidth - 113, -halfVisibleHeight + 20 ) );
+
+  const auto gemsLabel = new GameObject( object, "Hub Gems" );
+  const auto gemsLabelTransform = gemsLabel->getTransform();
+  const auto gemsLableText = new BitmapText( gemsLabel, "font_two.png", "two.fnt" );
+  gemsLabelTransform->setPosition( Vec2( gemsTransform->getPositionX() + 13, -halfVisibleHeight + 18 ) );
+  gemsLableText->setTextAlignment( BitmapText::LEFT );
+  gemsLableText->setText( "99" );
+
   const auto scoresLabel = new GameObject( object, "Hub Scores" );
   const auto scoresLabelTransform = scoresLabel->getTransform();
   const auto scoresLableText = new BitmapText( scoresLabel, "font_one.png", "one.fnt" );
