@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Scene>
+  <physics gravity="0 -500" />
+
+  <!--AUDIO-->
+  <object>
+    <prefab version="2" name="Sfx Controller" args="" />
+  </object>
+
+  <!--BACKGROUND & FOREGROUND-->
+  <object layer="Background">
+    <prefab version="2" name="Sprite" args="retry.png 0" />
+    <transform position="0 27" scale="1.1 1.1" />
+  </object>
+  <object name="Aladdin And Abu" layer="Main Character">
+    <prefab version="2" name="Aladdin And Abu" args="R 0" />
+    <transform position="-17 -55" />
+  </object>
+
+  <!--CONTROLLER-->
+  <object>
+    <prefab version="2" name="Retry Scene Controller" args="" />
+  </object>
+
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
+</Scene>

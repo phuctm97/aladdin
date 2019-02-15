@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Scene>
+  <!--BACKGROUND & FOREGROUND-->
+  <object layer="Background">
+    <prefab version="2" name="Sprite" args="cutscenes.png 1 cutscenes.anm cutscene_1" />
+  </object>
+  <object layer="Second Background">
+    <prefab version="2" name="Sprite" args="title.png 0" />
+    <transform position="0 59" />
+  </object>
+
+  <!--MENUS-->
+  <object name="Menu 1" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt AGRABAH MARKET&#10; T L 0.75" />
+    <transform position="-51 5" />
+  </object>
+  <object name="Menu 2" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt JAFAR PALACE&#10; T L 0.75" />
+    <transform position="-51 -13" />
+  </object>
+  <object name="Menu 3" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt OPTIONS&#10; T L 0.75" />
+    <transform position="-51 -31" />
+  </object>
+  <object name="Menu 4" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt EXIT&#10; T L 0.75" />
+    <transform position="-51 -49" />
+  </object>
+  <object name="Menu 5" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt SFX&#10; T L 0.75" />
+    <transform position="-51 5" />
+  </object>
+  <object name="Menu 6" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt MUSIC&#10; T L 0.75" />
+    <transform position="-51 -13" />
+  </object>
+  <object name="Menu 7" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt DIFFICULTY&#10; T L 0.75" />
+    <transform position="-51 -31" />
+  </object>
+  <object name="Menu 8" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt BACK&#10; T L 0.75" />
+    <transform position="-51 -49" />
+  </object>
+  <object name="Menu 9" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt ON&#10; T L 0.75" />
+    <transform position="63 5" />
+  </object>
+  <object name="Menu 10" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt ON&#10; T L 0.75" />
+    <transform position="63 -13" />
+  </object>
+  <object name="Menu 11" layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt EASY&#10; T L 0.75" />
+    <transform position="63 -31" />
+  </object>
+
+  <!--LICENSE TEXT-->
+  <object layer="Second Background">
+    <prefab version="2" name="Bitmap Text"
+            args="font_one.png one.fnt (C) 1993 SEGA (C) 1993 VIRGIN GAMES&#10; T C 0.75" />
+    <transform position="0 -75" />
+  </object>
+  <object layer="Second Background">
+    <prefab version="2" name="Bitmap Text" args="font_one.png one.fnt (C) 1993 THE WALT DISNEY COMPANY&#10; T C 0.75" />
+    <transform position="0 -92" />
+  </object>
+
+  <!--CONTROLLER-->
+  <object layer="UI">
+    <prefab version="2" name="Menu Select" args="5 -13 -31 -49" />
+  </object>
+
+  <!--EFFECT-->
+  <object>
+    <prefab version="2" name="Fade In Effect" args="0.3" />
+  </object>
+</Scene>

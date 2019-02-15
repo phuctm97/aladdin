@@ -1,117 +1,202 @@
+/*
+ * Created by phuctm97 on Sep 30th 2017
+ */
+
 #include "Scene.h"
 #include "StdHelper.h"
+#include "GameResource.h"
+#include "GameManager.h"
+#include "../2d/2dMacros.h"
+#include "../2d/Camera.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::Scene, "ala::Scene")
+ALA_CLASS_SOURCE_2(ala::Scene, ala::Initializable, ala::Releasable)
 
 // ================================================
 // Basic
 // ================================================
 
-Scene::Scene() :
-  _inited( false ),
-  _releasing( 0 ) {
-  TOTAL_SCENE_CREATED++;
+Scene::Scene(): _toReleaseInNextFrame( false ),
+                _gameObjectInLock( false ),
+                _quadTree( NULL ),
+                _camera( NULL ),
+                _cameraTransform( NULL ),
+                _visibleWidth( 0 ),
+                _visibleHeight( 0 ),
+                _halfVisibleWidth( 0 ),
+                _halfVisibleHeight( 0 ),
+                _physicsEnabled( false ),
+                _gravityAcceleration( 0, -100.0f ) {
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  TOTAL_SCENES_CREATED++;
 }
 
 Scene::~Scene() {
-  _releasing = 1;
-
-  if ( _inited && (!isReleased()) ) {
-    release();
-
+  if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
-  TOTAL_SCENE_DELETED++;
-}
 
+  TOTAL_SCENES_DELETED++;
+}
 
 // =================================================
 // Events
 // =================================================
 
-bool Scene::isInited() const {
-  return _inited;
-}
-
-bool Scene::isReleasing() const {
-  return _releasing == 1;
-}
-
-bool Scene::isReleased() const {
-  return _releasing == 2;
-}
-
-void Scene::init() {
+void Scene::initialize() {
   // make sure scene is not initialized;
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitializing()) && (!isInitialized()));
 
-  // TODO: subscriber pre init
+  // required framework objects
+  const auto gameManager = GameManager::get();
+  _camera = gameManager->getPrefab( ALA_MAIN_CAMERA )->instantiate( ALA_MAIN_CAMERA );
+  _cameraTransform = _camera->getTransform();
+  _visibleWidth = gameManager->getVisibleWidth();
+  _visibleHeight = gameManager->getVisibleHeight();
+  _halfVisibleWidth = _visibleWidth / 2;
+  _halfVisibleHeight = _visibleHeight / 2;
 
-  // child pre init
-  if ( !onPreInit() ) {
-    _inited = false;
-    return;
+  onPreInitialize();
+
+  setToInitializing();
+
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  // load resources scope with this
+  for ( auto resource : GameManager::get()->getResourcesWith( this ) ) {
+    if ( !resource->isLoaded() ) {
+      resource->load();
+    }
   }
 
-
-  // TODO: scene init here
+  // init game objects
   for ( const auto it : _gameObjects ) {
-    it.second->init();
+    auto object = it.second;
+
+    if ( !object->isInitialized() ) {
+      object->initialize();
+    }
   }
-  _inited = true;
 
+  setToInitialized();
 
-  // make sure scene initialized after initialization
-  ALA_ASSERT(_inited);
-
-
-  // child post init
-  onPostInit();
-
-  // TODO: client subscriber post init
+  onPostInitialize();
 }
 
-bool Scene::onPreInit() {
-  return true;
+void Scene::onPreInitialize() { }
+
+void Scene::onPostInitialize() {}
+
+void Scene::updatePhysics( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isPhysicsEnabled() ) return;
+
+  lockGameObjects();
+
+  onPrePhysicsUpdate( delta );
+
+  // update game objects
+
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->updatePhysics( delta );
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->updatePhysics( delta );
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->updatePhysics( delta );
+    }
+  }
+
+  onPostPhysicsUpdate( delta );
+
+  unlockGameObjects();
 }
 
-void Scene::onPostInit() {}
+void Scene::onPrePhysicsUpdate( const float delta ) {}
 
-void Scene::update( float delta ) {
-  // make sure scene is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
-    return;
+void Scene::onPostPhysicsUpdate( const float delta ) {}
+
+void Scene::update( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() ) return;
+
+  lockGameObjects();
 
   onPreUpdate( delta );
 
-  // TODO: scene update here
-  for ( const auto it : _gameObjects ) {
-    it.second->update( delta );
+  // update game objects
+
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->update( delta );
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->update( delta );
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->update( delta );
+    }
   }
 
   onPostUpdate( delta );
+
+  unlockGameObjects();
 }
 
-void Scene::onPreUpdate( float delta ) {}
+void Scene::onPreUpdate( const float delta ) {}
 
-void Scene::onPostUpdate( float delta ) {}
+void Scene::onPostUpdate( const float delta ) {}
 
 void Scene::render() {
-  // make sure scene is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
-    return;
+  // make sure scene is initialized and not being released
+  if ( (!isInitialized()) || isReleasing() || isReleased() ) return;
+
+  lockGameObjects();
 
   onPreRender();
 
-  // TODO: scene update here
-  for ( const auto it : _gameObjects ) {
-    it.second->render();
+  // render game objects
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->render();
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->render();
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->render();
+    }
   }
 
+
   onPostRender();
+
+  unlockGameObjects();
 }
 
 void Scene::onPreRender() {}
@@ -119,72 +204,250 @@ void Scene::onPreRender() {}
 void Scene::onPostRender() {}
 
 void Scene::release() {
-  // make sure scene is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!isReleased());
-
-  _releasing = 1;
-
-  ALA_ASSERT(isReleasing());
-  // TODO: client subscriber pre release
-
-  // child pre release
-  if ( !onPreRelease() ) return;
-
-  // TODO: game object release here
-  for ( const auto it : _gameObjects ) {
-    GameObject* gameObject = it.second;
-    delete gameObject;
+  // check lock
+  if ( _gameObjectInLock ) {
+    releaseInNextFrame();
+    return;
   }
-  _gameObjects.clear();
 
-  ALA_ASSERT(_gameObjects.empty());
-  _releasing = 2;
+  // make sure scene is initialized and not released
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
-  // make sure object released after release
-  ALA_ASSERT(isReleased());
+  onPreRelease();
 
+  setToReleasing();
 
-  // child post release
+  // release quad tree
+  if ( _quadTree != NULL ) delete _quadTree;
+
+  // release game objects
+  std::vector<GameObject*> gameObjectsToRelease;
+  for ( const auto it : _gameObjects ) {
+    auto object = it.second;
+    object->release();
+  }
+
+  // release resources scope with this
+  for ( auto resouce : GameManager::get()->getResourcesWith( this ) ) {
+    resouce->release();
+  }
+
+  setToReleased();
+
   onPostRelease();
 
-  // TODO: client subscriber post release
+  // destroy
+  delete this;
 }
 
-bool Scene::onPreRelease() {
-  return true;
+void Scene::releaseInNextFrame() {
+  // make sure scene is initialized and not released
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  _toReleaseInNextFrame = true;
 }
+
+void Scene::onPreRelease() {}
 
 void Scene::onPostRelease() {}
+
+void Scene::resolveLockedTasks() {
+  if ( isReleasing() || isReleased() ) return;
+
+  // lazy initialization
+  if ( !isInitialized() ) {
+    initialize();
+  }
+
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  // update locked actions
+  updateAddAndRemoveGameObjects();
+
+  // update quad tree
+  if ( isQuadTreeEnabled() ) {
+    updateQuadTreeVisibility();
+  }
+
+  // client
+  onResolveLockedTasks();
+
+  // update game object locked tasks
+  lockGameObjects();
+
+  if ( !isQuadTreeEnabled() ) {
+    for ( const auto it : _gameObjects ) {
+      auto object = it.second;
+      object->resolveLockedTasks();
+    }
+  }
+  else {
+    for ( const auto visibleNode : _quadTree->getVisibleNodes() ) {
+      for ( const auto object : visibleNode->getGameObjects() ) {
+        object->resolveLockedTasks();
+      }
+    }
+
+    for ( const auto it : _dynamicGameObjects ) {
+      auto object = it.second;
+      object->resolveLockedTasks();
+    }
+  }
+
+  unlockGameObjects();
+}
+
+void Scene::onResolveLockedTasks() { }
 
 // ==================================================
 // Objects Management
 // ==================================================
 
-GameObject* Scene::getGameObject( long id ) {
+GameObject* Scene::getGameObject( const long id ) const {
   const auto it = _gameObjects.find( id );
   if ( it == _gameObjects.end() ) return NULL;
   return it->second;
 }
 
-void Scene::addGameObject( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
-  if ( gameObject == NULL )return;
+GameObject* Scene::getMainCamera() const {
+  return _camera;
+}
 
-  _gameObjects.emplace( gameObject->getId(), gameObject );
-  gameObject->setParent( NULL );
+bool Scene::isInLock() const {
+  return _gameObjectInLock;
+}
+
+void Scene::addGameObject( GameObject* gameObject, const std::string& quadIndex ) {
+  // check lock
+  if ( _gameObjectInLock ) {
+    addGameObjectInNextFrame( gameObject );
+    return;
+  }
+
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
+  doAddGameObject( gameObject, quadIndex );
+}
+
+void Scene::addGameObjectInNextFrame( GameObject* gameObject, const std::string& quadIndex ) {
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
+  _gameObjectsToAddInNextFrame.push_back( std::make_pair( gameObject, quadIndex ) );
 }
 
 void Scene::removeGameObject( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
-  if ( gameObject == NULL ) return;
+  // check lock
+  if ( _gameObjectInLock ) {
+    removeGameObjectInNextFrame( gameObject );
+    return;
+  }
 
-  _gameObjects.erase( gameObject->getId() );
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
+  doRemoveGameObject( gameObject->getId() );
+}
+
+void Scene::removeGameObjectInNextFrame( GameObject* gameObject ) {
+  if ( isReleasing() || isReleased() ) return;
+  if ( gameObject == NULL ) return;
+  _gameObjectsToRemoveInNextFrame.push_back( gameObject->getId() );
+}
+
+QuadTree* Scene::getQuadTree() const {
+  return _quadTree;
+}
+
+void Scene::enableQuadTree( const float spaceMinX, const float spaceMinY,
+                            const float spaceWidth, const float spaceHeight,
+                            const int level ) {
+  _quadTree = new QuadTree( spaceMinX, spaceMinY, spaceWidth, spaceHeight, level );
+}
+
+bool Scene::isQuadTreeEnabled() const {
+  return _quadTree != NULL;
+}
+
+void Scene::updateQuadTreeVisibility() const {
+  const auto cameraPosition = _cameraTransform->getPosition();
+
+  // TODO: calculate with camera scale
+
+  const auto cameraMinX = cameraPosition.getX() - _halfVisibleWidth;
+  const auto cameraMinY = cameraPosition.getY() - _halfVisibleHeight;
+  const auto cameraMaxX = cameraPosition.getX() + _halfVisibleWidth;
+  const auto cameraMaxY = cameraPosition.getY() + _halfVisibleHeight;
+
+  _quadTree->updateVisibility( cameraMinX, cameraMinY, cameraMaxX, cameraMaxY );
+}
+
+void Scene::lockGameObjects() {
+  _gameObjectInLock = true;
+}
+
+void Scene::unlockGameObjects() {
+  _gameObjectInLock = false;
+}
+
+void Scene::updateAddAndRemoveGameObjects() {
+  for ( const auto it : _gameObjectsToAddInNextFrame ) {
+    doAddGameObject( it.first, it.second );
+  }
+  _gameObjectsToAddInNextFrame.clear();
+
+  for ( auto objectId : _gameObjectsToRemoveInNextFrame ) {
+    doRemoveGameObject( objectId );
+  }
+  _gameObjectsToRemoveInNextFrame.clear();
+}
+
+void Scene::doAddGameObject( GameObject* gameObject, const std::string& quadIndex ) {
+  _gameObjects.emplace( gameObject->getId(), gameObject );
+
+  if ( !isQuadTreeEnabled() || quadIndex.empty() ) {
+    _dynamicGameObjects.emplace( gameObject->getId(), gameObject );
+  }
+  else {
+    _quadTree->getNode( quadIndex )->addGameObject( gameObject );
+    _gameObjectToQuadNode.emplace( gameObject->getId(), quadIndex );
+  }
+}
+
+void Scene::doRemoveGameObject( const long id ) {
+  const auto gameObjectIt = _gameObjects.find( id );
+  if ( gameObjectIt == _gameObjects.cend() ) return;
+
+  if ( isQuadTreeEnabled() ) {
+    const auto gameObjectToQuadNodeIt = _gameObjectToQuadNode.find( id );
+    if ( gameObjectToQuadNodeIt != _gameObjectToQuadNode.cend() ) {
+      _quadTree->getNode( gameObjectToQuadNodeIt->second )->removeGameObject( gameObjectIt->second );
+      _gameObjectToQuadNode.erase( gameObjectToQuadNodeIt );
+    }
+  }
+
+  _gameObjects.erase( id );
+  _dynamicGameObjects.erase( id );
+}
+
+const Vec2& Scene::getGravityAcceleration() const {
+  return _gravityAcceleration;
+}
+
+void Scene::enablePhysics( const Vec2& gravity ) {
+  _physicsEnabled = true;
+  _gravityAcceleration = gravity;
+}
+
+bool Scene::isPhysicsEnabled() const {
+  return _physicsEnabled;
 }
 
 // =============================================
 // Debug memory allocation
 // =============================================
-long Scene::TOTAL_SCENE_CREATED( 0 );
-long Scene::TOTAL_SCENE_DELETED( 0 );
+long Scene::TOTAL_SCENES_CREATED( 0 );
+long Scene::TOTAL_SCENES_DELETED( 0 );
 }

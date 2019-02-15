@@ -5,96 +5,170 @@
 * Created by phuctm97 on Sep 27th 2017
 */
 
-#include "Base.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "GameResource.h"
+#include "Prefab.h"
+#include "PrefabV2.h"
+#include "Logger.h"
+#include "Messenger.h"
+#include "Color.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(GameManager)
+class SceneConfiguration;
+class Sprite;
+
+ALA_CLASS_HEADER_1(GameManager, ala::Releasable)
   // ==============================================
   // Basic
   // ==============================================
+  friend class Application;
+
 private:
   static GameManager* __instance;
+  Logger _logger;
 
 public:
   GameManager();
 
-  ~GameManager();
+  virtual ~GameManager();
 
   static GameManager* get();
+
+  void update( const float delta );
+
+  void release() override;
+
+  void onBackgroundToForeground();
+
+  // ===============================================
+  // Game Information
+  // ===============================================
+private:
+  float _visibleWidth;
+  float _visibleHeight;
+  std::function<void()> _exitFunc;
+
+public:
+  float getVisibleWidth() const;
+  float getVisibleHeight() const;
+
+  // ===============================================
+  // Id Generator
+  // ===============================================
+private:
+  long _idCounter;
+
+public:
+  long newId();
 
   // ===============================================
   // Object Management
   // ===============================================
 private:
-  bool _destructing;
-  long _idCounter;
   std::unordered_map<long, GameObject*> _attachedObjects;
 
 public:
-  long newObjectId();
-
   void attach( GameObject* gameObject );
 
   void detach( GameObject* gameObject );
 
-  GameObject* getObjectById( long id );
+  std::vector<GameObject*> getAllObjects() const;
 
-  template <class T>
-  T* getObjectTById( long id );
+  GameObject* getObjectById( const long id ) const;
 
-  std::vector<GameObject*> getAllObjectsByName( const std::string& name );
+  std::vector<GameObject*> getAllObjectsByName( const std::string& name ) const;
 
-  GameObject* getObjectByName( const std::string& name );
+  GameObject* getObjectByName( const std::string& name ) const;
 
-  template <class T>
-  T* getObjectTByName( const std::string& name );
+  std::vector<GameObject*> getAllObjectsByTag( const int tag ) const;
+
+  GameObject* getObjectByTag( const int tag ) const;
 
   // ===============================================
   // Scene Management
   // ===============================================
 private:
   Scene* _runningScene;
+  Scene* _sceneToReplaceInNextFrame;
 
 public:
   Scene* getRunningScene() const;
 
+  void exit();
+
   void replaceScene( Scene* scene );
+
+  void replaceSceneInNextFrame( Scene* scene );
+
+  void loadScene( const std::string& configurationName, ala::Scene* scene = NULL );
+
+  void loadScene( SceneConfiguration* configuration, ala::Scene* scene = NULL );
+
+private:
+  void updateRunningScene();
+
+  void doReplaceScene( Scene* scene );
+
+  // ===============================================
+  // Resource Management
+  // ===============================================
+private:
+  std::unordered_map<std::string, GameResource*> _attachedResources;
+
+public:
+  void attach( GameResource* resource );
+
+  void detach( GameResource* resource );
+
+  GameResource* getResource( const std::string& name );
+
+  Sprite* getEmptySprite( const ala::Color& color );
+
+  std::vector<GameResource*> getResourcesWith( Scene* scope );
+
+  std::vector<GameResource*> getAllResources();
+
+  // ===============================================
+  // Prefab Management
+  // ===============================================
+private:
+  std::unordered_map<std::string, Prefab*> _registeredPrefabs;
+
+public:
+  void registerPrefab( Prefab* prefab );
+
+  void removePrefab( Prefab* prefab );
+
+  Prefab* getPrefab( const std::string& name );
+
+  PrefabV2* getPrefabV2( const std::string& name );
+
+  std::vector<Prefab*> getAllPrefabs();
+
+  // ===============================================
+  // Global Messenger
+  // ===============================================
+private:
+  Messenger* _globalMessenger;
+
+public:
+  Messenger* getGlobalMessenger() const;
+
+  // ===============================================
+  // Layer Management
+  // ===============================================
+private:
+  std::unordered_map<std::string, int> _layers;
+
+public:
+  void addLayer( const std::string& layer );
+
+  int getLayerIndex( const std::string& layer );
 };
 
 // TEMPLATE DEFINITIONS
-
-// ===============================================
-// Object Management
-// ===============================================
-
-template <class T>
-T* GameManager::getObjectTById( long id ) {
-  const auto objectIt = _attachedObjects.find( id );
-  if ( objectIt == _attachedObjects.end() ) return NULL;
-
-  const auto object = objectIt->second;
-  if ( object->isInstanceOf<T>() ) {
-    return static_cast<T *>(object);
-  }
-  return NULL;
-}
-
-template <class T>
-T* GameManager::getObjectTByName( const std::string& name ) {
-  for ( auto& pair : _attachedObjects ) {
-    auto object = pair.second;
-    if ( object == NULL ) continue;
-    if ( object->getName() == name ) {
-      if ( object->isInstanceOf<T>() ) {
-        return static_cast<T *>(object);
-      }
-    }
-  }
-  return NULL;
-}
 }
 
 #endif //__ALADDIN_CORE_GAME_MANAGER_H__

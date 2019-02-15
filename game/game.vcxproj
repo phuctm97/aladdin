@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{6CDD9C9E-620D-4928-935B-B840314CE97D}</ProjectGuid>
     <RootNamespace>game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,8 +70,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\phuctm97\Desktop\gameuit\aladdin\aladdin;D:\dev\directx-sdk\Include;$(IncludePath)</IncludePath>
-    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)directx\Include;$(SolutionDir)aladdin;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)directx\Include;$(SolutionDir)aladdin;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)directx\Include;$(SolutionDir)aladdin;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)directx\Include;$(SolutionDir)aladdin;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>Build\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -79,6 +95,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"
+xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -86,6 +109,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"
+xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -99,6 +129,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"
+xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -112,11 +149,124 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /i /e /s /y /f "$(ProjectDir)textures\*" "$(TargetDir)textures\"
+xcopy /i /e /s /y /f "$(ProjectDir)audio\*" "$(TargetDir)audio\"
+xcopy /i /e /s /y /f "$(ProjectDir)animations\*" "$(TargetDir)animations\"
+xcopy /i /e /s /y /f "$(ProjectDir)fonts\*" "$(TargetDir)fonts\"
+xcopy /i /e /s /y /f "$(ProjectDir)scenes\*.scene" "$(TargetDir)scenes\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app\main.cpp" />
     <ClCompile Include="app\MyApp.cpp" />
-    <ClCompile Include="scenes\IntroScene.cpp" />
+    <ClCompile Include="app\MyAppData.cpp" />
+    <ClCompile Include="app\MyResourceInitializer.cpp" />
+    <ClCompile Include="prefabs\AgainstThrowableKnifePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketSceneSoundPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketSkyParallaxPrefab.cpp" />
+    <ClCompile Include="prefabs\AudioPlayerPrefab.cpp" />
+    <ClCompile Include="prefabs\FallingHalfOfApplePrefab.cpp" />
+    <ClCompile Include="prefabs\FinishEntrancePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketGroundParallaxPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsFivePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsFourPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsOnePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsSixPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsThreePrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketStairsTwoPrefab.cpp" />
+    <ClCompile Include="prefabs\AladdinAndAbuPrefab.cpp" />
+    <ClCompile Include="prefabs\DeathSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\DeathSceneSoundPrefab.cpp" />
+    <ClCompile Include="prefabs\FadeInEffectPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarFirePrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPalaceParallaxPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPalaceSceneSoundPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarPalaceGroundPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarStarExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\JafarStarPrefab.cpp" />
+    <ClCompile Include="prefabs\LevelCompleteSceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerTextPrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerV2Prefab.cpp" />
+    <ClCompile Include="prefabs\PendalPrefab.cpp" />
+    <ClCompile Include="prefabs\PendalV2Prefab.cpp" />
+    <ClCompile Include="prefabs\PlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\AbuBonusPrefab.cpp" />
+    <ClCompile Include="prefabs\AgrabahMarketGroundPrefab.cpp" />
+    <ClCompile Include="prefabs\BigExplosionPrefab.cpp" />
+    <ClCompile Include="prefabs\BitmapTextPrefab.cpp" />
+    <ClCompile Include="prefabs\CamelPrefab.cpp" />
+    <ClCompile Include="prefabs\CharcoalBurnerPrefab.cpp" />
+    <ClCompile Include="prefabs\CheckpointPrefab.cpp" />
+    <ClCompile Include="prefabs\GenieBonusPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardFivePrefab.cpp" />
+    <ClCompile Include="prefabs\GuardFourPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardThreePrefab.cpp" />
+    <ClCompile Include="prefabs\EatableApplePrefab.cpp" />
+    <ClCompile Include="prefabs\EnemyExplosionOnePrefab.cpp" />
+    <ClCompile Include="prefabs\EnemyExplosionTwoPrefab.cpp" />
+    <ClCompile Include="prefabs\EatableHeartPrefab.cpp" />
+    <ClCompile Include="prefabs\FlamePrefab.cpp" />
+    <ClCompile Include="prefabs\GenieLampPrefab.cpp" />
+    <ClCompile Include="prefabs\GuardOnePrefab.cpp" />
+    <ClCompile Include="prefabs\GuardTwoPrefab.cpp" />
+    <ClCompile Include="prefabs\HandEnemyPrefab.cpp" />
+    <ClCompile Include="prefabs\HoldableBarPrefab.cpp" />
+    <ClCompile Include="prefabs\HubPrefab.cpp" />
+    <ClCompile Include="prefabs\JumpableSpringPrefab.cpp" />
+    <ClCompile Include="prefabs\OneWayPlatformV2Prefab.cpp" />
+    <ClCompile Include="prefabs\QuadRendererPrefab.cpp" />
+    <ClCompile Include="prefabs\RetrySceneControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\SceneFadeOutTransitionPrefab.cpp" />
+    <ClCompile Include="prefabs\SfxControllerPrefab.cpp" />
+    <ClCompile Include="prefabs\SmallFireworkPrefab.cpp" />
+    <ClCompile Include="prefabs\MenuSelectPrefab.cpp" />
+    <ClCompile Include="prefabs\NodePrefab.cpp" />
+    <ClCompile Include="prefabs\PeddlerPrefab.cpp" />
+    <ClCompile Include="prefabs\PlayableAladdinPrefab.cpp" />
+    <ClCompile Include="prefabs\ClimbableRopePrefab.cpp" />
+    <ClCompile Include="prefabs\FloatingSalivaPrefab.cpp" />
+    <ClCompile Include="prefabs\SpendThesePrefab.cpp" />
+    <ClCompile Include="prefabs\SpritePrefab.cpp" />
+    <ClCompile Include="prefabs\StandablePlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\StaticPlatformPrefab.cpp" />
+    <ClCompile Include="prefabs\ThrowableApplePrefab.cpp" />
+    <ClCompile Include="prefabs\ThrowableKnifePrefab.cpp" />
+    <ClCompile Include="prefabs\FallingVasePrefab.cpp" />
+    <ClCompile Include="prefabs\TwoWayPlatformV2Prefab.cpp" />
+    <ClCompile Include="prefabs\WallPrefab.cpp" />
+    <ClCompile Include="scenes\AutoLoadScene.cpp" />
+    <ClCompile Include="scenes\DebugScene.cpp" />
+    <ClCompile Include="scripts\CamelController.cpp" />
+    <ClCompile Include="scripts\CameraController.cpp" />
+    <ClCompile Include="scripts\CheckpointController.cpp" />
+    <ClCompile Include="scripts\CameraFollower.cpp" />
+    <ClCompile Include="scripts\CharcoalBurnerCollisionTracker.cpp" />
+    <ClCompile Include="scripts\CharcoalBurnerController.cpp" />
+    <ClCompile Include="scripts\CollisionTracker.cpp" />
+    <ClCompile Include="scripts\DebugCameraController.cpp" />
+    <ClCompile Include="scripts\DirectionController.cpp" />
+    <ClCompile Include="scripts\DoubleStairsModeSwitcher.cpp" />
+    <ClCompile Include="scripts\DynamicParallaxController.cpp" />
+    <ClCompile Include="scripts\FadeInEffect.cpp" />
+    <ClCompile Include="scripts\FadeOutEffect.cpp" />
+    <ClCompile Include="scripts\GuardController.cpp" />
+    <ClCompile Include="scripts\HandEnemyController.cpp" />
+    <ClCompile Include="scripts\HubController.cpp" />
+    <ClCompile Include="scripts\JafarController.cpp" />
+    <ClCompile Include="scripts\JafarStarController.cpp" />
+    <ClCompile Include="scripts\NodeController.cpp" />
+    <ClCompile Include="scripts\PeddlerController.cpp" />
+    <ClCompile Include="scripts\SingleLayerParallaxController.cpp" />
+    <ClCompile Include="scripts\StaticParallaxController.cpp" />
+    <ClCompile Include="scripts\PendalController.cpp" />
+    <ClCompile Include="scripts\PlatformController.cpp" />
+    <ClCompile Include="scripts\OneWayPlatformV2Controller.cpp" />
+    <ClCompile Include="scripts\PlayableAladdinController.cpp" />
+    <ClCompile Include="scripts\SceneInfoQuerier.cpp" />
+    <ClCompile Include="scripts\SpringController.cpp" />
+    <ClCompile Include="scripts\StairsModeSwitcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aladdin\aladdin.vcxproj">
@@ -125,10 +275,267 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\MyApp.h" />
-    <ClInclude Include="scenes\IntroScene.h" />
+    <ClInclude Include="app\MyAppData.h" />
+    <ClInclude Include="app\MyResourceInitializer.h" />
+    <ClInclude Include="Define.h" />
+    <ClInclude Include="prefabs\AgainstThrowableKnifePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketSceneSoundPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketSkyParallaxPrefab.h" />
+    <ClInclude Include="prefabs\AudioPlayerPrefab.h" />
+    <ClInclude Include="prefabs\FallingHalfOfApplePrefab.h" />
+    <ClInclude Include="prefabs\FinishEntrancePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketGroundParallaxPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsFivePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsFourPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsOnePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsSixPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsThreePrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketStairsTwoPrefab.h" />
+    <ClInclude Include="prefabs\AladdinAndAbuPrefab.h" />
+    <ClInclude Include="prefabs\DeathSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\DeathSceneSoundPrefab.h" />
+    <ClInclude Include="prefabs\JafarFirePrefab.h" />
+    <ClInclude Include="prefabs\JafarPalaceParallaxPrefab.h" />
+    <ClInclude Include="prefabs\JafarPrefab.h" />
+    <ClInclude Include="prefabs\JafarPalaceSceneSoundPrefab.h" />
+    <ClInclude Include="prefabs\JafarPalaceGroundPrefab.h" />
+    <ClInclude Include="prefabs\JafarStarExplosionPrefab.h" />
+    <ClInclude Include="prefabs\JafarStarPrefab.h" />
+    <ClInclude Include="prefabs\LevelCompleteSceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\PeddlerTextPrefab.h" />
+    <ClInclude Include="prefabs\PeddlerV2Prefab.h" />
+    <ClInclude Include="prefabs\PendalPrefab.h" />
+    <ClInclude Include="prefabs\PendalV2Prefab.h" />
+    <ClInclude Include="prefabs\PlatformPrefab.h" />
+    <ClInclude Include="prefabs\AbuBonusPrefab.h" />
+    <ClInclude Include="prefabs\AgrabahMarketGroundPrefab.h" />
+    <ClInclude Include="prefabs\BigExplosionPrefab.h" />
+    <ClInclude Include="prefabs\BitmapTextPrefab.h" />
+    <ClInclude Include="prefabs\CamelPrefab.h" />
+    <ClInclude Include="prefabs\CharcoalBurnerPrefab.h" />
+    <ClInclude Include="prefabs\CheckpointPrefab.h" />
+    <ClInclude Include="prefabs\GenieBonusPrefab.h" />
+    <ClInclude Include="prefabs\GuardFivePrefab.h" />
+    <ClInclude Include="prefabs\GuardFourPrefab.h" />
+    <ClInclude Include="prefabs\GuardThreePrefab.h" />
+    <ClInclude Include="prefabs\EatableApplePrefab.h" />
+    <ClInclude Include="prefabs\EnemyExplosionOnePrefab.h" />
+    <ClInclude Include="prefabs\EnemyExplosionTwoPrefab.h" />
+    <ClInclude Include="prefabs\EatableHeartPrefab.h" />
+    <ClInclude Include="prefabs\FlamePrefab.h" />
+    <ClInclude Include="prefabs\GenieLampPrefab.h" />
+    <ClInclude Include="prefabs\GuardOnePrefab.h" />
+    <ClInclude Include="prefabs\GuardTwoPrefab.h" />
+    <ClInclude Include="prefabs\HandEnemyPrefab.h" />
+    <ClInclude Include="prefabs\HoldableBarPrefab.h" />
+    <ClInclude Include="prefabs\HubPrefab.h" />
+    <ClInclude Include="prefabs\JumpableSpringPrefab.h" />
+    <ClInclude Include="prefabs\OneWayPlatformV2Prefab.h" />
+    <ClInclude Include="prefabs\QuadRendererPrefab.h" />
+    <ClInclude Include="prefabs\RetrySceneControllerPrefab.h" />
+    <ClInclude Include="prefabs\SceneFadeOutTransitionPrefab.h" />
+    <ClInclude Include="prefabs\SfxControllerPrefab.h" />
+    <ClInclude Include="prefabs\SmallFireworkPrefab.h" />
+    <ClInclude Include="prefabs\MenuSelectPrefab.h" />
+    <ClInclude Include="prefabs\NodePrefab.h" />
+    <ClInclude Include="prefabs\PeddlerPrefab.h" />
+    <ClInclude Include="prefabs\PlayableAladdinPrefab.h" />
+    <ClInclude Include="prefabs\ClimbableRopePrefab.h" />
+    <ClInclude Include="prefabs\FloatingSalivaPrefab.h" />
+    <ClInclude Include="prefabs\SpendThesePrefab.h" />
+    <ClInclude Include="prefabs\SpritePrefab.h" />
+    <ClInclude Include="prefabs\StandablePlatformPrefab.h" />
+    <ClInclude Include="prefabs\StaticPlatformPrefab.h" />
+    <ClInclude Include="prefabs\ThrowableApplePrefab.h" />
+    <ClInclude Include="prefabs\ThrowableKnifePrefab.h" />
+    <ClInclude Include="prefabs\FallingVasePrefab.h" />
+    <ClInclude Include="prefabs\TwoWayPlatformV2Prefab.h" />
+    <ClInclude Include="prefabs\WallPrefab.h" />
+    <ClInclude Include="scenes\AutoLoadScene.h" />
+    <ClInclude Include="scenes\DebugScene.h" />
+    <ClInclude Include="scripts\CamelController.h" />
+    <ClInclude Include="scripts\CameraController.h" />
+    <ClInclude Include="scripts\CheckpointController.h" />
+    <ClInclude Include="scripts\CameraFollower.h" />
+    <ClInclude Include="scripts\CharcoalBurnerCollisionTracker.h" />
+    <ClInclude Include="scripts\CharcoalBurnerController.h" />
+    <ClInclude Include="scripts\CollisionTracker.h" />
+    <ClInclude Include="scripts\DebugCameraController.h" />
+    <ClInclude Include="scripts\DirectionController.h" />
+    <ClInclude Include="scripts\DoubleStairsModeSwitcher.h" />
+    <ClInclude Include="scripts\DynamicParallaxController.h" />
+    <ClInclude Include="scripts\FadeInEffect.h" />
+    <ClInclude Include="scripts\FadeOutEffect.h" />
+    <ClInclude Include="scripts\GuardController.h" />
+    <ClInclude Include="scripts\HandEnemyController.h" />
+    <ClInclude Include="scripts\HubController.h" />
+    <ClInclude Include="scripts\JafarController.h" />
+    <ClInclude Include="scripts\JafarStarController.h" />
+    <ClInclude Include="scripts\NodeController.h" />
+    <ClInclude Include="scripts\PeddlerController.h" />
+    <ClInclude Include="scripts\SingleLayerParallaxController.h" />
+    <ClInclude Include="scripts\StaticParallaxController.h" />
+    <ClInclude Include="scripts\PendalController.h" />
+    <ClInclude Include="scripts\PlatformController.h" />
+    <ClInclude Include="scripts\OneWayPlatformV2Controller.h" />
+    <ClInclude Include="scripts\PlayableAladdinController.h" />
+    <ClInclude Include="scripts\SceneInfoQuerier.h" />
+    <ClInclude Include="scripts\SpringController.h" />
+    <ClInclude Include="scripts\StairsModeSwitcher.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="audio\readme.txt" />
     <Text Include="log.txt" />
+    <Text Include="note.txt" />
+    <Text Include="prefabs\FadeInEffectPrefab.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\backgrounds\scene_1_0.png" />
+    <Image Include="textures\backgrounds\scene_1_1.png" />
+    <Image Include="textures\backgrounds\scene_1_2.png" />
+    <Image Include="textures\backgrounds\scene_2_0.png" />
+    <Image Include="textures\backgrounds\scene_2_1.png" />
+    <Image Include="textures\bosses\jafar.png" />
+    <Image Include="textures\enemies\civilian_enemies.png" />
+    <Image Include="textures\enemies\guards.png" />
+    <Image Include="textures\miscellaneous\cutscenes.png" />
+    <Image Include="textures\miscellaneous\enemy_explosions.png" />
+    <Image Include="textures\miscellaneous\font_one.png" />
+    <Image Include="textures\miscellaneous\font_two.png" />
+    <Image Include="textures\miscellaneous\items.png" />
+    <Image Include="textures\miscellaneous\retry.png" />
+    <Image Include="textures\miscellaneous\title.png" />
+    <Image Include="textures\miscellaneous\victory.png" />
+    <Image Include="textures\nonplayable_characters\abu.png" />
+    <Image Include="textures\nonplayable_characters\camel.png" />
+    <Image Include="textures\nonplayable_characters\peddler.png" />
+    <Image Include="textures\playable_characters\aladdin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animations\backgrounds\scene_1_2.anm" />
+    <None Include="animations\bosses\jafar.anm" />
+    <None Include="animations\enemies\civilian_enemies.anm" />
+    <None Include="animations\enemies\guards.anm">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="animations\miscellaneous\apple.anm" />
+    <None Include="animations\miscellaneous\cutscenes.anm" />
+    <None Include="animations\miscellaneous\enemy_explosions.anm" />
+    <None Include="animations\miscellaneous\items.anm" />
+    <None Include="animations\nonplayable_characters\abu.anm" />
+    <None Include="animations\nonplayable_characters\camel.anm" />
+    <None Include="animations\nonplayable_characters\peddler.anm" />
+    <None Include="animations\playable_characters\aladdin.anm" />
+    <None Include="fonts\one.fnt" />
+    <None Include="fonts\two.fnt" />
+    <None Include="scenes\agrabah_market.scene">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scenes\death.scene" />
+    <None Include="scenes\jafar_palace.scene" />
+    <None Include="scenes\level_complete.scene" />
+    <None Include="scenes\menu.scene">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scenes\retry.scene" />
+    <None Include="scenes\test.scene" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\aladdin.ttf" />
+    <Font Include="fonts\arcade.ttf" />
+    <Font Include="fonts\crackman.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\A Whole New World.wav" />
+    <Media Include="audio\Aaah.wav" />
+    <Media Include="audio\Abu Uh-Oh.wav" />
+    <Media Include="audio\Abu Waving.wav" />
+    <Media Include="audio\Aladdin Hurt.wav" />
+    <Media Include="audio\Aladdin Oof.wav" />
+    <Media Include="audio\Aladdin Push.wav" />
+    <Media Include="audio\Apple Collect.wav" />
+    <Media Include="audio\Apple Slice.wav" />
+    <Media Include="audio\Apple Splat.wav" />
+    <Media Include="audio\Background Agrabahmarket.wav" />
+    <Media Include="audio\Balloon Pop.wav" />
+    <Media Include="audio\Body Crunch.wav" />
+    <Media Include="audio\Bones Tinkle.wav" />
+    <Media Include="audio\BossTune.wav" />
+    <Media Include="audio\Boxing Bell.wav" />
+    <Media Include="audio\Camel Spit.wav" />
+    <Media Include="audio\Canopy Bounce.wav" />
+    <Media Include="audio\Cash Register (FM Only).wav" />
+    <Media Include="audio\Cash Register (Sample Only).wav" />
+    <Media Include="audio\Cash Register.wav" />
+    <Media Include="audio\Clay Pot.wav" />
+    <Media Include="audio\Cloud Poof.wav" />
+    <Media Include="audio\Coming Out.wav" />
+    <Media Include="audio\Continue Point.wav" />
+    <Media Include="audio\Earthquake.wav" />
+    <Media Include="audio\Eeeh.wav" />
+    <Media Include="audio\Extra Health.wav" />
+    <Media Include="audio\Fire From Coal.wav" />
+    <Media Include="audio\Flagpole.wav" />
+    <Media Include="audio\Flamingo Hey 2.wav" />
+    <Media Include="audio\Flamingo Hey!.wav" />
+    <Media Include="audio\Flute Pickup.wav" />
+    <Media Include="audio\Gazeem Hit 1.wav" />
+    <Media Include="audio\Gazeem Hit 2.wav" />
+    <Media Include="audio\Gem Collect.wav" />
+    <Media Include="audio\Genie Fumes.wav" />
+    <Media Include="audio\Geyser.wav" />
+    <Media Include="audio\Guard Beckon.wav" />
+    <Media Include="audio\Guard Hit 1.wav" />
+    <Media Include="audio\Guard Hit 2.wav" />
+    <Media Include="audio\Guard%27s Pants.wav" />
+    <Media Include="audio\Head Bop.wav" />
+    <Media Include="audio\High Sword.wav" />
+    <Media Include="audio\Honk.wav" />
+    <Media Include="audio\Honky Thing.wav" />
+    <Media Include="audio\Iago Squawk.wav" />
+    <Media Include="audio\Iiee.wav" />
+    <Media Include="audio\Jafar Laugh.wav" />
+    <Media Include="audio\Jafar Snake.wav" />
+    <Media Include="audio\Jafar Tractor.wav" />
+    <Media Include="audio\Level Complete.wav" />
+    <Media Include="audio\Low Sword.wav" />
+    <Media Include="audio\Menu Change.wav" />
+    <Media Include="audio\Menu Select.wav" />
+    <Media Include="audio\NameLevel Agrabahmarket.wav" />
+    <Media Include="audio\Object Throw.wav" />
+    <Media Include="audio\Oooh.wav" />
+    <Media Include="audio\Outta Apples.wav" />
+    <Media Include="audio\Peddler Shop (FM Only).wav" />
+    <Media Include="audio\Peddler Shop (Sample Only).wav" />
+    <Media Include="audio\Peddler Shop.wav" />
+    <Media Include="audio\Ping.wav" />
+    <Media Include="audio\Pole Slide.wav" />
+    <Media Include="audio\Retry.wav" />
+    <Media Include="audio\Rock Bounce (FM Only).wav" />
+    <Media Include="audio\Rock Bounce (Sample Only).wav" />
+    <Media Include="audio\Rock Bounce.wav" />
+    <Media Include="audio\Rope Appear.wav" />
+    <Media Include="audio\Rope Launch.wav" />
+    <Media Include="audio\Scarab Pickup.wav" />
+    <Media Include="audio\Scarab Wow.wav" />
+    <Media Include="audio\Skeleton (PSG Only).wav" />
+    <Media Include="audio\Skeleton (Sample Only).wav" />
+    <Media Include="audio\Skeleton.wav" />
+    <Media Include="audio\Splash.wav" />
+    <Media Include="audio\Spring Doing 1.wav" />
+    <Media Include="audio\Spring Doing 2.wav" />
+    <Media Include="audio\Start Gun.wav" />
+    <Media Include="audio\Stone Rumble.wav" />
+    <Media Include="audio\Stones Crumble.wav" />
+    <Media Include="audio\Stopping.wav" />
+    <Media Include="audio\Sword Ching.wav" />
+    <Media Include="audio\Sword Spinning.wav" />
+    <Media Include="audio\Tip Toe.wav" />
+    <Media Include="audio\Wall Hit 2.wav" />
+    <Media Include="audio\Wall Spikes.wav" />
+    <Media Include="audio\Win a Bonus.wav" />
+    <Media Include="audio\Wow!.wav" />
+    <Media Include="audio\Yeah.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

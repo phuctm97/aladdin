@@ -1,8 +1,38 @@
-[D] [ala::GameManager] : Created GameManager
-[D] [ala::GameManager] : Released GameManager
-[D] [ala::GameManager] : Total Object Created: 0
-[D] [ala::GameManager] : Total Object Deleted: 0
-[D] [ala::GameManager] : Total Scene Retained: 1
-[D] [ala::GameManager] : Total Scene Released: 1
-[D] [ala::GameManager] : Total Reference Retained: 0
-[D] [ala::GameManager] : Total Reference Released: 0
+[D] [ala::Application] : Allocated File Logger. All your logging data will be store in file `log.txt`
+[D] [ala::Application] : Created Windows
+[D] [ala::Application] : Initialized DirectX
+[D] [ala::Application] : Created DirectX Device
+[D] [ala::Application] : Created DirectX Sprite
+[D] [ala::Graphics] : Created
+[D] [ala::Input] : Created
+[D] [ala::Input] : Created DirectX Input
+[D] [ala::Input] : Created DirectX Input Keyboard Device
+[D] [ala::Input] : Acquired Keyboard Device
+[D] [ala::GameManager] : Created
+[D] [ala::GameManager] : Released
+[D] [ala::Graphics] : Released
+[D] [ala::Input] : Unacquired Keyboard Device
+[D] [ala::Input] : Released DirectX Input Keyboard Device
+[D] [ala::Input] : Released DirectX Input
+[D] [ala::Input] : Released
+[D] [ala::Application] : Released DirectX Sprite
+[D] [ala::Application] : Released DirectX Device
+[D] [ala::Application] : Released DirectX
+[D] [ala::Application] : Total Resources Created: 1
+[D] [ala::Application] : Total Resources Deleted: 1
+[D] [ala::Application] : Total Resource Initializers Created: 1
+[D] [ala::Application] : Total Resource Initializers Deleted: 1
+[D] [ala::Application] : Total Prefabs Created: 1
+[D] [ala::Application] : Total Prefabs Deleted: 1
+[D] [ala::Application] : Total Scenes Created: 1
+[D] [ala::Application] : Total Scenes Deleted: 1
+[D] [ala::Application] : Total Objects Created: 1
+[D] [ala::Application] : Total Objects Deleted: 1
+[D] [ala::Application] : Total Components Created: 3
+[D] [ala::Application] : Total Components Deleted: 3
+[D] [ala::Application] : Total Loggers Created: 4
+[D] [ala::Application] : Total Loggers Deleted: 4
+[D] [ala::Application] : Average FPS: 56
+[D] [ala::Application] : Total Loggers Deleted: 3
+[D] [ala::Application] : Total Messengers Created: 2
+[D] [ala::Application] : Total Messengers Deleted: 2

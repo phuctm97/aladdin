@@ -8,39 +8,74 @@
 
 NAMESPACE_ALA
 {
-ALA_CLASS_SOURCE_0(ala::GameObject, "ala::GameObject")
+ALA_CLASS_SOURCE_2(ala::GameObject, ala::Initializable, ala::Releasable)
 
-GameObject::GameObject( const std::string& name )
-  : _id( GameManager::get()->newObjectId() ),
+GameObject::GameObject( Scene* parentScene, const std::string& name, const std::string& quadIndex )
+  : _id( GameManager::get()->newId() ),
     _name( name ),
-    _inited( false ),
-    _releasing( 0 ),
-    _parent( NULL ) {
+    _tag( -1 ),
+    _flags( 0 ),
+    _parentScene( parentScene ),
+    _active( false ),
+    _selfInitialize( true ),
+    _toReleaseInNextFrame( false ),
+    _componentsInLock( false ),
+    _messenger( new Messenger() ) {
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  // default components
+  _transform = new Transform( this );
+
+  // attach to GameManager
+  GameManager::get()->attach( this );
+
+  // make sure parent scene is not null
+  ALA_ASSERT(_parentScene != NULL);
+
+  // attach to Scene
+  _parentScene->addGameObject( this, quadIndex );
+
+  // for debug memory allocation
+  TOTAL_OBJECTS_CREATED++;
+}
+
+GameObject::GameObject( GameObject* parentObject, const std::string& name )
+  : _id( GameManager::get()->newId() ),
+    _name( name ),
+    _tag( -1 ),
+    _flags( 0 ),
+    _parentScene( NULL ),
+    _active( false ),
+    _selfInitialize( true ),
+    _toReleaseInNextFrame( false ),
+    _componentsInLock( false ),
+    _messenger( new Messenger() ) {
+
+  // check initial state
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()) && (!isReleased()) && (!isReleasing()));
+
+  // make sure parent object is not null
+  ALA_ASSERT(parentObject != NULL);
+
+  // default components
+  _transform = new Transform( this, parentObject->getTransform() );
+
   // attach to GameManager
   GameManager::get()->attach( this );
 
   // for debug memory allocation
-  TOTAL_OBJECT_CREATED++;
+  TOTAL_OBJECTS_CREATED++;
 }
 
 GameObject::~GameObject() {
-  _releasing = 1;
-
-  if ( (_inited) && (!isReleased()) ) {
-    release();
-
+  if ( isInitialized() ) {
     // make sure object released after destruction
-    ALA_ASSERT(isReleased());
+    //    ALA_ASSERT(isReleased());
   }
 
-  // remove from parent
-  removeFromParent();
-
-  // detach from GameManager
-  GameManager::get()->detach( this );
-
   // for debug memory allocation
-  TOTAL_OBJECT_DELETED++;
+  TOTAL_OBJECTS_DELETED++;
 }
 
 long GameObject::getId() const {
@@ -51,179 +86,347 @@ const std::string& GameObject::getName() const {
   return _name;
 }
 
+Scene* GameObject::getParentScene() const {
+  return _parentScene;
+}
+
+bool GameObject::isActive() const {
+  return _active;
+}
+
+GameObject* GameObject::setActive( const bool val ) {
+  _active = val;
+  return this;
+}
+
+bool GameObject::isSelfInitialize() const {
+  return _selfInitialize;
+}
+
+GameObject* GameObject::setSelfInitialize( const bool val ) {
+  _selfInitialize = val;
+  return this;
+}
+
+const std::string& GameObject::getLayer() const {
+  return _layer;
+}
+
+GameObject* GameObject::setLayer( const std::string& layer ) {
+  _layer = layer;
+  return this;
+}
+
+GameObject* GameObject::setTag( const int tag ) {
+  ALA_ASSERT(tag >= 0);
+  _tag = tag;
+  return this;
+}
+
+int GameObject::getTag() const {
+  return _tag;
+}
+
+void GameObject::setFlags( const long v ) {
+  _flags = v;
+}
+
+void GameObject::addFlag( const long v ) {
+  _flags |= v;
+}
+
+int GameObject::getFlags() const {
+  return _flags;
+}
+
+bool GameObject::hasFlag( const long v ) const {
+  return (_flags & v) != 0;
+}
+
 // ===========================================================
 // Events
 // ===========================================================
 
-bool GameObject::isInited() const {
-  return _inited;
-}
-
-bool GameObject::isReleased() const {
-  return _releasing == 2;
-}
-
-bool GameObject::isReleasing() const {
-  return _releasing == 1;
-}
-
-void GameObject::init() {
+void GameObject::initialize() {
   // make sure object is not initialized;
-  ALA_ASSERT(!_inited);
+  ALA_ASSERT((!isInitialized()) && (!isInitializing()));
 
-  // TODO: subscriber pre init
+  setToInitializing();
 
-  // child pre init
-  if ( !onPreInit() ) {
-    _inited = false;
-    return;
+  // TODO: lock mutual exclusive when run in multithreading mode
+
+  // init components
+  for ( auto component : _components ) {
+    if ( !component->isInitialized() ) {
+      component->initialize();
+    }
   }
 
+  setToInitialized();
 
-  // TODO: game object init here
-  for ( GameObjectComponent* component : _components ) {
-    component->init();
-  }
-
-  for ( const auto it : _children ) {
-    it.second->init();
-  }
-  _inited = true;
-
-
-  // make sure object initialized after initialization
-  ALA_ASSERT(_inited);
-
-
-  // child post init
-  onPostInit();
-
-  // TODO: client subscriber post init
+  // activate
+  setActive( true );
 }
 
-bool GameObject::onPreInit() {
-  return true;
+void GameObject::updatePhysics( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+
+  // update components
+  for ( auto component : _components ) {
+    component->updatePhysics( delta );
+  }
+
+  unlockComponents();
 }
 
-void GameObject::onPostInit() {}
+void GameObject::update( const float delta ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
-void GameObject::update( float delta ) {
-  // make sure object is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
-    return;
+  lockComponents();
 
-  onPreUpdate( delta );
-
-  // TODO: game object update here
-  for ( GameObjectComponent* component : _components ) {
+  // update components
+  for ( auto component : _components ) {
     component->update( delta );
   }
 
-  for ( const auto it : _children ) {
-    it.second->update( delta );
-  }
-
-  onPostUpdate( delta );
+  unlockComponents();
 }
 
-void GameObject::onPreUpdate( float delta ) {}
+void GameObject::onCollisionEnter( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
 
-void GameObject::onPostUpdate( float delta ) {}
+  lockComponents();
+
+  for ( auto component : _components ) {
+    component->onCollisionEnter( collisionInfo );
+  }
+
+  unlockComponents();
+}
+
+void GameObject::onCollisionStay( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+
+  for ( auto component : _components ) {
+    component->onCollisionStay( collisionInfo );
+  }
+
+  unlockComponents();
+}
+
+void GameObject::onCollisionExit( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+
+  for ( auto component : _components ) {
+    component->onCollisionExit( collisionInfo );
+  }
+
+  unlockComponents();
+}
+
+void GameObject::onTriggerEnter( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+
+  for ( auto component : _components ) {
+    component->onTriggerEnter( collisionInfo );
+  }
+
+  unlockComponents();
+}
+
+void GameObject::onTriggerStay( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+
+  for ( auto component : _components ) {
+    component->onTriggerStay( collisionInfo );
+  }
+  unlockComponents();
+}
+
+void GameObject::onTriggerExit( const CollisionInfo& collisionInfo ) {
+  if ( isReleasing() || isReleased() || !isInitialized() || !isActive() ) return;
+
+  lockComponents();
+  for ( auto component : _components ) {
+    component->onTriggerExit( collisionInfo );
+  }
+  unlockComponents();
+}
 
 void GameObject::render() {
-  // make sure object is initialized and not released
-  if ( (!_inited) || (_releasing > 0) )
-    return;
+  if ( isReleasing() || isReleased() || !isInitialized() ) return;
 
-  onPreRender();
+  lockComponents();
 
-  // TODO: game object update here
-  for ( GameObjectComponent* component : _components ) {
+  // render components
+  for ( auto component : _components ) {
     component->render();
   }
 
-  for ( const auto it : _children ) {
-    it.second->render();
-  }
-
-  onPostRender();
+  unlockComponents();
 }
-
-void GameObject::onPreRender() {}
-
-void GameObject::onPostRender() {}
 
 void GameObject::release() {
+  // check lock
+  if ( _componentsInLock ) {
+    releaseInNextFrame();
+    return;
+  }
+
   // make sure object is initialized and not released
-  ALA_ASSERT(_inited);
-  ALA_ASSERT(!isReleased());
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
 
-  _releasing = 1;
+  setToReleasing();
 
-  ALA_ASSERT(isReleasing());
-  // TODO: client subscriber pre release
+  // TODO: lock mutual exclusive when run in multithreading mode
 
-  // child pre release
-  if ( !onPreRelease() ) return;
-
-
-  // TODO: game object release here
-  for ( const auto it : _children ) {
-    GameObject* gameObject = it.second;
-    delete gameObject;
+  // release components
+  for ( auto component : _components ) {
+    component->release();
   }
-  _children.clear();
-  ALA_ASSERT(_children.empty());
 
-  for ( GameObjectComponent* component : _components ) {
-    delete component;
+  // release messenger
+  _messenger->release();
+
+  // remove from parent scene
+  if ( _parentScene != NULL ) {
+    _parentScene->removeGameObject( this );
   }
-  _components.clear();
-  ALA_ASSERT(_components.empty());
 
-  _releasing = 2;
+  // detach from GameManager
+  GameManager::get()->detach( this );
 
-  // make sure object released after release
-  ALA_ASSERT(isReleased());
+  setToReleased();
 
-  // child post release
-  onPostRelease();
-
-  // TODO: client subscriber post release
+  // destroy
+  delete this;
 }
 
-bool GameObject::onPreRelease() {
-  return true;
+void GameObject::releaseInNextFrame() {
+  // make sure object is initialized and not released
+  //  ALA_ASSERT(isInitialized() && (!isReleasing()) && (!isReleased()));
+  _toReleaseInNextFrame = true;
 }
 
-void GameObject::onPostRelease() {}
+void GameObject::resolveLockedTasks() {
+  if ( isReleasing() || isReleased() ) return;
+
+  // lazy init
+  if ( !isInitialized() ) {
+    if ( isSelfInitialize() ) {
+      initialize();
+    }
+    else return;
+  }
+
+  // update to release in next frame
+  if ( _toReleaseInNextFrame ) {
+    release();
+    _toReleaseInNextFrame = false;
+    return;
+  }
+
+  // update actions
+  updateAddAndRemoveComponentInNextFrame();
+
+  // client
+  onResolveLockedTasks();
+
+  // update components
+  lockComponents();
+
+  for ( const auto component : _components ) {
+    component->resolveLockedTasks();
+  }
+
+  unlockComponents();
+}
+
+void GameObject::onResolveLockedTasks() { }
 
 // ============================================================
 // Components
 // ============================================================
 
-void GameObject::attach( GameObjectComponent* component ) {
-  if ( _releasing > 0 ) return;
+void GameObject::addComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
 
-  if ( component == NULL )
+  // check lock
+  if ( _componentsInLock ) {
+    addComponentInNextFrame( component );
     return;
-
-  if ( !StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) {
-    _components.emplace_back( component );
   }
+
+  doAddComponent( component );
 }
 
-void GameObject::detach( GameObjectComponent* component ) {
-  if ( _releasing > 0 ) return;
+void GameObject::addComponentInNextFrame( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
 
-  if ( component == NULL )
+  _componentsToAddInNextFrame.push_back( component );
+}
+
+void GameObject::removeComponent( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
+
+  // check lock 
+  if ( _componentsInLock ) {
+    removeComponentInNextFrame( component );
     return;
+  }
 
-  StdHelper::vectorErase<GameObjectComponent*>( _components, component );
+  doRemoveComponent( component );
 }
 
-GameObjectComponent* GameObject::getComponent( const std::string& name ) const {
-  for ( GameObjectComponent* component : _components ) {
+void GameObject::removeComponentInNextFrame( GameObjectComponent* component ) {
+  if ( component == NULL ) return;
+  if ( isReleasing() || isReleased() ) return;
+
+  _componentsToRemoveInNextFrame.push_back( component );
+}
+
+void GameObject::refreshComponent() {
+  if ( _componentsNotRefreshed.empty() ) return;
+
+  std::vector<GameObjectComponent*> componentsNotRefreshed;
+  componentsNotRefreshed.insert( componentsNotRefreshed.begin(),
+                                 _componentsNotRefreshed.cbegin(), _componentsNotRefreshed.cend() );
+
+  for ( const auto component : componentsNotRefreshed ) {
+    if ( component != _transform && ALA_IS_INSTANCE_OF(component, Transform) ) {
+      // TODO: move children from old transform to new transform
+
+      if ( !_transform->isInitialized() ) {
+        _transform->initialize();
+      }
+      _transform->release();
+      _transform = static_cast<Transform*>(component);
+
+      StdHelper::vectorErase<GameObjectComponent*>( _components, _transform );
+      _components.insert( _components.begin(), _transform );
+    }
+  }
+
+  _componentsNotRefreshed.clear();
+}
+
+GameObjectComponent* GameObject::getComponent( const std::string& name ) {
+  refreshComponent();
+
+  for ( auto component : _components ) {
     if ( component != NULL && component->getName() == name ) {
       return component;
     }
@@ -231,90 +434,113 @@ GameObjectComponent* GameObject::getComponent( const std::string& name ) const {
   return NULL;
 }
 
-std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::string& name ) const {
+GameObjectComponent* GameObject::getComponent( const int tag ) {
+  refreshComponent();
+
+  for ( auto component : _components ) {
+    if ( component != NULL && component->getTag() == tag ) {
+      return component;
+    }
+  }
+  return NULL;
+}
+
+std::vector<GameObjectComponent*> GameObject::getAllComponents( const std::string& name ) {
+  refreshComponent();
+
   std::vector<GameObjectComponent*> ret;
 
-  for ( GameObjectComponent* component : _components ) {
+  for ( auto component : _components ) {
     if ( component != NULL && component->getName() == name ) {
       ret.emplace_back( component );
     }
   }
+
   return ret;
 }
 
-std::vector<GameObjectComponent*> GameObject::getAllComponents() const {
+std::vector<GameObjectComponent*> GameObject::getAllComponents( const int tag ) {
+  refreshComponent();
+
+  std::vector<GameObjectComponent*> ret;
+
+  for ( auto component : _components ) {
+    if ( component != NULL && component->getTag() == tag ) {
+      ret.emplace_back( component );
+    }
+  }
+
+  return ret;
+}
+
+std::vector<GameObjectComponent*> GameObject::getAllComponents() {
+  refreshComponent();
+
   return _components;
 }
 
-// ==================================================
-// Objects Management
-// ==================================================
-
-GameObject* GameObject::getParent() const {
-  return _parent;
+void GameObject::lockComponents() {
+  _componentsInLock = true;
 }
 
-void GameObject::setParent( GameObject* parent ) {
-  if ( _releasing > 0 ) return;
-  if ( _parent == parent ) return;
-
-  ALA_ASSERT(parent != this);
-
-  if ( _parent == NULL ) {
-    ALA_ASSERT(GameManager::get()->getRunningScene()->getGameObject(getId()) == NULL);
-  }
-  else {
-    ALA_ASSERT(_parent->getChild(getId()) == NULL);
-  }
-
-  if ( parent == NULL ) {
-    ALA_ASSERT(GameManager::get()->getRunningScene()->getGameObject(getId()) != NULL);
-  }
-  else {
-    ALA_ASSERT(parent->getChild(getId()) != NULL);
-  }
-
-  _parent = parent;
+void GameObject::unlockComponents() {
+  _componentsInLock = false;
 }
 
-void GameObject::removeFromParent() {
-  if ( _parent == NULL ) {
-    GameManager::get()->getRunningScene()->removeGameObject( this );
+void GameObject::updateAddAndRemoveComponentInNextFrame() {
+  for ( auto component : _componentsToAddInNextFrame ) {
+    doAddComponent( component );
   }
-  else {
-    _parent->removeChild( this );
+  _componentsToAddInNextFrame.clear();
+
+  for ( auto component : _componentsToRemoveInNextFrame ) {
+    doRemoveComponent( component );
   }
+  _componentsToRemoveInNextFrame.clear();
 }
 
-GameObject* GameObject::getChild( long id ) {
-  const auto it = _children.find( id );
-  if ( it == _children.end() ) return NULL;
-  return it->second;
+void GameObject::doAddComponent( GameObjectComponent* component ) {
+  if ( StdHelper::vectorContain<GameObjectComponent*>( _components, component ) ) return;
+
+  _componentsNotRefreshed.emplace_back( component );
+
+  _components.emplace_back( component );
 }
 
-void GameObject::addChild( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
+void GameObject::doRemoveComponent( GameObjectComponent* component ) {
+  StdHelper::vectorErase<GameObjectComponent*>( _componentsNotRefreshed, component );
 
-  if ( gameObject == NULL ) return;
-
-  _children.emplace( gameObject->getId(), gameObject );
-  gameObject->setParent( this );
+  StdHelper::vectorErase<GameObjectComponent*>( _components, component );
 }
 
-void GameObject::removeChild( GameObject* gameObject ) {
-  if ( _releasing > 0 ) return;
+// ========================================================
+// Default components
+// ========================================================
 
-  if ( gameObject == NULL ) return;
-
-  _children.erase( gameObject->getId() );
+bool GameObject::isDefaultComponents( GameObjectComponent* component ) {
+  if ( component == _transform ) return true;
+  return false;
 }
 
+Transform* GameObject::getTransform() {
+  refreshComponent();
+
+  return _transform;
+}
+
+// ===========================================================
+// Messenger
+// ===========================================================
+
+Messenger* GameObject::getMessenger() const {
+  return _messenger;
+}
 
 // ============================================
 // Debug memory allocation
 // ============================================
 
-long GameObject::TOTAL_OBJECT_CREATED( 0 );
+long GameObject::TOTAL_OBJECTS_CREATED( 0 );
 
-long GameObject::TOTAL_OBJECT_DELETED( 0 );
+long GameObject::TOTAL_OBJECTS_DELETED( 0 );
 }

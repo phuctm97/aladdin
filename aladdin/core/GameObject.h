@@ -5,123 +5,188 @@
 * Created on Sep 27th 2017
 */
 
-#include "Base.h"
 #include "GameObjectComponent.h"
+#include "Transform.h"
+#include "Messenger.h"
 
 NAMESPACE_ALA
 {
-ALA_CLASS_HEADER_0(GameObject)
+class CollisionInfo;
+class Scene;
+
+ALA_CLASS_HEADER_2(GameObject, ala::Initializable, ala::Releasable)
   // =========================================================================
   // Basic
   // =========================================================================
 private:
   long _id;
   std::string _name;
+  int _tag;
+  long _flags;
+  Scene* _parentScene;
+  std::string _layer;
+  bool _active;
+  bool _selfInitialize;
+  bool _toReleaseInNextFrame;
 
 public:
-  GameObject( const std::string& name = "" );
+  /**
+   * \brief Create a game object, attach to game manager and attach to parent scene
+   */
+  GameObject( Scene* parentScene, const std::string& name = "", const std::string& quadIndex = "" );
 
-  ~GameObject();
+  /**
+   * \brief Create a game object, attach to game manager and attach its transform to "parentObject"'s transform 
+   */
+  GameObject( GameObject* parentObject, const std::string& name = "" );
+
+  virtual ~GameObject();
 
   long getId() const;
 
   const std::string& getName() const;
 
+  Scene* getParentScene() const;
+
+  bool isActive() const;
+
+  GameObject* setActive( const bool val );
+
+  bool isSelfInitialize() const;
+
+  GameObject* setSelfInitialize( const bool val );
+
+  const std::string& getLayer() const;
+
+  GameObject* setLayer( const std::string& layer );
+
+  GameObject* setTag( const int tag );
+
+  int getTag() const;
+
+  void setFlags( const long v );
+
+  void addFlag( const long v );
+
+  int getFlags() const;
+
+  bool hasFlag( const long v ) const;
+
   // =========================================================
   // Events
   // =========================================================
-private:
-  bool _inited;
-  int _releasing;
-
 public:
-  bool isInited() const;
+  void initialize() override;
 
-  bool isReleased() const;
+  void updatePhysics( const float delta );
 
-  bool isReleasing() const;
+  void update( const float delta );
 
-  void init();
+  void onCollisionEnter( const CollisionInfo& collisionInfo );
+  void onCollisionStay( const CollisionInfo& collisionInfo );
+  void onCollisionExit( const CollisionInfo& collisionInfo );
 
-protected:
-  virtual bool onPreInit();
+  void onTriggerEnter( const CollisionInfo& collisionInfo );
+  void onTriggerStay( const CollisionInfo& collisionInfo );
+  void onTriggerExit( const CollisionInfo& collisionInfo );
 
-  virtual void onPostInit();
-
-public:
-  void update( float delta );
-
-protected:
-  virtual void onPreUpdate( float delta );
-
-  virtual void onPostUpdate( float delta );
-
-public:
   void render();
 
-protected:
-  virtual void onPreRender();
+  /**
+   * \brief Release and destroy game object, automatically removed from parent scene or "parent object" and detached from game manager
+   */
+  void release() override;
 
-  virtual void onPostRender();
+  void releaseInNextFrame();
 
 public:
-  void release();
+  void resolveLockedTasks();
 
-protected:
-  virtual bool onPreRelease();
-
-  virtual void onPostRelease();
+  virtual void onResolveLockedTasks();
 
   // ========================================================
   // Components
   // ========================================================
 private:
+  bool _componentsInLock;
   std::vector<GameObjectComponent*> _components;
+  std::vector<GameObjectComponent*> _componentsToAddInNextFrame;
+  std::vector<GameObjectComponent*> _componentsToRemoveInNextFrame;
+  std::vector<GameObjectComponent*> _componentsNotRefreshed;
 
 public:
-  void attach( GameObjectComponent* component );
+  /**
+   * \brief Attach a component to game object, this will not change component's game object, you should not call this method directly
+   * \param component Component to attach
+   */
+  void addComponent( GameObjectComponent* component );
 
-  void detach( GameObjectComponent* component );
+  void addComponentInNextFrame( GameObjectComponent* component );
 
-  GameObjectComponent* getComponent( const std::string& name ) const;
+  /**
+   * \brief Detach a component from game object, this will not release component, you will have to delete in your own when it's necessary
+   * \param component Component to detach
+   */
+  void removeComponent( GameObjectComponent* component );
 
-  std::vector<GameObjectComponent*> getAllComponents() const;
+  void removeComponentInNextFrame( GameObjectComponent* component );
 
-  std::vector<GameObjectComponent*> getAllComponents( const std::string& name ) const;
+  void refreshComponent();
+
+  GameObjectComponent* getComponent( const std::string& name );
+
+  GameObjectComponent* getComponent( const int tag );
+
+  std::vector<GameObjectComponent*> getAllComponents();
+
+  std::vector<GameObjectComponent*> getAllComponents( const std::string& name );
+
+  std::vector<GameObjectComponent*> getAllComponents( const int tag );
 
   template <class T>
-  T* getComponentT() const;
+  T* getComponentT();
 
   template <class T>
-  std::vector<T*> getAllComponentTs() const;
+  std::vector<T*> getAllComponentTs();
 
-  // ==================================================
-  // Objects Management
-  // ==================================================
 private:
-  GameObject* _parent;
+  void lockComponents();
 
-  std::unordered_map<long, GameObject*> _children;
+  void unlockComponents();
+
+  void updateAddAndRemoveComponentInNextFrame();
+
+  void doAddComponent( GameObjectComponent* component );
+
+  void doRemoveComponent( GameObjectComponent* component );
+
+  // ========================================================
+  // Default components
+  // ========================================================
+private:
+  Transform* _transform;
+
+  bool isDefaultComponents( GameObjectComponent* component );
 
 public:
-  GameObject* getParent() const;
+  Transform* getTransform();
 
-  void setParent( GameObject* parent );
+  // ===========================================================
+  // Messenger
+  // ===========================================================
 
-  void removeFromParent();
+private:
+  Messenger* _messenger;
 
-  GameObject* getChild( long id );
-
-  void addChild( GameObject* gameObject );
-
-  void removeChild( GameObject* gameObject );
+public:
+  Messenger* getMessenger() const;
 
   // ===========================================================
   // Debug memory allocation
   // ===========================================================
 public:
-  static long TOTAL_OBJECT_CREATED;
-  static long TOTAL_OBJECT_DELETED;
+  static long TOTAL_OBJECTS_CREATED;
+  static long TOTAL_OBJECTS_DELETED;
 };
 
 // TEMPLATE DEFINITIONS
@@ -131,9 +196,11 @@ public:
 // ========================================================
 
 template <class T>
-T* GameObject::getComponentT() const {
+T* GameObject::getComponentT() {
+  refreshComponent();
+
   for ( GameObjectComponent* component : _components ) {
-    if ( component != NULL && component->isInstanceOf<T>() ) {
+    if ( component != NULL && ALA_IS_INSTANCE_OF(component, T) ) {
       return static_cast<T*>(component);
     }
   }
@@ -141,12 +208,14 @@ T* GameObject::getComponentT() const {
 }
 
 template <class T>
-std::vector<T*> GameObject::getAllComponentTs() const {
+std::vector<T*> GameObject::getAllComponentTs() {
+  refreshComponent();
+
   std::vector<T*> ret;
 
   for ( GameObjectComponent* component : _components ) {
-    if ( component != NULL && component->isInstanceOf<T>() ) {
-      ret.emplace_back( component );
+    if ( component != NULL && ALA_IS_INSTANCE_OF( component, T) ) {
+      ret.emplace_back( static_cast<T*>(component) );
     }
   }
   return ret;
